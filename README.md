@@ -167,7 +167,7 @@ It supports the following custom options in the documentclass in thesis.tex:
 
 *   `a4paper` (default as per the University guidelines) or `a5paper`: Paper size
 
-*   `11pt` or `12pt`: The University of Cambridge guidelines recommend using a minimum font size of 11pt (12pt is preferred) and 10pt for footnotes. This template also supports `10pt`.
+*   `11pt` or `12pt`: The Universita di Bologna guidelines recommend using a minimum font size of 11pt (12pt is preferred) and 10pt for footnotes. This template also supports `10pt`.
 
 *   `oneside` or `twoside` (default): This is especially useful for printing double side (twoside) or single side.
 
@@ -270,7 +270,7 @@ the bottom of the page. Pagewise line numbering is added on every page. `draft` 
 
 `PhDThesisPSnPDF` currently supports three fonts `Times`, `Fourier` and `Latin Modern (default)`.
 
-*   `times`: (The University of Cambridge guidelines recommend using Times). Specifying times option in the document class will use `mathptpx` or `Times` font with Math Support.
+*   `times`: (The Universita di Bologna guidelines recommend using Times). Specifying times option in the document class will use `mathptpx` or `Times` font with Math Support.
 *   `fourier`: fourier font with math support
 *   `default (empty)`: When no font is specified, `Latin Modern` is used as the default font with Math Support.
 *   `customfont`: Any custom font can be set in preamble by using `customfont` option in the document class. Then the custom font can be loaded in preamble.tex in the line:
@@ -437,7 +437,7 @@ To include custom to-do notes in your pdf document use  `\mynote{Hey! I have a n
 [https://www.admin.cam.ac.uk/students/studentregistry/exams/submission/phd/format.html](https://www.admin.cam.ac.uk/students/studentregistry/exams/submission/phd/format.html)
 
 
-#### _Q2_: Where can I find newer versions of the University of Cambridge crest/logos?
+#### _Q2_: Where can I find newer versions of the Universita di Bologna crest/logos?
 
 The university updates its crest every now and then. You can find up-to-date
 logos on [this page](http://www.cam.ac.uk/brand-resources/about-the-logo/logo-downloads)

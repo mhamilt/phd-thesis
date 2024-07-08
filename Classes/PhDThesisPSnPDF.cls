@@ -173,7 +173,7 @@
 % *************************** Pre-defined Options ******************************
 % Font Size
 \DeclareOption{10pt}{
-  \ClassWarning{PhDThesisPSnPDF}{The University of Cambridge PhD thesis guidelines
+  \ClassWarning{PhDThesisPSnPDF}{The Universita di Bologna PhD thesis guidelines
 recommend using a minimum font size of 11pt (12pt is preferred) and 10pt for
 footnotes.}
   \PassOptionsToClass{10pt}{book}%
@@ -187,7 +187,7 @@ footnotes.}
 \DeclareOption{a4paper}{\renewcommand\PHD@papersize{a4paper}}
 \DeclareOption{a5paper}{\renewcommand\PHD@papersize{a5paper}}
 \DeclareOption{letterpaper}{
-  \ClassWarning{PhDThesisPSnPDF}{The University of Cambridge
+  \ClassWarning{PhDThesisPSnPDF}{The Universita di Bologna
     PhD thesis guidelines recommend using A4 or A5paper}
   \renewcommand\PHD@papersize{letterpaper}
 }
