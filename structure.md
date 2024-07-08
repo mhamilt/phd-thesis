@@ -19,7 +19,7 @@
       - [Application](#application)
     - [Analysis: Magpie](#analysis-magpie)
       - [The Problem](#the-problem-2)
-      - [Plate Theory](#plate-theory)
+        - [Plate Theory](#plate-theory)
         - [Boundary Conditions](#boundary-conditions)
       - [The Solution](#the-solution-1)
         - [Implementation](#implementation)
@@ -27,9 +27,9 @@
           - [Design](#design)
       - [Application](#application-1)
     - [Reproduction: MIDI Harpsichord with Haptic Response](#reproduction-midi-harpsichord-with-haptic-response)
-      - [The problem](#the-problem-3)
+      - [The Problem](#the-problem-3)
         - [Musical Haptics](#musical-haptics)
-        - [Harpischord Haptics](#harpischord-haptics)
+        - [Harpsichord Haptics](#harpsichord-haptics)
       - [The Solution](#the-solution-2)
         - [experiments in jack tracking](#experiments-in-jack-tracking)
         - [refinement of QRE1113](#refinement-of-qre1113)
@@ -63,7 +63,7 @@
 
 ### Analysis: Magpie
 #### The Problem
-#### Plate Theory
+##### Plate Theory
 ##### Boundary Conditions
 #### The Solution
 ##### Implementation
@@ -72,9 +72,9 @@
 #### Application
 
 ### Reproduction: MIDI Harpsichord with Haptic Response
-#### The problem
+#### The Problem
 ##### Musical Haptics
-##### Harpischord Haptics
+##### Harpsichord Haptics
 #### The Solution
 ##### experiments in jack tracking
 ##### refinement of QRE1113
