@@ -8,14 +8,14 @@
     - [The problem of sustainable solutions](#the-problem-of-sustainable-solutions)
     - [Thesis structure](#thesis-structure)
   - [The Tools](#the-tools)
-      - [Measurement: Open Laser Vibrometry](#measurement-open-laser-vibrometry)
-        - [The Problem](#the-problem-1)
-          - [Vibrometry Theory](#vibrometry-theory)
-          - [Measuring Plates](#measuring-plates)
-        - [The Solution](#the-solution)
-          - [Designing a vibrometer](#designing-a-vibrometer)
-          - [Design Decisions](#design-decisions)
-          - [Limitations](#limitations)
+    - [Measurement: Open Laser Vibrometry](#measurement-open-laser-vibrometry)
+      - [The Problem](#the-problem-1)
+        - [Vibrometry Theory](#vibrometry-theory)
+        - [Measuring Plates](#measuring-plates)
+      - [The Solution](#the-solution)
+        - [Designing a vibrometer](#designing-a-vibrometer)
+        - [Design Decisions](#design-decisions)
+        - [Limitations](#limitations)
       - [Application](#application)
     - [Analysis: Magpie](#analysis-magpie)
       - [The Problem](#the-problem-2)
@@ -43,7 +43,6 @@
     - [Where do we go from here?](#where-do-we-go-from-here)
 
 
-
 ## The Problem
 ### What is Open Science
 ### What is Digital Conservation
@@ -52,14 +51,14 @@
 ### Thesis structure
 
 ## The Tools
-#### Measurement: Open Laser Vibrometry
-##### The Problem
-###### Vibrometry Theory
-###### Measuring Plates
-##### The Solution
-###### Designing a vibrometer
-###### Design Decisions
-###### Limitations
+### Measurement: Open Laser Vibrometry
+#### The Problem
+##### Vibrometry Theory
+##### Measuring Plates
+#### The Solution
+##### Designing a vibrometer
+##### Design Decisions
+##### Limitations
 #### Application
 
 ### Analysis: Magpie
