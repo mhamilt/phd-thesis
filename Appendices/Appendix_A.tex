@@ -1,0 +1,137 @@
+\chapter{MATLAB Code}
+\label{appA}
+
+\begin{lstlisting}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 2D Wave Propagation. Radiating Bodies %%%
+% Author: Alessandro Rodriguez
+% Date: 19th April 2017
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%% CHOICE OF SOURCE AND STENCIL %%%%%%%%
+source=2;       %1=Monopole ,2=Dipole, 3=Quadrupole
+stencil=2;      %1=5point 2=9point
+if (stencil~=1 && stencil~=2)
+    error('Please select a valid stencil');
+elseif (source~=1 && source~=2 && source~=3)
+    error('Please select a valid source');
+end
+%%
+%%%%%%%%%% VARIABLES %%%%%%%%%%%%%%%%%%%%%%%
+Fs=16000;       %Sample rate
+c=343;          %Wave speed
+T=1;            %Time of simulation
+k=1/Fs;         %Time step
+L=5;           %Length of domain
+% Derived parameters
+if stencil==1
+    lambda=1/sqrt(2);       %Stability condition 5 point stencil
+else
+    alpha=0.74;
+    lambda=min(1,(1/(sqrt(2*alpha))));  %Stability 9 point stencil
+end
+h=c*k/lambda;   %Space Step
+N=floor(L/h);   %Number of grid divisions
+h=L/N;
+lambda=c*k/h;
+x=[0:h:L-h];
+y=x';
+x0=x(floor(N/2));   %X coordinate Source
+y0=y(floor(N/2));   %Y coordinate Source
+%%
+%%%%%%%% DIRAC DELTA APPROXIMATION %%%%%%%%
+%%%%%% Threshold 
+threshold=10^(-10);
+% X coordinate
+xden=x-x0;
+xIndex=find(abs(xden)<threshold);
+dx=sinc((x-x0));
+dIx=cos(pi*(x-x0))./((x-x0));
+px=1./(x-x0);
+dIx(xIndex)=1;
+px(xIndex)=1;
+% Y coordinates
+yden=y-y0;
+yIndex=find(abs(yden)<threshold);
+dy=sinc((y-y0));
+dIy=cos(pi*(y-y0))./((y-y0));
+py=1./(y-y0);
+py(yIndex)=1;
+dIy(yIndex)=1;
+%%
+%%%%%%%%%%% SOURCE %%%%%%%%%%%%%%%%%%%%%%%%%%
+sFreq=220;      %Driving signal f.Frequency (Hz)
+if source==1;
+    %%%%%%%%%%%% MONOPOLE %%%%%%%%%%%%%%%%%%%%%%%
+    source=dy*dx;
+elseif source==2;
+    %%%%%%%% DIPOLE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    theta=pi/2;         %Angle of rotation.
+    source=(1/(h^2))*(cos(theta)*(dy*(dIx-(dx.*(px))))...
+        +(sin(theta)*(dIy-(dy.*py))*dx));
+elseif source==3;
+    %%%%%%% QUADRUPOLE %%%%%%%%%%%%%%%%%%%%%%%%%
+    theta=pi/4;         %Angle of rotation.
+    Qstrengh=0;         %Longitudinal strength
+    Qxstrengh=1;        %Lateral strength
+    Qxx=Qstrengh*(cos(theta)^2)
+	+Qxstrengh*(cos(theta)*sin(theta));
+    Qxy=Qstrengh*(cos(theta)*sin(theta))...
+        +Qxstrengh*(0.5*(cos(theta)^2-sin(theta)^2));
+    Qyx=Qstrengh*(cos(theta)*sin(theta))...
+        +Qxstrengh*(0.5*(cos(theta)^2-sin(theta)^2));
+    Qyy=Qstrengh*(sin(theta)^2)
+	-Qxstrengh*(cos(theta)*sin(theta));
+
+    source=(1/(h^2))*((Qxx*(dy*(-((pi^2)*dx)
+	-2*(dIx.*(px))+(2*dx.*(px.^2))))
+	+Qxy*((dIy-(dy.*py))*(dIx-(dx.*(px)))))...
+        +Qyx*((dIy-(dy.*py))*(dIx-(dx.*(px))))...
+        +Qyy*((-((pi^2)*dy)-(2*(dIy.*py)) 
+	+(2*dy.*(py.^2)))*dx));
+end
+%Setting storing values and initial time steps
+u=zeros(N,N);
+up1=u;
+um1=u;
+t=0;
+while (t<T);
+    um1=u;
+    u=up1;
+    t=t+k;
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%% 2D WAVE EQUATION CALCULATION USING FDTD %%%
+    if stencil==1 
+        %Five point stencil
+    up1(2:end-1,2:end-1)=2.*u(2:end-1,2:end-1)
+    -um1(2:end-1,2:end-1)
+    +(lambda^2.*(u(2:end-1,3:end)...
+    +u(2:end-1,1:end-2)+u(1:end-2,2:end-1)...
+    +u(3:end,2:end-1)-4.*u(2:end-1,2:end-1)))...
+    +source(2:end-1,2:end-1)*sin(2*pi*sFreq*t);
+
+    elseif stencil==2
+        %Nine point stencil
+    up1(2:end-1,2:end-1)=2.*u(2:end-1,2:end-1)
+     -um1(2:end-1,2:end-1)...
+    +(lambda^2.*((u(2:end-1,3:end)+u(2:end-1,1:end-2)
+    +u(1:end-2,2:end-1)+u(3:end,2:end-1)-4.*u(2:end-1,2:end-1))...
+    +0.5*(1-alpha).*(u(3:end,3:end)+u(1:end-2,3:end)
+    +u(1:end-2,1:end-2)+u(3:end,1:end-2)...
+   -2*(u(2:end-1,3:end)+u(2:end-1,1:end-2)...
+    +u(1:end-2,2:end-1)+u(3:end,2:end-1))...
+    +4.*u(2:end-1,2:end-1))))...
+    +source(2:end-1,2:end-1)*sin(2*pi*sFreq*t);
+    end
+                 %% PLOT AND MESH %%%
+    fig(1)=figure(1);
+    surf(u); 
+    shading interp
+    axis square
+    xlabel('x');
+    ylabel('y');
+    view(2)
+    drawnow limitrate;
+end
+\end{lstlisting}
+
