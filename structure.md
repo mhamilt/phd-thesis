@@ -60,10 +60,15 @@
 ##### Design Decisions
 ##### Limitations
 #### Application
-
+`
 ### Analysis: Magpie
 #### The Problem
 ##### Plate Theory
+
+- A. E. H. Love, On the small free vibrations and deformations of elastic shells, Philosophical trans. of the Royal Society (London), 1888, Vol. série A, N° 17 p. 491–549.
+ 
+- stuff on idiophones are from O. Thomas, C. Touzé , T.Humbert and M. Ducceschi 
+ 
 ##### Boundary Conditions
 #### The Solution
 ##### Implementation
