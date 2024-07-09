@@ -1,0 +1,179 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% From the Music Technology Project Latex Template 
+% Authored by Dr Michael Newton (University of Edinburgh)
+% December 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MAIN DOCUMENT 
+% 		--> USED TO CALL ALL CHAPTER DOCUMENTS AND SPECIAL PAGES
+%
+% EDITS REQUIRED WITHIN THIS FILE: 2 (most probably)
+% 		1) Chapter insertions (approximately from line 129 below)
+%		2) Appendix insertions (approximately from line 140 below) 
+% 		3) Bibliography filename (approximately line 160 below)
+% 
+% EDITS REQUIRED ELSEWHERE: quite a few
+% 		Edit all 'Special_Pages' documents as necessary (instructions included)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%													     
+%%% PLEASE NOTE:	
+%%%				FILE PATHS ARE RELATIVE TO THE THE DIRECTORY CONTAINING THIS FILE 							     
+%%%													     
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%% DO NOT EDIT %%%%%%%%%%
+\documentclass[11pt,a4paper,openright,twoside]{report}
+\usepackage{color,amstext,fancyhdr,graphicx,setspace}
+\usepackage[square]{natbib}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{amssymb}
+\usepackage{subcaption}
+
+\makeatletter
+\newcommand{\SAVED@cleardoublepage}{} 
+\let\SAVED@cleardoublepage\cleardoublepage
+\renewcommand*{\cleardoublepage}{
+  \clearpage 
+  \begingroup 
+    \pagestyle{empty}
+    \SAVED@cleardoublepage 
+  \endgroup 
+} 
+\makeatother
+\hyphenpenalty=5000 % helps to discourage hyphenation 10000 for no hyphens
+\tolerance=1000
+\setlength{\oddsidemargin}{1.5cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\textwidth}{14.5cm}
+\setlength{\topmargin}{-0.5cm}
+\setlength{\textheight}{23cm}
+\renewcommand{\hoffset}{0cm}
+\renewcommand{\voffset}{0cm}
+%%%%%%%%%% DO NOT EDIT %%%%%%%%%%
+
+
+%%%%%%%%%% DO NOT EDIT %%%%%%%%%%
+%
+% THIS IS THE TITLE PAGE (CONTAINED IN A SEPARATE FOLDER)
+% 	--> The title page itself SHOULD be edited as appropriate for your project
+%
+\begin{document}
+\bibliographystyle{plainnat}
+\input{./Special_Pages/title}
+\cleardoublepage{}
+%%%%%%%%%% DO NOT EDIT %%%%%%%%%%
+
+
+%%%%%%%%%% DO NOT EDIT (UNLESS REMOVING ANY UNWANTED PAGE INSERTIONS) %%%%%%%%%%
+\fancypagestyle{plain}{
+\fancyhead{} 
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[LE,RO]{\bf \thepage}
+}
+\pagestyle{plain}
+
+\pagenumbering{roman}
+\setcounter{page}{1}
+\onehalfspacing
+
+\addcontentsline{toc}{chapter}{Abstract}
+\input{./Special_Pages/abstract}
+\cleardoublepage{}
+
+\addcontentsline{toc}{chapter}{Declaration}
+\input{./Special_Pages/declaration}
+\cleardoublepage{}
+
+\addcontentsline{toc}{chapter}{Acknowledgements}
+\input{./Special_Pages/acknowledgements}
+\singlespacing
+\cleardoublepage{}
+\addcontentsline{toc}{chapter}{Contents}
+
+\tableofcontents
+\cleardoublepage{}
+\addcontentsline{toc}{chapter}{List of figures}
+\listoffigures
+\cleardoublepage{}
+
+\addcontentsline{toc}{chapter}{List of tables}
+\listoftables  
+\cleardoublepage % this command stops table page becoming page 1
+%%%%%%%%%% DO NOT EDIT (UNLESS REMOVING ANY UNWANTED PAGE INSERTIONS) %%%%%%%%%%
+
+
+%%%%%%%%%% DO NOT EDIT %%%%%%%%%%
+\onehalfspacing
+\pagenumbering{arabic}
+\pagestyle{fancy}
+\fancyhead{} 
+\cfoot{}
+\fancyfoot[LE,RO]{\bf \thepage}
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}} % Section headings (begin after chapter title page and following page)
+\fancyhead[LE]{\bf \footnotesize \slshape \leftmark}        % Chapter in the right on even pages
+\fancyhead[RO]{\bf \footnotesize \slshape \rightmark}     % Section in the left on odd pages
+\renewcommand{\headrulewidth}{0pt}    % Width of head rule
+%%%%%%%%%% DO NOT EDIT %%%%%%%%%%
+
+
+%%%%%%%%%%%% EDIT %%%%%%%%%%%%
+%
+% CHANGE TO REFLECT YOUR CHAPTERS
+%
+\input{./Chapter_1/Chapter_1}
+\input{./Chapter_2/Chapter_2}
+\input{./Chapter_3/Chapter_3}
+\input{./Chapter_4/Chapter_4}
+\input{./Chapter_5/Chapter_5}
+%%%%%%%%%%%% EDIT %%%%%%%%%%%%
+
+
+%%%%%%%%%%%% EDIT %%%%%%%%%%%%
+%
+% CHANGE TO REFLECT YOUR APPENDICES 
+% 	--> OR REMOVE/COMMENT OUT IF NO APPENDICES
+%
+%\renewcommand{\chaptername}[1]{Appendix. \chaptername \ #1}   					% DON'T EDIT THIS LINE UNLESS DELETING ALL APPENDICES
+%\renewcommand{\chaptername}[1]{Appendix }   					% DON'T EDIT THIS LINE UNLESS DELETING ALL APPENDICES
+%\renewcommand{\chaptermark}[1]{\markboth{\chaptername \ #1}{}} 		% DON'T EDIT THIS LINE UNLESS DELETING ALL APPENDICES
+
+\renewcommand\chaptername{Appendix}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter.\ #1}{}}
+\appendix 													% DON'T EDIT THIS LINE UNLESS DELETING ALL APPENDICES
+
+\input{./Appendices/Appendix_A}  								% DO EDIT/ADD TO THIS LINE IF YOU HAVE 1 OR MORE APPENDICES
+\input{./Appendices/Appendix_B_ProjectProposal}
+%\input{./Appendices/Appendix_C_InterimReport1}
+%\input{./Appendices/Appendix_D_InterimReport2}
+%%%%%%%%%%%% EDIT %%%%%%%%%%%%
+
+
+%%%%%%%%%% DO NOT EDIT %%%%%%%%%%
+\small{
+\singlespacing
+\addcontentsline{toc}{chapter}{Bibliography} 	% Adds bibliography to contents list
+%%%%%%%%%% DO NOT EDIT %%%%%%%%%%
+
+%%%%%%%%%%%% EDIT %%%%%%%%%%%%
+%
+% CHANGE IF NECESSARY TO REFLECT YOUR BIBLIOGRAPHY FILE
+%
+\bibliography{./Special_Pages/_Bibliography_File.bib}  % Makes the bibliography page(s) based upon references stored inside the given file
+%%%%%%%%%%%% EDIT %%%%%%%%%%%%
+
+
+
+%%%%%%%%%% DO NOT EDIT %%%%%%%%%%
+}
+\end{document}
+%%%%%%%%%% DO NOT EDIT %%%%%%%%%%
+
