@@ -1,8 +1,8 @@
-# NEMUS Thesis Template
+# Open Methods for Digital Conservation of Musical Instruments
 
-| ![ ](./img/example_title_page.png) |
+| ![ ](./img/example/title_page.png) |
 | :--------------------------------: |
-|         Example Title Page         |
+|           Title Page               |
 
 ## Getting started
 
