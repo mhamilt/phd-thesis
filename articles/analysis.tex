@@ -13,6 +13,21 @@
 
 \section{Application}\label{application-1}
 
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{img/boundary-types.png}
+    \caption{Enter Caption}
+    \label{fig:boundary-types}
+\end{figure}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{img/boundary-conditions-plot.png}
+    \caption{Enter Caption}
+    \label{fig:boundary-conditions-plot}
+\end{figure}
+
 \section{INTRODUCTION}
 \noindent
 Plate vibration is a longstanding topic of research. Plates are common engineering elements finding application in industry and, particularly, in acoustics. Musical instrument soundboards are accurately described using appropriate plate theories such as Kirchhoff-Love \cite{love_small_1888} and Mindlin-Reissner \cite{mindlin_Influence_1951}. Furthermore, plates lend themselves naturally to understanding vibration through eigenshape visualisation. They are often used as teaching tools in classrooms for their ability to produce accurate and fascinating Chladni patterns \cite{chladni_treatise_nodate}. Eigenshape visualisation techniques are still used today to measure the elastic properties of tonewood \cite{ducceschi_method_2024,fletcher_physics_2012} parallel to numerical simulation. Despite such an ever-growing body of applications, plate simulation is still mostly accessible through dedicated, proprietary software, often out of reach for the typical student's budget or even for small-sized research groups. This work illustrates the theoretical foundation and a first implementation of MAGPIE. MAGPIE is designed to be an open-source platform to simulate the physics of plates, offering easy-to-use visualisation tools and several analysis techniques. The tools can be equally used as a teaching aid for lecturers and as an analysis tool for researchers and industry stakeholders. Functionalities include setting elastic boundary conditions along the plate edges, visualising eigenshapes, exporting eigenshapes and frequencies, performing a time-domain simulation of the plate equation for sound synthesis, and estimating the elastic modulus of experimental plates. For brevity, not all functionalities can be described in this work, and attention is here restricted to the eigenvalue problem and related implementation. In Section \ref{sec:BackGround}, the background plate physics is described, along with the numerical approach used to perform the simulations; in Section \ref{sec:implementation}, the implementation details of MAGPIE are discussed; finally, Section \ref{sec:Conclusions} draws some final reflections and illustrates future alleys of development. 
