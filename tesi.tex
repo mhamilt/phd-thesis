@@ -1,18 +1,17 @@
+% Document Setup
 \documentclass[12pt,a4paper,twoside]{book}
-
 
 \usepackage[utf8]{inputenc}
 \usepackage[a4paper,inner=3.5cm,outer=2.5cm]{geometry}
-
 \usepackage[titletoc,title,toc,page]{appendix}
 \usepackage{verbatim}
 \usepackage{placeins}
 \usepackage{listings}
-\usepackage{hyperref}
-\usepackage[italian]{babel}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+\usepackage[english]{babel}
 \usepackage{tikz}
 \usepackage{parskip}
-
 \usepackage{graphicx}
 \usepackage{blindtext}
 \usepackage{chngcntr}
@@ -23,7 +22,6 @@
 \usepackage{indentfirst}
 \usepackage[utf8]{inputenc}
 \usepackage{float}
-\usepackage{hyperref}
 \usepackage[capitalize,noabbrev]{cleveref}
 \usepackage{soul}
 \usepackage[font=footnotesize,labelfont=bf]{caption}
@@ -34,14 +32,17 @@
 
 \usepackage{lscape} 
 
+\usepackage{pdfpages}
+% -----------------------------------------------------------------------------
+% Bibliography Setup
 \usepackage{natbib}
 \bibliographystyle{alpha}
 \setcitestyle{super,open={[},close={]}}
 
 \newcommand{\rom}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
 
-\usepackage{pdfpages}
-
+% -----------------------------------------------------------------------------
+% Begin Document
 \begin{document}
 % Per spostare i vari elementi più su o più giù gioca con i valori di vspace che ci sono tra uno e l'altro
 \pagestyle{empty}
@@ -52,82 +53,19 @@
     bottom=20mm
 }
 
-\begin{titlepage}
+% -----------------------------------------------------------------------------
+% Title Page
+\input{title-unibo}
 
-\begin{center}
+% -----------------------------------------------------------------------------
+% Abstract Page
+\newpage~\newpage
+\pagenumbering{gobble}
+\input{abstract}
+\topmargin=-1cm
+% -----------------------------------------------------------------------------
+% Dedication Page
 
-% marchio di ateneo
-\includegraphics[width=6.5cm,height=4.7cm]{img/logo/marchio-di-ateneo.png}
-
-\vspace{10mm}
-
-% \large is 12pt
-{\large{\bf{Dipartimento di }}} 
-
-\vspace{5mm}
-
-% \Large is 14.4pt
-{\Large{\bf{Corso di Laurea in }}}
-
-\vspace{15mm}
-
-{\Huge{\bf Titolo della tesi }}\\
-\vspace{3mm}
-{\Huge{\bf anche su più}}\\
-\vspace{3mm}
-{\Huge{\bf righe }}\\
-\vspace{3mm}
-
-\end{center}
-
-\vspace{10mm}
-
-\begin{minipage}[t]{0.40\textwidth}
-{\Large{\bf Relatore: \\ Chiar.mo Prof.\\ Nome Cognome}}
-
-\vspace{3mm}
-
-{\Large{\bf Correlatore: \\ Chiar.mo Prof.\\ Nome Cognome}}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.40\textwidth}\raggedleft
-{\Large{\bf Presentata da: \\ Nome Cognome}}
-\end{minipage}
-
-\vspace{30mm}
-
-\rule[0.5cm]{15.8cm}{0.6mm}
-
-\begin{center}
-{\large{\bf Sessione mese anno \\}}
-{\large{\bf Anno Accademico 20xx/20xx\\}}
-\end{center}
-
-\end{titlepage}
-
-\restoregeometry
-\newpage
-\begin{center}
-    (DA FARE ALLA FINE)\\
-    5 parole chiave per caratterizzare il contenuto della dissertazione:\\ (se non ti piacciono così sparse puoi anche semplicamente scriverle su una riga sola)
-\end{center}
-
-% https://tex.stackexchange.com/questions/26538/words-scattered-randomly-in-on-coverpage
-\begin{tikzpicture}[overlay,remember picture,shift=(current page.center)]
-\pgfmathsetseed{3}
-
-
-\foreach [count=\count] \word in {Parola 1, parola 2, parola 3, parola 4, parola 5} {
-\node [
-    xshift={(mod(\count,3)-1)*(\paperwidth/4)},
-    yshift={(mod(\count,7)-3)*(\paperwidth/6)},
-    xshift=rand*4cm,
-    yshift=rand*2cm,
-    % rotate=rand*35,
-    % opacity=rnd*0.5+0.125,
-    font=\large] {\word};
-}
-\end{tikzpicture}
 \newpage
 
 \topmargin=6.5cm
@@ -138,12 +76,9 @@
 \LARGE{su più righe} 
 }
 \end{flushright}
-\newpage~\newpage
-\pagenumbering{gobble}
-\chapter*{Abstract}
-Abstract qui (ti consiglio di farlo alla fine)
 
-\topmargin=-1cm
+% -----------------------------------------------------------------------------
+% TOCs
 \tableofcontents
 \thispagestyle{empty}
 \listoftables
@@ -152,6 +87,8 @@ Abstract qui (ti consiglio di farlo alla fine)
 \thispagestyle{empty}
 \newpage~\newpage
 
+% -----------------------------------------------------------------------------
+% Chapters
 
 % \pagenumbering{arabic}
 % \setcounter{chapter}{-1}
