@@ -28,17 +28,44 @@
 
 
 %%%%%%%%%% DO NOT EDIT %%%%%%%%%%
-\documentclass[11pt,a4paper,openright,twoside]{report}
+\documentclass[11pt,a4paper,openright,twoside]{book}
+
 \usepackage{color,amstext,fancyhdr,graphicx,setspace}
-\usepackage[square]{natbib}
+\usepackage{graphicx,svg}
+\usepackage{multirow} % used for the table
+\usepackage{indentfirst}
 \usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{txfonts}
+\usepackage{fourier}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{enumitem}
+% \usepackage{subfigure}
+\usepackage{float}
+\usepackage{svg}
 \usepackage{mathtools}
 \usepackage{listings}
-\usepackage{amssymb}
+% \usepackage{subcaption}
+\usepackage{caption}
 \usepackage{subcaption}
 \usepackage{booktabs} 
 \usepackage{adjustbox}
 \usepackage[hidelinks]{hyperref}
+% \usepackage{breakurl}
+
+%----------------------------------------------------------------------------------------
+% Bibliography
+\usepackage[
+    style=numeric-comp, % author year except    
+    backend=biber,
+    maxnames=1,
+    maxcitenames=1,
+    uniquelist=false,
+]{biblatex} % https://www.overleaf.com/learn/latex/Biblatex_citation_styles
+\addbibresource{main.bib}
+%----------------------------------------------------------------------------------------
 
 \makeatletter
 \newcommand{\SAVED@cleardoublepage}{} 
@@ -62,14 +89,60 @@
 \renewcommand{\voffset}{0cm}
 %%%%%%%%%% DO NOT EDIT %%%%%%%%%%
 
+%==============================================================================
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
 
+\newcommand{\dif}{\mathop{}\!\mathrm{d}}
+\newcommand{\al}{\alpha}
+\newcommand{\bt}{\beta}
+\newcommand{\om}{\omega}
+\newcommand{\gm}{\gamma}
+\newcommand{\lb}{\lambda}
+\newcommand{\lm}{\lambda_-}
+\newcommand{\lp}{\lambda_+}
+\newcommand{\thw}{\theta_w}
+\newcommand{\thp}{\theta_\phi}
+\newcommand{\tht}{\theta}
+
+\newcommand{\etp}{e_{t+}}
+\newcommand{\etm}{e_{t-}}
+
+\newcommand{\esp}{e_{x+}}
+\newcommand{\esm}{e_{x-}}
+
+\newcommand{\dsp}{\delta_{x+}}
+\newcommand{\dsm}{\delta_{x-}}
+\newcommand{\dsd}{\delta_{x\cdot}}
+\newcommand{\dss}{\delta_{xx}}
+\newcommand{\dssss}{\delta_{xxxx}}
+
+\newcommand{\dtp}{\delta_{t+}}
+\newcommand{\dtm}{\delta_{t-}}
+\newcommand{\dtd}{\delta_{t\cdot}}
+\newcommand{\dtt}{\delta_{tt}}
+\newcommand{\dtttt}{\delta_{tttt}}
+\newcommand{\dspm}{\delta_{x\pm}}
+
+\newcommand{\mtp}{\mu_{t+}}
+\newcommand{\mtm}{\mu_{t-}}
+\newcommand{\mtd}{\mu_{t\cdot}}
+\newcommand{\mtt}{\mu_{tt}}
+
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\innp}[1]{\left\langle#1\right\rangle}
+\newcommand{\virg}[1]{``#1''}
+\DeclareMathOperator{\sinc}{sinc}
+%==============================================================================
 %%%%%%%%%% DO NOT EDIT %%%%%%%%%%
 %
 % THIS IS THE TITLE PAGE (CONTAINED IN A SEPARATE FOLDER)
 % 	--> The title page itself SHOULD be edited as appropriate for your project
 %
 \begin{document}
-\bibliographystyle{plainnat}
+% \bibliographystyle{plainnat}
 \input{title-unibo}
 \cleardoublepage{}
 %%%%%%%%%% DO NOT EDIT %%%%%%%%%%
@@ -108,9 +181,9 @@
 \listoffigures
 \cleardoublepage{}
 
-\addcontentsline{toc}{chapter}{List of tables}
-\listoftables  
-\cleardoublepage % this command stops table page becoming page 1
+% \addcontentsline{toc}{chapter}{List of tables}
+% \listoftables  
+% \cleardoublepage % this command stops table page becoming page 1
 %%%%%%%%%% DO NOT EDIT (UNLESS REMOVING ANY UNWANTED PAGE INSERTIONS) %%%%%%%%%%
 
 
@@ -127,7 +200,7 @@
 \renewcommand{\headrulewidth}{0pt}    % Width of head rule
 %%%%%%%%%% DO NOT EDIT %%%%%%%%%%
 
-
+\newcommand{\anon}[1]{#1}
 %%%%%%%%%%%% EDIT %%%%%%%%%%%%
 %
 % CHANGE TO REFLECT YOUR CHAPTERS
@@ -163,14 +236,18 @@
 %%%%%%%%%% DO NOT EDIT %%%%%%%%%%
 \small{
 \singlespacing
-\addcontentsline{toc}{chapter}{Bibliography} 	% Adds bibliography to contents list
+\addcontentsline{toc}{chapter}{References} 	% Adds bibliography to contents list
+
+\clearpage
+\chapter*{References}
+\printbibliography[heading=none]{}
 %%%%%%%%%% DO NOT EDIT %%%%%%%%%%
 
 %%%%%%%%%%%% EDIT %%%%%%%%%%%%
 %
 % CHANGE IF NECESSARY TO REFLECT YOUR BIBLIOGRAPHY FILE
 %
-\bibliography{main.bib}  % Makes the bibliography page(s) based upon references stored inside the given file
+% \bibliography{main.bib}  % Makes the bibliography page(s) based upon references stored inside the given file
 %%%%%%%%%%%% EDIT %%%%%%%%%%%%
 
 

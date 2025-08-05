@@ -40,8 +40,8 @@ Easing acces to fabrication and permitting iteration on designs
 \subsection{Overview}\label{overview}
 
 Modal analysis provides an understanding of an object's frequency response,
-vibration patterns through mode shapes \cite{SKRODZKA, MOYNE}, and can also
-estimate material properties \cite{DUCCESCHI2024109949}.
+vibration patterns through mode shapes \cite{skrodzka_modal_2011, le-moyne_restoration_2012}, and can also
+estimate material properties \cite{ducceschi_a-method_2024}.
 Risk to an instrument is a prominent concern during analysis, particularly to
 historic musical instruments. This has led to the emergence of non-contact
 methods for measuring vibration. These new methods are appealing for modal
@@ -49,13 +49,13 @@ analysis for fragile or expensive instruments.
 
 
 Laser vibrometry has long been a useful tool for acoustic analysis
-\cite{SRIRIAM}, especially with respect to musical instruments \cite{HENNA,GUITAR_3D_SCAN,VIOLIN_3D_SCAN,MANSOUR}. There are two main methods for detecting the vibrations of an object using lasers. There is interferometry, which is based on the interference of lasers, and velocimetry, which is based on the Doppler shift of a single laser.  Laser vibrometry
-provides a non-contact means of obtaining accurate results and is a preferred method for analysing musical instruments. However, it has a cost limitation \cite{DUERINCK}. 
+\cite{sririam_mode_1992}, especially with respect to musical instruments \cite{tahvanainen_numerical_2019,alexander-brauchler_numerical_2020,viala_identification_2018,mansour_a-comparison_2012}. There are two main methods for detecting the vibrations of an object using lasers. There is interferometry, which is based on the interference of lasers, and velocimetry, which is based on the Doppler shift of a single laser.  Laser vibrometry
+provides a non-contact means of obtaining accurate results and is a preferred method for analysing musical instruments. However, it has a cost limitation \cite{duerinck_experimental_2021}. 
 
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.66\textwidth]{./img/ldv-setup.png}
-  \caption{LDV Measurement Setup in \cite{MANSOUR}}
+  \caption{LDV Measurement Setup in \cite{mansour_a-comparison_2012}}
   \label{fig:ldv-setup}
 \end{figure}
 
@@ -75,7 +75,7 @@ measurements. Secondly, an automated process would make
 measurements more easily reproducible. Multiple measurements could be
 taken, and the accuracy of the experimental setup could be tested more easily. The project aims to explore viable, affordable and reproducible means for augmenting a laser vibrometer with a scanning laser vibrometer.
 
-Since many important modal analysis applications in musical instrument conservation operate in the low-frequency range, the precision constraints of vibration measurement equipment in the high-frequency range may be relaxed.  The thesis by Malah \cite{MALAHS2015DESIGNOA} outlines such a system for a Grazing Laser Vibrometer (GLV). 
+Since many important modal analysis applications in musical instrument conservation operate in the low-frequency range, the precision constraints of vibration measurement equipment in the high-frequency range may be relaxed.  The thesis by Malah \cite{malahs_design_2015} outlines such a system for a Grazing Laser Vibrometer (GLV). 
 
 
 The barrier to entry for technical projects of this kind has been lowered over the past few decades. What was once quite a technical undertaking is now more achievable with readily available micro-controller units (MCU) like the Arduino or single-board computers (SBC) like the Raspberry Pi, which can easily interface with sensors and actuators to prototype haptic devices. This proposal will cover what components will be required in the project and what function they will serve.
@@ -83,7 +83,7 @@ The barrier to entry for technical projects of this kind has been lowered over t
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.66\textwidth]{./img/guitar-mode-table.png}
-\caption{Table of guitar body mode shapes derived from LDV in \cite{SKRODZKA}}
+\caption{Table of guitar body mode shapes derived from LDV in \cite{skrodzka_modal_2011}}
 \label{fig:guitar-mode-table}
 \end{figure}
 
@@ -97,29 +97,29 @@ This section will discuss some projects from the last 15 years focused on laser 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.66\textwidth]{./img/rau-laser-scan.png}
-    \caption{Scanning LDV setup used in \cite{RAU_THESIS}}
+    \caption{Scanning LDV setup used in \cite{rau_vibration_2023}}
     \label{fig:rau-setup}
 \end{figure}
 
-In the paper by Tahvanainen et al. \cite{HENNA}, the measurements of eight
+In the paper by Tahvanainen et al. \cite{tahvanainen_numerical_2019}, the measurements of eight
 guitars were required, one using laser vibrometry, to obtain an
-aggregate set of mode shapes and top plate velocities. In this case, research placed at Yamaha Research and Development is the best-case scenario concerning access to materials and tools.  Similarly, Eberhard et al. \cite{GUITAR_3D_SCAN} measured guitar mode shapes and frequencies compared to those of a finite element model. A low-cost laser scanning vibrometer would lower the barrier in both cost and labour for projects of this kind, making it more accessible.
+aggregate set of mode shapes and top plate velocities. In this case, research placed at Yamaha Research and Development is the best-case scenario concerning access to materials and tools.  Similarly, Eberhard et al. \cite{alexander-brauchler_numerical_2020} measured guitar mode shapes and frequencies compared to those of a finite element model. A low-cost laser scanning vibrometer would lower the barrier in both cost and labour for projects of this kind, making it more accessible.
 
 % \cite{VIOLIN_3D_SCAN} Scanning laser vibrometer used for top plate measure of a
 % violin fabricated with bio-based composite materials.
 
-The paper by Le Moyne \cite{MOYNE} provides an example of when non-contact
-measurements are essential in musical instrument restoration. In this case, a 17th-century Couchet harpsichord was to be reconstructed.  In this case, a near-field acoustical holography approach was used. This was to avoid the need for the use of an impact hammer. Less intrusive excitation methods are available, such as those used in \cite{HENNA}, where a non-invasive excitation was achieved using random noise in a speaker. The project would aim to provide a readily available tool for musical instrument collection to monitor and restore musical instruments.
+The paper by Le Moyne \cite{le-moyne_restoration_2012} provides an example of when non-contact
+measurements are essential in musical instrument restoration. In this case, a 17th-century Couchet harpsichord was to be reconstructed.  In this case, a near-field acoustical holography approach was used. This was to avoid the need for the use of an impact hammer. Less intrusive excitation methods are available, such as those used in \cite{tahvanainen_numerical_2019}, where a non-invasive excitation was achieved using random noise in a speaker. The project would aim to provide a readily available tool for musical instrument collection to monitor and restore musical instruments.
 
 
 \subsection{Low Cost Non-Contact Vibration Measurement}
 
-Matiss Malahs researched building a low-cost laser vibrometer system \cite{MALAHS2015DESIGNOA}. The thesis is an overview of interferometry, LDVs, and GLVs and instructions on fabricating a GLV economically. This project would expand on Matiss's work by exploring the construction of affordable LDV and GLV measurement units, particularly with an application to soundboards. Measuring musical instrument soundboards does not require as wide a frequency bandwidth as other vibration analysis applications. The Polytec PSV400  has resources up to 1000kHz \cite{PSV400}, compared to soundboards, where only up to 20kHz are considered for measurement as it is the limit of human hearing.
+Matiss Malahs researched building a low-cost laser vibrometer system \cite{malahs_design_2015}. The thesis is an overview of interferometry, LDVs, and GLVs and instructions on fabricating a GLV economically. This project would expand on Matiss's work by exploring the construction of affordable LDV and GLV measurement units, particularly with an application to soundboards. Measuring musical instrument soundboards does not require as wide a frequency bandwidth as other vibration analysis applications. The Polytec PSV400  has resources up to 1000kHz \cite{polytec_psv-400-3d_2009}, compared to soundboards, where only up to 20kHz are considered for measurement as it is the limit of human hearing.
 
 One of the main applications for scanning instruments is the ability to
 cross-reference results with those obtained within simulation. 
 
-Laser vibrometry and its application and practicalities within musical acoustics are still actively being explored, but it is not the only method of non-contact measurement of musical instruments. An array of MEM microphones has been considered an option for non-contact economic modal analysis. This is a promising approach for obtaining FRFs as outlined in \cite{FARSHIDI2010755} and may be accurate enough for estimating material properties. MEMs microphone arrays for plate mode measurement are demonstrated in \cite{VELSEN} as inaccurate.
+Laser vibrometry and its application and practicalities within musical acoustics are still actively being explored, but it is not the only method of non-contact measurement of musical instruments. An array of MEM microphones has been considered an option for non-contact economic modal analysis. This is a promising approach for obtaining FRFs as outlined in \cite{farshidi_non-contact_2010} and may be accurate enough for estimating material properties. MEMs microphone arrays for plate mode measurement are demonstrated in \cite{velsen_plate_2015} as inaccurate.
 
 Since the focus of the project is on the derivation of mode shapes, as well as
 mode frequencies, the usage of MEMs microphone arrays has not been considered.
@@ -134,21 +134,21 @@ as the need for repositioning the LDV is bypassed entirely. The project aims to
 develop further methods that have been used in recent researched for obtaining
 an affordable method to augment an LDV into a scanning LDV.
 
-The paper of Hui et al. \cite{HUI} considers the addition of a linear scanning
+The paper of Hui et al. \cite{li_modal_2018} considers the addition of a linear scanning
 unit paired with a laser vibrometer. In this paper high-resolution results were
 obtained with a XY sliding table. A sliding table can be sourced for a
 relatively low cost and is therefore within the scope of an affordable linear
 scanning assembly.
 
 Linear scanning using a standard two-dimensional plotter yielded high-resolution
-results in \cite{HUI}. Such a measurement arrangement would allow for automated
-scanning. The 3D printed impact hammer used for measurements  in \cite{RAU} can
+results in \cite{li_modal_2018}. Such a measurement arrangement would allow for automated
+scanning. The 3D printed impact hammer used for measurements  in \cite{rau_vibration_2023} can
 also be combined with an actuator (e.g. a solenoid) for reproducible excitation.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.66\textwidth]{./img/linear-scanning-ldv.png}
-\caption{LDV Mounted to plotter (labelled X-Y sliding table) \cite{HUI}}
+\caption{LDV Mounted to plotter (labelled X-Y sliding table) \cite{li_modal_2018}}
 \label{fig:ldv-linear-scanner}
 \end{figure}
 
@@ -172,7 +172,7 @@ economic cost.
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.66\textwidth]{./img/mirror-galv.pdf}
-\caption{Setup of mirror galvanometer pair from \cite{GALVO} illustrating how
+\caption{Setup of mirror galvanometer pair from \cite{hung_optoelectronic_2022} illustrating how
 rotation of mirrors translates to project onto a 2D plane}
 \label{fig:mirror-galv}
 \end{figure}
@@ -182,11 +182,11 @@ that they would address the problem of scaling to larger soundboards. In order
 to scan a larger area, the laser can simply be moved further away from the
 soundboard. The mechanical travel is also less in comparison to the sliding
 table, meaning scanning time would also be reduced. Such a system was used in
-the thesis by Rau \cite{RAU_THESIS} to successfully measure the soundboard of a
+the thesis by Rau \cite{rau_vibration_2023} to successfully measure the soundboard of a
 guitar. One limitation of digitally controlling a mirror galvanometer is number
 of potential points that can be measured. The bit-depth of the digital to analog
 converter (DAC) that is used dictates the number of available grid points. In
-the thesis by Rau \cite{RAU_THESIS} a 12-bit DAC was used, which provides a 4096
+the thesis by Rau \cite{rau_vibration_2023} a 12-bit DAC was used, which provides a 4096
 x 4096 grid of points that can be measured. A grid of that size would be
 sufficient for a guitar or violin top plate, but in order to accommodate larger
 soundboards, such as for piano or harpsichord, it would be beneficial to select
@@ -201,7 +201,7 @@ system for musical instrument soundboards. The system would aim to be economic
 to fabricate in comparison to current commercially available laser vibrometers.
 
 \begin{itemize}
-\tightlist
+
 \item
   Laser Doppler Velocimetry
 \item
@@ -228,16 +228,16 @@ instrument soundboards consisting of:
   \qquad
   \subfloat[\centering GLV Block
   Diagrams]{{\includegraphics[width=5cm]{./img/grv-block.png} }}%
-  \caption{Block Diagrams of both LDV and GLV from \cite{MALAHS2015DESIGNOA}}%
+  \caption{Block Diagrams of both LDV and GLV from \cite{malahs_design_2015}}%
   \label{fig:laser-block}%
 \end{figure}
 
 \begin{itemize}
-\tightlist
+
   \item
     Operation Manual Repository: An open source repository containing:
   \begin{itemize}
-  \tightlist
+  
     \item
       Instructions for self-assembly of measurement tools and experiment setup 
     \item
@@ -253,7 +253,7 @@ instrument soundboards consisting of:
   Technical Documentation: A document containing: , justification of design
 decisions, discussion of formulae required to obtain detain from the system, 
   \begin{itemize}
-  \tightlist
+  
     \item
       An outline of the design process
     \item
@@ -287,7 +287,7 @@ require facilities to aid prototyping. Suppliers RS and Element 14 were used as
 a source for guide prices:
 
 \begin{itemize}
-\tightlist
+
 \item
   Bench Power Supply: Parametric power supply required for prototyping
   electronics when power requirements are still in flux. (Guide Price: £125)
@@ -310,14 +310,14 @@ Components relevant to each vibrometer type are listed below. Suppliers RS and
 Element 14 were used as a source for guide prices:
 
   \begin{itemize}
-  \tightlist
+  
   \item
     LM348 op-amps: used in the Transimpedance Amplifier as well as filtering
-    circuits, and level shifting. As recommended in \cite{MALAHS2015DESIGNOA} an
+    circuits, and level shifting. As recommended in \cite{malahs_design_2015} an
     alternative would aso be sought to improve sensor bandwidth. (Guide Price:
     £0.70)
   \item
-    650nm Laser: Bandwidth chosen in \cite{MALAHS2015DESIGNOA} to match the
+    650nm Laser: Bandwidth chosen in \cite{malahs_design_2015} to match the
     BPW34 photodiodes. The BPW3 is shown to have the best response in the
     Infrared range so a dual laser system, one for aiming one for measuring,
     would be desirable. (Guide Price: £20)
@@ -325,14 +325,14 @@ Element 14 were used as a source for guide prices:
     BPW34 photodiodes: Used for detecting changes in the laser beam. Current is
     induced when the light strikes the surface. (Guide Price: £0.80)
   \item
-    Analog to Digital Converter: The GLV from \cite{MALAHS2015DESIGNOA} was
+    Analog to Digital Converter: The GLV from \cite{malahs_design_2015} was
     connected to a National Instruments myDAQ which provided enough resolution
     for processing data. As such, an ADC of similar specifications would be
     desirable. (Guide Price: £650)
   \item
     Linear Scanning Rig using either:
     \begin{enumerate}
-    \tightlist
+    
     \item
         An assembly of multiple stepper motors cascaded onto two sets of guide
         rails to for movement in 2 dimensions. These rigs can be purchased as a
@@ -341,7 +341,7 @@ Element 14 were used as a source for guide prices:
         \ref{fig:ldv-linear-scanner} labelled as ``X-Y Sliding Table'' (Guide
         Price: £400). They consist of: 
         \begin{itemize}
-        \tightlist
+        
         \item
           Stepper Motor: Motors and associated driver chips that can be
           controlled step-wise for accuracy.
@@ -359,7 +359,7 @@ Element 14 were used as a source for guide prices:
         A pair of mirror galvanometers, such as in \ref{fig:mirror-galv},
         controlled by a MCU. Consisting of: 
         \begin{itemize}
-        \tightlist
+        
         \item
             Mirror Galvanometer pair (Guide Price: £200)
         \item
@@ -379,7 +379,7 @@ component are an aggregate of those listed for components on Edmund Optics,
 AeroDiode and OptoShop.
 
 \begin{itemize}
-\tightlist
+
 \item
   Beam Splitter: Allows for redirection of laser beam into two direction. (Guide
   Price: £160)
@@ -390,7 +390,7 @@ AeroDiode and OptoShop.
   Bragg Cell: (Optional) Also known as Acousto-optic Modulators. This component
   modulates the light frequency which produces a fringe pattern on the
   photodetector. The bragg cell is the most expensive component of the LDV and
-  as suggested in \cite{MALAHS2015DESIGNOA}, the inclusion is not necessary if
+  as suggested in \cite{malahs_design_2015}, the inclusion is not necessary if
   directional information is not required. The first design of the LDV would
   omit this component entirely. (Guide Price: £1500)
 \item
@@ -402,12 +402,12 @@ AeroDiode and OptoShop.
 \subsection{Safety}\label{safety}}
 
 Since the project will be working with lasers there are safety concerns. The
-design in \cite{MALAHS2015DESIGNOA} was Category 3R laser with a maximum power
+design in \cite{malahs_design_2015} was Category 3R laser with a maximum power
 of 5mW at 3V.
 
 \begin{quote}
 Class 3R lasers are specified as to create no risk to skin and low risk to eyes
-with power limit up to 5 mW [\cite{SAFETY}]
+with power limit up to 5 mW [\cite{henderson_laser_2003}]
 \end{quote}
 
 Eye protection would need to be worn and appropriate signage displayed in any
