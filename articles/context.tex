@@ -8,7 +8,7 @@
     \item the problems of conservation and cultural heritage
 \end{itemize}
 
-\section{Overview}
+\section{Introduction}
 
 the chapter deals with the research context of the thesis, the overarching motivations for each chapter as well as chapter specific motivations.
 
@@ -19,64 +19,38 @@ Context can split into
 
 musical instrument conservation deals with the topics relevant to the conservation of musical instrument in particular digital methods and tools to conserve musical instruments digitally
 
-Digital conservatio relates to the detail and problems associated with process of conserving digiital tools
+Digital conservation relates to the detail and problems associated with process of conserving digiital tools
 
 we have an interesting problem in that we are not only conserving some physical object digitally, but the tools used to do so themselves need to be conserved and  sustained in some manner.
 
 For this second point we can look towards the Open Science movement which has been growing since arround 2016, as well as 
 
-\section{Digital object Identifier}
+\subsection{Breakdown of the Thesis}
 
-Adoption of diital objectidentifier for referencing software releases. Point towards a particular release of software
+\subsubsection{Chapter 2: MAGPIE}
 
-Open software is living in the sense that it capable of constant change, when used in research or research sowftare this can be a problem for citeableility and reusablility
+This chapter covers the creation of an open source software tool for plate vibration analysis, material property estimation and acoustics education.
 
-\subsection{YIN Example}
+\subsubsection{Chapter 3: Interface}
 
-By way of example, look at the YIN source code from the paper \cite{cheveigne_yin-a-fundamental_2002} 
+This chapter covers the creation of a model harpsichord interface that was augmented with an optical electronic sensor system to allow for interaction with digital software instruments. Incorporates the design, prototyping and fabrication stages as well as the final deployment as part of an exhibition at Museo San Colombano, Bologna.
 
-source code originally available from IRCAM at \url{http://www.ircam.fr/pcm/cheveign/sw/yin.zip}. 
+\subsubsection{Chapter 4: Synthesis}
 
-Later at cited at \url{http://audition.ens.fr/adc/sw/yin.zip} and as recently as 2023 \cite{alain_cancellation_2023} where it is available for, though via unsecured http.
+This chapter covers the intersection of chapters 2 and 3 where a numerical modal was designed around a modified version of the interface. A bespoke synthesis engine that utilises the data available from embedded electronic sensors inside the keyboard. Synthesis designed around measurements taken during research as well the harpsichord specific mechanics of jack staggering and the timing differences between register plucks.
 
-\begin{quotation}
-The audition team belongs to the Laboratoire des Systèmes Perceptifs. This is the team's informal webpage, with links to some personal pages. See the official page of the LSP for up-to-date information.
-\end{quotation} from \url{audition.ens.fr}
+\section{Research Context: Musical Instrument Conservation}
 
-Official webpage \url{iec-lsp.ens.fr} offline and now \url{lsp.dec.ens.fr}
+\subsection{Living Heritage, Dead Heritage}
 
-Just one example of link rot but for an algorithm that is widely cited. DOIs and independent digital repositories would go some way ot address this.
+Over recent decades, there has been a greater discourse around `living heritage' versus the static, preservable `dead' heritage \cite{poulios_moving_2010,smith_uses_2006}. 
 
+Poulios critiques values-based conservation for treating the past as something `dead,' resulting in a discontinuity between past and present experiences \cite{poulios_moving_2010}. In contrast, the `living heritage' paradigm emphasises the ongoing, dynamic use and relevance of heritage, advocating for the preservation of not just physical artifacts but the practices, skills, and meanings that sustain them in contemporary life.
 
-\section{Music Instrument Sustainability}
-\subsection{CITES}
+While Poulios' arguments are primarily directed at heritage sites and ceremonial objects, the underlying philosophy is applicable to the wider umbrella heritage objects, particularly musical instruments. There is false dichotomy that presents conservation as a choice between heritage as static and `dead' or `living.'\footnote{``a handful dismissed the idea of heritage as a negative idea, noting for instance that heritage was `keeping that which aught to be alive dead.' '' \cite{smith_uses_2006}}
+The reality is more complex and to treat heritage as perpetually living without acknowledging its material finitude risks creating an `undead' heritage, neither truly alive nor preserved.
 
-Convention on International Trade in Endangered Species of Wild Fauna and Flora (CITES) is a multi-lateral treaty for the protection of animals and plant species that have been put under threat through involvement in trade.
-
-CITES had 3 Appendices that correlate to the level of threat the species is under from Appendix I being the most server to III being the least.
-
-Under the CITES appendices are a number of materials traditionally used within the manufacture of musical instrumemnt. Of note for musical instrument manufacture are the restrictions on:
-
-\begin{itemize}
-    \item Dalbergia nigra (Brazilian rosewood)Appendix I  [1992] \url{https://cites.org/sites/default/files/E-CoP17-62-R1.pdf}
-    \item Paubrasilia echinata (Pernambuco) Appendix II  [2007] \url{https://cites.org/sites/default/files/documents/E-CoP19-Inf-53_0.pdf}
-    \item Madagascar Ebony [2013] Appendix II \url{https://cites.org/sites/default/files/timber_id_materials/files/CITES%20%20Timber%20-%20A%20guide%20to%20CITES-listed%20tree%20species%202023.pdf}
-    \item Madagascar Ebony [2013] Appendix II \url{https://cites.org/sites/default/files/timber_id_materials/files/CITES%20%20Timber%20-%20A%20guide%20to%20CITES-listed%20tree%20species%202023.pdf}
-    \item Dalbergia spp. (Rosewood) [2017] \url{https://www.aphis.usda.gov/sites/default/files/cites.pdf} All Dalbergia species
-\end{itemize}
-
-
-Pernambuco \cite{toledo_operation_2022} (original portugese \cite{toledo_como_2022}) illegal harvested.
-
-Gibson guitar company 2008 involvement in importing illegally harvested wood in Madagascar in 2008 \cite{justice_gibson_2012}.
-
-Instrument makers involved in these activities shows what impact they have on the industry. 
-
-Many materials used in historic instruments covered under cites. Even if there was no question of the preservation of the material, it is either legally impossible or financially and ecologically uinsustainable to maintain historic instryments in an original form.
-
-Musical minstrument conservation has to contend with a ship of thesues problem. How much can the original instrument be changed before it is considered the same instrument. One benefit of a conservation approach that does not priooritise the playing of instruments is that this problem does to typically need to be addressed.,
-
-\section{Conservation values}
+\subsection{Conservation values}
 
 \begin{quotation}
 In this way, ‘conservation [. . .] is a modern concept that sees the past as divorced from the present and existing self-consciously outside tradition’ (Matero, 2004: 69).
@@ -116,7 +90,7 @@ Value-based preservation: in this case preservation is the maintaining of instru
 
 This is not the definition of conservation that musical instruments museums will use.
 
-Explore living heritage \cite{poulios_moving_2010} vs and alongside values-based heritage
+Explore living heritage \cite{.} vs and alongside values-based heritage
 
 
 That a preservation of a musical instrument must necessitate the usage of the original object.
@@ -140,37 +114,146 @@ Museum collections of playbable harpsichords
 
 Anecdotal: Visitor to the museum commenting on the feel of an interface
 
-\section{Musical Haptics}
 
-research of x y and z showing the impact of musical haptics on performer and perception.
+\subsection{A New Value for Conservation}
 
-\section{Music Instrument Conservation}
-\subsection{Digital Museums and Visitor Interaction}
-- Context of San colombano / tagkliavini 
-- Also benton fletcher, also russel collection
-\section{Perception of Musical Instruments}
+The justification for conserving heritage objects often rests upon a complex matrix of values. \textcite{avrami_values_2000} provide a collection of value systems that underpin conservation decisions across different disciplines and organisations, summarised in Table \ref{tab:values_comparison}.
 
-\subsection{Influence of visual}
+\begin{table}[h]
+    \footnotesize
+    \centering
+        \begin{tabular}{llll}
+            \toprule
+            \textbf{Art History} & \textbf{ICOMOS Australia} & \textbf{Economics} & \textbf{English Heritage} \\
+            Alois Reigl & Burra Charter & Bruno Frey &  \\ 
+            1902 & 1998 & 1997 & 1999 \\ \hline
+            Age & Aesthetic & Monetary & Cultural \\ 
+            Historical & Historic & Option & Educational and academic \\ 
+            Commemorative & Scientific & Existence & Economic \\ 
+            Use & Social & Bequest & Resource \\ 
+            & & Prestige & Recreational \\
+            & & Educational & Aesthetic \\
+            \bottomrule
+        \end{tabular}    
+    \caption{Comparative Analysis of Value Systems in Heritage Conservation adapted from \cite{avrami_values_2000}.}
+    \label{tab:values_comparison}
+\end{table}
 
-Thesis draws upon the research carried out by Fritz et al between 2012 and 2018 that concerned double blind studies using old cremonese violins, specifically Guarneri del Gesù and Antonio Stradivari.
+In addition to those above, I propose as a new category for musical instruments and potentially all heritage objects that embody craft and practice: `instructional value.' Instructional value refers to the capacity of a heritage object to convey knowledge of practice, technique, and skill intrinsic to its use and creation. A painting or sculpture may reveal insights into artistic methods through `witness marks,' the traces of the artist’s hand or materials. Similarly, a musical instrument can serve as a pedagogical tool for performers, luthiers, and scholars, instructing through its construction, wear patterns, and interaction how music was historically produced and experienced.
 
-Through the course of these studies its was shown that player preference fell towards newer violins around 2 years of age.
+Instructional value may superficially appear to be a subset of educational or academic value. I argue that this conflation obscures a critical distinction between `descriptive knowledge' (knowing that) and `procedural knowledge' (knowing how). This division is essential to resolving tensions in musical instrument conservation, where preserving the physical object alone cannot fully capture its performative essence without maintaining or reviving the skills and practices it embodies.
 
-Study by Tsay \cite{tsay_sight_2013} also explored the impact that sight has over perception. In the course of which they found x and y and z.
+The discourse around conservation frequently centres on the notion of `authenticity' \cite{pine_museums_2007, laurenson_authenticity_2006}, particularly regarding historically informed performance \cite{davies_authenticity_2001}. Setting aside the complexities and debates surrounding the meaning of `authenticity,' it is important to recognise that the audience's experience often dominates discussions of musical heritage. Yet, consider a scenario where a performer rehearses a piece 50 times before performing to an audience of 50 who hears it once. Which value was represented and by what magnitude in the course performance? I would argue the performer’s experience -- informed by the instrument’s unique qualities -- carries significant instructional value which is equal or greater in magnitude to those values relevant to audience. 
 
-Sight interfering with listening is not a new observation \cite{mcgurk_hearing_1976}, 
+The performer, through hours of embodied interaction, acquires a richer, more nuanced understanding, gained through tactile feedback and `gestural repertoires' \cite[][]{levinson_music_1990} intrinsic to playing the instrument. The instrument shapes the performance as much as the performer shapes the music. This interplay is especially salient when comparing, for instance, a modern Steinway piano with a historical harpsichord, where differences in touch, sound production, and response create distinct musical experiences. Put simply, this yet another example of McLuhan’s maxim that ``the medium is the message'' \cite[][]{mcluhan_understanding_1964}.
 
-`a nonspeech McGurk effect' \cite{saldana_visual_1993} 
+Conventional museum practice rarely permits visitors to handle or play historical instruments. Though instruments may be in `playing condition' they are not typically playable by the average museum visitor. Instead, instruments cordoned off behind a -- real or imagined -- `red velvet cord,' \cite{mcalpine_sampling_2014} displayed as objects to be seen but not touched. This approach robs visitors of the experience of vibro-tactile and kinaesthetic cues encoded into the interface of the instrument. The challenge, then, is how to reintroduce embodied interaction with historical instruments in ways that respect conservation imperatives while restoring some degree of their living function.
 
-trained musicians have less impact to McGurk effect though \cite{politzer_mcgurk_2019} refutes. In conjunction with \cite{tsay_sight_2013}, it seems that musicians are just as, if not lsight more, suceptible to visual stimuli interfence with audiitory judgement.
+On the `priorities for future collecting' for the harpsichord collection at Musical Instrument Museums Edinburgh from \cite{uoe_collections_2020}
 
-Trained musicians are not immune to these effects.
+\begin{quotation}
+    The collection is generally considered to have the widest scope of any in the world. Each item is important for reasons relevant to research and teaching, and in some cases performance potential. 
+\end{quotation}
 
-This says soethgi about the natureof musical instrument conservation. If these instruments are degrading both in fragiliyty and sonic qualit, what can be done to preserve them.
+With performance potential only becoming less likely as time moves on.
 
-To what degree can visual stimul be leveraged to ``sell'' the experience of playing an interface. In conjunction with a haptic response, is it enough to convince the player and remove the barrier to verisimiltude as raised by McAlpine \cite{mcalpine_sampling_2014}
+I argue here that a holistic conservation framework for musical instruments must integrate both values-based and living heritage perspectives. Such a synthesis acknowledges the physical realities of ageing instruments while honouring their performative and instructional roles. This integration opens pathways to novel conservation strategies that extend beyond current paradigms.
 
-\section{Open Science}
+\subsection{Conservation and Sustainability}
+
+\subsubsection{CITES}
+
+Convention on International Trade in Endangered Species of Wild Fauna and Flora (CITES) is a multi-lateral treaty for the protection of animals and plant species that have been put under threat through involvement in trade.
+
+CITES had 3 Appendices that correlate to the level of threat the species is under from Appendix I being the most server to III being the least.
+
+Under the CITES appendices are a number of materials traditionally used within the manufacture of musical instrumemnt. Of note for musical instrument manufacture are the restrictions on:
+
+\begin{itemize}
+    \item Dalbergia nigra (Brazilian rosewood) Appendix I  [1992] \url{https://cites.org/sites/default/files/E-CoP17-62-R1.pdf}
+    \item Paubrasilia echinata (Pernambuco) Appendix II  [2007] \url{https://cites.org/sites/default/files/documents/E-CoP19-Inf-53_0.pdf}
+    \item Madagascar Ebony [2013] Appendix II \url{https://cites.org/sites/default/files/timber_id_materials/files/CITES%20%20Timber%20-%20A%20guide%20to%20CITES-listed%20tree%20species%202023.pdf}
+    \item Madagascar Ebony [2013] Appendix II \url{https://cites.org/sites/default/files/timber_id_materials/files/CITES%20%20Timber%20-%20A%20guide%20to%20CITES-listed%20tree%20species%202023.pdf}
+    \item Dalbergia spp. (Rosewood) [2017] \url{https://www.aphis.usda.gov/sites/default/files/cites.pdf} All Dalbergia species
+\end{itemize}
+
+Pernambuco \cite{toledo_operation_2022} (original portugese \cite{toledo_como_2022}) illegal harvested.
+
+Gibson guitar company 2008 involvement in importing illegally harvested wood in Madagascar in 2008 \cite{justice_gibson_2012}.
+
+Instrument makers involved in these activities shows what impact they have on the industry. 
+
+Many materials used in historic instruments covered under cites. Even if there was no question of the preservation of the material, it is either legally impossible or financially and ecologically uinsustainable to maintain historic instryments in an original form.
+
+Musical instrument conservation has to contend with a ship of thesues problem. How much can the original instrument be changed before it is considered the same instrument. One benefit of a conservation approach that does not priooritise the playing of instruments is that this problem does to typically need to be addressed.,
+
+\subsection{It's Harpsichords All The Way Down}
+
+What will be presented is an approach to historical harpsichords conservation that is equal parts reconstruction, emulation and re-enactment of the original interface. By creating this new augmented interface there is still a question of how the new artefact is conserved as it ages. If the same process is applied where the copy is preserved and reconstructed, then it is `harpsichords all the way down.' Instead, this new interface should be considered finite and the focus of conservation should not be on the interface but rather the instructions for re-creating it.
+
+\section{Research Context: Open Methods for Digital Conservation}
+
+\subsection{Digital object Identifier}
+
+Adoption of digital object identifier for referencing software releases. Point towards a particular release of software
+
+Open software is living in the sense that it capable of constant change, when used in research or research sowftare this can be a problem for citeableility and reusablility
+
+\subsection{Software Sustainability}
+
+The Software sustainability institute at the university of Edinburgh has provided guidance citation \cite{hong_how_2019} of software as well as evaluation of software sustainability \url{https://www.software.ac.uk/resources/online-sustainability-evaluation}
+
+\subsubsection{YIN}
+
+By way of example, look at the YIN source code from the paper \cite{cheveigne_yin-a-fundamental_2002} 
+
+source code originally available from IRCAM at \url{http://www.ircam.fr/pcm/cheveign/sw/yin.zip}. 
+
+Later at cited at \url{http://audition.ens.fr/adc/sw/yin.zip} and as recently as 2023 \cite{alain_cancellation_2023} where it is available for, though via unsecured http.
+
+\begin{quotation}
+The audition team belongs to the Laboratoire des Systèmes Perceptifs. This is the team's informal webpage, with links to some personal pages. See the official page of the LSP for up-to-date information.
+\end{quotation} from \url{audition.ens.fr}
+
+Official webpage \url{iec-lsp.ens.fr} offline and now \url{lsp.dec.ens.fr}
+
+Just one example of link rot but for an algorithm that is widely cited. DOIs and independent digital repositories would go some way ot address this.
+
+\subsubsection{Aurora}
+The Aurora plug-ins for acoustical analysis by Angelo Farina originating in 1995 \cite{farina_aurora_1995} with further active development over the following years. \cite{farina_aurora_2000}. In use for almost three decades and well known in the community(above paper cited > 1k times).
+
+In recent years, Aurora was still in active development with its sister programme Ramsete \cite{bevilacqua_new_2023}.
+
+No publicly available source code for Aurora is available. 
+
+The compiled binaries exist on the Farina's own website with the note:
+
+\subsubsection{SSI Areas of sustainability}
+
+All projects have strived to adhered to the SSI guidance covering points of:
+
+\begin{quotation}
+    *** Russian Roulette ***
+The suite of Aurora plugins is shareware. However, while most shareware programs
+expire after a short period, Aurora modules can be used as long as required without
+registering them. This was chosen for aiding broken students, or people living in 
+difficult conditions - for those people even the small amount of money required for 
+registering Aurora can be a big trouble.
+However, when Aurora is unregistered, you are affected by that nasty "Russian Roulette":
+with a chance of 1:4, the module will crash, causing the host program to die. Albeit 
+this is annoying, this behaviour does not cause any loss of data, as Audition will 
+restore all the previously-open files (even those not saved) at the next launch.
+Of course, when Aurora is registered, the Russian Roulette will not bother you again.
+\end{quotation}
+
+\url{https://www.angelofarina.it/Aurora/download/00-readme.txt} 
+
+The repository for the Aurora \url{https://www.angelofarina.it/Aurora/download} will likely rot without intervention.
+
+A version of Aurora entangled with the Audacity software, which means that changes to Audacity source code directly break Aurora \url{https://github.com/Aurora-for-Audacity/Aurora-for-Audacity}. Lessons learned from this and best practice suggest to take a separate library / interface approach which has guided the structure of Magpie.
+
+
+\subsection{Open Science}
 
 \cite{unesco_open_2021}
 
@@ -185,7 +268,7 @@ Considering that more open, transparent, collaborative and inclusive scientific 
 
 \cite{wilkinson_fair_2016}
 
-\section{What is FAIR}
+\subsection{What is FAIR?}
 
 FAIR \cite{wilkinson_fair_2016} four foundational principles on the
 
@@ -212,13 +295,7 @@ A goal to demonstrate the considerations needed to adhere to these four principl
 
 All digital assets, be it source code, measurement data or CAD files
 
-\section{Software Sustainability}
 
-The Software sustainability institute at the university of Edinburgh has provided guidance citation \cite{hong_how_2019} of software as well as evaluation of software sustainablity \url{https://www.software.ac.uk/resources/online-sustainability-evaluation}
-
-\subsection{SSI Areas of sustainability}
-
-All projects have strived to adhered to the SSI guidance covering points of:
 
 \begin{itemize}
 \item What does your software do
