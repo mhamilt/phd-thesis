@@ -25,17 +25,30 @@ For this second point we can look towards the Open Science movement which has be
 
 \subsection{Breakdown of the Thesis}
 
-\subsubsection{Chapter 2: MAGPIE}
+Two ends of the conservation pipeline represented within this theses. The interface represents the end onbce digital conservation has taken place, how do you facilitate interaction. MAGPIE represents the beginning where anyalysis of materials take place, in the case of the harpshicord, which can be used alongside measurmements to make further decisions about conservation routes \cite{barclay_care_1997}.
 
-This chapter covers the creation of an open source software tool for plate vibration analysis, material property estimation and acoustics education.
-
-\subsubsection{Chapter 3: Interface}
+\subsubsection{Chapter 2: Interface}
 
 This chapter covers the creation of a model harpsichord interface that was augmented with an optical electronic sensor system to allow for interaction with digital software instruments. Incorporates the design, prototyping and fabrication stages as well as the final deployment as part of an exhibition at Museo San Colombano, Bologna.
 
-\subsubsection{Chapter 4: Synthesis}
+\subsubsection{Chapter 3: MAGPIE}
+
+This chapter covers the creation of an open source software tool for plate vibration analysis, material property estimation and acoustics education.
+
+\subsubsection{Chapter 4: Applications}
 
 This chapter covers the intersection of chapters 2 and 3 where a numerical modal was designed around a modified version of the interface. A bespoke synthesis engine that utilises the data available from embedded electronic sensors inside the keyboard. Synthesis designed around measurements taken during research as well the harpsichord specific mechanics of jack staggering and the timing differences between register plucks.
+
+Uses of porjects within the wild.
+
+- NEMUS work that has been using and building upon the MAGPIE software
+- keyboard integrated with custom software
+
+
+
+\subsubsection{Chapter 5: Future}
+
+where do we go
 
 \section{Research Context: Musical Instrument Conservation}
 
@@ -201,34 +214,28 @@ Open software is living in the sense that it capable of constant change, when us
 
 The Software sustainability institute at the university of Edinburgh has provided guidance citation \cite{hong_how_2019} of software as well as evaluation of software sustainability \url{https://www.software.ac.uk/resources/online-sustainability-evaluation}
 
-\subsubsection{YIN}
-
-By way of example, look at the YIN source code from the paper \cite{cheveigne_yin-a-fundamental_2002} 
-
-source code originally available from IRCAM at \url{http://www.ircam.fr/pcm/cheveign/sw/yin.zip}. 
-
-Later at cited at \url{http://audition.ens.fr/adc/sw/yin.zip} and as recently as 2023 \cite{alain_cancellation_2023} where it is available for, though via unsecured http.
-
-\begin{quotation}
-The audition team belongs to the Laboratoire des Systèmes Perceptifs. This is the team's informal webpage, with links to some personal pages. See the official page of the LSP for up-to-date information.
-\end{quotation} from \url{audition.ens.fr}
-
-Official webpage \url{iec-lsp.ens.fr} offline and now \url{lsp.dec.ens.fr}
-
-Just one example of link rot but for an algorithm that is widely cited. DOIs and independent digital repositories would go some way ot address this.
 
 \subsubsection{Aurora}
+
+This section is  a short case study into how precarious digital software can be. 
+
+Aurora is free digital software but its source code has not historically been open.
+
 The Aurora plug-ins for acoustical analysis by Angelo Farina originating in 1995 \cite{farina_aurora_1995} with further active development over the following years. \cite{farina_aurora_2000}. In use for almost three decades and well known in the community(above paper cited > 1k times).
 
 In recent years, Aurora was still in active development with its sister programme Ramsete \cite{bevilacqua_new_2023}.
 
-No publicly available source code for Aurora is available. 
+For a brief illustration in use, three projects referencing Aurora since 2011.
+
+\url{https://www.ioa.org.uk/system/files/acoustics_bulletin_march-april_2021.pdf} used aurora in 2021
+\url{https://era.ed.ac.uk/bitstream/handle/1842/36988/Shannan2020.pdf} a 2019 PhD thesis
+\url{https://core.ac.uk/reader/13782570} PhD thesis
+
+Versions can be inferred from use dates, but not an accurate versioning system.
 
 The compiled binaries exist on the Farina's own website with the note:
 
-\subsubsection{SSI Areas of sustainability}
-
-All projects have strived to adhered to the SSI guidance covering points of:
+\cite{farina_aurora_2025}
 
 \begin{quotation}
     *** Russian Roulette ***
@@ -248,7 +255,35 @@ Of course, when Aurora is registered, the Russian Roulette will not bother you a
 
 The repository for the Aurora \url{https://www.angelofarina.it/Aurora/download} will likely rot without intervention.
 
-A version of Aurora entangled with the Audacity software, which means that changes to Audacity source code directly break Aurora \url{https://github.com/Aurora-for-Audacity/Aurora-for-Audacity}. Lessons learned from this and best practice suggest to take a separate library / interface approach which has guided the structure of Magpie.
+A variation of Aurora used the Audacity FOSS audio software. Since Audacity was open source the Aurora software could be embedded directly through an experimental module system \url{https://manual.audacityteam.org/man/modules.html} which is both under documented and supported.
+
+A drawback of this approach is that the aurora software is entangled within the source code of Audacity. Breaking changes -- updates to the source code that break the functionality of other code -- were inevitable, with Aurora relying on older versions of Audacity to function. 
+
+A version of Aurora entangled with the Audacity software \cite{farina_aurora_2025} which provides a code base from which a working library could be made.
+
+Lessons learned from this and best practice suggest to take a separate library / interface approach which has guided the structure of Magpie.
+
+Aurora is not alone, by way of example, look at the YIN source code from the paper \cite{cheveigne_yin-a-fundamental_2002} 
+
+source code originally available from IRCAM at \url{http://www.ircam.fr/pcm/cheveign/sw/yin.zip}. 
+
+Later at cited at \url{http://audition.ens.fr/adc/sw/yin.zip} and as recently as 2023 \cite{alain_cancellation_2023} where it is available for, though via unsecured http.
+
+\begin{quotation}
+The audition team belongs to the Laboratoire des Systèmes Perceptifs. This is the team's informal webpage, with links to some personal pages. See the official page of the LSP for up-to-date information.
+\end{quotation} from \url{audition.ens.fr}
+
+Official webpage \url{iec-lsp.ens.fr} offline and now \url{lsp.dec.ens.fr}
+
+Software can be free like Aurora or free and open source like YIN, but this does not make invulnerable to rot.
+
+Just one example of link rot but for an algorithm that is widely cited. DOIs and independent digital repositories would go some way to address this.
+
+Aurora and YIN represents only two data points of research software within the field of acoustics. 
+
+\subsubsection{SSI Areas of sustainability}
+
+All projects have strived to adhered to the SSI guidance covering points of:
 
 
 \subsection{Open Science}
