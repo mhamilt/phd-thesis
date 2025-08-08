@@ -19,7 +19,7 @@
 
 \section{Introduction} 
 \label{sec:introduction}
-The evolution of digital sound synthesis has transformed the relationship between human gesture, performance, and sound production. Early digital instruments offered sonic flexibility but introduced a degree of abstraction, primarily due to reliance on indirect parameter manipulation rather than direct physical interaction \cite{roads_computer_1996, moore_elements_1990}. With advances in computational power, real-time processing and expressive controllers have reintroduced immediacy to digital performance, allowing musicians to interact with sound more intuitively \cite{trolland_airsticks_2022,caren_keywi_2020,mcpherson_the-space_2013}. Nevertheless, the fundamental challenge of expressive control remains central across domains such as live electronic music and interactive performance systems, where continued exploration has led to the creation of complex multimodal interfaces \cite{tanaka_multimodal_2002}.
+The evolution of digital sound synthesis has transformed the relationship between human gesture, performance, and sound production. Early digital instruments offered sonic flexibility but introduced a degree of abstraction, primarily due to reliance on indirect parameter manipulation rather than direct physical interaction \cite{roads_computer_1996, moore_elements_1990}. With advances in computational power, real-time processing and expressive controllers have reintroduced immediacy to digital performance, allowing musicians to interact with sound more intuitively \cite{trolland_airsticks_2022,caren_keywi_2020,mcpherson_space_2013}. Nevertheless, the fundamental challenge of expressive control remains central across domains such as live electronic music and interactive performance systems, where continued exploration has led to the creation of complex multimodal interfaces \cite{tanaka_multimodal_2002}.
 
 The challenge of control remains open and becomes relevant when applied to historical musical instruments, where physical fragility often precludes direct interaction \cite{mcalpine_sampling_2014,baldwin_tromba_2016,erc_nemus_}. Physical modelling synthesis presents a promising solution by enabling real-time simulation of an instrument’s behaviour \cite{smith_physical_2010, bilbao_numerical_2009}. However, digital reconstructions often struggle to capture the fine-grained control and responsiveness required for historically informed performance practices.
 
@@ -156,7 +156,7 @@ with total energy:
 \begin{equation}
 H = \frac{1}{2} \dot{\bf q}^{\intercal} \dot{\bf q} + \frac{1}{2} {\bf q}^{\intercal} {\bf \Omega}^2 {\bf q} + \int_{\mathcal I} \phi_{nl}\,\mathrm dx,
 \end{equation}
-and note that the energy is strictly decreasing when the source is inactive ($f(t) = 0$). To ensure numerical stability in the presence of non-linear terms, the system is reformulated using the Scalar Auxiliary Variable (SAV) method \cite{bilbao_explicit_2023, van-walstijn_a-real-time_2016}:
+and note that the energy is strictly decreasing when the source is inactive ($f(t) = 0$). To ensure numerical stability in the presence of non-linear terms, the system is reformulated using the Scalar Auxiliary Variable (SAV) method \cite{bilbao_explicit_2023, van-walstijn_real-time_2016}:
 \begin{equation}
 \psi := \sqrt{2 \int_{\mathcal I} \phi_{nl}\,\mathrm dx},
 \end{equation}
@@ -188,10 +188,10 @@ where:
 \tilde \Omega^2_m &:= \frac{4}{T^2}\frac{1-2e^{-\sigma_m T}\cos(T\sqrt{\Omega_m^2-\sigma_m^2})+e^{-2\sigma_m T}}{1+2e^{-\sigma_m T}\cos(T\sqrt{\Omega_m^2-\sigma_m^2})+e^{-2\sigma_m T}}, \\
 \tilde \sigma_m &:= \frac{2}{T}\frac{1-e^{-\sigma_m T}}{1+2e^{-\sigma_m T}\cos(T\sqrt{\Omega^2_m-\sigma_m^2})+e^{-2\sigma_m T}}.
 \end{align*}
-This discretisation has several desirable properties. First, it ensures that the linear part is discretised exactly \cite{cieslinski_on-exact_2011}, as it appears in previous works employing modal synthesis \cite{van-walstijn_a-real-time_2016,walstijn_implicit_2024}. Second, it is unconditionally stable. Finally, the system's update -not shown here for brevity- is performed explicitly via the Sherman-Morrison formula \cite{bilbao_explicit_2023,russo_scalar_2024,sherman_adjustment_1950}, avoiding non-linear root finding algorithms -often requiring several iterations per time step- or large matrix inversions.
+This discretisation has several desirable properties. First, it ensures that the linear part is discretised exactly \cite{cieslinski_on-exact_2011}, as it appears in previous works employing modal synthesis \cite{van-walstijn_real-time_2016,walstijn_implicit_2024}. Second, it is unconditionally stable. Finally, the system's update -not shown here for brevity- is performed explicitly via the Sherman-Morrison formula \cite{bilbao_explicit_2023,russo_scalar_2024,sherman_adjustment_1950}, avoiding non-linear root finding algorithms -often requiring several iterations per time step- or large matrix inversions.
 
 To manage computational complexity further, full non-linearity is applied only to modes below 3\,kHz; higher modes are treated linearly. This hybrid approach preserves perceptual features while reducing floating-point cost. Additionally, a constrained version of the SAV method, adapted from \cite{walstijn_implicit_2024}, is employed to enforce the non-negativity of $ \mu_{t+}\psi^{n-\frac{1}{2}}$, preventing spurious numerical artefacts from appearing in the solution and allowing the auxiliary variable to decay toward zero. %A slightly altered formulation is employed, as presented by Russo \emph{et al.}~ 
-A detailed description can be found in \cite{bilbao_real-time_2024, russo_non-iterative_2025}.
+A detailed description can be found in \cite{bilbao_real-time_2024, russo_noniterative_2025}.
 
 
 
