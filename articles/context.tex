@@ -31,15 +31,15 @@ Two ends of the conservation pipeline represented within this theses. The interf
 
 This chapter covers the creation of a model harpsichord interface that was augmented with an optical electronic sensor system to allow for interaction with digital software instruments. Incorporates the design, prototyping and fabrication stages as well as the final deployment as part of an exhibition at Museo San Colombano, Bologna.
 
-Technological advances have transformed how museums document, present and interpret their collections. Immersive experiences are realised through tools such as 3D printing and virtual reality\cite{allard_use-of-hand-held_2005,wachowiak_3d-scanning_2009,music_3d-printed_2024,kuzminsky_three-dimensional_2012,schaich_from_2007}.
-These technologies form a kind of experiential authenticity, enabling encounters that evoke the past's sensory, emotional, and intellectual essence\cite{trant_when_1999}. 
-Achieving authenticity requires museums to navigate the delicate balance between preservation and meaningful engagement\cite{pine_museums_2007}—a challenge that is particularly evident in the case of historical musical instrument collections\cite{mcalpine_sampling_2014}. 
-Musical instruments present an interesting problem for cultural heritage as they are both an aesthetic physical object, but also a tool with an inherent tactile experience\cite{charalampos-saitis_musical_2018}.
-However, musical instruments inevitably decay until they reach a point where they are too fragile for continued interaction\cite{paradiso_to-save_2019}.
-Museums face a constant tension between accessibility and preservation, restricting how visitors can interact with collections\cite{templeton_museum_2018, mcalpine_sampling_2014}.
+Technological advances have transformed how museums document, present and interpret their collections. Immersive experiences are realised through tools such as 3D printing and virtual reality \cite{allard_use-of-hand-held_2005,wachowiak_3d-scanning_2009,music_3d-printed_2024,kuzminsky_three-dimensional_2012,schaich_from_2007}.
+These technologies form a kind of experiential authenticity, enabling encounters that evoke the past's sensory, emotional, and intellectual essence \cite{trant_when_1999}. 
+Achieving authenticity requires museums to navigate the delicate balance between preservation and meaningful engagement \cite{pine_museums_2007}—a challenge that is particularly evident in the case of historical musical instrument collections \cite{mcalpine_sampling_2014}. 
+Musical instruments present an interesting problem for cultural heritage as they are both an aesthetic physical object, but also a tool with an inherent tactile experience \cite{charalampos-saitis_musical_2018}.
+However, musical instruments inevitably decay until they reach a point where they are too fragile for continued interaction \cite{paradiso_to-save_2019}.
+Museums face a constant tension between accessibility and preservation, restricting how visitors can interact with collections \cite{templeton_museum_2018, mcalpine_sampling_2014}.
 What can be done to preserve not just the object, but the tactile experiences of playing a musical instrument? 
 The chapter discusses the motivations, design and creation of a replica harpsichord keyboard with a typical early Italian layout, electronically augmented for an interactive exhibition.
-Thinking beyond the ``red velvet cord''\cite{mcalpine_sampling_2014, masu_the-o-in-nime:_2023}, the replica keyboard aims to provide an opportunity to enhance visitor interaction with cultural heritage while safeguarding delicate artefacts. 
+Thinking beyond the ``red velvet cord''\cite{mcalpine_sampling_2014, masu_o-in-nime_2023}, the replica keyboard aims to provide an opportunity to enhance visitor interaction with cultural heritage while safeguarding delicate artefacts. 
 Rather than prioritising technical novelty, the project demonstrates how digital interventions can support meaningful interaction with a shared musical heritage, ensuring its continued relevance in contemporary museum contexts.
 An exhibition was held at Museo San Colombano, Bologna, which aimed to enhance the visitor experience by providing an interface to digitised versions of instruments within the collection by leveraging the propensity humans have to being influenced by visual components when making musical judgements \cite{fritz_player_2012, fritz_soloist_2014, fritz_listener_2017, tsay_sight_2013}.
 The exhibition attempted to balance the competing demands of historical authenticity, public accessibility, and preservation while situating itself within broader discussions on the role of technology in museums. Discussed are the keyboard's design principles, technical implementation, and implications, emphasising its contribution to public engagement and the long-term preservation of musical heritage.
@@ -227,24 +227,25 @@ If musical instruments are to be preserved digitally, we need to aware as to how
 
 Software has reproducibility problem \cite{perkel_challenge_2020} where it can be difficult to recreate process or results after only historically relatively short periods of time \cite{robert_reproducibility_2020}.
 
+Digital technology and immersive experiences technology are frequently declared to be `transforming' the idea of the museum \cite{gedert_technology_2017, li_systematic_2024, dutot_changing_2021}.
 
-Digital technology and immersive experiences technology are frequently declared to be `transforming' the idea of the museum \nocite{Gedert2017, Jingjing2024, Dutot2021}.
 We need first ask `have museums been transformed by digital technologies?', or `have digital technologies simply been wielded with an analogue mentality'?
-The `digital' in a museum not should not be a substitute of the physical artefact, but rather an extension of its reach\nocite{Foster1998, Parry2010}.
-It is worth keeping in mind that `digitisation' of an object is also not a single act, but a perpetual process\nocite{Rubio2020, Kelley2018}.
-Both digital and analogue objects rely on physical storage mediums\nocite{Rubio2020}, but the financial and energy cost of preserving something digitally can often be orders of magnitude greater than an `analogue' equivalent\nocite{Cieply2007}.
-Can we find value in digital technology that is not simply in preservation or novel spectacle?
+
+The `digital' in a museum not should not be a substitute of the physical artefact, but rather an extension of its reach \cite{foster_defining_1998, parry_museums_2010}.
+
+It is worth keeping in mind that `digitisation' of an object is also not a single act, but a perpetual process \cite{rubio_work_2020, kelley_digital_2018}.
+
+Both digital and analogue objects rely on physical storage mediums \cite{rubio_work_2020}, but the financial and energy cost of preserving something digitally can often be orders of magnitude greater than an `analogue' equivalent \cite{cieply_afterlife_2007}.
+
 One advantage of digital technologies is the ability to provide a central point of access to disparate and distributed collections, specifically the data of those collections. 
+
 The Musical Instrument Museums Online (MIMO) project, an online catalogue that aggregates the data from collections of participating musical instrument museums around the globe, is a perfect example of this advantage. 
-The key to the usability\nocite{MIMO2017} of these systems lies within their data, the collection and managing of which requires multidisciplinary skills.
-Museum professionals need adequate training to have an understanding of digital data and its inherent problems of obsolescence and silent corruption\nocite{Rubio2020,Schwarz2006,Parry2010}.
-With respect to the humanities, there is still a gap in  digital skills and best practices in data sustainability that needs to be closed\nocite{Taylor2022}. 
-One initiative addressing this digital skills gap is the Carpentries foundation, which promotes essential data and computational skills and reproducible research in academia through open source workshops and lesson plans. 
-The workshops are grounded in a philosophy of inclusivity and best-practice methods for teaching digital skills to give researchers agency in digital projects they undertake.
-Most relevant to digital cultural heritage is the Library Carpentry, partly developed on a grant from the California digital library,\footnote{\url{https://www.imls.gov/grants/awarded/re-85-17-0121-17}} is aimed at training archivists in computational and data-driven methods. 
-Carpentries are designed to modular and configurable and the workshop would aim to cover one or two modules from the core lesson plan.\footnote{\url{https://librarycarpentry.org/lessons/}} 
-The proposed workshop is an interactive 90-minute carpentry exploring the data set of a musical instrument museum in three parts, parsing data with regular expressions, normalising data with OpenRefine, and version control of data with Git. 
-The workshop would provide an opportunity to demonstrate best-practice methods for teaching digital skills and also to raise questions on data and software sustainability, open source licencing and collaboration on digital data-centric infrastructure as it relates to cultural heritage.
+
+The key to the usability \cite{dolan_mimo_2017} of these systems lies within their data, the collection and managing of which requires multidisciplinary skills.
+
+Museum professionals need adequate training to have an understanding of digital data and its inherent problems of obsolescence and silent corruption \cite{rubio_work_2020,schwarz_disk_2006,parry_museums_2010}.
+
+With respect to the humanities, there is still a gap in  digital skills and best practices in data sustainability that needs to be closed \cite{taylor_shaping_2022}. 
 
 
 
@@ -323,11 +324,13 @@ A goal to demonstrate the considerations needed to adhere to these four principl
 
 All digital assets, be it source code, measurement data or CAD files
 
-\subsection{Reproducibility}
+\subsection{Methods for Reproducibility}
 
 The challenge of reproducibility \url{https://rescience.github.io/ten-years/} \cite{perkel_challenge_2020}
 
 Quoting from \cite{perkel_challenge_2020}
+
+Methods employed to allow the software to reproducible when the intention is for it to be used in research.
 
 \begin{quotation}
 Reproducibility checklist
