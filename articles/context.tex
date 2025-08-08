@@ -212,12 +212,14 @@ What will be presented is an approach to historical harpsichords conservation th
 
 Adoption of digital object identifier for referencing software releases. Point towards a particular release of software
 
-Open software is living in the sense that it capable of constant change, when used in research or research software this can be a problem for cite-ableility and reusability
+Open software is living in the sense that it capable of constant change, when used in research or research software this can be a problem for cite-ability and reusability
 
 \subsection{Software Sustainability}
 
 The Software sustainability institute at the university of Edinburgh has provided guidance citation \cite{hong_how_2019} of software as well as evaluation of software sustainability \url{https://www.software.ac.uk/resources/online-sustainability-evaluation}
 
+
+Reproducibility challenge \url{https://rescience.github.io/ten-years/}
 
 \subsubsection{Aurora}
 
@@ -225,7 +227,7 @@ During the course of this PhD was the passing of professor Angelo Farina, who as
 
 This section is a short case study into how precarious digital software can be. 
 
-Aurora is a free software suite for acoustical analysis created in 1995 \cite{farina_auralization_1995} as an extension to the then Cool Edit software \cite{tronchin_acoustics_1997} -- which would eventually become Adobe Audition \cite{farina_listening_2004} -- and distibuted from \url{http://aurora-plugins.com/} as shareware. 
+Aurora is a free software suite for acoustical analysis created in 1995 \cite{farina_auralization_1995} as an extension to the then Cool Edit software \cite{tronchin_acoustics_1997} -- which would eventually become Adobe Audition \cite{farina_listening_2004}. Aurora was initially distributed alongside Farina's Ramsete software for 3D simulation of building acoustics \cite{farina_aurora_1995} from \url{http://aurora.ramsete.com/Aurora} and \url{http://aurora-plugins.com/} as shareware. With respect to the licence of Aurora, Farina remarks in an early README file:
 
 \begin{quotation}
     *** Russian Roulette ***
@@ -239,52 +241,43 @@ with a chance of 1:4, the module will crash, causing the host program to die. Al
 this is annoying, this behaviour does not cause any loss of data, as Audition will 
 restore all the previously-open files (even those not saved) at the next launch.
 Of course, when Aurora is registered, the Russian Roulette will not bother you again.
-\end{quotation} \url{https://www.angelofarina.it/Aurora/download/00-readme.txt} 
+\end{quotation} 
 
-Developed alongside the Ramsete software for 3D simulation of building acoustics \cite{farina_aurora_1995}. From 1995, Aurora was in active development over the next decade where it was used simplify the process of sine sweep room impulse response measurement \cite{farina_aurora_2000}. The source code for Aurora would later be re-written by Simone Campanini for the free open source audio editor Audacity \cite{farina_new_2009} marking the first time the suite could be run entirely for free and the end of the `Russian Roulette' approach to shareware.
+-- \url{https://www.angelofarina.it/Aurora/download/00-readme.txt} 
+
+From 1995, Aurora was in active development over the next decade where it was used simplify the process of sine sweep room impulse response measurement \cite{farina_aurora_2000}. The source code for Aurora would later be re-written by Simone Campanini for the free open source audio editor Audacity \cite{farina_new_2009} marking the first time the suite could be run entirely for free and the end of the `Russian Roulette' approach to shareware.
 
 Aurora has been used widely in research papers since its release and has continued to be used even as recent as 2024 \cite{fontana_highly_2024,popp_speech_2024,denti_pan_2024}.
 
 \footnote{At time of writing Farina's University of Parma site, \url{http://pcfarina.eng.unipr.it}, is down though it has been mirrored at \url{https://www.angelofarina.it}}
 
-Although Aurora is free digital software, its source code has not historically been open; however it was still in active development by Farina as late as 2023 \cite{bevilacqua_new_2023}.
+Although Aurora is free software, its source code has not historically been open; however it was still in active development by Farina as late as 2023 \cite{bevilacqua_new_2023}.
 
-Without a formal software citation system, Aurora's usage in historical research is difficult to track. Determining the versions of Aurora used can be inferred from the date of a paper but this neither ideal nor accurate. With development to Aurora it is difficult to determine what results would be 
+Without a formal software citation system, Aurora's usage in historical research is difficult to track. Determining the versions of Aurora used can be inferred from the date of a paper but this neither ideal nor accurate. If we consider the development Aurora has undergone, it is difficult to determine what impact these changes might have had in the results of previous research. This was in part the motivation for undertaking a small software conservation project in collaboration with Campanini and Farina. The Audacity variant of Aurora's source code was uploaded to a public version control repository, under a GPLv3 licence and DOI created \cite{farina_aurora_2025} in line with the guidelines of Software Sustainability institute \cite{hong_how_2019}. 
 
-The compiled binaries exist on the Farina's own website with the note:
+Since Audacity is open source, software could be embedded directly utilising Audacity's experimental `module' system, which is an under-documented feature \footnote{\url{https://manual.audacityteam.org/man/modules.html}}. One requirement for modules are that they be co-compiled with the Audacity source code in order to function \footnote{``Modules should be built on the same date as Audacity, otherwise the version string check will prevent the module loading'' \url{https://manual.audacityteam.org/man/modules.html}}.
 
-The repository for the Aurora binaries -- \url{https://www.angelofarina.it/Aurora/download} -- will likely rot without intervention.
+The module approach was the one taken for Aurora port to Audacity \cite{farina_new_2009}. A benefit is the ability to distribute a single working audio editor environment alongside the Aurora suite. A potential, though not inevitable, pitfall of this approach is that the module source code becomes entangled within that of Audacity's and sadly this was the case for Aurora.
 
-As part of this PhD the Audacity variant of Aurora's source code was put onto a public version control repository, under a GPLv3 licence and DOI created \cite{farina_aurora_2025} in line with the guidelines of Software Sustainability institute \cite{hong_how_2019}. Since Audacity was open source, the Aurora software could be embedded directly utilising Audacity's experimental `module' system, which is both under-documented and under-supported \footnote{\url{https://manual.audacityteam.org/man/modules.html}}.
+Where this all has implications for software sustainability is when the host software, Audacity, undergoes major development which -- after its announced partnership in with Muse Group in 2021 \cite{prokoudine_ultimate_2021} -- is likely to take place. In this scenario breaking changes -- updates to the source code that cause other dependant code or software to fail -- are inevitable. This leaves Aurora in a state of precarity where not only might it not available for use, but also a clear reference of functionality will not be possible.
 
-A drawback of this approach is that the Aurora source code has become entangled within that of Audacity's. Breaking changes -- updates to the source code that break the functionality of other code -- are inevitable, with Aurora relying on older versions of Audacity which are compiled `in tandem' to function \footnote{``Modules should be built on the same date as Audacity, otherwise the version string check will prevent the module loading'' \url{https://manual.audacityteam.org/man/modules.html}}.
+The repository for the Aurora binaries -- hosted from \url{https://www.angelofarina.it/Aurora/download} -- will inevitably become unusable. Source code therefore presents one of the few points of reference for functionality.
 
-A version of Aurora entangled with the Audacity software \cite{farina_aurora_2025} which provides a code base from which a working library could be made.
+Aurora is not alone in this predicament as the parallels between it and the YIN source code by Alain de Cheveigne \cite{cheveigne_yin_2002} are strikingly similar. Likely YIN is a prolifcly used and cite piece of software whose source code was originally available from a repository at IRCAM at \url{http://www.ircam.fr/pcm/cheveign/sw/yin.zip}. YIN has recently been cited as available from de Cheveigne's ``informal'' page at Laboratoire des Systèmes Perceptifs (LSR)  \url{http://audition.ens.fr/adc/sw/yin.zip} \cite{alain_cancellation_2023}\footnote{YIN as it is available from the the LSR page \textit{still} references the IRCAM url as the repository}.
 
-Lessons learned from this and best practice suggest to take a separate library / interface approach which has guided the structure of MAGPIE (Chapter~\ref{chapter:magpie}.
+Aurora and YIN represents only two examples to problem of sustainability and preservation of research software; however, they illustrate that software though prolific and free like Aurora or free and open source like YIN does not make it invulnerable to decay and the risk of being lost.
+Institutes could potentially be more proactive in hosting repositories and providing DOIs of the software that is born from their research output.
 
-Aurora is not alone, by way of example, look at the YIN source code from the paper \cite{cheveigne_yin-a-fundamental_2002} 
+Documentation is vital for understanding the how source code is structured and functions \cite{perkel_challenge_2020}. Something as simple as adding a software licence can improve the developer engagement with software \cite{colazo_licence_2009}
 
-source code originally available from IRCAM at \url{http://www.ircam.fr/pcm/cheveign/sw/yin.zip}. 
+The work outlined in the is thesis build from the lessons learned from software like Aurora and YIN and have informed the methodology of project structure documentation for the digital output of the research. 
 
-Later at cited at \url{http://audition.ens.fr/adc/sw/yin.zip} and as recently as 2023 \cite{alain_cancellation_2023} where it is available for, though via unsecured http.
+Chapter~\ref{chapter:magpie} discusses the steps taken for sustainability with a purely software project where a distinct functional software library and interface library were created for the MAGPIE sowftare.  For electronic hardware, the problem of sustainability is compounded compounded with the addition of physical components, their schematics and assembly on top of the firmaware and software required to make the hardwaree function. Process for addressing this is covered further in Chapter~\ref{chapter:interaction}.
 
-\begin{quotation}
-The audition team belongs to the Laboratoire des Systèmes Perceptifs. This is the team's informal webpage, with links to some personal pages. See the official page of the LSP for up-to-date information.
-\end{quotation} from \url{audition.ens.fr}
-
-Official webpage \url{iec-lsp.ens.fr} offline and now \url{lsp.dec.ens.fr}
-
-Software can be free like Aurora or free and open source like YIN, but this does not make invulnerable to rot.
-
-Just one example of link rot but for an algorithm that is widely cited. DOIs and independent digital repositories would go some way to address this.
-
-Aurora and YIN represents only two data points of research software within the field of acoustics. 
 
 \subsubsection{SSI Areas of sustainability}
 
 All projects have strived to adhered to the SSI guidance covering points of:
-
 
 \subsection{Open Science}
 
@@ -355,7 +348,7 @@ To address all of the above, the output of this thesis has confirmed to the foll
 
 All work digital has been put under version control using the git version control system. Version controlled repository are stored on the GitHub platform to allow for public access.
 
-Releases of the software are stored on the Zenodo platform for assigning a DOI
+Releases of the software are stored on the Zenodo platform for assigning a digital object identifier (DOI).
 
 A `release` is defined as any self-contained working version of an asset that was used in the course of research. Digital assets are living and can travel through periods of transition. A release of represents a version that is self-contained, in some final form at a particular moment in time.
 
