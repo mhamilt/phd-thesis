@@ -198,6 +198,10 @@ Many materials used in historic instruments covered under cites. Even if there w
 
 Musical instrument conservation has to contend with a ship of thesues problem. How much can the original instrument be changed before it is considered the same instrument. One benefit of a conservation approach that does not priooritise the playing of instruments is that this problem does to typically need to be addressed.,
 
+With this in mind, the decision to renovate or recreate is a false one, neither is viable on the scale. Perhaps for one instrument, but who chooses which instruments would be worthy of either process.
+
+Chapter 2 will discuss an approach that explore whether a single interface is intended for interaction with multiple instruments
+
 \subsection{It's Harpsichords All The Way Down}
 
 What will be presented is an approach to historical harpsichords conservation that is equal parts reconstruction, emulation and re-enactment of the original interface. By creating this new augmented interface there is still a question of how the new artefact is conserved as it ages. If the same process is applied where the copy is preserved and reconstructed, then it is `harpsichords all the way down.' Instead, this new interface should be considered finite and the focus of conservation should not be on the interface but rather the instructions for re-creating it.
@@ -208,7 +212,7 @@ What will be presented is an approach to historical harpsichords conservation th
 
 Adoption of digital object identifier for referencing software releases. Point towards a particular release of software
 
-Open software is living in the sense that it capable of constant change, when used in research or research sowftare this can be a problem for citeableility and reusablility
+Open software is living in the sense that it capable of constant change, when used in research or research software this can be a problem for cite-ableility and reusability
 
 \subsection{Software Sustainability}
 
@@ -217,25 +221,11 @@ The Software sustainability institute at the university of Edinburgh has provide
 
 \subsubsection{Aurora}
 
-This section is  a short case study into how precarious digital software can be. 
+During the course of this PhD was the passing of professor Angelo Farina, who as well being prolific academic within the field of acoustics was also the author of  a number of free software packages for acoustics analysis. One such package, Aurora, provides a apposite case for importance of software sustainability and preservation.
 
-Aurora is free digital software but its source code has not historically been open.
+This section is a short case study into how precarious digital software can be. 
 
-The Aurora plug-ins for acoustical analysis by Angelo Farina originating in 1995 \cite{farina_aurora_1995} with further active development over the following years. \cite{farina_aurora_2000}. In use for almost three decades and well known in the community(above paper cited > 1k times).
-
-In recent years, Aurora was still in active development with its sister programme Ramsete \cite{bevilacqua_new_2023}.
-
-For a brief illustration in use, three projects referencing Aurora since 2011.
-
-\url{https://www.ioa.org.uk/system/files/acoustics_bulletin_march-april_2021.pdf} used aurora in 2021
-\url{https://era.ed.ac.uk/bitstream/handle/1842/36988/Shannan2020.pdf} a 2019 PhD thesis
-\url{https://core.ac.uk/reader/13782570} PhD thesis
-
-Versions can be inferred from use dates, but not an accurate versioning system.
-
-The compiled binaries exist on the Farina's own website with the note:
-
-\cite{farina_aurora_2025}
+Aurora is a free software suite for acoustical analysis created in 1995 \cite{farina_auralization_1995} as an extension to the then Cool Edit software \cite{tronchin_acoustics_1997} -- which would eventually become Adobe Audition \cite{farina_listening_2004} -- and distibuted from \url{http://aurora-plugins.com/} as shareware. 
 
 \begin{quotation}
     *** Russian Roulette ***
@@ -249,19 +239,29 @@ with a chance of 1:4, the module will crash, causing the host program to die. Al
 this is annoying, this behaviour does not cause any loss of data, as Audition will 
 restore all the previously-open files (even those not saved) at the next launch.
 Of course, when Aurora is registered, the Russian Roulette will not bother you again.
-\end{quotation}
+\end{quotation} \url{https://www.angelofarina.it/Aurora/download/00-readme.txt} 
 
-\url{https://www.angelofarina.it/Aurora/download/00-readme.txt} 
+Developed alongside the Ramsete software for 3D simulation of building acoustics \cite{farina_aurora_1995}. From 1995, Aurora was in active development over the next decade where it was used simplify the process of sine sweep room impulse response measurement \cite{farina_aurora_2000}. The source code for Aurora would later be re-written by Simone Campanini for the free open source audio editor Audacity \cite{farina_new_2009} marking the first time the suite could be run entirely for free and the end of the `Russian Roulette' approach to shareware.
 
-The repository for the Aurora \url{https://www.angelofarina.it/Aurora/download} will likely rot without intervention.
+Aurora has been used widely in research papers since its release and has continued to be used even as recent as 2024 \cite{fontana_highly_2024,popp_speech_2024,denti_pan_2024}.
 
-A variation of Aurora used the Audacity FOSS audio software. Since Audacity was open source the Aurora software could be embedded directly through an experimental module system \url{https://manual.audacityteam.org/man/modules.html} which is both under documented and supported.
+\footnote{At time of writing Farina's University of Parma site, \url{http://pcfarina.eng.unipr.it}, is down though it has been mirrored at \url{https://www.angelofarina.it}}
 
-A drawback of this approach is that the aurora software is entangled within the source code of Audacity. Breaking changes -- updates to the source code that break the functionality of other code -- were inevitable, with Aurora relying on older versions of Audacity to function. 
+Although Aurora is free digital software, its source code has not historically been open; however it was still in active development by Farina as late as 2023 \cite{bevilacqua_new_2023}.
+
+Without a formal software citation system, Aurora's usage in historical research is difficult to track. Determining the versions of Aurora used can be inferred from the date of a paper but this neither ideal nor accurate. With development to Aurora it is difficult to determine what results would be 
+
+The compiled binaries exist on the Farina's own website with the note:
+
+The repository for the Aurora binaries -- \url{https://www.angelofarina.it/Aurora/download} -- will likely rot without intervention.
+
+As part of this PhD the Audacity variant of Aurora's source code was put onto a public version control repository, under a GPLv3 licence and DOI created \cite{farina_aurora_2025} in line with the guidelines of Software Sustainability institute \cite{hong_how_2019}. Since Audacity was open source, the Aurora software could be embedded directly utilising Audacity's experimental `module' system, which is both under-documented and under-supported \footnote{\url{https://manual.audacityteam.org/man/modules.html}}.
+
+A drawback of this approach is that the Aurora source code has become entangled within that of Audacity's. Breaking changes -- updates to the source code that break the functionality of other code -- are inevitable, with Aurora relying on older versions of Audacity which are compiled `in tandem' to function \footnote{``Modules should be built on the same date as Audacity, otherwise the version string check will prevent the module loading'' \url{https://manual.audacityteam.org/man/modules.html}}.
 
 A version of Aurora entangled with the Audacity software \cite{farina_aurora_2025} which provides a code base from which a working library could be made.
 
-Lessons learned from this and best practice suggest to take a separate library / interface approach which has guided the structure of Magpie.
+Lessons learned from this and best practice suggest to take a separate library / interface approach which has guided the structure of MAGPIE (Chapter~\ref{chapter:magpie}.
 
 Aurora is not alone, by way of example, look at the YIN source code from the paper \cite{cheveigne_yin-a-fundamental_2002} 
 
