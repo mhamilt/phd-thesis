@@ -31,6 +31,21 @@ Two ends of the conservation pipeline represented within this theses. The interf
 
 This chapter covers the creation of a model harpsichord interface that was augmented with an optical electronic sensor system to allow for interaction with digital software instruments. Incorporates the design, prototyping and fabrication stages as well as the final deployment as part of an exhibition at Museo San Colombano, Bologna.
 
+Technological advances have transformed how museums document, present and interpret their collections. Immersive experiences are realised through tools such as 3D printing and virtual reality\cite{allard_use-of-hand-held_2005,wachowiak_3d-scanning_2009,music_3d-printed_2024,kuzminsky_three-dimensional_2012,schaich_from_2007}.
+These technologies form a kind of experiential authenticity, enabling encounters that evoke the past's sensory, emotional, and intellectual essence\cite{trant_when_1999}. 
+Achieving authenticity requires museums to navigate the delicate balance between preservation and meaningful engagement\cite{pine_museums_2007}—a challenge that is particularly evident in the case of historical musical instrument collections\cite{mcalpine_sampling_2014}. 
+Musical instruments present an interesting problem for cultural heritage as they are both an aesthetic physical object, but also a tool with an inherent tactile experience\cite{charalampos-saitis_musical_2018}.
+However, musical instruments inevitably decay until they reach a point where they are too fragile for continued interaction\cite{paradiso_to-save_2019}.
+Museums face a constant tension between accessibility and preservation, restricting how visitors can interact with collections\cite{templeton_museum_2018, mcalpine_sampling_2014}.
+What can be done to preserve not just the object, but the tactile experiences of playing a musical instrument? 
+The chapter discusses the motivations, design and creation of a replica harpsichord keyboard with a typical early Italian layout, electronically augmented for an interactive exhibition.
+Thinking beyond the ``red velvet cord''\cite{mcalpine_sampling_2014, masu_the-o-in-nime:_2023}, the replica keyboard aims to provide an opportunity to enhance visitor interaction with cultural heritage while safeguarding delicate artefacts. 
+Rather than prioritising technical novelty, the project demonstrates how digital interventions can support meaningful interaction with a shared musical heritage, ensuring its continued relevance in contemporary museum contexts.
+An exhibition was held at Museo San Colombano, Bologna, which aimed to enhance the visitor experience by providing an interface to digitised versions of instruments within the collection by leveraging the propensity humans have to being influenced by visual components when making musical judgements \cite{fritz_player_2012, fritz_soloist_2014, fritz_listener_2017, tsay_sight_2013}.
+The exhibition attempted to balance the competing demands of historical authenticity, public accessibility, and preservation while situating itself within broader discussions on the role of technology in museums. Discussed are the keyboard's design principles, technical implementation, and implications, emphasising its contribution to public engagement and the long-term preservation of musical heritage.
+
+
+
 \subsubsection{Chapter 3: MAGPIE}
 
 This chapter covers the creation of an open source software tool for plate vibration analysis, material property estimation and acoustics education.
@@ -194,19 +209,44 @@ Gibson guitar company 2008 involvement in importing illegally harvested wood in 
 
 Instrument makers involved in these activities shows what impact they have on the industry. 
 
-Many materials used in historic instruments covered under cites. Even if there was no question of the preservation of the material, it is either legally impossible or financially and ecologically uinsustainable to maintain historic instryments in an original form.
+Many materials used in historic instruments covered under cites. Even if there was no question of the preservation of the material, it is either legally impossible or financially and ecologically unsustainable to maintain historic instruments in an original form.
 
-Musical instrument conservation has to contend with a ship of thesues problem. How much can the original instrument be changed before it is considered the same instrument. One benefit of a conservation approach that does not priooritise the playing of instruments is that this problem does to typically need to be addressed.,
+Musical instrument conservation has to contend with a Ship of Thesues problem. How much can the original instrument be changed before it is considered the same instrument. One benefit of a conservation approach that does not prioritise the playing of instruments is that this problem does to typically need to be addressed.,
 
 With this in mind, the decision to renovate or recreate is a false one, neither is viable on the scale. Perhaps for one instrument, but who chooses which instruments would be worthy of either process.
 
-Chapter 2 will discuss an approach that explore whether a single interface is intended for interaction with multiple instruments
+Chapter~\ref{chapter:keyboard} will discuss an approach that explore whether a single interface is intended for interaction with multiple instruments
 
-\subsection{It's Harpsichords All The Way Down}
+\subsection{Harpsichords All The Way Down}
 
 What will be presented is an approach to historical harpsichords conservation that is equal parts reconstruction, emulation and re-enactment of the original interface. By creating this new augmented interface there is still a question of how the new artefact is conserved as it ages. If the same process is applied where the copy is preserved and reconstructed, then it is `harpsichords all the way down.' Instead, this new interface should be considered finite and the focus of conservation should not be on the interface but rather the instructions for re-creating it.
 
 \section{Research Context: Open Methods for Digital Conservation}
+
+If musical instruments are to be preserved digitally, we need to aware as to how the tools that are created for the process of conservation are themselves conserved. 
+
+Software has reproducibility problem \cite{perkel_challenge_2020} where it can be difficult to recreate process or results after only historically relatively short periods of time \cite{robert_reproducibility_2020}.
+
+
+Digital technology and immersive experiences technology are frequently declared to be `transforming' the idea of the museum \nocite{Gedert2017, Jingjing2024, Dutot2021}.
+We need first ask `have museums been transformed by digital technologies?', or `have digital technologies simply been wielded with an analogue mentality'?
+The `digital' in a museum not should not be a substitute of the physical artefact, but rather an extension of its reach\nocite{Foster1998, Parry2010}.
+It is worth keeping in mind that `digitisation' of an object is also not a single act, but a perpetual process\nocite{Rubio2020, Kelley2018}.
+Both digital and analogue objects rely on physical storage mediums\nocite{Rubio2020}, but the financial and energy cost of preserving something digitally can often be orders of magnitude greater than an `analogue' equivalent\nocite{Cieply2007}.
+Can we find value in digital technology that is not simply in preservation or novel spectacle?
+One advantage of digital technologies is the ability to provide a central point of access to disparate and distributed collections, specifically the data of those collections. 
+The Musical Instrument Museums Online (MIMO) project, an online catalogue that aggregates the data from collections of participating musical instrument museums around the globe, is a perfect example of this advantage. 
+The key to the usability\nocite{MIMO2017} of these systems lies within their data, the collection and managing of which requires multidisciplinary skills.
+Museum professionals need adequate training to have an understanding of digital data and its inherent problems of obsolescence and silent corruption\nocite{Rubio2020,Schwarz2006,Parry2010}.
+With respect to the humanities, there is still a gap in  digital skills and best practices in data sustainability that needs to be closed\nocite{Taylor2022}. 
+One initiative addressing this digital skills gap is the Carpentries foundation, which promotes essential data and computational skills and reproducible research in academia through open source workshops and lesson plans. 
+The workshops are grounded in a philosophy of inclusivity and best-practice methods for teaching digital skills to give researchers agency in digital projects they undertake.
+Most relevant to digital cultural heritage is the Library Carpentry, partly developed on a grant from the California digital library,\footnote{\url{https://www.imls.gov/grants/awarded/re-85-17-0121-17}} is aimed at training archivists in computational and data-driven methods. 
+Carpentries are designed to modular and configurable and the workshop would aim to cover one or two modules from the core lesson plan.\footnote{\url{https://librarycarpentry.org/lessons/}} 
+The proposed workshop is an interactive 90-minute carpentry exploring the data set of a musical instrument museum in three parts, parsing data with regular expressions, normalising data with OpenRefine, and version control of data with Git. 
+The workshop would provide an opportunity to demonstrate best-practice methods for teaching digital skills and also to raise questions on data and software sustainability, open source licencing and collaboration on digital data-centric infrastructure as it relates to cultural heritage.
+
+
 
 \subsection{Digital object Identifier}
 
@@ -216,12 +256,111 @@ Open software is living in the sense that it capable of constant change, when us
 
 \subsection{Software Sustainability}
 
-The Software sustainability institute at the university of Edinburgh has provided guidance citation \cite{hong_how_2019} of software as well as evaluation of software sustainability \url{https://www.software.ac.uk/resources/online-sustainability-evaluation}
+The Software sustainability institute at the University of Edinburgh has provided guidance citation \cite{hong_how_2019} of software as well as evaluation of software sustainability \url{https://www.software.ac.uk/resources/online-sustainability-evaluation}
+
+All projects have strived to adhered to the SSI guidance covering points of:
+
+Projects were designed to conform to the current software sustainability institute guidelines and underwent assessment from the SSI \cite{ssi_online_2025}.
+
+\begin{itemize}
+\item What does your software do
+\item Documentation: Instructions on build
+\item Plans for the future: outlined in issues
+\item Availability of your software: open and available via GitHub
+\item Source code structure: structured source code
+\item Open standards
+\item Building from source: where applicable, build instructions
+\item Installing the binary: where applicable, installation instructions or deployment to package manager systems
+\item Testing
+\item Portability: cross-platform where possible
+\item Community
+\item Contributor Policy
+\item Identity
+\item Copyright
+\item Licence: GPLv3 Licence
+\end{itemize}
 
 
-Reproducibility challenge \url{https://rescience.github.io/ten-years/}
+\subsection{Open Science}
 
-\subsubsection{Aurora}
+\cite{unesco_open_2021}
+
+\begin{quotation}
+    accelerate human progress and foster knowledge societies and highlighting the importance of narrowing the STI and digital gaps existing between and within countries and regions,
+\end{quotation}
+
+\begin{quotation}
+Considering that more open, transparent, collaborative and inclusive scientific practices, coupled with more accessible and verifiable scientific knowledge subject to scrutiny and critique, is a more efficient enterprise that improves the quality, reproducibility and impact of science, and thereby the reliability of the evidence needed for robust decision- making and policy and increased trust in science,
+\end{quotation}
+
+
+\cite{wilkinson_fair_2016}
+
+\subsection{What is FAIR?}
+
+FAIR \cite{wilkinson_fair_2016} four foundational principles on the
+
+\begin{quotation}
+Findability, Accessibility, Interoperability, and Reuse of digital assets    
+\end{quotation}
+
+Summarising \cite{wilkinson_fair_2016}
+
+\begin{itemize}
+\item Findability: data are described with rich metadata
+\item Accessibility: protocol is open, free, and universally implementable
+\item Interoperability: the ability of data or tools from non-cooperating resources to integrate or work together with minimal effort.
+\item Reuse: data are released with a clear and accessible data usage license
+\end{itemize}
+
+used in academic research. Wilkinson et al. call out scientific data, but the principles should be applicable to all fields of academic research where digital assets are created.
+
+Version control systems such as git provide an easy means of tracking and tagging versions of software and services such as GitHub provide a means to distribute.
+
+perpetual digital repository
+
+A goal to demonstrate the considerations needed to adhere to these four principles, particular within a cross-discpline project such is the topic of this thesis.
+
+All digital assets, be it source code, measurement data or CAD files
+
+\subsection{Reproducibility}
+
+The challenge of reproducibility \url{https://rescience.github.io/ten-years/} \cite{perkel_challenge_2020}
+
+Quoting from \cite{perkel_challenge_2020}
+
+\begin{quotation}
+Reproducibility checklist
+Although it’s impossible to guarantee computational reproducibility over time, these strategies can maximize your chances.
+\begin{itemize}
+\item \textbf{Code} Workflows based on point-and-click interfaces, such as Excel, are not reproducible. Enshrine your computations and data manipulation in code.
+\item \textbf{Document} Use comments, computational notebooks and README files to explain how your code works, and to define the expected parameters and the computational environment required.
+\item \textbf{Record} Make a note of key parameters, such as the ‘seed’ values used to start a random-number generator. Such records allow you to reproduce runs, track down bugs and follow up on unexpected results.
+\item \textbf{Test} Create a suite of test functions. Use positive and negative control data sets to ensure you get the expected results, and run those tests throughout development to squash bugs as they arise.
+\item \textbf{Guide} Create a master script (for example, a ‘run.sh’ file) that downloads required data sets and variables, executes your workflow and provides an obvious entry point to the code.
+\item \textbf{Archive} GitHub is a popular but impermanent online repository. Archiving services such as Zenodo, Figshare and Software Heritage promise long-term stability.
+\item \textbf{Track} Use version-control tools such as Git to record your project’s history. Note which version you used to create each result.
+\item \textbf{Package} Create ready-to-use computational environments using containerization tools (for example, Docker, Singularity), web services (Code Ocean, Gigantum, Binder) or virtual-environment managers (Conda).
+\item \textbf{Automate} Use continuous-integration services (for example, Travis CI) to automatically test your code over time, and in various computational environments.
+\item \textbf{Simplify} Avoid niche or hard-to-install third-party code libraries that can complicate reuse.
+\item \textbf{Verify} Check your code’s portability by running it in a range of computing environments.
+\end{itemize}
+\end{quotation}
+
+
+\subsection{Addressing Open Science, FAIR, and Software Sustainability}
+
+To address all of the above, the output of this thesis has confirmed to the following. 
+
+All work digital has been put under version control using the git version control system. Version controlled repository are stored on the GitHub platform to allow for public access.
+
+Releases of the software are stored on the Zenodo platform for assigning a digital object identifier (DOI).
+
+A `release` is defined as any self-contained working version of an asset that was used in the course of research. Digital assets are living and can travel through periods of transition. A release of represents a version that is self-contained, in some final form at a particular moment in time.
+
+All digital assets are available under the GLPv3 licence to provide open permission. Allows for the copy, distribute and modify the source files and that any modifications to that digital source must also be made available under the GPLv3.
+
+\subsection{Aurora}
 
 During the course of this PhD was the passing of professor Angelo Farina, who as well being prolific academic within the field of acoustics was also the author of  a number of free software packages for acoustics analysis. One such package, Aurora, provides a apposite case for importance of software sustainability and preservation.
 
@@ -272,87 +411,10 @@ Documentation is vital for understanding the how source code is structured and f
 
 The work outlined in the is thesis build from the lessons learned from software like Aurora and YIN and have informed the methodology of project structure documentation for the digital output of the research. 
 
-Chapter~\ref{chapter:magpie} discusses the steps taken for sustainability with a purely software project where a distinct functional software library and interface library were created for the MAGPIE sowftare.  For electronic hardware, the problem of sustainability is compounded compounded with the addition of physical components, their schematics and assembly on top of the firmaware and software required to make the hardwaree function. Process for addressing this is covered further in Chapter~\ref{chapter:interaction}.
-
-
-\subsubsection{SSI Areas of sustainability}
-
-All projects have strived to adhered to the SSI guidance covering points of:
-
-\subsection{Open Science}
-
-\cite{unesco_open_2021}
-
-\begin{quotation}
-    accelerate human progress and foster knowledge societies and highlighting the importance of narrowing the STI and digital gaps existing between and within countries and regions,
-\end{quotation}
-
-\begin{quotation}
-Considering that more open, transparent, collaborative and inclusive scientific practices, coupled with more accessible and verifiable scientific knowledge subject to scrutiny and critique, is a more efficient enterprise that improves the quality, reproducibility and impact of science, and thereby the reliability of the evidence needed for robust decision- making and policy and increased trust in science,
-\end{quotation}
-
-
-\cite{wilkinson_fair_2016}
-
-\subsection{What is FAIR?}
-
-FAIR \cite{wilkinson_fair_2016} four foundational principles on the
-
-\begin{quotation}
-Findability, Accessibility, Interoperability, and Reuse of digital assets    
-\end{quotation}
-
-Summarising \cite{wilkinson_fair_2016}
-
-\begin{itemize}
-\item Findability: data are described with rich metadata
-\item Accessibility: protocol is open, free, and universally implementable
-\item Interoperability: the ability of data or tools from non-cooperating resources to integrate or work together with minimal effort.
-\item Reuse: data are released with a clear and accessible data usage license
-\end{itemize}
-
-used in academic research. Wilkinson et al. call out scientific data, but the principles should be applicable to all fields of academic research where digital assets are created.
-
-Version control systems such as git provide an easy means of tracking and tagging versions of software and services such as GitHub provide a means to distribute.
-
-perpetual digital repository
-
-A goal to demonstrate the considerations needed to adhere to these four principles, particular within a cross-discpline project such is the topic of this thesis.
-
-All digital assets, be it source code, measurement data or CAD files
+Chapter~\ref{chapter:magpie} discusses the steps taken for sustainability with a purely software project where a distinct functional software library and interface library were created for the MAGPIE software.  For electronic hardware, the problem of sustainability is compounded compounded with the addition of physical components, their schematics and assembly on top of the firmware and software required to make the hardware function. Process for addressing this is covered further in Chapter~\ref{chapter:interaction}.
 
 
 
-\begin{itemize}
-\item What does your software do
-\item Documentation: Instructions on build
-\item Plans for the future: outlined in issues
-\item Availability of your software: open and available via GitHub
-\item Source code structure: structured source code
-\item Open standards
-\item Building from source: where applicable, build instructions
-\item Installing the binary: where applicable, installation instructions or deployment to package manager systems
-\item Testing
-\item Portability: cross-platform where possible
-\item Community
-\item Contributor Policy
-\item Identity
-\item Copyright
-\item Licence: GPLv3 Licence
-\end{itemize}
-
-
-\subsection{Addressing Open Science, FAIR, and Software Sustainability}
-
-To address all of the above, the output of this thesis has confirmed to the following. 
-
-All work digital has been put under version control using the git version control system. Version controlled repository are stored on the GitHub platform to allow for public access.
-
-Releases of the software are stored on the Zenodo platform for assigning a digital object identifier (DOI).
-
-A `release` is defined as any self-contained working version of an asset that was used in the course of research. Digital assets are living and can travel through periods of transition. A release of represents a version that is self-contained, in some final form at a particular moment in time.
-
-All digital assets are available under the GLPv3 licence to provide open permission. Allows for the copy, distribute and modify the source files and that any modifications to that digital source must also be made available under the GPLv3.
 
 \section{Definitions}
 
