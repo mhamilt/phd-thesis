@@ -1,10 +1,10 @@
-\section{Points to Hit}
+% \section{Points to Hit}
 
-\begin{itemize}
-    \item the problems of musical instrument conservation
-    \item the problems of software sustainability in research
-    \item the problems of conservation and cultural heritage
-\end{itemize}
+% \begin{itemize}
+%     \item the problems of musical instrument conservation
+%     \item the problems of software sustainability in research
+%     \item the problems of conservation and cultural heritage
+% \end{itemize}
 
 \section{Introduction}
 
@@ -196,12 +196,28 @@ CITES had 3 Appendices that correlate to the level of threat the species is unde
 Under the CITES appendices are a number of materials traditionally used within the manufacture of musical instrumemnt. Of note for musical instrument manufacture are the restrictions on:
 
 \begin{itemize}
-    \item Dalbergia nigra (Brazilian rosewood) Appendix I  [1992] \url{https://cites.org/sites/default/files/E-CoP17-62-R1.pdf}
-    \item Paubrasilia echinata (Pernambuco) Appendix II  [2007] \url{https://cites.org/sites/default/files/documents/E-CoP19-Inf-53_0.pdf}
-    \item Madagascar Ebony [2013] Appendix II \url{https://cites.org/sites/default/files/timber_id_materials/files/CITES%20%20Timber%20-%20A%20guide%20to%20CITES-listed%20tree%20species%202023.pdf}
-    \item Madagascar Ebony [2013] Appendix II \url{https://cites.org/sites/default/files/timber_id_materials/files/CITES%20%20Timber%20-%20A%20guide%20to%20CITES-listed%20tree%20species%202023.pdf}
-    \item Dalbergia spp. (Rosewood) [2017] \url{https://www.aphis.usda.gov/sites/default/files/cites.pdf} All Dalbergia species
+    \item Dalbergia Nigra (Brazilian rosewood) Appendix I  [1992] \cite{cites_cop17_2017}
+    \item Paubrasilia Echinata (Pernambuco) Appendix II  [2007] \cite{cites_cop19_2019}
+    \item Madagascar Ebony [2013] Appendix II \cite{cites_timber_2023}
+    \item Dalbergia species (Rosewood) [2017] \cite{usda_species_2025}
 \end{itemize}
+
+
+
+\begin{table}
+    \centering
+    \begin{tabular}{lrcl}
+         Common Name&  Genus&  Appendix& Year Added\\
+         Brazilian rosewood&  Dalbergia Nigra&  I& 1992 \cite{cites_cop17_2017}\\
+         Pernambuco&  Paubrasilia Echinata&  II& 2007 \cite{cites_cop19_2019}\\
+         Madagascar Ebony&  Diospyros [species]&  II& 2013 \cite{cites_timber_2023}\\
+ Indian Rosewood& Dalbergia [species]& II&2017 \cite{usda_species_2025}\\
+    \end{tabular}
+    \caption{Caption}
+    \label{tab:placeholder}
+\end{table}
+
+
 
 Pernambuco \cite{toledo_operation_2022} (original portugese \cite{toledo_como_2022}) illegal harvested.
 
@@ -213,7 +229,10 @@ Many materials used in historic instruments covered under cites. Even if there w
 
 Musical instrument conservation has to contend with a Ship of Thesues problem. How much can the original instrument be changed before it is considered the same instrument. One benefit of a conservation approach that does not prioritise the playing of instruments is that this problem does to typically need to be addressed.,
 
-With this in mind, the decision to renovate or recreate is a false one, neither is viable on the scale. Perhaps for one instrument, but who chooses which instruments would be worthy of either process.
+With this in mind, the decision to renovate or recreate is a false one, neither is viable at scale, neither financially nor ethically.
+
+The number of instruments eligible is fundamentally limited., but who chooses which instruments would be worthy of either process?
+
 
 Chapter~\ref{chapter:keyboard} will discuss an approach that explore whether a single interface is intended for interaction with multiple instruments
 
@@ -221,15 +240,39 @@ Chapter~\ref{chapter:keyboard} will discuss an approach that explore whether a s
 
 What will be presented is an approach to historical harpsichords conservation that is equal parts reconstruction, emulation and re-enactment of the original interface. By creating this new augmented interface there is still a question of how the new artefact is conserved as it ages. If the same process is applied where the copy is preserved and reconstructed, then it is `harpsichords all the way down.' Instead, this new interface should be considered finite and the focus of conservation should not be on the interface but rather the instructions for re-creating it.
 
+For this reason the word `conservation' is used deliberately throughout this as opposed to `preservation' with respect to musical instrument heritage. Given the facts presented above, the working lifespan of an instrument -- where it can provide value instructional value -- is finite. To attempt to `preserve' a specific instrument with instructional value in mind is a futile endeavour, conserving, keeping as long as possible through careful treatment, is the best we for which can hope.
+
 \section{Research Context: Open Methods for Digital Conservation}
 
-If musical instruments are to be preserved digitally, we need to aware as to how the tools that are created for the process of conservation are themselves conserved. 
+So far the challenges inherent to musical instrument conservation have been discussed.
 
-Software has reproducibility problem \cite{perkel_challenge_2020} where it can be difficult to recreate process or results after only historically relatively short periods of time \cite{robert_reproducibility_2020}.
+In this section we will look at the problem of Digital Conservation as it applies to musical instrument.
+
+For this `digital conservation' is defined as conservation where digital tools play a vital role within the process.
+
+`Digital conservation' has traditionally bee applied to nature conservation \cite{vanderwal_digital_2015}, but here it is used to encapsulate the concepts of ``digital heritage'' \cite{unesco_heritage_2003}, ``digital preservation'' \cite{garrett_preserving_1996}, and ``digital cultural heritage'' \cite{fresa_digital_2014}. 
+
+
+Defining some terms: 
+
+\begin{itemize}
+    \item \textbf{Digital preservation} is the process of digitising an artefact for the purpose of a permanent record.
+    \item \textbf{Digital heritage} constitutes all ``digital materials of enduring value'' \cite{unesco_heritage_2003} including documents, datasets and software.
+    \item \textbf{Digital cultural heritage} are heritage artefacts with have undergone the process of digitisation. This specifically references to the digital instance of heritage objects
+\end{itemize}
+
+Digital preservation is the process of digitising an artefact for the purpose of a permanent record.
+Digital heritage constitutes all ``digital materials of enduring value'' \cite{unesco_heritage_2003} including documents, datasets and software.
+
+Digital cultural heritage are heritage artefacts with have undergone the process of digitisation. This specifically references to the digital instance of heritage objects
+
+We have to tackle a compound problem of digital conservation as it relates to musical instruments but also broader digital conservation itself. There are the problems that arise ins a digital conservation process particular to musical instruments such as the retention of the tactile performer experience. As has has been discussed in the previous section, retaining performer experience has problem outside of the digital domain.
+
+Digital preservation and the integration of digital technology within the heritage sector is also not a solved problem.
 
 Digital technology and immersive experiences technology are frequently declared to be `transforming' the idea of the museum \cite{gedert_technology_2017, li_systematic_2024, dutot_changing_2021}.
 
-We need first ask `have museums been transformed by digital technologies?', or `have digital technologies simply been wielded with an analogue mentality'?
+We need to ask ourselves: have museums been transformed by digital technologies? Or have digital technologies simply been wielded with an analogue mentality?
 
 The `digital' in a museum not should not be a substitute of the physical artefact, but rather an extension of its reach \cite{foster_defining_1998, parry_museums_2010}.
 
@@ -247,6 +290,20 @@ Museum professionals need adequate training to have an understanding of digital 
 
 With respect to the humanities, there is still a gap in  digital skills and best practices in data sustainability that needs to be closed \cite{taylor_shaping_2022}. 
 
+There is also the question of the digital heritage such as software or data sets that are either utilised of created as part of the conservation process.
+
+If musical instruments are to be preserved digitally, we need to aware as to how the tools that are created for the process of conservation are themselves conserved. 
+
+Software has reproducibility problem \cite{perkel_challenge_2020} where it can be difficult to recreate process or results after only historically relatively short periods of time \cite{robert_reproducibility_2020}.
+
+
+The digital components of this thesis have strived to follow the current best practice guidelines.
+
+This sections discusses the organisation and structure of all digital components and the motivations behind this methodology.
+
+
+
+Tools to allow us to do so:
 
 
 \subsection{Digital object Identifier}
@@ -284,26 +341,28 @@ Projects were designed to conform to the current software sustainability institu
 
 \subsection{Open Science}
 
-\cite{unesco_open_2021}
+Entangled within the concept Digital preservation is the movement of Open Science \cite{unesco_open_2021} with a focus on  ``Findability, Accessibility, Interoperability, and Reuse [FAIR] of digital assets'' \cite{wilkinson_fair_2016}.
 
-\begin{quotation}
-    accelerate human progress and foster knowledge societies and highlighting the importance of narrowing the STI and digital gaps existing between and within countries and regions,
-\end{quotation}
+% \cite{unesco_open_2021}
 
-\begin{quotation}
-Considering that more open, transparent, collaborative and inclusive scientific practices, coupled with more accessible and verifiable scientific knowledge subject to scrutiny and critique, is a more efficient enterprise that improves the quality, reproducibility and impact of science, and thereby the reliability of the evidence needed for robust decision- making and policy and increased trust in science,
-\end{quotation}
+% \begin{quotation}
+%     accelerate human progress and foster knowledge societies and highlighting the importance of narrowing the STI and digital gaps existing between and within countries and regions,
+% \end{quotation}
+
+% \begin{quotation}
+% Considering that more open, transparent, collaborative and inclusive scientific practices, coupled with more accessible and verifiable scientific knowledge subject to scrutiny and critique, is a more efficient enterprise that improves the quality, reproducibility and impact of science, and thereby the reliability of the evidence needed for robust decision- making and policy and increased trust in science,
+% \end{quotation}
 
 
 \cite{wilkinson_fair_2016}
 
-\subsection{What is FAIR?}
+% \subsection{What is FAIR?}
 
-FAIR \cite{wilkinson_fair_2016} four foundational principles on the
+% FAIR \cite{wilkinson_fair_2016} four foundational principles on the
 
-\begin{quotation}
-Findability, Accessibility, Interoperability, and Reuse of digital assets    
-\end{quotation}
+% \begin{quotation}
+% Findability, Accessibility, Interoperability, and Reuse of digital assets    
+% \end{quotation}
 
 Summarising \cite{wilkinson_fair_2016}
 
@@ -314,13 +373,13 @@ Summarising \cite{wilkinson_fair_2016}
 \item Reuse: data are released with a clear and accessible data usage license
 \end{itemize}
 
-used in academic research. Wilkinson et al. call out scientific data, but the principles should be applicable to all fields of academic research where digital assets are created.
+\textcite{wilkinson_fair_2016} and FAIR is aimed at research and data within the sciences, but the principles should be applicable to all fields of academic research where digital assets are created.
 
 Version control systems such as git provide an easy means of tracking and tagging versions of software and services such as GitHub provide a means to distribute.
 
-perpetual digital repository
+Perpetual digital repositories
 
-A goal to demonstrate the considerations needed to adhere to these four principles, particular within a cross-discpline project such is the topic of this thesis.
+A goal to demonstrate the considerations needed to adhere to these four principles, particular within a cross-discipline project such is the topic of this thesis.
 
 All digital assets, be it source code, measurement data or CAD files
 
@@ -365,11 +424,13 @@ All digital assets are available under the GLPv3 licence to provide open permiss
 
 \subsection{Aurora}
 
-During the course of this PhD was the passing of professor Angelo Farina, who as well being prolific academic within the field of acoustics was also the author of  a number of free software packages for acoustics analysis. One such package, Aurora, provides a apposite case for importance of software sustainability and preservation.
+During the course of this PhD was the passing of professor Angelo Farina, who as well being prolific academic within the field of acoustics was also the author of  a number of free software packages for acoustics analysis. One example of Farina's software is Aurora, a free software suite for acoustical analysis. 
+
+Auroa provides an apposite case for importance of software sustainability and preservation, not just as a software of enduring value but also in its own use in digital cultural heritage projects for decades \cite{fausti_acoustic_2000,frey_acoustical_2013,almagropastor_assessing_2021}.
 
 This section is a short case study into how precarious digital software can be. 
 
-Aurora is a free software suite for acoustical analysis created in 1995 \cite{farina_auralization_1995} as an extension to the then Cool Edit software \cite{tronchin_acoustics_1997} -- which would eventually become Adobe Audition \cite{farina_listening_2004}. Aurora was initially distributed alongside Farina's Ramsete software for 3D simulation of building acoustics \cite{farina_aurora_1995} from \url{http://aurora.ramsete.com/Aurora} and \url{http://aurora-plugins.com/} as shareware. With respect to the licence of Aurora, Farina remarks in an early README file:
+Created in 1995 \cite{farina_auralization_1995} as an extension to the then Cool Edit software \cite{tronchin_acoustics_1997} -- which would eventually become Adobe Audition \cite{farina_listening_2004} -- Aurora was initially distributed alongside Farina's Ramsete software for 3D simulation of building acoustics \cite{farina_aurora_1995} from \url{http://aurora.ramsete.com/Aurora} and \url{http://aurora-plugins.com/} as shareware. With respect to the licence of Aurora, Farina remarks in an early README file:
 
 \begin{quotation}
     *** Russian Roulette ***
@@ -416,14 +477,13 @@ The work outlined in the is thesis build from the lessons learned from software 
 
 Chapter~\ref{chapter:magpie} discusses the steps taken for sustainability with a purely software project where a distinct functional software library and interface library were created for the MAGPIE software.  For electronic hardware, the problem of sustainability is compounded compounded with the addition of physical components, their schematics and assembly on top of the firmware and software required to make the hardware function. Process for addressing this is covered further in Chapter~\ref{chapter:interaction}.
 
-
-
+\subsection{Software citation}
 
 \section{Definitions}
 
 \begin{itemize}
     \item CAD: Computer aided design,  Relating to CAD files used in the creation of PCBs or 3D prints
-    \item PCB: Printed circuit board. The circuit required for connecting electronics togther. Printed on plate of silicon with a copper coating.
+    \item PCB: Printed circuit board. The circuit required for connecting electronics together. Printed on plate of silicon with a copper coating.
     \item FAIR: Findability, Accessibility, Interoperability, and Reuse of digital assets    
     \item DOI: Digital object Identifier
     \item Digital Asset: Any type of digital data, encapsulating source code, compiled binaries, CAD files, images. Anything created then stored digital and used in the course of research.
@@ -448,48 +508,48 @@ These areas were:
 \begin{enumerate}
     \item \textbf{Analysis}: The processing and interpretation of measurement data to further understand material
     \item \textbf{Interaction}: The design of an interface for digitally conserved musical instruments. Preserving the physical experience of playing an instrument
-    \item \textbf{Synthesis}: The fusion of interface and digital audio engines to create a parametric digital instrument.
+    \item \textbf{Application}: The usage of these digital tools and the areas for development within them.
 \end{enumerate}
 
-\subsection{Analysis}
+% \subsection{Analysis}
 
-Existing tools: ITEMM Suite, \cite{hamilton_pffdtd_2021},
+% Existing tools: ITEMM Suite, \cite{hamilton_pffdtd_2021},
 
-\begin{enumerate}
-    \item Research Question: An open source method for non-destructive material parameter calculation    
-    \item Research Methods
-    \item ``Measurements'', Type of data used
-    \item Sample
-    \item Collection Process
-    \item Validity and Reliability, data analysis
-    \item Instruments or Equipment
-    \item Experimental Procedure
-\end{enumerate}
+% \begin{enumerate}
+%     \item Research Question: An open source method for non-destructive material parameter calculation    
+%     \item Research Methods
+%     \item ``Measurements'', Type of data used
+%     \item Sample
+%     \item Collection Process
+%     \item Validity and Reliability, data analysis
+%     \item Instruments or Equipment
+%     \item Experimental Procedure
+% \end{enumerate}
 
-\subsection{Interaction}
+% \subsection{Interaction}
 
-\begin{enumerate}
-    \item Research Question
-    \item Research Methods
-    \item ``Measurements''
-    \item Sample
-    \item Collection Process
-    \item Validity and Reliability
-    \item Instruments or Equipment
-    \item Experimental Procedure
-\end{enumerate}
+% \begin{enumerate}
+%     \item Research Question
+%     \item Research Methods
+%     \item ``Measurements''
+%     \item Sample
+%     \item Collection Process
+%     \item Validity and Reliability
+%     \item Instruments or Equipment
+%     \item Experimental Procedure
+% \end{enumerate}
 
-\subsection{Synthesis}
+% \subsection{Synthesis}
 
-\begin{enumerate}
-    \item Research Question
-    \item Research Methods
-    \item ``Measurements''
-    \item Sample
-    \item Collection Process
-    \item Validity and Reliability
-    \item Instruments or Equipment
-    \item Experimental Procedure
-\end{enumerate}
+% \begin{enumerate}
+%     \item Research Question
+%     \item Research Methods
+%     \item ``Measurements''
+%     \item Sample
+%     \item Collection Process
+%     \item Validity and Reliability
+%     \item Instruments or Equipment
+%     \item Experimental Procedure
+% \end{enumerate}
 
 
