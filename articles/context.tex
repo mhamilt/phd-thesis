@@ -23,49 +23,11 @@ we have an interesting problem in that we are not only conserving some physical 
 
 For this second point we can look towards the Open Science movement which has been growing since arround 2016, as well as 
 
-\subsection{Breakdown of the Thesis}
 
-Two ends of the conservation pipeline represented within this theses. The interface represents the end onbce digital conservation has taken place, how do you facilitate interaction. MAGPIE represents the beginning where anyalysis of materials take place, in the case of the harpshicord, which can be used alongside measurmements to make further decisions about conservation routes \cite{barclay_care_1997}.
-
-\subsubsection{Chapter 2: Interface}
-
-This chapter covers the creation of a model harpsichord interface that was augmented with an optical electronic sensor system to allow for interaction with digital software instruments. Incorporates the design, prototyping and fabrication stages as well as the final deployment as part of an exhibition at Museo San Colombano, Bologna.
-
-Technological advances have transformed how museums document, present and interpret their collections. Immersive experiences are realised through tools such as 3D printing and virtual reality \cite{allard_use-of-hand-held_2005,wachowiak_3d-scanning_2009,music_3d-printed_2024,kuzminsky_three-dimensional_2012,schaich_from_2007}.
-These technologies form a kind of experiential authenticity, enabling encounters that evoke the past's sensory, emotional, and intellectual essence \cite{trant_when_1999}. 
-Achieving authenticity requires museums to navigate the delicate balance between preservation and meaningful engagement \cite{pine_museums_2007}—a challenge that is particularly evident in the case of historical musical instrument collections \cite{mcalpine_sampling_2014}. 
-Musical instruments present an interesting problem for cultural heritage as they are both an aesthetic physical object, but also a tool with an inherent tactile experience \cite{charalampos-saitis_musical_2018}.
-However, musical instruments inevitably decay until they reach a point where they are too fragile for continued interaction \cite{paradiso_to-save_2019}.
-Museums face a constant tension between accessibility and preservation, restricting how visitors can interact with collections \cite{templeton_museum_2018, mcalpine_sampling_2014}.
-What can be done to preserve not just the object, but the tactile experiences of playing a musical instrument? 
-The chapter discusses the motivations, design and creation of a replica harpsichord keyboard with a typical early Italian layout, electronically augmented for an interactive exhibition.
-Thinking beyond the ``red velvet cord''\cite{mcalpine_sampling_2014, masu_o-in-nime_2023}, the replica keyboard aims to provide an opportunity to enhance visitor interaction with cultural heritage while safeguarding delicate artefacts. 
-Rather than prioritising technical novelty, the project demonstrates how digital interventions can support meaningful interaction with a shared musical heritage, ensuring its continued relevance in contemporary museum contexts.
-An exhibition was held at Museo San Colombano, Bologna, which aimed to enhance the visitor experience by providing an interface to digitised versions of instruments within the collection by leveraging the propensity humans have to being influenced by visual components when making musical judgements \cite{fritz_player_2012, fritz_soloist_2014, fritz_listener_2017, tsay_sight_2013}.
-The exhibition attempted to balance the competing demands of historical authenticity, public accessibility, and preservation while situating itself within broader discussions on the role of technology in museums. Discussed are the keyboard's design principles, technical implementation, and implications, emphasising its contribution to public engagement and the long-term preservation of musical heritage.
+This chapter with erxplore the context in which the research of thesis was conducted. The context is divided into two sections. The first section conerns the context around the nature of musicla instrument consercvation, problems that arise and what limitations are in place wether or not they are acknowledged by the greater community. The second section looks at defining `digital conservation' as it used thruughou the rest of this thesis and the challenges around digital tecnihology and its integration with cultural heritage conservation. In particular, this sections discusses an open methodology -- FAIR and sustainable -- for the process of digital conservation.
 
 
-
-\subsubsection{Chapter 3: MAGPIE}
-
-This chapter covers the creation of an open source software tool for plate vibration analysis, material property estimation and acoustics education.
-
-\subsubsection{Chapter 4: Applications}
-
-This chapter covers the intersection of chapters 2 and 3 where a numerical modal was designed around a modified version of the interface. A bespoke synthesis engine that utilises the data available from embedded electronic sensors inside the keyboard. Synthesis designed around measurements taken during research as well the harpsichord specific mechanics of jack staggering and the timing differences between register plucks.
-
-Uses of porjects within the wild.
-
-- NEMUS work that has been using and building upon the MAGPIE software
-- keyboard integrated with custom software
-
-
-
-\subsubsection{Chapter 5: Future}
-
-where do we go
-
-\section{Research Context: Musical Instrument Conservation}
+\section{Musical Instrument Conservation}
 
 \subsection{Living Heritage, Dead Heritage}
 
@@ -242,7 +204,7 @@ What will be presented is an approach to historical harpsichords conservation th
 
 For this reason the word `conservation' is used deliberately throughout this as opposed to `preservation' with respect to musical instrument heritage. Given the facts presented above, the working lifespan of an instrument -- where it can provide value instructional value -- is finite. To attempt to `preserve' a specific instrument with instructional value in mind is a futile endeavour, conserving, keeping as long as possible through careful treatment, is the best we for which can hope.
 
-\section{Research Context: Open Methods for Digital Conservation}
+\section{Open Methods for Digital Conservation}
 
 So far the challenges inherent to musical instrument conservation have been discussed.
 
@@ -263,42 +225,28 @@ Defining some terms:
 
 Digital preservation is the process of digitising an artefact for the purpose of a permanent record.
 Digital heritage constitutes all ``digital materials of enduring value'' \cite{unesco_heritage_2003} including documents, datasets and software.
-
 Digital cultural heritage are heritage artefacts with have undergone the process of digitisation. This specifically references to the digital instance of heritage objects
-
 We have to tackle a compound problem of digital conservation as it relates to musical instruments but also broader digital conservation itself. There are the problems that arise ins a digital conservation process particular to musical instruments such as the retention of the tactile performer experience. As has has been discussed in the previous section, retaining performer experience has problem outside of the digital domain.
 
 Digital preservation and the integration of digital technology within the heritage sector is also not a solved problem.
-
 Digital technology and immersive experiences technology are frequently declared to be `transforming' the idea of the museum \cite{gedert_technology_2017, li_systematic_2024, dutot_changing_2021}.
-
 We need to ask ourselves: have museums been transformed by digital technologies? Or have digital technologies simply been wielded with an analogue mentality?
-
 The `digital' in a museum not should not be a substitute of the physical artefact, but rather an extension of its reach \cite{foster_defining_1998, parry_museums_2010}.
-
 It is worth keeping in mind that `digitisation' of an object is also not a single act, but a perpetual process \cite{rubio_work_2020, kelley_digital_2018}.
-
 Both digital and analogue objects rely on physical storage mediums \cite{rubio_work_2020}, but the financial and energy cost of preserving something digitally can often be orders of magnitude greater than an `analogue' equivalent \cite{cieply_afterlife_2007}.
 
 One advantage of digital technologies is the ability to provide a central point of access to disparate and distributed collections, specifically the data of those collections. 
-
 The Musical Instrument Museums Online (MIMO) project, an online catalogue that aggregates the data from collections of participating musical instrument museums around the globe, is a perfect example of this advantage. 
-
 The key to the usability \cite{dolan_mimo_2017} of these systems lies within their data, the collection and managing of which requires multidisciplinary skills.
-
 Museum professionals need adequate training to have an understanding of digital data and its inherent problems of obsolescence and silent corruption \cite{rubio_work_2020,schwarz_disk_2006,parry_museums_2010}.
-
 With respect to the humanities, there is still a gap in  digital skills and best practices in data sustainability that needs to be closed \cite{taylor_shaping_2022}. 
 
 There is also the question of the digital heritage such as software or data sets that are either utilised of created as part of the conservation process.
-
 If musical instruments are to be preserved digitally, we need to aware as to how the tools that are created for the process of conservation are themselves conserved. 
-
 Software has reproducibility problem \cite{perkel_challenge_2020} where it can be difficult to recreate process or results after only historically relatively short periods of time \cite{robert_reproducibility_2020}.
 
 
 The digital components of this thesis have strived to follow the current best practice guidelines.
-
 This sections discusses the organisation and structure of all digital components and the motivations behind this methodology.
 
 
@@ -490,6 +438,45 @@ Chapter~\ref{chapter:magpie} discusses the steps taken for sustainability with a
     \item FOSS: Free open source software where free encapsulates GNU Project Four Essential Freedoms \cite{gnu_philosophy_2025} the user's ability to run, study, distribute and modify without restriction and that the source code be publicly available.
 \end{itemize}
 
+
+
+\subsection{Breakdown of the Thesis}
+
+Two aspects of the conservation pipeline represented within this thesis. The Chapter~\ref{chapter:keyboard} represents the aspect once digital conservation has taken place and asks the question: how do you facilitate interaction with a digitised musical instrument? Chapter~\ref{chapter:magpie} represents the beginning where analysis of materials take place, in the case of the harpsichord, which can be used alongside measurements to make further decisions about conservation routes \cite{barclay_care_1997}.
+
+\subsubsection{Chapter 2: Interface}
+
+This chapter covers the creation of a model harpsichord interface that was augmented with an optical electronic sensor system to allow for interaction with digital software instruments. Incorporates the design, prototyping and fabrication stages as well as the final deployment as part of an exhibition at Museo San Colombano, Bologna.
+
+Technological advances have transformed how museums document, present and interpret their collections. Immersive experiences are realised through tools such as 3D printing and virtual reality \cite{allard_use-of-hand-held_2005,wachowiak_3d-scanning_2009,music_3d-printed_2024,kuzminsky_three-dimensional_2012,schaich_from_2007}.
+These technologies form a kind of experiential authenticity, enabling encounters that evoke the past's sensory, emotional, and intellectual essence \cite{trant_when_1999}. 
+Achieving authenticity requires museums to navigate the delicate balance between preservation and meaningful engagement \cite{pine_museums_2007}—a challenge that is particularly evident in the case of historical musical instrument collections \cite{mcalpine_sampling_2014}. 
+Musical instruments present an interesting problem for cultural heritage as they are both an aesthetic physical object, but also a tool with an inherent tactile experience \cite{charalampos-saitis_musical_2018}.
+However, musical instruments inevitably decay until they reach a point where they are too fragile for continued interaction \cite{paradiso_to-save_2019}.
+Museums face a constant tension between accessibility and preservation, restricting how visitors can interact with collections \cite{templeton_museum_2018, mcalpine_sampling_2014}.
+What can be done to preserve not just the object, but the tactile experiences of playing a musical instrument? 
+The chapter discusses the motivations, design and creation of a replica harpsichord keyboard with a typical early Italian layout, electronically augmented for an interactive exhibition.
+Thinking beyond the ``red velvet cord''\cite{mcalpine_sampling_2014, masu_o-in-nime_2023}, the replica keyboard aims to provide an opportunity to enhance visitor interaction with cultural heritage while safeguarding delicate artefacts. 
+Rather than prioritising technical novelty, the project demonstrates how digital interventions can support meaningful interaction with a shared musical heritage, ensuring its continued relevance in contemporary museum contexts.
+An exhibition was held at Museo San Colombano, Bologna, which aimed to enhance the visitor experience by providing an interface to digitised versions of instruments within the collection by leveraging the propensity humans have to being influenced by visual components when making musical judgements \cite{fritz_player_2012, fritz_soloist_2014, fritz_listener_2017, tsay_sight_2013}.
+The exhibition attempted to balance the competing demands of historical authenticity, public accessibility, and preservation while situating itself within broader discussions on the role of technology in museums. Discussed are the keyboard's design principles, technical implementation, and implications, emphasising its contribution to public engagement and the long-term preservation of musical heritage.
+
+\subsubsection{Chapter 3: MAGPIE}
+
+This chapter covers the creation of an open source software tool for plate vibration analysis, material property estimation and acoustics education.
+
+\subsubsection{Chapter 4: Applications}
+
+This chapter covers the intersection of chapters 2 and 3 where a numerical modal was designed around a modified version of the interface. A bespoke synthesis engine that utilises the data available from embedded electronic sensors inside the keyboard. Synthesis designed around measurements taken during research as well the harpsichord specific mechanics of jack staggering and the timing differences between register plucks.
+
+Uses of porjects within the wild.
+
+- NEMUS work that has been using and building upon the MAGPIE software
+- keyboard integrated with custom software
+
+\subsubsection{Chapter 5: Future}
+
+where do we go
 
 \section{Questions trying to be answered}
 
