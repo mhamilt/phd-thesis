@@ -1,9 +1,9 @@
 \section{Introduction}
 
 The work for this thesis was carried out as part of the NEMUS project, which aims to address the problem of historical musical instrument restoration through digital technology \cite{nemus_description_2023}.
-Two aspects of the conservation process are considered. Chapter~\ref{chapter:keyboard} represents the aspect once digital conservation has taken place and asks the question: how do you facilitate interaction with a digitised musical instrument? Chapter~\ref{chapter:magpie} represents the beginning where analysis of materials take place, in the case of the harpsichord, which can be used alongside measurements to make further decisions about conservation routes \cite{barclay_care_1997}. Connecting these two projects together is the problem of digital conservation an sustainability. What steps need to be taken to ensure that manner in which digital research is created and distributed ensures its longevity and accessibility \cite{soito_citations_2016,smith_software_2016,katz_recognizing_2021,stall_journal_2023}.
+Two aspects of the conservation process are considered. Chapter~\ref{chapter:keyboard} represents the aspect once digital conservation has taken place and asks the question: how do you facilitate interaction with a digitised musical instrument? Chapter~\ref{chapter:magpie} represents the beginning where analysis of materials take place, in the case of the harpsichord, which can be used alongside measurements to make further decisions about conservation routes \cite{barclay_care_1997}. Connecting these two projects together is the problem of digital conservation an sustainability. Digital research has a reproducibility problem \cite{perkel_challenge_2020}. Therefore, covered alongside the research are the steps needed to be taken to ensure any digital research output's longevity and accessibility \cite{soito_citations_2016,smith_software_2016,katz_recognizing_2021,stall_journal_2023}.
 
-This chapter with explore the two distinct context in which the research of thesis was conducted. The first section concerns the context around the nature of musical instrument conservation, problems that arise and what limitations are in place whether or not they are acknowledged by the greater community. The second section looks at defining `digital conservation' as it used throughout the rest of this thesis and the challenges around digital technology and its integration within cultural heritage conservation. In particular, this sections discusses an open methodology -- FAIR and sustainable -- for the process of digital conservation.
+This chapter will explore the two distinct contexts in which the research of thesis was conducted. The first section concerns the context around the nature of musical instrument conservation, problems that arise and what limitations are in place whether or not they are acknowledged by the greater community. The second section looks at defining `digital conservation' as it used throughout the rest of this thesis and the challenges around digital technology and its integration within cultural heritage conservation. In particular, this sections discusses an open methodology -- where the digital research output is accessible, reusable  and sustainable -- for the process of digital conservation.
 
 \section{Musical Instrument Conservation}
 
@@ -13,22 +13,18 @@ Begin by looking at musical instrument conservation.  Musical instruments as fun
 
 The drawback to restoration is that the process can be irreversibly destructive to the longevity of the instrument \cite{barclay_care_1997} but also to evidence of original craftsmanship \cite{koster_restoration_1996}.
 
-Do we learn more from an `authentic ruin'? \cite[][p. 78]{barclay_critical_1999}
-
 The `futility of restoration' \cite{koster_restoration_1996} but Koster also argues against the `tonal' qualities of copies. In \cite{koster_restoration_1996}, Koster writes of a copy of a 1785 Jacques Germain harpsichord ``Although a direct comparison of the Germain harpsichord and its copy shows that the tone of the copy does not quite match the surpassing elegance of the original.'' The conclusion arrived at by Koster, and  his contemporaries \url{https://www.newyorker.com/magazine/2014/07/28/musical-gold?utm_source=chatgpt.com}, is founded on fantasy. If the argument against a copy is one purely based on the acoustics of the original instrument -- and it's inherent superiority to any copy -- then it is fundamentally baseless. In order to prove that the instrument sounded worst it would need to undergo a double  blind study such as Fritz conducted with the old violins. Even then, as Fritz remarked on the initial response to her study where she was told sh had used `bad' Stradivari violins \footnote{``of  course, the  community  didn't  like  these  results. And  so,  the  study  was  heavily  criticised. We  basically  got  killed  on the  Internet,  on  phones, like  "what  have  you  done?", "How  can  you  disrespect  Stradivarius  so  much?" People  were really not  happy  and  then  they  found all  different  excuses  to  justify that  the  study  was necessarily  badly  conducted, starting  with  the  fact  that  we definitely  chose a bad Stradivarius, which  was  was  already  a  good  move because,  I  mean,  now  people were  happy  to  acknowledge that  there  could  be  a bad Stradivarius. That was  always  something  going  forward.'' \cite{fritz_musica_2017}}. The goal posts cannot be moved. There is also an implication in this thinking that the original maker of these historical instrument could perfectly duplicate the instrument with respect to acoustic qualities. Material variability alone means that such a possibility is incredibly narrow \cite{viala_simultaneous_2020}. The troubling aspect to this is when such baseless assessment make there way into guiding policy \cite{koster_exact_1994} or impacting ecological environment \cite{allen_fatto_2012}. The environmental impact of musical instrument fabrication should not be discounted, and it is through this we can argue that to replicate or renovate an instrument is in fact a false dichotomy and that environmental concerns mean that neither is feasible at scale [Lead in section on CITES].
 
-If authenticity of performance requires an original instrument \cite{karp_musical_1985}, and if ``every restoration [...] wipes away evidence and makes the original [...] condition more remote'' (from \cite{waitzman_music_1988} quoted in \cite{barclay_critical_1999}) then there is a finite supply of music to be played. This is not a sustainable long term plan for enabling access to performing on historic instruments.
+If authenticity of performance requires an original instrument \cite{karp_musical_1985}, and if ``every restoration [...] wipes away evidence and makes the original [...] condition more remote'' (from \cite{waitzman_music_1988} quoted in \cite{barclay_critical_1999}) then there is a finite supply of music to be played. This is not a sustainable long term plan for enabling access to performing on historic instruments. 
 
-% Karp argues) 'rather than rendering these colections sa playable sa possible, thereby compromising both their material and documentary integrity, would ti not be wiser ot make them as copyable sa possible?"
-Barclay has been critical of restoration \cite{barclay_care_1997} but is rightly cautious of the concept of an `authentic copy' \cite{barclay_preservation_2005}.
+% Do we learn more from an `authentic ruin'? \cite[][p. 78]{barclay_critical_1999}
+% Karp argues) 'rather than rendering these colections sa playable sa possible, thereby compromising both their material and documentary integrity, would it not be wiser ot make them as copyable as possible?"
 
-``we still have to make this assemblage of materials into a working musical instrument, comfortable and useful to players of the 21st century'' \cite{barclay_preservation_2005}. This is a potential misstep, as it is in the discomfort and retaining the original  limitations of an instrument that we can learn.
+Barclay has been critical of restoration \cite{barclay_care_1997} but is rightly cautious of the concept of an `authentic copy' \cite{barclay_preservation_2005}. For a replica to provide instructions value, Barclay perhaps makes the mistaken assumption that ``we still have to make this assemblage of materials into a working musical instrument, comfortable and useful to players of the 21st century'' \cite{barclay_preservation_2005}. This is a potential misstep, as it is from the ``gestural repertoires'' \cite{levinson_music_1990} of the original instrument that we can learn more about it.
 
-Like \cite{davies_authenticity_2001}, Barclay relates two cases of instruments being copy, a recorder and a natural trumpet, to apply to the grander idea of copying, in particular the fideluty to measurements. However, Barclay choses to cite \cite{koster_restoration_1996} who argues not for aesthetics but rather tonal quality.
+Like \cite{davies_authenticity_2001}, Barclay relates two cases of instruments being copy, a recorder and a natural trumpet, to apply to the grander idea of copying, in particular the fidelity to measurements. However, Barclay choses to cite \cite{koster_restoration_1996} who argues not for aesthetics but rather tonal quality.
 
 ``That's where the 'accurate copy' inevitably falls from grace. And this is, of course, grist for the mills of those who argue for restoring as opposed to copying.'' In light of recent scientific studies, it would appear that neither approach can be accurate. The limitations in copying is no longer `grist in the mills` for restorers as that approach cannot be deemed `authentic' for all instruments either, and is in fact detrimental to other heritage values an instrument can hold. An ``authetic ruin'' providing more valuable information than a ``falsely stored original'' \cite[Citing Martin Skowroneck][p. 78]{barclay_preservation_2005}. This was already apparent in 1985 when Karp wrote: ``it is becoming obvious that restored older instruments do not necessarily behave or sound as they did when they were new''  \cite{karp_musical_1985}.
-
-
 
 The harpsichord -- in particular those 17th century instruments within the Tagliavini collection -- is central focus of this thesis. When discussing musical instrument conservation, it is the case of the harpsichord that is being considered. Some of the methodology can be translated to other instruments but much of what is discussed is specific to the harpsichord.
 
@@ -336,24 +332,16 @@ Chapter~\ref{chapter:magpie} discusses the steps taken for sustainability with a
 
 \subsection{Software citation}
 
-\section{Definitions}
-
-\begin{itemize}
-    \item CAD: Computer aided design,  Relating to CAD files used in the creation of PCBs or 3D prints
-    \item PCB: Printed circuit board. The circuit required for connecting electronics together. Printed on plate of silicon with a copper coating.
-    \item FAIR: Findability, Accessibility, Interoperability, and Reuse of digital assets    
-    \item DOI: Digital object Identifier
-    \item Digital Asset: Any type of digital data, encapsulating source code, compiled binaries, CAD files, images. Anything created then stored digital and used in the course of research.
-    \item FOSS: Free open source software where free encapsulates GNU Project Four Essential Freedoms \cite{gnu_philosophy_2025} the user's ability to run, study, distribute and modify without restriction and that the source code be publicly available.
-\end{itemize}
 
 
 
-\subsection{Breakdown of the Thesis}
+
+
+\section{Thesis Outline}
 
 Two aspects of the conservation pipeline represented within this thesis. The Chapter~\ref{chapter:keyboard} represents the aspect once digital conservation has taken place and asks the question: how do you facilitate interaction with a digitised musical instrument? Chapter~\ref{chapter:magpie} represents the beginning where analysis of materials take place, in the case of the harpsichord, which can be used alongside measurements to make further decisions about conservation routes \cite{barclay_care_1997}.
 
-\subsubsection{Chapter 2: Interface}
+\subsection{Chapter 2: Interface}
 
 This chapter covers the creation of a model harpsichord interface that was augmented with an optical electronic sensor system to allow for interaction with digital software instruments. Incorporates the design, prototyping and fabrication stages as well as the final deployment as part of an exhibition at Museo San Colombano, Bologna.
 
@@ -370,11 +358,11 @@ Rather than prioritising technical novelty, the project demonstrates how digital
 An exhibition was held at Museo San Colombano, Bologna, which aimed to enhance the visitor experience by providing an interface to digitised versions of instruments within the collection by leveraging the propensity humans have to being influenced by visual components when making musical judgements \cite{fritz_player_2012, fritz_soloist_2014, fritz_listener_2017, tsay_sight_2013}.
 The exhibition attempted to balance the competing demands of historical authenticity, public accessibility, and preservation while situating itself within broader discussions on the role of technology in museums. Discussed are the keyboard's design principles, technical implementation, and implications, emphasising its contribution to public engagement and the long-term preservation of musical heritage.
 
-\subsubsection{Chapter 3: MAGPIE}
+\subsection{Chapter 3: MAGPIE}
 
 This chapter covers the creation of an open source software tool for plate vibration analysis, material property estimation and acoustics education.
 
-\subsubsection{Chapter 4: Applications}
+\subsection{Chapter 4: Applications}
 
 This chapter covers the intersection of chapters 2 and 3 where a numerical modal was designed around a modified version of the interface. A bespoke synthesis engine that utilises the data available from embedded electronic sensors inside the keyboard. Synthesis designed around measurements taken during research as well the harpsichord specific mechanics of jack staggering and the timing differences between register plucks.
 
@@ -383,9 +371,19 @@ Uses of porjects within the wild.
 - NEMUS work that has been using and building upon the MAGPIE software
 - keyboard integrated with custom software
 
-\subsubsection{Chapter 5: Future}
+\subsection{Chapter 5: Future}
 
 where do we go from here?
+
+\section{Definitions}
+\begin{itemize}
+    \item CAD: Computer aided design,  Relating to CAD files used in the creation of PCBs or 3D prints
+    \item PCB: Printed circuit board. The circuit required for connecting electronics together. Printed on plate of silicon with a copper coating.
+    \item FAIR: Findability, Accessibility, Interoperability, and Reuse of digital assets    
+    \item DOI: Digital object Identifier
+    \item Digital Asset: Any type of digital data, encapsulating source code, compiled binaries, CAD files, images. Anything created then stored digital and used in the course of research.
+    \item FOSS: Free open source software where free encapsulates GNU Project Four Essential Freedoms \cite{gnu_philosophy_2025} the user's ability to run, study, distribute and modify without restriction and that the source code be publicly available.
+\end{itemize}
 
 % \section{Questions trying to be answered}
 
