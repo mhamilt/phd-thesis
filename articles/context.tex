@@ -179,91 +179,44 @@ There is also the question of the digital heritage such as software or data sets
 If musical instruments are to be preserved digitally, we need to aware as to how the tools that are created for the process of conservation are themselves conserved. 
 Software has reproducibility problem \cite{perkel_challenge_2020} where it can be difficult to recreate process or results after only historically relatively short periods of time \cite{robert_reproducibility_2020}.
 
-
 The digital components of this thesis have strived to follow the current best practice guidelines.
 This sections discusses the organisation and structure of all digital components and the motivations behind this methodology.
 
 
 
-Tools to allow us to do so:
+\subsection{Addressing Open Science, FAIR, and Software Sustainability}
 
+To address the tackle problem of digital music conservation we require frameworks that address each or all of the components explained above. 
 
-\subsection{Digital object Identifier}
-
-Adoption of digital object identifier for referencing software releases. Point towards a particular release of software
-
-Open software is living in the sense that it capable of constant change, when used in research or research software this can be a problem for cite-ability and reusability
-
-\subsection{Software Sustainability}
-
-The Software sustainability institute at the University of Edinburgh has provided guidance citation \cite{hong_how_2019} of software as well as evaluation of software sustainability \url{https://www.software.ac.uk/resources/online-sustainability-evaluation}
-
-All projects have strived to adhered to the SSI guidance covering points of:
-
-Projects were designed to conform to the current software sustainability institute guidelines and underwent assessment from the SSI \cite{ssi_online_2025}.
+Entangled within the concept Digital preservation is the movement of towards Open Science \cite{unesco_open_2021}, a philosophy for academic research that aims to share openly the results of research\footnote{ ``e.g. original   scientific   research   results,   research  data,  software,  source  code,  source  materials,  workflows  and  protocols,  digital  representations  of  pictorial  and  graphical  materials   and   scholarly   multimedia   material''
+\cite{unesco_open_2021}} as well processes and methodologies required to achieve those results. Digital techonologies make a concept like Open Science plausible, but when applied to the digital assets there is also a framework required open science achievable. The FAIR principles are one such framework that focuses on ``Findability, Accessibility, Interoperability, and Reuse [FAIR] of digital assets'' \cite{wilkinson_fair_2016}.
 
 \begin{itemize}
-\item What does your software do
-\item Documentation: Instructions on build
-\item Plans for the future: outlined in issues
-\item Availability of your software: open and available via GitHub
-\item Source code structure: structured source code
-\item Open standards
-\item Building from source: where applicable, build instructions
-\item Installing the binary: where applicable, installation instructions or deployment to package manager systems
-\item Testing
-\item Portability: cross-platform where possible
-\item Community
-\item Contributor Policy
-\item Identity
-\item Copyright
-\item Licence: GPLv3 Licence
-\end{itemize}
-
-
-\subsection{Open Science}
-
-Entangled within the concept Digital preservation is the movement of Open Science \cite{unesco_open_2021} with a focus on  ``Findability, Accessibility, Interoperability, and Reuse [FAIR] of digital assets'' \cite{wilkinson_fair_2016}.
-
-% \cite{unesco_open_2021}
-
-% \begin{quotation}
-%     accelerate human progress and foster knowledge societies and highlighting the importance of narrowing the STI and digital gaps existing between and within countries and regions,
-% \end{quotation}
-
-% \begin{quotation}
-% Considering that more open, transparent, collaborative and inclusive scientific practices, coupled with more accessible and verifiable scientific knowledge subject to scrutiny and critique, is a more efficient enterprise that improves the quality, reproducibility and impact of science, and thereby the reliability of the evidence needed for robust decision- making and policy and increased trust in science,
-% \end{quotation}
-
-
-\cite{wilkinson_fair_2016}
-
-% \subsection{What is FAIR?}
-
-% FAIR \cite{wilkinson_fair_2016} four foundational principles on the
-
-% \begin{quotation}
-% Findability, Accessibility, Interoperability, and Reuse of digital assets    
-% \end{quotation}
-
-Summarising \cite{wilkinson_fair_2016}
-
-\begin{itemize}
-\item Findability: data are described with rich metadata
+\item Findability: Digital assets are described with rich metadata with a persistent location
 \item Accessibility: protocol is open, free, and universally implementable
 \item Interoperability: the ability of data or tools from non-cooperating resources to integrate or work together with minimal effort.
-\item Reuse: data are released with a clear and accessible data usage license
+\item Reuse: digital assets are released with a clear and accessible data usage license
 \end{itemize}
 
-\textcite{wilkinson_fair_2016} and FAIR is aimed at research and data within the sciences, but the principles should be applicable to all fields of academic research where digital assets are created.
-
 Version control systems such as git provide an easy means of tracking and tagging versions of software and services such as GitHub provide a means to distribute.
-
-Perpetual digital repositories
 
 A goal to demonstrate the considerations needed to adhere to these four principles, particular within a cross-discipline project such is the topic of this thesis.
 
 All digital assets, be it source code, measurement data or CAD files
+
+For software to be FAIR it will also need to be citable \cite{soito_citations_2016}, a process which has largely been without standardisation. To make software citable is to fight a hydra with compliance to guidelines required not just by authors of research software \cite{smith_software_2016} but also those citing that software \cite{katz_recognizing_2021} and journals cross-referencing those citations \cite{stall_journal_2023}.
+
+% \footnote{Inclusion in the Bib\TeX citation system in 2019 \url{https://github.com/plk/biblatex/commit/95ca156e116e5d2c4b76b93b5e325367113fb166}}
+For the digital output of this thesis has confirmed to the following. 
+All work digital has been put under version control using the git version control system. Version controlled repository are stored on the GitHub platform to allow for public access.
+
+A `release` is defined as any self-contained working version of an asset that was used in the course of research. Digital assets are living and can travel through periods of transition. A release of represents a version that is self-contained, in some final form at a particular moment in time.
+
+Adoption of digital object identifier for referencing software releases. Point towards a particular release of software \cite{smith_software_2016}. Open software is living in the sense that it capable of constant change, when used in research or research software this can be a problem for cite-ability and reusability
+Public, online version controlled source code repository service like those GitHub aid in making software comply with FAIR, but there is still a question of longevity \cite{smith_software_2016}.
+Releases of the software are stored on the Zenodo platform for assigning a digital object identifier (DOI) \cite{smith_software_2016,stall_journal_2023}.
+This `persistence of location' is only one type of longevity, there is also the problem of reusability.
+Open Science and FAIR look at the point of digital research output. There is still work required while the digital work during the process of authoring source code. On top of reusability is a problem of reproducibility \cite{perkel_challenge_2020}, where software is should be expected run and re-run in the future, a process which is hindered by constantly developing technology and lack of documentation \cite{robert_reproducibility_2020}.
 
 \subsection{Methods for Reproducibility}
 
@@ -291,18 +244,33 @@ Although it’s impossible to guarantee computational reproducibility over time,
 \end{itemize}
 \end{quotation}
 
+All digital assets are available under the GLPv3 licence under recommendation to provide as open permission as possible \cite{stall_journal_2023}. The GPLv3 licence allows for the copy, distribution and modify the source files and that any modifications to that digital source must also be made available under the same licence.\footnote{Licence Text: \url{https://www.gnu.org/licenses/gpl-3.0.en.html#license-text}}
+Source code repositories for this thesis were designed to conform to the current software sustainability institute guidelines and underwent assessment from the Software Sustainability Institute at the University of Edinburgh \cite{ssi_online_2025}.
 
-\subsection{Addressing Open Science, FAIR, and Software Sustainability}
-
-To address all of the above, the output of this thesis has confirmed to the following. 
-
-All work digital has been put under version control using the git version control system. Version controlled repository are stored on the GitHub platform to allow for public access.
-
-Releases of the software are stored on the Zenodo platform for assigning a digital object identifier (DOI).
-
-A `release` is defined as any self-contained working version of an asset that was used in the course of research. Digital assets are living and can travel through periods of transition. A release of represents a version that is self-contained, in some final form at a particular moment in time.
-
-All digital assets are available under the GLPv3 licence to provide open permission. Allows for the copy, distribute and modify the source files and that any modifications to that digital source must also be made available under the GPLv3.
+% \begin{itemize}
+% \item What does your software do
+% \item Documentation: Instructions on build
+% \item Plans for the future: outlined in issues
+% \item Availability of your software: open and available via GitHub
+% \item Source code structure: structured source code
+% \item Open standards
+% \item Building from source: where applicable, build instructions
+% \item Installing the binary: where applicable, installation instructions or deployment to package manager systems
+% \item Testing
+% \item Portability: cross-platform where possible
+% \item Community
+% \item Contributor Policy
+% \item Identity
+% \item Copyright
+% \item Licence: GPLv3 Licence
+% \end{itemize}
+% \cite{unesco_open_2021}
+% \begin{quotation}
+%     accelerate human progress and foster knowledge societies and highlighting the importance of narrowing the STI and digital gaps existing between and within countries and regions,
+% \end{quotation}
+% \begin{quotation}
+% Considering that more open, transparent, collaborative and inclusive scientific practices, coupled with more accessible and verifiable scientific knowledge subject to scrutiny and critique, is a more efficient enterprise that improves the quality, reproducibility and impact of science, and thereby the reliability of the evidence needed for robust decision- making and policy and increased trust in science,
+% \end{quotation}
 
 \subsection{Aurora}
 
@@ -335,12 +303,6 @@ Documentation is vital for understanding how the source code is structured and f
 The work outlined in the is thesis build from the lessons learned from software like Aurora and YIN and have informed the methodology of project structure documentation for the digital output of the research. 
 
 Chapter~\ref{chapter:magpie} discusses the steps taken for sustainability with a purely software project where a distinct functional software library and interface library were created for the MAGPIE software.  For electronic hardware, the problem of sustainability is compounded compounded with the addition of physical components, their schematics and assembly on top of the firmware and software required to make the hardware function. Process for addressing this is covered further in Chapter~\ref{chapter:interaction}.
-
-\subsection{Software citation}
-
-
-
-
 
 
 \section{Thesis Outline}
