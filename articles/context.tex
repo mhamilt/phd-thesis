@@ -179,14 +179,12 @@ Software has reproducibility problem \cite{perkel_challenge_2020} where it can b
 The digital components of this thesis have strived to follow the current best practice guidelines.
 This sections discusses the organisation and structure of all digital components and the motivations behind this methodology.
 
-
-
 \subsection{Addressing Open Science, FAIR, and Software Sustainability}
 
-To address the tackle problem of digital music conservation we require frameworks that address each or all of the components explained above. 
+To effectively tackle the problem of digital musical instrument conservation, we require frameworks that address each of the components discussed above. 
 
-Entangled within the concept Digital preservation is the movement of towards Open Science \cite{unesco_open_2021}, a philosophy for academic research that aims to share openly the results of research\footnote{ ``e.g. original   scientific   research   results,   research  data,  software,  source  code,  source  materials,  workflows  and  protocols,  digital  representations  of  pictorial  and  graphical  materials   and   scholarly   multimedia   material''
-\cite{unesco_open_2021}} as well processes and methodologies required to achieve those results. Digital techonologies make a concept like Open Science plausible, but when applied to the digital assets there is also a framework required open science achievable. The FAIR principles are one such framework that focuses on ``Findability, Accessibility, Interoperability, and Reuse [FAIR] of digital assets'' \cite{wilkinson_fair_2016}.
+Connected with the concept digital preservation is the movement of towards Open Science \cite{unesco_open_2021}, a philosophy of academic research that advocates for openly sharing not only the the results of research\footnote{ ``e.g. original   scientific   research   results,   research  data,  software,  source  code,  source  materials,  workflows  and  protocols,  digital  representations  of  pictorial  and  graphical  materials   and   scholarly   multimedia   material''
+\cite{unesco_open_2021}} but also the processes and methodologies necessary to achieve those results. Digital technologies make a concepts like Open Science feasible, but when applied to the digital assets, a robust framework is required to make Open Science achievable. The FAIR principles provide such framework, focussing on the ``Findability, Accessibility, Interoperability, and Reuse [FAIR] of digital assets'' \cite{wilkinson_fair_2016}.
 
 \begin{itemize}
 \item Findability: Digital assets are described with rich metadata with a persistent location
@@ -195,34 +193,21 @@ Entangled within the concept Digital preservation is the movement of towards Ope
 \item Reuse: digital assets are released with a clear and accessible data usage license
 \end{itemize}
 
-Version control systems such as git provide an easy means of tracking and tagging versions of software and services such as GitHub provide a means to distribute.
+For software to be FAIR, it must also be citable \cite{soito_citations_2016}, a process which has historically lacked standardisation. Making software citable involves compliance to guidelines not only by research software authors \cite{smith_software_2016} but also by those citing that software \cite{katz_recognizing_2021} and the journals cross-referencing those citations \cite{stall_journal_2023}.
 
-A goal to demonstrate the considerations needed to adhere to these four principles, particular within a cross-discipline project such is the topic of this thesis.
+Open software should ideally be `living' with the potential for constant change, but when used in research, this quality can be a problem for cite-ability and reusability. Version control systems such as git provide a straightforward way to track and tag versions of software. public, online, version-controlled repositories like GitHub help software comply with FAIR principles, but there is still a question of longevity \cite{smith_software_2016}. In addition to version control platforms source should be uploaded to archive repositories, like the Zenodo platform, which enable persistent referencing through a digital object identifier (DOI) \cite{smith_software_2016,stall_journal_2023}.
 
-All digital assets, be it source code, measurement data or CAD files
+Persistent referencing addresses on aspect longevity but another critical aspect is the reproducibility of software \cite{perkel_challenge_2020}. Software is should be executable no and in the future, a process which is hindered by constantly developing programming languages in addition to all manner of unforeseen obstacles, from hardware obsolescence to missing documentation \cite{robert_reproducibility_2020}.
 
-For software to be FAIR it will also need to be citable \cite{soito_citations_2016}, a process which has largely been without standardisation. To make software citable is to fight a hydra with compliance to guidelines required not just by authors of research software \cite{smith_software_2016} but also those citing that software \cite{katz_recognizing_2021} and journals cross-referencing those citations \cite{stall_journal_2023}.
+% \subsection{Reproducibility}
 
-% \footnote{Inclusion in the Bib\TeX citation system in 2019 \url{https://github.com/plk/biblatex/commit/95ca156e116e5d2c4b76b93b5e325367113fb166}}
-For the digital output of this thesis has confirmed to the following. 
-All work digital has been put under version control using the git version control system. Version controlled repository are stored on the GitHub platform to allow for public access.
+While this discussion has focused on digital software, digitally designed physical hardware presents additional challenges. Within the field of digital musical instrument (DMI) design, long-term reusability remains an on-going challenge \cite{fiordelmondo_towards_2025}. Designing and fabricating hardware requires more than just source code. Design of electronics hardware typically incorporates Computer Aided Design (CAD) and Computer Aided Manufacture (CAM) steps, necessitating the inclusion of not just schematics but also the bill of materials, and documentation on assembly and operation all within a  well structure archived repository \cite{calegario_documentation_2021}. CAD files and surrounding support files also provide another point of failure with respect to preservation. For example, in the course of this thesis the popular Electronic Design Automation (EDA) software tool EAGLE was announced to be discontinued \cite{autodesk_eagle_2024} for the July 2026. A conscious decision was made to continue using the EAGLE format for the PCB design. Much in the same way as the discontinuation of Python 2 may be beneficial for archival purposes as ``advanced programming language that is guaranteed not to evolve anymore'' \cite{rougier_loupe_2020}, so to does the discontinuation of the EAGLE means that its XML file standard is now calcified and is unable changes. Instead, the EAGLE files can be used in conjunction with other EDA software such as the open source KiCAD \cite{kicad_eagle_2024}.
 
-A `release` is defined as any self-contained working version of an asset that was used in the course of research. Digital assets are living and can travel through periods of transition. A release of represents a version that is self-contained, in some final form at a particular moment in time.
+\textcite{perkel_challenge_2020} provides a checklist aggregated from the ReScience C jounral's ten-year challenge initiative which challenges researchers to replicate results from their software that is older than ten years. Key recommendations in the list include version control and archiving which is in keeping with this guidance for best practice \cite{smith_software_2016, stall_journal_2023}.
 
-Adoption of digital object identifier for referencing software releases. Point towards a particular release of software \cite{smith_software_2016}. Open software is living in the sense that it capable of constant change, when used in research or research software this can be a problem for cite-ability and reusability
-Public, online version controlled source code repository service like those GitHub aid in making software comply with FAIR, but there is still a question of longevity \cite{smith_software_2016}.
-Releases of the software are stored on the Zenodo platform for assigning a digital object identifier (DOI) \cite{smith_software_2016,stall_journal_2023}.
-This `persistence of location' is only one type of longevity, there is also the problem of reusability.
-Open Science and FAIR look at the point of digital research output. There is still work required while the digital work during the process of authoring source code. On top of reusability is a problem of reproducibility \cite{perkel_challenge_2020}, where software is should be expected run and re-run in the future, a process which is hindered by constantly developing technology and lack of documentation \cite{robert_reproducibility_2020}.
-
-\subsection{Reproducibility}
-
-So far just talked of digital software, but digitally designed physical hardware has additional requirements, comprising not just of the software but also the firmware on which the hardware electronics operates. Within the field of digital musical instrument (DMI) design, long-term reusability remains an on-going challenge \cite{fiordelmondo_towards_2025}. Design of electronics hardware typically incorporates Computer Aided Design (CAD) and Computer Aided Manufacture (CAM) steps, necessitating the inclusion of not just schematics but also the bill of materials \cite{calegario_documentation_2021}. CAD provide another point of failure with respect to preservation. In the course of this thesis the popular Electronic Design Automation software tool EAGLE was announced to be discontinued \cite{autodesk_eagle_2024} for the July 2026. A conscious decision was made to continue using the EAGLE format for the PCB design. Much in the same way as the discontinuation of Python 2 may be beneficial for archival purposes as ``advanced programming language that is guaranteed not to evolve anymore'' \cite{rougier_loupe_2020}, so to does the discontinuation of the EAGLE means that its XML file standard is now calcified and is unable changes. Instead, the EAGLE files can be used in conjunction with other EDA software such as the open source KiCAD \cite{kicad_eagle_2024}.
-
-\textcite{perkel_challenge_2020} provides a checklist aggregated from the articles of the ReScience C and its challenge for researcher to replicate results from their software that is over 10 years old. Key points among the list a call for version control and archiving. In keeping with this guidance echoed thoughout the literature \cite{smith_software_2016, stall_journal_2023}, Git version control repositories has been used tracking changes and tagging distinct iterations. All repositories have been archived on the Zenodo platform hosted by CERN where each repository is assigned a base DOI and a DOI fore each tagged version.
-
-All digital assets are available under the GLPv3 licence under recommendation to provide as open permission as possible \cite{stall_journal_2023}. The GPLv3 licence allows for the copy, distribution and modify the source files and that any modifications to that digital source must also be made available under the same licence.\footnote{Licence Text: \url{https://www.gnu.org/licenses/gpl-3.0.en.html}}
+Finally, all digital assets are available under the GLPv3 licence under recommendation to provide as open permission as possible \cite{stall_journal_2023}. The GPLv3 licence allows for the copy, distribution and modify the source files and that any modifications to that digital source must also be made available under the same licence \cite{gplv3}.
 Source code repositories for this thesis were designed to conform to the current software sustainability institute guidelines and underwent assessment from the Software Sustainability Institute at the University of Edinburgh \cite{ssi_online_2025}.
+
 
 \subsection{Aurora}
 
@@ -258,6 +243,14 @@ Two aspects of the conservation pipeline represented within this thesis. The Cha
 
 
 Chapter~\ref{chapter:magpie} discusses the steps taken for sustainability with a purely software project where a distinct functional software library and interface library were created for the MAGPIE software.  For electronic hardware, the problem of sustainability is compounded compounded with the addition of physical components, their schematics and assembly on top of the firmware and software required to make the hardware function. Process for addressing this is covered further in Chapter~\ref{chapter:interaction}.
+
+
+This thesis aims to demonstrate the considerations necessary to adhere to these four FAIR principles, particularly within a cross-disciplinary project. All digital assets—whether source code, measurement data, or CAD files—are managed accordingly.
+
+For the digital output of this thesis has confirmed to the following. 
+All work digital has been put under version control using the git version control system. Version controlled repository are stored on the GitHub platform to allow for public access.
+
+A `release` is defined as any self-contained working version of an asset that was used in the course of research. Digital assets are living and can travel through periods of transition. A release of represents a version that is self-contained, in some final form at a particular moment in time.
 
 
 
