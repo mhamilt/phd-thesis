@@ -1,7 +1,7 @@
 \section{Introduction}
 
 The work for this thesis was carried out as part of the NEMUS project, which aims to address the problem of historical musical instrument restoration through digital technology \cite{nemus_description_2023}.
-Two aspects of the conservation process are considered. When an historical musical instrument has fallen out of playing condition, and returning it to that state would be destructive, an avenue for conservation is the digitisation of the instrument. Digitisation could consist of sampling an instrument \cite{mcalpine_sampling_2014s,paradiso_to-save_2019,tasten_project_2018} or reconstructing the instrument through numerical simulation \cite{XXXX}. How we facilitate access to playing instruments in musical instrument museum is still an open question \cite{woodmusick_effects_2015}. Once digitisation of an instrument has taken place this questions still remains.
+Two aspects of the conservation process are considered. When an historical musical instrument has fallen out of playing condition, and returning it to that state would be destructive, an avenue for conservation is the digitisation of the instrument. Digitisation could consist of sampling an instrument \cite{mcalpine_sampling_2014,paradiso_to-save_2019,tasten_project_2018} or reconstructing the instrument through numerical simulation \cite{XXXX}. How we facilitate access to playing instruments in musical instrument museum is still an open question \cite{woodmusick_effects_2015}. Once digitisation of an instrument has taken place this questions still remains.
 
 Chapter~\ref{chapter:keyboard} consider what happens once digital conservation has taken place and asks the question: how do you facilitate interaction with a digitised musical instrument? 
 
@@ -28,7 +28,7 @@ If authenticity of performance requires an original instrument \cite{karp_musica
 
 Barclay has been critical of restoration \cite{barclay_care_1997} but is rightly cautious of the concept of an `authentic copy' \cite{barclay_preservation_2005}. For a replica to provide instructions value, Barclay perhaps makes the mistaken assumption that ``we still have to make this assemblage of materials into a working musical instrument, comfortable and useful to players of the 21st century'' \cite{barclay_preservation_2005}. This is a potential misstep, as it is from the ``gestural repertoires'' \cite{levinson_music_1990} of the original instrument that we can learn more about it.
 
-Like \cite{davies_authenticity_2001}, Barclay relates two cases of instruments being copy, a recorder and a natural trumpet, to apply to the grander idea of copying, in particular the fidelity to measurements. However, Barclay choses to cite \cite{koster_restoration_1996} who argues not for aesthetics but rather tonal quality.
+Like \textcite{davies_authenticity_2001}, Barclay relates two cases of instruments being copy, a recorder and a natural trumpet, to apply to the grander idea of copying, in particular the fidelity to measurements. However, Barclay choses to cite \cite{koster_restoration_1996} who argues not for aesthetics but rather tonal quality.
 
 ``That's where the 'accurate copy' inevitably falls from grace. And this is, of course, grist for the mills of those who argue for restoring as opposed to copying.'' In light of recent scientific studies, it would appear that neither approach can be accurate. The limitations in copying is no longer `grist in the mills` for restorers as that approach cannot be deemed `authentic' for all instruments either, and is in fact detrimental to other heritage values an instrument can hold. An ``authetic ruin'' providing more valuable information than a ``falsely stored original'' \cite[Citing Martin Skowroneck][p. 78]{barclay_preservation_2005}. This was already apparent in 1985 when Karp wrote: ``it is becoming obvious that restored older instruments do not necessarily behave or sound as they did when they were new''  \cite{karp_musical_1985}.
 
@@ -218,59 +218,14 @@ Releases of the software are stored on the Zenodo platform for assigning a digit
 This `persistence of location' is only one type of longevity, there is also the problem of reusability.
 Open Science and FAIR look at the point of digital research output. There is still work required while the digital work during the process of authoring source code. On top of reusability is a problem of reproducibility \cite{perkel_challenge_2020}, where software is should be expected run and re-run in the future, a process which is hindered by constantly developing technology and lack of documentation \cite{robert_reproducibility_2020}.
 
-\subsection{Methods for Reproducibility}
+\subsection{Reproducibility}
 
-The challenge of reproducibility \url{https://rescience.github.io/ten-years/} \cite{perkel_challenge_2020}
+So far just talked of digital software, but digitally designed physical hardware has additional requirements, comprising not just of the software but also the firmware on which the hardware electronics operates. Within the field of digital musical instrument (DMI) design, long-term reusability remains an on-going challenge \cite{fiordelmondo_towards_2025}. Design of electronics hardware typically incorporates Computer Aided Design (CAD) and Computer Aided Manufacture (CAM) steps, necessitating the inclusion of not just schematics but also the bill of materials \cite{calegario_documentation_2021}. CAD provide another point of failure with respect to preservation. In the course of this thesis the popular Electronic Design Automation software tool EAGLE was announced to be discontinued \cite{autodesk_eagle_2024} for the July 2026. A conscious decision was made to continue using the EAGLE format for the PCB design. Much in the same way as the discontinuation of Python 2 may be beneficial for archival purposes as ``advanced programming language that is guaranteed not to evolve anymore'' \cite{rougier_loupe_2020}, so to does the discontinuation of the EAGLE means that its XML file standard is now calcified and is unable changes. Instead, the EAGLE files can be used in conjunction with other EDA software such as the open source KiCAD \cite{kicad_eagle_2024}.
 
-Quoting from \cite{perkel_challenge_2020}
+\textcite{perkel_challenge_2020} provides a checklist aggregated from the articles of the ReScience C and its challenge for researcher to replicate results from their software that is over 10 years old. Key points among the list a call for version control and archiving. In keeping with this guidance echoed thoughout the literature \cite{smith_software_2016, stall_journal_2023}, Git version control repositories has been used tracking changes and tagging distinct iterations. All repositories have been archived on the Zenodo platform hosted by CERN where each repository is assigned a base DOI and a DOI fore each tagged version.
 
-Methods employed to allow the software to reproducible when the intention is for it to be used in research.
-
-\begin{quotation}
-Reproducibility checklist
-Although it’s impossible to guarantee computational reproducibility over time, these strategies can maximize your chances.
-\begin{itemize}
-\item \textbf{Code} Workflows based on point-and-click interfaces, such as Excel, are not reproducible. Enshrine your computations and data manipulation in code.
-\item \textbf{Document} Use comments, computational notebooks and README files to explain how your code works, and to define the expected parameters and the computational environment required.
-\item \textbf{Record} Make a note of key parameters, such as the ‘seed’ values used to start a random-number generator. Such records allow you to reproduce runs, track down bugs and follow up on unexpected results.
-\item \textbf{Test} Create a suite of test functions. Use positive and negative control data sets to ensure you get the expected results, and run those tests throughout development to squash bugs as they arise.
-\item \textbf{Guide} Create a master script (for example, a ‘run.sh’ file) that downloads required data sets and variables, executes your workflow and provides an obvious entry point to the code.
-\item \textbf{Archive} GitHub is a popular but impermanent online repository. Archiving services such as Zenodo, Figshare and Software Heritage promise long-term stability.
-\item \textbf{Track} Use version-control tools such as Git to record your project’s history. Note which version you used to create each result.
-\item \textbf{Package} Create ready-to-use computational environments using containerization tools (for example, Docker, Singularity), web services (Code Ocean, Gigantum, Binder) or virtual-environment managers (Conda).
-\item \textbf{Automate} Use continuous-integration services (for example, Travis CI) to automatically test your code over time, and in various computational environments.
-\item \textbf{Simplify} Avoid niche or hard-to-install third-party code libraries that can complicate reuse.
-\item \textbf{Verify} Check your code’s portability by running it in a range of computing environments.
-\end{itemize}
-\end{quotation}
-
-All digital assets are available under the GLPv3 licence under recommendation to provide as open permission as possible \cite{stall_journal_2023}. The GPLv3 licence allows for the copy, distribution and modify the source files and that any modifications to that digital source must also be made available under the same licence.\footnote{Licence Text: \url{https://www.gnu.org/licenses/gpl-3.0.en.html#license-text}}
+All digital assets are available under the GLPv3 licence under recommendation to provide as open permission as possible \cite{stall_journal_2023}. The GPLv3 licence allows for the copy, distribution and modify the source files and that any modifications to that digital source must also be made available under the same licence.\footnote{Licence Text: \url{https://www.gnu.org/licenses/gpl-3.0.en.html}}
 Source code repositories for this thesis were designed to conform to the current software sustainability institute guidelines and underwent assessment from the Software Sustainability Institute at the University of Edinburgh \cite{ssi_online_2025}.
-
-% \begin{itemize}
-% \item What does your software do
-% \item Documentation: Instructions on build
-% \item Plans for the future: outlined in issues
-% \item Availability of your software: open and available via GitHub
-% \item Source code structure: structured source code
-% \item Open standards
-% \item Building from source: where applicable, build instructions
-% \item Installing the binary: where applicable, installation instructions or deployment to package manager systems
-% \item Testing
-% \item Portability: cross-platform where possible
-% \item Community
-% \item Contributor Policy
-% \item Identity
-% \item Copyright
-% \item Licence: GPLv3 Licence
-% \end{itemize}
-% \cite{unesco_open_2021}
-% \begin{quotation}
-%     accelerate human progress and foster knowledge societies and highlighting the importance of narrowing the STI and digital gaps existing between and within countries and regions,
-% \end{quotation}
-% \begin{quotation}
-% Considering that more open, transparent, collaborative and inclusive scientific practices, coupled with more accessible and verifiable scientific knowledge subject to scrutiny and critique, is a more efficient enterprise that improves the quality, reproducibility and impact of science, and thereby the reliability of the evidence needed for robust decision- making and policy and increased trust in science,
-% \end{quotation}
 
 \subsection{Aurora}
 
@@ -354,7 +309,6 @@ where do we go from here?
 \end{itemize}
 
 % \section{Questions trying to be answered}
-
 % \begin{itemize}
 %     \item how to facilitate the physical experience of playing a musical instrument in a museum collection while preserving the original?
 %     \item How can the visual of an instrument interface be leveraged to achieve this?
@@ -478,24 +432,6 @@ where do we go from here?
 %     \item Instruments or Equipment
 %     \item Experimental Procedure
 % \end{enumerate}
-
-
-
-
-% This chapter deals with the research context of the thesis, the overarching motivations for each chapter as well as chapter specific motivations.
-
-% Context can split into 
-
-% - digital musical instrument conservation
-% - more generally digital conservation
-
-% musical instrument conservation deals with the topics relevant to the conservation of musical instrument in particular digital methods and tools to conserve musical instruments digitally
-
-% Digital conservation relates to the detail and problems associated with process of conserving digital tools
-
-% We have an interesting problem in that we are not only conserving some physical object digitally, but the tools used to do so themselves need to be conserved and  sustained in some manner.
-
-% For this second point we can look towards the Open Science movement which has been growing since around 2016, as well as 
 
 % \section{Points to Hit}
 
