@@ -1,34 +1,137 @@
-The work presented in this thesis was carried out as part of the NEMUS project \cite{nemus_description_2023}, which seeks to address the challenges of historical musical instrument restoration through the application of digital technologies.
-Two aspects of the conservation process are considered here. When a historical musical instrument has fallen out of playing condition---and restoring it would compromise its structural or historical integrity---can interaction be reintroduced through digitisation? Digitisation may involve sampling an instrument \cite{mcalpine_sampling_2014,paradiso_to-save_2019,tasten_project_2018} or reconstructing it through numerical simulation \cite{XXXX}. Despite the emergence of these techniques, the question of how to provide meaningful access to digitised instruments within museum contexts remains unresolved \cite{woodmusick_effects_2015,holzer_imperfect_2025}.
+The work presented in this thesis was carried out as part of the NEMUS project
+\cite{nemus_description_2023}, which seeks to address the challenges of
+historical musical instrument restoration through the application of digital
+technologies. Two aspects of the conservation process are considered here. When
+a historical musical instrument has fallen out of playing condition---and
+restoring it would compromise its structural or historical integrity---can
+interaction be reintroduced through digitisation? Digitisation may involve
+sampling an instrument
+\cite{mcalpine_sampling_2014,paradiso_to-save_2019,tasten_project_2018} or
+reconstructing it through numerical simulation \cite{XXXX}. Despite the
+emergence of these techniques, the question of how to provide meaningful access
+to digitised instruments within museum contexts remains unresolved
+\cite{woodmusick_effects_2015,holzer_imperfect_2025}.
 
-These challenges are exemplified by the renowned Tagliavini Collection in Bologna \cite{meer_collezione_2007}, housed at Museo San Colombano, comprised of primarily early Italian plucked string keyboards. Fernando Tagliavini envisioned that the instruments in his collection would be maintained in their original playable condition. While the instruments are indeed playable, their use necessitates strict controls and is permitted only under special supervision. Moreover, certain instruments—such as the Museum’s 1547 Alessandro Trasuntino harpsichord—where restoration to playable condition poses significant risks due to their fragility.
+These challenges are exemplified by the renowned Tagliavini Collection in
+Bologna \cite{meer_collezione_2007}, housed at Museo San Colombano, comprised of
+primarily early Italian plucked string keyboards. Fernando Tagliavini envisioned
+that the instruments in his collection would be maintained in their original
+playable condition. While the instruments are indeed playable, their use
+necessitates strict controls and is permitted only under special supervision.
+Moreover, certain instruments—such as the Museum’s 1547 Alessandro Trasuntino
+harpsichord—where restoration to playable condition poses significant risks due
+to their fragility.
 
-This issue is not unique to the Tagliavini Collection but also pertains to other notable historical instrument collections, such as those of Richard Burnett, Benton Fletcher, and Bate \cite{barclay_preservation_2005}, which all house playable harpsichords dating from the 17th and 18th centuries. The work addresses two aspects of the conservation process relevant to these collections termed `Analysis' and `Interaction'.
+This issue is not unique to the Tagliavini Collection but also pertains to other
+notable historical instrument collections, such as those of Richard Burnett,
+Benton Fletcher, and Bate \cite{barclay_preservation_2005}, which all house
+playable harpsichords dating from the 17th and 18th centuries. The work
+addresses two aspects of the conservation process relevant to these collections
+termed `Analysis' and `Interaction'.
 
-This thesis addresses these questions through two interconnected projects. Chapter~\ref{chapter:keyboard} examines what occurs after digitisation has taken place, asking: how can interaction with a digitised musical instrument be meaningfully facilitated? Chapter~\ref{chapter:magpie} focuses on the development of an open-source software tool for plate simulation, designed to be used alongside measurements to support decision-making in conservation strategies \cite{barclay_care_1997}. Linking these two case studies is a broader investigation into the sustainability and reproducibility of digital conservation and the tools that underpin it. Reproducibility poses a significant challenge for digital research \cite{perkel_challenge_2020}. Accordingly, this thesis outlines the steps required to ensure the longevity and accessibility of digital research outputs \cite{soito_citations_2016,smith_software_2016,katz_recognizing_2021,stall_journal_2023} within the context of musical cultural heritage.
+This thesis addresses these questions through two interconnected projects.
+Chapter~\ref{chapter:keyboard} examines what occurs after digitisation has taken
+place, asking: how can interaction with a digitised musical instrument be
+meaningfully facilitated? Chapter~\ref{chapter:magpie} focuses on the
+development of an open-source software tool for plate simulation, designed to be
+used alongside measurements to support decision-making in conservation
+strategies \cite{barclay_care_1997}. Linking these two case studies is a broader
+investigation into the sustainability and reproducibility of digital
+conservation and the tools that underpin it. Reproducibility poses a significant
+challenge for digital research \cite{perkel_challenge_2020}. Accordingly, this
+thesis outlines the steps required to ensure the longevity and accessibility of
+digital research outputs
+\cite{soito_citations_2016,smith_software_2016,katz_recognizing_2021,stall_journal_2023}
+within the context of musical cultural heritage.
 
-This chapter situates the work within its broader context and is divided into two main areas. The first concerns the field of musical instrument conservation, addressing the challenges that arise and the limitations that persist, whether or not they are acknowledged by the wider community. The second examines the term `digital conservation' as it is used throughout this thesis, focusing on the challenges posed by digital technologies and their integration into cultural heritage and conservation practice. In particular, this section discusses an open methodology---in which digital research outputs are accessible, reusable, and sustainable---as a framework for the practice of digital conservation.
+This chapter situates the work within its broader context and is divided into
+two main areas. The first concerns the field of musical instrument conservation,
+addressing the challenges that arise and the limitations that persist, whether
+or not they are acknowledged by the wider community. The second examines the
+term `digital conservation' as it is used throughout this thesis, focusing on
+the challenges posed by digital technologies and their integration into cultural
+heritage and conservation practice. In particular, this section discusses an
+open methodology---in which digital research outputs are accessible, reusable,
+and sustainable---as a framework for the practice of digital conservation.
 
 \section{Musical Instrument Conservation}
 
-Historical musical instruments present a unique challenge within the field of cultural heritage. Instruments are both an aesthetic physical object, but also a tool with an inherent tactile experience \cite{charalampos-saitis_musical_2018}.  Maintaining instruments in playable condition introduces significant risks and costs \cite{lamb_play_2007}, prompting ongoing debate about how best to balance preservation and access. The discussion within the field of musical instrument conservation has typically been split between approaches to balance competing values of aesthetics and function \cite{barclay_care_1997, barclay_preservation_2005}. 
+Historical musical instruments present a unique challenge within the field of
+cultural heritage. Instruments are both an aesthetic physical object, but also a
+tool with an inherent tactile experience \cite{charalampos-saitis_musical_2018}.
+Maintaining instruments in playable condition introduces significant risks and
+costs \cite{lamb_play_2007}, prompting ongoing debate about how best to balance
+preservation and access. The discussion within the field of musical instrument
+conservation has typically been split between approaches to balance competing
+values of aesthetics and function \cite{barclay_care_1997,
+barclay_preservation_2005}. 
 
-The harpsichord has found itself at the centre of the `playability' debate in more than one collection. Of note are the Benton Fletcher Collection in Fenton House \cite{barclay_preservation_2005,mcalpine_sampling_2014}, Musical Instruments Museums Edinburgh \cite{}, and the Tagliavini Collection in San Colombano \cite{wraight_report_2022}. Instruments from the Tagliavini collection \cite{meer_collezione_2007} -- in particular 17th century instruments -- were a motivating factor and test case for part of thesis. When discussing musical instrument conservation, it is the case of the harpsichord that is being considered. Though some of the methodology can be translated to other instruments, much of what is discussed is specific to the harpsichord.
+The harpsichord has found itself at the centre of the `playability' debate in
+more than one collection. Of note are the Benton Fletcher Collection in Fenton
+House \cite{barclay_preservation_2005,mcalpine_sampling_2014}, Musical
+Instruments Museums Edinburgh \cite{}, and the Tagliavini Collection in San
+Colombano \cite{wraight_report_2022}. Instruments from the Tagliavini collection
+\cite{meer_collezione_2007} -- in particular 17th century instruments -- were a
+motivating factor and test case for part of thesis. When discussing musical
+instrument conservation, it is the case of the harpsichord that is being
+considered. Though some of the methodology can be translated to other
+instruments, much of what is discussed is specific to the harpsichord.
 
 
 \subsection{Living Heritage, Dead Heritage}
 
-\textcite[p. 19]{barclay_preservation_2005} defines a schema of three states into which a historical instrument may fall: Currency, Conservation, and Restoration. The state of Currency---where the instrument is in working condition and actively maintained---is not relevant to the concerns of this thesis. Arguments in favour of restoration often appeal to aesthetics and sound quality, which have historically motivated renovation practices. However, the degree of accuracy with which instruments can be assessed varies considerably across the spectrum of musical instruments. Focusing specifically on the harpsichord, it will be argued that pursuing the original sound of a historical instrument is a questionable rationale for restoration. As Barclay suggests, museums should inform both players and audiences of the uncertainties inherent in such reconstructions, noting that ``the speculative nature of the instrument’s original sound'' must be acknowledged \cite[p. 83]{barclay_care_1997}.
+\textcite[p. 19]{barclay_preservation_2005} defines a schema of three states
+into which a historical instrument may fall: Currency, Conservation, and
+Restoration. The state of Currency---where the instrument is in working
+condition and actively maintained---is not relevant to the concerns of this
+thesis. Arguments in favour of restoration often appeal to aesthetics and sound
+quality, which have historically motivated renovation practices. However, the
+degree of accuracy with which instruments can be assessed varies considerably
+across the spectrum of musical instruments. Focusing specifically on the
+harpsichord, it will be argued that pursuing the original sound of a historical
+instrument is a questionable rationale for restoration. As Barclay suggests,
+museums should inform both players and audiences of the uncertainties inherent
+in such reconstructions, noting that ``the speculative nature of the
+instrument’s original sound'' must be acknowledged \cite[p.
+83]{barclay_care_1997}.
 
-This perspective stands in contrast to earlier views, such as those of Benton Fletcher, who insisted that instruments should remain playable in order to avoid becoming relics in a ``dead museum of glass cases'' \cite[p. 154, quoted in a letter]{barclay_preservation_2005}. Fletcher’s sentiments are echoed in a later report on the restoration of instruments in the collection. As relayed by \textcite[]{barclay_critical_1999}, the report warns against instruments being relegated to ``a temple of silence where it may be conserved as a piece of furniture, its musical function forgotten'' \cite{adlam_proposal_1972}. The tension between Barclay’s three states reflects a wider discourse in the heritage sector over the past decade concerning \emph{living heritage} versus static, preservable \emph{dead heritage} \cite{poulios_moving_2010, smith_uses_2006}.
+This perspective stands in contrast to earlier views, such as those of Benton
+Fletcher, who insisted that instruments should remain playable in order to avoid
+becoming relics in a ``dead museum of glass cases'' \cite[p. 154, quoted in a
+letter]{barclay_preservation_2005}. Fletcher’s sentiments are echoed in a later
+report on the restoration of instruments in the collection. As relayed by
+\textcite[]{barclay_critical_1999}, the report warns against instruments being
+relegated to ``a temple of silence where it may be conserved as a piece of
+furniture, its musical function forgotten'' \cite{adlam_proposal_1972}. The
+tension between Barclay’s three states reflects a wider discourse in the
+heritage sector over the past decade concerning \emph{living heritage} versus
+static, preservable \emph{dead heritage} \cite{poulios_moving_2010,
+smith_uses_2006}.
 
-\textcite{poulios_moving_2010} critiques values-based conservation for treating the past as dead, which creates a discontinuity between past and present experiences. In contrast, the living heritage paradigm emphasises the ongoing, dynamic use and relevance of heritage, advocating for the preservation not only of physical artefacts but also of the practices, skills, and meanings that sustain them in contemporary life.
+\textcite{poulios_moving_2010} critiques values-based conservation for treating
+the past as dead, which creates a discontinuity between past and present
+experiences. In contrast, the living heritage paradigm emphasises the ongoing,
+dynamic use and relevance of heritage, advocating for the preservation not only
+of physical artefacts but also of the practices, skills, and meanings that
+sustain them in contemporary life.
 
-While Poulios’ arguments are primarily directed at heritage sites and ceremonial objects, the underlying philosophy extends to the broader category of heritage artefacts, including musical instruments. The framing of conservation as a strict choice between static dead heritage and perpetually living heritage constitutes a false dichotomy.\footnote{``a handful dismissed the idea of heritage as a negative idea, noting for instance that heritage was keeping that which ought to be alive dead. '' \cite{smith_uses_2006}} The reality is more complex: to treat heritage as endlessly living without acknowledging its material finitude risks producing an undead heritage, neither truly alive nor genuinely preserved.
+While Poulios’ arguments are primarily directed at heritage sites and ceremonial
+objects, the underlying philosophy extends to the broader category of heritage
+artefacts, including musical instruments. The framing of conservation as a
+strict choice between static dead heritage and perpetually living heritage
+constitutes a false dichotomy.\footnote{``a handful dismissed the idea of
+heritage as a negative idea, noting for instance that heritage was keeping that
+which ought to be alive dead. '' \cite{smith_uses_2006}} The reality is more
+complex: to treat heritage as endlessly living without acknowledging its
+material finitude risks producing an undead heritage, neither truly alive nor
+genuinely preserved.
 
 \subsection{A New Value for Conservation}
 
-The justification for conserving heritage objects often rests upon a complex matrix of values. \textcite{avrami_values_2000} provide a collection of value systems that underpin conservation decisions across different disciplines and organisations, summarised in Table \ref{tab:values_comparison}.
+The justification for conserving heritage objects often rests upon a complex
+matrix of values. \textcite{avrami_values_2000} provide a collection of value
+systems that underpin conservation decisions across different disciplines and
+organisations, summarised in Table \ref{tab:values_comparison}.
 
 \begin{table}[h]
     \small
@@ -50,43 +153,181 @@ The justification for conserving heritage objects often rests upon a complex mat
     \label{tab:values_comparison}
 \end{table}
 
-In addition to those above, this work proposes a new category for musical instruments and potentially all heritage objects that embody craft and practice: `instructional value.' Instructional value refers to the capacity of a heritage object to convey knowledge of practice, technique, and skill intrinsic to its use and creation. A painting or sculpture may reveal insights into artistic methods through `witness marks,' the traces of the artist’s hand or materials. Similarly, a musical instrument can serve as a pedagogical tool for performers, luthiers, and scholars, instructing through its construction, wear patterns, and interaction how music was historically produced and experienced.
+In addition to those above, this work proposes a new category for musical
+instruments and potentially all heritage objects that embody craft and practice:
+`instructional value.' Instructional value refers to the capacity of a heritage
+object to convey knowledge of practice, technique, and skill intrinsic to its
+use and creation. A painting or sculpture may reveal insights into artistic
+methods through `witness marks,' the traces of the artist’s hand or materials.
+Similarly, a musical instrument can serve as a pedagogical tool for performers,
+luthiers, and scholars, instructing through its construction, wear patterns, and
+interaction how music was historically produced and experienced.
 
-Instructional value may superficially appear to be a subset of educational or academic value. This conflation obscures a critical distinction between `descriptive knowledge' (knowing that) and `procedural knowledge' (knowing how). This division is essential to resolving tensions in musical instrument conservation, where preserving the physical object alone cannot fully capture its performative essence without maintaining or reviving the skills and practices it embodies. The information derived from playing an instrument is difficult to convey to performer and who in turn find it difficult to express \cite{lamb_play_2007}.
+Instructional value may superficially appear to be a subset of educational or
+academic value. This conflation obscures a critical distinction between
+`descriptive knowledge' (knowing that) and `procedural knowledge' (knowing how).
+This division is essential to resolving tensions in musical instrument
+conservation, where preserving the physical object alone cannot fully capture
+its performative essence without maintaining or reviving the skills and
+practices it embodies. The information derived from playing an instrument is
+difficult to convey to performer and who in turn find it difficult to express
+\cite{lamb_play_2007}.
 
-The discourse around conservation frequently centres on the notion of `authenticity' \cite{pine_museums_2007, laurenson_authenticity_2006}, particularly regarding historically informed performance \cite{davies_authenticity_2001}. Setting aside the complexities and debates surrounding the meaning of `authenticity,' it is important to recognise that the audience's experience often dominates discussions of musical heritage. Yet, consider a scenario where a performer rehearses a piece 50 times before performing to an audience of 50 who hears it once. Which value was represented and by what magnitude in the course performance? This thesis argue for the performer’s experience -- informed by the instrument’s unique qualities -- carries significant instructional value which is equal or greater in magnitude to those values relevant to audience. 
+The discourse around conservation frequently centres on the notion of
+`authenticity' \cite{pine_museums_2007, laurenson_authenticity_2006},
+particularly regarding historically informed performance
+\cite{davies_authenticity_2001}. Setting aside the complexities and debates
+surrounding the meaning of `authenticity,' it is important to recognise that the
+audience's experience often dominates discussions of musical heritage. Yet,
+consider a scenario where a performer rehearses a piece 50 times before
+performing to an audience of 50 who hears it once. Which value was represented
+and by what magnitude in the course performance? This thesis argue for the
+performer’s experience -- informed by the instrument’s unique qualities --
+carries significant instructional value which is equal or greater in magnitude
+to those values relevant to audience. 
 
-The performer, through hours of embodied interaction, acquires a richer, more nuanced understanding, gained through tactile feedback and `gestural repertoires' \cite[][]{levinson_music_1990} intrinsic to playing the instrument. The instrument shapes the performance as much as the performer shapes the music. This interplay is especially salient when comparing, for instance, a modern Steinway piano with a historical harpsichord, where differences in touch, sound production, and response create distinct musical experiences. Put simply, this yet another example of McLuhan’s maxim that ``the medium is the message'' \cite[][]{mcluhan_understanding_1964}.
+The performer, through hours of embodied interaction, acquires a richer, more
+nuanced understanding, gained through tactile feedback and `gestural
+repertoires' \cite[][]{levinson_music_1990} intrinsic to playing the instrument.
+The instrument shapes the performance as much as the performer shapes the music.
+This interplay is especially salient when comparing, for instance, a modern
+Steinway piano with a historical harpsichord, where differences in touch, sound
+production, and response create distinct musical experiences. Put simply, this
+yet another example of McLuhan’s maxim that ``the medium is the message''
+\cite[][]{mcluhan_understanding_1964}.
 
-Conventional museum practice rarely permits visitors to handle or play historical instruments. Though instruments may be in `playing condition' they are not typically playable by the average museum visitor. Instead, instruments cordoned off behind a -- real or imagined -- `red velvet cord,' \cite{mcalpine_sampling_2014} displayed as objects to be seen but not touched. This approach robs visitors of the experience of vibro-tactile and kinaesthetic cues encoded into the interface of the instrument. The challenge, then, is how to reintroduce embodied interaction with historical instruments in ways that respect conservation imperatives while restoring some degree of their living function.
+Conventional museum practice rarely permits visitors to handle or play
+historical instruments. Though instruments may be in `playing condition' they
+are not typically playable by the average museum visitor. Instead, instruments
+cordoned off behind a -- real or imagined -- `red velvet cord,'
+\cite{mcalpine_sampling_2014} displayed as objects to be seen but not touched.
+This approach robs visitors of the experience of vibro-tactile and kinaesthetic
+cues encoded into the interface of the instrument. The challenge, then, is how
+to reintroduce embodied interaction with historical instruments in ways that
+respect conservation imperatives while restoring some degree of their living
+function.
 
-On the `priorities for future collecting' for the harpsichord collection at Musical Instrument Museums Edinburgh from \cite{uoe_collections_2020}
+On the `priorities for future collecting' for the harpsichord collection at
+Musical Instrument Museums Edinburgh from \cite{uoe_collections_2020}
 
 \begin{quotation}
-    The collection is generally considered to have the widest scope of any in the world. Each item is important for reasons relevant to research and teaching, and in some cases, performance potential. 
+    The collection is generally considered to have the widest scope of any in
+    the world. Each item is important for reasons relevant to research and
+    teaching, and in some cases, performance potential. 
 \end{quotation}
 
-For instruments that originated from a fixed point in time (e.g. 17th-century harpsichords), `performance potential' is becoming less likely. A holistic conservation framework for musical instruments must integrate both values-based and living heritage perspectives. Such a synthesis acknowledges the physical realities of ageing instruments while honouring their performative and instructional roles. This integration opens pathways to novel conservation strategies that extend beyond current paradigms.
+For instruments that originated from a fixed point in time (e.g. 17th-century
+harpsichords), `performance potential' is becoming less likely. A holistic
+conservation framework for musical instruments must integrate both values-based
+and living heritage perspectives. Such a synthesis acknowledges the physical
+realities of ageing instruments while honouring their performative and
+instructional roles. This integration opens pathways to novel conservation
+strategies that extend beyond current paradigms.
 
 \subsection{Reproduction or Renovation}
 
-Musical instrument states of Currency and Restoration must contend with a Ship of Theseus problem: how much alteration can the original instrument undergo before it ceases to be considered the same object? The drawback of restoration is twofold: the process can be irreversibly destructive both to the instrument’s longevity \cite{barclay_care_1997} and to the surviving evidence of original craftsmanship \cite{karp_restoration_1979}. If the authenticity of performance requires the use of an original instrument \cite{karp_musical_1985}, and if ``every restoration [...] wipes away evidence and makes the original [...] condition more remote'' (from \cite{waitzman_music_1988} quoted in \cite{barclay_critical_1999}), then there exists only a finite reservoir of authentic music to be played. This is not a sustainable long-term approach for enabling performance on historical instruments.
+Musical instrument states of Currency and Restoration must contend with a Ship
+of Theseus problem: how much alteration can the original instrument undergo
+before it ceases to be considered the same object? The drawback of restoration
+is twofold: the process can be irreversibly destructive both to the instrument’s
+longevity \cite{barclay_care_1997} and to the surviving evidence of original
+craftsmanship \cite{karp_restoration_1979}. If the authenticity of performance
+requires the use of an original instrument \cite{karp_musical_1985}, and if
+``every restoration [...] wipes away evidence and makes the original [...]
+condition more remote'' (from \cite{waitzman_music_1988} quoted in
+\cite{barclay_critical_1999}), then there exists only a finite reservoir of
+authentic music to be played. This is not a sustainable long-term approach for
+enabling performance on historical instruments.
 
-Barclay has been critical of restoration \cite{barclay_care_1997}, while at the same time expressing caution regarding the notion of an `authentic copy' \cite{barclay_preservation_2005}. For a replica to be of instructional value, Barclay appears to assume---perhaps mistakenly---that we still have to make this assemblage of materials into a working musical instrument, comfortable and useful to players of the 21st century \cite{barclay_preservation_2005}. This assumption risks overlooking the possibility that it is from the ``gestural repertoires'' \cite{levinson_music_1990} of the original instrument that the most meaningful insights may be gained.
+Barclay has been critical of restoration \cite{barclay_care_1997}, while at the
+same time expressing caution regarding the notion of an `authentic copy'
+\cite{barclay_preservation_2005}. For a replica to be of instructional value,
+Barclay appears to assume---perhaps mistakenly---that we still have to make this
+assemblage of materials into a working musical instrument, comfortable and
+useful to players of the 21st century \cite{barclay_preservation_2005}. This
+assumption risks overlooking the possibility that it is from the ``gestural
+repertoires'' \cite{levinson_music_1990} of the original instrument that the
+most meaningful insights may be gained.
 
-Approaches to historical instruments that prioritise either strict conservation or reproduction preserve the informational integrity of the original and thus avoid the Ship of Theseus problem altogether. Even so, reproduction is not without contention. Barclay cites two cases of copying---a recorder and a natural trumpet---to address the broader issue of fidelity to measurements, a concern also raised by \textcite{koster_exact_1994}. In raising the ``thorny issue'' \cite{barclay_preservation_2005} of reproduction, Barclay draws on \textcite{koster_restoration_1996}, who argues not from aesthetics but from tonal quality. In evaluating a 1785 Jacques Germain harpsichord copy, Koster concludes: ``... a direct comparison of the Germain harpsichord and its copy shows that the tone of the copy does not quite match the surpassing elegance of the original'' \cite{koster_restoration_1996}. The conclusion that the older instrument sounded superior to its copy is echoed by contemporaries,\footnote{A Stradivari has the ability to deliver the whole range of tonal colors [...]'' [...] Simon Morris, the director of Beare’s... New violins don’t have the range of tonal color. The depth of personality isn’t there [...]'' \cite{mead_musical_2014}} and even a team of museum experts may hesitate before creating a copy.
+Approaches to historical instruments that prioritise either strict conservation
+or reproduction preserve the informational integrity of the original and thus
+avoid the Ship of Theseus problem altogether. Even so, reproduction is not
+without contention. Barclay cites two cases of copying---a recorder and a
+natural trumpet---to address the broader issue of fidelity to measurements, a
+concern also raised by \textcite{koster_exact_1994}. In raising the ``thorny
+issue'' \cite{barclay_preservation_2005} of reproduction, Barclay draws on
+\textcite{koster_restoration_1996}, who argues not from aesthetics but from
+tonal quality. In evaluating a 1785 Jacques Germain harpsichord copy, Koster
+concludes: ``... a direct comparison of the Germain harpsichord and its copy
+shows that the tone of the copy does not quite match the surpassing elegance of
+the original'' \cite{koster_restoration_1996}. The conclusion that the older
+instrument sounded superior to its copy is echoed by contemporaries,\footnote{A
+Stradivari has the ability to deliver the whole range of tonal colors [...]''
+[...] Simon Morris, the director of Beare’s... New violins don’t have the range
+of tonal color. The depth of personality isn’t there [...]''
+\cite{mead_musical_2014}} and even a team of museum experts may hesitate before
+creating a copy.
 
-However, given recent studies by \textcite{fritz_player_2012, fritz_soloist_2014, fritz_listener_2017}---which demonstrate that the acoustic quality of older violins, including Guarneri and Stradivari, deteriorates over time---Koster’s conclusion may be unsound. His objections to copies also extend beyond acoustics: they might deceive by being misrepresented as originals, or deviate from the original simply through the act of replication. Yet an argument against reproduction based on acoustics must be tested empirically. To demonstrate that a copy sounds inferior, an ideal study would require a double-blind design. Great care is also necessary to clarify exactly what is being assessed.\footnote{``Of course, the community didn't like these results. And so, the study was heavily criticised. We basically got killed on the Internet, on phones, like What have you done?', How can you disrespect Stradivarius so much?' People were really not happy, and then they found all different excuses to justify that the study was necessarily badly conducted, starting with the fact that we definitely chose a bad Stradivarius, which was already a good move because, I mean, now people were happy to acknowledge that there could be a bad Stradivarius. That was always something going forward.'' \cite{fritz_musica_2017}}
+However, given recent studies by \textcite{fritz_player_2012,
+fritz_soloist_2014, fritz_listener_2017}---which demonstrate that the acoustic
+quality of older violins, including Guarneri and Stradivari, deteriorates over
+time---Koster’s conclusion may be unsound. His objections to copies also extend
+beyond acoustics: they might deceive by being misrepresented as originals, or
+deviate from the original simply through the act of replication. Yet an argument
+against reproduction based on acoustics must be tested empirically. To
+demonstrate that a copy sounds inferior, an ideal study would require a
+double-blind design. Great care is also necessary to clarify exactly what is
+being assessed.\footnote{``Of course, the community didn't like these results.
+And so, the study was heavily criticised. We basically got killed on the
+Internet, on phones, like What have you done?', How can you disrespect
+Stradivarius so much?' People were really not happy, and then they found all
+different excuses to justify that the study was necessarily badly conducted,
+starting with the fact that we definitely chose a bad Stradivarius, which was
+already a good move because, I mean, now people were happy to acknowledge that
+there could be a bad Stradivarius. That was always something going forward.''
+\cite{fritz_musica_2017}}
 
-``That's where the 'accurate copy' inevitably falls from grace. And this is, of course, grist for the mills of those who argue for restoring as opposed to copying.'' In light of recent scientific studies, it would appear that neither approach can be accurate. The limitations in copying is no longer `grist in the mills` for restorers as that approach cannot be deemed `authentic' for all instruments either, and is detrimental to other heritage values an instrument can hold. An ``authentic ruin'' providing more valuable information than a ``falsely stored original'' \cite[Citing Martin Skowroneck][p 78]{barclay_preservation_2005}. This was already apparent in 1985 when Karp wrote: ``it is becoming obvious that restored older instruments do not necessarily behave or sound as they did when they were new''  \cite{karp_musical_1985}.
+``That's where the 'accurate copy' inevitably falls from grace. And this is, of
+course, grist for the mills of those who argue for restoring as opposed to
+copying.'' In light of recent scientific studies, it would appear that neither
+approach can be accurate. The limitations in copying is no longer `grist in the
+mills` for restorers as that approach cannot be deemed `authentic' for all
+instruments either, and is detrimental to other heritage values an instrument
+can hold. An ``authentic ruin'' providing more valuable information than a
+``falsely stored original'' \cite[Citing Martin Skowroneck][p
+78]{barclay_preservation_2005}. This was already apparent in 1985 when Karp
+wrote: ``it is becoming obvious that restored older instruments do not
+necessarily behave or sound as they did when they were new''
+\cite{karp_musical_1985}.
 
-There is also an implication in this rhetoric that the original maker of these historical instruments could perfectly: ``a true acoustical copy'' \cite{koster_exact_1994}. In the work the \textcite{viala_simultaneous_2020}, material variability and the affects of geometry means that, if the goal is indeed and ``acoustical copy'' the construction will likely deviate from the original. The environmental impact of musical instrument fabrication should not be discounted \cite{allen_fatto_2012}, and this suggests that replicating or renovating an instrument is a false dichotomy and that environmental concerns mean neither is feasible at scale.
+There is also an implication in this rhetoric that the original maker of these
+historical instruments could perfectly: ``a true acoustical copy''
+\cite{koster_exact_1994}. In the work the \textcite{viala_simultaneous_2020},
+material variability and the affects of geometry means that, if the goal is
+indeed and ``acoustical copy'' the construction will likely deviate from the
+original. The environmental impact of musical instrument fabrication should not
+be discounted \cite{allen_fatto_2012}, and this suggests that replicating or
+renovating an instrument is a false dichotomy and that environmental concerns
+mean neither is feasible at scale.
 
 \subsection{Conservation and Sustainability}
 
-Musical instrument restoration and reproduction do not exist in isolation. Instruments require raw materials for their manufacture, and many of the materials historically employed are no longer readily available, or may soon become scarce. As part of the broader discussion on the preservation of musical instrument heritage, consideration should also be given to environmental concerns.
+Musical instrument restoration and reproduction do not exist in isolation.
+Instruments require raw materials for their manufacture, and many of the
+materials historically employed are no longer readily available, or may soon
+become scarce. As part of the broader discussion on the preservation of musical
+instrument heritage, consideration should also be given to environmental
+concerns.
 
-The Convention on International Trade in Endangered Species of Wild Fauna and Flora (CITES) is a multilateral treaty established to protect animal and plant species threatened by international trade. CITES maintains three Appendices, which classify species according to the degree of threat they face, with Appendix I representing the highest level of protection and Appendix III the lowest. Among the species listed under these Appendices are several materials traditionally used in the manufacture of musical instruments. Table~\ref{tab:cites} presents examples of woods commonly used in instrument making that are currently subject to CITES regulations.
+The Convention on International Trade in Endangered Species of Wild Fauna and
+Flora (CITES) is a multilateral treaty established to protect animal and plant
+species threatened by international trade. CITES maintains three Appendices,
+which classify species according to the degree of threat they face, with
+Appendix I representing the highest level of protection and Appendix III the
+lowest. Among the species listed under these Appendices are several materials
+traditionally used in the manufacture of musical instruments.
+Table~\ref{tab:cites} presents examples of woods commonly used in instrument
+making that are currently subject to CITES regulations.
 
 
 \begin{table}
@@ -106,25 +347,76 @@ The Convention on International Trade in Endangered Species of Wild Fauna and Fl
 \end{table}
 
 
-The use of these woods, and the implications of their inclusion in the CITES Appendices for the musical instrument industry, are far from trivial. For example, a large seizure of illegally harvested Pernambuco, used in the manufacture of violin bows, was reported in Brazil \cite{toledo_operation_2022}. Similarly, in 2008, the Gibson Guitar Company was implicated in the import of illegally harvested wood from Madagascar \cite{justice_gibson_2012}. Such cases highlight the environmental impact that the musical instrument industry can exert on endangered ecosystems.
+The use of these woods, and the implications of their inclusion in the CITES
+Appendices for the musical instrument industry, are far from trivial. For
+example, a large seizure of illegally harvested Pernambuco, used in the
+manufacture of violin bows, was reported in Brazil \cite{toledo_operation_2022}.
+Similarly, in 2008, the Gibson Guitar Company was implicated in the import of
+illegally harvested wood from Madagascar \cite{justice_gibson_2012}. Such cases
+highlight the environmental impact that the musical instrument industry can
+exert on endangered ecosystems.
 
-As more tree species become at risk and are brought under the protection of CITES, many of the materials historically employed in instrument making are no longer legally obtainable. Beyond legality, it is also financially and ecologically unsustainable to maintain historical instruments in their original form on a large scale. With the environmental consequences of musical instrument conservation in view, the binary choice between replication and restoration appears increasingly untenable. Neither option, pursued at scale, is financially or ethically viable. Moreover, the number of historical instruments that could realistically undergo such processes is limited, raising a further question: who decides which instruments are deemed worthy of replication or restoration?
+As more tree species become at risk and are brought under the protection of
+CITES, many of the materials historically employed in instrument making are no
+longer legally obtainable. Beyond legality, it is also financially and
+ecologically unsustainable to maintain historical instruments in their original
+form on a large scale. With the environmental consequences of musical instrument
+conservation in view, the binary choice between replication and restoration
+appears increasingly untenable. Neither option, pursued at scale, is financially
+or ethically viable. Moreover, the number of historical instruments that could
+realistically undergo such processes is limited, raising a further question: who
+decides which instruments are deemed worthy of replication or restoration?
 
 \subsection{A Third Path}
 
-\textcite{desilvey_curated_2017} puts forward the question ``what could be gained if we were to care for the past without pickling it[?]'' If heritage can be in a state of living -- and a conservation approach is akin to `dead` \cite{poulios_moving_2010} -- then there must also be a transition phase where heritage dies and moves from one state to the other. Rather than resisting and fearing this transition, \textcite{desilvey_curated_2017} suggests that we might instead embrace this natural event. \textcite[p 75]{barclay_preservation_2005} touches on this same idea as he discusses `benign neglect' where the preservation of playing state-- or Currency-- is passive but the decision to do so is very deliberate. We might then turn to other approaches to maintaining the idea of an instrument. Rather than striving for the ``exact copy'' we can instead consciously and deliberately seek an `imperfect' that elicits the ``exploring the social, political, historical, conceptual, contextual'' aspects of musical instrument heritage \cite{holzer_imperfect_2025}.
+\textcite{desilvey_curated_2017} puts forward the question ``what could be
+gained if we were to care for the past without pickling it[?]'' If heritage can
+be in a state of living -- and a conservation approach is akin to `dead`
+\cite{poulios_moving_2010} -- then there must also be a transition phase where
+heritage dies and moves from one state to the other. Rather than resisting and
+fearing this transition, \textcite{desilvey_curated_2017} suggests that we might
+instead embrace this natural event. \textcite[p 75]{barclay_preservation_2005}
+touches on this same idea as he discusses `benign neglect' where the
+preservation of playing state-- or Currency-- is passive but the decision to do
+so is very deliberate. We might then turn to other approaches to maintaining the
+idea of an instrument. Rather than striving for the ``exact copy'' we can
+instead consciously and deliberately seek an `imperfect' that elicits the
+``exploring the social, political, historical, conceptual, contextual'' aspects
+of musical instrument heritage \cite{holzer_imperfect_2025}.
 
-What will be presented is an approach to historical harpsichords conservation that is equal parts reconstruction, emulation and re-enactment of the original interface. By creating this new augmented interface, there is still a question of how the new artefact is conserved as it ages. If the same process is applied where the copy is preserved and reconstructed, then it is `harpsichords all the way down.' Instead, this new interface should be considered finite, and the focus of conservation should not be on the interface but rather the instructions for re-creating it.
+What will be presented is an approach to historical harpsichords conservation
+that is equal parts reconstruction, emulation and re-enactment of the original
+interface. By creating this new augmented interface, there is still a question
+of how the new artefact is conserved as it ages. If the same process is applied
+where the copy is preserved and reconstructed, then it is `harpsichords all the
+way down.' Instead, this new interface should be considered finite, and the
+focus of conservation should not be on the interface but rather the instructions
+for re-creating it.
 
-For this reason, the term `conservation,' rather than `preservation', is used deliberately throughout this thesis in relation to musical instrument heritage. As the discussion above has shown, the working lifespan of an instrument---the period during which it can provide instructional value---is finite. To attempt to `preserve' a specific instrument with instructional value in mind is a futile endeavour. What can be achieved, at best, is conservation: sustaining the instrument for as long as possible through careful treatment.
+For this reason, the term `conservation,' rather than `preservation', is used
+deliberately throughout this thesis in relation to musical instrument heritage.
+As the discussion above has shown, the working lifespan of an instrument---the
+period during which it can provide instructional value---is finite. To attempt
+to `preserve' a specific instrument with instructional value in mind is a futile
+endeavour. What can be achieved, at best, is conservation: sustaining the
+instrument for as long as possible through careful treatment.
 
 
 \section{Digital Conservation}
 
-Having discussed the broader challenges of musical instrument conservation, this section turns to the role of digital technology within that context, framed here under the term \emph{digital conservation}. Although the phrase \emph{digital conservation} has more commonly been associated with biodiversity and environmental preservation \cite{vanderwal_digital_2015}, in this thesis it is redefined to draw on concepts from the fields of ``digital heritage'' \cite{unesco_heritage_2003}, ``digital preservation'' \cite{garrett_preserving_1996}, and ``digital cultural heritage'' \cite{fresa_digital_2014}.
+Having discussed the broader challenges of musical instrument conservation, this
+section turns to the role of digital technology within that context, framed here
+under the term \emph{digital conservation}. Although the phrase \emph{digital
+conservation} has more commonly been associated with biodiversity and
+environmental preservation \cite{vanderwal_digital_2015}, in this thesis it is
+redefined to draw on concepts from the fields of ``digital heritage''
+\cite{unesco_heritage_2003}, ``digital preservation''
+\cite{garrett_preserving_1996}, and ``digital cultural heritage''
+\cite{fresa_digital_2014}.
 
 
-To clarify the terminology used throughout the remainder of this thesis, the following definitions are provided:
+To clarify the terminology used throughout the remainder of this thesis, the
+following definitions are provided:
 
 \begin{itemize}
     \item \textbf{Digital preservation} is the process of digitising an artefact for the purpose of a permanent record.
@@ -132,223 +424,458 @@ To clarify the terminology used throughout the remainder of this thesis, the fol
     \item \textbf{Digital cultural heritage} are heritage artefacts with have undergone the process of digitisation. This specifically references to the digital instance of heritage objects
 \end{itemize}
 
-Digital conservation is a compound problem, encompassing both the specific challenges of digital conservation for musical instruments and the broader, systemic issues facing digital conservation as a whole. One of the significant challenges of digital musical instruments is preserving the tactile and embodied experience of performance. As discussed in the previous section, this issue is not exclusive to digital conservation; however, it becomes even more complex when interaction is mediated through digital means.
+Digital conservation is a compound problem, encompassing both the specific
+challenges of digital conservation for musical instruments and the broader,
+systemic issues facing digital conservation as a whole. One of the significant
+challenges of digital musical instruments is preserving the tactile and embodied
+experience of performance. As discussed in the previous section, this issue is
+not exclusive to digital conservation; however, it becomes even more complex
+when interaction is mediated through digital means.
 
-Digital preservation and the integration of digital technology within the heritage sector are also not solved problems.
-Digital technology and immersive experiences technology are frequently declared to be `transforming' the idea of the museum \cite{gedert_technology_2017, li_systematic_2024, dutot_changing_2021}.
-We need to ask ourselves: have museums been transformed by digital technologies? Or have digital technologies simply been wielded with an analogue mentality?
-The `digital' in a museum should not be a substitute for the physical artefact, but rather an extension of its reach \cite{foster_defining_1998, parry_museums_2010}.
-It is worth keeping in mind that `digitisation' of an object is also not a single act, but a perpetual process \cite{rubio_work_2020, kelley_digital_2018}.
-Both digital and analogue objects rely on physical storage mediums \cite{rubio_work_2020}, but the financial and energy cost of preserving something digitally can often be orders of magnitude greater than an `analogue' equivalent \cite{cieply_afterlife_2007}.
+Digital preservation and the integration of digital technology within the
+heritage sector are also not solved problems. Digital technology and immersive
+experiences technology are frequently declared to be `transforming' the idea of
+the museum \cite{gedert_technology_2017, li_systematic_2024,
+dutot_changing_2021}. We need to ask ourselves: have museums been transformed by
+digital technologies? Or have digital technologies simply been wielded with an
+analogue mentality? The `digital' in a museum should not be a substitute for the
+physical artefact, but rather an extension of its reach
+\cite{foster_defining_1998, parry_museums_2010}. It is worth keeping in mind
+that `digitisation' of an object is also not a single act, but a perpetual
+process \cite{rubio_work_2020, kelley_digital_2018}. Both digital and analogue
+objects rely on physical storage mediums \cite{rubio_work_2020}, but the
+financial and energy cost of preserving something digitally can often be orders
+of magnitude greater than an `analogue' equivalent \cite{cieply_afterlife_2007}.
 
-One advantage of digital technologies is the ability to provide a central point of access to disparate and distributed collections, specifically the data of those collections. 
-The Musical Instrument Museums Online (MIMO) project, an online catalogue that aggregates the data from collections of participating musical instrument museums around the globe, is a perfect example of this advantage. 
-The key to the usability \cite{dolan_mimo_2017} of these systems lies within their data, the collection and management of which requires multidisciplinary skills.
-Museum professionals need adequate training to have an understanding of digital data and its inherent problems of obsolescence and silent corruption \cite{rubio_work_2020,schwarz_disk_2006,parry_museums_2010}.
-Concerning the humanities, there is still a gap in digital skills and best practices in data sustainability that needs to be closed \cite{taylor_shaping_2022}. 
+One advantage of digital technologies is the ability to provide a central point
+of access to disparate and distributed collections, specifically the data of
+those collections. The Musical Instrument Museums Online (MIMO) project, an
+online catalogue that aggregates the data from collections of participating
+musical instrument museums around the globe, is a perfect example of this
+advantage. The key to the usability \cite{dolan_mimo_2017} of these systems lies
+within their data, the collection and management of which requires
+multidisciplinary skills. Museum professionals need adequate training to have an
+understanding of digital data and its inherent problems of obsolescence and
+silent corruption \cite{rubio_work_2020,schwarz_disk_2006,parry_museums_2010}.
+Concerning the humanities, there is still a gap in digital skills and best
+practices in data sustainability that needs to be closed
+\cite{taylor_shaping_2022}. 
 
-There is also the question of the digital heritage, such as software or data sets, that are either utilised or created as part of the conservation process.
-If musical instruments are to be preserved digitally, we need to be aware of how the tools that are created for the process of conservation are themselves conserved. 
-Software has a reproducibility problem \cite{perkel_challenge_2020} where it can be difficult to recreate the process or results after only historically relatively short periods \cite{robert_reproducibility_2020}.
+There is also the question of the digital heritage, such as software or data
+sets, that are either utilised or created as part of the conservation process.
+If musical instruments are to be preserved digitally, we need to be aware of how
+the tools that are created for the process of conservation are themselves
+conserved. Software has a reproducibility problem \cite{perkel_challenge_2020}
+where it can be difficult to recreate the process or results after only
+historically relatively short periods \cite{robert_reproducibility_2020}.
 
-The digital components of this thesis have strived to follow the current best practice guidelines.
-This section discusses the organisation and structure of all digital components and the motivations behind this methodology.
+The digital components of this thesis have strived to follow the current best
+practice guidelines. This section discusses the organisation and structure of
+all digital components and the motivations behind this methodology.
 
 \subsection{Open Methods}
 
-To effectively tackle the problem of digital musical instrument conservation, we require frameworks that address each of the components discussed above. 
+To effectively tackle the problem of digital musical instrument conservation, we
+require frameworks that address each of the components discussed above. 
 
-Connected with the concept digital preservation is the movement of towards Open Science \cite{unesco_open_2021}, a philosophy of academic research that advocates for openly sharing not only the the results of research\footnote{ ``e.g. original   scientific   research   results,   research  data,  software,  source  code,  source  materials,  workflows  and  protocols,  digital  representations  of  pictorial  and  graphical  materials   and   scholarly   multimedia   material''
-\cite{unesco_open_2021}} but also the processes and methodologies necessary to achieve those results. Digital technologies make a concepts like Open Science feasible, but when applied to the digital assets, a robust framework is required to make Open Science achievable. The FAIR principles provide such framework, focussing on the ``Findability, Accessibility, Interoperability, and Reuse [FAIR] of digital assets'' \cite{wilkinson_fair_2016}.
+Connected with the concept digital preservation is the movement of towards Open
+Science \cite{unesco_open_2021}, a philosophy of academic research that
+advocates for openly sharing not only the the results of research\footnote{
+``e.g. original   scientific   research   results,   research  data,  software,
+source  code,  source  materials,  workflows  and  protocols,  digital
+representations  of  pictorial  and  graphical  materials   and   scholarly
+multimedia   material'' \cite{unesco_open_2021}} but also the processes and
+methodologies necessary to achieve those results. Digital technologies make a
+concepts like Open Science feasible, but when applied to the digital assets, a
+robust framework is required to make Open Science achievable. The FAIR
+principles provide such framework, focussing on the ``Findability,
+Accessibility, Interoperability, and Reuse [FAIR] of digital assets''
+\cite{wilkinson_fair_2016}.
 
 \begin{itemize}
-\item Findability: Digital assets are described with rich metadata with a persistent location
+\item Findability: Digital assets are described with rich metadata with a
+persistent location
 \item Accessibility: protocol is open, free, and universally implementable
-\item Interoperability: the ability of data or tools from non-cooperating resources to integrate or work together with minimal effort.
-\item Reuse: digital assets are released with a clear and accessible data usage license
+\item Interoperability: the ability of data or tools from non-cooperating
+resources to integrate or work together with minimal effort.
+\item Reuse: digital assets are released with a clear and accessible data usage
+license
 \end{itemize}
 
-For software to be FAIR, it must also be citable \cite{soito_citations_2016}, a process which has historically lacked standardisation. Making software citable involves compliance to guidelines not only by research software authors \cite{smith_software_2016} but also by those citing that software \cite{katz_recognizing_2021} and the journals cross-referencing those citations \cite{stall_journal_2023}.
+For software to be FAIR, it must also be citable \cite{soito_citations_2016}, a
+process which has historically lacked standardisation. Making software citable
+involves compliance to guidelines not only by research software authors
+\cite{smith_software_2016} but also by those citing that software
+\cite{katz_recognizing_2021} and the journals cross-referencing those citations
+\cite{stall_journal_2023}.
 
-Open software should ideally be `living' with the potential for constant change, but when used in research, this quality can be a problem for cite-ability and reusability. Version control systems such as git provide a straightforward way to track and tag versions of software. public, online, version-controlled repositories like GitHub help software comply with FAIR principles, but there is still a question of longevity \cite{smith_software_2016}. In addition to version control platforms source should be uploaded to archive repositories, like the Zenodo platform, which enable persistent referencing through a digital object identifier (DOI) \cite{smith_software_2016,stall_journal_2023}.
+Open software should ideally be `living' with the potential for constant change,
+but when used in research, this quality can be a problem for cite-ability and
+reusability. Version control systems such as git provide a straightforward way
+to track and tag versions of software. public, online, version-controlled
+repositories like GitHub help software comply with FAIR principles, but there is
+still a question of longevity \cite{smith_software_2016}. In addition to version
+control platforms source should be uploaded to archive repositories, like the
+Zenodo platform, which enable persistent referencing through a digital object
+identifier (DOI) \cite{smith_software_2016,stall_journal_2023}.
 
-Persistent referencing addresses on aspect longevity but another critical aspect is the reproducibility of software \cite{perkel_challenge_2020}. Software is should be executable no and in the future, a process which is hindered by constantly developing programming languages in addition to all manner of unforeseen obstacles, from hardware obsolescence to missing documentation \cite{robert_reproducibility_2020}.
+Persistent referencing addresses on aspect longevity but another critical aspect
+is the reproducibility of software \cite{perkel_challenge_2020}. Software is
+should be executable no and in the future, a process which is hindered by
+constantly developing programming languages in addition to all manner of
+unforeseen obstacles, from hardware obsolescence to missing documentation
+\cite{robert_reproducibility_2020}.
 
 \subsection{Reproducibility}
 
-While this discussion has focused on digital software, digitally designed physical hardware presents additional challenges. Within the field of digital musical instrument (DMI) design, long-term reusability remains an on-going challenge \cite{fiordelmondo_towards_2025}. Designing and fabricating hardware requires more than just source code. Design of electronics hardware typically incorporates Computer Aided Design (CAD) and Computer Aided Manufacture (CAM) steps, necessitating the inclusion of not just schematics but also the bill of materials, and documentation on assembly and operation all within a  well structure archived repository \cite{calegario_documentation_2021}. CAD files and surrounding support files also provide another point of failure with respect to preservation. For example, in the course of this thesis the popular Electronic Design Automation (EDA) software tool EAGLE was announced to be discontinued \cite{autodesk_eagle_2024} for the July 2026. A conscious decision was made to continue using the EAGLE format for the PCB design. Much in the same way as the discontinuation of Python 2 may be beneficial for archival purposes as ``advanced programming language that is guaranteed not to evolve anymore'' \cite{rougier_loupe_2020}, so to does the discontinuation of the EAGLE means that its XML file standard is now calcified and is unable changes. Instead, the EAGLE files can be used in conjunction with other EDA software such as the open source KiCAD \cite{kicad_eagle_2024}.
+While this discussion has focused on digital software, digitally designed
+physical hardware presents additional challenges. Within the field of digital
+musical instrument (DMI) design, long-term reusability remains an on-going
+challenge \cite{fiordelmondo_towards_2025}. Designing and fabricating hardware
+requires more than just source code. Design of electronics hardware typically
+incorporates Computer Aided Design (CAD) and Computer Aided Manufacture (CAM)
+steps, necessitating the inclusion of not just schematics but also the bill of
+materials, and documentation on assembly and operation all within a  well
+structure archived repository \cite{calegario_documentation_2021}. CAD files and
+surrounding support files also provide another point of failure with respect to
+preservation. For example, in the course of this thesis the popular Electronic
+Design Automation (EDA) software tool EAGLE was announced to be discontinued
+\cite{autodesk_eagle_2024} for the July 2026. A conscious decision was made to
+continue using the EAGLE format for the PCB design. Much in the same way as the
+discontinuation of Python 2 may be beneficial for archival purposes as
+``advanced programming language that is guaranteed not to evolve anymore''
+\cite{rougier_loupe_2020}, so to does the discontinuation of the EAGLE means
+that its XML file standard is now calcified and is unable changes. Instead, the
+EAGLE files can be used in conjunction with other EDA software such as the open
+source KiCAD \cite{kicad_eagle_2024}.
 
-\textcite{perkel_challenge_2020} provides a checklist aggregated from the ReScience C jounral's ten-year challenge initiative which challenges researchers to replicate results from their software that is older than ten years. Key recommendations in the list include version control and archiving which is in keeping with this guidance for best practice \cite{smith_software_2016, stall_journal_2023}.
+\textcite{perkel_challenge_2020} provides a checklist aggregated from the
+ReScience C jounral's ten-year challenge initiative which challenges researchers
+to replicate results from their software that is older than ten years. Key
+recommendations in the list include version control and archiving which is in
+keeping with this guidance for best practice \cite{smith_software_2016,
+stall_journal_2023}.
 
-Finally, all digital assets are available under the GLPv3 licence under recommendation to provide as open permission as possible \cite{stall_journal_2023}. The GPLv3 licence allows for the copy, distribution and modify the source files and that any modifications to that digital source must also be made available under the same licence \cite{gplv3}.
-Source code repositories for this thesis were designed to conform to the current software sustainability institute guidelines and underwent assessment from the Software Sustainability Institute at the University of Edinburgh \cite{ssi_online_2025}.
+Finally, all digital assets are available under the GLPv3 licence under
+recommendation to provide as open permission as possible
+\cite{stall_journal_2023}. The GPLv3 licence allows for the copy, distribution
+and modify the source files and that any modifications to that digital source
+must also be made available under the same licence \cite{gplv3}. Source code
+repositories for this thesis were designed to conform to the current software
+sustainability institute guidelines and underwent assessment from the Software
+Sustainability Institute at the University of Edinburgh \cite{ssi_online_2025}.
 
 
 \subsection{Case Study: Aurora}
 
-During the course of this PhD was the passing of professor Angelo Farina who, as well being prolific academic within the field of acoustics, was also the author of a number of free software packages for acoustics analysis. One example of Farina's software is Aurora, a free software suite for acoustical analysis. Auroa provides an apposite case for the importance of software sustainability and preservation, not only for its enduring value but also because of its long-standing role in digital cultural heritage projects spanning decades \cite{fausti_acoustic_2000,frey_acoustical_2013,almagropastor_assessing_2021}.
+During the course of this PhD was the passing of professor Angelo Farina who, as
+well being prolific academic within the field of acoustics, was also the author
+of a number of free software packages for acoustics analysis. One example of
+Farina's software is Aurora, a free software suite for acoustical analysis.
+Auroa provides an apposite case for the importance of software sustainability
+and preservation, not only for its enduring value but also because of its
+long-standing role in digital cultural heritage projects spanning decades
+\cite{fausti_acoustic_2000,frey_acoustical_2013,almagropastor_assessing_2021}.
 
-Aurora was created in 1995 \cite{farina_auralization_1995} as an extension to the then Cool Edit software \cite{tronchin_acoustics_1997} -- which would eventually become Adobe Audition \cite{farina_listening_2004} -- and was initially distributed alongside Farina's Ramsete software for 3D simulation of building acoustics \cite{farina_aurora_1995} from \url{http://aurora.ramsete.com/Aurora} and \url{http://aurora-plugins.com/} as shareware \cite{farina_registration_2007}. 
+Aurora was created in 1995 \cite{farina_auralization_1995} as an extension to
+the then Cool Edit software \cite{tronchin_acoustics_1997} -- which would
+eventually become Adobe Audition \cite{farina_listening_2004} -- and was
+initially distributed alongside Farina's Ramsete software for 3D simulation of
+building acoustics \cite{farina_aurora_1995} from
+\url{http://aurora.ramsete.com/Aurora} and \url{http://aurora-plugins.com/} as
+shareware \cite{farina_registration_2007}. 
 
-Aurora became prominently used in research after functionality was added that simplified the process of sine sweep room impulse response measurement \cite{farina_aurora_2000}. In 2009 the source code for Aurora would later be ported by Simone Campanini to the free open source audio editor Audacity \cite{farina_new_2009}. This port marked the first time Aurora was fully free to use and ended the ``russian roulette'' approach to shareware that had been taken with the Adobe Audition version \cite{farina_registration_2007}.
+Aurora became prominently used in research after functionality was added that
+simplified the process of sine sweep room impulse response measurement
+\cite{farina_aurora_2000}. In 2009 the source code for Aurora would later be
+ported by Simone Campanini to the free open source audio editor Audacity
+\cite{farina_new_2009}. This port marked the first time Aurora was fully free to
+use and ended the ``russian roulette'' approach to shareware that had been taken
+with the Adobe Audition version \cite{farina_registration_2007}.
 
-Aurora has been widely cited in research papers since its remains a part of toolkit for the acoustics research community \cite{fontana_highly_2024,popp_speech_2024,denti_pan_2024}. Although Aurora is free software, its source code has not historically been open; however it was still in active development by Farina as late as 2023 \cite{bevilacqua_new_2023}. Tracking Aurora’s use in historical research is complicated by the lack of a software citation standard. Inferring the version of Aurora used from publication dates is imprecise, and given the significant development it has undergone, it is difficult to assess how changes may have influenced previous research results. These factors motivated a small software conservation project, undertaken in collaboration with Campanini and Farina, which involved uploading the Audacity variant of Aurora’s source code to a public version control repository, released under a GPLv3 license with an assigned DOI \cite{farina_aurora_2025} in accordance with current best practice guidlines \cite{stall_journal_2023, hong_how_2019}
+Aurora has been widely cited in research papers since its remains a part of
+toolkit for the acoustics research community
+\cite{fontana_highly_2024,popp_speech_2024,denti_pan_2024}. Although Aurora is
+free software, its source code has not historically been open; however it was
+still in active development by Farina as late as 2023
+\cite{bevilacqua_new_2023}. Tracking Aurora’s use in historical research is
+complicated by the lack of a software citation standard. Inferring the version
+of Aurora used from publication dates is imprecise, and given the significant
+development it has undergone, it is difficult to assess how changes may have
+influenced previous research results. These factors motivated a small software
+conservation project, undertaken in collaboration with Campanini and Farina,
+which involved uploading the Audacity variant of Aurora’s source code to a
+public version control repository, released under a GPLv3 license with an
+assigned DOI \cite{farina_aurora_2025} in accordance with current best practice
+guidlines \cite{stall_journal_2023, hong_how_2019}
 
-Since Audacity is an open source project, additional software can be embedded directly into it utilising Audacity's experimental `module' system, a little-used and under-documented feature. \footnote{\url{https://manual.audacityteam.org/man/modules.html}} One requirement for modules are that they be co-compiled with the Audacity source code in order to function.\footnote{``Modules should be built on the same date as Audacity, otherwise the version string check will prevent the module loading'' \url{https://manual.audacityteam.org/man/modules.html}}
+Since Audacity is an open source project, additional software can be embedded
+directly into it utilising Audacity's experimental `module' system, a
+little-used and under-documented feature.
+\footnote{\url{https://manual.audacityteam.org/man/modules.html}} One
+requirement for modules are that they be co-compiled with the Audacity source
+code in order to function.\footnote{``Modules should be built on the same date
+as Audacity, otherwise the version string check will prevent the module
+loading'' \url{https://manual.audacityteam.org/man/modules.html}}
 
-The module approach was the one taken for Aurora port to Audacity \cite{farina_new_2009}. A key advantage is the ability to distribute a single working audio editor package that intergrates the Aurora suite. However, this also risks the module’s source code becoming entangled with Audacity’s own codebase — a situation that unfortunately occurred with Aurora.
+The module approach was the one taken for Aurora port to Audacity
+\cite{farina_new_2009}. A key advantage is the ability to distribute a single
+working audio editor package that intergrates the Aurora suite. However, this
+also risks the module’s source code becoming entangled with Audacity’s own
+codebase — a situation that unfortunately occurred with Aurora.
 
-Where this all has implications for software sustainability is when the host software, Audacity, undergoes major development which -- after its announced partnership in with Muse Group in 2021 \cite{prokoudine_ultimate_2021} -- is likely to take place. In this scenario breaking changes -- updates to source code that cause other dependant code or software to fail -- are inevitable. Consequently, Aurora’s availability and functionality has cbecome precarious.
+Where this all has implications for software sustainability is when the host
+software, Audacity, undergoes major development which -- after its announced
+partnership in with Muse Group in 2021 \cite{prokoudine_ultimate_2021} -- is
+likely to take place. In this scenario breaking changes -- updates to source
+code that cause other dependant code or software to fail -- are inevitable.
+Consequently, Aurora’s availability and functionality has cbecome precarious.
 
-The repository for the Aurora binaries, hosted from \url{https://www.angelofarina.it/Aurora/download}, will inevitably become obsolete\footnote{At time of writing Farina's University of Parma site, \url{http://pcfarina.eng.unipr.it}, is down though it has been mirrored at \url{https://www.angelofarina.it}}. 
-Thus, source code remains one of the few reliable records to Aurora’s functionality. Although the source code for Aurora's Audacity port is available, the original Adobe Audition version source is not public. The current repository represents only a snapshot of the source code's complete history.
+The repository for the Aurora binaries, hosted from
+\url{https://www.angelofarina.it/Aurora/download}, will inevitably become
+obsolete\footnote{At time of writing Farina's University of Parma site,
+\url{http://pcfarina.eng.unipr.it}, is down though it has been mirrored at
+\url{https://www.angelofarina.it}}. Thus, source code remains one of the few
+reliable records to Aurora’s functionality. Although the source code for
+Aurora's Audacity port is available, the original Adobe Audition version source
+is not public. The current repository represents only a snapshot of the source
+code's complete history.
 
-Aurora is not unique in this predicament, the YIN source code by Alain de Cheveigne \cite{cheveigne_yin_2002} and it faces strikingly similar challenges to Aurora. YIN is also a widely used and cited software in acoustics. YIN's source code was originally available from a commonly cited link at IRCAM website \url{http://www.ircam.fr/pcm/cheveign/sw/yin.zip}, but this is no longer a valid. YIN has recently been cited as available from de Cheveigne's ``informal'' page at Laboratoire des Systèmes Perceptifs (LSR) \url{http://audition.ens.fr/adc/sw/yin.zip} \cite{alain_cancellation_2023}.\footnote{YIN as it is available from the the LSR page \textit{still} references the IRCAM url as the repository} Though the original article describes the algorithm, citation to these zip archives are not uncommon in research \cite{banhalmi_fundamental_2005,staudacher_fast_2016} and when the software, not the algorithm in the paper, is a constituent part of that research then it is important that a record of it is kept.
+Aurora is not unique in this predicament, the YIN source code by Alain de
+Cheveigne \cite{cheveigne_yin_2002} and it faces strikingly similar challenges
+to Aurora. YIN is also a widely used and cited software in acoustics. YIN's
+source code was originally available from a commonly cited link at IRCAM website
+\url{http://www.ircam.fr/pcm/cheveign/sw/yin.zip}, but this is no longer a
+valid. YIN has recently been cited as available from de Cheveigne's ``informal''
+page at Laboratoire des Systèmes Perceptifs (LSR)
+\url{http://audition.ens.fr/adc/sw/yin.zip}
+\cite{alain_cancellation_2023}.\footnote{YIN as it is available from the the LSR
+page \textit{still} references the IRCAM url as the repository} Though the
+original article describes the algorithm, citation to these zip archives are not
+uncommon in research \cite{banhalmi_fundamental_2005,staudacher_fast_2016} and
+when the software, not the algorithm in the paper, is a constituent part of that
+research then it is important that a record of it is kept.
 
-Aurora and YIN illustrate broader issues in the sustainability and preservation of research software. Regardless of being free, open source, or widely used, software remains vulnerable to decay. Research institutions could play a more proactive role by hosting repositories and assigning DOIs to software produced from their research outputs.
+Aurora and YIN illustrate broader issues in the sustainability and preservation
+of research software. Regardless of being free, open source, or widely used,
+software remains vulnerable to decay. Research institutions could play a more
+proactive role by hosting repositories and assigning DOIs to software produced
+from their research outputs.
 
-Documentation is vital for understanding source code structure and functionality \cite{perkel_challenge_2020}.  Even basic steps such as adding a software licence can improve the developer community engagement with software \cite{colazo_licence_2009}.
+Documentation is vital for understanding source code structure and functionality
+\cite{perkel_challenge_2020}.  Even basic steps such as adding a software
+licence can improve the developer community engagement with software
+\cite{colazo_licence_2009}.
 
-The work presented in this thesis builds on lessons learned from software like Aurora and YIN. These experiences have informed the methodology for project structure, documentation and the broader digital output of this research. 
+The work presented in this thesis builds on lessons learned from software like
+Aurora and YIN. These experiences have informed the methodology for project
+structure, documentation and the broader digital output of this research. 
 
 
 \section{Thesis Outline [Under Construction]}
 
-Two aspects of the conservation pipeline represented within this thesis. The Chapter~\ref{chapter:keyboard} represents the aspect once digital conservation has taken place and asks the question: how do you facilitate interaction with a digitised musical instrument? Chapter~\ref{chapter:magpie} represents the beginning where analysis of materials take place, in the case of the harpsichord, which can be used alongside measurements to make further decisions about conservation routes \cite{barclay_care_1997}.
+Two aspects of the conservation pipeline represented within this thesis. The
+Chapter~\ref{chapter:keyboard} represents the aspect once digital conservation
+has taken place and asks the question: how do you facilitate interaction with a
+digitised musical instrument? Chapter~\ref{chapter:magpie} represents the
+beginning where analysis of materials take place, in the case of the
+harpsichord, which can be used alongside measurements to make further decisions
+about conservation routes \cite{barclay_care_1997}.
 
 
-Chapter~\ref{chapter:magpie} discusses the steps taken for sustainability with a purely software project where a distinct functional software library and interface library were created for the MAGPIE software.  For electronic hardware, the problem of sustainability is compounded compounded with the addition of physical components, their schematics and assembly on top of the firmware and software required to make the hardware function. Process for addressing this is covered further in Chapter~\ref{chapter:interaction}.
+Chapter~\ref{chapter:magpie} discusses the steps taken for sustainability with a
+purely software project where a distinct functional software library and
+interface library were created for the MAGPIE software.  For electronic
+hardware, the problem of sustainability is compounded compounded with the
+addition of physical components, their schematics and assembly on top of the
+firmware and software required to make the hardware function. Process for
+addressing this is covered further in Chapter~\ref{chapter:interaction}.
 
 
-This thesis aims to demonstrate the considerations necessary to adhere to these four FAIR principles, particularly within a cross-disciplinary project. All digital assets—whether source code, measurement data, or CAD files—are managed accordingly.
+This thesis aims to demonstrate the considerations necessary to adhere to these
+four FAIR principles, particularly within a cross-disciplinary project. All
+digital assets—whether source code, measurement data, or CAD files—are managed
+accordingly.
 
-For the digital output of this thesis has confirmed to the following. 
-All work digital has been put under version control using the git version control system. Version controlled repository are stored on the GitHub platform to allow for public access.
+For the digital output of this thesis has confirmed to the following. All work
+digital has been put under version control using the git version control system.
+Version controlled repository are stored on the GitHub platform to allow for
+public access.
 
-A `release` is defined as any self-contained working version of an asset that was used in the course of research. Digital assets are living and can travel through periods of transition. A release of represents a version that is self-contained, in some final form at a particular moment in time.
+A `release` is defined as any self-contained working version of an asset that
+was used in the course of research. Digital assets are living and can travel
+through periods of transition. A release of represents a version that is
+self-contained, in some final form at a particular moment in time.
 
 \subsection{Chapter 2: Interface}
 
-This chapter covers the creation of a model harpsichord interface that was augmented with an optical electronic sensor system to allow for interaction with digital software instruments. Incorporates the design, prototyping and fabrication stages as well as the final deployment as part of an exhibition at Museo San Colombano, Bologna.
+This chapter covers the creation of a model harpsichord interface that was
+augmented with an optical electronic sensor system to allow for interaction with
+digital software instruments. Incorporates the design, prototyping and
+fabrication stages as well as the final deployment as part of an exhibition at
+Museo San Colombano, Bologna.
 
-Technological advances have transformed how museums document, present and interpret their collections. Immersive experiences are realised through tools such as 3D printing and virtual reality \cite{allard_use-of-hand-held_2005,wachowiak_3d-scanning_2009,music_3d-printed_2024,kuzminsky_three-dimensional_2012,schaich_from_2007}.
-These technologies form a kind of experiential authenticity, enabling encounters that evoke the past's sensory, emotional, and intellectual essence \cite{trant_when_1999}. 
-Achieving authenticity requires museums to navigate the delicate balance between preservation and meaningful engagement \cite{pine_museums_2007}—a challenge that is particularly evident in the case of historical musical instrument collections \cite{mcalpine_sampling_2014}. 
-Musical instruments present an interesting problem for cultural heritage as they are both an aesthetic physical object, but also a tool with an inherent tactile experience \cite{charalampos-saitis_musical_2018}.
-However, musical instruments inevitably decay until they reach a point where they are too fragile for continued interaction \cite{paradiso_to-save_2019}.
-Museums face a constant tension between accessibility and preservation, restricting how visitors can interact with collections \cite{templeton_museum_2018, mcalpine_sampling_2014}.
-What can be done to preserve not just the object, but the tactile experiences of playing a musical instrument? 
-The chapter discusses the motivations, design and creation of a replica harpsichord keyboard with a typical early Italian layout, electronically augmented for an interactive exhibition.
-Thinking beyond the ``red velvet cord''\cite{mcalpine_sampling_2014, masu_o-in-nime_2023}, the replica keyboard aims to provide an opportunity to enhance visitor interaction with cultural heritage while safeguarding delicate artefacts. 
-Rather than prioritising technical novelty, the project demonstrates how digital interventions can support meaningful interaction with a shared musical heritage, ensuring its continued relevance in contemporary museum contexts.
-An exhibition was held at Museo San Colombano, Bologna, which aimed to enhance the visitor experience by providing an interface to digitised versions of instruments within the collection by leveraging the propensity humans have to being influenced by visual components when making musical judgements \cite{fritz_player_2012, fritz_soloist_2014, fritz_listener_2017, tsay_sight_2013}.
-The exhibition attempted to balance the competing demands of historical authenticity, public accessibility, and preservation while situating itself within broader discussions on the role of technology in museums. Discussed are the keyboard's design principles, technical implementation, and implications, emphasising its contribution to public engagement and the long-term preservation of musical heritage.
+Technological advances have transformed how museums document, present and
+interpret their collections. Immersive experiences are realised through tools
+such as 3D printing and virtual reality
+\cite{allard_use-of-hand-held_2005,wachowiak_3d-scanning_2009,music_3d-printed_2024,kuzminsky_three-dimensional_2012,schaich_from_2007}.
+These technologies form a kind of experiential authenticity, enabling encounters
+that evoke the past's sensory, emotional, and intellectual essence
+\cite{trant_when_1999}. Achieving authenticity requires museums to navigate the
+delicate balance between preservation and meaningful engagement
+\cite{pine_museums_2007}—a challenge that is particularly evident in the case of
+historical musical instrument collections \cite{mcalpine_sampling_2014}. Musical
+instruments present an interesting problem for cultural heritage as they are
+both an aesthetic physical object, but also a tool with an inherent tactile
+experience \cite{charalampos-saitis_musical_2018}. However, musical instruments
+inevitably decay until they reach a point where they are too fragile for
+continued interaction \cite{paradiso_to-save_2019}. Museums face a constant
+tension between accessibility and preservation, restricting how visitors can
+interact with collections \cite{templeton_museum_2018, mcalpine_sampling_2014}.
+What can be done to preserve not just the object, but the tactile experiences of
+playing a musical instrument? The chapter discusses the motivations, design and
+creation of a replica harpsichord keyboard with a typical early Italian layout,
+electronically augmented for an interactive exhibition. Thinking beyond the
+``red velvet cord''\cite{mcalpine_sampling_2014, masu_o-in-nime_2023}, the
+replica keyboard aims to provide an opportunity to enhance visitor interaction
+with cultural heritage while safeguarding delicate artefacts. Rather than
+prioritising technical novelty, the project demonstrates how digital
+interventions can support meaningful interaction with a shared musical heritage,
+ensuring its continued relevance in contemporary museum contexts. An exhibition
+was held at Museo San Colombano, Bologna, which aimed to enhance the visitor
+experience by providing an interface to digitised versions of instruments within
+the collection by leveraging the propensity humans have to being influenced by
+visual components when making musical judgements \cite{fritz_player_2012,
+fritz_soloist_2014, fritz_listener_2017, tsay_sight_2013}. The exhibition
+attempted to balance the competing demands of historical authenticity, public
+accessibility, and preservation while situating itself within broader
+discussions on the role of technology in museums. Discussed are the keyboard's
+design principles, technical implementation, and implications, emphasising its
+contribution to public engagement and the long-term preservation of musical
+heritage.
 
 \subsection{Chapter 3: MAGPIE}
 
-This chapter covers the creation of an open source software tool for plate vibration analysis, material property estimation and acoustics education.
+This chapter covers the creation of an open source software tool for plate
+vibration analysis, material property estimation and acoustics education.
 
 \subsection{Chapter 4: Applications}
 
-This chapter covers the intersection of chapters 2 and 3 where a numerical modal was designed around a modified version of the interface. A bespoke synthesis engine that utilises the data available from embedded electronic sensors inside the keyboard. Synthesis designed around measurements taken during research as well the harpsichord specific mechanics of jack staggering and the timing differences between register plucks.
+This chapter covers the intersection of chapters 2 and 3 where a numerical modal
+was designed around a modified version of the interface. A bespoke synthesis
+engine that utilises the data available from embedded electronic sensors inside
+the keyboard. Synthesis designed around measurements taken during research as
+well the harpsichord specific mechanics of jack staggering and the timing
+differences between register plucks.
 
 Uses of porjects within the wild.
 
-- NEMUS work that has been using and building upon the MAGPIE software
-- keyboard integrated with custom software
+- NEMUS work that has been using and building upon the MAGPIE software -
+keyboard integrated with custom software
 
 \subsection{Chapter 5: Future}
 
 where do we go from here?
 
-% \section{Definitions}
-% \begin{itemize}
-%     \item CAD: Computer aided design,  Relating to CAD files used in the creation of PCBs or 3D prints
-%     \item PCB: Printed circuit board. The circuit required for connecting electronics together. Printed on plate of silicon with a copper coating.
-%     \item FAIR: Findability, Accessibility, Interoperability, and Reuse of digital assets    
-%     \item DOI: Digital object Identifier
-%     \item Digital Asset: Any type of digital data, encapsulating source code, compiled binaries, CAD files, images. Anything created then stored digital and used in the course of research.
-%     \item FOSS: Free open source software where free encapsulates GNU Project Four Essential Freedoms \cite{gnu_philosophy_2025} the user's ability to run, study, distribute and modify without restriction and that the source code be publicly available.
-% \end{itemize}
+% \section{Definitions} \begin{itemize} \item CAD: Computer aided design,
+% Relating to CAD files used in the creation of PCBs or 3D prints \item PCB:
+% Printed circuit board. The circuit required for connecting electronics
+% together. Printed on plate of silicon with a copper coating. \item FAIR:
+% Findability, Accessibility, Interoperability, and Reuse of digital assets    
+%     \item DOI: Digital object Identifier \item Digital Asset: Any type of
+%     digital data, encapsulating source code, compiled binaries, CAD files,
+%     images. Anything created then stored digital and used in the course of
+%     research. \item FOSS: Free open source software where free encapsulates
+%     GNU Project Four Essential Freedoms \cite{gnu_philosophy_2025} the user's
+%     ability to run, study, distribute and modify without restriction and that
+%     the source code be publicly available. \end{itemize}
 
-% \section{Questions trying to be answered}
-% \begin{itemize}
-%     \item how to facilitate the physical experience of playing a musical instrument in a museum collection while preserving the original?
-%     \item How can the visual of an instrument interface be leveraged to achieve this?
-%     \item How can digital technologies be used to provide free open open source tools to help help conserve musical instruments?
-% \end{itemize}
+% \section{Questions trying to be answered} \begin{itemize} \item how to
+% facilitate the physical experience of playing a musical instrument in a museum
+% collection while preserving the original? \item How can the visual of an
+% instrument interface be leveraged to achieve this? \item How can digital
+% technologies be used to provide free open open source tools to help help
+% conserve musical instruments? \end{itemize}
 
 % \section{Goals / Methodology}
 
-% Exploratory research to identify three areas within conservation of musical instruments where FOSS digital tools could be used to aid the process.
+% Exploratory research to identify three areas within conservation of musical
+% instruments where FOSS digital tools could be used to aid the process.
 
 % These areas were:
 
-% \begin{enumerate}
-%     \item \textbf{Analysis}: The processing and interpretation of measurement data to further understand material
-%     \item \textbf{Interaction}: The design of an interface for digitally conserved musical instruments. Preserving the physical experience of playing an instrument
-%     \item \textbf{Application}: The usage of these digital tools and the areas for development within them.
-% \end{enumerate}
+% \begin{enumerate} \item \textbf{Analysis}: The processing and interpretation
+%     of measurement data to further understand material \item
+%     \textbf{Interaction}: The design of an interface for digitally conserved
+%     musical instruments. Preserving the physical experience of playing an
+%     instrument \item \textbf{Application}: The usage of these digital tools
+%     and the areas for development within them. \end{enumerate}
 
 
 % \subsection{Conservation values}
 
-% \begin{quotation}
-% In this way, ‘conservation [. . .] is a modern concept that sees the past as divorced from the present and existing self-consciously outside tradition’ (Matero, 2004: 69).
-% \end{quotation} \cite{poulios_moving_2010}
+% \begin{quotation} In this way, ‘conservation [. . .] is a modern concept that
+% sees the past as divorced from the present and existing self-consciously
+% outside tradition’ (Matero, 2004: 69). \end{quotation}
+% \cite{poulios_moving_2010}
 
-% \begin{quotation}
-% A living heritage site may be seen as a heritage site that maintains its original function
-% \end{quotation} \cite{poulios_moving_2010} Poulios talking about sites can be applied to object
+% \begin{quotation} A living heritage site may be seen as a heritage site that
+% maintains its original function \end{quotation} \cite{poulios_moving_2010}
+% Poulios talking about sites can be applied to object
 
-% \begin{quotation}
-% Given the increased power of the conservation professionals, a values-based app-
-% roach appears to concentrate mostly on the preservation of the fabric. In this context,
-% a values-based approach, though expected to equally consider tangible and intangible
-% heritage elements, in practice seems to be primarily concerned with the tangible ones,
-% seeing the safeguarding of intangible elements as incorporated within and serving the
-% conservation of the tangible ones
-% \end{quotation} \cite{poulios_moving_2010} Poulios talking about sites can be applied to object
+% \begin{quotation} Given the increased power of the conservation professionals,
+% a values-based app- roach appears to concentrate mostly on the preservation of
+% the fabric. In this context, a values-based approach, though expected to
+% equally consider tangible and intangible heritage elements, in practice seems
+% to be primarily concerned with the tangible ones, seeing the safeguarding of
+% intangible elements as incorporated within and serving the conservation of the
+% tangible ones \end{quotation} \cite{poulios_moving_2010} Poulios talking about
+% sites can be applied to object
 
-% \begin{quotation}
-% The general viewpoint is that the fabric is protected as a non-‘renewable’
-% resource
-% \end{quotation} \cite{poulios_moving_2010} Poulios talking about sites can be applied to object
+% \begin{quotation} The general viewpoint is that the fabric is protected as a
+% non-‘renewable’ resource \end{quotation} \cite{poulios_moving_2010} Poulios
+% talking about sites can be applied to object
 
-% values-based 'discontinuity' \cite{poulios_moving_2010} between past and present.
-% living heritage 'continuity' \cite{poulios_moving_2010}
+% values-based 'discontinuity' \cite{poulios_moving_2010} between past and
+% present. living heritage 'continuity' \cite{poulios_moving_2010}
 
-% \begin{quotation}
-% For a values-based approach the past is
-% mostly regarded as ‘dead’, and seeking authenticity is unattainable, while for a living
-% heritage approach the past is part of the ongoing present, or rather there is only pre-
-% sent (the boundaries between the past, the present, and the future are eliminated), and
-% authenticity can never be lost thanks to the continual process of the creation of a site
-% \end{quotation} \cite{poulios_moving_2010} Poulios talking about sites can be applied to object
+% \begin{quotation} For a values-based approach the past is mostly regarded as
+% ‘dead’, and seeking authenticity is unattainable, while for a living heritage
+% approach the past is part of the ongoing present, or rather there is only pre-
+% sent (the boundaries between the past, the present, and the future are
+% eliminated), and authenticity can never be lost thanks to the continual
+% process of the creation of a site \end{quotation} \cite{poulios_moving_2010}
+% Poulios talking about sites can be applied to object
 
-% Value-based preservation: in this case preservation is the maintaining of instruments in original working order without compromising their construction. Under that definition musical instruments are fundamentally finite.
+% Value-based preservation: in this case preservation is the maintaining of
+% instruments in original working order without compromising their construction.
+% Under that definition musical instruments are fundamentally finite.
 
-% This is not the definition of conservation that musical instruments museums will use.
+% This is not the definition of conservation that musical instruments museums
+% will use.
 
-% Explore living heritage \cite{poulios_moving_2010,smith_uses_2006} vs and alongside values-based heritage
+% Explore living heritage \cite{poulios_moving_2010,smith_uses_2006} vs and
+% alongside values-based heritage
 
-% That a preservation of a musical instrument must necessitate the usage of the original object.
+% That a preservation of a musical instrument must necessitate the usage of the
+% original object.
 
-% A one-for-one replica of every instrument is also not feasible financially or ecologically.
+% A one-for-one replica of every instrument is also not feasible financially or
+% ecologically.
 
 % like has happen with electronic MIDI interface
 
-% creating an interface that can replicate the commonalities in tactile / haptic sensations of an instrument but with a digital audio synthesis that can be tailored to parametrically generate the sound of multiple instruments
+% creating an interface that can replicate the commonalities in tactile / haptic
+% sensations of an instrument but with a digital audio synthesis that can be
+% tailored to parametrically generate the sound of multiple instruments
 
 % Museum collections of playable harpsichords
 
-% \begin{itemize}
-%     \item  Tagliavini Collection
-%     \item  Russell Collection 
-%     \item  Benton-Fletcher Collection \cite{mcalpine_sampling_2014}
-% \end{itemize}
+% \begin{itemize} \item  Tagliavini Collection \item  Russell Collection \item
+%     Benton-Fletcher Collection \cite{mcalpine_sampling_2014} \end{itemize}
 
-% \footnote{Not a rare phenomenon \url{https://www.harpsichord.org.uk/collections/}}
+% \footnote{Not a rare phenomenon
+% \url{https://www.harpsichord.org.uk/collections/}}
 
 
 % Anecdotal: Visitor to the museum commenting on the feel of an interface
@@ -359,48 +886,30 @@ where do we go from here?
 
 % Existing tools: ITEMM Suite, \cite{hamilton_pffdtd_2021},
 
-% \begin{enumerate}
-%     \item Research Question: An open source method for non-destructive material parameter calculation    
-%     \item Research Methods
-%     \item ``Measurements'', Type of data used
-%     \item Sample
-%     \item Collection Process
-%     \item Validity and Reliability, data analysis
-%     \item Instruments or Equipment
-%     \item Experimental Procedure
-% \end{enumerate}
+% \begin{enumerate} \item Research Question: An open source method for
+%     non-destructive material parameter calculation    
+%     \item Research Methods \item ``Measurements'', Type of data used \item
+%     Sample \item Collection Process \item Validity and Reliability, data
+%     analysis \item Instruments or Equipment \item Experimental Procedure
+%     \end{enumerate}
 
 % \subsection{Interaction}
 
-% \begin{enumerate}
-%     \item Research Question
-%     \item Research Methods
-%     \item ``Measurements''
-%     \item Sample
-%     \item Collection Process
-%     \item Validity and Reliability
-%     \item Instruments or Equipment
-%     \item Experimental Procedure
-% \end{enumerate}
+% \begin{enumerate} \item Research Question \item Research Methods \item
+%     ``Measurements'' \item Sample \item Collection Process \item Validity and
+%     Reliability \item Instruments or Equipment \item Experimental Procedure
+%     \end{enumerate}
 
 % \subsection{Synthesis}
 
-% \begin{enumerate}
-%     \item Research Question
-%     \item Research Methods
-%     \item ``Measurements''
-%     \item Sample
-%     \item Collection Process
-%     \item Validity and Reliability
-%     \item Instruments or Equipment
-%     \item Experimental Procedure
-% \end{enumerate}
+% \begin{enumerate} \item Research Question \item Research Methods \item
+%     ``Measurements'' \item Sample \item Collection Process \item Validity and
+%     Reliability \item Instruments or Equipment \item Experimental Procedure
+%     \end{enumerate}
 
 % \section{Points to Hit}
 
-% \begin{itemize}
-%     \item the problems of musical instrument conservation
-%     \item the problems of software sustainability in research
-%     \item the problems of conservation and cultural heritage
-% \end{itemize}
+% \begin{itemize} \item the problems of musical instrument conservation \item
+%     the problems of software sustainability in research \item the problems of
+%     conservation and cultural heritage \end{itemize}
 
