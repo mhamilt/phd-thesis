@@ -49,7 +49,9 @@ For this thesis, `Feedback' refers to physical sensory feedback, the sense of fo
 
 \paragraph{Vibrotactile Feedback:} A subset of tactile feedback achieved through vibration. More precisely, ``vibrating at a given frequency, in contact with the skin at one or several locations \cite{rovan_typology_2000}'' and ``using mechanical vibration of the skin, typically at frequencies of 10-500 Hz'' \cite{kaczmarek_electrotactile_1991}
 
-\paragraph{Kinaesthetic Feedback:} Haptic feedback that relates to the awareness of parts, specifically their position and movement ``Kinaesthetic perception is the awareness of the body state, including position, velocity and forces supplied by the muscles.'' \cite{palacio_eight_2008}  `` position and motor control of muscles and joints,'' \cite{hayes_vibrotactile_2011} ``meaning the movement principles of the body'' \cite{bokowiec_ritual_2011}. Kinaesthetic sensation and feedback are also discussed loosely in the NIME archive with the term being used in approximately 30 paper, but few strict definitions. Kinaesthesia is quite an abstract concept and one that is probably understood more by intuition than a fundamental grasp of the concept. Thus, for its use as part of haptics in part this project it can best be summarised as how the interface influences the movement and and encourages specific movement of parts of the body during use. 
+\paragraph{Kinaesthetic Feedback:} Haptic feedback that relates to the awareness of parts, specifically their position and movement ``Kinaesthetic perception is the awareness of the body state, including position, velocity and forces supplied by the muscles.'' \cite{palacio_eight_2008}  `` position and motor control of muscles and joints,'' \cite{hayes_vibrotactile_2011} ``meaning the movement principles of the body'' \cite{bokowiec_ritual_2011}. Kinaesthetic sensation and feedback are also discussed loosely in the NIME archive with the term being used in approximately 30 paper, but few strict definitions. 
+For the NIME community, kinaesthetics are often discussed alongside somatic practice and proprioception relatively interchangeably.  
+In sum, Kinaesthesia is quite an abstract concept and one that is probably understood more by intuition than a fundamental grasp of the concept. Thus, for its use as part of haptics in part this project it can best be summarised as how the interface influences the movement and and encourages specific movement of parts of the body during use. 
 
 \paragraph{Force Feedback:} A subset of kinaesthetic feedback achieved through the physical resistance or force perceived by muscles and joints, allowing users to feel weight, resistance, or motion. Examples this would be the FireFader \cite{berdahl_firefader_2013} and TorqueTuner \cite{kirkegaard_torquetuner_2020}. \newline
 % \item Electrotactile: ``stimulation evokes tactile (touch) sensations within the skin at the location of the electrode by passing a local electric current through the skin.'' doi: 10.1109/10.68204
@@ -65,12 +67,18 @@ For this thesis, `Feedback' refers to physical sensory feedback, the sense of fo
         │   └── Kinaesthetic
         │       └── Force
         ├── Thermal
+        │   ├── ...
+        │   ...
         ├── Electrical
-        │   └── Electrotactile
+        │   ├── Electrotactile
+        │   ...
         ├── Ultrasonic
+        │   ├── ...
+        │   ...
+        ...
     \end{verbatim}
         
-    \caption{An incomplete informal taxonomy of haptic feedback.}
+    \caption{An incomplete, informal taxonomy of haptic feedback.}
     \label{fig:taxonomy}
 \end{figure}
 
@@ -118,14 +126,186 @@ This says soethgi about the natureof musical instrument conservation. If these i
 
 To what degree can visual stimul be leveraged to ``sell'' the experience of playing an interface. In conjunction with a haptic response, is it enough to convince the player and remove the barrier to verisimiltude as raised by McAlpine \cite{mcalpine_sampling_2014}
 
-\subsection{Harpsichord Haptics}\label{harpsichord-haptics}
+\subsection{Harpsichord Mechanics}\label{harpsichord-Mechanics}
+\subsubsection{Anatomy of Harpsichord
+mechanics}\label{anatomy-of-harpsichord-mechanics}
+
+\begin{itemize}
+\item
+  simple
+\item
+  aesthetics
+\item
+  split workload
+\item
+  parts
+
+  \begin{itemize}
+  \tightlist
+  \item
+    jack
+
+    \begin{itemize}
+    \tightlist
+    \item
+      quill
+    \item
+      jack body
+    \item
+      pivot
+    \item
+      tongue
+    \end{itemize}
+  \item
+    key
+  \item
+    body
+  \end{itemize}
+\end{itemize}
+
 \subsubsection{Player Perception}\label{musical-haptics}
 \subsubsection{Haptics and Pedagogy}\label{musical-haptics}
+
+
+\subsection{Protoyping Methodlogy}
+
+% The original design was to take a similar approach to the project by
+% Timmermans \cite{Timmermans2020}, which was an extension of the system
+% by Gillespie \cite{Gillespie1996}. The process laid out in Timmermans
+% project was to begin with a single key model of the mechanism. We began
+% with a 3-key Model Harpsichord Mechanism by Graziano Bandini
+% \textbackslash figure\{\}. Before we continued with augementing a model
+% with actuators it was decided that it we should first validate whether a
+% recreation of the harpsichord mechanism would suffice in allowing
+% visitors to suspend disbelief.
+
+\subsubsection{3-Key Model}
+\subsubsection{Failed sensors}\label{failed-sensors}
+
+A number of sensors were tried before the final system was decided upon.
+An inertial measurment unit (IMU) was mounted to a single key which
+contained a 6 degrees of freedome acceleromoetr and gyroscope. There was
+a consistent set of conditions to trigger sound, but this was not easily
+differntiable when other keys were played. The fitting time and cost of
+a single IMU could b reduced when purchased in bulk but was far greater
+than other systems considered.
+
+A reed sensor and a hall sensor were mounted and magnets embedded within
+the jacks. Adjusting the hieight of the sensor provided a reliable means
+of detecting a threshold, inparticular the hall sensors which could be
+partially calibrarted physically and also in softwrae. The time taken to
+calibarte a single key was time consuming. Ideally each sensor would be
+placed on a thread for adjustment, but given the constraints on the
+internal space it was decided any adjustment of heights would likely
+mean an unnacceptable length of time to install and calibrate. Embedding
+magnets into the jacks was also did not satisfy the criteria of being
+scalable and non-invasive.
+
+Light dependant resistor mounted to the jack rail. as jacks were pressed
+less light would be let through. Usable data but very dependant on
+lighting conditions. Modifying the jack also did not satisfy the
+non-intrusive criteria and the placement outside the internal chamber of
+the model meant hiding electronics would be more difficult.
+
+Finally, force sensitive resistors placed under the jack of each key was
+considered but was never implemented. The sensors were to be placed
+under each jack either above or below the padding on which the bottom of
+the jack rests.
+
+
+\subsubsection{QRE1113}\label{qre1113}
+
+A number of sensors were tried before the final system was decided upon.
+Sensors included, an 6-degrees-of-freedom inertial measurement unit,
+reed and hall sensors paired with magnets, and light-dependant resistors mounted to the jack rail.
+None of these sensors satisfied the sensor criteria described above.
+
+Following from the work in \cite{McPherson2013, McPherson2019}, we tested
+a system using the Fairchild QRE1113 \footnote{Fairchild, now ON Semiconductor, QRE1113 datasheet \url{https://www.onsemi.com/download/data-sheet/pdf/qre1113-d.pdf}}. The
+QRE1113 is a combination infrared LED and phototransistor sensitive to
+IR light. The phototransistor of QRE1113 provides data on how much light
+is present and in particular how much light is being reflected from a
+surface. Since reflected light will be proportional to the distance of
+a surface it is a good, close-proximity, distance sensor. Distance is
+the way in which the instruments in \cite{McPherson2013, McPherson2019}
+function as well the Moog Piano Bar from which it took inspiration.
+
+The limitation for taking a distance approach is that there is not one
+but 2 jacks per key. For each jack to be measured independently the data
+would need to come from the jacks themselves.
+
+They \emph{could} be used and individual trigger points set in
+calibration, but this creates new problems.
+
+\begin{figure}  
+  \centering
+  \includegraphics[width=\linewidth]{img/CrossSectionSensorPlacement.jpg} 
+  \caption{} 
+  \Description{} 
+  \label{fig:cross-section}
+\end{figure}
+
+Another common application of the QRE1113 is within line following
+robots, where an array of QRE1113s are used in conjunction with black
+tape or reflective. A motorised system can then use this data to follow the line of tape and adjust its position.
+
+Applied to the jacks was a greyscale gradient printed the length full
+travel range of the jack.
+
+For the first iteration this was performed on an inkjet printer and
+double-sided tape. For the final iteration the stickers were printed on
+(Coala, 1D 100 Gloss P, gloss, white, permanent adhesive, 300g/m2, 100
+µm, 1370mm x 50.00m, Solvent/Latex/UV) using a HP Latex 115 and then
+cutout with a Summa 150 roll cutter. The printer and roll cutter greatly
+reduced the manual labour for cutting stickers meaning the process would
+scale from the 3-key to the 49-key model.
+
+An initial sticker design was used that contained only the gradient. It
+was found that the jacks were sticking in their slots and the edges on the
+stickers easily peeled around the printing The sticker was redesigned to
+be the full length of the jack which avoided the problem of peeling. The
+larger are also mean the stickers adhered better to the jack Some
+trimming was still required of each sticker to avoid them adding extra
+resistance to the jack's movement.
+
+During testing it was found that their was a considerable amount
+cross-talk between adjacent sensors. This meant the reading from key
+would be affected by the movement of the key next to it. The cross-talk
+was assumed to be as a result of light reflecting from other jacks.
+Given that IR is used this was difficult to confirm by sight. A set of
+baffles was designed for the PCB that would wrap round the jack and stop
+light from other jacks or sensors. The baffles were printed on a BAMBU X1 3D
+printers using PLA plastic. A dark pigmented PLA was used to avoid IR
+light simply being diffused. After the baffles were fitted, the
+cross-talk was eliminated.
+
+
+\subsubsection{Proto-PCB}
+
+Combined Sensor and Controller PCB that allowed a proof of concept scaled up to 7 jacks.
+
+This confirmed if variation in space would be a problem
+
+if the distance to sensor surface could be adjusted could be easily adjust
+
+Insert figure of Proto-PCB
+
+Whether assembly process would scale.
+
+
+Initial designe to bend the legs of THT optical sensor to allow flush mounting to the underside of the wrestplank.
+
+It was found that the legs of the optical sensor were too fragile and the risk of breaking thesenro was high.
+
+Could have been end mounted like \cite{mcpherson_portable_2013} but this would also be time consuming and the use of THT parts in the rest of the design was prohibitive with space.
+
+
+
 
 \section{Creation of Hardware Interface}\label{the-solution-2}
 \subsection{Design Principles}\label{design}
 \subsection{Materials and Construction}
-\subsubsection{3-Key Model}
+
 \subsubsection{Full Model}
 \subsubsection{Problems of Scale}
 
@@ -134,10 +314,269 @@ To what degree can visual stimul be leveraged to ``sell'' the experience of play
 \subsubsection{Refinement of QRE1113}\label{refinement-of-qre1113}
 
 \section{Electronics Design}\label{hardware-design}
+\subsection{Components}
+\subsubsection{Arduino Nano BLE}\label{nano-ble}
+
+Arduino Nano BLE was chosen for a few reasons. The Nano form factor was
+appealing as it would allow for easy changes between chipsets without
+requiring any rewiring and thus no new PCBs would need to be created if
+a better alternative was found later in the project. Another benefit to
+the Arduino Nano boards was that typically had native-USB meaning the
+could be programmed as a hardware USB MIDI device directly.
+
+The Nano BLE was used in the initial stages for its integrated inertial measurment unit.
+
+When it was finalised that the project would proceed using the QRE1113 a
+number of microcontroller units (MCU) were considered.
+
+The MCUs considered were the Arduino Nano 33 IoT, Arduino Nano 33 BLE,
+Arduino Nano ESP32 and STM32 NUCLEO-L031K6.
+
+A rough performance test was later carried out using an STM32
+NUCLEO-L031K6, a Nano ESP32 and the BLE. The Nano BLE was found to be
+more performative. To execute a single sensor read cycle of the firmware
+the STM32 took 40ms, and both the Nano ESP32 and Nano BLE required 11ms
+on average. The Nano ESP32 had high variability so it was decided to
+continue with the Nano BLE. 
+
+% Further discussion of using ESP32 continues
+% in \textbackslash section\{Going forward\}
+
+BLE functionality also meant if the cable connection between the nano
+and computer running audio synthesis was impractical, BLE MIDI was
+available as a fallback. The Nano BLE also has a 12-bit DAC, which
+provided a contingency should the default 10-bit not be sensitive enough
+for the signal from the sensors.
+
+Initially a Nano IoT was used for both WiFi and Bluetooth Low Energy
+functionality, but it was found that 2 ADC channels were in fact not
+useable and would have required additional multiplexers.
+
+\subsubsection{FRAM}\label{eeprom-nvram-fram}
+There would need to be the ability to store values on non-volatile
+memory so that the electroincs could be powered-down without losing
+data.
+
+Adjusting the values through firmware would not have been flexible or
+practical. Instead an Ferroelectric RAM unit was chosen and connected
+using an SPI interface. NVRAM or EEPROM would have sufficed and the FRAM
+was primarily chosen for it's ready availability.
+
+Most microcontrollers have some variety of non-volatile program memory
+that can be read and writ accessed but in most cases this memory is
+cleared during compilation and re-flashing. The small cost was far
+outweighed by the potential for data loss if using onboard RAM.
+
+\emph{It is worth noting that the FRAM model chosen stopped being
+available during the project, meaning any future iteration would need to
+adjust for another board in firmware}
+
+The firmware was structure in a way that the interface could be changed
+so long as the code required for any other board would comply with
+function arguments and outputs. Worth noting the fragility and
+volatility when designing this kind of project and how easily it is for
+the project to become broken.
+
+SD card would provide an easier way to interact with calibration data.
+The posiiton of the controller board did not permit easy access.
+reliability and speed was preffered over storage capacity.
+
+\subsubsection{RGB LEDs}
+for problems of scale:
+
+Addressing the problem of scale of identifying which key's threshold is
+currently being edited.
+
+The LEDs also allowed for easy identification for keys that were outside
+of expected values and when a key was triggered. This allowed for visual
+identification of malfunctioning or uncalibrated keys.
+
+The LEDs are on the same PCB as the sensors and are hidden when the
+nameboard is in place.
+
+Would sugggest that this is a necessity of this kind to provide a means
+to identify and diagnose LEDs with state.
+
+TLC5940 or other PWM driver such as in \textbackslash cite\{mcpherson\}
+added complexity to assembling, but were avoid in favour of Addressable
+LEDs with intergrated driver. The intergrated LEDs share the same data
+line which has the limitation where a fualty LED will stop all following
+LEDs from working. An individual PWM driver per PCB would allow avoid
+situations where failutre cascades, but would add complexity in assembly
+as the parts are typically SMD. Also, given the LEDs are fixed to the
+board and could not be repaired in situ, the solution would be to
+replace the PCB regardless of which approach was taken. Given the LEDs
+were only used in debugging and calibration and otehrwise would not be
+visible, a simpler design approach was taken.
+
+\begin{itemize}
+\tightlist
+\item
+  locating keys
+\item
+  displaying key state
+\end{itemize}
+
+\subsubsection{Multiplexer}
+
+CD4051BE Texas Instruments
+
+problem of scale
+
+For the 3-key model, individual jacks could be connected to one of the 8
+available ADC pins.
+
+The BLE Nano has 8 ADC pins connected to one ADC channel via a
+multiplexer
+
+Multiplexer added to expand to the
+
+Transistor / Op-amp circuit could have been used similar to the one in
+\textbackslash cite\{mcpherson\}.
+
+Benefits were keeping with THT based designed for easy assembly.
+
+An 8-channel multiplexer was chosen as the model has 49-keys and a
+division of 7 PCBs each containing 7 sensors
+
+The multiplexer reduced 7 signals to a single pin. Three pins are
+required pins for addressing the muliplexewrs and all PCBs are addressed
+simulatenously.
+
+\begin{itemize}
+\tightlist
+\item
+  limited ADC channels
+\item
+  ADC channels already multiplexed
+\item
+  simple
+\item
+  8 channel
+\item
+  THT
+\item
+  7 into 49
+
+  \begin{itemize}
+  \tightlist
+  \item
+    7 PCBS
+  \item
+    each with 7 sensors
+  \end{itemize}
+\end{itemize}
+
 \subsection{First Prototype}
 \subsubsection{Sensor Board}\label{sensor-board}
 \subsubsection{Controller Board}\label{controller-board}
 \subsubsection{Bracket Design}\label{controller-board}
+\subsubsection{Installation}\label{installation}
+
+The electronic components were partly pre-assembled at the university of
+Edinburgh. Though all measurements were known ahead, enough flexibility
+was needed to allow for problems to solved in situ.
+
+The final assembly took place at the NEMUS lab at the University of
+Bologna over the final week in October 2024 for delivery at San
+Colombano for exhibition in the first week of November in 2024.
+
+A misreading in the original clearance between the keys and the PCB
+meant that the keys were blocked entirely from moving. A 10mm by 15mm
+section was milled out of each key to create extra
+clearance. The milling required the removal, shortening and refitting of
+the leather pads for the jacks. The extra work
+added an extra day to the full install.
+
+\begin{figure}  
+  \centering
+  \includegraphics[width=\linewidth]{img/keys-milled.jpeg} 
+  \caption{} 
+  \Description{} 
+  \label{fig:milling}
+\end{figure}
+
+A redesign of the PCBs meant that removing the material would no longer
+be necessary.
+
+The PCBs shared power and data lines for components with the exception
+of the output from the multiplexer. Ribbon cable was cut to size to
+allow for some room to readjust the distance of the sensors from the
+jacks. The data signals from each PCB were connected using a separate
+cable loom. Soldering cables and inspecting each join required another
+day work. This did allow for readjustments to the position of the
+controller board Measurements of the rear chamber did not match with the
+Mac Mini that was to be used a different layout was decided for fitting
+the controller board/ Cutting cables to size allowed for a great deal of
+flexibility but at the cost of time. After the first install it was
+clearer what constraints were in place for fitting and an alternative
+wiring system using flat flex cable was implement (discussed in
+\textbackslash section)
+
+Fitting PCBs required the removal of all keys. The support brackets were
+assembled and screwed into the the underside. With the harpsichord on
+it's back the sensors were tested to ensure an expected range.
+Self-tapping round head screws were used to to attach the brackets. The
+screws were not over tightened to allow for brackets to move. The
+brackets were not easily adjusted once the key were replaced. Adjusted
+to a best average with subsequent adjustment carried out on the
+microcontroller.
+
+As the PCBs were fitted the jacks had the gradient stickers applied to
+them. The jacks had been coated with a varnish on the short side to
+provide a better surface for the stickers to adhere to. After the
+stickers were applied excess material was trimmed from each jack. The
+jack were then check that they moved freely in their slot.
+
+After fitting the PCBs preliminary calibration was carried out. Before
+the keys were refitted the jacks were put back in place. The data from
+each key was confirmed to be in a similar range. Any key showing
+anomalous data had it's jack removed and re-inspected. The PCB fitting
+process and refitting required another day as faults were found in
+wiring or misalignment of the stickers. After the sensors were
+confirmed to be functioning the keys were put back.
+
+The calibration workflow was with \anon{Dr. Craig Webb} who was unfamiliar with
+the system. Adjustments were made to the firmware to to make it more
+intuitive for the user. Addressable LEDs became vital as it allowed for
+easy identification of the key being calibrated. They were also used to
+identify any keys whose current reading was beyond what was expected.
+
+The rotary encoder was used as the interface to select a key, adjust
+it's threshold and update the Ferroelectric RAM (FRAM) with new values.
+
+A process was implemented where the key was selected by playing, but
+this caused problems in situations where the data was unusual due to
+misalignment of the sensors.
+
+This would likely be a better system for when the keyboard was fully
+operational.
+
+\begin{figure}  
+  \centering
+  \includegraphics[width=\linewidth]{images/serial_monitor.png} 
+  \caption{} 
+  \Description{} 
+  \label{fig:serial_monitor}
+\end{figure}
+
+The thresholds were calibrated visually utilising the serial plotter of
+the Arduino IDE (Figure \ref{fig:serial_monitor}) and the open source MIDI
+Monitor software \footnote{\url{https://github.com/krevis/MIDIApps}}.
+
+\begin{itemize}
+\item
+  partial pre-assembly
+\item
+  handsolder components
+
+  \begin{itemize}
+  \item
+    analog lines
+  \end{itemize}
+\item
+  connecting supports
+\end{itemize}
 \subsection{Second Prototype}
 - introduction of FSR data
 \subsubsection{Sensor Board}\label{sensor-board}
