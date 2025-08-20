@@ -33,63 +33,50 @@ To obtain the performer's ``connection between gesture, sound, and feel'' \cite{
 
 \subsection{Terminology}
 
-Feedback as it refers to physical sensory feedback, the sense of forces, movement, position, and pressure through internal sensory mechanisms
+
+There is some confused usage of  terminology around haptic interfaces as it used in the DMI communities such as NIME. The terminology around DMIs takes its cues from the field of Human-Computer Interfaces (HCI) with terms for physical sensory feedback such as haptic, tactual, tactile, vibrotactile, kinaesthetic, proprioception, force feedback all in use, but sadly not commonly with strict definition. This section aims will define terms relating to haptic as they relate musical instrument interfaces in order to bring clarity to the remainder of thesis. 
+
+The archive of DMIs available from the NIME conference will be the primary source of definition and for examples of usage, which is facilitated by its open access under the Creative Commons Attribution 4.0 International License (CC BY 4.0).\footnote{\url{https://creativecommons.org/licenses/by/4.0/}}
+
+For this thesis, `Feedback' refers to physical sensory feedback, the sense of forces, movement, position, and pressure as sensed by the human body. 
 
 
 \begin{itemize}
-    \item Haptic: feedback that engages the sense of touch, including tactile (skin) and kinesthetic (force/motion) sensations. (Also: tactual \cite{bongers_tactual_1998} when sensed by the skin (cutaneous) \cite{srinivasan_tactual_1996}) ``The word haptics is derived from the Greek word “haptikos,” which refers to “a sense of touch,” and the Oxford English dictionary defines haptics as: “Relating to the sense of touch, in particular relating to the perception and manipulation of objects using the senses of touch and proprioception.”''\cite{culmer_haptics_2020}
-    \item Mechanical: haptic feedback using physical movement or structures that apply forces or constraints.
-    \item Force: haptic feedback through the physical resistance or force perceived by muscles and joints, allowing users to feel weight, resistance, or motion 
-    \item Tactile haptic feedback perceived through skin contact—including sensations like pressure, texture, or vibration—distinct from deeper force sensations.
-    \item Vibrotactile: tactile feedback achieved through vibration
-    \item Electrotactile: ``stimulation evokes tactile (touch) sensations within the skin at the location of the electrode by passing a local electric current through the skin.'' doi: 10.1109/10.68204
+    \item Haptic: feedback that engages the sense of touch, including tactile (skin) and kinesthetic (force/motion) sensations. (Also: tactual \cite{bongers_tactual_1998} when sensed by the skin (cutaneous) \cite{srinivasan_tactual_1996}) ``The word haptics is derived from the Greek word “haptikos,” which refers to “a sense of touch,” and the Oxford English dictionary defines haptics as: “Relating to the sense of touch, in particular relating to the perception and manipulation of objects using the senses of touch and proprioception.”''\cite{culmer_haptics_2020}. ``Haptic (combined senses of touch, including skin vibration and pressure, and the muscle senses of motion, position, and force)'' \cite{cook_remutualizing_2004}. ``Sensory and motor modalities under one unified umbrella'' \cite{rovan_typology_2000}. ``The term haptic refers to combined feedback from tactile sensors in the skin and kinesthetic sensors in muscles and joints.''  \cite{omodhrain_playing_2000}    
+    
+    \item Mechanical Feedback:  is haptic feedback using physical movement or structures that apply forces or constraints. \textcite{rovan_typology_2000} appears to use haptic and mechanical feedback interchangeably. \textcite{hayes_vibrotactile_2011} refers to a ``actuator or mechanical device''. Mechanical feedback is a less helpful distinction as it relates to DMIs since generally all haptic feedback is mechanical feedback. This subset is in contrast to thermal, ultrasonic or electrical feedback where the haptic feedback is achieved through heat, sound waves and electrical current respectively
+    
+    \item Force Feedback: is a subset of haptic feedback achieved through the physical resistance or force perceived by muscles and joints, allowing users to feel weight, resistance, or motion. Examples this would be the FireFader \cite{FireFader} and TorqueTuner \cite{TorqueTuner}.
+    \item Tactile feedback is cutaneous haptic feedback as perceived through the touch and contact to the body—including sensations like pressure, texture, or vibration—distinct from deeper force sensations. \textcite{rovan_typology_2000} defines tactile as ``discriminative touch as in the perception of surfaces.'' Confusingly, tactile is also used alongside `tactual' and haptics. Tactual refers to cutaneous sensations (as felt by the skin) but also encapsulates kinaesthetic feedback \cite{bongers_tactual_1998}. Haptic also refers to tactile and kinaesthetic feedback, just not necessarily cutaneous in nature; however, for DMIs the majority of cases that discuss tactile feedback are also speaking of cutaneous feedback. This is as opposed to say, `dental feedback' which would perhaps to relevant to the players of single reed instruments or the jaw harp where the teeth are in contact with the instrument. It is perhaps for this reasons that `tactual' is uncommonly used with repesct to DMIs. In fact, the term appears only in 10 papers, mostly in citation to \cites[][x1]{sherrick_scale_1985}[][x4]{bongers_tactual_1998}[][x2]{tan_multifinger_1996}.\footnote{Although, only \textcite{bongers_tactual_1998} defines the term.} In the NIME archive, `tactual' is used only four times in the paper body, three times alongside `haptic' but without differentiation \cite{gunther_multi_2002,pardue_hand_2013,spapetti_multi_2015} and once without reference to haptic \cite{ferris_musical_2002} as part of ``sensory modalities --tactual, kinaesthetic, sonic, auditory.'' though the usage is tautological as kinaesthetic is encompassed by `tactual'. This is in contrast to `haptic', which appears in around 300 papers. As such, haptic and tactual can be considered relatively interchangeable as it relates to DMIs.
+
+    \item Vibrotactile Feedback is a subset of tactile feedback achieved through vibration. More precisely, ``vibrating at a given frequency, in contact with the skin at one or several locations \cite{rovan_typology_2000}'' and ``using mechanical vibration of the skin, typically at frequencies of 10-500 Hz'' \cite{kaczmarek_electrotactile_1991}
+    % \item Electrotactile: ``stimulation evokes tactile (touch) sensations within the skin at the location of the electrode by passing a local electric current through the skin.'' doi: 10.1109/10.68204
+    
 \end{itemize}
 
+\begin{figure}
+    \centering
+    \begin{verbatim}
+        Haptic Feedback
+        ├── Mechanical
+        │   ├── Force
+        │   └── Tactile      
+        │       └── Vibrotactile      
+        ├── Thermal
+        ├── Electrical
+        │   └── Electrotactile
+        ├── Ultrasonic
+    \end{verbatim}
+        
+    \caption{An incomplete taxonomy of haptic feedback}
+    \label{fig:taxonomy}
+\end{figure}
 
-From the perspective of DMIs
+On top of that, \textcite{cook_remutualizing_2004} makes a distinction of ``passive'' haptics and therefore inferring the category of ``active'' haptics. Passive in this case refers to a haptic feedback achieved by purely mechanical means without the aid of any computation and the use of actuators or motors. Cook puts forth weighted piano keys as an example of passive haptics. The usage of the haptic feedback of the harpsichord jacks would also put the interface here in `passive' category.
+Using the taxonomy of Figure~\ref{fig:taxonomy}, and Cook's `passive' distinction, the interface described herein could therefore be categorised as passive haptic, force-feedback, tactile interface.
+For brevity, simply `haptic' will be used.
 
-\begin{itemize}
-    \item ``Haptic (combined senses of touch, including skin vibration and pressure, and the muscle senses of motion, position, and force)'' \cite{cook_remutualizing_2004}. ``Sensory and motor modalities under one unified umbrella'' \cite{rovan_typology_2000}. ``The term haptic refers to
-combined feedback from tactile sensors in the skin and kinesthetic sensors in muscles
-and joints.''  \cite{omodhrain_playing_2000}
-    \item Mechanical: \textcite{rovan_typology_2000} haptic and mechanical feedback are used interchangeably. ``actuator or mechanical device'' \cite{hayes_vibrotactile_2011}
-    \item Force: ``Systems ... to exert large-scale mechanical force back onto the operator.''
-    \item Tactile: ``discriminative touch as in the perception of surfaces.'' \cite{rovan_typology_2000}
-    \item Vibrotactile: ``vibrating at a given frequency, in contact with the skin at one or several locations \cite{rovan_typology_2000}'' ``Vibrotactile stimulation evokes tactile sensations using mechanical vibration of the skin, typically at frequencies of 10-500 Hz'' \cite{kaczmarek_electrotactile_1991}
-    \item Electrotactile: ``stimulation evokes tactile (touch) sensations within the skin at the location of the electrode by passing a local electric current through the skin.'' \cite{kaczmarek_electrotactile_1991}
-\end{itemize}
-
-\begin{verbatim}
-Haptics
-├── Mechanical
-│   ├── Force
-│   └── Tactile      
-│       └── Vibrotactile      
-├── Thermal
-├── Electrical
-│   └── Electrotactile
-├── Ultrasonic
-\end{verbatim}
-
-
-Using this taxonomy, defines the interface as a passive haptic, mechanical, tactile interface.
-
-
-Using the NIME archive as example, as its archive is open access under the CC-BY-4 license
-
-The term `tactual' as it relates to DMI is in  far less use, appearing in 10 papers, mostly as a result of citation to x1\cite{sherrick_scale_1985}, x4\cite{bongers_tactual_1998}, x2\cite{tan_multifinger_1996}
-
-Alongside term haptic with no differentiation:
-
-- \url{https://www.nime.org/proceedings/2002/nime2002_073.pdf}
-- \url{https://www.nime.org/proceedings/2013/nime2013_245.pdf}
-- \url{https://www.nime.org/proceedings/2015/nime2015_118.pdf}
-
-purely tactual
-
-- \url{https://www.nime.org/proceedings/2002/nime2002_056.pdf} though this lists ``sensory modalities --tactual, kinaesthetic, sonic, auditory'' in which there is some repetition.
-
-Compares to `haptic' which appears in around 300 papers
+Since all musical instruments and interface involve physical interaction, with the exception of perhaps the theramin, one could argue that in fact all musical instruments are haptic. Keyboards, weighted or not, still require some force and have a limited amount of travel meaning  resistance will be felt. This thesis will not discuss the ontological implications of the term haptic feedback (even the theramin could be argued that the absence of haptic feedback is a form of haptic design choice) rather the term is used herein to describe design intent.
 
 \subsection{Music Instrument Conservation}
 
