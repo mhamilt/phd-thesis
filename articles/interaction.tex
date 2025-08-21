@@ -131,7 +131,7 @@ perhaps to relevant to the players of single reed instruments or the jaw harp
 where the teeth are in contact with the instrument. It is perhaps for this
 reasons that `tactual' is uncommonly used with repesct to DMIs. In fact, the
 term appears only in 10 papers, mostly in citation to
-\cites[][x1]{sherrick_scale_1985}[][x4]{bongers_tactual_1998}[][x2]{tan_multifinger_1996}.\footnote{Although,
+\cites[x1][]{sherrick_scale_1985}[x4][]{bongers_tactual_1998}[x2][]{tan_multifinger_1996}.\footnote{Although,
 only \textcite{bongers_tactual_1998} defines the term.} In the NIME archive,
 `tactual' is used only four times in the paper body, three times alongside
 `haptic' but without differentiation
@@ -268,18 +268,25 @@ stimuli interfence with audiitory judgement.
 
 Trained musicians are not immune to these effects.
 
-This says soethgi about the natureof musical instrument conservation. If these
-instruments are degrading both in fragiliyty and sonic qualit, what can be done
+This says something about the nature of musical instrument conservation. If these
+instruments are degrading both in fragility and sonic quality, what can be done
 to preserve them.
 
-To what degree can visual stimul be leveraged to ``sell'' the experience of
+To what degree can visual stimuli be leveraged to ``sell'' the experience of
 playing an interface. In conjunction with a haptic response, is it enough to
-convince the player and remove the barrier to verisimiltude as raised by
+convince the player and remove the barrier to verisimilitude as raised by
 McAlpine \cite{mcalpine_sampling_2014}
 
 \subsection{Harpsichord Mechanics}\label{harpsichord-Mechanics}
 
-Harpsichord existed in its earliest form in the latter half of the fourteenth century and with its mechanism partly stemming from, what was referred to as the time, as an ``eschaquier'' \cite{koster_keyboard_1994} or ``eschequier'' \cite{dewhirst_stringed_2016} as well as the plucking action stemming from the psaltery \cite{campbell_musician_1987}.
+\begin{figure}
+    \centering
+    \frame{\includegraphics[width=1\linewidth]{img/3-key-mechanism.pdf}}
+    \caption{Single manual, two-register action as used on the 1547 Alessandro Trasuntino and model interfaces.}
+    \label{fig:mechanism}
+\end{figure}
+
+Harpsichord existed in its earliest form in the latter half of the fourteenth century and with its mechanism partly stemming from, what was referred to as the time, as an ``eschaquier'' \cite{koster_keyboard_1994} (or ``eschequier'' \cite{dewhirst_stringed_2016}) as well as the plucking action stemming from the psaltery \cite{campbell_musician_1987}.
 
 The harpsichord mechanism consists of a second class lever that forces a plectrum upwards to pluck a string. Plectra were typically made of quill but also leather.
 
@@ -289,6 +296,13 @@ The two parts of the jack are the `body' and the `tongue'. The plectrum is wedge
 As the jack is displaced upwards the quill acts against the string. This force is translated as lateral movement towards the body of the jack, but the tapered recess ensures the tongue does not move. After the
 
 There is a relatively fixed force to overcome the resistance of the quill against the string. As such, the volume of the harpsichord string pluck is equally fixed and it might be said these fixed dynamics are one of the defining features of the instrument.
+
+\begin{figure}
+    \centering
+    \frame{\includegraphics[width=1\linewidth]{img/jack_forces.pdf}}
+    \caption{Forces at play on the jack during the plucking and release phases.}
+    \label{fig:mechanism}
+\end{figure}
 
 By the 16th century it was typical for Italian harpsichords to have more than one string per key and each string with its own jack. In the case of multiple strings (or registers), the jacks are arranged into rows. The jacks are staggered in height in order that, during the keys' travel,  each register is plucked in turn rather than occurring simultaneously  \cite{veroli_optimising_2012}. The central problem to be solved is the detection of the moment a string is plucked by a plectrum (Figure~\ref{fig:pluck}). Each jack is uniquely constructed, resulting in changes in pluck points across the entire keyboard.
 
@@ -310,12 +324,12 @@ By the 16th century it was typical for Italian harpsichords to have more than on
   parts
 
   \begin{itemize}
-  \tightlist
+  
   \item
     jack
 
     \begin{itemize}
-    \tightlist
+    
     \item
       quill
     \item
@@ -385,7 +399,7 @@ included, an 6-degrees-of-freedom inertial measurement unit, reed and hall
 sensors paired with magnets, and light-dependant resistors mounted to the jack
 rail. None of these sensors satisfied the sensor criteria described above.
 
-Following from the work in \cite{McPherson2013, McPherson2019}, we tested a
+Following from the work in \cite{mcpherson_portable_2013, moro_platform_2020}, we tested a
 system using the Fairchild QRE1113 \footnote{Fairchild, now ON Semiconductor,
 QRE1113 datasheet
 \url{https://www.onsemi.com/download/data-sheet/pdf/qre1113-d.pdf}}. The QRE1113
@@ -394,7 +408,7 @@ phototransistor of QRE1113 provides data on how much light is present and in
 particular how much light is being reflected from a surface. Since reflected
 light will be proportional to the distance of a surface it is a good,
 close-proximity, distance sensor. Distance is the way in which the instruments
-in \cite{McPherson2013, McPherson2019} function as well the Moog Piano Bar from
+in \cite{mcpherson_portable_2013, moro_platform_2020} function as well the Moog Piano Bar from
 which it took inspiration.
 
 The limitation for taking a distance approach is that there is not one but 2
@@ -408,7 +422,7 @@ this creates new problems.
   \centering
   \includegraphics[width=\linewidth]{img/CrossSectionSensorPlacement.jpg} 
   \caption{} 
-  \Description{} 
+   
   \label{fig:cross-section}
 \end{figure}
 
@@ -578,7 +592,7 @@ Given the LEDs were only used in debugging and calibration and otehrwise would
 not be visible, a simpler design approach was taken.
 
 \begin{itemize}
-\tightlist
+
 \item
   locating keys
 \item
@@ -610,7 +624,7 @@ The multiplexer reduced 7 signals to a single pin. Three pins are required pins
 for addressing the muliplexewrs and all PCBs are addressed simulatenously.
 
 \begin{itemize}
-\tightlist
+
 \item
   limited ADC channels
 \item
@@ -625,7 +639,7 @@ for addressing the muliplexewrs and all PCBs are addressed simulatenously.
   7 into 49
 
   \begin{itemize}
-  \tightlist
+  
   \item
     7 PCBS
   \item
@@ -656,7 +670,7 @@ an extra day to the full install.
   \centering
   \includegraphics[width=\linewidth]{img/keys-milled.jpeg} 
   \caption{} 
-  \Description{} 
+  
   \label{fig:milling}
 \end{figure}
 
@@ -714,9 +728,9 @@ operational.
 
 \begin{figure}  
   \centering
-  \includegraphics[width=\linewidth]{images/serial_monitor.png} 
+  \includegraphics[width=1\linewidth]{img/serial_monitor.png} 
   \caption{} 
-  \Description{} 
+  
   \label{fig:serial_monitor}
 \end{figure}
 
