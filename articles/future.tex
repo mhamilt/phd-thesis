@@ -14,9 +14,25 @@
 \section{What didn't}\label{what-didnt}
 
 \section{Where do we go from here?}\label{where-do-we-go-from-here}
+
 \subsection{Interface as Research Probe}
+
+One of the richest avenues for further research using the interface is as part of a larger study that explores interface haptic feedback as well as the potency of visual aesthetics to player experience.
+
+Such studies previously mentioned have already covered the harpsichord.
+
+For haptics, A double blind study involving a similar installation as \textcite{mcalpine_sampling_2014} as well as a full scale instrument
+It should first be determined if mechanical recreation is sufficient as part of a digital musical instrument before pursuing elaborate electromechanical emulation.
+Does recreating the harpsichord action at a smaller scale achieve tactile realism? Answer to that question would provide grounds for further work on a purely actuated keyboard.
+
+The ability for the jacks to be disengaged and prevent plucking the string, but still capable of triggering a MIDI message is ripe for exploration. The Mark 2 interface will hopefully serve as a research probe to explore the unique characteristics of the harpsichord and its impact on performance, much in the same manner as other musical haptics studies \cite{charalampos-saitis_musical_2018}.
+
 \subsection{Study of Visitor Feedback}
+
+
 \subsection{Research Software and Academic Institutes}
+
+
 \subsection{Refinement}
 
 \begin{itemize}
@@ -26,6 +42,11 @@
     \item fabrication be largely automated, no need for THT parts. SMD would shrink things massively.
     \item improved circuitry, incorporating a similar op amp circuit from \cite{mcpherson_portable_2013} which can allow for a tuned voltage range, utilising the full range of the ADC used rather than what is given.
 \end{itemize}
+
+
+A separate sensor module, splitting the current sensor board into a board containig just the sensor which is then routed to an expanded controller board.
+
+A similar conept can be seen in \textcite{schmidt_sparksichord_2025}, where optical sensors at a fixed pitch are connected to headers to allow for a more modular assembly. This would help to overcome implementation in a constrained space. The footprint of the pcb being reduced where the vertical span wil no longer be a problem, thus avoiding problems such as blocking the keys.
 
 \subsection{Site speicific enhancements}
 adding shakers to seat
