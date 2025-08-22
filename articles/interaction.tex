@@ -421,18 +421,14 @@ By the 16th century it was typical for Italian harpsichords to have more than on
 \end{figure}
 
 
-\section{Design Principles}
+\section{Design Constraints}
 
-Two sets of design principles were drawn up, one for the final mechanical interface and another for the
-electronic sensor system. These provided pillars on which to guide the design process and a set of criteria by which the mechanics and electronics could be evaluated.
+Two sets of design constraints were drawn up, one for the final mechanical interface and another for the
+electronic sensor system. These constraints provided pillars on which to guide the design process and a set of criteria by which the mechanics and electronics could be evaluated.
 
 \subsection{Mechanical Interface}
 
-The initial goal was to create an actuated haptic interface to recreate the tactile and force feedback provide by the harpsichord.
-
-It became clear through the literature that physical feel was only part of the experience. 
-The design of the augmented replica keyboard for the Museo San Colombano was guided by three principal constraints stipulated by the
-museum:
+The design of the augmented replica keyboard for the Museo San Colombano was guided by these criteria:
 
 \begin{itemize}
     \item \emph{Faithfulness}. The keyboard mechanism had to ensure fidelity to
@@ -450,18 +446,13 @@ museum:
     exhibition of the permanent display. 
 \end{itemize}
 
-These constraints demanded an electronics system that was non-invasive in design
-and respectful of the instruments' historical aesthetics. The requirement for
+These constraints cascaded to the constraints of the  electronics system, requiring that it be non-invasive in design and respectful of the instruments' historical aesthetics. The requirement for
 faithfulness to the original mechanism immediately ruled out a mechanical design
 reliant on electromechanical actuators, as in previous works on piano haptics
 \cite{timmermans_multibody-based_2020,gillespie_haptic_1996}. While actuators
 can generate considerable force, achieving a jack's free motion and resistance
 is difficult without extensive mechanical intervention such as that carried out
-by Gillespie \cite{gillespie_haptic_1996}. 
-% Recreating the mechanism can already achieve the tactile realism of the
-% harpsichord. It should first be determined if mechanical recreation is
-% sufficient as part of a digital musical instrument before pursuing elaborate
-% electromechanical emulation. 
+by Gillespie \cite{gillespie_haptic_1996}.
 
 The final design, shown in Figures \ref{fig:teaser} and \ref{fig:details}, is a
 49-key, two-register harpsichord keyboard replica. Since the Tagliavini
@@ -505,11 +496,6 @@ key dip. The current sensor system enables the data recording of traditional use
 from which it can be identified where those opportunities for new expression lie
 \cite{mcpherson_space_2013}.
 
-% "When working with an established interface like the keyboard, it is
-% particularly important that new mappings do not interfere with familiar
-% technique (McPherson, Gierakowski, and Stark 2013). The Space Between the
-% Notes: Adding Expressive Pitch Control to the Piano Keyboard"
-
 \begin{figure}
   \centering
   \includegraphics[width=\linewidth]{img/49-key-bottom-sensors-no-keys.jpg} 
@@ -551,14 +537,11 @@ integration to make the system suitable for a museum context:
     or negligible.
     \item \emph{Scalability:} The design needed to scale in both cost and time
     in order to be adaptable from a 3-key prototype (Figure \ref{fig:3key}) up
-    to the 49 keys of the final design.
-    % \item \emph{Expandability:} The system should accommodate future
-    % functionality, such as additional MIDI parameters or data visualisation.
+    to the 49 keys of the final design.    
 \end{itemize}
 
 The hardware was designed to make assembly possible in standard university maker
 spaces.  
-
 
 \section{Prototype}
 
@@ -570,90 +553,65 @@ simplest case before moving on to more complex systems. Prototyping was to first
 
 The original design was to take a similar approach to the project by \textcite{timmermans_multibody-based_2020}, which itself was an extension of the methodology by \textcite{gillespie_haptic_1996} where a single model piano key action was used. More specific to the harpsichord was the experimental setup in \textcite{perng_physical_2012} which was constructed from spare parts obtained from a local luthier. The benefit of such a system would was the consideration of only a single action in isolation as well as the easy access open sided single action models permitted. 
 
-Luckily, with the assistance on Museo San Colombano, a small model containing three harpsichord actions was procured by the NEMUS project (Figure~\ref{fig:3-key-model}). The construction of the model were after a XXXX Italian harpsichord with two registers. The cross-sectional construction permitted easy access to the key lever and jacks directly and therefore allowed simple means of mounting multiple sensors for testing. The multiple keys and registers meant that more complex iterations of the sensor system could be expanded on the same model without having to construct or procure another. The aesthetics of the model also complied with the visual requirememntes as set out in the design priciples.
-
-% Embedding: Once a haptic system had been decided upon and its scalability assessed, the next stage will likely be to embed the haptic system within an existing MIDI controller. This will aim to discover any idiosyncrasies with scaling the problem before fabricating a bespoke housing and enclosure. Keyboards also present a problem of having many parts requiring manufacture. Using an existing unit will help both to cut down on time for fabrication but also cut down on waste.
-
-% Fabrication: The final stage will then aim to create a bespoke enclosure for the final hardware interface. This will likely be a small 2 1/2 octave keyboard both to reduce time to manufacture but also help ensure some level of portability when visiting other institutes.
+Luckily, with the assistance on Museo San Colombano, a small model containing three harpsichord actions was procured by the NEMUS project (Figure~\ref{fig:3-key-model}). The construction of the model were after a XXXX Italian harpsichord with two registers. The cross-sectional construction permitted easy access to the key lever and jacks directly and therefore allowed simple means of mounting multiple sensors for testing. The multiple keys and registers meant that more complex iterations of the sensor system could be expanded on the same model without having to construct or procure another. The aesthetics of the model also complied with the visual requirements as set out in the design principles.
+Should the prototype be used as part of a user study, this would provide some control and visual continuity between it and the final interface.
 
 \subsection{Sensors Trials}\label{failed-sensors}
 
-A number of sensors were tried before the final system was decided upon. An
-inertial measurment unit (IMU) was mounted to a single key which contained a 6
-degrees of freedome acceleromoetr and gyroscope. There was a consistent set of
-conditions to trigger sound, but this was not easily differntiable when other
-keys were played. The fitting time and cost of a single IMU could b reduced when
-purchased in bulk but was far greater than other systems considered.
+A number of sensors were trialled before the final system was decided upon, each of which was evaluated
+against the design principles and constraints
 
-A reed sensor and a hall sensor were mounted and magnets embedded within the
-jacks. Adjusting the hieight of the sensor provided a reliable means of
-detecting a threshold, inparticular the hall sensors which could be partially
-calibrarted physically and also in softwrae. The time taken to calibarte a
-single key was time consuming. Ideally each sensor would be placed on a thread
-for adjustment, but given the constraints on the internal space it was decided
-any adjustment of heights would likely mean an unnacceptable length of time to
-install and calibrate. Embedding magnets into the jacks was also did not satisfy
-the criteria of being scalable and non-invasive.
+An inertial measurment unit (IMU) was mounted to a single key which contained a 6
+degrees of freedome acceleromoetr and gyroscope. The IMU provided a consistent set of
+conditions (or signal fingerprint) from which to trigger sound, but these conditions were not easily differentiable when other
+keys were pressed. Furthermore, the cost of a single IMU could be reduced when
+purchased in bulk, but was far greater than other sensors that were trialled.
 
-Light dependant resistor mounted to the jack rail. as jacks were pressed less
-light would be let through. Usable data but very dependant on lighting
-conditions. Modifying the jack also did not satisfy the non-intrusive criteria
-and the placement outside the internal chamber of the model meant hiding
-electronics would be more difficult.
+Two magentic-based sensors, a reed switch and a hall sensor, were trialled. Both sensors were fixed to the wrestplank and magnets embedded within the body of the jacks. 
+The hall and reed sensors both provided a consistent means of
+detecting a threshold. 
 
-Finally, force sensitive resistors placed under the jack of each key was
-considered but was never implemented. The sensors were to be placed under each
-jack either above or below the padding on which the bottom of the jack rests.
+Reed switch consist of two flexible ferromagnetic metal contacts in a sealed glass tube with containing an inert gas or a vacuum. 
+The contacts are arrange in such a way that a strong enough magnetic field will force the contacts to make or break a circuit.
+A magnets can be attached to the jack so that it interacts with the reed switch atthe pluck point. 
+The reed can also be mounted in such a way to allow for fine adjustment. However, this places calibration in entirely the physical domain and the scalability of such a slution was not viable for the intended function. 
+The hall sensors could be partially calibrated physically by adjusting their position and then further refined in software, however the process to do so for a single key was considered too time consuming.
+Making the sensors adjustable was also not considered feasible given the constraints on the internal space. 
+Finally embedding magnets into the jack body was also did not satisfy the criteria of being non-invasive and also posed too much risk of potential damage.
 
-\subsection{QRE1113}\label{qre1113}
+A light dependant resistor (LDR) was trialled by mounting it to the jack rail, which sits above the jacks to limit there movement after plucking. As jacks moved towards the rail, they would reduce the
+light that was let through to the sensors. The LDR provided a signal from which plucks could be determined, however they were very sensitive to lighting conditions. This would mean any change in lighting would need to be accounted for, all a separate light balance system would need to be connected to compensate. The LDRs would also need to be installed outside of the internal cavity meant hiding the remainder of the electronics would be more difficult. Though the LDR was not ultimately used, it did imply that perhaps light could be used so long as it could be supplied localy and not be visible to the user.
 
-A number of sensors were tried before the final system was decided upon. Sensors
-included, an 6-degrees-of-freedom inertial measurement unit, reed and hall
-sensors paired with magnets, and light-dependant resistors mounted to the jack
-rail. None of these sensors satisfied the sensor criteria described above.
-
-Following from the work in \cite{mcpherson_portable_2013, moro_platform_2020}, we tested a
-system using the Fairchild QRE1113 \footnote{Fairchild, now ON Semiconductor,
+This line of enquiry led to following from the work in \texcite{mcpherson_portable_2013, moro_platform_2020}. A
+system was created using the Fairchild QRE1113 \footnote{Fairchild, now ON Semiconductor,
 QRE1113 datasheet
 \url{https://www.onsemi.com/download/data-sheet/pdf/qre1113-d.pdf}}. The QRE1113
-is a combination infrared LED and phototransistor sensitive to IR light. The
-phototransistor of QRE1113 provides data on how much light is present and in
-particular how much light is being reflected from a surface. Since reflected
-light will be proportional to the distance of a surface it is a good,
-close-proximity, distance sensor. Distance is the way in which the instruments
+is an optical sensor composed of an infrared (IR) LED and a phototransistor sensitive to IR light. The
+phototransistor of QRE1113 provides a signal on how much IR light is present, more precisely how much IR light is reflected by a surface from the LED. Since reflected
+light will be proportional to the distance of a surface QRE1113 typically functions as a
+close-proximity distance sensor. Distance is the way in which the instruments
 in \cite{mcpherson_portable_2013, moro_platform_2020} function as well the Moog Piano Bar from
-which it took inspiration.
+which those projects took inspiration. However, those projects focussed on the displacement of the key. For the harpsichord, the optical sensor would need to provide data on the displacement of the jacks. To take the same approach, the optical sensors would need to be mounted in the jack rail and, as was discussed with the LDR, it would be too difficult to hide the sensors from view. In order to fit the sensors internally, they would need to be directed perpendicular to the movement of the jacks.
 
-The limitation for taking a distance approach is that there is not one but 2
-jacks per key. For each jack to be measured independently the data would need to
-come from the jacks themselves.
-
-They \emph{could} be used and individual trigger points set in calibration, but
-this creates new problems.
 
 \begin{figure}  
   \centering
   \includegraphics[width=\linewidth]{img/CrossSectionSensorPlacement.jpg} 
-  \caption{} 
-   
+  \caption{}   
   \label{fig:cross-section}
 \end{figure}
 
-Another common application of the QRE1113 is within line following robots, where
-an array of QRE1113s are used in conjunction with black tape or reflective. A
+To address this restruction, we looked toward another common application of the QRE1113, which is within line following robots \cite{ramesh_turning_2017}. For line following,
+an array of QRE1113s are used in conjunction with low or high reflecant tape. A
 motorised system can then use this data to follow the line of tape and adjust
-its position.
-
-Applied to the jacks was a greyscale gradient printed the length full travel
-range of the jack.
+its position. The same principles was used, but rather than single shade, a greyscale gradient was applied to the jack body (Figure~\ref{fig:jack-tags}).
 
 For the first iteration this was performed on an inkjet printer and double-sided
 tape. For the final iteration the stickers were printed on (Coala, 1D 100 Gloss
 P, gloss, white, permanent adhesive, 300g/m2, 100 µm, 1370mm x 50.00m,
 Solvent/Latex/UV) using a HP Latex 115 and then cutout with a Summa 150 roll
 cutter. The printer and roll cutter greatly reduced the manual labour for
-cutting stickers meaning the process would scale from the 3-key to the 49-key
-model.
+cutting the tags required, allowing the process process to scale from the six jacks of the prototype to the 98 jacks of Mark 1 model.
 
 An initial sticker design was used that contained only the gradient. It was
 found that the jacks were sticking in their slots and the edges on the stickers
@@ -698,7 +656,10 @@ also be time consuming and the use of THT parts in the rest of the design was
 prohibitive with space.
 
 
-\section{Mark 1}
+\section{Mark 1: San Colombano}
+
+The first full version of the interface was designed for exhibition at San Colombano, herein referred to as Mark 1.
+A modular approach was taken during the design and fabrication of Mark 1. Development was divided into the mechanical hardware, electronic hardware, electronic firmware, and audio software. This allowed construction to begin on the mechanical interface while prototyping still continued. Excess space was stipulated as part of the design to be as accommodating as possible to any final sensor system. The final dimensions in the design also dictated a an upper limit to the internal footprint of electronics.
 
 \begin{figure}
     \centering
@@ -706,6 +667,8 @@ prohibitive with space.
     \caption{Scale drawing comparison of the 1547 Trasuntino, 49-key `Mark 1' model, and the 3-key prototype.}
     \label{fig:compare}
 \end{figure}
+
+
 
 \subsection{Mechanical Hardware}
 
@@ -1059,8 +1022,6 @@ sampling period to 5.1 milliseconds.
 % cylces the buffer of timing was sent over serial and a mean average of 1.7
 % milliseconds was found with a jitter of ±0.2 milliseconds.
 
-
-
 Non-volatile memory, implemented using a Fujitsu MB85RS64 Ferroelectric RAM
 (FRAM) chip, provided a reliable means of storing and preserving calibration
 settings across power cycles. This ensured that sensor thresholds and other
@@ -1123,6 +1084,11 @@ adjust playback parameters such as tuning, voicing and which stops are engaged.
 
 \subsubsection{Brackets}
 \subsubsection{Installation}
+
+Once a sensor system had been decided upon and its scalability assessed, the next stage to install it within the mechanical interface. 
+Electronics were designed to be a bespoke installation, after which brackets and enclosures could be drafted to hasten the install process.
+This also provided flexibility to adjust wiring and fitting should there be any unforeseen problems.
+One such problem was the change from a horizontal to a vertical design
 
 The electronic components were partly pre-assembled at the university of
 Edinburgh. Though all measurements were known ahead, enough flexibility was
@@ -1265,14 +1231,21 @@ Reference repositories for this project can be found here:
 
 
 \section{Mark 2}
+
+
+
 \begin{figure}
     \centering
     \includegraphics[width=1\linewidth]{img/mark2.png}
     \caption{Mark 2 [Image Credit]}
     \label{fig:mark-2}
 \end{figure}
+
+After successful deployment at exhibition at San COlombano and verfification that system was robust enough to justify refinement, a second keyboard was commisioned with Roberto Livi.
+
 \subsection{Mechanical Hardware}
 \subsection{Electronics Hardware}
+
 \subsubsection{New Components}
 \subsubsection{New Designs}
 \subsubsection{Bracket Design}
