@@ -582,11 +582,10 @@ Finally embedding magnets into the jack body was also did not satisfy the criter
 A light dependant resistor (LDR) was trialled by mounting it to the jack rail, which sits above the jacks to limit there movement after plucking. As jacks moved towards the rail, they would reduce the
 light that was let through to the sensors. The LDR provided a signal from which plucks could be determined, however they were very sensitive to lighting conditions. This would mean any change in lighting would need to be accounted for, all a separate light balance system would need to be connected to compensate. The LDRs would also need to be installed outside of the internal cavity meant hiding the remainder of the electronics would be more difficult. Though the LDR was not ultimately used, it did imply that perhaps light could be used so long as it could be supplied localy and not be visible to the user.
 
-This line of enquiry led to following from the work in \texcite{mcpherson_portable_2013, moro_platform_2020}. A
-system was created using the Fairchild QRE1113 \footnote{Fairchild, now ON Semiconductor,
+This line of enquiry led to following from the work in \textcite{mcpherson_portable_2013, moro_platform_2020}. A system was created using the Fairchild QRE1113 \footnote{Fairchild, now ON Semiconductor,
 QRE1113 datasheet
 \url{https://www.onsemi.com/download/data-sheet/pdf/qre1113-d.pdf}}. The QRE1113
-is an optical sensor composed of an infrared (IR) LED and a phototransistor sensitive to IR light. The
+is an optical sensor composed of an infrared (IR) LED and a phototransistor sensitive to IR light (Figure~\ref{fig:simple-schematic}). The
 phototransistor of QRE1113 provides a signal on how much IR light is present, more precisely how much IR light is reflected by a surface from the LED. Since reflected
 light will be proportional to the distance of a surface QRE1113 typically functions as a
 close-proximity distance sensor. Distance is the way in which the instruments
@@ -601,10 +600,10 @@ which those projects took inspiration. However, those projects focussed on the d
   \label{fig:cross-section}
 \end{figure}
 
-To address this restruction, we looked toward another common application of the QRE1113, which is within line following robots \cite{ramesh_turning_2017}. For line following,
-an array of QRE1113s are used in conjunction with low or high reflecant tape. A
-motorised system can then use this data to follow the line of tape and adjust
-its position. The same principles was used, but rather than single shade, a greyscale gradient was applied to the jack body (Figure~\ref{fig:jack-tags}).
+To address this restriction, we looked toward another common application of the QRE1113, which is within line following robots \cite{ramesh_turning_2017}. For line following,
+an array of optical sensors are used in conjunction with either low or high reflectance tape. A
+motorised system can then use this data to follow the line of tape, the reflectance providing a clear reference, and adjust
+its position accordingly. The same principles was used, but rather than single shade, a greyscale gradient was applied to the jack body (Figure~\ref{fig:jack-tags}).
 
 For the first iteration this was performed on an inkjet printer and double-sided
 tape. For the final iteration the stickers were printed on (Coala, 1D 100 Gloss
@@ -631,10 +630,10 @@ used to avoid IR light simply being diffused. After the baffles were fitted, the
 cross-talk was eliminated.
 
 
-\subsection{Proto-PCB}
+\subsection{Prototype PCB}
 
-Combined Sensor and Controller PCB that allowed a proof of concept scaled up to
-7 jacks.
+A prototype PCB (Figure~\ref{}) was drafted in the EAGLE CAD Software. The prototype PCB is combined wiring for the sensors and the microcontroller and provided a proof-of-concept for the optical sensor mounting.
+The prototype PCB
 
 This confirmed if variation in space would be a problem
 
@@ -649,7 +648,7 @@ Initial designe to bend the legs of THT optical sensor to allow flush mounting
 to the underside of the wrestplank.
 
 It was found that the legs of the optical sensor were too fragile and the risk
-of breaking thesenro was high.
+of breaking the senro was high.
 
 Could have been end mounted like \cite{mcpherson_portable_2013} but this would
 also be time consuming and the use of THT parts in the rest of the design was
