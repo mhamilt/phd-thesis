@@ -595,7 +595,7 @@ which those projects took inspiration. However, those projects focussed on the d
 
 \begin{figure}  
   \centering
-  \includegraphics[width=\linewidth]{img/CrossSectionSensorPlacement.jpg} 
+  \frame{\includegraphics[width=\linewidth]{img/49-key-model.pdf}}
   \caption{}   
   \label{fig:cross-section}
 \end{figure}
@@ -657,7 +657,7 @@ A modular approach was taken during the design and fabrication of Mark 1. Develo
 
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{img/all_comparison-90.pdf}
+    \includegraphics[width=0.75\linewidth,angle=270]{img/all_comparison-90.pdf}
     \caption{Scale comparison: (from left to right) the 1547 Trasuntino, 49-key `Mark 1' model, and the 3-key prototype.}
     \label{fig:compare}
 \end{figure}
@@ -878,51 +878,9 @@ not be visible, a simpler design approach was taken.
 
 \subsubsection{Multiplexer}
 
-CD4051BE Texas Instruments
-
-problem of scale
-
-For the 3-key model, individual jacks could be connected to one of the 8
-available ADC pins.
-
-The BLE Nano has 8 ADC pins connected to one ADC channel via a multiplexer
-
-Multiplexer added to expand to the
-
-Transistor / Op-amp circuit could have been used similar to the one in
-\textbackslash cite\{mcpherson\}.
-
-Benefits were keeping with THT based designed for easy assembly.
-
-An 8-channel multiplexer was chosen as the model has 49-keys and a division of 7
-PCBs each containing 7 sensors
-
-The multiplexer reduced 7 signals to a single pin. Three pins are required pins
-for addressing the muliplexewrs and all PCBs are addressed simulatenously.
-
-\begin{itemize}
-
-\item
-  limited ADC channels
-\item
-  ADC channels already multiplexed
-\item
-  simple
-\item
-  8 channel
-\item
-  THT
-\item
-  7 into 49
-
-  \begin{itemize}
-  
-  \item
-    7 PCBS
-  \item
-    each with 7 sensors
-  \end{itemize}
-\end{itemize}
+The number of available analogue-to-digital channels (ADC) on the Arduino is limited to eight. For the prototype, sensors outputs were connected directly to the available ADCs.
+One of the first a `problems of scale', introduced when expanding from six jacks of the prototype model to the Mark 1, was how to accommodate 98 optical sensors. To overcome the Arduino's ADC limitation, a CD4051BE Texas Instruments multiplexer was introduced.  A multiplexer (multiplexor, MUX) a circuit that routes a common pin to one of several inputs or output. The MUX would provide a means to connect multiple sensor output signals to a single ADC pin on the Arduino. Available GPIO pins on the Arduino allowed for programmatic control of signal routing. This is the same way in with the ADCs themselves are routed on the Arduino \cite{nordic_nrf52840_2025}, meaning there is a cascade of two mux circuits. The problems typically associated with cascading multiplexers, such as increased signal settle time and increased noise, did not have a meaningful impact. compared to direct connection with the ADC channels. Trace length between the output signal of the sensor and the MUX channel were kept as short as possible to minimise noise.
+Seven of the available eight channels on the CD4051BE were used, which allowed seven sensors to be attached to a single sensor PCB for a total of 14 PCBs to provide coverage for the 98 jacks.
 
 \subsection{Printed Circuit Boards}
 \subsubsection{Sensor Board}
@@ -1168,23 +1126,63 @@ The thresholds were calibrated visually utilising the serial plotter of the
 Arduino IDE (Figure \ref{fig:serial_monitor}) and the open source MIDI Monitor
 software \footnote{\url{https://github.com/krevis/MIDIApps}}.
 
-\begin{itemize}
-\item
-  partial pre-assembly
-\item
-  handsolder components
+% \begin{itemize}
+% \item
+%   partial pre-assembly
+% \item
+%   handsolder components
 
-  \begin{itemize}
-  \item
-    analog lines
-  \end{itemize}
-\item
-  connecting supports
-\end{itemize}
+%   \begin{itemize}
+%   \item
+%     analog lines
+%   \end{itemize}
+% \item
+%   connecting supports
+% \end{itemize}
 
 \subsection{Electronics Firmware}
+
+The firmware can be initiated in two states: a `calibration' and an `operation' state. In the operation state, the sensor system uses a two-threshold hysteresis mechanism implemented as a finite state machine with three states: \texttt{RELEASED}, \texttt{PLUCKED}, and \texttt{PRESSED}. A MIDI \texttt{Note\_ON} is triggered only when the sensor reading exceeds the \texttt{pluck\_threshold} and the system is in the \texttt{RELEASED} state. Conversely, a \texttt{Note\_OFF} is issued when the value falls below a lower \texttt{release\_threshold}, and the system is in the \texttt{PLUCKED} state. This avoids instability from minor fluctuations near a single threshold and prevents rapid state toggling. A 4-sample moving average filter was implemented to reduce noise and brought the effective sampling period to 2 milliseconds with 1 millisecond jitter. The rotary encoder is used to initiate the firmware in a `calibration state' during which the threshold values can modified and written to FRAM. The threshold values are plotted alongside live sensor reading to help identify the correct pluck point. The calibration state also allows for identification of any malfunctioning sensor.
+
+
+
+
+FRAM data structure was in part inspired by the RIFF file format standard \cite{ibm_riff_1991}. The layout of data was in such a way as to potentially allow for calibration values to be stored to files and read from a storage device. Table~\ref{tab:fram-structure} shows the structure of data in the FRAM. The pluck and release `Chunk IDs' can be interpreted as a unsigned 32-bit integer, with the hexadecimal values \texttt{0x4D415849} and \texttt{0x4D494E49} respectively or as ASCII character strings \texttt{"MAXI"} and \texttt{"MINI"}. The firmware check addresses of the Chunk IDs and if the the value there does not match the correct hexadecimal value, the memory will be assumed uninitialised and a default threshold value will be set for all thresholds in the chunk.
+
+\begin{table}
+    \centering
+    \begin{tabular}{|l|l|r|l|}
+        \hline
+        \textbf{Address} & \textbf{Field Name}     & \textbf{Size} & \textbf{C Type}        \\ \hline
+        \texttt{0x00}    & Pluck Chunk ID          & 4             & \texttt{uint32\_t    } \\ \hline
+        \texttt{0x04}    & Pluck Threshold Chunk   & 98            & \texttt{uint16\_t[49]} \\ \hline
+        \texttt{0x66}    & Release Chunk ID        & 4             & \texttt{uint32\_t    } \\ \hline
+        \texttt{0x6A}    & Release Threshold Chunk & 98            & \texttt{uint16\_t[49]} \\ \hline
+        \bottomrule
+    \end{tabular}
+    \caption{}
+    \label{tab:fram-structure}
+\end{table}
+
 \subsubsection{Finite State Machine}
+
+
 \subsubsection{Hysteresis}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{img/hysteresis-states.pdf}
+    \caption{Enter Caption}
+    \label{fig:jack-states}
+\end{figure}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{img/hysteresis.pdf}
+    \caption{Enter Caption}
+    \label{fig:hysteresis}
+\end{figure}
 
 \subsection{Open Sourcing}
 
@@ -1193,9 +1191,7 @@ committing to an open source approach for all outputs of the project. The
 commitment to open sourcing encompassed all aspects of the system, including
 hardware schematics, firmware, and calibration data. Cost-effectiveness was also
 a central consideration. 
-% The system was initially developed for a 3-key prototype, shown in Figure
-% \ref{fig:3key}, and successfully scaled to 49 keys without significant
-% increases in cost or complexity. 
+
 Specifically, the system was designed to be easily assembled using resources
 typically available in a university-managed maker space. Components, such as
 QRE1113 optical sensors and CD4051BE multiplexers, are widely available from
@@ -1254,6 +1250,36 @@ After successful deployment at exhibition at San Colombano and verification that
 \subsection{Electronics Hardware}
 
 \subsubsection{New Components}
+
+\begin{figure}[!b]
+  \centering
+  \begin{subfigure}[h]{0.5\linewidth}
+    \centering
+    \includegraphics[height=0.2\linewidth]{img/sensor_board_v2}
+    \caption{Sensor PCB}
+    \label{fig:sensor_v2}
+  \end{subfigure}
+  \begin{subfigure}[h]{0.4\linewidth}
+    \centering
+    \includegraphics[height=0.2\linewidth]{img/controller_board_v2}
+    \caption{Controller PCB}
+    \label{fig:controller_v2}
+  \end{subfigure}
+  \caption{Redesigns of sensor and controller boards show the inclusion of FFC and JST-PH ports. Sensor board shows the solder pads used to configure its position in the keyboard}
+  \label{fig:pcb_v2}
+\end{figure}
+
+The controller PCB added JST-PH ports for the FRAM, rotary encoder, and reset switch. The JST and FFC ports ensured only a single orientation of connection was possible to prevent incorrect wiring during installation. The FFC cables on the sensor PCB (Figure~\ref{fig:internal}) permitted quick swapping of the sensor boards should any of the components on it fail.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\linewidth]{img/49-key-v2-front-internal.jpeg}
+  \caption{Inside the Mark 2 interface showing the FFC connecting sensor PCBs together.}
+  \label{fig:internal}
+\end{figure}
+% Transistor / Op-amp circuit could have been used similar to the one in \textbackslash cite\{mcpherson\}.
+
+
 \subsubsection{New Designs}
 \subsubsection{Bracket Design}
 \subsection{Electronics Firmware}
