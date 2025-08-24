@@ -472,6 +472,9 @@ timmermans_multibody-based_2020}, the visual component may provide the final
 persuasive element necessary for acceptance, similar to the way visual
 perception affects judgments of musical performance \cite{tsay_sight_2013}.
 
+
+
+
 \begin{figure}[!b]  
   \centering
   \includegraphics[width=\linewidth,trim={0 0 0 0.5cm},clip]{img/tagging-jacks-3.jpg} 
@@ -1054,10 +1057,37 @@ out of each key to create extra clearance. The milling required the removal,
 shortening and refitting of the leather pads for the jacks. The extra work added
 an extra day to the full install.
 
+
+% \begin{figure}[!b]
+%   \centering
+%   \begin{subfigure}[h]{1\linewidth}
+%     \centering
+%     \includegraphics[height=0.3\linewidth]{img/keys-milled.jpeg} 
+%     \caption{Sensor PCB}
+%     \label{fig:sensor_v2}
+%   \end{subfigure}
+%   \begin{subfigure}[h]{1\linewidth}
+%     \centering
+%     \includegraphics[height=0.1\linewidth]{img/milled-keys.jpg} 
+%     \caption{Controller PCB}
+%     \label{fig:controller_v2}
+%   \end{subfigure}
+%   \caption{}
+%   \label{fig:pcb_v2}
+% \end{figure}
+
+
 \begin{figure}  
   \centering
-  \includegraphics[width=\linewidth]{img/keys-milled.jpeg} 
-  \caption{} 
+  \includegraphics[width=0.6\linewidth]{img/keys-milled.jpeg} 
+  \caption{Keys after rough milling.}  
+  \label{fig:milling}
+\end{figure}
+
+\begin{figure}  
+  \centering
+  \includegraphics[width=0.75\linewidth]{img/milled-keys.jpg} 
+  \caption{Milled keys after edges squared.} 
   
   \label{fig:milling}
 \end{figure}
@@ -1117,7 +1147,7 @@ operational.
 \begin{figure}  
   \centering
   \includegraphics[width=1\linewidth]{img/serial_monitor.png} 
-  \caption{} 
+  \caption{Example of calibrating a pluck threshold using the Arduino IDE Serial Plotter in a 10-bit ADC mode. Plot shows the key at index 32 (\texttt{K32}) and its current pluck threshold (\texttt{T32}). \texttt{M} and \texttt{m} are the maximum and minimum values to normalise the y axis of the plot.} 
   
   \label{fig:serial_monitor}
 \end{figure}
@@ -1126,19 +1156,6 @@ The thresholds were calibrated visually utilising the serial plotter of the
 Arduino IDE (Figure \ref{fig:serial_monitor}) and the open source MIDI Monitor
 software \footnote{\url{https://github.com/krevis/MIDIApps}}.
 
-% \begin{itemize}
-% \item
-%   partial pre-assembly
-% \item
-%   handsolder components
-
-%   \begin{itemize}
-%   \item
-%     analog lines
-%   \end{itemize}
-% \item
-%   connecting supports
-% \end{itemize}
 
 \subsection{Electronics Firmware}
 
@@ -1147,7 +1164,7 @@ The firmware can be initiated in two states: a `calibration' and an `operation' 
 
 
 
-FRAM data structure was in part inspired by the RIFF file format standard \cite{ibm_riff_1991}. The layout of data was in such a way as to potentially allow for calibration values to be stored to files and read from a storage device. Table~\ref{tab:fram-structure} shows the structure of data in the FRAM. The pluck and release `Chunk IDs' can be interpreted as a unsigned 32-bit integer, with the hexadecimal values \texttt{0x4D415849} and \texttt{0x4D494E49} respectively or as ASCII character strings \texttt{"MAXI"} and \texttt{"MINI"}. The firmware check addresses of the Chunk IDs and if the the value there does not match the correct hexadecimal value, the memory will be assumed uninitialised and a default threshold value will be set for all thresholds in the chunk.
+FRAM data structure was in part inspired by the RIFF file format standard \cite{ibm_riff_1991}. The layout of data was in such a way as to potentially allow for calibration values to be stored to files and read from a storage device. Table~\ref{tab:fram-structure} shows the structure of data in the FRAM. The pluck and release `Chunk IDs' can be interpreted as a unsigned 32-bit integer, with the hexadecimal values \texttt{0x4D415849} and \texttt{0x4D494E49} respectively or as ASCII character strings \texttt{"MAXI"} and \texttt{"MINI"}. The firmware checks memory addresses \texttt{0x00} and \texttt{0x66} for the corresponding Chunk ID and if the value stored there is not correct, the memory is  assumed to be uninitialised. In that case, the tag value is written and a default value will be set for all thresholds in the chunk.
 
 \begin{table}
     \centering
@@ -1157,10 +1174,9 @@ FRAM data structure was in part inspired by the RIFF file format standard \cite{
         \texttt{0x00}    & Pluck Chunk ID          & 4             & \texttt{uint32\_t    } \\ \hline
         \texttt{0x04}    & Pluck Threshold Chunk   & 98            & \texttt{uint16\_t[49]} \\ \hline
         \texttt{0x66}    & Release Chunk ID        & 4             & \texttt{uint32\_t    } \\ \hline
-        \texttt{0x6A}    & Release Threshold Chunk & 98            & \texttt{uint16\_t[49]} \\ \hline
-        \bottomrule
+        \texttt{0x6A}    & Release Threshold Chunk & 98            & \texttt{uint16\_t[49]} \\ \hline  
     \end{tabular}
-    \caption{}
+    \caption{Calibration data layout in non-volatile memory.}
     \label{tab:fram-structure}
 \end{table}
 
@@ -1171,16 +1187,16 @@ FRAM data structure was in part inspired by the RIFF file format standard \cite{
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.75\linewidth]{img/hysteresis-states.pdf}
-    \caption{Enter Caption}
+    \includegraphics[width=0.66\linewidth]{img/jack-states.pdf}
+    \caption{Plot illustrating hysteresis as two thresholds. Plot shows a full key press and release event. After passing the pluck threshold, the key enters a \texttt{PLUCKED} state. The key then enters the \texttt{RELEASED} state after passing the lower release threshold.}
     \label{fig:jack-states}
 \end{figure}
 
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.75\linewidth]{img/hysteresis.pdf}
-    \caption{Enter Caption}
+    \includegraphics[width=0.5\linewidth]{img/hysteresis.pdf}
+    \caption{Plot illustrating hysteresis by two thresholds, one for the pluck state and another for the release state.}
     \label{fig:hysteresis}
 \end{figure}
 
