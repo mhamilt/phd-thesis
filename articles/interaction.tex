@@ -648,21 +648,19 @@ A prototype PCB (Figure~\ref{fig:prototype-pcb}) was drafted using the EAGLE CAD
     \label{fig:prototype-pcb-mount}
 \end{figure}
 
-This would allow the PCB to be mounted to an adjustable 3D printed bracket which was fitted to the side of the wrestplank. The bracket was designed to allow adjustment in the distance between the sensor and the gradient tag. The intention was for the final PCB to mounted horizontally on the underside of the wrestplank. While assembling the prototype PCB, it was found that the optical sensor contacts were too fragile and could be easily broken in this process. Instead, the optical sensors would need to be soldered flat entailing that the PCB be orientated vertically.
+This would allow the PCB to be mounted to an adjustable 3D printed bracket which was fitted to the side of the wrestplank. The bracket was designed to allow adjustment in the distance between the sensor and the gradient tag. The intention was for the final PCB to mounted horizontally on the underside of the wrestplank. While assembling the prototype PCB, it was found that the optical sensor contacts were too fragile and could be easily broken in this process. An end-mount approach like that taken in \textcite{mcpherson_portable_2013} was attempted, but the short side of the jack body, at a width of 4.30 millimetres, presented a much smaller target than the keyboard keys. Slight deviations in sensor alignment resulted in drastic changes to the range of the output signal. Instead, the optical sensors would need to be soldered fluch against the PCB, which would require the PCB to orientate vertically.
 
 \section{Mark 1: San Colombano}
 
 The first full version of the interface was designed for exhibition at San Colombano, herein referred to as Mark 1.
-A modular approach was taken during the design and fabrication of Mark 1. Development was divided into the mechanical hardware, electronic hardware, electronic firmware, and audio software. This allowed construction to begin on the mechanical interface while prototyping still continued. Excess space was stipulated as part of the design to be as accommodating as possible to any final sensor system. The final dimensions in the design also dictated a an upper limit to the internal footprint of electronics.
+A modular approach was taken during the design and fabrication of Mark 1. Development was divided into the mechanical hardware, electronic hardware, electronic firmware, and audio software. This allowed construction to begin on the mechanical interface while prototyping still continued. Excess space was stipulated as part of the design to be as accommodating as possible to any final sensor system. The final dimensions in the design also dictated an upper limit to the internal footprint of electronics.
 
 \begin{figure}
     \centering
     \includegraphics[width=1\linewidth]{img/all_comparison-90.pdf}
-    \caption{Scale drawing comparison of the 1547 Trasuntino, 49-key `Mark 1' model, and the 3-key prototype.}
+    \caption{Scale comparison: (from left to right) the 1547 Trasuntino, 49-key `Mark 1' model, and the 3-key prototype.}
     \label{fig:compare}
 \end{figure}
-
-
 
 \subsection{Mechanical Hardware}
 
@@ -1208,24 +1206,39 @@ using the Arduino IDE’s serial plotter and open source MIDI Monitor software
 \footnote{\url{https://github.com/krevis/MIDIApps}}, reducing reliance on
 proprietary tools and simplifying the process for users. 
 
+Following best practice in the DMI community \cite{calegario_documentation_2021}, and broader academia \cite{stall_journal_2023}, the digital assets for the interface were placed under version control and archived. These assets included,
 
-Reference repositories for this project can be found here:
+\begin{itemize}
+  \item Source Code
+  \item Textual Description(s)
+  \item Bill of Materials
+  \item Build and Operational Instructions
+  \item Photo(s) / Image(s) / Diagram(s) / Drawing(s)
+  \item STL model files
+  \item CAD PCB Schematice files
+\end{itemize}
 
-    \begin{itemize}
-        \item 
-        \emph{Firmware}:
-        \url{https://github.com/Nemus-Project/harpsichord-interface-firmware}
-        \item 
-        \emph{PCB CAD}:
-        \url{https://github.com/Nemus-Project/harpsichord-interface-cad}
-        \item 
-        \emph{Models}:
-        \url{https://github.com/Nemus-Project/harpsichord-interface-models}
-    \end{itemize}
+Digital assets were divided into three version control repositories:
 
+\begin{itemize}
+  \item
+    \emph{Firmware}: source code for final firmware, test firmware and documentation of dependencies \cite{hamilton_firmware_2025}
+  \item
+    \emph{PCB CAD}: EAGLE CAD files and bill of materials for electronics \cite{hamilton_cad_2025}
+  \item
+    \emph{Models}: STL 3D models for the jacks \cite{hamilton_models_2025}
+\end{itemize}
+
+These repositories are combined into a single meta repository. Each repository of information can be taken in isolation, allowing for substitutions in any component should there be a changes such as the optical sensor used, or the type harpsichord used. It is only when they are combined in \citetitle{hamilton_nemus_2025} that they represent the interface as it was deployed at Museo San Colombano.
+
+Archiving the project in this manner highlighted limitations within the frameworks that are currently available. A benefit of the Zenodo archive is its integration to GitHub. This allows a single project to be simultaneously maintained and archived for citation from a single location.
+Unfortunately, the GitHub integration for Zenodo does not currently provide a means for meta-repositories to be archived correctly \cite{zenodo_1036_2025}. This limitation necessitates the generation of a separate DOI for each component submodule, all of which reference the meta-repository.
+CAD files and surrounding support files also provide another point of failure with respect to digital preservation. For example, in the course of this thesis the popular Electronic Design Automation (EDA) software tool EAGLE was announced to be discontinued \cite{autodesk_eagle_2024} for the July 2026. A conscious decision was made to continue using the EAGLE format for the PCB design. Much in the same way as the discontinuation of Python 2 may be beneficial for archival purposes as ``advanced programming language that is guaranteed not to evolve anymore'' \cite{rougier_loupe_2020}, so to does the discontinuation of the EAGLE means that its XML file standard is now calcified and is unable changes. Instead, the EAGLE files can be used in conjunction with other EDA software such as the open source KiCAD \cite{kicad_eagle_2024}.
 
 \section{Mark 2}
 
+
+The Mark 2 interface demonstrates a refinement of the core technology and functionality of a multiple register system. The parametric placement of sensors shows that such a system is viable for altering existing interfaces in the same manner as the PianoBar from Moog Music \cite{computer_products_2005, mcpherson_portable_2013}. A move from THT to SMD components would be expected to reduce the footprint of the PCB by half \cite{prasad_surface_1997} allowing the space to be used for a refined op-amp design \cite{mcpherson_portable_2013} or the ability to install in more constrained spaces. The system would benefit from single piece mounting bracket which would allow for much more simplified installation. Given the open source nature of the project the advantages come from the ability to modify the design for a bespoke application.
 
 
 \begin{figure}
@@ -1235,7 +1248,7 @@ Reference repositories for this project can be found here:
     \label{fig:mark-2}
 \end{figure}
 
-After successful deployment at exhibition at San COlombano and verfification that system was robust enough to justify refinement, a second keyboard was commisioned with Roberto Livi.
+After successful deployment at exhibition at San Colombano and verification that system was robust enough to justify refinement, a second keyboard was commissioned with Roberto Livi.
 
 \subsection{Mechanical Hardware}
 \subsection{Electronics Hardware}
