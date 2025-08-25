@@ -929,7 +929,6 @@ were used to track jack displacement throughout the key dip.
     \centering
     \includegraphics[width=0.8\linewidth,trim={0 2cm 0 2.5cm},clip]{img/baffles.png}
     \caption{Baffles designed to prevent cross-talk between adjacent sensors.}
-
     \label{fig:baffles}
 \end{figure}
 
@@ -945,9 +944,23 @@ providing visual feedback. The LEDs are controlled via a pulse width modulation
 multiplexer is taken from each PCB and routed to a separate ADC channel of the
 Arduino. Multiplexer channel select and LED PWM signals are daisy-chained
 through each PCB (Figure \ref{fig:sensor-reverse}).
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{img/sensor_board_v1.pdf}
+    \caption{Mark 1 Sensor board schematic. Component labels \texttt{D} correspond to LEDs and \texttt{Q} to optical sensors}
+    \label{fig:sensor-schematic-1}
+\end{figure}
+
+Figure~\ref{fig:sensor-schematic-1} shows the schematic for the Mark 1 Sensor board.
+
+Of note are the optical sensor signal output routed through the multipexer (\texttt{SIG}) which was wired separately to the controller board. This was in art to make space for a multiplexer interrupt control (\texttt{INT}) which was ultimately never used. For the Mark 1 a solution had not yet been found for allowing all signals to flow through the sensor boards.
+
+needed a separate cable loom
+Means its place in the circuit is fixed
+sensor boards souldered together with ribbon cable.
+\texttt{A}, \texttt{B}, and \texttt{C} correlate to the first second and third bits of the 3-bit channels select number.
 
 \subsubsection{Controller Board}
-
 
 The controller board, designed around the Arduino Nano format, was the central
 hub for processing sensor data and triggering MIDI messages. In addition to
@@ -1271,17 +1284,17 @@ After successful deployment at exhibition at San Colombano and verification that
   \centering
   \begin{subfigure}[h]{0.5\linewidth}
     \centering
-    \includegraphics[height=0.2\linewidth]{img/sensor_board_v2}
+    \includegraphics[height=0.2\linewidth]{img/sensor_board_v2.png}
     \caption{Sensor PCB}
     \label{fig:sensor_v2}
   \end{subfigure}
   \begin{subfigure}[h]{0.4\linewidth}
     \centering
-    \includegraphics[height=0.2\linewidth]{img/controller_board_v2}
+    \includegraphics[height=0.2\linewidth]{img/controller_board_v2.png}
     \caption{Controller PCB}
     \label{fig:controller_v2}
   \end{subfigure}
-  \caption{Redesigns of sensor and controller boards show the inclusion of FFC and JST-PH ports. Sensor board shows the solder pads used to configure its position in the keyboard}
+  \caption{PCB traces of the redesigned sensor and controller boards. Figure show the inclusion of FFC and JST-PH ports. Sensor board shows the solder pads used to configure its position in the keyboard}
   \label{fig:pcb_v2}
 \end{figure}
 
@@ -1297,6 +1310,15 @@ The controller PCB added JST-PH ports for the FRAM, rotary encoder, and reset sw
 
 
 \subsubsection{New Designs}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{img/sensor_board_v2.pdf}
+    \caption{Mark 2 Sensor board schematic. RGB LEDs \texttt{D}, signal paths \texttt{S}, optical sensors \texttt{Q}. The Solder Junction in the center illustrates the connection  between the multiplexer output and corresponding \texttt{S} channel assignment on the FFC cable.}
+    \label{fig:sensor-schematic-2}
+\end{figure}
+
+
 \subsubsection{Bracket Design}
 \subsection{Electronics Firmware}
 
