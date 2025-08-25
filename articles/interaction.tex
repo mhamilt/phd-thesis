@@ -472,6 +472,9 @@ timmermans_multibody-based_2020}, the visual component may provide the final
 persuasive element necessary for acceptance, similar to the way visual
 perception affects judgments of musical performance \cite{tsay_sight_2013}.
 
+
+
+
 \begin{figure}[!b]  
   \centering
   \includegraphics[width=\linewidth,trim={0 0 0 0.5cm},clip]{img/tagging-jacks-3.jpg} 
@@ -595,7 +598,7 @@ which those projects took inspiration. However, those projects focussed on the d
 
 \begin{figure}  
   \centering
-  \includegraphics[width=\linewidth]{img/CrossSectionSensorPlacement.jpg} 
+  \frame{\includegraphics[width=\linewidth]{img/49-key-model.pdf}}
   \caption{}   
   \label{fig:cross-section}
 \end{figure}
@@ -648,21 +651,19 @@ A prototype PCB (Figure~\ref{fig:prototype-pcb}) was drafted using the EAGLE CAD
     \label{fig:prototype-pcb-mount}
 \end{figure}
 
-This would allow the PCB to be mounted to an adjustable 3D printed bracket which was fitted to the side of the wrestplank. The bracket was designed to allow adjustment in the distance between the sensor and the gradient tag. The intention was for the final PCB to mounted horizontally on the underside of the wrestplank. While assembling the prototype PCB, it was found that the optical sensor contacts were too fragile and could be easily broken in this process. Instead, the optical sensors would need to be soldered flat entailing that the PCB be orientated vertically.
+This would allow the PCB to be mounted to an adjustable 3D printed bracket which was fitted to the side of the wrestplank. The bracket was designed to allow adjustment in the distance between the sensor and the gradient tag. The intention was for the final PCB to mounted horizontally on the underside of the wrestplank. While assembling the prototype PCB, it was found that the optical sensor contacts were too fragile and could be easily broken in this process. An end-mount approach like that taken in \textcite{mcpherson_portable_2013} was attempted, but the short side of the jack body, at a width of 4.30 millimetres, presented a much smaller target than the keyboard keys. Slight deviations in sensor alignment resulted in drastic changes to the range of the output signal. Instead, the optical sensors would need to be soldered fluch against the PCB, which would require the PCB to orientate vertically.
 
 \section{Mark 1: San Colombano}
 
 The first full version of the interface was designed for exhibition at San Colombano, herein referred to as Mark 1.
-A modular approach was taken during the design and fabrication of Mark 1. Development was divided into the mechanical hardware, electronic hardware, electronic firmware, and audio software. This allowed construction to begin on the mechanical interface while prototyping still continued. Excess space was stipulated as part of the design to be as accommodating as possible to any final sensor system. The final dimensions in the design also dictated a an upper limit to the internal footprint of electronics.
+A modular approach was taken during the design and fabrication of Mark 1. Development was divided into the mechanical hardware, electronic hardware, electronic firmware, and audio software. This allowed construction to begin on the mechanical interface while prototyping still continued. Excess space was stipulated as part of the design to be as accommodating as possible to any final sensor system. The final dimensions in the design also dictated an upper limit to the internal footprint of electronics.
 
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{img/all_comparison-90.pdf}
-    \caption{Scale drawing comparison of the 1547 Trasuntino, 49-key `Mark 1' model, and the 3-key prototype.}
+    \includegraphics[width=0.75\linewidth,angle=270]{img/all_comparison-90.pdf}
+    \caption{Scale comparison: (from left to right) the 1547 Trasuntino, 49-key `Mark 1' model, and the 3-key prototype.}
     \label{fig:compare}
 \end{figure}
-
-
 
 \subsection{Mechanical Hardware}
 
@@ -880,51 +881,9 @@ not be visible, a simpler design approach was taken.
 
 \subsubsection{Multiplexer}
 
-CD4051BE Texas Instruments
-
-problem of scale
-
-For the 3-key model, individual jacks could be connected to one of the 8
-available ADC pins.
-
-The BLE Nano has 8 ADC pins connected to one ADC channel via a multiplexer
-
-Multiplexer added to expand to the
-
-Transistor / Op-amp circuit could have been used similar to the one in
-\textbackslash cite\{mcpherson\}.
-
-Benefits were keeping with THT based designed for easy assembly.
-
-An 8-channel multiplexer was chosen as the model has 49-keys and a division of 7
-PCBs each containing 7 sensors
-
-The multiplexer reduced 7 signals to a single pin. Three pins are required pins
-for addressing the muliplexewrs and all PCBs are addressed simulatenously.
-
-\begin{itemize}
-
-\item
-  limited ADC channels
-\item
-  ADC channels already multiplexed
-\item
-  simple
-\item
-  8 channel
-\item
-  THT
-\item
-  7 into 49
-
-  \begin{itemize}
-  
-  \item
-    7 PCBS
-  \item
-    each with 7 sensors
-  \end{itemize}
-\end{itemize}
+The number of available analogue-to-digital channels (ADC) on the Arduino is limited to eight. For the prototype, sensors outputs were connected directly to the available ADCs.
+One of the first a `problems of scale', introduced when expanding from six jacks of the prototype model to the Mark 1, was how to accommodate 98 optical sensors. To overcome the Arduino's ADC limitation, a CD4051BE Texas Instruments multiplexer was introduced.  A multiplexer (multiplexor, MUX) a circuit that routes a common pin to one of several inputs or output. The MUX would provide a means to connect multiple sensor output signals to a single ADC pin on the Arduino. Available GPIO pins on the Arduino allowed for programmatic control of signal routing. This is the same way in with the ADCs themselves are routed on the Arduino \cite{nordic_nrf52840_2025}, meaning there is a cascade of two mux circuits. The problems typically associated with cascading multiplexers, such as increased signal settle time and increased noise, did not have a meaningful impact. compared to direct connection with the ADC channels. Trace length between the output signal of the sensor and the MUX channel were kept as short as possible to minimise noise.
+Seven of the available eight channels on the CD4051BE were used, which allowed seven sensors to be attached to a single sensor PCB for a total of 14 PCBs to provide coverage for the 98 jacks.
 
 \subsection{Printed Circuit Boards}
 \subsubsection{Sensor Board}
@@ -970,7 +929,6 @@ were used to track jack displacement throughout the key dip.
     \centering
     \includegraphics[width=0.8\linewidth,trim={0 2cm 0 2.5cm},clip]{img/baffles.png}
     \caption{Baffles designed to prevent cross-talk between adjacent sensors.}
-
     \label{fig:baffles}
 \end{figure}
 
@@ -986,9 +944,23 @@ providing visual feedback. The LEDs are controlled via a pulse width modulation
 multiplexer is taken from each PCB and routed to a separate ADC channel of the
 Arduino. Multiplexer channel select and LED PWM signals are daisy-chained
 through each PCB (Figure \ref{fig:sensor-reverse}).
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{img/sensor_board_v1.pdf}
+    \caption{Mark 1 Sensor board schematic. Component labels \texttt{D} correspond to LEDs and \texttt{Q} to optical sensors}
+    \label{fig:sensor-schematic-1}
+\end{figure}
+
+Figure~\ref{fig:sensor-schematic-1} shows the schematic for the Mark 1 Sensor board.
+
+Of note are the optical sensor signal output routed through the multipexer (\texttt{SIG}) which was wired separately to the controller board. This was in art to make space for a multiplexer interrupt control (\texttt{INT}) which was ultimately never used. For the Mark 1 a solution had not yet been found for allowing all signals to flow through the sensor boards.
+
+needed a separate cable loom
+Means its place in the circuit is fixed
+sensor boards souldered together with ribbon cable.
+\texttt{A}, \texttt{B}, and \texttt{C} correlate to the first second and third bits of the 3-bit channels select number.
 
 \subsubsection{Controller Board}
-
 
 The controller board, designed around the Arduino Nano format, was the central
 hub for processing sensor data and triggering MIDI messages. In addition to
@@ -1098,10 +1070,37 @@ out of each key to create extra clearance. The milling required the removal,
 shortening and refitting of the leather pads for the jacks. The extra work added
 an extra day to the full install.
 
+
+% \begin{figure}[!b]
+%   \centering
+%   \begin{subfigure}[h]{1\linewidth}
+%     \centering
+%     \includegraphics[height=0.3\linewidth]{img/keys-milled.jpeg} 
+%     \caption{Sensor PCB}
+%     \label{fig:sensor_v2}
+%   \end{subfigure}
+%   \begin{subfigure}[h]{1\linewidth}
+%     \centering
+%     \includegraphics[height=0.1\linewidth]{img/milled-keys.jpg} 
+%     \caption{Controller PCB}
+%     \label{fig:controller_v2}
+%   \end{subfigure}
+%   \caption{}
+%   \label{fig:pcb_v2}
+% \end{figure}
+
+
 \begin{figure}  
   \centering
-  \includegraphics[width=\linewidth]{img/keys-milled.jpeg} 
-  \caption{} 
+  \includegraphics[width=0.6\linewidth]{img/keys-milled.jpeg} 
+  \caption{Keys after rough milling.}  
+  \label{fig:milling}
+\end{figure}
+
+\begin{figure}  
+  \centering
+  \includegraphics[width=0.75\linewidth]{img/milled-keys.jpg} 
+  \caption{Milled keys after edges squared.} 
   
   \label{fig:milling}
 \end{figure}
@@ -1161,7 +1160,7 @@ operational.
 \begin{figure}  
   \centering
   \includegraphics[width=1\linewidth]{img/serial_monitor.png} 
-  \caption{} 
+  \caption{Example of calibrating a pluck threshold using the Arduino IDE Serial Plotter in a 10-bit ADC mode. Plot shows the key at index 32 (\texttt{K32}) and its current pluck threshold (\texttt{T32}). \texttt{M} and \texttt{m} are the maximum and minimum values to normalise the y axis of the plot.} 
   
   \label{fig:serial_monitor}
 \end{figure}
@@ -1170,23 +1169,49 @@ The thresholds were calibrated visually utilising the serial plotter of the
 Arduino IDE (Figure \ref{fig:serial_monitor}) and the open source MIDI Monitor
 software \footnote{\url{https://github.com/krevis/MIDIApps}}.
 
-\begin{itemize}
-\item
-  partial pre-assembly
-\item
-  handsolder components
-
-  \begin{itemize}
-  \item
-    analog lines
-  \end{itemize}
-\item
-  connecting supports
-\end{itemize}
 
 \subsection{Electronics Firmware}
+
+The firmware can be initiated in two states: a `calibration' and an `operation' state. In the operation state, the sensor system uses a two-threshold hysteresis mechanism implemented as a finite state machine with three states: \texttt{RELEASED}, \texttt{PLUCKED}, and \texttt{PRESSED}. A MIDI \texttt{Note\_ON} is triggered only when the sensor reading exceeds the \texttt{pluck\_threshold} and the system is in the \texttt{RELEASED} state. Conversely, a \texttt{Note\_OFF} is issued when the value falls below a lower \texttt{release\_threshold}, and the system is in the \texttt{PLUCKED} state. This avoids instability from minor fluctuations near a single threshold and prevents rapid state toggling. A 4-sample moving average filter was implemented to reduce noise and brought the effective sampling period to 2 milliseconds with 1 millisecond jitter. The rotary encoder is used to initiate the firmware in a `calibration state' during which the threshold values can modified and written to FRAM. The threshold values are plotted alongside live sensor reading to help identify the correct pluck point. The calibration state also allows for identification of any malfunctioning sensor.
+
+
+
+
+FRAM data structure was in part inspired by the RIFF file format standard \cite{ibm_riff_1991}. The layout of data was in such a way as to potentially allow for calibration values to be stored to files and read from a storage device. Table~\ref{tab:fram-structure} shows the structure of data in the FRAM. The pluck and release `Chunk IDs' can be interpreted as a unsigned 32-bit integer, with the hexadecimal values \texttt{0x4D415849} and \texttt{0x4D494E49} respectively or as ASCII character strings \texttt{"MAXI"} and \texttt{"MINI"}. The firmware checks memory addresses \texttt{0x00} and \texttt{0x66} for the corresponding Chunk ID and if the value stored there is not correct, the memory is  assumed to be uninitialised. In that case, the tag value is written and a default value will be set for all thresholds in the chunk.
+
+\begin{table}
+    \centering
+    \begin{tabular}{|l|l|r|l|}
+        \hline
+        \textbf{Address} & \textbf{Field Name}     & \textbf{Size} & \textbf{C Type}        \\ \hline
+        \texttt{0x00}    & Pluck Chunk ID          & 4             & \texttt{uint32\_t    } \\ \hline
+        \texttt{0x04}    & Pluck Threshold Chunk   & 98            & \texttt{uint16\_t[49]} \\ \hline
+        \texttt{0x66}    & Release Chunk ID        & 4             & \texttt{uint32\_t    } \\ \hline
+        \texttt{0x6A}    & Release Threshold Chunk & 98            & \texttt{uint16\_t[49]} \\ \hline  
+    \end{tabular}
+    \caption{Calibration data layout in non-volatile memory.}
+    \label{tab:fram-structure}
+\end{table}
+
 \subsubsection{Finite State Machine}
+
+
 \subsubsection{Hysteresis}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.66\linewidth]{img/jack-states.pdf}
+    \caption{Plot illustrating hysteresis as two thresholds. Plot shows a full key press and release event. After passing the pluck threshold, the key enters a \texttt{PLUCKED} state. The key then enters the \texttt{RELEASED} state after passing the lower release threshold.}
+    \label{fig:jack-states}
+\end{figure}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{img/hysteresis.pdf}
+    \caption{Plot illustrating hysteresis by two thresholds, one for the pluck state and another for the release state.}
+    \label{fig:hysteresis}
+\end{figure}
 
 \subsection{Open Sourcing}
 
@@ -1195,9 +1220,7 @@ committing to an open source approach for all outputs of the project. The
 commitment to open sourcing encompassed all aspects of the system, including
 hardware schematics, firmware, and calibration data. Cost-effectiveness was also
 a central consideration. 
-% The system was initially developed for a 3-key prototype, shown in Figure
-% \ref{fig:3key}, and successfully scaled to 49 keys without significant
-% increases in cost or complexity. 
+
 Specifically, the system was designed to be easily assembled using resources
 typically available in a university-managed maker space. Components, such as
 QRE1113 optical sensors and CD4051BE multiplexers, are widely available from
@@ -1208,24 +1231,39 @@ using the Arduino IDE’s serial plotter and open source MIDI Monitor software
 \footnote{\url{https://github.com/krevis/MIDIApps}}, reducing reliance on
 proprietary tools and simplifying the process for users. 
 
+Following best practice in the DMI community \cite{calegario_documentation_2021}, and broader academia \cite{stall_journal_2023}, the digital assets for the interface were placed under version control and archived. These assets included,
 
-Reference repositories for this project can be found here:
+\begin{itemize}
+  \item Source Code
+  \item Textual Description(s)
+  \item Bill of Materials
+  \item Build and Operational Instructions
+  \item Photo(s) / Image(s) / Diagram(s) / Drawing(s)
+  \item STL model files
+  \item CAD PCB Schematice files
+\end{itemize}
 
-    \begin{itemize}
-        \item 
-        \emph{Firmware}:
-        \url{https://github.com/Nemus-Project/harpsichord-interface-firmware}
-        \item 
-        \emph{PCB CAD}:
-        \url{https://github.com/Nemus-Project/harpsichord-interface-cad}
-        \item 
-        \emph{Models}:
-        \url{https://github.com/Nemus-Project/harpsichord-interface-models}
-    \end{itemize}
+Digital assets were divided into three version control repositories:
 
+\begin{itemize}
+  \item
+    \emph{Firmware}: source code for final firmware, test firmware and documentation of dependencies \cite{hamilton_firmware_2025}
+  \item
+    \emph{PCB CAD}: EAGLE CAD files and bill of materials for electronics \cite{hamilton_cad_2025}
+  \item
+    \emph{Models}: STL 3D models for the jacks \cite{hamilton_models_2025}
+\end{itemize}
+
+These repositories are combined into a single meta repository. Each repository of information can be taken in isolation, allowing for substitutions in any component should there be a changes such as the optical sensor used, or the type harpsichord used. It is only when they are combined in \citetitle{hamilton_nemus_2025} that they represent the interface as it was deployed at Museo San Colombano.
+
+Archiving the project in this manner highlighted limitations within the frameworks that are currently available. A benefit of the Zenodo archive is its integration to GitHub. This allows a single project to be simultaneously maintained and archived for citation from a single location.
+Unfortunately, the GitHub integration for Zenodo does not currently provide a means for meta-repositories to be archived correctly \cite{zenodo_1036_2025}. This limitation necessitates the generation of a separate DOI for each component submodule, all of which reference the meta-repository.
+CAD files and surrounding support files also provide another point of failure with respect to digital preservation. For example, in the course of this thesis the popular Electronic Design Automation (EDA) software tool EAGLE was announced to be discontinued \cite{autodesk_eagle_2024} for the July 2026. A conscious decision was made to continue using the EAGLE format for the PCB design. Much in the same way as the discontinuation of Python 2 may be beneficial for archival purposes as ``advanced programming language that is guaranteed not to evolve anymore'' \cite{rougier_loupe_2020}, so to does the discontinuation of the EAGLE means that its XML file standard is now calcified and is unable changes. Instead, the EAGLE files can be used in conjunction with other EDA software such as the open source KiCAD \cite{kicad_eagle_2024}.
 
 \section{Mark 2}
 
+
+The Mark 2 interface demonstrates a refinement of the core technology and functionality of a multiple register system. The parametric placement of sensors shows that such a system is viable for altering existing interfaces in the same manner as the PianoBar from Moog Music \cite{computer_products_2005, mcpherson_portable_2013}. A move from THT to SMD components would be expected to reduce the footprint of the PCB by half \cite{prasad_surface_1997} allowing the space to be used for a refined op-amp design \cite{mcpherson_portable_2013} or the ability to install in more constrained spaces. The system would benefit from single piece mounting bracket which would allow for much more simplified installation. Given the open source nature of the project the advantages come from the ability to modify the design for a bespoke application.
 
 
 \begin{figure}
@@ -1235,13 +1273,52 @@ Reference repositories for this project can be found here:
     \label{fig:mark-2}
 \end{figure}
 
-After successful deployment at exhibition at San COlombano and verfification that system was robust enough to justify refinement, a second keyboard was commisioned with Roberto Livi.
+After successful deployment at exhibition at San Colombano and verification that system was robust enough to justify refinement, a second keyboard was commissioned with Roberto Livi.
 
 \subsection{Mechanical Hardware}
 \subsection{Electronics Hardware}
 
 \subsubsection{New Components}
+
+\begin{figure}[!b]
+  \centering
+  \begin{subfigure}[h]{0.5\linewidth}
+    \centering
+    \includegraphics[height=0.2\linewidth]{img/sensor_board_v2.png}
+    \caption{Sensor PCB}
+    \label{fig:sensor_v2}
+  \end{subfigure}
+  \begin{subfigure}[h]{0.4\linewidth}
+    \centering
+    \includegraphics[height=0.2\linewidth]{img/controller_board_v2.png}
+    \caption{Controller PCB}
+    \label{fig:controller_v2}
+  \end{subfigure}
+  \caption{PCB traces of the redesigned sensor and controller boards. Figure show the inclusion of FFC and JST-PH ports. Sensor board shows the solder pads used to configure its position in the keyboard}
+  \label{fig:pcb_v2}
+\end{figure}
+
+The controller PCB added JST-PH ports for the FRAM, rotary encoder, and reset switch. The JST and FFC ports ensured only a single orientation of connection was possible to prevent incorrect wiring during installation. The FFC cables on the sensor PCB (Figure~\ref{fig:internal}) permitted quick swapping of the sensor boards should any of the components on it fail.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\linewidth]{img/49-key-v2-front-internal.jpeg}
+  \caption{Inside the Mark 2 interface showing the FFC connecting sensor PCBs together.}
+  \label{fig:internal}
+\end{figure}
+% Transistor / Op-amp circuit could have been used similar to the one in \textbackslash cite\{mcpherson\}.
+
+
 \subsubsection{New Designs}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{img/sensor_board_v2.pdf}
+    \caption{Mark 2 Sensor board schematic. RGB LEDs \texttt{D}, signal paths \texttt{S}, optical sensors \texttt{Q}. The Solder Junction in the center illustrates the connection  between the multiplexer output and corresponding \texttt{S} channel assignment on the FFC cable.}
+    \label{fig:sensor-schematic-2}
+\end{figure}
+
+
 \subsubsection{Bracket Design}
 \subsection{Electronics Firmware}
 
