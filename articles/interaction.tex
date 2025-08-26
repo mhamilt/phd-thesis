@@ -415,13 +415,13 @@ By the 16th century it was typical for Italian harpsichords to have more than on
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.5\linewidth]{img/film-strip.jpeg}
+  \includegraphics[width=1\linewidth]{img/film-strip.jpeg}
   \caption{Photo series from a recording at 1000 frames per second illustrating jack displacement with the final frames are sequential and showing the pluck of the string.}
   \label{fig:pluck}
 \end{figure}
 
 
-\section{Design Constraints}
+\section{Design Constraints}\label{sec:design-constraints}
 
 Two sets of design constraints were drawn up, one for the final mechanical interface and another for the
 electronic sensor system. These constraints provided pillars on which to guide the design process and a set of criteria by which the mechanics and electronics could be evaluated.
@@ -454,26 +454,8 @@ can generate considerable force, achieving a jack's free motion and resistance
 is difficult without extensive mechanical intervention such as that carried out
 by Gillespie \cite{gillespie_haptic_1996}.
 
-The final design, shown in Figures \ref{fig:teaser} and \ref{fig:details}, is a
-49-key, two-register harpsichord keyboard replica. Since the Tagliavini
-collection hosts primarily early plucked stringed keyboards of Italian origin,
-the keyboard layout was deliberately modelled after early Italian harpsichords,
-leveraging the human tendency to be influenced by visual elements when making
-musical judgments \cite{tsay_sight_2013}. This effect is particularly relevant
-in musical instruments, as demonstrated by studies conducted by Fritz \emph{et
-al.} \cite{fritz_player_2012, fritz_soloist_2014, fritz_listener_2017}. Instead
-of attempting to mitigate this influence, the design embraces it. This
-phenomenon, akin to a `musical instrument McGurk effect’, is one of the reasons
-why the electronics have been concealed from view. The aesthetics of the
-interface enhance its likelihood of being perceived as an `authentic' musical
-instrument. Given the extensive research into modelling and recreating piano
-action \cite{cadoz_modular_1990, gillespie_haptic_1996,
-timmermans_multibody-based_2020}, the visual component may provide the final
-persuasive element necessary for acceptance, similar to the way visual
-perception affects judgments of musical performance \cite{tsay_sight_2013}.
-
-
-
+% The final design, shown in Figures \ref{fig:teaser} and \ref{fig:details}, is a
+% 49-key, two-register harpsichord keyboard replica. 
 
 \begin{figure}  
   \centering
@@ -576,8 +558,8 @@ detecting a threshold.
 
 Reed switch consist of two flexible ferromagnetic metal contacts in a sealed glass tube with containing an inert gas or a vacuum. 
 The contacts are arrange in such a way that a strong enough magnetic field will force the contacts to make or break a circuit.
-A magnets can be attached to the jack so that it interacts with the reed switch atthe pluck point. 
-The reed can also be mounted in such a way to allow for fine adjustment. However, this places calibration in entirely the physical domain and the scalability of such a slution was not viable for the intended function. 
+A magnets can be attached to the jack so that it interacts with the reed switch at the pluck point. 
+The reed can also be mounted in such a way to allow for fine adjustment. However, this places calibration in entirely the physical domain and the scalability of such a solution was not viable for the intended function. 
 The hall sensors could be partially calibrated physically by adjusting their position and then further refined in software, however the process to do so for a single key was considered too time consuming.
 Making the sensors adjustable was also not considered feasible given the constraints on the internal space. 
 Finally embedding magnets into the jack body was also did not satisfy the criteria of being non-invasive and also posed too much risk of potential damage.
@@ -585,10 +567,8 @@ Finally embedding magnets into the jack body was also did not satisfy the criter
 A light dependant resistor (LDR) was trialled by mounting it to the jack rail, which sits above the jacks to limit there movement after plucking. As jacks moved towards the rail, they would reduce the
 light that was let through to the sensors. The LDR provided a signal from which plucks could be determined, however they were very sensitive to lighting conditions. This would mean any change in lighting would need to be accounted for, all a separate light balance system would need to be connected to compensate. The LDRs would also need to be installed outside of the internal cavity meant hiding the remainder of the electronics would be more difficult. Though the LDR was not ultimately used, it did imply that perhaps light could be used so long as it could be supplied localy and not be visible to the user.
 
-This line of enquiry led to following from the work in \textcite{mcpherson_portable_2013, moro_platform_2020}. A system was created using the Fairchild QRE1113 \footnote{Fairchild, now ON Semiconductor,
-QRE1113 datasheet
-\url{https://www.onsemi.com/download/data-sheet/pdf/qre1113-d.pdf}}. The QRE1113
-is an optical sensor composed of an infrared (IR) LED and a phototransistor sensitive to IR light (Figure~\ref{fig:simple-schematic}). The
+This line of enquiry led to following from the work in \textcite{mcpherson_portable_2013, moro_platform_2020}. A system was created using the Fairchild QRE1113 \footnote{Fairchild, now ON Semiconductor, QRE1113 datasheet \url{https://www.onsemi.com/download/data-sheet/pdf/qre1113-d.pdf}}. 
+The QRE1113 is an optical sensor composed of an infrared (IR) LED and a phototransistor sensitive to IR light (Figure~\ref{fig:simple-schematic}). The
 phototransistor of QRE1113 provides a signal on how much IR light is present, more precisely how much IR light is reflected by a surface from the LED. Since reflected
 light will be proportional to the distance of a surface QRE1113 typically functions as a
 close-proximity distance sensor. Distance is the way in which the instruments
@@ -603,24 +583,21 @@ which those projects took inspiration. However, those projects focussed on the d
   \label{fig:cross-section}
 \end{figure}
 
-To address this restriction, we looked toward another common application of the QRE1113, which is within line following robots \cite{ramesh_turning_2017}. For line following,
+To address this restriction on orientation, we looked toward another common application of the QRE1113, which is as the central component of line following robots \cite{ramesh_turning_2017}. 
+For a line following robot,
 an array of optical sensors are used in conjunction with either low or high reflectance tape. A
 motorised system can then use this data to follow the line of tape, the reflectance providing a clear reference, and adjust
 its position accordingly. The same principles was used, but rather than single shade, a greyscale gradient was applied to the jack body (Figure~\ref{fig:jack-tags}).
 
-For the first iteration this was performed on an inkjet printer and double-sided
-tape. For the final iteration the stickers were printed on (Coala, 1D 100 Gloss
-P, gloss, white, permanent adhesive, 300g/m2, 100 µm, 1370mm x 50.00m,
-Solvent/Latex/UV) using a HP Latex 115 and then cutout with a Summa 150 roll
-cutter. The printer and roll cutter greatly reduced the manual labour for
-cutting the tags required, allowing the process process to scale from the six jacks of the prototype to the 98 jacks of Mark 1 model.
+For the first iteration and as a proof of concept, the gradient was printed on an inkjet printer and attached to the jack body with double-sided
+tape. For the final iteration the gradients were printed on a permanent adhesive vinyl material
+\footnote{Coala, 1D 100 Gloss P, gloss, white, 300g/m2, 100 µm, 1370mm x 50.00m} using a HP Latex 115 large format printer. The print was then passed through a Summa 150 roll
+cutter along with a vector file with the sticker outline. The cutter roll provided an accurate means to cut the gradients to the correct dimensions for the jack body as well as allow for surplus printing to accommodate wastage. The combined printer and cutter process greatly reduced the amount of manual labour, which meant here was compliance with the \textit{Scalability} criterion when moving from the six jacks of the prototype to the 98 jacks of the Mark 1 model.
 
-An initial sticker design was used that contained only the gradient. It was
-found that the jacks were sticking in their slots and the edges on the stickers
-easily peeled around the printing The sticker was redesigned to be the full
-length of the jack which avoided the problem of peeling. The larger are also
-mean the stickers adhered better to the jack Some trimming was still required of
-each sticker to avoid them adding extra resistance to the jack's movement.
+The initial sensor surface design contained only the gradient and no excess material. It was
+found that this approach resulted in the jacks becoming stuck in their slots as they push the edge of the surface against the walls of the jack slot. Furthermore, surface edges ending in havy ink print tended to curl, exacerbating this problem further.
+The stickers were redesigned to be cover the full
+length of the jack, providing a greater surface area and thus better adherence to the jack body. The longer length meant there was no printing near the edge, which solved the problem of curling edges. 
 
 During testing it was found that their was a considerable amount cross-talk
 between adjacent sensors. This meant the reading from key would be affected by
@@ -628,10 +605,8 @@ the movement of the key next to it. The cross-talk was assumed to be as a result
 of light reflecting from other jacks. Given that IR is used this was difficult
 to confirm by sight. A set of baffles was designed for the PCB that would wrap
 round the jack and stop light from other jacks or sensors. The baffles were
-printed on a BAMBU X1 3D printers using PLA plastic. A dark pigmented PLA was
-used to avoid IR light simply being diffused. After the baffles were fitted, the
-cross-talk was eliminated.
-
+printed on a BAMBU X1 3D printers using polylactic acid (PLA) plastic. 
+A dark pigmented PLA was used to avoid IR light simply being diffused. After the baffles were fitted, the cross-talk was eliminated.
 
 \subsection{Prototype PCB}
 
@@ -651,31 +626,28 @@ A prototype PCB (Figure~\ref{fig:prototype-pcb}) was drafted using the EAGLE CAD
     \label{fig:prototype-pcb-mount}
 \end{figure}
 
-This would allow the PCB to be mounted to an adjustable 3D printed bracket which was fitted to the side of the wrestplank. The bracket was designed to allow adjustment in the distance between the sensor and the gradient tag. The intention was for the final PCB to mounted horizontally on the underside of the wrestplank. While assembling the prototype PCB, it was found that the optical sensor contacts were too fragile and could be easily broken in this process. An end-mount approach like that taken in \textcite{mcpherson_portable_2013} was attempted, but the short side of the jack body, at a width of 4.30 millimetres, presented a much smaller target than the keyboard keys. Slight deviations in sensor alignment resulted in drastic changes to the range of the output signal. Instead, the optical sensors would need to be soldered fluch against the PCB, which would require the PCB to orientate vertically.
+This would allow the PCB to be mounted to an adjustable 3D printed bracket which was fitted to the side of the wrestplank. The bracket was designed to allow adjustment in the distance between the sensor and the gradient tag. The intention was for the final PCB to mounted horizontally on the underside of the wrestplank. While assembling the prototype PCB, it was found that the optical sensor contacts were too fragile and could be easily broken in this process. An end-mount approach like that taken in \textcite{mcpherson_portable_2013} was attempted, but the short side of the jack body, at a width of 4.30 millimetres, presented a much smaller target than the keyboard keys. Slight deviations in sensor alignment resulted in drastic changes to the range of the output signal. Instead, the optical sensors would need to be soldered flush against the PCB, which would require the PCB to orientate vertically.
 
 \section{Mark 1: San Colombano}
 
-The first full version of the interface was designed for exhibition at San Colombano, herein referred to as Mark 1.
-A modular approach was taken during the design and fabrication of Mark 1. Development was divided into the mechanical hardware, electronic hardware, electronic firmware, and audio software. This allowed construction to begin on the mechanical interface while prototyping still continued. Excess space was stipulated as part of the design to be as accommodating as possible to any final sensor system. The final dimensions in the design also dictated an upper limit to the internal footprint of electronics.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\linewidth,angle=270]{img/all_comparison-90.pdf}
-    \caption{Scale comparison: (from left to right) the 1547 Trasuntino, 49-key `Mark 1' model, and the 3-key prototype.}
-    \label{fig:compare}
-\end{figure}
+The first, complete version of the interface was designed for exhibition at San Colombano, herein referred to as Mark 1.
+A modular approach was taken during the design and fabrication of Mark 1. Development was divided into the mechanical hardware, electronics, and audio software. The electronics were further divided as hardware and firmware. This modular approach allowed construction to begin on the mechanical interface while prototyping still continued. Concurrent development allowed for changes or limitations in one module could be accounted for in the others. 
 
 \subsection{Mechanical Hardware}
 
+The mechanical hardware was co-designed with luthier Roberto Livi and curator of San Colombano Catalina Vicens using the design constraints in Section~\ref{sec:design-constraints}. The hardware was then commissioned for fabrication with Roberto Livi.
+
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{img/3-49-key_scale.pdf}
-    \caption{Scale comparison of the 3-key model used for prototyping and the 49-key model for the San Colombano Exhibition.}
-    \label{fig:3-49-comparison}
+    \includegraphics[width=0.5\linewidth]{img/49-key-model-cross-section.pdf}
+    \caption{Cross-section of keyboard mechanics by Roberto Livi. Not the original design was to accommodate a horizontal circuit board of dimensions 50mm by 6mm.}
+    \label{fig:mark-1-cs}
 \end{figure}
 
-The keyboard was designed to replicate the tactile and aesthetic sensations of
-playing a historical Italian harpsichord. Traditional materials were used,
+An internal cavity with excess space was stipulated as part of the design in order to provide flexibility with the potential PCB size. The final dimensions in the design also dictated an upper limit to the internal footprint of electronics (Figure~\ref{fig:mark-1-cs}).
+
+The keyboard was designed to replicate the tactile sensations and aesthetics of
+a historical Italian harpsichord. Traditional materials were used,
 including walnut for the wrest plank, chestnut for the key levers, boxwood and
 ebony for key covers, and cypress for the case and soundboard. The 98 jacks were
 made from beech, fitted with brass springs and natural seagull feather plectra.
@@ -685,40 +657,23 @@ been conceived with two sets of 8-foot strings. An exception was made for the
 short octave --- the assigning of common keys in the first octave instead of a
 chromatic scale --- typically found in Italian harpsichords, which was replaced
 by a standard octave layout to more easily accommodate the interaction with
-commercial sample libraries. 
+commercial samplers. 
 
-% % Option 2
 \begin{figure}
     \centering
-     \begin{subfigure}[h]{0.4\linewidth}
-        \centering
-        \includesvg[inkscapelatex=false, width = \linewidth]{img/log_harp_outline}            
-        \caption{logarithmic shape}    
-        \label{fig:log-harp}
-    \end{subfigure}
-
-    
-    \begin{subfigure}[h]{0.4\linewidth}
-        \centering
-        \includesvg[inkscapelatex=false, width = \linewidth]{img/49-key_outline}        
-        \caption{rectangular shape}
-        \label{fig:rect-harp}
-    \end{subfigure}
-    \caption{Logarithmic shape of an original Trasuntino harpsichord
-    contrast with the rectangular shape of the replica}    
-
-    \label{fig:log-harp-comp}
+    \includegraphics[width=0.75\linewidth,angle=270]{img/all_comparison-90.pdf}
+    \caption{Scale comparison: (from left to right) the 1547 Trasuntino, 49-key `Mark 1' model, and the 3-key prototype. The Trasuntino provides an example of the `logarithmic' form of a traditional harpsichord.}
+    \label{fig:compare}
 \end{figure}
 
 The rectangular poplar frame also deviates from the traditional logarithmic
-(Figure \ref{fig:log-harp-comp}) form to allow for the installation of the
+(Figure \ref{fig:compare}) form to allow for the installation of the
 electronic sensors, as visible in Figure \ref{fig:49-key-bottom}, without
 compromising the visual or tactile authenticity. Two string choirs, crafted from
 yellow brass wire and anchored with wrought iron pins, were tensioned to
 replicate authentic plucking resistance. Felt strips were added to dampen
-vibrations. The result is an interface that combines the mechanical action of
-keys with synthetic sound generation, preserving a real harpsichord's tactile
-qualities.
+vibrations. The result is an interface with the mechanical action of
+keys that preserves a real harpsichord's haptic qualities.
 
 \begin{figure}
     \centering    
@@ -729,6 +684,49 @@ qualities.
 
 \subsubsection{Visual Perception of Musical Instruments}
 
+
+The aesthetics of the instrument well careful considered during the design process.
+
+Since the Tagliavini
+collection hosts primarily early plucked stringed keyboards of Italian origin,
+the keyboard layout was deliberately modelled after early Italian harpsichords.
+
+Often for haptic DMI projects, much of the effort is placed into the design and functionality of electronic components but not much is done with respect to the visual stimulus.
+The impact of visual stimulius should not be underplayed, in particular when it comes to musicians.
+
+The studies of \textcite{fritz_player_2012, fritz_soloist_2014, fritz_listener_2017} covered briefly in Section~\ref{sec:reproduction-or-renovation} illustrates the need for restriction in visual stimulus to avoid influencing a musician when they are listening.
+
+\textcite{tsay_sight_2013} also discusses the impact of quality assessment by ``novices and experts'' alike. In all of those studies, the influence of the visual stimulus was something to be avoided.
+Instead of trying to mitigate this influence, the design embraces it and attempts to leverage it. This phenomenon, akin to a `musical instrument McGurk effect’ \cite{mcgurk_hearing_1976}, is one of the reasons why the electronics have been concealed from view. 
+
+The Mcgurk effect is perhaps an apt example, as the effect itself is proposed to extend beyond speech and into the domain of visual musical cues \cite{saidana_mcgurk_1990}. The
+
+The aesthetics of the interface enhance its likelihood of being perceived as an `authentic' musical
+instrument. 
+
+
+
+
+ 
+
+Given the extensive research into modelling and recreating piano
+action \cite{cadoz_modular_1990, gillespie_haptic_1996,
+timmermans_multibody-based_2020}, the visual component may provide the final
+persuasive element necessary for acceptance, similar to the way visual
+perception affects judgments of musical performance.
+
+
+
+
+
+
+
+% A common piece of advice for those purchasing a guitar is for them to wear a blindfold as they try instruments. This is to avoid the buyer being influenced by the `look' of the instrument over the sound or the feel to the detriment to their comfort.
+
+
+
+\cite{saidana_mcgurk_1990} that Mcgurk not restricted to speech.
+\cite{politzer_mcgurk_2019} that
 Thesis draws upon the research carried out by Fritz et al between 2012 and 2018
 that concerned double blind studies using old cremonese violins, specifically
 Guarneri del Gesù and Antonio Stradivari.
@@ -774,22 +772,22 @@ reliably trigger MIDI playback. Modifying an existing harpsichord for testing
 was considered but ultimately discarded due to significant internal measurement
 and layout discrepancies. Instead, a custom 3-key harpsichord mechanism (Figure
 \ref{fig:3key}) was used as a foundation for prototyping. This approach followed
-a methodology similar to that used in Timmermans \emph{et al.}'s Haptic Key
-project \cite{timmermans_multibody-based_2020}, since the 3-key model enabled
+a methodology similar to that used in the \textcite{timmermans_multibody-based_2020} Haptic Key
+project, since the 3-key model enabled
 iterative testing of individual components, including sensor placement, signal
 processing, and mechanical tolerances, before upscaling. 
 
 
-\subsubsection{Arduino Nano BLE}\label{nano-ble}
+\subsubsection{Arduino Nano 33 BLE}\label{nano-ble}
 
-Arduino Nano BLE was chosen for a few reasons. The Nano form factor was
+Arduino Nano 33 BLE (Bluetooth Low Energy) microcontroller was chosen for a few reasons. The Nano form factor was
 appealing as it would allow for easy changes between chipsets without requiring
 any rewiring and thus no new PCBs would need to be created if a better
 alternative was found later in the project. Another benefit to the Arduino Nano
 boards was that typically had native-USB meaning the could be programmed as a
 hardware USB MIDI device directly.
 
-The Nano BLE was used in the initial stages for its integrated inertial
+The Nano 33 BLE was used in the initial stages for its integrated inertial
 measurment unit.
 
 When it was finalised that the project would proceed using the QRE1113 a number
@@ -799,17 +797,17 @@ The MCUs considered were the Arduino Nano 33 IoT, Arduino Nano 33 BLE, Arduino
 Nano ESP32 and STM32 NUCLEO-L031K6.
 
 A rough performance test was later carried out using an STM32 NUCLEO-L031K6, a
-Nano ESP32 and the BLE. The Nano BLE was found to be more performative. To
+Nano ESP32 and the BLE. The Nano 33 BLE was found to be more performative. To
 execute a single sensor read cycle of the firmware the STM32 took 40ms, and both
-the Nano ESP32 and Nano BLE required 11ms on average. The Nano ESP32 had high
-variability so it was decided to continue with the Nano BLE. 
+the Nano ESP32 and Nano 33 BLE required 11ms on average. The Nano ESP32 had high
+variability so it was decided to continue with the Nano 33 BLE. 
 
 % Further discussion of using ESP32 continues in \textbackslash section\{Going
 % forward\}
 
 BLE functionality also meant if the cable connection between the nano and
 computer running audio synthesis was impractical, BLE MIDI was available as a
-fallback. The Nano BLE also has a 12-bit DAC, which provided a contingency
+fallback. The Nano 33 BLE also has a 12-bit DAC, which provided a contingency
 should the default 10-bit not be sensitive enough for the signal from the
 sensors.
 
@@ -882,11 +880,11 @@ not be visible, a simpler design approach was taken.
 \subsubsection{Multiplexer}
 
 The number of available analogue-to-digital channels (ADC) on the Arduino is limited to eight. For the prototype, sensors outputs were connected directly to the available ADCs.
-One of the first a `problems of scale', introduced when expanding from six jacks of the prototype model to the Mark 1, was how to accommodate 98 optical sensors. To overcome the Arduino's ADC limitation, a CD4051BE Texas Instruments multiplexer was introduced.  A multiplexer (multiplexor, MUX) a circuit that routes a common pin to one of several inputs or output. The MUX would provide a means to connect multiple sensor output signals to a single ADC pin on the Arduino. Available GPIO pins on the Arduino allowed for programmatic control of signal routing. This is the same way in with the ADCs themselves are routed on the Arduino \cite{nordic_nrf52840_2025}, meaning there is a cascade of two mux circuits. An 8-channel multiplexer was used in order to mitigate the problems typically associated with cascading multiplexers, such as increased signal settle time and increased noise. The sensor outputs were then divided between two microcontrollers.  Seven of the available eight channels on the CD4051BE were used, which provided a clean division of seven sensors per sensor board with seven sensor boards to cover 49 jacks in a register. In total, 14 sensor boards and two controller boards were installed. Details on the sensor and controller boards are given in the next section.
+One of the first a `problems of scale', introduced when expanding from six jacks of the prototype model to the Mark 1, was how to accommodate 98 optical sensors. To overcome the Arduino's ADC limitation, a \texttt{CD4051BE} Texas Instruments multiplexer was introduced.  A multiplexer (multiplexor, MUX) a circuit that routes a common pin to one of several inputs or output. The MUX would provide a means to connect multiple sensor output signals to a single ADC pin on the Arduino. Available GPIO pins on the Arduino allowed for programmatic control of signal routing. This is the same way in with the ADCs themselves are routed on the Arduino \cite{nordic_nrf52840_2025}, meaning there is a cascade of two mux circuits. An 8-channel multiplexer was used in order to mitigate the problems typically associated with cascading multiplexers, such as increased signal settle time and increased noise. The sensor outputs were then divided between two microcontrollers.  Seven of the available eight channels on the \texttt{CD4051BE} were used, which provided a clean division of seven sensors per sensor board with seven sensor boards to cover 49 jacks in a register. In total, 14 sensor boards and two controller boards were installed. Details on the sensor and controller boards are given in the next section.
 
 \subsection{Printed Circuit Boards}
 
-To ensure stable connection, reduce the footprint of the circuit and fix the pitch spacing of the sensors to match the jacks, two printed circuit boards (PCBs) were designed: the sensor board and the controller board.
+To ensure stable connection, reduce the footprint of the circuit and fix the pitch spacing of the sensors to match the jacks, two PCBs were designed: the sensor board and the controller board.
 
 \subsubsection{Sensor Board}
 
@@ -898,7 +896,7 @@ Trace length between the output signal of the sensor and the MUX channel were ke
   \centering
   \includegraphics[width=0.5\linewidth]{img/qre1113-schematic.pdf} 
   \caption{Optical sensor in a simple voltage divider circuit. \texttt{V\_OUT}
-  is routed to one of 8 channels on the CD4051BE multiplexer.}
+  is routed to one of 8 channels on the \texttt{CD4051BE} multiplexer.}
 
   \label{fig:simple-schematic}
 \end{figure}
@@ -916,7 +914,7 @@ contained the following components:
     \item 7 QRE1113 optical sensors.
     \item 7 100 $\Omega$ resistors and 7 10 k$\Omega$ resistors (later reduced
     to one resistor per board).
-    \item 1 Texas Instruments CD4051BE multiplexer for signal aggregation.
+    \item 1 Texas Instruments \texttt{CD4051BE} multiplexer for signal aggregation.
     \item 7 WS2812 RGB LEDs with integrated driver.
 \end{itemize}
 
@@ -1238,7 +1236,7 @@ a central consideration.
 
 Specifically, the system was designed to be easily assembled using resources
 typically available in a university-managed maker space. Components, such as
-QRE1113 optical sensors and CD4051BE multiplexers, are widely available from
+QRE1113 optical sensors and \texttt{CD4051BE} multiplexers, are widely available from
 commercial resellers, while the modular PCB design ensures easy replication and
 maintenance. The Arduino Nano was chosen as the core microcontroller format for
 its compatibility with open source tools. Calibration workflows were optimised
