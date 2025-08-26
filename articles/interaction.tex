@@ -475,7 +475,7 @@ perception affects judgments of musical performance \cite{tsay_sight_2013}.
 
 
 
-\begin{figure}[!b]  
+\begin{figure}  
   \centering
   \includegraphics[width=\linewidth,trim={0 0 0 0.5cm},clip]{img/tagging-jacks-3.jpg} 
   \caption{Gradient stickers applied to the side of the jack body. The coarse gradient scale was selected to maximise signal excursion while preserving signal readout stability.}
@@ -509,7 +509,7 @@ from which it can be identified where those opportunities for new expression lie
 
 A modular system of printed circuit boards (PCBs) was designed to manage the
 sensors and process their output. The system uses 49 optical sensors distributed
-across seven boards containing 7 sensors each. The PCBs were secured to the
+across seven boards containing seven sensors each. The PCBs were secured to the
 underside of the wrest plank and above the keys (Figure
 \ref{fig:49-key-bottom}), allowing them to be adjusted during installation.
 Ribbon cables connected the PCBs, providing flexibility during assembly while
@@ -688,7 +688,7 @@ by a standard octave layout to more easily accommodate the interaction with
 commercial sample libraries. 
 
 % % Option 2
-\begin{figure}[!b]
+\begin{figure}
     \centering
      \begin{subfigure}[h]{0.4\linewidth}
         \centering
@@ -720,7 +720,7 @@ vibrations. The result is an interface that combines the mechanical action of
 keys with synthetic sound generation, preserving a real harpsichord's tactile
 qualities.
 
-\begin{figure}[!t]
+\begin{figure}
     \centering    
     \includegraphics[width=\linewidth]{img/3-key-side.png}
     \caption{ 3-Key Model Harpsichord Mechanism.}
@@ -882,7 +882,7 @@ not be visible, a simpler design approach was taken.
 \subsubsection{Multiplexer}
 
 The number of available analogue-to-digital channels (ADC) on the Arduino is limited to eight. For the prototype, sensors outputs were connected directly to the available ADCs.
-One of the first a `problems of scale', introduced when expanding from six jacks of the prototype model to the Mark 1, was how to accommodate 98 optical sensors. To overcome the Arduino's ADC limitation, a CD4051BE Texas Instruments multiplexer was introduced.  A multiplexer (multiplexor, MUX) a circuit that routes a common pin to one of several inputs or output. The MUX would provide a means to connect multiple sensor output signals to a single ADC pin on the Arduino. Available GPIO pins on the Arduino allowed for programmatic control of signal routing. This is the same way in with the ADCs themselves are routed on the Arduino \cite{nordic_nrf52840_2025}, meaning there is a cascade of two mux circuits. An 8-channel multiplexer was used in order to mitigate the problems typically associated with cascading multiplexers, such as increased signal settle time and increased noise. The sensor outputs were then divided between two microcontrollers.  Seven of the available eight channels on the CD4051BE were used, which gavee a clean division of seven sensors per sensor board, 7 sensor boards per register giving coverage to the 49 jacks. In total, 14 sensor boards and two controller boards were installed. Details on the sensor and controller boards are given in the next section.
+One of the first a `problems of scale', introduced when expanding from six jacks of the prototype model to the Mark 1, was how to accommodate 98 optical sensors. To overcome the Arduino's ADC limitation, a CD4051BE Texas Instruments multiplexer was introduced.  A multiplexer (multiplexor, MUX) a circuit that routes a common pin to one of several inputs or output. The MUX would provide a means to connect multiple sensor output signals to a single ADC pin on the Arduino. Available GPIO pins on the Arduino allowed for programmatic control of signal routing. This is the same way in with the ADCs themselves are routed on the Arduino \cite{nordic_nrf52840_2025}, meaning there is a cascade of two mux circuits. An 8-channel multiplexer was used in order to mitigate the problems typically associated with cascading multiplexers, such as increased signal settle time and increased noise. The sensor outputs were then divided between two microcontrollers.  Seven of the available eight channels on the CD4051BE were used, which provided a clean division of seven sensors per sensor board with seven sensor boards to cover 49 jacks in a register. In total, 14 sensor boards and two controller boards were installed. Details on the sensor and controller boards are given in the next section.
 
 \subsection{Printed Circuit Boards}
 
@@ -890,11 +890,11 @@ To ensure stable connection, reduce the footprint of the circuit and fix the pit
 
 \subsubsection{Sensor Board}
 
-Sensor board contains components required for the measurment of vertical jack displacement. Dividing the sensors across multiple boards reduced manufacturing costs, allowed for easier installation and provided some room for adjustment in both the distance between sensors and the surface but also the centre point to the corresponding 7 jacks.
+Sensor board contains components required for the measurement of vertical jack displacement. Dividing the sensors across multiple boards reduced manufacturing costs, allowed for easier installation and provided some room for adjustment in both the distance between sensors and the surface but also the centre point to the corresponding seven jacks.
 
 Trace length between the output signal of the sensor and the MUX channel were kept as short as possible to minimise noise.
 
-\begin{figure}[!b] 
+\begin{figure}
   \centering
   \includegraphics[width=0.7\linewidth,trim={0 0.5cm 0 0.5cm},clip]{img/simple-schematic-bw-.jpg} 
   \caption{Optical sensor in a simple voltage divider circuit. \texttt{V\_OUT}
@@ -903,12 +903,7 @@ Trace length between the output signal of the sensor and the MUX channel were ke
   \label{fig:simple-schematic}
 \end{figure}
 
-\begin{figure}[h]{0.4\linewidth}
-    \centering
-    \includesvg[inkscapelatex=false, width=\linewidth]{img/p}            
-    \caption{logarithmic shape}    
-    \label{fig:log-harp}
-\end{figure}
+
 
 
 The final sensor system utilised QRE1113 optical sensors, known for their small
@@ -939,7 +934,7 @@ infrared light reflected from nearby surfaces. The gradient stickers affixed to
 each jack provided a surface with varying reflectivity for the sensors, which
 were used to track jack displacement throughout the key dip. 
 
-\begin{figure}[!t]
+\begin{figure}
     \centering
     \includegraphics[width=0.8\linewidth,trim={0 2cm 0 2.5cm},clip]{img/baffles.png}
     \caption{Baffles designed to prevent cross-talk between adjacent sensors.}
@@ -958,10 +953,11 @@ providing visual feedback. The LEDs are controlled via a pulse width modulation
 multiplexer is taken from each PCB and routed to a separate ADC channel of the
 Arduino. Multiplexer channel select and LED PWM signals are daisy-chained
 through each PCB (Figure \ref{fig:sensor-reverse}).
+
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{img/pcb_sensor_schematic_v1.pdf}
-    \caption{Mark 1 Sensor board schematic. Component labels \texttt{D} correspond to LEDs and \texttt{Q} to optical sensors.  Labels point in the direction of current flow.}
+    \includesvg[inkscapelatex=false, width=\linewidth]{img/pcb_sensor_schematic_v1.svg}            
+        \caption{Mark 1 Sensor board schematic. Component labels \texttt{D} correspond to LEDs and \texttt{Q} to optical sensors.  Labels point in the direction of current flow.}
     \label{fig:sensor-schematic-1}
 \end{figure}
 
@@ -1037,7 +1033,7 @@ continuously in this iteration, future designs may incorporate power-saving
 measures, such as dynamic modulation of the optical emitters found in the
 McPherson piano \cite{mcpherson_portable_2013}.
 
-\begin{figure}[!b] 
+\begin{figure}
   \centering
   \includegraphics[width=\linewidth,trim={0 1.5cm 0 1.5cm},clip]{img/sensor-board-w-baffles.jpeg}
     \\
@@ -1302,7 +1298,7 @@ After successful deployment at exhibition at San Colombano and verification that
 
 \subsubsection{New Components}
 
-\begin{figure}[!b]
+\begin{figure}
   \centering
   \begin{subfigure}[h]{0.5\linewidth}
     \centering
