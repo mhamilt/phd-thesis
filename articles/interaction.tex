@@ -16,7 +16,7 @@ In a collaboration between Museo San Colombano and the NEMUS project, we
 designed an electronically augmented replica of a historical harpsichord
 keyboard for interaction with digital musical instruments (Figure
 \ref{fig:mark2}). The goal was to enable visitors to experience the
-harpsichord’s unique vibro-tactile qualities without risking damage to the
+harpsichord’s unique vibrotactile qualities without risking damage to the
 original artifacts and offer an immersive learning environment. The keyboard
 incorporates an optical sensor system and digital sound synthesis to replicate
 the physical feedback and acoustic response of an original 15th century
@@ -193,12 +193,12 @@ antique keyboard instruments, and upcoming projects such as Rem@ke
 instrument and performer.
 
 
-\begin{figure*}
+\begin{figure}
 \centering
 \includegraphics[width=0.8\linewidth]{img/details.jpg}
 \caption{Details of the replica, including the key slots and sides, keys, and jacks with seagull plectra.}
 \label{fig:details}
-\end{figure*}
+\end{figure}
 
 \subsection{Musical Haptics}\label{musical-haptics}
 
@@ -896,7 +896,7 @@ Trace length between the output signal of the sensor and the MUX channel were ke
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.7\linewidth,trim={0 0.5cm 0 0.5cm},clip]{img/simple-schematic-bw-.jpg} 
+  \includegraphics[width=0.5\linewidth]{img/qre1113-schematic.pdf} 
   \caption{Optical sensor in a simple voltage divider circuit. \texttt{V\_OUT}
   is routed to one of 8 channels on the CD4051BE multiplexer.}
 
@@ -957,13 +957,13 @@ through each PCB (Figure \ref{fig:sensor-reverse}).
 \begin{figure}
     \centering
     \includesvg[inkscapelatex=false, width=\linewidth]{img/pcb_sensor_schematic_v1.svg}            
-        \caption{Mark 1 Sensor board schematic. Component labels \texttt{D} correspond to LEDs and \texttt{Q} to optical sensors.  Labels point in the direction of current flow.}
+        \caption{Mark 1 Sensor board schematic. `\texttt{D}' labels correspond to LEDs and `\texttt{Q}' labels are the optical sensors. `\texttt{C}' labels show connection to corresponding multiplexer channel. Connection labels point in the direction of current flow.}
     \label{fig:sensor-schematic-1}
 \end{figure}
 
 Figure~\ref{fig:sensor-schematic-1} shows the schematic for the Mark 1 Sensor board.
 
-Of note are the optical sensor signal output routed through the multipexer (\texttt{SIG}) which was wired separately to the controller board. This was in art to make space for a multiplexer interrupt control (\texttt{INT}) which was ultimately never used. For the Mark 1 a solution had not yet been found for allowing all signals to flow through the sensor boards.
+Of note are the optical sensor signal output routed through the multiplexer (\texttt{SIG}) which was wired separately to the controller board. This was in art to make space for a multiplexer interrupt control (\texttt{INT}) which was ultimately never used. For the Mark 1 a solution had not yet been found for allowing all signals to flow through the sensor boards.
 
 needed a separate cable loom
 Means its place in the circuit is fixed
@@ -983,15 +983,12 @@ solder terminals for the sensor board channels, the controller board contained:
     \label{fig:sensor-schematic-1}
 \end{figure}
 
-
-
 \begin{itemize}
     \item 1 Arduino Nano 33 BLE.
     \item 1 Fujitsu MB85RS64 SPI Ferroelectric RAM chip.
     \item 1 EC11 combined rotary encoder and tactile switch.
-    % \item 1 DFROBOT DFR0785 Tactile Switch
+    \item 1 Tactile Switch
 \end{itemize}
-
 
 The Arduino Nano's small form factor made fitting the board inside the
 harpsichord easier and also allowed for testing of multiple chipsets. The 33 BLE
