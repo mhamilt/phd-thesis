@@ -580,7 +580,16 @@ A light dependant resistor (LDR) was trialled by mounting it to the jack rail, w
 light that was let through to the sensors. The LDR provided a signal from which plucks could be determined, however they were very sensitive to lighting conditions. This would mean any change in lighting would need to be accounted for, all a separate light balance system would need to be connected to compensate. The LDRs would also need to be installed outside of the internal cavity meant hiding the remainder of the electronics would be more difficult. Though the LDR was not ultimately used, it did imply that perhaps light could be used so long as it could be supplied localy and not be visible to the user.
 
 This line of enquiry led to following from the work in \textcite{mcpherson_portable_2013, moro_platform_2020}. A system was created using the Fairchild QRE1113 \footnote{Fairchild, now ON Semiconductor, QRE1113 datasheet \url{https://www.onsemi.com/download/data-sheet/pdf/qre1113-d.pdf}}. 
-The QRE1113 is an optical sensor composed of an infrared (IR) LED and a phototransistor sensitive to IR light (Figure~\ref{fig:simple-schematic}). The
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\linewidth]{img/qre1113-schematic.pdf} 
+  \caption{Optical sensor in a simple voltage divider circuit.}
+  \label{fig:simple-schematic}
+\end{figure}
+
+
+The QRE1113 is an optical sensor composed of an infrared (IR) LED and a phototransistor sensitive to IR light (Figure~\ref{fig:simple-schematic}). The optical sensor can wired in a simple voltage divider circuit such as in Figure~\ref{fig:simple-schematic}. In this configuration,  the
 phototransistor of QRE1113 provides a signal on how much IR light is present, more precisely how much IR light is reflected by a surface from the LED. Since reflected
 light will be proportional to the distance of a surface QRE1113 typically functions as a
 close-proximity distance sensor. Distance is the way in which the instruments
@@ -598,6 +607,8 @@ tape. For the final iteration the gradients were printed on a permanent adhesive
 \footnote{Coala, 1D 100 Gloss P, gloss, white, 300g/m2, 100 µm, 1370mm x 50.00m} using a HP Latex 115 large format printer. The print was then passed through a Summa 150 roll
 cutter along with a vector file with the sticker outline. The cutter roll provided an accurate means to cut the gradients to the correct dimensions for the jack body as well as allow for surplus printing to accommodate wastage. The combined printer and cutter process greatly reduced the amount of manual labour, which meant here was compliance with the \textit{Scalability} criterion when moving from the six jacks of the prototype to the 98 jacks of the Mark 1 model.
 
+The divider circuit resistor's, \texttt{R1} in Figure~\ref{fig:simple-schematic}, value was chosen though experimentation for best range of voltage at a distance of six millimetres from the sensor surface. A one mega-ohm potentiometer was used as a variable resistor within the voltage divider circuit. Once a desirable voltage range was found while monitoring the ADC channel, resistance across the potentiometer pins was measured to provide a guideline fixed resistor value.
+
 The initial sensor surface design contained only the gradient and no excess material. It was
 found that this approach resulted in the jacks becoming stuck in their slots as they push the edge of the surface against the walls of the jack slot. Furthermore, surface edges ending in havy ink print tended to curl, exacerbating this problem further.
 The stickers were redesigned to be cover the full
@@ -612,8 +623,10 @@ round the jack and stop light from other jacks or sensors. The baffles were
 printed on a BAMBU X1 3D printers using polylactic acid (PLA) plastic. 
 A dark pigmented PLA was used to avoid IR light simply being diffused. After the baffles were fitted, the cross-talk was eliminated.
 
-\subsection{Prototype PCB}
 
+
+
+\subsection{Prototype PCB}
 
 \begin{figure}
     \centering
@@ -724,7 +737,6 @@ instrument. The aesthetic design develops what was observed by \textcite{mcalpin
 
 % A common piece of advice for those purchasing a guitar is for them to wear a blindfold as they try instruments. This is to avoid the buyer being influenced by the `look' of the instrument over the sound or the feel to the detriment to their comfort.
 
-
 \subsection{Electronic Components}
 
 This section covers the electronics components utilised in the final circuit design, their purpose and reasons behind their choice.
@@ -792,24 +804,7 @@ electronics setup, showing the connectivity between the sensor boards and the co
 
 \subsubsection{Sensor Board}
 
-The sensor board contains components required for the measurement of vertical jack displacement. Dividing the sensors across multiple boards reduced manufacturing costs, allowed for easier installation and provided some room for adjustment in both the distance between sensors and the surface but also the centre point to the corresponding seven jacks.
-
-Trace length between the output signal of the sensor and the MUX channel were kept as short as possible to minimise noise.
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.5\linewidth]{img/qre1113-schematic.pdf} 
-  \caption{Optical sensor in a simple voltage divider circuit. \texttt{V\_OUT}
-  is routed to one of 8 channels on the \texttt{CD4051BE} multiplexer.}
-  \label{fig:simple-schematic}
-\end{figure}
-
-
-The final sensor system utilised QRE1113 optical sensors, known for their small
-form factor, low cost, and suitability for short-range distance detection
-\cite{mcpherson_portable_2013, moro_platform_2020}. The sensors were distributed
-across seven printed circuit boards, each responsible for seven keys. Each PCB
-contained the following components:
+The sensor board contains components required for the measurement of vertical jack displacement. Dividing the sensors across multiple boards reduced manufacturing costs, allowed for easier installation and provided some room for adjustment in both the distance between sensors and the surface but also the centre point to the corresponding seven jacks. Trace length between the output signal of the sensor and the MUX channel were kept as short as possible to minimise noise. Each sensor board  contained the following components:
 
 \begin{itemize}
     \item 7 QRE1113 optical sensors.
@@ -819,27 +814,6 @@ contained the following components:
     \item 7 WS2812 RGB LEDs with integrated driver.
 \end{itemize}
 
-The optical sensors are wired in a voltage divider configuration (Figure
-\ref{fig:simple-schematic}) and the circuit outputs a voltage based on the
-infrared light reflected from nearby surfaces. The gradient stickers affixed to
-each jack provided a surface with varying reflectivity for the sensors, which
-were used to track jack displacement throughout the key dip. 
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.8\linewidth,trim={0 2cm 0 2.5cm},clip]{img/baffles.png}
-    \caption{Baffles designed to prevent cross-talk between adjacent sensors.}
-    \label{fig:baffles}
-\end{figure}
-
-% A manual visual check of plotted
-% all sensors readings confirmed that interference from neighbouring jacks had
-% been eliminated. 
-% RGB LEDs are placed on the reverse side of the PCB, vertically in-line with the sensors, and were added to provide a programmable means of providing visual feedback. The LEDs are controlled via a pulse width modulation (PWM) signal and are addressable individually. The output signal of the
-% multiplexer is taken from each PCB and routed to a separate ADC channel of the
-% Arduino. Multiplexer channel select and LED PWM signals are daisy-chained
-% through each PCB (Figure \ref{fig:sensor-reverse}).
-
 \begin{figure}
     \centering
     \includesvg[inkscapelatex=false, width=\linewidth]{img/pcb_sensor_schematic_v1.svg}            
@@ -848,7 +822,6 @@ were used to track jack displacement throughout the key dip.
 \end{figure}
 
 Figure~\ref{fig:sensor-schematic-1} shows the schematic for the Mark 1 Sensor board.
-
 Of note are the optical sensor signal output routed through the multiplexer (\texttt{SIG}) which was wired separately to the controller board. This was in art to make space for a multiplexer interrupt control (\texttt{INT}) which was ultimately never used. For the Mark 1 a solution had not yet been found for allowing all signals to flow through the sensor boards. The \texttt{A}, \texttt{B}, and \texttt{C} lines in Figure~\ref{fig:sensor-schematic-1} correspond to the first second and third bits of the 3-bit multiplexer channel selection (Table~\ref{tab:mux-encoding}).
 
 \begin{figure}
@@ -872,6 +845,14 @@ Visible in Figure~\ref{fig:49-key-pcbs} is the adjustment brackets, which were u
   \includegraphics[width=0.6\linewidth,trim={4.45cm 4.5cm 5.25cm 4cm},clip]{img/sensor-board-reverse-side.png} 
   \caption{Sensor board showing the front side (top) and rear side (bottom) after ribbon cable installation but before \texttt{SIG} and \texttt{INT} terminals were connected.}
   \label{fig:sensor-physical-pcbs}
+\end{figure}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth,trim={0 2cm 0 2.5cm},clip]{img/baffles.png}
+    \caption{Baffles designed to prevent cross-talk between adjacent sensors.}
+    \label{fig:baffles}
 \end{figure}
 
 \begin{figure}
@@ -910,30 +891,12 @@ The Nano BLE is mounted to the PCB via header sockets. The header mount allowed 
     \label{fig:controller-board-1}
 \end{figure}
 
+The rotary encoder is used as an interface to the firmware and its functionality will be cobvered further in Section \ref{}. The reset switch is a simple momentary tactile switch which is installed toward the front of internal chamber using a JST-PH crimped cable. The Nano BLE already has a reset switch attached to it, its position inside the Mark 1 made it difficult to reach. A reset could be performed with a power cycle, but this was neither practical nor ideal. Instead the reset switch gives the user more definite means of resetting the Nano BLE's firmware back to startup.
 
-
-A rotary encoder was used as the interface to select a key, edit a threshold and
-save current thresholds to the FRAM. Thresholds were first set the midrange of
-possible values a a default. A rough calibration process was carried out where
-each sensor were selected individually and its readings were plotted against
-their current threshold value using the Arduino IDE serial plotter. Thresholds
-were adjusted with the rotary encoder until the key no longer passed the
-threshold line until the jack had plucked the string. During calibration RGB
-LEDs were used as a visual aid to quickly identify which key was currently being
-adjusted. These LEDs also provided visual feedback during calibration, and would
-change colour based on if readings were above below the threshold or if the were
-outside previously recorded maximum or minimum values. Such use of the LEDs
-meant for easy identification of malfunctioning sensors and simplified the
-alignment process. A finer calibration process was carried out with the guidance
-of expert harpsichord performer Catalina Vicens.
-
-Power requirements for the system were estimated at 1.1 A at 5 V, with some
+The power requirements for the system were estimated at 1.1 A at 5 V, with some
 fluctuation when the system was first powered on. While the sensors were powered
 continuously in this iteration, future designs may incorporate power-saving
-measures, such as dynamic modulation of the optical emitters found in the
-McPherson piano \cite{mcpherson_portable_2013}.
-
-
+measures, such as dynamic modulation of the optical emitters found \textcite{mcpherson_portable_2013}.
 
 \subsection{Electronics Firmware}
 
@@ -1019,7 +982,7 @@ of project and how easily it is for the project to become broken.
     \label{fig:hysteresis}
 \end{figure}
 
-\subsubsection{Installation}
+\subsection{Installation}
 
 Once a sensor system had been decided upon and its scalability assessed, the next stage to install it within the mechanical interface. 
 Electronics were designed to be a bespoke installation, after which brackets and enclosures could be drafted to hasten the install process.
@@ -1136,6 +1099,23 @@ adjust playback parameters such as tuning, voicing and which stops are engaged.
 
     \label{fig:mac-mini}
 \end{figure}
+
+\subsection{Calibration}
+
+used as the interface to select a key, edit a threshold and
+save current thresholds to the FRAM. Thresholds were first set the midrange of
+possible values a a default. A rough calibration process was carried out where
+each sensor were selected individually and its readings were plotted against
+their current threshold value using the Arduino IDE serial plotter. Thresholds
+were adjusted with the rotary encoder until the key no longer passed the
+threshold line until the jack had plucked the string. During calibration RGB
+LEDs were used as a visual aid to quickly identify which key was currently being
+adjusted. These LEDs also provided visual feedback during calibration, and would
+change colour based on if readings were above below the threshold or if the were
+outside previously recorded maximum or minimum values. Such use of the LEDs
+meant for easy identification of malfunctioning sensors and simplified the
+alignment process. A finer calibration process was carried out with the guidance
+of expert harpsichord performer Catalina Vicens.
 
 
 \subsection{Open Sourcing}
