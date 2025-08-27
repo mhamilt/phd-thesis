@@ -73,7 +73,7 @@
     maxnames=1,
     maxcitenames=1,
     uniquelist=false,
-]{biblatex} % https://www.overleaf.com/learn/latex/Biblatex_citation_styles
+]{biblatex} 
 \addbibresource{main.bib}
 %----------------------------------------------------------------------------------------
 
@@ -100,51 +100,51 @@
 %%%%%%%%%% DO NOT EDIT %%%%%%%%%%
 
 %==============================================================================
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\N}{\mathbb{N}}
+% \newcommand{\R}{\mathbb{R}}
+% \newcommand{\Q}{\mathbb{Q}}
+% \newcommand{\Z}{\mathbb{Z}}
+% \newcommand{\N}{\mathbb{N}}
 
-\newcommand{\dif}{\mathop{}\!\mathrm{d}}
-\newcommand{\al}{\alpha}
-\newcommand{\bt}{\beta}
-\newcommand{\om}{\omega}
-\newcommand{\gm}{\gamma}
-\newcommand{\lb}{\lambda}
-\newcommand{\lm}{\lambda_-}
-\newcommand{\lp}{\lambda_+}
-\newcommand{\thw}{\theta_w}
-\newcommand{\thp}{\theta_\phi}
-\newcommand{\tht}{\theta}
+% \newcommand{\dif}{\mathop{}\!\mathrm{d}}
+% \newcommand{\al}{\alpha}
+% \newcommand{\bt}{\beta}
+% \newcommand{\om}{\omega}
+% \newcommand{\gm}{\gamma}
+% \newcommand{\lb}{\lambda}
+% \newcommand{\lm}{\lambda_-}
+% \newcommand{\lp}{\lambda_+}
+% \newcommand{\thw}{\theta_w}
+% \newcommand{\thp}{\theta_\phi}
+% \newcommand{\tht}{\theta}
 
-\newcommand{\etp}{e_{t+}}
-\newcommand{\etm}{e_{t-}}
+% \newcommand{\etp}{e_{t+}}
+% \newcommand{\etm}{e_{t-}}
 
-\newcommand{\esp}{e_{x+}}
-\newcommand{\esm}{e_{x-}}
+% \newcommand{\esp}{e_{x+}}
+% \newcommand{\esm}{e_{x-}}
 
-\newcommand{\dsp}{\delta_{x+}}
-\newcommand{\dsm}{\delta_{x-}}
-\newcommand{\dsd}{\delta_{x\cdot}}
-\newcommand{\dss}{\delta_{xx}}
-\newcommand{\dssss}{\delta_{xxxx}}
+% \newcommand{\dsp}{\delta_{x+}}
+% \newcommand{\dsm}{\delta_{x-}}
+% \newcommand{\dsd}{\delta_{x\cdot}}
+% \newcommand{\dss}{\delta_{xx}}
+% \newcommand{\dssss}{\delta_{xxxx}}
 
-\newcommand{\dtp}{\delta_{t+}}
-\newcommand{\dtm}{\delta_{t-}}
-\newcommand{\dtd}{\delta_{t\cdot}}
-\newcommand{\dtt}{\delta_{tt}}
-\newcommand{\dtttt}{\delta_{tttt}}
-\newcommand{\dspm}{\delta_{x\pm}}
+% \newcommand{\dtp}{\delta_{t+}}
+% \newcommand{\dtm}{\delta_{t-}}
+% \newcommand{\dtd}{\delta_{t\cdot}}
+% \newcommand{\dtt}{\delta_{tt}}
+% \newcommand{\dtttt}{\delta_{tttt}}
+% \newcommand{\dspm}{\delta_{x\pm}}
 
-\newcommand{\mtp}{\mu_{t+}}
-\newcommand{\mtm}{\mu_{t-}}
-\newcommand{\mtd}{\mu_{t\cdot}}
-\newcommand{\mtt}{\mu_{tt}}
+% \newcommand{\mtp}{\mu_{t+}}
+% \newcommand{\mtm}{\mu_{t-}}
+% \newcommand{\mtd}{\mu_{t\cdot}}
+% \newcommand{\mtt}{\mu_{tt}}
 
-\newcommand{\norm}[1]{\left\|#1\right\|}
-\newcommand{\innp}[1]{\left\langle#1\right\rangle}
-\newcommand{\virg}[1]{``#1''}
-\DeclareMathOperator{\sinc}{sinc}
+% \newcommand{\norm}[1]{\left\|#1\right\|}
+% \newcommand{\innp}[1]{\left\langle#1\right\rangle}
+% \newcommand{\virg}[1]{``#1''}
+% \DeclareMathOperator{\sinc}{sinc}
 %==============================================================================
 %%%%%%%%%% DO NOT EDIT %%%%%%%%%%
 %
@@ -209,21 +209,19 @@
 \fancyhead[RO]{\bf \footnotesize \slshape \rightmark}     % Section in the left on odd pages
 \renewcommand{\headrulewidth}{0pt}    % Width of head rule
 %%%%%%%%%% DO NOT EDIT %%%%%%%%%%
-
-\newcommand{\anon}[1]{#1}
 %%%%%%%%%%%% EDIT %%%%%%%%%%%%
 %
 % CHANGE TO REFLECT YOUR CHAPTERS
 %
-\input{Chapter_1}
-\input{Chapter_2}
+\input{Chapter-1.tex}
+\input{Chapter-2.tex}
 % \input{Chapter_3}
 % \input{Chapter_4}
 % \input{Chapter_5}
 
 % \clearpage
 % \chapter{References}
-\printbibliography[heading=none]{}
+\printbibliography
 %%%%%%%%%%%% EDIT %%%%%%%%%%%%
 
 

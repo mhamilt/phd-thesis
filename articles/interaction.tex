@@ -754,15 +754,15 @@ Alternatives to the FRAM were available. The problem could also have been addres
 
 \begin{figure}
     \centering
-     \includegraphics[width=0.75\linewidth]{img/49-key-leds.png}
+     \includegraphics[width=0.66\linewidth]{img/49-key-leds.png}
     \caption{Mark 1 demonstrating addressable RGB LED array.}
     \label{fig:mark1-leds}
 \end{figure}
 
-With the prototype keyboard there were at most six jacks requiring calibration. Moving to the 98 jacks of the Mark 1 interface introduced what could be referred to as `problems of scale', problems that arise only in the scaling up of a design. One such problem of scale was how the user keeps track or identifies which key is currently calibrated. To assist the user, addressable RGB LEDs were added to the design. The LEDs are aligned with the sensors and controlled programmatically. This allows for an LED to illuminated in front of a key that is being calibrated to aid identification.
+With the prototype keyboard there were at most six jacks requiring calibration. Moving to the 98 jacks of the Mark 1 interface introduced what could be referred to as `problems of scale', problems that arise only in the scaling up of a design. One such problem of scale was how the user keeps track or identifies which key is currently calibrated. To assist the user, addressable RGB LEDs were added to the design. The LEDs are aligned with the sensors and are controlled programmatically via a pulse width modulation (PWM) signal and are addressable individually. This allows for an LED to illuminated in front of a key that is being calibrated to aid identification.
 The colour can also be controller (Figure~\ref{fig:mark1-leds}) which allows for visual feedback on both interface and key states. This allowed for visual identification if a sensor had fallen out of an expected range or if a key had still used its default threshold value and was still to be calibrated.
 
-An \textcite{TLC5940} or other PWM driver such as in \textcite{mcpherson_portable_2013} added
+A separate driver such as the \texttt{TLC5940} used in \textcite{mcpherson_portable_2013} added
 complexity to assembling and were avoid in favour of addressable LEDs with
 integrated driver and shared data line. One limitation to this approach is should any LED in chain fail, the fault will prevent all subsequent LEDs from illuminating.
 An individual PWM driver per PCB avoids cascading failure, but would have add 
@@ -819,8 +819,6 @@ contained the following components:
     \item 7 WS2812 RGB LEDs with integrated driver.
 \end{itemize}
 
-
-
 The optical sensors are wired in a voltage divider configuration (Figure
 \ref{fig:simple-schematic}) and the circuit outputs a voltage based on the
 infrared light reflected from nearby surfaces. The gradient stickers affixed to
@@ -834,18 +832,13 @@ were used to track jack displacement throughout the key dip.
     \label{fig:baffles}
 \end{figure}
 
-3D-printed baffles were installed on the PCBs to eliminate cross-talk between
-adjacent sensors, as per Figure \ref{fig:baffles}. These baffles, fabricated
-from dark-pigmented PLA, ensured that infrared reflections from neighbouring
-jacks did not interfere with sensor readings. A manual visual check of plotted
-all sensors readings confirmed that interference from neighbouring jacks had
-been eliminated. RGB LEDs are placed on the reverse side of the PCB, vertically
-in-line with the sensors, and were added to provide a programmable means of
-providing visual feedback. The LEDs are controlled via a pulse width modulation
-(PWM) signal and are addressable individually. The output signal of the
-multiplexer is taken from each PCB and routed to a separate ADC channel of the
-Arduino. Multiplexer channel select and LED PWM signals are daisy-chained
-through each PCB (Figure \ref{fig:sensor-reverse}).
+% A manual visual check of plotted
+% all sensors readings confirmed that interference from neighbouring jacks had
+% been eliminated. 
+% RGB LEDs are placed on the reverse side of the PCB, vertically in-line with the sensors, and were added to provide a programmable means of providing visual feedback. The LEDs are controlled via a pulse width modulation (PWM) signal and are addressable individually. The output signal of the
+% multiplexer is taken from each PCB and routed to a separate ADC channel of the
+% Arduino. Multiplexer channel select and LED PWM signals are daisy-chained
+% through each PCB (Figure \ref{fig:sensor-reverse}).
 
 \begin{figure}
     \centering
@@ -856,72 +849,68 @@ through each PCB (Figure \ref{fig:sensor-reverse}).
 
 Figure~\ref{fig:sensor-schematic-1} shows the schematic for the Mark 1 Sensor board.
 
-Of note are the optical sensor signal output routed through the multiplexer (\texttt{SIG}) which was wired separately to the controller board. This was in art to make space for a multiplexer interrupt control (\texttt{INT}) which was ultimately never used. For the Mark 1 a solution had not yet been found for allowing all signals to flow through the sensor boards.
+Of note are the optical sensor signal output routed through the multiplexer (\texttt{SIG}) which was wired separately to the controller board. This was in art to make space for a multiplexer interrupt control (\texttt{INT}) which was ultimately never used. For the Mark 1 a solution had not yet been found for allowing all signals to flow through the sensor boards. The \texttt{A}, \texttt{B}, and \texttt{C} lines in Figure~\ref{fig:sensor-schematic-1} correspond to the first second and third bits of the 3-bit multiplexer channel selection (Table~\ref{tab:mux-encoding}).
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\linewidth,trim={0 2cm 0 2.5cm},clip]{img/49-key-pcbs.jpg}
+    \includegraphics[width=0.75\linewidth]{img/49-key-pcbs.jpg}
     \caption{Detail of sensor boards installed inside Mark 1. Cabling between sensor boards can be seen which corresponds to the \texttt{Input} and \texttt{Output} connectors in Figure~\ref{fig:sensor-schematic-1}. The multicoloured cable loom above the PCBs carries the \texttt{SIG} from each sensor board, while the green cabling is the unused interrupt channel that was ultimately connected to \texttt{GND}.}
     \label{fig:49-key-pcbs}
 \end{figure}
 
+Ribbon cable was used solder the \texttt{Input} and \texttt{Ouput} of the sensor boards together. This was done prior to installation and the entire assembly was fitted as a single chain.
 A separate cable for the output signal was taken from each PCB (Figure~\ref{fig:49-key-pcbs}) which were collected in a separate cable loom and connected to a header on the controller board for easy routing to the analogue channels (Figure~\ref{fig:controller-schematic-1}).
-% Means its place in the circuit is fixed
-% sensor boards soldered together with ribbon cable.
-% \texttt{A}, \texttt{B}, and \texttt{C} correlate to the first second and third bits of the 3-bit channels select number.
 
+The same style of 3D-printed baffles as used in the prototype were installed on the sensor boards to eliminate cross-talk between adjacent sensors, as per Figure \ref{fig:baffles}. 
+These baffles, fabricated from dark-pigmented, matte PLA, ensured that infrared reflections from neighbouring jacks did not interfere with sensor readings. The baffles (Figure~\ref{fig:sensor-physical-pcbs}, alongside an adjustment plate and a vertical mount back plate, formed a three-part bracket assembly.
+Visible in Figure~\ref{fig:49-key-pcbs} is the adjustment brackets, which were used to both mount the sensor boards in a vertical orientation but also provide a means for broad adjustment of the distance between the sensor and gradients stickers. The three parts of the bracket are designed as a push fit so that they could be printed off-site, but assembled on on-site at the museum. The vertical backplate and adjustment plate fit together by means of a pressure fit dovetail join. Holes were placed on the sensor board design to accommodate such a bracket. Two 3mm holes are present on the sensor board allowing it to be sandwiched between between the back plate and the baffles. 
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.6\linewidth,trim={0 1.5cm 0 1.5cm},clip]{img/sensor-board-w-baffles.jpeg}
+    \\
+  \includegraphics[width=0.6\linewidth,trim={4.45cm 4.5cm 5.25cm 4cm},clip]{img/sensor-board-reverse-side.png} 
+  \caption{Sensor board showing the front side (top) and rear side (bottom) after ribbon cable installation but before \texttt{SIG} and \texttt{INT} terminals were connected.}
+  \label{fig:sensor-physical-pcbs}
+\end{figure}
+
+\begin{figure}
+    \centering    
+    \label{fig:sensor-bracket}
+\end{figure}
 
 \subsubsection{Controller Board}
 
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth,angle=180]{img/pcb_controller_schematic_v1.pdf}
+    \includegraphics[width=0.75\linewidth,angle=180]{img/pcb_controller_schematic_v1.pdf}
     \caption{Mark 1 controller board schematic.}
     \label{fig:controller-schematic-1}
 \end{figure}
 
 The controller board was designed as means to reliably connect all components to the Nano BLE.
-Figure~\ref{fig:controller-schematic-1} shows the schematic of the controller which illustrates its purpose to facilitate signal routing. Power is supplied through barrel jack \texttt{J1} and there are separate header connectors for the \texttt{RESET} button, \texttt{ROTARY} encoder, and NVM \texttt{FRAM}. The connections to sensor board are separated into \texttt{SIGNALS} for the optical sensor signals and \texttt{SENSOR_BOARD} containing the power, multiplexer channel select and LED control data. On the silkscreen of the final PCB the sensor headers are marked as 
-
-\begin{figure}
-    \centering
-    \includegraphics[width=1\linewidth,angle=180]{img/pcb-controller-board-v0.1.0.png}
-    \caption{Mark 1 controller board.}
-    \label{fig:controller-schematic-1}
-\end{figure}
-
-
-The Nano BLE is mounted to the PCB via header sockets. Thisformat, was the central
-hub for processing sensor data and triggering MIDI messages. In addition to
-solder terminals for the sensor board channels, the controller board contained:
-
-The controller board provides a reliable means to connect to the sensor board as well as surrounding components such as the non-volatile FRAM.
+Figure~\ref{fig:controller-schematic-1} shows the schematic of the controller which illustrates its purpose to facilitate signal routing.  Components on the board are:
 
 \begin{itemize}
     \item 1 Arduino Nano 33 BLE.
     \item 1 Fujitsu MB85RS64 SPI Ferroelectric RAM chip.
     \item 1 EC11 combined rotary encoder and tactile switch.
-    \item 1 Tactile Switch
+    \item 1 Momentary Reset Switch
 \end{itemize}
 
-The Arduino Nano's small form factor made fitting the board inside the
-harpsichord easier and also allowed for testing of multiple chipsets. The 33 BLE
-variation of the Nano had the additional benefit in its ability to be programmed
-as both native USB MIDI and BLE MIDI devices. The 33 BLE was also able to
-achieve a sampling period of 1.7 milliseconds for all sensors. A 4-sample moving
-average filter was implemented to reduce noise and brought the effective
-sampling period to 5.1 milliseconds.
-% Samping period was measure by timing each iterations of the entire sensor read
-% and processing cycle, polling the internal clock of the arduino a the start
-% and end of each cycle and storing the difference in a buffer.  After 10k
-% cylces the buffer of timing was sent over serial and a mean average of 1.7
-% milliseconds was found with a jitter of ±0.2 milliseconds.
+Power is supplied through barrel jack \texttt{J1} and there are separate header connectors for the \texttt{RESET}, \texttt{ROTARY}, and \texttt{FRAM}. The connections to sensor board are separated into \texttt{SIGNALS} for the optical sensor signals and \texttt{SENSOR\_BOARD} containing the power, multiplexer channel select and LED control data. On the silkscreen of the final PCB (Figure~\ref{fig:controller-board-1}) the \texttt{SENSOR\_BOARD} header is marked as \texttt{FACEBOARD}
 
-Non-volatile memory, implemented using a Fujitsu MB85RS64 Ferroelectric RAM
-(FRAM) chip, provided a reliable means of storing and preserving calibration
-settings across power cycles. This ensured that sensor thresholds and other
-settings could be preserved across power cycles, enhancing the system's
-usability in museums.  
+
+The Nano BLE is mounted to the PCB via header sockets. The header mount allowed for a second new Nano BLE to be quickly substituted should the original require a firmware update or become faulty. The firmware could not be update remotely and neither was there a reliable internet connection in the museum to do so. Ability to quick swap the Nano BLE aimed to avoid prolonged disruption to the exhibition. 
+
+\begin{figure}
+    \centering
+    \includegraphics[angle=-90,width=0.66\linewidth]{img/pcb-controller-board-v0.1.0.png}
+    \caption{Mark 1 controller board.}
+    \label{fig:controller-board-1}
+\end{figure}
+
+
 
 A rotary encoder was used as the interface to select a key, edit a threshold and
 save current thresholds to the FRAM. Thresholds were first set the midrange of
@@ -944,41 +933,13 @@ continuously in this iteration, future designs may incorporate power-saving
 measures, such as dynamic modulation of the optical emitters found in the
 McPherson piano \cite{mcpherson_portable_2013}.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=\linewidth,trim={0 1.5cm 0 1.5cm},clip]{img/sensor-board-w-baffles.jpeg}
-    \\
-  \includegraphics[width=\linewidth,trim={4.45cm 4.5cm 5.25cm 4cm},clip]{img/sensor-board-reverse-side.png} 
-  \caption{Sensor board showing the sensor side (top) and rear side with RGB
-  LEDs and terminal connections (bottom). The \texttt{SIG} terminal (Top Left)
-  is routed to an ADC channel. Power \texttt{5V, 3V, GND}, multiplexer channels
-  \texttt{A, B, C} and LED PWM input \texttt{DI} and output \texttt{DO}  connect
-  from the previous sensor board (Left) and are routed to the next (Right).}
-
-  \label{fig:sensor-reverse}
-\end{figure}
-
-For the initial version of the exhibition, a harpsichord sample library was used
-and controlled via Native Instrument's
-Kontakt\footnote{\href{https://www.native-instruments.com/en/products/komplete/samplers/kontakt-8/?srsltid=AfmBOorKUf43SoIxGBS2-GnXmKHHkgcfcfWRskpweDhLSG3FiF0qrf2w}{Kontakt
-webpage} (accessed 31 Jan 2025)}. The software was installed on a Mac Mini
-hosted inside the instrument's case. Holes were drilled at the back of the
-instrument's frame, away from sight, to allow the passage of cables, such as
-from power supplies, USB connectors and headphone jack (Figure
-\ref{fig:mac-mini}). An iPad is used as a monitor through which visitors can
-adjust playback parameters such as tuning, voicing and which stops are engaged. 
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.8\linewidth,trim={0 5cm 0 0},clip]{img/mac-mini.jpg}
-    \caption{Components and cabling hidden in the bottom section of the instrument case.}
-
-    \label{fig:mac-mini}
-\end{figure}
 
 
 \subsection{Electronics Firmware}
 
+A 4-sample moving
+average filter was implemented to reduce noise and brought the effective
+sampling period to 5.1 milliseconds.
 
 Addressing the problem of scale of identifying which key's threshold is
 currently being edited.
@@ -989,6 +950,31 @@ expected values and when a key was triggered.
 The LEDs are on the same PCB as the sensors and are hidden when the nameboard is
 in place.
 
+\begin{table}[]
+    \centering
+    {
+        \ttfamily
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            C & B & A & MUX \\ \hline
+            0 & 0 & 0 & 0   \\ \hline
+            0 & 0 & 1 & 1   \\ \hline
+            0 & 1 & 0 & 2   \\ \hline
+            0 & 0 & 1 & 3   \\ \hline
+            0 & 1 & 0 & 4   \\ \hline
+            1 & 0 & 1 & 5   \\ \hline
+            1 & 1 & 0 & 6   \\ \hline
+        \end{tabular}
+    }
+    \caption{3-bit binary encoding for \texttt{MUX} channel selection}
+    \label{tab:mux-encoding}
+\end{table}
+
+% Samping period was measure by timing each iterations of the entire sensor read
+% and processing cycle, polling the internal clock of the arduino a the start
+% and end of each cycle and storing the difference in a buffer.  After 10k
+% cylces the buffer of timing was sent over serial and a mean average of 1.7
+% milliseconds was found with a jitter of ±0.2 milliseconds.
 
 The firmware can be initiated in two states: a `calibration' and an `operation' state. In the operation state, the sensor system uses a two-threshold hysteresis mechanism implemented as a finite state machine with three states: \texttt{RELEASED}, \texttt{PLUCKED}, and \texttt{PRESSED}. A MIDI \texttt{Note\_ON} is triggered only when the sensor reading exceeds the \texttt{pluck\_threshold} and the system is in the \texttt{RELEASED} state. Conversely, a \texttt{Note\_OFF} is issued when the value falls below a lower \texttt{release\_threshold}, and the system is in the \texttt{PLUCKED} state. This avoids instability from minor fluctuations near a single threshold and prevents rapid state toggling. A 4-sample moving average filter was implemented to reduce noise and brought the effective sampling period to 2 milliseconds with 1 millisecond jitter. The rotary encoder is used to initiate the firmware in a `calibration state' during which the threshold values can modified and written to FRAM. The threshold values are plotted alongside live sensor reading to help identify the correct pluck point. The calibration state also allows for identification of any malfunctioning sensor.
 
@@ -1133,6 +1119,23 @@ The thresholds were calibrated visually utilising the serial plotter of the
 Arduino IDE (Figure \ref{fig:serial_monitor}) and the open source MIDI Monitor
 software \footnote{\url{https://github.com/krevis/MIDIApps}}.
 
+For the initial version of the exhibition, a harpsichord sample library was used
+and controlled via Native Instrument's
+Kontakt\footnote{\href{https://www.native-instruments.com/en/products/komplete/samplers/kontakt-8/?srsltid=AfmBOorKUf43SoIxGBS2-GnXmKHHkgcfcfWRskpweDhLSG3FiF0qrf2w}{Kontakt
+webpage} (accessed 31 Jan 2025)}. The software was installed on a Mac Mini
+hosted inside the instrument's case. Holes were drilled at the back of the
+instrument's frame, away from sight, to allow the passage of cables, such as
+from power supplies, USB connectors and headphone jack (Figure
+\ref{fig:mac-mini}). An iPad is used as a monitor through which visitors can
+adjust playback parameters such as tuning, voicing and which stops are engaged. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth,trim={0 5cm 0 0},clip]{img/mac-mini.jpg}
+    \caption{Components and cabling hidden in the bottom section of the instrument case.}
+
+    \label{fig:mac-mini}
+\end{figure}
 
 
 \subsection{Open Sourcing}
@@ -1209,13 +1212,13 @@ After successful deployment at exhibition at San Colombano and verification that
   \centering
   \begin{subfigure}[h]{0.5\linewidth}
     \centering
-    \includegraphics[height=0.2\linewidth]{img/sensor_board_v2.png}
+    \includegraphics[height=0.2\linewidth]{img/pcb_sensor_board_v2.png}
     \caption{Sensor PCB}
     \label{fig:sensor_v2}
   \end{subfigure}
   \begin{subfigure}[h]{0.4\linewidth}
     \centering
-    \includegraphics[height=0.2\linewidth]{img/controller_board_v2.png}
+    \includegraphics[height=0.2\linewidth]{img/pcb_controller_board_v2.png}
     \caption{Controller PCB}
     \label{fig:controller_v2}
   \end{subfigure}
@@ -1240,14 +1243,14 @@ Kept original seven sensors per board, the two sensor on the edges of the board 
 
 \begin{figure}
     \centering
-     \includesvg[inkscapelatex=false, width=\linewidth]{img/pcb_sensor_schematic_v2.svg}            
+     \includesvg[inkscapelatex=false, width=0.8\linewidth]{img/pcb_sensor_schematic_v2.svg}            
     \caption{Mark 2 Sensor board schematic. RGB LEDs \texttt{D}, signal paths \texttt{S}, optical sensors \texttt{Q}. The Solder Junction in the center illustrates the connection  between the multiplexer output and corresponding \texttt{S} channel assignment on the FFC cable. Labels point in the direction of current flow.}
     \label{fig:sensor-schematic-2}
 \end{figure}
 
 \begin{figure}
     \centering    
-    \includegraphics[width=1\linewidth]{img/pcb_controller_schematic_v2.pdf}
+    \includegraphics[width=0.6\linewidth]{img/pcb_controller_schematic_v2.pdf}
     \caption{}
     \label{fig:sensor-schematic-1}
 \end{figure}
