@@ -59,7 +59,10 @@ The same logic as the original firmware was programmed and the latency was reduc
 It is possible that the 10 ms latency could be improved upon with appropriate optimisation, but there would be a cost in the form of development time. 
 Consideration would need to be made on the time to port existing source code for the I2C FRAM chip or fall back on a simpler storage option.
 
+Use of QRD1114 which has a faster rise time, greater sensitivity. Rest of the deisgn could be keptthe same and the QRD1114 dropped in place of the QRE1113. This is at the cost of greater power consumption (around 0.1V per sensor, but current would also change)
 
+\url{https://www.onsemi.com/pdf/datasheet/qrd1114-d.pdf}
+\url{https://www.onsemi.com/download/data-sheet/pdf/qre1113-d.pdf}
 
 \subsection{Site Specific Enhancements}
 
