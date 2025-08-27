@@ -737,105 +737,45 @@ This section covers the electronics components utilised in the final circuit des
 
 \subsubsection{Microcontroller}\label{nano-ble}
 
-All the electronic components in the system terminate at a microcontroller, whose job is to convert analogue signals to digital data, and control the other components in the system. For microcontroller, an Arduino Nano 33 BLE (Bluetooth Low Energy) was chosen as the final design, hereafter referred to as simply the Nano BLE. The Arudino Nano line of microcontrollers have a standardised form factor, which is to say they have a standard size and pin layout. Since it was unclear what the computational and functional requirements would be for the microcontroller, standardised form allowed for the testing of multiple models and chipsets. For the prototyping stage, an Arduino Nano 33 IoT was used as the initial microcontroller given its ready availability. When scaling the final sensor concept, it was found that the Nano 33 IoT had limitation on its analogue-to-digital converter (ADC) input channels four and five \cite{arduino_nano33iot_2025}, limiting the total number of input channels to just six. This limitation in input channels would have a great impact in the layout of the rest of the circuit. The Nano BLE, which had all eight ADC channels available, was therefore swapped in of the Nano 33 IoT with the firmware and circuitry remaining the same.
+All the electronic components in the system terminate at a microcontroller, whose job is to convert analogue signals to digital data, and control the other components in the system. Microcontroller are re-programmable, which allow for easy iterative development and algorithmic control over other electronic components. For microcontroller, an Arduino Nano 33 BLE (Bluetooth Low Energy) was chosen as the final design, hereafter referred to as simply the Nano BLE. The Arudino Nano line of microcontrollers have a standardised form factor, which is to say they have a standard size and pin layout. Since it was unclear what the computational and functional requirements would be for the microcontroller, standardised form allowed for the testing of multiple models and chipsets. For the prototyping stage, an Arduino Nano 33 IoT was used as the initial microcontroller given its ready availability. When scaling the final sensor concept, it was found that the Nano 33 IoT had limitation on its analogue-to-digital converter (ADC) input channels four and five \cite{arduino_nano33iot_2025}, limiting the total number of input channels to just six. This limitation in input channels would have a great impact in the layout of the rest of the circuit. The Nano BLE, which had all eight ADC channels available, was therefore swapped in of the Nano 33 IoT with the firmware and circuitry remaining the same.
 
-It was found a number of different models could be tested  was 
+The Arduino Nano models also provided native-USB functionality, which allowed the microcontroller to be programmed as a hardware USB MIDI device directly. In addition, the Nano BLE allowed a fallback of using the MIDI BLE protocol, should there be any difficulty in connecting the microcontroller to the computer used for audio synthesis. A further benefit of the Nano BLE was its The Nano 33 BLE 12-bit digital-to-analogue converter (DAC), which provided a contingency should the default 10-bit not be sensitive enough for the signal from the sensors.
 
-appealing as it would allow for easy changes between chipsets without requiring
-any rewiring and thus no new PCBs would need to be created if a better
-alternative was found later in the project. Another benefit to the Arduino Nano
-boards was that typically had native-USB meaning the could be programmed as a
-hardware USB MIDI device directly.
-
-The Nano 33 BLE was used in the initial stages for its integrated inertial
-measurment unit.
-
-When it was finalised that the project would proceed using the QRE1113 a number
-of microcontroller units (MCU) were considered.
-
-The MCUs considered were the Arduino Nano 33 IoT, Arduino Nano 33 BLE, Arduino
-Nano ESP32 and STM32 NUCLEO-L031K6.
-
-A rough performance test was later carried out using an STM32 NUCLEO-L031K6, a
-Nano ESP32 and the BLE. The Nano 33 BLE was found to be more performative. To
-execute a single sensor read cycle of the firmware the STM32 took 40ms, and both
-the Nano ESP32 and Nano 33 BLE required 11ms on average. The Nano ESP32 had high
-variability so it was decided to continue with the Nano 33 BLE. 
-
-% Further discussion of using ESP32 continues in \textbackslash section\{Going
-% forward\}
-
-BLE functionality also meant if the cable connection between the nano and
-computer running audio synthesis was impractical, BLE MIDI was available as a
-fallback. The Nano 33 BLE also has a 12-bit DAC, which provided a contingency
-should the default 10-bit not be sensitive enough for the signal from the
-sensors.
-
-Initially a Nano IoT was used for both WiFi and Bluetooth Low Energy
-functionality, but it was found that 2 ADC channels were in fact not useable and
-would have required additional multiplexers.
+% A rough performance test was later carried out using an STM32 NUCLEO-L031K6, a
+% Nano ESP32 and the BLE. The Nano 33 BLE was found to be more performative. To
+% execute a single sensor read cycle of the firmware the STM32 took 40ms, and both
+% the Nano ESP32 and Nano 33 BLE required 11ms on average. The Nano ESP32 had high
+% variability so it was decided to continue with the Nano 33 BLE. 
 
 \subsubsection{Non-Volatile Memory}\label{eeprom-nvram-fram} 
 
-There would need to be the ability to store values on non-volatile memory so that the electroincs could be powered-down without losing data.
+The signal values for the jack pluck and release points needed to be calibrated and stored so that they had permanence between power cycles. Adjusting the threshold values through firmware would not have been flexible or practical, therefore a form of non-volatile memory (NVM) was required.  The Nano BLE did not provide any direct NVM and what memory was available would be lost during re-programming.
 
-Adjusting the values through firmware would not have been flexible or practical.
-Instead an Ferroelectric RAM unit was chosen and connected using an SPI
-interface. NVRAM or EEPROM would have sufficed and the FRAM was primarily chosen
-for it's ready availability.
+Instead a Fujitsu MB85RS64 Ferroelectric RAM (FRAM) module was chosen. Two standard communication protocols are available on the Nano for communicating with other odules: Inter-Integrated Circuit I\textsuperscript{2}C and  Serial Peripheral Interface (SPI). The pins associated with the  I\textsuperscript{2}C interface were used for the sensor output ADC, which left the only the SPI interface available. The MB85RS64 was chosen for its SPI support and relatively low power consumption compared to other NVM technology \cite{fujitsu_fram_2011}.
 
-Most microcontrollers have some variety of non-volatile program memory that can
-be read and writ accessed but in most cases this memory is cleared during
-compilation and re-flashing. The small cost was far outweighed by the potential
-for data loss if using onboard RAM.
+Alternatives to the FRAM were available. The problem could also have been addressed with the use of an SD card and reader. An SD card would have provided a means to edit calibration values away from the Arduino. The position of the controller board within the interface did not permit easy access. Reliability and speed of executing the calibration process was preferred over storage capacity of an SD card. Additionally, calibration values could have been stored on the audio synthesis computer and communicated to Nano BLE directly. This would have necessitated an extra step in the setup process and a point failure. This approach would have made the interface less portable, limiting connection to audio synthesis devices on which additional software could be installed, thus undoing the portability that the MIDI standard provided.
 
-\emph{It is worth noting that the FRAM model chosen stopped being available
-during the project, meaning any future iteration would need to adjust for
-another board in firmware}
-
-The firmware was structure in a way that the interface could be changed so long
-as the code required for any other board would comply with function arguments
-and outputs. Worth noting the fragility and volatility when designing this kind
-of project and how easily it is for the project to become broken.
-
-SD card would provide an easier way to interact with calibration data. The
-posiiton of the controller board did not permit easy access. reliability and
-speed was preffered over storage capacity.
 
 \subsubsection{RGB LEDs}
-for problems of scale:
 
-Addressing the problem of scale of identifying which key's threshold is
-currently being edited.
+\begin{figure}
+    \centering
+     \includegraphics[width=0.75\linewidth]{img/49-key-leds.png}
+    \caption{Mark 1 demonstrating addressable RGB LED array.}
+    \label{fig:mark1-leds}
+\end{figure}
 
-The LEDs also allowed for easy identification for keys that were outside of
-expected values and when a key was triggered. This allowed for visual
-identification of malfunctioning or uncalibrated keys.
+With the prototype keyboard there were at most six jacks requiring calibration. Moving to the 98 jacks of the Mark 1 interface introduced what could be referred to as `problems of scale', problems that arise only in the scaling up of a design. One such problem of scale was how the user keeps track or identifies which key is currently calibrated. To assist the user, addressable RGB LEDs were added to the design. The LEDs are aligned with the sensors and controlled programmatically. This allows for an LED to illuminated in front of a key that is being calibrated to aid identification.
+The colour can also be controller (Figure~\ref{fig:mark1-leds}) which allows for visual feedback on both interface and key states. This allowed for visual identification if a sensor had fallen out of an expected range or if a key had still used its default threshold value and was still to be calibrated.
 
-The LEDs are on the same PCB as the sensors and are hidden when the nameboard is
-in place.
-
-Would sugggest that this is a necessity of this kind to provide a means to
-identify and diagnose LEDs with state.
-
-TLC5940 or other PWM driver such as in \textbackslash cite\{mcpherson\} added
-complexity to assembling, but were avoid in favour of Addressable LEDs with
-intergrated driver. The intergrated LEDs share the same data line which has the
-limitation where a fualty LED will stop all following LEDs from working. An
-individual PWM driver per PCB would allow avoid situations where failutre
-cascades, but would add complexity in assembly as the parts are typically SMD.
-Also, given the LEDs are fixed to the board and could not be repaired in situ,
-the solution would be to replace the PCB regardless of which approach was taken.
-Given the LEDs were only used in debugging and calibration and otehrwise would
-not be visible, a simpler design approach was taken.
-
-\begin{itemize}
-
-\item
-  locating keys
-\item
-  displaying key state
-\end{itemize}
+An \textcite{TLC5940} or other PWM driver such as in \textcite{mcpherson_portable_2013} added
+complexity to assembling and were avoid in favour of addressable LEDs with
+integrated driver and shared data line. One limitation to this approach is should any LED in chain fail, the fault will prevent all subsequent LEDs from illuminating.
+An individual PWM driver per PCB avoids cascading failure, but would have add 
+complexity in the assembly process as they are typically in an SMD for factor.
+As covered in Section~\ref{}, THT components were preferred in the initial design stages to allow for easier manual assembly and alteration of wiring and components.
+In the event of a failure with other components, the the solution was to replace the faulty PCB. As such, failing LEDs did not present a great enough problem to justify a design change.
+Furthermore, the LEDs were to included to aid debugging and calibration, there failure would not otherwise effect the operation of the interface.
 
 \subsubsection{Multiplexer}
 
@@ -928,6 +868,10 @@ needed a separate cable loom
 Means its place in the circuit is fixed
 sensor boards soldered together with ribbon cable.
 \texttt{A}, \texttt{B}, and \texttt{C} correlate to the first second and third bits of the 3-bit channels select number.
+
+
+
+
 
 \subsubsection{Controller Board}
 
@@ -1025,7 +969,20 @@ adjust playback parameters such as tuning, voicing and which stops are engaged.
 \subsubsection{Brackets}
 
 
+
+
 \subsection{Electronics Firmware}
+
+
+Addressing the problem of scale of identifying which key's threshold is
+currently being edited.
+
+The LEDs also allowed for easy identification for keys that were outside of
+expected values and when a key was triggered. 
+
+The LEDs are on the same PCB as the sensors and are hidden when the nameboard is
+in place.
+
 
 The firmware can be initiated in two states: a `calibration' and an `operation' state. In the operation state, the sensor system uses a two-threshold hysteresis mechanism implemented as a finite state machine with three states: \texttt{RELEASED}, \texttt{PLUCKED}, and \texttt{PRESSED}. A MIDI \texttt{Note\_ON} is triggered only when the sensor reading exceeds the \texttt{pluck\_threshold} and the system is in the \texttt{RELEASED} state. Conversely, a \texttt{Note\_OFF} is issued when the value falls below a lower \texttt{release\_threshold}, and the system is in the \texttt{PLUCKED} state. This avoids instability from minor fluctuations near a single threshold and prevents rapid state toggling. A 4-sample moving average filter was implemented to reduce noise and brought the effective sampling period to 2 milliseconds with 1 millisecond jitter. The rotary encoder is used to initiate the firmware in a `calibration state' during which the threshold values can modified and written to FRAM. The threshold values are plotted alongside live sensor reading to help identify the correct pluck point. The calibration state also allows for identification of any malfunctioning sensor.
 
@@ -1045,6 +1002,11 @@ FRAM data structure was in part inspired by the RIFF file format standard \cite{
     \label{tab:fram-structure}
 \end{table}
 
+The firmware was structure in a way that the interface could be changed so long
+as the code required for any other board would comply with function arguments
+and outputs. Worth noting the fragility and volatility when designing this kind
+of project and how easily it is for the project to become broken.
+
 \subsubsection{Finite State Machine}
 
 
@@ -1053,7 +1015,7 @@ FRAM data structure was in part inspired by the RIFF file format standard \cite{
 \begin{figure}
     \centering
     \includegraphics[width=0.66\linewidth]{img/jack-states.pdf}
-    \caption{Plot illustrating hysteresis as two thresholds. Plot shows a full key press and release event. After passing the pluck threshold, the key enters a \texttt{PLUCKED} state. The key then enters the \texttt{RELEASED} state after passing the lower release threshold.}
+    \caption{Plot illustrating hysteresis as two thresholds. Plot shows a full key press and release event recorded using an Arduino Nano 33 BLE in its 12-bit DAC mode. After passing the pluck threshold, the key enters a \texttt{PLUCKED} state. The key then enters the \texttt{RELEASED} state after passing the lower release threshold.}
     \label{fig:jack-states}
 \end{figure}
 
@@ -1278,8 +1240,7 @@ Kept original seven sensors per board, the two sensor on the edges of the board 
 \end{figure}
 
 \begin{figure}
-    \centering
-    \includesvg[]{}
+    \centering    
     \includegraphics[width=1\linewidth]{img/pcb_controller_schematic_v2.pdf}
     \caption{}
     \label{fig:sensor-schematic-1}
