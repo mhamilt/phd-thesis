@@ -532,7 +532,20 @@ spaces.
 
 The prototyping for the sensor system was separated into multiple stages of ever increasing complexity.
 The intention behind this was to solve the problem of sensing a harpsichord jack displacement in the
-simplest case before moving on to more complex systems. Prototyping was to first take place on single action, then an action with multiple registers and finally expanding to an interface with multiple keys.
+simplest case before moving on to more complex systems. Prototyping was to first take place on single action, then an action with multiple registers and finally expanding to an interface with multiple keys. 
+The system evolved through iterative prototyping, beginning with
+simple threshold-based testing and ending in a fully functional multi-sensor
+interface capable of triggering MIDI events. 
+
+The initial stage of development focused on testing whether sensor data could
+reliably trigger MIDI playback. Modifying an existing harpsichord for testing
+was considered but ultimately discarded due to significant internal measurement
+and layout discrepancies. Instead, a custom 3-key harpsichord mechanism (Figure
+\ref{fig:3key}) was used as a foundation for prototyping. This approach followed
+a methodology similar to that used in the \textcite{timmermans_multibody-based_2020} Haptic Key
+project, since the 3-key model enabled
+iterative testing of individual components, including sensor placement, signal
+processing, and mechanical tolerances, before eventually scaling the concept to a multi-octave keyobard. 
 
 \subsection{Methodology}
 
@@ -610,6 +623,8 @@ A dark pigmented PLA was used to avoid IR light simply being diffused. After the
 
 \subsection{Prototype PCB}
 
+
+
 \begin{figure}
     \centering
     \includegraphics[width=0.75\linewidth]{img/prototype-mini-pcb-bw.png}
@@ -686,13 +701,14 @@ keys that preserves a real harpsichord's haptic qualities.
 
 
 The aesthetics of the instrument well careful considered during the design process.
-
-Since the Tagliavini
-collection hosts primarily early plucked stringed keyboards of Italian origin,
+The physical and visual presentation of an instrument might not be the priority for a performer, but in the context of a museum exhibition it is vital to the visitor experience as demonstrated by \textcite{mcalpine_sampling_2014}.
+Since the Tagliavini collection hosts primarily early plucked stringed keyboards of Italian origin,
 the keyboard layout was deliberately modelled after early Italian harpsichords.
 
-Often for haptic DMI projects, much of the effort is placed into the design and functionality of electronic components but not much is done with respect to the visual stimulus.
-The impact of visual stimulius should not be underplayed, in particular when it comes to musicians.
+Often for haptic DMI projects, much of the effort is placed into the design and functionality of electronic components but not much is done with respect to the visual stimulus. 
+For keyboards, this is in part down to the small number of key modelling \cite{gillespie_haptic_1996,lozada_modelisations_2007,timmermans_multibody-based_2020}, the form of which is already far removed from what a performer would expect. For actuated haptic systems, there is also a question of where to put everything. A combined approach of realistic haptics and aesthetics presents a challenge in design. What differentiates a commercial MIDI keyboard from an acoustic keyboard instrument is the presence of strings. The strings in the interfaces presented here are functional, which is to say their presence serves a purpose as part of both the haptic feedback and visual presentation. If the strings were no longer needed as part of the haptic mechanism, it could be argued their presence would would be necessitate for the purpose of presentation, otherwise what would differentiate the interface visually from current commercial offerings. This then raises the question: where do the electronics go? Haptic systems and electronic actuators have a lower limit for their footprint and often require moving out of the confines of the instrument \cite{mcpherson_augmented_2010, schmidt_sparksichord_2025}.
+
+The impact of visual stimulus should not be underplayed, in particular when it comes to musicians.
 
 The studies of \textcite{fritz_player_2012, fritz_soloist_2014, fritz_listener_2017} covered briefly in Section~\ref{sec:reproduction-or-renovation} illustrates the need for restriction in visual stimulus to avoid influencing a musician when they are listening.
 
@@ -710,33 +726,21 @@ timmermans_multibody-based_2020}, the visual component may provide the final
 persuasive element necessary for acceptance, similar to the way visual
 perception affects judgments of musical performance.
 The aesthetics of the interface enhance its likelihood of being perceived as an `authentic' musical
-instrument. The aesthetic design develops what was observed by \textcite{mcalpine_sampling_2014} and provides a means to answer to what degree can visual stimuli be leveraged to ``sell'' the experience of playing a DMI. When combined with a passive haptic response, are aethetics enough to convince the player and remove the barrier to verisimilitude.
+instrument. The aesthetic design develops what was observed by \textcite{mcalpine_sampling_2014} and provides a means to answer to what degree can visual stimuli be leveraged to ``sell'' the experience of playing a DMI. When combined with a passive haptic response, are aesthetics enough to convince the player and remove the barrier to verisimilitudinous experience?
 
 % A common piece of advice for those purchasing a guitar is for them to wear a blindfold as they try instruments. This is to avoid the buyer being influenced by the `look' of the instrument over the sound or the feel to the detriment to their comfort.
 
 
 \subsection{Electronic Components}
 
+This section covers the electronics components utilised in the final circuit design, their purpose and reasons behind their choice.
 
-Figure \ref{fig:system-block-diagram} shows a block diagram of the finalised
-hardware setup. The system evolved through iterative prototyping, beginning with
-simple threshold-based testing and ending in a fully functional multi-sensor
-interface capable of triggering MIDI events. 
+\subsubsection{Microcontroller}\label{nano-ble}
 
-The initial stage of development focused on testing whether sensor data could
-reliably trigger MIDI playback. Modifying an existing harpsichord for testing
-was considered but ultimately discarded due to significant internal measurement
-and layout discrepancies. Instead, a custom 3-key harpsichord mechanism (Figure
-\ref{fig:3key}) was used as a foundation for prototyping. This approach followed
-a methodology similar to that used in the \textcite{timmermans_multibody-based_2020} Haptic Key
-project, since the 3-key model enabled
-iterative testing of individual components, including sensor placement, signal
-processing, and mechanical tolerances, before upscaling. 
+All the electronic components in the system terminate at a microcontroller, whose job is to convert analogue signals to digital data, and control the other components in the system. For microcontroller, an Arduino Nano 33 BLE (Bluetooth Low Energy) was chosen as the final design, hereafter referred to as simply the Nano BLE. The Arudino Nano line of microcontrollers have a standardised form factor, which is to say they have a standard size and pin layout. Since it was unclear what the computational and functional requirements would be for the microcontroller, standardised form allowed for the testing of multiple models and chipsets. For the prototyping stage, an Arduino Nano 33 IoT was used as the initial microcontroller given its ready availability. When scaling the final sensor concept, it was found that the Nano 33 IoT had limitation on its analogue-to-digital converter (ADC) input channels four and five \cite{arduino_nano33iot_2025}, limiting the total number of input channels to just six. This limitation in input channels would have a great impact in the layout of the rest of the circuit. The Nano BLE, which had all eight ADC channels available, was therefore swapped in of the Nano 33 IoT with the firmware and circuitry remaining the same.
 
+It was found a number of different models could be tested  was 
 
-\subsubsection{Arduino Nano 33 BLE}\label{nano-ble}
-
-Arduino Nano 33 BLE (Bluetooth Low Energy) microcontroller was chosen for a few reasons. The Nano form factor was
 appealing as it would allow for easy changes between chipsets without requiring
 any rewiring and thus no new PCBs would need to be created if a better
 alternative was found later in the project. Another benefit to the Arduino Nano
@@ -771,9 +775,9 @@ Initially a Nano IoT was used for both WiFi and Bluetooth Low Energy
 functionality, but it was found that 2 ADC channels were in fact not useable and
 would have required additional multiplexers.
 
-\subsubsection{FRAM}\label{eeprom-nvram-fram} There would need to be the ability
-to store values on non-volatile memory so that the electroincs could be
-powered-down without losing data.
+\subsubsection{Non-Volatile Memory}\label{eeprom-nvram-fram} 
+
+There would need to be the ability to store values on non-volatile memory so that the electroincs could be powered-down without losing data.
 
 Adjusting the values through firmware would not have been flexible or practical.
 Instead an Ferroelectric RAM unit was chosen and connected using an SPI
@@ -835,12 +839,16 @@ not be visible, a simpler design approach was taken.
 
 \subsubsection{Multiplexer}
 
-The number of available analogue-to-digital channels (ADC) on the Arduino is limited to eight. For the prototype, sensors outputs were connected directly to the available ADCs.
+The number of available analogue-to-digital converter (ADC) channels  on the Arduino is limited to eight. For the prototype, sensors outputs were connected directly to the available ADCs.
 One of the first a `problems of scale', introduced when expanding from six jacks of the prototype model to the Mark 1, was how to accommodate 98 optical sensors. To overcome the Arduino's ADC limitation, a \texttt{CD4051BE} Texas Instruments multiplexer was introduced.  A multiplexer (multiplexor, MUX) a circuit that routes a common pin to one of several inputs or output. The MUX would provide a means to connect multiple sensor output signals to a single ADC pin on the Arduino. Available GPIO pins on the Arduino allowed for programmatic control of signal routing. This is the same way in with the ADCs themselves are routed on the Arduino \cite{nordic_nrf52840_2025}, meaning there is a cascade of two mux circuits. An 8-channel multiplexer was used in order to mitigate the problems typically associated with cascading multiplexers, such as increased signal settle time and increased noise. The sensor outputs were then divided between two microcontrollers.  Seven of the available eight channels on the \texttt{CD4051BE} were used, which provided a clean division of seven sensors per sensor board with seven sensor boards to cover 49 jacks in a register. In total, 14 sensor boards and two controller boards were installed. Details on the sensor and controller boards are given in the next section.
 
 \subsection{Printed Circuit Boards}
 
 To ensure stable connection, reduce the footprint of the circuit and fix the pitch spacing of the sensors to match the jacks, two PCBs were designed: the sensor board and the controller board.
+
+Figure \ref{fig:system-block-diagram} shows a block diagram of the finalised
+electronics setup, showing the connectivity between the sensor boards and the controller board on a macro level. 
+
 
 \subsubsection{Sensor Board}
 
@@ -853,11 +861,8 @@ Trace length between the output signal of the sensor and the MUX channel were ke
   \includegraphics[width=0.5\linewidth]{img/qre1113-schematic.pdf} 
   \caption{Optical sensor in a simple voltage divider circuit. \texttt{V\_OUT}
   is routed to one of 8 channels on the \texttt{CD4051BE} multiplexer.}
-
   \label{fig:simple-schematic}
 \end{figure}
-
-
 
 
 The final sensor system utilised QRE1113 optical sensors, known for their small
@@ -1018,6 +1023,48 @@ adjust playback parameters such as tuning, voicing and which stops are engaged.
 
 
 \subsubsection{Brackets}
+
+
+\subsection{Electronics Firmware}
+
+The firmware can be initiated in two states: a `calibration' and an `operation' state. In the operation state, the sensor system uses a two-threshold hysteresis mechanism implemented as a finite state machine with three states: \texttt{RELEASED}, \texttt{PLUCKED}, and \texttt{PRESSED}. A MIDI \texttt{Note\_ON} is triggered only when the sensor reading exceeds the \texttt{pluck\_threshold} and the system is in the \texttt{RELEASED} state. Conversely, a \texttt{Note\_OFF} is issued when the value falls below a lower \texttt{release\_threshold}, and the system is in the \texttt{PLUCKED} state. This avoids instability from minor fluctuations near a single threshold and prevents rapid state toggling. A 4-sample moving average filter was implemented to reduce noise and brought the effective sampling period to 2 milliseconds with 1 millisecond jitter. The rotary encoder is used to initiate the firmware in a `calibration state' during which the threshold values can modified and written to FRAM. The threshold values are plotted alongside live sensor reading to help identify the correct pluck point. The calibration state also allows for identification of any malfunctioning sensor.
+
+FRAM data structure was in part inspired by the RIFF file format standard \cite{ibm_riff_1991}. The layout of data was in such a way as to potentially allow for calibration values to be stored to files and read from a storage device. Table~\ref{tab:fram-structure} shows the structure of data in the FRAM. The pluck and release `Chunk IDs' can be interpreted as a unsigned 32-bit integer, with the hexadecimal values \texttt{0x4D415849} and \texttt{0x4D494E49} respectively or as ASCII character strings \texttt{"MAXI"} and \texttt{"MINI"}. The firmware checks memory addresses \texttt{0x00} and \texttt{0x66} for the corresponding Chunk ID and if the value stored there is not correct, the memory is  assumed to be uninitialised. In that case, the tag value is written and a default value will be set for all thresholds in the chunk.
+
+\begin{table}
+    \centering
+    \begin{tabular}{|l|l|r|l|}
+        \hline
+        \textbf{Address} & \textbf{Field Name}     & \textbf{Size} & \textbf{C Type}        \\ \hline
+        \texttt{0x00}    & Pluck Chunk ID          & 4             & \texttt{uint32\_t    } \\ \hline
+        \texttt{0x04}    & Pluck Threshold Chunk   & 98            & \texttt{uint16\_t[49]} \\ \hline
+        \texttt{0x66}    & Release Chunk ID        & 4             & \texttt{uint32\_t    } \\ \hline
+        \texttt{0x6A}    & Release Threshold Chunk & 98            & \texttt{uint16\_t[49]} \\ \hline  
+    \end{tabular}
+    \caption{Calibration data layout in non-volatile memory.}
+    \label{tab:fram-structure}
+\end{table}
+
+\subsubsection{Finite State Machine}
+
+
+\subsubsection{Hysteresis}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.66\linewidth]{img/jack-states.pdf}
+    \caption{Plot illustrating hysteresis as two thresholds. Plot shows a full key press and release event. After passing the pluck threshold, the key enters a \texttt{PLUCKED} state. The key then enters the \texttt{RELEASED} state after passing the lower release threshold.}
+    \label{fig:jack-states}
+\end{figure}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{img/hysteresis.pdf}
+    \caption{Plot illustrating hysteresis by two thresholds, one for the pluck state and another for the release state.}
+    \label{fig:hysteresis}
+\end{figure}
+
 \subsubsection{Installation}
 
 Once a sensor system had been decided upon and its scalability assessed, the next stage to install it within the mechanical interface. 
@@ -1038,26 +1085,6 @@ the keys were blocked entirely from moving. A 10mm by 15mm section was milled
 out of each key to create extra clearance. The milling required the removal,
 shortening and refitting of the leather pads for the jacks. The extra work added
 an extra day to the full install.
-
-
-% \begin{figure}[!b]
-%   \centering
-%   \begin{subfigure}[h]{1\linewidth}
-%     \centering
-%     \includegraphics[height=0.3\linewidth]{img/keys-milled.jpeg} 
-%     \caption{Sensor PCB}
-%     \label{fig:sensor_v2}
-%   \end{subfigure}
-%   \begin{subfigure}[h]{1\linewidth}
-%     \centering
-%     \includegraphics[height=0.1\linewidth]{img/milled-keys.jpg} 
-%     \caption{Controller PCB}
-%     \label{fig:controller_v2}
-%   \end{subfigure}
-%   \caption{}
-%   \label{fig:pcb_v2}
-% \end{figure}
-
 
 \begin{figure}  
   \centering
@@ -1139,48 +1166,6 @@ Arduino IDE (Figure \ref{fig:serial_monitor}) and the open source MIDI Monitor
 software \footnote{\url{https://github.com/krevis/MIDIApps}}.
 
 
-\subsection{Electronics Firmware}
-
-The firmware can be initiated in two states: a `calibration' and an `operation' state. In the operation state, the sensor system uses a two-threshold hysteresis mechanism implemented as a finite state machine with three states: \texttt{RELEASED}, \texttt{PLUCKED}, and \texttt{PRESSED}. A MIDI \texttt{Note\_ON} is triggered only when the sensor reading exceeds the \texttt{pluck\_threshold} and the system is in the \texttt{RELEASED} state. Conversely, a \texttt{Note\_OFF} is issued when the value falls below a lower \texttt{release\_threshold}, and the system is in the \texttt{PLUCKED} state. This avoids instability from minor fluctuations near a single threshold and prevents rapid state toggling. A 4-sample moving average filter was implemented to reduce noise and brought the effective sampling period to 2 milliseconds with 1 millisecond jitter. The rotary encoder is used to initiate the firmware in a `calibration state' during which the threshold values can modified and written to FRAM. The threshold values are plotted alongside live sensor reading to help identify the correct pluck point. The calibration state also allows for identification of any malfunctioning sensor.
-
-
-
-
-FRAM data structure was in part inspired by the RIFF file format standard \cite{ibm_riff_1991}. The layout of data was in such a way as to potentially allow for calibration values to be stored to files and read from a storage device. Table~\ref{tab:fram-structure} shows the structure of data in the FRAM. The pluck and release `Chunk IDs' can be interpreted as a unsigned 32-bit integer, with the hexadecimal values \texttt{0x4D415849} and \texttt{0x4D494E49} respectively or as ASCII character strings \texttt{"MAXI"} and \texttt{"MINI"}. The firmware checks memory addresses \texttt{0x00} and \texttt{0x66} for the corresponding Chunk ID and if the value stored there is not correct, the memory is  assumed to be uninitialised. In that case, the tag value is written and a default value will be set for all thresholds in the chunk.
-
-\begin{table}
-    \centering
-    \begin{tabular}{|l|l|r|l|}
-        \hline
-        \textbf{Address} & \textbf{Field Name}     & \textbf{Size} & \textbf{C Type}        \\ \hline
-        \texttt{0x00}    & Pluck Chunk ID          & 4             & \texttt{uint32\_t    } \\ \hline
-        \texttt{0x04}    & Pluck Threshold Chunk   & 98            & \texttt{uint16\_t[49]} \\ \hline
-        \texttt{0x66}    & Release Chunk ID        & 4             & \texttt{uint32\_t    } \\ \hline
-        \texttt{0x6A}    & Release Threshold Chunk & 98            & \texttt{uint16\_t[49]} \\ \hline  
-    \end{tabular}
-    \caption{Calibration data layout in non-volatile memory.}
-    \label{tab:fram-structure}
-\end{table}
-
-\subsubsection{Finite State Machine}
-
-
-\subsubsection{Hysteresis}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.66\linewidth]{img/jack-states.pdf}
-    \caption{Plot illustrating hysteresis as two thresholds. Plot shows a full key press and release event. After passing the pluck threshold, the key enters a \texttt{PLUCKED} state. The key then enters the \texttt{RELEASED} state after passing the lower release threshold.}
-    \label{fig:jack-states}
-\end{figure}
-
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\linewidth]{img/hysteresis.pdf}
-    \caption{Plot illustrating hysteresis by two thresholds, one for the pluck state and another for the release state.}
-    \label{fig:hysteresis}
-\end{figure}
 
 \subsection{Open Sourcing}
 
@@ -1229,8 +1214,11 @@ Archiving the project in this manner highlighted limitations within the framewor
 Unfortunately, the GitHub integration for Zenodo does not currently provide a means for meta-repositories to be archived correctly \cite{zenodo_1036_2025}. This limitation necessitates the generation of a separate DOI for each component submodule, all of which reference the meta-repository.
 CAD files and surrounding support files also provide another point of failure with respect to digital preservation. For example, in the course of this thesis the popular Electronic Design Automation (EDA) software tool EAGLE was announced to be discontinued \cite{autodesk_eagle_2024} for the July 2026. A conscious decision was made to continue using the EAGLE format for the PCB design. Much in the same way as the discontinuation of Python 2 may be beneficial for archival purposes as ``advanced programming language that is guaranteed not to evolve anymore'' \cite{rougier_loupe_2020}, so to does the discontinuation of the EAGLE means that its XML file standard is now calcified and is unable changes. Instead, the EAGLE files can be used in conjunction with other EDA software such as the open source KiCAD \cite{kicad_eagle_2024}.
 
-\section{Mark 2}
 
+
+
+
+\section{Mark 2}
 
 The Mark 2 interface demonstrates a refinement of the core technology and functionality of a multiple register system. The parametric placement of sensors shows that such a system is viable for altering existing interfaces in the same manner as the PianoBar from Moog Music \cite{computer_products_2005, mcpherson_portable_2013}. A move from THT to SMD components would be expected to reduce the footprint of the PCB by half \cite{prasad_surface_1997} allowing the space to be used for a refined op-amp design \cite{mcpherson_portable_2013} or the ability to install in more constrained spaces. The system would benefit from single piece mounting bracket which would allow for much more simplified installation. Given the open source nature of the project the advantages come from the ability to modify the design for a bespoke application.
 
@@ -1284,13 +1272,14 @@ Kept original seven sensors per board, the two sensor on the edges of the board 
 
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{img/pcb_sensor_schematic_v2.pdf}
+     \includesvg[inkscapelatex=false, width=\linewidth]{img/pcb_sensor_schematic_v2.svg}            
     \caption{Mark 2 Sensor board schematic. RGB LEDs \texttt{D}, signal paths \texttt{S}, optical sensors \texttt{Q}. The Solder Junction in the center illustrates the connection  between the multiplexer output and corresponding \texttt{S} channel assignment on the FFC cable. Labels point in the direction of current flow.}
     \label{fig:sensor-schematic-2}
 \end{figure}
 
 \begin{figure}
     \centering
+    \includesvg[]{}
     \includegraphics[width=1\linewidth]{img/pcb_controller_schematic_v2.pdf}
     \caption{}
     \label{fig:sensor-schematic-1}
