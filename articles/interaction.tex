@@ -623,9 +623,6 @@ round the jack and stop light from other jacks or sensors. The baffles were
 printed on a BAMBU X1 3D printers using polylactic acid (PLA) plastic. 
 A dark pigmented PLA was used to avoid IR light simply being diffused. After the baffles were fitted, the cross-talk was eliminated.
 
-
-
-
 \subsection{Prototype PCB}
 
 \begin{figure}
@@ -652,6 +649,8 @@ A prototype PCB (Figure~\ref{fig:prototype-pcb}) was drafted using the EAGLE CAD
 \end{figure}
 
 This would allow the PCB to be mounted to an adjustable 3D printed bracket which was fitted to the side of the wrestplank. The bracket was designed to allow adjustment in the distance between the sensor and the gradient tag. The intention was for the final PCB to mounted horizontally on the underside of the wrestplank. While assembling the prototype PCB, it was found that the optical sensor contacts were too fragile and could be easily broken in this process. An end-mount approach like that taken in \textcite{mcpherson_portable_2013} was attempted, but the short side of the jack body, at a width of 4.30 millimetres, presented a much smaller target than the keyboard keys. Slight deviations in sensor alignment resulted in drastic changes to the range of the output signal. Instead, the optical sensors would need to be soldered flush against the PCB, which would require the PCB to orientate vertically.
+
+
 
 \section{Mark 1: San Colombano}
 
@@ -781,7 +780,7 @@ An individual PWM driver per PCB avoids cascading failure, but would have add
 complexity in the assembly process as they are typically in an SMD for factor.
 As covered in Section~\ref{}, THT components were preferred in the initial design stages to allow for easier manual assembly and alteration of wiring and components.
 In the event of a failure with other components, the the solution was to replace the faulty PCB. As such, failing LEDs did not present a great enough problem to justify a design change.
-Furthermore, the LEDs were to included to aid debugging and calibration, there failure would not otherwise effect the operation of the interface.
+Furthermore, the LEDs were to included to aid debugging and calibration, there failure would not otherwise effect the operation of the interface. The LEDs would also be hidden behind the name board of the exhibition interface during standard operation.
 
 \subsubsection{Multiplexer}
 
@@ -923,13 +922,14 @@ in place.
             0 & 0 & 0 & 0   \\ \hline
             0 & 0 & 1 & 1   \\ \hline
             0 & 1 & 0 & 2   \\ \hline
-            0 & 0 & 1 & 3   \\ \hline
-            0 & 1 & 0 & 4   \\ \hline
+            0 & 1 & 1 & 3   \\ \hline
+            1 & 0 & 0 & 4   \\ \hline
             1 & 0 & 1 & 5   \\ \hline
             1 & 1 & 0 & 6   \\ \hline
+            1 & 1 & 1 & 7   \\ \hline
         \end{tabular}
     }
-    \caption{3-bit binary encoding for \texttt{MUX} channel selection}
+    \caption{3-bit binary encoding for \texttt{MUX} channel selection. There are 8 \texttt{MUX} channels, indexed from 0.}
     \label{tab:mux-encoding}
 \end{table}
 
@@ -963,7 +963,6 @@ and outputs. Worth noting the fragility and volatility when designing this kind
 of project and how easily it is for the project to become broken.
 
 \subsubsection{Finite State Machine}
-
 
 \subsubsection{Hysteresis}
 
