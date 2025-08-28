@@ -247,9 +247,8 @@ appears to use haptic and mechanical feedback interchangeably.
 \textcite{hayes_vibrotactile_2011} refers to a ``actuator or mechanical
 device''. Mechanical feedback is a less helpful distinction as it relates to
 DMIs since generally all haptic feedback is mechanical feedback. This subset is
-in contrast to thermal, ultrasonic or electrical feedback where the haptic
-feedback is achieved through heat\url{https://www.nime.org/proceedings/2004/nime2004_104.pdf}, sound waves and electrical current
-respectively
+in contrast to thermal \cite{miyashita_thermoscore_2004}, ultrasonic \cite{hwang_airpiano_2017} or electrical \cite{altinsoy_electrotactile_2011} feedback where the haptic
+feedback is achieved through heat, sound waves and electrical current respectively
 
 \paragraph{Tactile feedback:} Haptic feedback as perceived through the touch and
 contact to the body—including sensations like pressure, texture, or
@@ -398,7 +397,7 @@ There is a relatively fixed force to overcome the resistance of the quill agains
 \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{img/drawing-jack_forces.pdf}\\
-    \\
+    
     \includegraphics[width=0.5\linewidth]{img/film-strip.jpeg}
     \caption{Forces at play on the jack during the plucking and release phases (Adapted from  \textcite[Figure 1.7][]{perng_physical_2012}) against a 1000 frames per second photo series illustrating jack displacement.}
     \label{fig:mechanism}
@@ -419,9 +418,9 @@ By the 16th century it was typical for Italian harpsichords to have more than on
 
 \begin{itemize}
     \item \(f\) a function of force applied to key over time \(t\)
-    \item \(\theta\) a function of angular displacement, and \(\dot{\theta}\) first derivative velocity, over time \(t\)
-    \item \(B\) a viscosity constant
-    \item \(X\) a function of \(\theta\) representing ?? key displacement ??
+    \item \(\theta\) a function of angular displacement, in time \(t\)
+    \item \(B\) a viscosity friction constant, the \(\dot{\theta}\) velocity with \(B \dot{\theta}\) comprising the viscous damping term.
+    \item \(X\) a function of \(\theta\) representing ``extra terms''
 \end{itemize}
 
 \section{Design Constraints}\label{sec:design-constraints}
@@ -640,15 +639,9 @@ A dark pigmented PLA was used to avoid IR light simply being diffused. After the
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.35\linewidth]{img/pcb-prototype-schematic.png}
-    \caption{PCB schematic of the prototype sensor board.}
-    \label{fig:prototype-pcb}
-\end{figure}
-
-\begin{figure}
-    \centering
+    \includesvg[inkscapelatex=false,width=0.75\linewidth]{img/pcb-miniboard-schematic.svg} \\
     \includegraphics[width=0.75\linewidth]{img/pcb-prototype-mini-board-bw.png}
-    \caption{PCB layout of the prototype sensor board.}
+    \caption{PCB schematic of the prototype sensor board and its board silkscreen.}
     \label{fig:prototype-pcb}
 \end{figure}
 
@@ -676,7 +669,7 @@ The mechanical hardware and its design constraints were co-authored with luthier
 
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{img/mark-1-model-cross-section.pdf}
+    \includegraphics[width=1\linewidth]{img/drawing-mark-1-model-cross-section.pdf}
     \caption{Cross-section of keyboard mechanics by Roberto Livi. Not the original design was to accommodate a horizontal circuit board of dimensions 50mm by 6mm.}
     \label{fig:mark-1-cs}
 \end{figure}
@@ -728,6 +721,7 @@ Since the Tagliavini collection hosts primarily early plucked stringed keyboards
 the keyboard layout was deliberately modelled after early Italian harpsichords.
 
 Often for haptic DMI projects, much of the effort is placed into the design and functionality of electronic components but not much is done with respect to the visual stimulus. 
+% Outside of commercial haptic keyboard projects like the vibrotactile AvantGrande series of piano models \cite{fluckiger_evaluation_2018,fluckiger_influence_2018}. Being commercial, its mechanics and software is closed source.
 For keyboards, this is in part down to the small number of key modelling \cite{gillespie_haptic_1996,lozada_modelisations_2007,timmermans_multibody-based_2020}, the form of which is already far removed from what a performer would expect. For actuated haptic systems, there is also a question of where to put everything. A combined approach of realistic haptics and aesthetics presents a challenge in design. What differentiates a commercial MIDI keyboard from an acoustic keyboard instrument is the presence of strings. The strings in the interfaces presented here are functional, which is to say their presence serves a purpose as part of both the haptic feedback and visual presentation. If the strings were no longer needed as part of the haptic mechanism, it could be argued their presence would would be necessitate for the purpose of presentation, otherwise what would differentiate the interface visually from current commercial offerings. This then raises the question: where do the electronics go? Haptic systems and electronic actuators have a lower limit for their footprint and often require moving out of the confines of the instrument \cite{mcpherson_augmented_2010, schmidt_sparksichord_2025}.
 
 The impact of visual stimulus should not be underplayed, in particular when it comes to musicians.
