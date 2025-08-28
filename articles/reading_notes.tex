@@ -1728,6 +1728,68 @@ hypothesis that adding haptic feedback to interfaces for computer-based musical
 instruments improves the player’s ability to control these instruments
 \end{quotation}
 
+\subsection{\cite{oboe_mikey_2006}}
+
+The MIKEY project by robert oboe, another active touch feedback keyboard. Aimed at recreating haptic feel of the grand piano, hammond organ and the harpsichord.
+
+\begin{quotation}
+    Roughly speaking, haptic information allows the player to perceive the “state” of the mechanism being manipulated through the key. By using this knowledge about the state of the mechanism and correlating it with the sound generated, the player learns a strategy to obtain desired tones.
+\end{quotation}
+
+
+The reduction of expression to simply key attack velocity
+
+\begin{quotation}
+  constitutes a significant limitation for the musician, who loses expressive control of the instrument and, in turn, of the generated sound.
+\end{quotation}
+
+Oboe also talks of key ``pressure'' which may be a reference to aftertouch, which is not present as standard. Interestingly, key pressure (or after touch) is something that a commercial midi keyboard can provide control that an acoustic mechanism cannot.
+
+What is implied, but unsaid by \textcite{oboe_mikey_2006} is that the trigger point for a commercial keyboard is always at the end of the keys travel. This is not quite true for the pianos, but is certainly not true for the harpsichord. To play the instrument on a commercial keyboard requires a major shift in tactile expectations.
+
+
+\begin{quotation}
+    Gillespie (1992, 1994), on the other hand, has studied the modeling of a simplified piano action, composed of only two bodies: the key and the hammer. Even with this very simple model, it is possible to reproduce part of the hammer motion, composed of three different phases: contact with the key, fly, and return on the key. This model, however, does not take into account the impact of the hammer with the string and the effect of es- capement, even if such characteristics are very useful in regaining the previously mentioned corre- spondence between acoustic response and haptic interaction.
+\end{quotation}
+
+\textcite{oboe_mikey_2006} notes the erhaps over simplification of the model. What is not covered that perhaps should be is the veracity required in the ``virtual mechanism'' model. How simplified can it be made before it could trick a blind performer.
+
+Maybe goes in tandem with the musical haptics papers
+
+Defines force profile of the harpsichord for forward travel (key depression) as:
+
+\[ f(t) = Bθ(t) + X(θ(t))\]
+
+\begin{itemize}
+    \item \(f\) a function of over time \(t\)
+    \item \(\theta\) a function of angular displacement, and \(\dot{\theta}\) first derivative velocity, over time \(t\)
+    \item \(B\) a viscosity constant
+    \item \(X\) a function of \(\theta\) representing ?? key displacement??
+\end{itemize}
+
+for a function f, X, constant V
+
+\textcite[Figures 20,21]{oboe_mikey_2006} showing the force profile for a virtual mechanism.
+
+A single register harpsichord has two points of resistance: one for the key pluck and another for the jack rail, the second dictated by the tallest jack body, which will typically be the furthest along the key lever.
+
+
+\subsection{Timeline of haptic keyboard projects}
+
+
+Baker, R. 1988. “Active Touch Keyboard.” United States Patent No. 4,899,631
+
+Cadoz, C., L. Lisowski, and J.-L. Florens. 1990. “Modular Feedback Keyboard.” Proceedings of the 1990 Interna- tional Computer Music Conference. San Francisco, California: International Computer Music Association, pp. 379–382.
+
+Gillespie, B. 1992. “The Touchback Keyboard.” Proceed- ings of the 1992 International Computer Music Confer- ence. San Francisco, California: International Computer Music Association, pp. 447–448. 
+
+Gillespie, B., and M. Cutkosky. 1992. “Dynamical Model- ing of the Grand Piano Action.” Proceedings of the 1992 International Computer Music Conference. San Francisco, California: International Computer Music Association, pp. 77–80.
+
+Cadoz, C., A. Luciani, and J-L. Florens. 1993. “CORDIS- ANIMA: A Modeling and Simulation System for Sound and Image Synthesis—The General Formalism.” Com- puter Music Journal 17(1):19–29. 
+
+Gillespie, B. 1994. “The Virtual Piano Action: Design and Implementation.” Proceedings of the 1994 Interna- tional Computer Music Conference. San Francisco, California: International Computer Music Association, pp. 167–170.
+
+
 \section{Beats}
 
 work part of the nemus project 
