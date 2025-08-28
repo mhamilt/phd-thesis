@@ -1,5 +1,6 @@
 \section{Introduction}
 
+
 % Pine and Gilmore note \cite{pinegilmore_2007}, achieving authenticity requires
 % museums to navigate the delicate balance between preservation and meaningful
 % engagement—a challenge that is particularly evident in the case of historical
@@ -378,7 +379,7 @@ collection
 
 \begin{figure}
     \centering
-    \frame{\includegraphics[width=1\linewidth]{img/3-key-mechanism.pdf}}
+    \frame{\includegraphics[width=1\linewidth]{img/drawing-3-key-mechanism.pdf}}
     \caption{Single manual, two-register action as used on the 1547 Alessandro Trasuntino and model interfaces.}
     \label{fig:mechanism}
 \end{figure}
@@ -396,20 +397,31 @@ There is a relatively fixed force to overcome the resistance of the quill agains
 
 \begin{figure}
     \centering
-    \frame{\includegraphics[width=1\linewidth]{img/jack_forces.pdf}}
-    \caption{Forces at play on the jack during the plucking and release phases. Adapted from Figure 1.7 \cite{perng_physical_2012}}
+    \frame{\includegraphics[width=0.5\linewidth]{img/drawing-jack_forces.pdf}}\\
+    \includegraphics[width=0.5\linewidth]{img/film-strip.jpeg}
+    \caption{Forces at play on the jack during the plucking and release phases (Adapted from  \textcite[Figure 1.7][]{perng_physical_2012}) against a 1000 frames per second photo series illustrating jack displacement.}
     \label{fig:mechanism}
 \end{figure}
 
 By the 16th century it was typical for Italian harpsichords to have more than one string per key and each string with its own jack. In the case of multiple strings (or registers), the jacks are arranged into rows. The jacks are staggered in height in order that, during the keys' travel,  each register is plucked in turn rather than occurring simultaneously  \cite{veroli_optimising_2012}. The central problem to be solved is the detection of the moment a string is plucked by a plectrum (Figure~\ref{fig:pluck}). Since each jack is constructed by hand, the resulting subtle variations in pluck points across the entire keyboard mean that individual jack displacement must be obtained, rather than simply the displacement of the key.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=1\linewidth]{img/film-strip.jpeg}
-  \caption{Photo series from a recording at 1000 frames per second illustrating jack displacement with the final frames are sequential and showing the pluck of the string.}
-  \label{fig:pluck}
-\end{figure}
+% \begin{figure}
+%   \centering
+%   \includegraphics[width=1\linewidth]{img/film-strip.jpeg}
+%   \caption{Photo series from a recording at 1000 frames per second illustrating jack displacement with the final frames are sequential and showing the pluck of the string.}
+%   \label{fig:pluck}
+% \end{figure}
 
+\textcite{oboe_mikey_2006} defines force profile of the harpsichord for forward travel (key depression) as:
+
+\[ f(t) = B\dot{\theta}(t) + X(\theta(t))\]
+
+\begin{itemize}
+    \item \(f\) a function of force applied to key over time \(t\)
+    \item \(\theta\) a function of angular displacement, and \(\dot{\theta}\) first derivative velocity, over time \(t\)
+    \item \(B\) a viscosity constant
+    \item \(X\) a function of \(\theta\) representing ?? key displacement ??
+\end{itemize}
 
 \section{Design Constraints}\label{sec:design-constraints}
 
@@ -473,17 +485,17 @@ from which it can be identified where those opportunities for new expression lie
 
 \begin{figure}
   \centering
-  \includegraphics[width=\linewidth]{img/49-key-bottom-sensors-no-keys.jpg} 
+  \includegraphics[width=\linewidth]{img/mark-1-bottom-sensors-no-keys.jpg} 
   \caption{Underside of the full model keyboard, showing two chambers: the front chamber (top) and the rear chamber (bottom).} 
 
-  \label{fig:49-key-bottom}
+  \label{fig:mark-1-bottom}
 \end{figure}
 
 A modular system of printed circuit boards (PCBs) was designed to manage the
 sensors and process their output. The system uses 49 optical sensors distributed
 across seven boards containing seven sensors each. The PCBs were secured to the
 underside of the wrest plank and above the keys (Figure
-\ref{fig:49-key-bottom}), allowing them to be adjusted during installation.
+\ref{fig:mark-1-bottom}), allowing them to be adjusted during installation.
 Ribbon cables connected the PCBs, providing flexibility during assembly while
 maintaining a compact form factor. Additional modifications, including baffles
 and adhesive improvements, were made to optimise the reliability of the sensor
@@ -627,7 +639,7 @@ A dark pigmented PLA was used to avoid IR light simply being diffused. After the
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.75\linewidth]{img/pcb-prototype-schematic.png}
+    \includegraphics[width=0.35\linewidth]{img/pcb-prototype-schematic.png}
     \caption{PCB schematic of the prototype sensor board.}
     \label{fig:prototype-pcb}
 \end{figure}
@@ -652,7 +664,7 @@ This would allow the PCB to be mounted to an adjustable 3D printed bracket which
 
 
 
-\section{Mark 1: San Colombano}
+\section{Mark 1}
 
 The first, complete version of the interface was designed for exhibition at San Colombano, herein referred to as Mark 1.
 A modular approach was taken during the design and fabrication of Mark 1. Development was divided into the mechanical hardware, electronics, and audio software. The electronics were further divided as hardware and firmware. This modular approach allowed construction to begin on the mechanical interface while prototyping still continued. Concurrent development allowed for changes or limitations in one module could be accounted for in the others. 
@@ -663,7 +675,7 @@ The mechanical hardware and its design constraints were co-authored with luthier
 
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{img/49-key-model-cross-section.pdf}
+    \includegraphics[width=1\linewidth]{img/mark-1-model-cross-section.pdf}
     \caption{Cross-section of keyboard mechanics by Roberto Livi. Not the original design was to accommodate a horizontal circuit board of dimensions 50mm by 6mm.}
     \label{fig:mark-1-cs}
 \end{figure}
@@ -685,14 +697,14 @@ commercial samplers.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.75\linewidth,angle=270]{img/all_comparison-90.pdf}
+    \includegraphics[width=0.75\linewidth,angle=270]{img/drawing-all_comparison-90.pdf}
     \caption{Scale comparison: (from left to right) the 1547 Trasuntino, 49-key `Mark 1' model, and the 3-key prototype. The Trasuntino provides an example of the `logarithmic' form of a traditional harpsichord.}
     \label{fig:compare}
 \end{figure}
 
 The rectangular poplar frame also deviates from the traditional logarithmic
 (Figure \ref{fig:compare}) form to allow for the installation of the
-electronic sensors, as visible in Figure \ref{fig:49-key-bottom}, without
+electronic sensors, as visible in Figure \ref{fig:mark-1-bottom}, without
 compromising the visual or tactile authenticity. Two string choirs, crafted from
 yellow brass wire and anchored with wrought iron pins, were tensioned to
 replicate authentic plucking resistance. Felt strips were added to dampen
@@ -765,7 +777,7 @@ Alternatives to the FRAM were available. The problem could also have been addres
 
 \begin{figure}
     \centering
-     \includegraphics[width=0.66\linewidth]{img/49-key-leds.png}
+     \includegraphics[width=0.66\linewidth]{img/mark-1-leds.png}
     \caption{Mark 1 demonstrating addressable RGB LED array.}
     \label{fig:mark1-leds}
 \end{figure}
@@ -825,17 +837,17 @@ Of note are the optical sensor signal output routed through the multiplexer (\te
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.75\linewidth]{img/49-key-pcbs.jpg}
+    \includegraphics[width=0.75\linewidth]{img/mark-1-pcbs.jpg}
     \caption{Detail of sensor boards installed inside Mark 1. Cabling between sensor boards can be seen which corresponds to the \texttt{Input} and \texttt{Output} connectors in Figure~\ref{fig:sensor-schematic-1}. The multicoloured cable loom above the PCBs carries the \texttt{SIG} from each sensor board, while the green cabling is the unused interrupt channel that was ultimately connected to \texttt{GND}.}
-    \label{fig:49-key-pcbs}
+    \label{fig:mark-1-pcbs}
 \end{figure}
 
 Ribbon cable was used solder the \texttt{Input} and \texttt{Ouput} of the sensor boards together. This was done prior to installation and the entire assembly was fitted as a single chain.
-A separate cable for the output signal was taken from each PCB (Figure~\ref{fig:49-key-pcbs}) which were collected in a separate cable loom and connected to a header on the controller board for easy routing to the analogue channels (Figure~\ref{fig:controller-schematic-1}).
+A separate cable for the output signal was taken from each PCB (Figure~\ref{fig:mark-1-pcbs}) which were collected in a separate cable loom and connected to a header on the controller board for easy routing to the analogue channels (Figure~\ref{fig:controller-schematic-1}).
 
 The same style of 3D-printed baffles as used in the prototype were installed on the sensor boards to eliminate cross-talk between adjacent sensors, as per Figure \ref{fig:baffles}. 
 These baffles, fabricated from dark-pigmented, matte PLA, ensured that infrared reflections from neighbouring jacks did not interfere with sensor readings. The baffles (Figure~\ref{fig:sensor-physical-pcbs}, alongside an adjustment plate and a vertical mount back plate, formed a three-part bracket assembly.
-Visible in Figure~\ref{fig:49-key-pcbs} is the adjustment brackets, which were used to both mount the sensor boards in a vertical orientation but also provide a means for broad adjustment of the distance between the sensor and gradients stickers. The three parts of the bracket are designed as a push fit so that they could be printed off-site, but assembled on on-site at the museum. The vertical backplate and adjustment plate fit together by means of a pressure fit dovetail join. Holes were placed on the sensor board design to accommodate such a bracket. Two 3mm holes are present on the sensor board allowing it to be sandwiched between between the back plate and the baffles. 
+Visible in Figure~\ref{fig:mark-1-pcbs} is the adjustment brackets, which were used to both mount the sensor boards in a vertical orientation but also provide a means for broad adjustment of the distance between the sensor and gradients stickers. The three parts of the bracket are designed as a push fit so that they could be printed off-site, but assembled on on-site at the museum. The vertical backplate and adjustment plate fit together by means of a pressure fit dovetail join. Holes were placed on the sensor board design to accommodate such a bracket. Two 3mm holes are present on the sensor board allowing it to be sandwiched between between the back plate and the baffles. 
 
 \begin{figure}
   \centering
@@ -968,7 +980,7 @@ of project and how easily it is for the project to become broken.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.66\linewidth]{img/jack-states.pdf}
+    \includegraphics[width=0.66\linewidth]{img/plot-jack-states.pdf}
     \caption{Plot illustrating hysteresis as two thresholds. Plot shows a full key press and release event recorded using an Arduino Nano 33 BLE in its 12-bit DAC mode. After passing the pluck threshold, the key enters a \texttt{PLUCKED} state. The key then enters the \texttt{RELEASED} state after passing the lower release threshold.}
     \label{fig:jack-states}
 \end{figure}
@@ -976,12 +988,20 @@ of project and how easily it is for the project to become broken.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\linewidth]{img/hysteresis.pdf}
+    \includegraphics[width=0.5\linewidth]{img/plot-hysteresis.pdf}
     \caption{Plot illustrating hysteresis by two thresholds, one for the pluck state and another for the release state.}
     \label{fig:hysteresis}
 \end{figure}
 
 \subsection{Installation}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{img/installation.png}
+    \caption{Keyboard being installed for exhibition in the Oratory at San Colombano.}
+    \label{fig:installation}
+\end{figure}
 
 Once a sensor system had been decided upon and its scalability assessed, the next stage to install it within the mechanical interface. 
 Electronics were designed to be a bespoke installation, after which brackets and enclosures could be drafted to hasten the install process.
@@ -1209,7 +1229,7 @@ The controller PCB added JST-PH ports for the FRAM, rotary encoder, and reset sw
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.5\linewidth]{img/49-key-v2-front-internal.jpeg}
+  \includegraphics[width=0.5\linewidth]{img/mark-2-front-internal.jpeg}
   \caption{Inside the Mark 2 interface showing the FFC connecting sensor PCBs together.}
   \label{fig:internal}
 \end{figure}
@@ -1288,12 +1308,11 @@ custom sample library and interface.
 
 
 \begin{figure}
-\centering
-\includegraphics[width = \linewidth]{img/keyboardMuseum.JPEG}
-\caption{The keyboard installed in the \emph{Oratory} at San Colombano,
-and a user wearing headphones playing it.}
-
-\label{fig:oratory}
+    \centering
+    \includegraphics[width = \linewidth]{img/keyboardMuseum.JPEG}
+    \caption{The keyboard installed in the \emph{Oratory} at San Colombano,
+    and a user wearing headphones playing it.}
+    \label{fig:oratory}
 \end{figure}
 
 This work has incorporated and developed further the ideas of reusing and
