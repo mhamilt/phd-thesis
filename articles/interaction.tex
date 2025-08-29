@@ -1,6 +1,27 @@
 \section{Introduction}
 
 
+Presented in this chapter the creation of a set of digital musical interfaces (DMIs) which aimed to retain the haptic information as could be found on XVI century italian harpischord. The chapter covers the motivations, constraints and methodology for creating such instruments. The creation of the interfaces is presented in chronological order, beginining with the first prototype., the refinements required before moving onto to full scale iterations of the idea.
+
+To retain the instructional value of historical instrument that cannot be played, the kinaesthetic actions encoded within the interface need to emulated. Retaining the form of the instrument, such as a commercial MIDI keyboard, goes part of achieve successful emulation as will be discussed in Section~\ref{}. 
+What is still missing from such keyboards is the haptic information of the instrument, which to \textcite{oboe_mikey_2006}:
+
+\begin{quotation}
+    ``allows the player to perceive the ``state'' of the mechanism being manipulated through the key. By using this knowledge about the state of the mechanism and correlating it with the sound generated, the player learns a strategy to obtain desired tones.''
+\end{quotation}
+
+
+The haptics have attempted to be passively re-introduced through weighted keys which attempt to emulate the resistive force of a piano action. Weights don't fully capture the forces at play in piano action, and simplify the full force including vibrotactile feedback from the acoustic coupling between soundboard and keyboard base after hammer strikes, the hammer-key and hammer-key impacts as well as the effect of escapement \cite{oboe_mikey_2006,fluckiger_evaluation_2018}.
+
+The problem with commercial MIDI also comes from the fact there is a reduction of expression to the simple key attack velocity, of which  \textcite{oboe_mikey_2006} write 
+
+\begin{quotation}
+  ``constitutes a significant limitation for the musician, who loses expressive control of the instrument and, in turn, of the generated sound.''
+\end{quotation}
+
+The problem here is partly from the fact that most MIDI keyboards trigger there output at the 
+end of the keys travel. The dynamics of the attached sound synthesis engine are determined from the velocity at which the key travelled from a rest position (or central trigger point) to being fully pressed. For the piano this is a fair representation as the hammer strike occurs close to the bottom of the keys motion. For the harpsichord on the other hand, both the sonic and major haptic events happen in the centre of the keys travel. A force is is encounters the plectrum encounters the string and a second force as the jack bodies push against the jack rail.
+
 % Pine and Gilmore note \cite{pinegilmore_2007}, achieving authenticity requires
 % museums to navigate the delicate balance between preservation and meaningful
 % engagement—a challenge that is particularly evident in the case of historical
@@ -193,6 +214,45 @@ instrument and performer.
     \caption{Details of the replica, including the key slots and sides, keys, and jacks with seagull plectra.}
     \label{fig:details}
 \end{figure}
+
+
+
+\subsection{Timeline of Haptic Keyboard projects}\label{timeline}
+
+Modern history of haptic keyboard instruments could be said to begin with 
+\textcite{cadoz_synthese_1981}. In under ten years this projetc was reduced in size dramatically.
+\textcite{cadoz_modular_1990} feedback keyboard used an array of polarisation magnets and flat coils to introduce a ``tactilo-proprio-kinest'' element to a to a keyboard interface. No photographs of the system are presented, but the figures suggest a large scale and heavy instrument. At a siilar time.
+
+Motivatation behind these designs were for modular haptic interfaces \cite{cadoz_modular_1990} that could function haptcally as more than one type of mechanism. Or the drive was for  by Teleoperation and interacxtion with virtuals worolds or augmented reality.
+
+\textcite{gillespie_dynamical_1992} created a single haptic-key setup using a linear motor, later refining the concept and simplifying the numerical model \cite{gillespie_virtual_1994}. 
+In \textcite{gillespie_virtual_1994} motivation was towards emulation and recapturing the haptical element of performance.
+
+
+\begin{quotation}
+    We have conducted several introductory experiments using this apparatus. Subjects have made side-by-side key-press comparisons between the above virtual action and a physical action with its regulation button removed with promising re-sults. We have begun to address real-time simulation problems such as extra energy introduced into the simulation by model transition timing errors with compensating additions to the simulation algorithm.
+\end{quotation}
+-- \cite{gillespie_virtual_1994}
+
+
+\cite{mowat_pianobar_2005}: piano bar release in 2005 in a collaboration between Don Buchla and Moog Music 
+``Don Buchla is a name long associated with innovative design of electronic instruments. His latest invention, marketed in collaboration with Moog Music (known as Big Briar Music prior to 2002) is the PianoBar.''
+
+``The Moog Music PianoBar transforms a standard 88-key acoustic piano into a MIDI controller piano. It is based on a cleverly designed sensor mechanism that does (or rather, does not do two very important things: it does not alter the feel or touch of the keyboard mechanism in any way, as there is no physical contact between the PianoBar and the keyboard; and, it does not physically alter the setting of the acoustic piano in any way other than having the Scanner Bar lay comfortably away from the performer's fingers along on back edge of the keyboard to trans-duce performance nuances into digital data format (see Figure 10).'' \cite{computer_products_2005}
+
+
+\textcite{oboe_mikey_2006} is there more of an emphasises this goal firther. The MIKEY (Multi-Instrument active KEYboard) project for a multi-modal haptic interface replicating the grand piano, harpsichord and hammond organ. \textcite{oboe_mikey_2006} can be viewed as combination of the motivatoins of \textcite{cadoz_modular_1990} and \textcite{gillespie_virtual_1994}.
+
+Trapping here is perhaps in trying to do too much. However, the rise of low-cost electronics at the demonstrated that ``a mass production of an active keyboard is now pos- sible with the proposed approach.''
+
+Followed by \textcite{lozada_novel_2007} a single piano key with haptic feedback enabled by magneto-rheological (MR) fluids. Mechanics of \textcite{lozada_novel_2007} are similar to \textcite{cadoz_modular_1990} but the size of the instrument seems far smaller.
+
+\cite{hwang_airpiano_2017} ultrasonic haptics combnined with a virtual reality headset and environment. Noted limitation of polyphonic playing.
+
+\cite{timmermans_multibody-based_2020} further extending from  \cite{oboe_mikey_2006}  noting also  ``key physical characteristics are preserved'' as well as a achieving a haptic device with a simple, low-cost components
+
+Commonality across all of these projects is that they are typically restricted a single or a small number of keys.
+
 
 \subsection{Musical Haptics}\label{musical-haptics}
 
@@ -1258,6 +1318,8 @@ The specific instruments may be at risk of being lost, but the mechanics are not
 
 The interface presented here is not complex one and and that is precisely the point. 
 Outlined was a process of using replicas of mechanical action and layering the technology on top (or rather behind) in order put the aesthetics at the forefront given the application with the musical heritage domain. This work has incorporated and developed further the ideas of reusing and complimenting the `old' in digital musical instrument design \cite{masu_o-in-nime_2023}. By integrating historical keyboard-building traditions with digital augmentation, the interface offers a possibility to extend the practical lifespan of musical heritage while maintaining the tactile qualities of the original instrument. Rather than prioritising technical novelty, the project demonstrates how digital interventions can support multi-modal interaction with a shared musical heritage, ensuring its continued relevance in contemporary museum contexts.
+
+At the beginning of this chapter \textcite{oboe_mikey_2006} is quoted withe there thoughts on the importance of haptics and problems of its absence in MIDI keyboards and, in particular, how ``sound generation is related only to the key attack velocity and pressure.'' The second comment ``pressure'' is of note. It is unclear when \textcite{oboe_mikey_2006} mentions pressure if it is in relation to purely digital interfaces or acoustic keyboards instruments as well. This may be simply a  reference to aftertouch, which is not present as standard on all digital keyboard interfaces. Key pressure (or after touch) is something that a MIDI keyboard can provide control that an acoustic mechanism cannot. For the interfaces presented here, there is as stream of information potentially available that would enable expressive control, therefore extending the performance techniques and strategies that would otherwise be iunavailable. 
 
 A longer discussion, but one going beyond the scope of this work, is whether the
 current setup or its future iterations may be effectively used to build
