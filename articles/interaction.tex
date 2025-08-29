@@ -656,6 +656,15 @@ A prototype PCB (Figure~\ref{fig:prototype-pcb}) was drafted using the EAGLE CAD
 
 This would allow the PCB to be mounted to an adjustable 3D printed bracket which was fitted to the side of the wrestplank. The bracket was designed to allow adjustment in the distance between the sensor and the gradient tag. The intention was for the final PCB to mounted horizontally on the underside of the wrestplank. While assembling the prototype PCB, it was found that the optical sensor contacts were too fragile and could be easily broken in this process. An end-mount approach like that taken in \textcite{mcpherson_portable_2013} was attempted, but the short side of the jack body, at a width of 4.30 millimetres, presented a much smaller target than the keyboard keys. Slight deviations in sensor alignment resulted in drastic changes to the range of the output signal. Instead, the optical sensors would need to be soldered flush against the PCB, which would require the PCB to orientate vertically.
 
+\begin{figure}
+    \centering
+    \includesvg[inkscapelatex=false,width=0.75\linewidth]{img/pcb-dual-sensor-board.svg} \\
+    \includegraphics[width=0.75\linewidth]{img/pcb-prototype-mini-board-bw.png}
+    \caption{PCB schematic of the prototype sensor board and its board silkscreen.}
+    \label{fig:prototype-pcb}
+\end{figure}
+
+The prototype pcb was redesigned in a new vertical orientation (Figure~\ref{}) in which the sensors layout were doubled. The 3-key model action had limited space and only allowed wiring from a single direction. Doubling the sensors in the design allowed the circuit to wired two different ways to accommodate the change in orientation for the front and rear registers while also keeping the same vertical positioning. This was done to minimise the differences in signal ranges and avoid the necessity of printing two offset gradients or fabricating two different PCBs. The final full-scale interface would have enough internal space to accommodate routing on either side of the registers.   A two-piece 3D printed bracket held the PCB in a vertical orientation while also allowing for broad adjustments of the gap between the sensors and the surface.
 
 
 \section{Mark 1}
