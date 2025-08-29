@@ -1130,6 +1130,59 @@ Unfortunately, the GitHub integration for Zenodo does not currently provide a me
 
 CAD files and surrounding support files also provide another point of failure with respect to digital preservation. For example, in the course of this thesis the popular Electronic Design Automation (EDA) software tool EAGLE was announced to be discontinued \cite{autodesk_eagle_2024} for the July 2026. A conscious decision was made to continue using the EAGLE format for the PCB design. Much in the same way as the discontinuation of Python 2 may be beneficial for archival purposes as ``advanced programming language that is guaranteed not to evolve anymore'' \cite{rougier_loupe_2020}, so to does the discontinuation of the EAGLE means that its XML file standard is now calcified and is unable changes. Instead, the EAGLE files can be used in conjunction with other EDA software such as the open source KiCAD \cite{kicad_eagle_2024}.
 
+\section{Exhibition}\label{interfacing-with-digital-instrument}
+
+
+The exhibition opened February 2025 and since then there have been two rounds of preliminary feedback collected. The first from a pool of 20 people -- consisting of staff, surveillance personnel and visitors who were given training on the system -- and expert feedback from curator Catalina Vicens and luthier Roberto Livi.The keyboard shows
+promise in enhancing the museum experience as comments about a ``sense of
+disconnect'' found in the Benton Fletcher Collection
+\cite{mcalpine_sampling_2014} were absent in this initial feedback.
+
+
+Expert feedback has highlighted limitations, including imprecise key
+calibration, which creates a temporal disconnect between the tactile plucking
+sensation and sound onset. Additionally, the commercial sample library, while
+allowing the selection of registers such as 8', 4', and their combinations,
+restricts functionality to a single MIDI message per key, regardless of the
+number of string choirs controlled. Inspired by early Italian instruments, the
+keyboard's layout is designed to manage two 8' registers with a sensor system
+fitted to each. Internally, the instrument functions as two separate MIDI
+devices. However, one register must be disengaged due to the software's limited
+communication with only a single device. While running multiple instances of the
+software is possible, having two sets of GUI controls was considered too
+confusing for visitors engaging with the exhibition without prior orientation.
+Consequently, sensors are only active on single jacks to accommodate these
+constraints. Future iterations could address these limitations through technical
+improvements, such as refined calibration with hysteresis and developing a
+custom sample library and interface.
+
+The second round as part of a wider survey of the exhibition on a group of approximately 50 PhD students. This survey was in a five-point scale format the results of which are still being collected. From this group it was observed that some did not play the interface. When these visitors were later asked why they did not play the reasons given were that did not think they were allowed to touch the instrument. This behaviour could be considered a compliment to the accuracy of the keyboard's aesthetics, but may also suggest a wider problem with encouraging interaction in the museum context.
+
+% A more formal surveying of museum visitors would be required to determine to
+% what degree the exhibition achieved its core aims. The keyboard is hosted in the
+% \emph{Oratory} above the museum's main hall, an exceptional testimony to the
+% Bolognese art, decorated by the finest students of the Carracci and presenting a
+% series of frescoes covering most of the walls and ceiling. The room hosts unique
+% examples of the Italian Renaissance building tradition, including the 1547
+% harpsichord and the 1540 spinet by Alessandro Trasuntino. Visitors often
+% visit the room with the same caution and respect typical of worship spaces.
+% Among the visitors interviewed, no comments were made that the exposed
+% headphones and touchscreen affected such an experience negatively, though a more
+% definitive answer will come as more feedback is collected after launch. Pictures
+% of the keyboard hosted in the \emph{Oratory} are shown in Figure
+% \ref{fig:oratory}.
+
+\begin{figure}
+    \centering
+    \includegraphics[height=0.5\linewidth]{img/exhibition-user-2.jpg}
+    \includegraphics[height=0.5\linewidth]{img/exhibition-user-3.jpg}
+    \caption{The keyboard installed in the \emph{Oratory} at San Colombano,
+    and a user wearing headphones playing it.}
+    \label{fig:oratory}
+\end{figure}
+
+
+
 \section{Mark 2}
 
 \begin{figure}
@@ -1194,84 +1247,19 @@ A major change to the sensor board was the inclusion of a solder pad junction (F
 % \end{figure}
 
 
-\section{Exhibition}\label{interfacing-with-digital-instrument}
+\section{Discussion}\label{discussion-interaction}
 
 
-The exhibition opened February 2025 and since then there have been two rounds of preliminary feedback collected. The first from a pool of 20 people -- consisting of staff, surveillance personnel and visitors who were given training on the system -- and expert feedback from curator Catalina Vicens and luthier Roberto Livi.The keyboard shows
-promise in enhancing the museum experience as comments about a ``sense of
-disconnect'' found in the Benton Fletcher Collection
-\cite{mcalpine_sampling_2014} were absent in this initial feedback.
-
-The second round as part of a wider survey of the exhibition on a group of approximately 50 PhD students. This survey was in a five-point scale format the results of which are still being collected. From this group it was observed that some did not play the interface. When these visitors were later asked why they did not play the reasons given were that did not think they were allowed to touch the instrument. This behaviour could be considered a compliment to the accuracy of the keyboard's aesthetics, but may also suggest a wider problem with encouraging interaction in the museum context.
-
-% A more formal surveying of museum visitors would be required to determine to
-% what degree the exhibition achieved its core aims. The keyboard is hosted in the
-% \emph{Oratory} above the museum's main hall, an exceptional testimony to the
-% Bolognese art, decorated by the finest students of the Carracci and presenting a
-% series of frescoes covering most of the walls and ceiling. The room hosts unique
-% examples of the Italian Renaissance building tradition, including the 1547
-% harpsichord and the 1540 spinet by Alessandro Trasuntino. Visitors often
-% visit the room with the same caution and respect typical of worship spaces.
-% Among the visitors interviewed, no comments were made that the exposed
-% headphones and touchscreen affected such an experience negatively, though a more
-% definitive answer will come as more feedback is collected after launch. Pictures
-% of the keyboard hosted in the \emph{Oratory} are shown in Figure
-% \ref{fig:oratory}.
-
-Expert feedback has highlighted limitations, including imprecise key
-calibration, which creates a temporal disconnect between the tactile plucking
-sensation and sound onset. Additionally, the commercial sample library, while
-allowing the selection of registers such as 8', 4', and their combinations,
-restricts functionality to a single MIDI message per key, regardless of the
-number of string choirs controlled. Inspired by early Italian instruments, the
-keyboard's layout is designed to manage two 8' registers with a sensor system
-fitted to each. Internally, the instrument functions as two separate MIDI
-devices. However, one register must be disengaged due to the software's limited
-communication with only a single device. While running multiple instances of the
-software is possible, having two sets of GUI controls was considered too
-confusing for visitors engaging with the exhibition without prior orientation.
-Consequently, sensors are only active on single jacks to accommodate these
-constraints. Future iterations could address these limitations through technical
-improvements, such as refined calibration with hysteresis and developing a
-custom sample library and interface.
+For haptic keyboard projects, the approach of taking a single key action before expanding to a larger keyboard is an intuitive methodology to use.  The risk with such an approach is the over engineering of concept before expansion takes place. Without losing sight of motivation the project showed that a relatively low-budget, technically simplistic sensor system is enough to enable an interface for interaction. 
 
 
-\begin{figure}
-    \centering
-    \includegraphics[width = \linewidth]{img/keyboardMuseum.JPEG}
-    \caption{The keyboard installed in the \emph{Oratory} at San Colombano,
-    and a user wearing headphones playing it.}
-    \label{fig:oratory}
-\end{figure}
+For heritage exhibition the temptation to use new technology as a solution to old problems seems a natural one. 
+Creating an actuated system inspired by an interface was a route to take, but with it comes the inherent risk of getting ``too close'' to the original interface \textcite{michon_hybrid_2018}.
+The work here builds on what was laid out by \textcite{mcalpine_sampling_2014}.
 
-This work has incorporated and developed further the ideas of reusing and
-complimenting the `old' in digital musical instrument design as put forward in
-the article `The \emph{O} in NIME' \cite{masu_o-in-nime_2023}. By integrating
-historical keyboard-building traditions with digital augmentation, it offers a
-possibility to extend the practical lifespan of musical heritage while
-maintaining the tactile qualities of the original instrument. Rather than
-prioritising technical novelty, the project demonstrates how digital
-interventions can support multi-modal interaction with a shared musical
-heritage, ensuring its continued relevance in contemporary museum contexts.
+% As \textcite{michon_hybrid_2018} notes ``by getting too close to the original instrument, we ...[lose] part of its novelty and that it would never be as good as its purely acoustical counterpart.
 
-A longer discussion, but one going beyond the scope of this work, is whether the
-current setup or its future iterations may be effectively used to build
-legitimate replicas of historical musical instruments or even become a kind of
-\emph{new} musical instrument altogether. As such, the question is whether these
-designs may result in music being practised, performed and recorded with the
-instruments. This work supports an overarching narrative extending beyond its
-application in museum collections. The NEMUS project
-\cite{bologna_nemus_2024}, focusing on developing advanced physical models
-simulating the non-linear interaction between subcomponents, has commissioned a
-second keyboard to further explore the role of control interfaces in
-performance, employing the sense of touch as link between the mechanical world
-with the digital, replicating the embodied relationships between performer and
-instrument and offering opportunities to modify or even disrupt these
-interactions. The upcoming Rem@ke project \cite{council_erc-synergy_2024} has
-also expressed an interest in engaging with the keyboard to explore meaningful
-embodied interactions between players and instruments. 
-
-\section{Conclusion}\label{conclusion}
+This work has incorporated and developed further the ideas of reusing and complimenting the `old' in digital musical instrument design as put forward in the article `The \emph{O} in NIME' \cite{Masu_NIME_2023}. By integrating historical keyboard-building traditions with digital augmentation, it offers a possibility to extend the practical lifespan of musical heritage while maintaining the tactile qualities of the original instrument. Rather than prioritising technical novelty, the project demonstrates how digital interventions can support multi-modal interaction with a shared musical heritage, ensuring its continued relevance in contemporary museum contexts.
 
 \textcite{desilvey_curated_2017} puts forward the question ``what could be
 gained if we were to care for the past without pickling it[?]'' If heritage can
@@ -1287,6 +1275,22 @@ idea of an instrument. Rather than striving for the ``Exact copy'' we instead
 can consciously and deliberately seek an `imperfect' that elicits the
 ``exploring the social, political, historical, conceptual, contextual'' aspects
 of musical instrument heritage \cite{holzer_imperfect_2025}.
+
+A longer discussion, but one going beyond the scope of this work, is whether the
+current setup or its future iterations may be effectively used to build
+legitimate replicas of historical musical instruments or even become a kind of
+\emph{new} musical instrument altogether. As such, the question is whether these
+designs may result in music being practised, performed and recorded with the
+instruments. This work supports an overarching narrative extending beyond its
+application in museum collections. The NEMUS project
+\cite{bologna_nemus_2024}, focusing on developing advanced physical models
+simulating the non-linear interaction between subcomponents, has commissioned a
+second keyboard to further explore the role of control interfaces in
+performance, employing the sense of touch as link between the mechanical world
+with the digital, replicating the embodied relationships between performer and
+instrument and offering opportunities to modify or even disrupt these
+interactions. 
+
 
 % This study has presented the design and implementation of an electronically
 % augmented keyboard for the Tagliavini Collection at the San Colombano Museum.
