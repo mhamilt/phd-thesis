@@ -29,32 +29,37 @@
 
 %%%%%%%%%% DO NOT EDIT %%%%%%%%%%
 \documentclass[11pt,a4paper,openright,twoside]{book}
-
-\usepackage{color,amstext,fancyhdr,graphicx,setspace}
-\usepackage{graphicx,svg}
+%----------------------------------------------------------------------------------------
+\usepackage{
+    adjustbox,
+     amsfonts,
+      amsmath,
+      amssymb,
+      amstext,
+     booktabs,
+      caption,
+        color,
+     enumitem,
+     fancyhdr,
+        float,
+      fourier,
+     graphicx,
+  indentfirst,
+     listings,
+    mathtools,
+     multicol,
+    pmboxdraw,
+     setspace,
+   subcaption,
+          svg,
+      txfonts,
+        xcolor
+}
+%----------------------------------------------------------------------------------------
 \usepackage{multirow} % used for the table
 \renewcommand{\arraystretch}{1.2}
-\usepackage{indentfirst}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsfonts}
-\usepackage{txfonts}
-\usepackage{fourier}
-\usepackage{enumitem}
-\usepackage{xcolor}
-\usepackage{enumitem}
-% \usepackage{subfigure}
-\usepackage{float}
-\usepackage{svg}
-\usepackage{mathtools}
-\usepackage{listings}
-% \usepackage{subcaption}
-\usepackage{caption}
-\usepackage{subcaption}
-\usepackage{booktabs} 
-\usepackage{adjustbox}
 \usepackage[hidelinks]{hyperref}
-\usepackage{pmboxdraw}
+%----------------------------------------------------------------------------------------
 \usepackage{newunicodechar}
 \newunicodechar{└}{\textSFii}
 \newunicodechar{┴}{\textSFvii}
@@ -64,7 +69,10 @@
 \newunicodechar{┼}{\textSFv}
 \newunicodechar{│}{\textSFxi}
 % \usepackage{breakurl}
-
+%----------------------------------------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows}
 %----------------------------------------------------------------------------------------
 % Bibliography
 \usepackage[
@@ -213,8 +221,8 @@
 %
 % CHANGE TO REFLECT YOUR CHAPTERS
 %
-\input{Chapter-1.tex}
-\input{Chapter-2.tex}
+\input{Chapter_1.tex}
+\input{Chapter_2.tex}
 % \input{Chapter_3}
 % \input{Chapter_4}
 % \input{Chapter_5}

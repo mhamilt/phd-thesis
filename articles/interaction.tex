@@ -1097,144 +1097,126 @@ Following best practice in the DMI community \cite{calegario_documentation_2021}
 \end{itemize}
 \end{multicols}
 
-Digital assets were divided into three version control repositories:
+All of these digital assets were divided into one of three version control repositories: \emph{Firmware}, \emph{CAD}, and \emph{Model data}. The firmware repository \cite{hamilton_firmware_2025} contains all source code for final firmware, test firmware and documentation of usage and dependencies. The CAD repository \cite{hamilton_cad_2025} EAGLE CAD contains files and bill of materials for electronics. Finally, the Models repository \cite{hamilton_models_2025} contains the STL 3D models for the jacks and physical measurement for the mechanical interface. These repositories are combined into a single meta repository (Figure~\ref{fig:repo-relation}) as `sub-module' a reference to a git repository as it existed for a specific moment in time. Each sub-module can be considered in isolation and reused as a component of another project.  It is only when they are combined in \textcite{hamilton_nemus_2025} that they represent the interface as it was deployed at Museo San Colombano. This allows for substitutions in any repository should there be a changes such as the type of optical sensor used or the type mechanical hardware used. Sub-modules also promote a containerised methodology, where any component (i.e. sub-module) can be developed without affecting the larger meta-repository. Updating any one sub-module is therefore a conscious decision and not an accidental or unavoidable by product of changing the constituent parts. 
 
-\begin{itemize}
-  \item
-    \emph{Firmware}: source code for final firmware, test firmware and documentation of dependencies \cite{hamilton_firmware_2025}
-  \item
-    \emph{PCB CAD}: EAGLE CAD files and bill of materials for electronics \cite{hamilton_cad_2025}
-  \item
-    \emph{Models}: STL 3D models for the jacks \cite{hamilton_models_2025}
-\end{itemize}
+\begin{figure}
+\centering
+    \begin{tikzpicture}[
+      box/.style = {draw, minimum width=3cm, minimum height=1.5cm, align=center},
+      arrow/.style = {-latex', thick}
+    ]
+    
+    % Top boxes
+    \node[box] (box1) {Firmware\\sub-module};
+    \node[box, right=of box1] (box2) {CAD\\sub-module};
+    \node[box, right=of box2] (box3) {Model Data\\sub-module};
+    
+    % Bottom box
+    \node[box, below=2cm of box2] (bottom) {Interface\\meta-repository};
+    
+    % Arrows from bottom box to each top box
+    \draw[arrow] (bottom.north) -- (box1.south);
+    \draw[arrow] (bottom.north) -- (box2.south);
+    \draw[arrow] (bottom.north) -- (box3.south);
+    
+    \end{tikzpicture}
 
-These repositories are combined into a single meta repository. Each repository of information can be taken in isolation, allowing for substitutions in any component should there be a changes such as the optical sensor used, or the type harpsichord used. It is only when they are combined in \citetitle{hamilton_nemus_2025} that they represent the interface as it was deployed at Museo San Colombano.
+    \caption{Interface git repository and its submodules}
+    \label{fig:repo-relation}
+\end{figure}
 
-
-\begin{tikzpicture}[
-  box/.style = {draw, minimum width=3cm, minimum height=1.5cm, align=center},
-  arrow/.style = {-{Latex}, thick}
-]
-
-% Top boxes
-\node[box] (box1) {Box 1\\Placeholder};
-\node[box, right=of box1] (box2) {Box 2\\Placeholder};
-\node[box, right=of box2] (box3) {Box 3\\Placeholder};
-
-% Bottom box
-\node[box, below=2cm of box2] (bottom) {Main Box\\Placeholder};
-
-% Arrows from bottom box to each top box
-\draw[arrow] (bottom.north) -- (box1.south);
-\draw[arrow] (bottom.north) -- (box2.south);
-\draw[arrow] (bottom.north) -- (box3.south);
-
-\end{tikzpicture}
-
-Archiving the project in this manner highlighted limitations within the frameworks that are currently available. A benefit of the Zenodo archive is its integration to GitHub. This allows a single project to be simultaneously maintained and archived for citation from a single location.
+Though a sub-module approach to the project was beneficial during development, organisation in this manner highlighted limitations the archiving process. A major benefit of the Zenodo archiving platform is its integration to GitHub. This allows a single project to be simultaneously maintained and archived for citation from a single location.
 Unfortunately, the GitHub integration for Zenodo does not currently provide a means for meta-repositories to be archived correctly \cite{zenodo_1036_2025}. This limitation necessitates the generation of a separate DOI for each component submodule, all of which reference the meta-repository.
+
 CAD files and surrounding support files also provide another point of failure with respect to digital preservation. For example, in the course of this thesis the popular Electronic Design Automation (EDA) software tool EAGLE was announced to be discontinued \cite{autodesk_eagle_2024} for the July 2026. A conscious decision was made to continue using the EAGLE format for the PCB design. Much in the same way as the discontinuation of Python 2 may be beneficial for archival purposes as ``advanced programming language that is guaranteed not to evolve anymore'' \cite{rougier_loupe_2020}, so to does the discontinuation of the EAGLE means that its XML file standard is now calcified and is unable changes. Instead, the EAGLE files can be used in conjunction with other EDA software such as the open source KiCAD \cite{kicad_eagle_2024}.
 
 \section{Mark 2}
 
-Using what had been learned in the design and deployment of the Mark 1 interface, a second interface was designed and commissioned again by NEMUS for fabrication by Roberto Livi. This interface, referred to a Mark 2, would be used as part of research in the NEMUS laboratory for interaction with an audio synthesis engine using numerical simulated physical models using the multiple register functionality of the interface. The Mark 2 demonstrates a refinement of the sensor technology and full functionality of a multiple register system. Python was used to create script files for the Eagle CAD software that allowed for parametric placement of components based on the pitch spacing of the jacks, expediting the design process.
-
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{img/mark2.png}
-    \caption{Mark 2 [Image Credit]}
+    \includegraphics[width=0.7\linewidth]{img/mark2.png}\\
+    \includegraphics[width=0.7\linewidth,trim={0 20cm 0 .5cm},clip]{img/mark-2-front-internal.jpeg}
+    \caption{Mark 2 [Image Credit] (Top) and the front register sensor boards behind the nameplate (Bottom)}
     \label{fig:mark-2}
 \end{figure}
 
-The mechanical interface for Mark 2 differed from Mark 1 in that it was designed with 45 keys instead of 49, which was chosen to match the common short octave configuration found in historical Italian plucked keyboard instruments from the XVI to the XVIII century \cite[p. 46]{tagliavini_clavicembali_1987}.
+Using what had been learned in the design and deployment of the Mark 1 interface, a second interface was designed and commissioned again by NEMUS for fabrication by Roberto Livi. This interface, referred to a Mark 2, would be used as part of research in the NEMUS laboratory for interaction with an audio synthesis engine using numerical simulated physical models using the multiple register functionality of the interface. The Mark 2 demonstrates a refinement of the sensor technology and full functionality of a multiple register system. Python was used to create script files for the Eagle CAD software that allowed for parametric placement of components based on the pitch spacing of the jacks, expediting the design process.
 
-\subsubsection{Component Developments}
+The mechanical interface for Mark 2 differed from Mark 1 in that it was designed with 45 keys instead of 49, which was chosen to match the common short octave configuration found in historical Italian plucked keyboard instruments from the XVI to the XVIII century \cite[p. 46]{tagliavini_clavicembali_1987}. The short octave could then be mapped directly to MIDI notes within the firmware.
+
+% \subsubsection{Developments}
+
+% \begin{figure}
+%   \centering
+%   \begin{subfigure}[h]{0.5\linewidth}
+%     \centering
+%     \includegraphics[height=0.2\linewidth]{img/pcb_sensor_board_v2.png}
+%     \caption{Sensor PCB}
+%     \label{fig:sensor_v2}
+%   \end{subfigure}
+%   \begin{subfigure}[h]{0.4\linewidth}
+%     \centering
+%     \includegraphics[height=0.2\linewidth]{img/pcb_controller_board_v2.png}
+%     \caption{Controller PCB}
+%     \label{fig:controller_v2}
+%   \end{subfigure}
+%   \caption{PCB traces of the redesigned sensor and controller boards. Figure show the inclusion of FFC and JST-PH ports. Sensor board shows the solder pads used to configure its position in the keyboard}
+%   \label{fig:pcb_v2}
+% \end{figure}
 
 \begin{figure}
-  \centering
-  \begin{subfigure}[h]{0.5\linewidth}
-    \centering
-    \includegraphics[height=0.2\linewidth]{img/pcb_sensor_board_v2.png}
-    \caption{Sensor PCB}
-    \label{fig:sensor_v2}
-  \end{subfigure}
-  \begin{subfigure}[h]{0.4\linewidth}
-    \centering
-    \includegraphics[height=0.2\linewidth]{img/pcb_controller_board_v2.png}
-    \caption{Controller PCB}
-    \label{fig:controller_v2}
-  \end{subfigure}
-  \caption{PCB traces of the redesigned sensor and controller boards. Figure show the inclusion of FFC and JST-PH ports. Sensor board shows the solder pads used to configure its position in the keyboard}
-  \label{fig:pcb_v2}
+    \centering    
+    \includegraphics[width=0.5\linewidth]{img/pcb_controller_schematic_v2.pdf}
+    \caption{Controller board schematic version 2.}
+    \label{fig:controller-schematic-2}
 \end{figure}
 
-The controller PCB added JST-PH ports for the FRAM, rotary encoder, and reset switch. The JST-PH connector has a locator which stops the cable from becoming disconnected easily.
-Both the JST-PH and FFC ports are asymmetric which ensured only a single orientation of connection is possible and prevented incorrect wiring during installation. The FFC cables on the sensor PCB (Figure~\ref{fig:internal}) permitted quick swapping of the sensor boards should any of the components on it fail.
+The redesign of the controller board (Figure~\ref{fig:controller-schematic-2}) added JST-PH ports for the FRAM, rotary encoder, and reset switch. The JST-PH connector has a locator which stops the cable from becoming disconnected easily.
+Both the JST-PH and FFC ports are asymmetric which ensured only a single orientation of connection is possible and prevented incorrect wiring during installation. The FFC cables on the sensor PCB, visible in Figure~\ref{fig:mark-2}, permitted quick connection of the sensor boards and the flat form allowed the cabling the to be routed between the joins of the keyboard frame and the outer frame.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.5\linewidth]{img/mark-2-front-internal.jpeg}
-  \caption{Inside the Mark 2 interface showing the FFC connecting sensor PCBs together.}
-  \label{fig:internal}
-\end{figure}
-
-\subsubsection{PCB Developments}
-
-The original seven sensors per board was kept and the two sensor on the edges of the board are simply not used. 
-Reducing the number of sensors on the PCB would have meant increasing the number of PCBs required. This in turn would require more multiplexers which would have half of their channels unused. Keeping the sensor board format the same also mean the firmware could be reused with little modification.
+The original seven sensors per board was kept and the two sensor on the edges of the board are simply not used.  Reducing the number of sensors on the PCB would have meant increasing the number of PCBs required. This in turn would require more multiplexers which would have half of their channels unused. Keeping the sensor board format the same also mean the firmware could be reused with little modification.
 
 \begin{figure}
     \centering
-     \includesvg[inkscapelatex=false, width=0.8\linewidth]{img/pcb_sensor_schematic_v2.svg}            
+    \includesvg[inkscapelatex=false, width=0.8\linewidth]{img/pcb_sensor_schematic_v2.svg}    
     \caption{Mark 2 Sensor board schematic. RGB LEDs \texttt{D}, signal paths \texttt{S}, optical sensors \texttt{Q}. The Solder Junction in the center illustrates the connection  between the multiplexer output and corresponding \texttt{S} channel assignment on the FFC cable. Labels point in the direction of current flow.}
     \label{fig:sensor-schematic-2}
 \end{figure}
 
-\begin{figure}
-    \centering    
-    \includegraphics[width=0.6\linewidth]{img/pcb_controller_schematic_v2.pdf}
-    \caption{}
-    \label{fig:sensor-schematic-1}
-\end{figure}
+
+A major change to the sensor board was the inclusion of a solder pad junction (Figure~\ref{fig:sensor-schematic-2}). The junction is a set of solder pads which can be shorted. This then set to which ADC channel on the Nano BLE the signal is routed. In combination with the FFC cable, this allowed a single board to be easily substituted should there be a fault with any components. For Mark 1, the wiring was such that any one board required disconnection of the entire system and access to soldering facilities. The FFC and solder junction provided a means to create a replacement off site from the museum and swap the faulty board in situ.
+
+% \begin{figure}
+%   \centering
+%   \includegraphics[width=0.7\linewidth,trim={0 0 0 0.5cm},clip]{img/mark-2-front-internal.jpeg}
+%   \caption{Inside the Mark 2 interface showing the FFC connecting sensor PCBs together.}
+%   \label{fig:internal}
+% \end{figure}
 
 
-A major change to the sensor board wias the inclusion of a solder pad junction. 
+\section{Exhibition}\label{interfacing-with-digital-instrument}
 
 
-
-
-% \subsubsection{Bracket Design}
-% \subsection{Electronics Firmware}
-
-\section{Application}\label{application-2}
-\subsection{Exhibition}\label{interfacing-with-digital-instrument}
-
-The exhibition is set to open approximately a month after this work's
-submission, and only preliminary feedback has been collected from a pool of 20
-people -- consisting of staff, surveillance personnel and visitors who were
-given training on the system -- and expert feedback from Catalina Vicens
-and Roberto Livi. Visitor feedback was collected through short informal
-interviews and primarily to identify technical problems. The keyboard shows
+The exhibition opened February 2025 and since then there have been two rounds of preliminary feedback collected. The first from a pool of 20 people -- consisting of staff, surveillance personnel and visitors who were given training on the system -- and expert feedback from curator Catalina Vicens and luthier Roberto Livi.The keyboard shows
 promise in enhancing the museum experience as comments about a ``sense of
 disconnect'' found in the Benton Fletcher Collection
 \cite{mcalpine_sampling_2014} were absent in this initial feedback.
 
-%\textcolor{red}{This goes in the direction pointed by Andrew, but I wonder if
-%it could be worded differently}
+The second round as part of a wider survey of the exhibition on a group of approximately 50 PhD students. This survey was in a five-point scale format the results of which are still being collected. From this group it was observed that some did not play the interface. When these visitors were later asked why they did not play the reasons given were that did not think they were allowed to touch the instrument. This behaviour could be considered a compliment to the accuracy of the keyboard's aesthetics, but may also suggest a wider problem with encouraging interaction in the museum context.
 
-A more formal surveying of museum visitors would be required to determine to
-what degree the exhibition achieved its core aims. The keyboard is hosted in the
-\emph{Oratory} above the museum's main hall, an exceptional testimony to the
-Bolognese art, decorated by the finest students of the Carracci and presenting a
-series of frescoes covering most of the walls and ceiling. The room hosts unique
-examples of the Italian Renaissance building tradition, including the 1547
-harpsichord and the 1540 spinet by Alessandro Trasuntino. Visitors often
-visit the room with the same caution and respect typical of worship spaces.
-Among the visitors interviewed, no comments were made that the exposed
-headphones and touchscreen affected such an experience negatively, though a more
-definitive answer will come as more feedback is collected after launch. Pictures
-of the keyboard hosted in the \emph{Oratory} are shown in Figure
-\ref{fig:oratory}.
+% A more formal surveying of museum visitors would be required to determine to
+% what degree the exhibition achieved its core aims. The keyboard is hosted in the
+% \emph{Oratory} above the museum's main hall, an exceptional testimony to the
+% Bolognese art, decorated by the finest students of the Carracci and presenting a
+% series of frescoes covering most of the walls and ceiling. The room hosts unique
+% examples of the Italian Renaissance building tradition, including the 1547
+% harpsichord and the 1540 spinet by Alessandro Trasuntino. Visitors often
+% visit the room with the same caution and respect typical of worship spaces.
+% Among the visitors interviewed, no comments were made that the exposed
+% headphones and touchscreen affected such an experience negatively, though a more
+% definitive answer will come as more feedback is collected after launch. Pictures
+% of the keyboard hosted in the \emph{Oratory} are shown in Figure
+% \ref{fig:oratory}.
 
 Expert feedback has highlighted limitations, including imprecise key
 calibration, which creates a temporal disconnect between the tactile plucking
