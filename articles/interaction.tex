@@ -22,8 +22,16 @@ The problem with commercial MIDI also comes from the fact there is a reduction o
 The problem here is partly from the fact that most MIDI keyboards trigger there output at the 
 end of the keys travel. The dynamics of the attached sound synthesis engine are determined from the velocity at which the key travelled from a rest position (or central trigger point) to being fully pressed. For the piano this is a fair representation as the hammer strike occurs close to the bottom of the keys motion. For the harpsichord on the other hand, both the sonic and major haptic events happen in the centre of the keys travel. A force is is encounters the plectrum encounters the string and a second force as the jack bodies push against the jack rail.
 
+Framed typically as a problem for musicians using synthesisers who are being denied an vector of information from which they can draw upon and use to inform and shape expression in performance. The absence of haptic information is also true for instruments that cannot be played such as the musical heritage instruments within musical instrument museum collections.
+A major motivation for the design of the interface in this chapter was to overcome this very limitation.
 
-Framed typically as a problem for musicians using synthesisers who are being denied an vector of information from which they can draw upon and use to inform and shape expression in performance. The absence of haptic information s also true for instruments that cannot be played such as the musical heritage instruments available in museums.
+In a collaboration between Museo San Colombano and the NEMUS project, we
+designed an electronically augmented replica of a historical harpsichord
+keyboard for interaction with digital musical instruments (Figure
+\ref{fig:mark2}). The goal was to enable visitors to experience the
+harpsichord’s unique tactile and kinaesthetic qualities without risk of damage to the
+original artifacts. The interface would aim to offer an immersive learning environment, providing a means to access the instructional value of the Tagliavini collection. 
+
 % Pine and Gilmore note \cite{pinegilmore_2007}, achieving authenticity requires
 % museums to navigate the delicate balance between preservation and meaningful
 % engagement—a challenge that is particularly evident in the case of historical
@@ -36,17 +44,8 @@ instruments' authenticity was the cornerstone of Ferdinando Tagliavini’s visio
 This guiding principle led him to collect instruments that could be restored to
 their playing condition after minimal intervention. 
 
-In a collaboration between Museo San Colombano and the NEMUS project, we
-designed an electronically augmented replica of a historical harpsichord
-keyboard for interaction with digital musical instruments (Figure
-\ref{fig:mark2}). The goal was to enable visitors to experience the
-harpsichord’s unique vibrotactile qualities without risking damage to the
-original artifacts and offer an immersive learning environment. The keyboard
-incorporates an optical sensor system and digital sound synthesis to replicate
-the physical feedback and acoustic response of an original 15th century
-harpsichord in the Italian style.
-
-This new interface builds on the work of \textcite{mcalpine_sampling_2014} with
+The keyboard provides the haptic feedback that would be present on an original 15th century
+harpsichord with two 8-foot registers as is typical of the Italian style \cite{tagliavini_clavicembali_1987}. This new interface builds on the work of \textcite{mcalpine_sampling_2014} with
 the Benton Fletcher Collection of historical harpsichords. McAlpine created an
 interface from off-the-shelf MIDI keyboards that communicated with digital audio
 samples of instruments from the collection. At the end of that project, user
@@ -68,10 +67,10 @@ influenced by visual elements when making musical judgments
 and enhance its likelihood of being perceived as an `authentic' by visitors. The
 rectangular frame deviates from the traditional logarithmic (Figure
 \ref{fig:log-harp-comp}) form as the interface needed to be compact enough not
-to compromise space for exhibition of the permanent display. The keyboard is
-hosted in the Oratory above the museum's main hall (Figure \ref{fig:installed})
+to compromise space for exhibition of the permanent display. The first fully-functing interface is
+hosted in the Oratory above the main hall (Figure \ref{fig:installed}) of San Colombano,
 alongside unique examples of the Italian Renaissance building tradition,
-including the 1547 harpsichord and the 1540 spinet by Alessandro Trasuntino.
+including the 1547 harpsichord and the 1540 spinet by Alessandro Trasuntino \footnote{https://digital.fondazionecarisbo.it/artwork/arpicordo-a-pianta-poligonale-anonimo-attr-ad-alessandro-trasuntino}.
 
 Technological advances have transformed how museums document, present and
 interpret their collections. Immersive experiences are realised through tools
@@ -221,9 +220,8 @@ instrument and performer.
 
 \subsection{Timeline of Haptic Keyboard projects}\label{timeline}
 
-Modern history of haptic keyboard instruments could be said to begin with 
-\textcite{cadoz_synthese_1981}. In under ten years this projetc was reduced in size dramatically.
-\textcite{cadoz_modular_1990} feedback keyboard used an array of polarisation magnets and flat coils to introduce a ``tactilo-proprio-kinest'' element to a to a keyboard interface. No photographs of the system are presented, but the figures suggest a large scale and heavy instrument. At a siilar time.
+To better contextualise the methodology for the project, this section gives a brief timeline of haptic keyboard projects, the modern history ofwhich could be said to begin with 
+\textcite{cadoz_synthese_1981}. In under ten years the work of \textcite{cadoz_synthese_1981} was dramatically reduced in size. \textcite{cadoz_modular_1990} feedback keyboard used an array of polarisation magnets and flat coils to introduce a ``tactilo-proprio-kinest'' element to a to a keyboard interface. No photographs of the system are presented, but the figures suggest a large scale and heavy instrument. At a siilar time.
 
 Motivatation behind these designs were for modular haptic interfaces \cite{cadoz_modular_1990} that could function haptcally as more than one type of mechanism. Or the drive was for  by Teleoperation and interacxtion with virtuals worolds or augmented reality.
 
@@ -245,7 +243,7 @@ In \textcite{gillespie_virtual_1994} motivation was towards emulation and recapt
 
 \textcite{oboe_mikey_2006} is there more of an emphasises this goal firther. The MIKEY (Multi-Instrument active KEYboard) project for a multi-modal haptic interface replicating the grand piano, harpsichord and hammond organ. \textcite{oboe_mikey_2006} can be viewed as combination of the motivatoins of \textcite{cadoz_modular_1990} and \textcite{gillespie_virtual_1994}.
 
-Trapping here is perhaps in trying to do too much. However, the rise of low-cost electronics at the demonstrated that ``a mass production of an active keyboard is now pos- sible with the proposed approach.''
+Trapping here is perhaps in trying to do too much. However, the rise of low-cost electronics at the demonstrated that ``a mass production of an active keyboard is now possible with the proposed approach.''
 
 Followed by \textcite{lozada_novel_2007} a single piano key with haptic feedback enabled by magneto-rheological (MR) fluids. Mechanics of \textcite{lozada_novel_2007} are similar to \textcite{cadoz_modular_1990} but the size of the instrument seems far smaller.
 
