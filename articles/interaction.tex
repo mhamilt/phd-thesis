@@ -1,7 +1,7 @@
 \section{Introduction}
 
 
-Presented in this chapter the creation of a set of digital musical interfaces (DMIs) which aimed to retain the haptic information as could be found on XVI century italian harpischord. The chapter covers the motivations, constraints and methodology for creating such instruments. The creation of the interfaces is presented in chronological order, beginining with the first prototype., the refinements required before moving onto to full scale iterations of the idea.
+Presented in this chapter the creation of a set of digital musical interfaces (DMIs) which aimed to retain the haptic information as could be found on XVI century Italian harpischord. The chapter covers the motivations, constraints and methodology for creating such instruments. The creation of the interfaces is presented in chronological order, beginning with the first prototype., the refinements required before moving onto to full scale iterations of the idea.
 
 To retain the instructional value of historical instrument that cannot be played, the kinaesthetic actions encoded within the interface need to emulated. Retaining the form of the instrument, such as a commercial MIDI keyboard, goes part of achieve successful emulation as will be discussed in Section~\ref{}. 
 What is still missing from such keyboards is the haptic information of the instrument, which to \textcite{oboe_mikey_2006}:
@@ -13,7 +13,7 @@ What is still missing from such keyboards is the haptic information of the instr
 
 The haptics have attempted to be passively re-introduced through weighted keys which attempt to emulate the resistive force of a piano action. Weights don't fully capture the forces at play in piano action, and simplify the full force including vibrotactile feedback from the acoustic coupling between soundboard and keyboard base after hammer strikes, the hammer-key and hammer-key impacts as well as the effect of escapement \cite{oboe_mikey_2006,fluckiger_evaluation_2018}.
 
-The problem with commercial MIDI also comes from the fact there is a reduction of expression to the simple key attack velocity, of which  \textcite{oboe_mikey_2006} write 
+The problem with commercial MIDI also comes from the fact there is a reduction of expression to the simple key attack velocity, of which \textcite{oboe_mikey_2006} write 
 
 \begin{quotation}
   ``constitutes a significant limitation for the musician, who loses expressive control of the instrument and, in turn, of the generated sound.''
@@ -22,6 +22,8 @@ The problem with commercial MIDI also comes from the fact there is a reduction o
 The problem here is partly from the fact that most MIDI keyboards trigger there output at the 
 end of the keys travel. The dynamics of the attached sound synthesis engine are determined from the velocity at which the key travelled from a rest position (or central trigger point) to being fully pressed. For the piano this is a fair representation as the hammer strike occurs close to the bottom of the keys motion. For the harpsichord on the other hand, both the sonic and major haptic events happen in the centre of the keys travel. A force is is encounters the plectrum encounters the string and a second force as the jack bodies push against the jack rail.
 
+
+Framed typically as a problem for musicians using synthesisers who are being denied an vector of information from which they can draw upon and use to inform and shape expression in performance. The absence of haptic information s also true for instruments that cannot be played such as the musical heritage instruments available in museums.
 % Pine and Gilmore note \cite{pinegilmore_2007}, achieving authenticity requires
 % museums to navigate the delicate balance between preservation and meaningful
 % engagement—a challenge that is particularly evident in the case of historical
