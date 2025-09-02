@@ -51,3 +51,11 @@ Usage: `sh ./compile-thesis.sh [OPTIONS] main`
 
 [Link to 37th cycle guidelines](https://phd.unibo.it/agricultural-environmental-food-sci-technology/en/final-exam/uploading-of-the-phd-thesis-in-the-unibo-repository)
 
+## Generate Files
+
+
+### Bibliography
+
+```sh
+pandoc -t markdown_strict  -F pandoc-crossref --citeproc -s bib-template.md -o bibliography.md
+```
