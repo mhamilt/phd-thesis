@@ -1,64 +1,187 @@
-As part of a broader commitment to accessibility, the Museo San Colombano-Tagliavini Collection, situated within Fondazione Carisbo's cultural itinerary in Bologna \cite{meer_collezione_2007}, has undertaken a series of projects aimed at enhancing both cognitive and sensory engagement. Supported by funding from NextGenerationEU\footnote{https://openpnrr.it/progetti/143852/}, these initiatives seek to leverage the collection’s rich holdings to create immersive and interactive modes of encounter with the exhibited heritage. Central to this vision is the reinterpretation of historical musical objects through their tactile and auditory dimensions, making the exhibition more inclusive for blind and partially sighted visitors, as well as the general public. The Tagliavini Collection comprises more than fifty historical keyboard instruments, with a particular concentration on Italian plucked string types. The collection represents a unique resource of interest to musicologists, organologists, and performers. Tagliavini's guiding principle was one of authenticity: instruments were acquired with the explicit aim that they be restored to playing condition with as little intervention as possible. Clearly, the cultural value of such instruments extends beyond their visual presence, 
-encompassing tactile and auditory dimensions of performance \cite{fritz_listener_2017}. In the museum context, they may be played under carefully controlled conditions, typically by experienced historical keyboard specialists or by students under the close supervision of the curator. Nonetheless, experiential access remains limited for the general public. As McAlpine describes through the ``red velvet cord'' metaphor \cite{mcalpine_sampling_2014}, collections such as Tagliavini's prioritise protection of fragile mechanisms at the expense of use. This strategy safeguards the objects but also compromises their functional identity, limiting the cultural and historical insight that performance can reveal.  
+% \section{Introduction}
+
+% To retain the instructional value of a historical instrument that cannot be played, the kinesthetic actions encoded within the interface must be emulated. Retaining the form of the instrument, such as a commercial MIDI keyboard, is part of achieving successful emulation, as will be discussed in Section~\ref{}. 
+% What is still missing from such keyboards is the haptic information of the instrument, which to \textcite{oboe_mikey_2006}:
+% \begin{quotation}
+%     ``allows the player to perceive the ``state'' of the mechanism being manipulated through the key. By using this knowledge about the state of the mechanism and correlating it with the sound generated, the player learns a strategy to obtain desired tones.''
+% \end{quotation}
+% The haptics have been passively reintroduced through weighted keys, which attempt to emulate the resistive force of a piano action. Weights do not fully capture the forces at play in piano action, and simplify the full force, including vibrotactile feedback from the acoustic coupling between soundboard and keybed after hammer strikes, the hammer-key and hammer-key impacts, as well as the effect of escapement \cite{oboe_mikey_2006,fluckiger_evaluation_2018}. A major limitation with commercial MIDI interfaces is their reduction of musical expression to simple key attack velocity, of which \textcite{oboe_mikey_2006} writes: 
+% \begin{quotation}
+%   ``constitutes a significant limitation for the musician, who loses expressive control of the instrument and, in turn, of the generated sound.''
+% \end{quotation}
+% The behaviour of the sound synthesis engine is determined by the speed at which a key moves from its rest position (or central trigger point) to being fully depressed. For the piano, this mapping is quite accurate, since the hammer strike occurs near the bottom of the key’s travel. However, applying the same interface to the harpsichord creates a misrepresentation. This is because most MIDI keyboards trigger their output at the end of the key’s travel, whereas in the harpsichord, both the key’s main haptic and sonic events occur midway through its motion. At that point, the player first feels resistance as the plectrum meets the string, and then again as the jack body presses against the jack rail.
+
+% Limited or absent haptic feedback is often framed as a central challenge for
+% musicians working with synthesisers. Without it, performers are denied the
+% physical grounding that informs and shapes musical expression. The same absence
+% of tactile information applies, perhaps even more profoundly, to instruments
+% that can no longer be played—most notably the fragile musical heritage objects
+% preserved within museum collections.  
+
+% Musical instruments embody a distinctive fusion of form, function, and history.
+% Their cultural value extends well beyond their visual presence, encompassing
+% the tactile and auditory dimensions of performance \cite{fritz_listener_2017}.
+% Yet, in the museum context, preservation demands frequently outweigh these
+% experiential aspects, restricting direct interaction and reducing instruments
+% to static artefacts. This ``red velvet cord'' approach
+% \cite{mcalpine_sampling_2014} safeguards delicate mechanisms but simultaneously
+% diminishes functional identity, depriving visitors of the full cultural and
+% historical resonance inherent in these objects.  
+
+% The Tagliavini Collection \cite{meer_collezione_2007}, housed at Museo San
+% Colombano -- Genus Bononiae in Bologna, exemplifies this dilemma. Renowned for
+% its wealth of historical keyboard instruments—over fifty in total, with a
+% strong emphasis on Italian plucked stringed keyboards—the collection is a vital
+% resource for musicologists, organologists, and performers alike. Central to
+% Ferdinando Tagliavini’s vision was the preservation of authenticity: instruments
+% were acquired with the specific aim that they might be restored to playing
+% condition with minimal intervention. Nevertheless, the fragility of their
+% mechanisms and their historical significance dictate that they are played only
+% under carefully controlled circumstances, either by experienced historical
+% keyboard specialists or by students under the close supervision of the curator.  
+
+% As part of a broader commitment to accessibility, the Museo San Colombano --
+% Tagliavini Collection, situated within the cultural itinerary of Fondazione
+% Carisbo, has undertaken a series of projects designed to improve both cognitive
+% and sensory engagement. Supported by funding from NextGenerationEU, these
+% initiatives seek to leverage the collection’s rich holdings to create immersive
+% and interactive modes of encounter with the exhibited heritage. Central to this
+% vision is the reinterpretation of historical musical objects through their
+% tactile and auditory dimensions, with the aim of making the exhibition more
+% inclusive for blind and partially sighted visitors.  
 
 
-This limitation prompted a collaboration between Museo San Colombano and the NEMUS project, aiming to develop an interface to digital representations of historical instruments. The installation, conceived for the San Colombano exhibition space, sought to reproduce the haptic experience of a sixteenth-century Italian harpsichord. At its centre was an electronically augmented keyboard: a replica designed to capture the tactile and kinaesthetic qualities of the original while removing any risk to the artefacts themselves. Shown in Figure XXXX, the replica serves as a controller for a digitally emulated harpsichord, implemented through sampling or physical modelling, with sound delivered to visitors via headphones. 
+% This initiative led to a collaboration between Museo San Colombano and the NEMUS
+% project, with the shared goal of creating an interface to digital representations
+% of historical instruments. The outcome was envisioned as an installation within
+% the San Colombano exhibition space: a faithful recreation of the haptic
+% experience of a sixteenth-century Italian harpsichord. At the centre of this
+% design was an electronically augmented replica, intended to allow visitors to
+% engage directly with the harpsichord’s distinctive tactile and kinaesthetic
+% qualities without risk of damage to the original artefacts. Beyond simple
+% replication, the interface was conceived as an immersive learning environment,
+% a medium through which the instructional value of the Tagliavini Collection
+% might be more broadly accessed.  
 
+% This chapter documents the development of two such digital musical instruments
+% (DMIs), beginning with the motivations, constraints, and methodological
+% framework. Subsequent sections trace the design process in chronological order,
+% from the earliest prototypes to the full-scale realisation of the concept. The
+% resulting keyboards reproduce the haptic responses characteristic of an
+% original fifteenth-century harpsichord, featuring two 8-foot registers typical
+% of the Italian style \cite{tagliavini_clavicembali_1987}. In doing so, the work
+% builds on prior explorations in musical heritage
+% \cite{mcalpine_sampling_2014,baldwin_tromba_2016} as well as four decades of
+% research into haptic keyboard design.  
+
+% In addition to enhancing the visitor experience within the musical instrument
+% museum, the project engages with a parallel concern: the sustainability of
+% digital research. The optical sensing technique implemented for the keyboard
+% adapts earlier work by McPherson on the piano
+% \cite{mcpherson_portable_2013}. By extending and recontextualising this method,
+% the project ensures that its outcomes endure beyond their immediate scope,
+% aligning with best practices for digital research archiving
+% \cite{smith_software_2016} and addressing long-term considerations for digital
+% musical instruments (DMIs) and electronics hardware
+% \cite{mcpherson_nimehub_2016,fiordelmondo_longevity_2024}. The final design
+% iteration is therefore positioned not only as a practical interface for public
+% engagement, but also as a research probe: a tool to explore the unique
+% characteristics of the harpsichord and their implications for musical
+% performance.  
+As part of a broader commitment to accessibility, the Museo San Colombano-Tagliavini Collection, situated within Fondazione Carisbo's cultural itinerary \cite{meer_collezione_2007}, has undertaken a series of projects aimed at enhancing both cognitive and sensory engagement. Supported by funding from NextGenerationEU\footnote{https://openpnrr.it/progetti/143852/}, these initiatives seek to leverage the collection’s rich holdings to create immersive and interactive modes of encounter with the exhibited heritage. Central to this vision is the reinterpretation of historical musical objects through their tactile and auditory dimensions, making the exhibition more inclusive for blind and partially sighted visitors, as well as the general public. The Tagliavini Collection, housed at the Museo San Colombano – Genus Bononiae in Bologna, comprises more than fifty historical keyboard instruments, with a particular concentration on Italian plucked string types. The collection represents a unique resource of interest to musicologists, organologists, and performers. Tagliavini's guiding principle was one of authenticity: instruments were acquired with the explicit aim that they be restored to playing condition with as little intervention as possible. At the same time, their fragility and historical value impose clear limitations: they are played only under carefully controlled conditions, by experienced historical keyboard specialists, or by students under the close supervision of the curator.
+
+This limitation prompted a collaboration between Museo San Colombano and the NEMUS project, aiming to develop an interface to digital representations of historical instruments. The installation, conceived for the San Colombano exhibition space, sought to reproduce the haptic experience of a sixteenth-century Italian harpsichord. At its centre was an electronically augmented keyboard: a replica designed to capture the tactile and kinaesthetic qualities of the original while removing any risk to the artefacts themselves. Shown in Figure XXXX, the replica serves as a controller for a digitally emulated harpsichord, implemented through sampling or physical modelling, with sound delivered to visitors via headphones.
 
 Beyond simple replication, the interface was conceived as an immersive learning environment, a medium through which the instructional value of the Tagliavini Collection could be more broadly accessed. 
+Retaining the form of the instrument, such as a commercial MIDI keyboard, is one part of achieving successful emulation, as will be discussed in Section~\ref{}. Yet even where the form is preserved, what is missing from such a keyboard is the haptic information of the instrument. 
 As \textcite{oboe_mikey_2006} observes:  
 \begin{quotation}
     (the haptic information) allows the player to perceive the ``state'' of the mechanism being manipulated through the key. By using this knowledge about the state of the mechanism and correlating it with the sound generated, the player learns a strategy to obtain desired tones.
 \end{quotation}
-The expressive potential of commercial MIDI interfaces is further limited by their reduction of musical nuance to a single parameter: key attack velocity, which, as \textcite{oboe_mikey_2006} writes:  
+Weighted keys represent a partial attempt to reintroduce haptics, imitating the resistive force of, e.g., a piano action. However, such weights only simplify the complexity of the forces involved, neglecting the vibrotactile feedback from the acoustic coupling between soundboard and keybed after hammer strikes, the hammer--key and hammer--key impacts, and the effect of escapement \cite{oboe_mikey_2006,fluckiger_evaluation_2018}. The expressive potential of commercial MIDI interfaces is further limited by their reduction of musical nuance to a single parameter: key attack velocity, which, as \textcite{oboe_mikey_2006} writes:  
 \begin{quotation}
-    constitutes a significant limitation for the musician, who loses expressive control of the instrument and, in turn, of the generated sound.
+  ``constitutes a significant limitation for the musician, who loses expressive control of the instrument and, in turn, of the generated sound.''
 \end{quotation}
 
+The behaviour of the sound synthesis engine is determined by the speed at which a key moves from its rest position (or central trigger point) to being fully depressed. For the piano, this mapping remains relatively faithful, as the hammer strike occurs near the bottom of the key’s travel. However, applying the same interface to the harpsichord creates a misrepresentation. On most MIDI keyboards, sound is triggered at the end of the key's motion; in the harpsichord, by contrast, both the primary haptic and sonic events occur midway through, when the player first feels resistance as the plectrum meets the string, and again as the jack body presses against the jack rail. This absence of nuanced haptic feedback is often described as a central challenge for musicians working with synthesisers. Without it, performers are denied the physical grounding that shapes musical expression. 
 
 
-This chapter presents the development of two digital musical instruments (DMIs). It begins by outlining the motivations, constraints and methodological approach, 
-before following the design process from early prototypes through to the completed system. 
-The work builds on prior studies of musical heritage 
-\cite{mcalpine_sampling_2014,baldwin_tromba_2016} and draws on a long history of research into haptic keyboard design. While the immediate goal was to enhance the visitor experience within the museum, the project also responds to a broader challenge: the sustainability of digital research. 
-The optical sensing approach adapts earlier techniques developed for the piano \cite{mcpherson_portable_2013}, here reinterpreted for the harpsichord. By extending this method, the project situates itself within best practices for archiving and long-term reuse \cite{smith_software_2016}, engaging with ongoing 
-discussions around the durability of DMIs and electronics hardware \cite{mcpherson_nimehub_2016,fiordelmondo_longevity_2024}. 
-The final design thus serves both as a practical interface for public engagement and as a research instrument in its own right: a means of examining the tactile and performative qualities of the harpsichord in a contemporary digital context.  
 
-%
+The same problem applies---perhaps even more profoundly---to historical instruments that can no longer be played. These fragile objects, preserved within museum collections, embody a distinctive fusion of form, function, and history. Their cultural value extends beyond their visual presence, encompassing tactile and auditory dimensions of performance \cite{fritz_listener_2017}. Yet in the museum context, preservation demands frequently outweigh experiential access. Instruments are too often reduced to static artefacts, restricted to visual display under what \textcite{mcalpine_sampling_2014} terms the ``red velvet cord'' approach. While this protects delicate mechanisms, it simultaneously diminishes the functional identity of the objects, depriving visitors of the full cultural and historical resonance inherent in performance. 
 
-% Museums consistently navigate the competing demands of accessibility and
-% preservation, which restricts the ways in which audiences can interact with
-% collections \cite{templeton_museum_2018, mcalpine_sampling_2014}. 
-% For musical instrument museums, these challenges are compounded by the 
-% difficult choice of maintaining, restoring or preserving the instruments in their collections \cite{barclay_critical_1999,barclay_preservation_2005}. 
-% For an instrument such as the harpsichord, the nature of its construction means that it is destined to decay, terminating at a
-% state where it is no longer playable. This is true, even when collections adhere to the
-% strictest conservation protocols \cite{paradiso_to-save_2019}. In response,
-% recent decades have witnessed a cultural shift: emphasis has moved away from
-% playability toward conservation. Karp \cite{karp_restoration_1979, karp_musical_1985} argues for cultivating a deep understanding of musical instruments to generate sufficient knowledge to make
-% them as ``copyable'' as possible. Not all instruments can be copied, and there is then a choice to be made for which instruments are deserving of recreation. 
+
+
+This chapter documents the development of two such digital musical instruments (DMIs), beginning with the motivations, constraints, and methodological framework. Subsequent sections trace the design process in chronological order, from the earliest prototypes to the full-scale realisation of the concept. The resulting keyboards reproduce the haptic responses characteristic of an original fifteenth-century harpsichord, featuring two 8-foot registers typical of the Italian style \cite{tagliavini_clavicembali_1987}. In doing so, the work builds on prior explorations in musical heritage \cite{mcalpine_sampling_2014,baldwin_tromba_2016} as well as four decades of research into haptic keyboard design.  
+
+In addition to enhancing the visitor experience within the musical instrument museum, the project engages with a parallel concern: the sustainability of digital research. The optical sensing technique implemented for the keyboard adapts earlier work by McPherson on the piano \cite{mcpherson_portable_2013}. By extending and recontextualising this method, the project ensures that its outcomes endure beyond their immediate scope, aligning with best practices for digital research archiving \cite{smith_software_2016} and addressing long-term considerations for digital musical instruments (DMIs) and electronics hardware \cite{mcpherson_nimehub_2016,fiordelmondo_longevity_2024}. The final design iteration is therefore positioned not only as a practical interface for public engagement, but also as a research probe: a tool to explore the unique characteristics of the harpsichord and their implications for musical performance.  
+
 
 \section{Related Work and Motivations}\label{related-work}
 
-The Benton Fletcher Collection at Fenton House presents an instructive case of the recurring challenge of providing meaningful interaction with historical instruments while safeguarding fragile originals. \textcite{mcalpine_sampling_2014} developed a sampling campaign and a custom MIDI interface to enable public engagement without endangering the instruments. Although successful in preserving access, the commercial weighted keyboards used failed to capture the distinctive feel of historical plucked mechanisms, a limitation common in digital musical instruments \cite{magnusson_survey_2007}. 
-The Tromba Moderna project \cite{baldwin_tromba_2016} took a more embodied approach, reconstructing and augmenting a tromba marina replica with embedded sensors and actuators. This strategy exemplifies what \textcite{cook_remutualizing_2004} terms ``remutualising'' the interface: restoring a closer relationship between gesture and sound.
+% Technological advances have transformed how museums document, present and
+% interpret their collections. 
+% These technologies form a kind of experiential authenticity, enabling encounters
+% that evoke the past's sensory, emotional, and intellectual essence
+% \cite{trant_when_1999}. \textcite{pine_museums_2007} note, achieving authenticity requires museums to navigat the delicate balance between preservation and meaningful engagement—a challenge
+% that is particularly evident in the case of historical musical instrument
+% collections \cite{mcalpine_sampling_2014}.
 
+Museums consistently navigate the competing demands of accessibility and
+preservation, which restricts the ways in which audiences can interact with
+collections \cite{templeton_museum_2018, mcalpine_sampling_2014}. 
+For musical instrument museums, these challenges are compounded by the 
+difficult choice of maintaining, restoring or preserving the instruments in their collections \cite{barclay_critical_1999,barclay_preservation_2005}. 
+For an instrument such as the harpsichord, the nature of its construction means that it is destined to decay, terminating at a
+state where it is no longer playable. This is true, even when collections adhere to the
+strictest conservation protocols \cite{paradiso_to-save_2019}. In response,
+recent decades have witnessed a cultural shift: emphasis has moved away from
+playability toward conservation. Karp \cite{karp_restoration_1979, karp_musical_1985} argues for cultivating a deep understanding of musical instruments to generate sufficient knowledge to make
+them as ``copyable'' as possible. Not all instruments can be copied, and there is then a choice to be made for which instruments are deserving of recreation. 
 
+With digital instruments, the interface is decoupled from the acoustic sound generator, and the interface can be one-to-many. Communication with various digital heritage instruments can be achieved through a single interface, an approach adopted by \textcite{mcalpine_sampling_2014}. In a case similar to the Tagliavini collection, \textcite{mcalpine_sampling_2014} involved an
+examination of the Benton Fletcher Collection at National Trust Fenton House
+\cite{mcalpine_sampling_2014}. When these instruments were donated, Benton
+Fletcher stipulated that they remain playable and should continue to be
+maintained for tuition and public performance. A large sampling campaign was
+conducted, and a custom MIDI interface was designed to fulfil this requirement
+while preserving the original instruments' integrity. The MIDI controller,
+comprising two commercially available keyboards mimicking the two-manual
+harpsichord layout, was used by visitors to trigger the instrument samples
+recorded with tailored strategies for each. However, user tests identified a
+limitation: the commercially available weighted keys failed to provide an
+authentic sense of interacting with a historical plucked keyboard instrument
+\cite{mcalpine_sampling_2014}. 
 
-In parallel to these museum-focused initiatives, four decades of research 
-have explored haptic keyboard design. The lineage begins with Cadoz et. al., and their modular feedback keyboard \cite{cadoz_synthese_1981,cadoz_modular_1990}, which introduced tactilo-proprio-kinesthetic elements through polarisation magnets and flat coils, originally intended for applications in teleoperation and virtual reality. \textcite{gillespie_dynamical_1992} advanced the field with a single-key linear motor prototype, later simplified to enable more realistic emulation of keyboard performance \cite{gillespie_virtual_1994}. These efforts culminated in the MIKEY project, a multi-modal interface capable of reproducing piano, harpsichord and organ actions \cite{oboe_mikey_2006}. Subsequent explorations have included magneto-rheological actuation \cite{lozada_novel_2007}, ultrasonic haptics combined with virtual reality \cite{hwang_airpiano_2017}, and multibody-based designs using low-cost electronics while preserving key mechanics \cite{timmermans_multibody-based_2020}.  
+The limitations of synthetic interfaces is known limitation of DMI \textcite{magnusson_survey_2007}. The ``Tromba Moderna'' project by \textcite{baldwin_tromba_2016} faced a similar problem to \textcite{mcalpine_sampling_2014}, but strived towards what \textcite{cook_remutualizing_2004} would call ``remutualising'' the interface. \textcite{baldwin_tromba_2016} created the Tromba Moderna for an exhibition at the Musikmuseet Musical Instrument Museum in Copenhagen and the exhibition was to address the problem of engagement and interactivity for visitors to the collection. In this case, the issue of musical heritage playability was approached by recreating and augmenting a replica of a historical tromba marina. A piezo transducer was connected to a sound synthesis engine and a driver within the instrument, and by doing so simulated the expected vibrations of a historical tromba marina. 
 
-Despite their variety, these systems share a common limitation: they are generally restricted 
-to a single key or a small number of keys. For heritage applications such as the Tagliavini 
-collection, an interface must span 38--53 keys to match historical harpsichords 
-\cite{tagliavini_clavicembali_1987}. 
-The present project therefore builds directly on both museum precedents and haptic keyboard research. 
-It diverges, however, in adopting an aesthetics-first approach: electronics are concealed, 
-serving only as a transparent link between mechanical action and digital sound, 
-so that the tactile and kinaesthetic qualities of the instrument remain central 
-to the visitor’s experience.  
- 
+The interface described in this chapter builds on these precedents, inheriting
+elements from the Tromba Moderna while seeking to extend their scope. Its
+design is motivated by the desire to enrich the visitor experience of the
+Tagliavini collection, while maintaining continuity with historical
+instrument-building traditions. In this sense, both the Tromba Moderna
+\cite{baldwin_tromba_2016} and McAlpine’s Benton Fletcher project
+\cite{mcalpine_sampling_2014} serve as points of departure. Furthermore, the
+development of the harpsichord interface draws on four decades of haptic
+keyboard research, embedding this project within a broader lineage of
+instrumental interface design.
+
+\subsection{Haptic Keyboards}
+
+To better contextualise the methodology for the project, this section gives a brief timeline of haptic keyboard projects, the modern history of which could be said to begin with 
+\textcite{cadoz_synthese_1981}. In under ten years the work of \textcite{cadoz_synthese_1981} was dramatically reduced in size. \textcite{cadoz_modular_1990} feedback keyboard used an array of polarisation magnets and flat coils to introduce a ``tactilo-proprio-kinest'' element to a to a keyboard interface. No photographs of the system are presented, but the figures suggest a large scale and heavy instrument. At a similar time.
+
+Motivations behind these designs were for modular haptic interfaces \cite{cadoz_modular_1990} that could function haptically as more than one type of mechanism. Or the drive was for  by Teleoperation and interaction with virtuals worlds or augmented reality.
+
+\textcite{gillespie_dynamical_1992} created a single haptic-key setup using a linear motor, later refining the concept and simplifying the numerical model \cite{gillespie_virtual_1994}. 
+In \textcite{gillespie_virtual_1994} motivation was towards emulation and recapturing the haptical element of performance, a goal emphasised further in the MIKEY (Multi-Instrument active KEYboard) project. MIKEY is a multi-modal haptic interface for replicating the grand piano, harpsichord and hammond organ and can be viewed as drawing from the combined motivations of \textcite{cadoz_modular_1990} and \textcite{gillespie_virtual_1994}.
+
+This was then followed by a single piano key by \textcite{lozada_novel_2007} with haptic feedback enabled through the use of magneto-rheological (MR) fluids. The mechanics of \textcite{lozada_novel_2007} are similar to those of \textcite{cadoz_modular_1990}. 
+\textcite{hwang_airpiano_2017} ultrasonic haptics combined with a virtual reality headset and environment. Noted limitation of polyphonic playing.
+\textcite{timmermans_multibody-based_2020} further extending concepts \textcite{oboe_mikey_2006}  noting also the benefit that ``key physical characteristics are preserved'' and notably achieving a haptic device with the use of simple, low-cost electronics.
+
+One commonality across all of these projects is that they are typically restricted a single or a small number of keys. For the museum exhibition, the interface would have to be between 38 to 53 keys to match the layouts of the harpsichords in the collection \cite{tagliavini_clavicembali_1987}. The methodologies of the work above were used as basis for the prototyping process. Where this project  diverged from previous work was in an aesthetics-first, rather than technology-first, approach to design. The electronics were hidden inside the interface were not intended to augment or 
+disrupt the haptic feedback; rather, they serve as to facilitate a link between the
+mechanical and the digital realms as transparently as possible. 
 
 \subsubsection{Visual Aesthetics}
 
