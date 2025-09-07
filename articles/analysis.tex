@@ -10,17 +10,16 @@ Characterization of tonewood elastic properties can be achieved by representing 
 
 This situation motivated the development of a software library, \textsc{MAGPIE}, designed for the non-invasive derivation of material parameters. \textsc{MAGPIE} is intended as an open-source platform for simulating the physics of plates, offering intuitive visualization tools and a range of analysis techniques. \textsc{MAGPIE} represents the second branch the thesis 'heritage conservation through analytical methods.' This chapter covers the the creation of the \textsc{MAGPIE} including the background plate physics, the numerical approach for simulations, and the implementation details. 
 
-Plates are particularly well-suited for studying vibration through eigenshape visualization. They are commonly used as educational tools for demonstrating Chladni patterns \cite{chladni_treatise_2015}, providing both accurate results and visually engaging representations. A platform such as \textsc{MAGPIE} can serve dual purposes: as a teaching aid for instructors and as an analysis tool for researchers and industry practitioners. Its functionalities include applying elastic boundary conditions along plate edges, visualizing and exporting eigenshapes and frequencies, performing time-domain simulations of the plate equation for sound synthesis, and estimating the elastic modulus of experimental plates. For conciseness, this work focuses primarily on the eigenvalue problem and its implementation, rather than the full range of capabilities.
+Plates are particularly well-suited for studying vibration through eigenshape visualization. They are commonly used as educational tools for demonstrating Chladni patterns \cite{chladni_treatise_2015}, providing both accurate results and visually engaging representations. Presenting eigenshapes as Chladni patterns can also be used a visual verification tool for matching conditions during a physical experiment. A platform such as \textsc{MAGPIE} can serve the dual purposes an analytical tool for researchers and industry practitioners and also a teaching aid for instructors. \textsc{MAGPIE}'s functionalities include applying elastic boundary conditions along plate edges, visualizing and exporting eigenshapes and frequencies, performing time-domain simulations of the plate equation for sound synthesis, and estimating the elastic modulus of experimental plates. 
 
 
-% \begin{quotation}
-% To describe the vibrational modes of wood plates generally requires four elastic constants. These may be Young's moduli along (Ex) and across (Ey) the grain, the in-plane shear modulus G, and the larger of the two Poisson ratios vxy' Foraquarter-cutplateinthexyplane,Ex= EL,Ey= ER,G= GLR, vxy = VLR , and Vyx = VRL' 
-% \end{quotation}
-% -- \cite{fletcher_physics_2012}
+\begin{quotation}
+Wood can be described as an orthotropic material; it has different mechanical properties along three perpendicular axes (longitudinal, radial, and tangential, which we denote by L, R, and T).
+...
+To describe the vibrational modes of wood plates generally requires four elastic constants. These may be Young's moduli along ($E_x$) and across ($E_y$) the grain, the in-plane shear modulus $G$, and the larger of the two Poisson ratios $\nu_{xy}$' For a quarter-cut plate in the xy plane,$E_x= E_L$,$E_y= E_R$,$G= G_{LR}$, $\nu_{xy} = \nu_{LR}$ , and $\nu_{yx} = \nu_{RL}\frac{E_R}{E_L}$' 
+\end{quotation}
+-- \cite[Rectangular Wood Plates][Section 3.11]{fletcher_physics_2012}
     
-
-
-
 
 \section{Main Points}
 
@@ -58,9 +57,6 @@ Plates are particularly well-suited for studying vibration through eigenshape vi
     \caption{Enter Caption}
     \label{fig:boundary-conditions-plot}
 \end{figure}
-
-
-Plate vibration is a longstanding topic of research. Plates are common engineering elements finding application in industry and, particularly, in acoustics. Musical instrument soundboards are accurately described using appropriate plate theories such as Kirchhoff-Love \cite{love_small_1888} and Mindlin-Reissner \cite{mindlin_influence_1951}. Furthermore, plates lend themselves naturally to understanding vibration through eigenshape visualisation. They are often used as teaching tools in classrooms for their ability to produce accurate and fascinating Chladni patterns \cite{chladni_treatise_2015}. Eigenshape visualisation techniques are still used today to measure the elastic properties of tonewood \cite{ducceschi_method_2024,fletcher_physics_2012} parallel to numerical simulation. Despite such an ever-growing body of applications, plate simulation is still mostly accessible through dedicated, proprietary software, often out of reach for the typical student's budget or even for small-sized research groups. This work illustrates the theoretical foundation and a first implementation of MAGPIE. MAGPIE is designed to be an open-source platform to simulate the physics of plates, offering easy-to-use visualisation tools and several analysis techniques. The tools can be equally used as a teaching aid for lecturers and as an analysis tool for researchers and industry stakeholders. Functionalities include setting elastic boundary conditions along the plate edges, visualising eigenshapes, exporting eigenshapes and frequencies, performing a time-domain simulation of the plate equation for sound synthesis, and estimating the elastic modulus of experimental plates. For brevity, not all functionalities can be described in this work, and attention is here restricted to the eigenvalue problem and related implementation. 
 
 
 % In Section \ref{sec:BackGround}, the background plate physics is described, along with the numerical approach used to perform the simulations; in Section \ref{sec:implementation}, the implementation details of MAGPIE are discussed; finally, Section \ref{sec:Conclusions} draws some final reflections and illustrates future alleys of development. 
