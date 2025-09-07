@@ -1,3 +1,27 @@
+\section{Introduction}
+
+Research into plate vibration have a long-standing and ongoing presence in the scientific literature. Plates are ubiquitous in engineering applications, particularly in acoustics, where they play a critical role in musical instruments. Soundboards of string instruments, for example, are accurately described by classical plate theories such as Kirchhoff-Love \cite{love_small_1888} and Mindlin-Reissner \cite{mindlin_influence_1951} models.
+
+Knowledge of material parameters, particularly elastic constants, provides valuable insight into the structural integrity of a musical instrument. In the case of string instrument soundboards, elastic constants offer a quantitative measure of the instrument’s condition \cite{duran_use_2025}. For collections of musical instruments, understanding the elastic limits of materials is essential for effective conservation \cite[p. 19-20]{barclay_care_1997}. Periodic monitoring of these constants allows curators to assess the state of a soundboard and to intervene when necessary.
+
+Determining the material properties of a complete instrument is challenging \cite{viala_model_2019}. Conventional mechanical tests—such as bending, tensile, or compression experiments—cannot be conducted in situ and are typically destructive. In contrast, vibration-based measurements provide a minimally invasive approach, offering low-risk assessment of elastic constants.
+
+Characterization of tonewood elastic properties can be achieved by representing eigenvectors as mode shapes (eigenshapes) \cite{ducceschi_method_2024}, complementing numerical simulations. Despite their proliferation, plate simulations are still largely accessible only through proprietary software, often beyond the budget of students or small research groups. Finite element tools, such as those employed in modelling instrument vibrations \cite{viala_model_2019}, frequently present financial or technical barriers.
+
+This situation motivated the development of a software library, \textsc{MAGPIE}, designed for the non-invasive derivation of material parameters. \textsc{MAGPIE} is intended as an open-source platform for simulating the physics of plates, offering intuitive visualization tools and a range of analysis techniques. \textsc{MAGPIE} represents the second branch the thesis 'heritage conservation through analytical methods.' This chapter covers the the creation of the \textsc{MAGPIE} including the background plate physics, the numerical approach for simulations, and the implementation details. 
+
+Plates are particularly well-suited for studying vibration through eigenshape visualization. They are commonly used as educational tools for demonstrating Chladni patterns \cite{chladni_treatise_2015}, providing both accurate results and visually engaging representations. A platform such as \textsc{MAGPIE} can serve dual purposes: as a teaching aid for instructors and as an analysis tool for researchers and industry practitioners. Its functionalities include applying elastic boundary conditions along plate edges, visualizing and exporting eigenshapes and frequencies, performing time-domain simulations of the plate equation for sound synthesis, and estimating the elastic modulus of experimental plates. For conciseness, this work focuses primarily on the eigenvalue problem and its implementation, rather than the full range of capabilities.
+
+
+% \begin{quotation}
+% To describe the vibrational modes of wood plates generally requires four elastic constants. These may be Young's moduli along (Ex) and across (Ey) the grain, the in-plane shear modulus G, and the larger of the two Poisson ratios vxy' Foraquarter-cutplateinthexyplane,Ex= EL,Ey= ER,G= GLR, vxy = VLR , and Vyx = VRL' 
+% \end{quotation}
+% -- \cite{fletcher_physics_2012}
+    
+
+
+
+
 \section{Main Points}
 
 \begin{itemize}
@@ -13,12 +37,10 @@
 
 \subsection{Boundary Conditions}\label{boundary-conditions}
 
-\section{The Solution}\label{the-solution-1}
 
-\subsection{Implementation}\label{implementation}
 
 \subsubsection{Discretising}\label{discretising}
-\subsubsection{Design}\label{design}
+
 
 \section{Application}\label{application-1}
 
@@ -37,9 +59,11 @@
     \label{fig:boundary-conditions-plot}
 \end{figure}
 
-\section{INTRODUCTION}
-\noindent
-Plate vibration is a longstanding topic of research. Plates are common engineering elements finding application in industry and, particularly, in acoustics. Musical instrument soundboards are accurately described using appropriate plate theories such as Kirchhoff-Love \cite{love_small_1888} and Mindlin-Reissner \cite{mindlin_influence_1951}. Furthermore, plates lend themselves naturally to understanding vibration through eigenshape visualisation. They are often used as teaching tools in classrooms for their ability to produce accurate and fascinating Chladni patterns \cite{chladni_treatise_2015}. Eigenshape visualisation techniques are still used today to measure the elastic properties of tonewood \cite{ducceschi_method_2024,fletcher_physics_2012} parallel to numerical simulation. Despite such an ever-growing body of applications, plate simulation is still mostly accessible through dedicated, proprietary software, often out of reach for the typical student's budget or even for small-sized research groups. This work illustrates the theoretical foundation and a first implementation of MAGPIE. MAGPIE is designed to be an open-source platform to simulate the physics of plates, offering easy-to-use visualisation tools and several analysis techniques. The tools can be equally used as a teaching aid for lecturers and as an analysis tool for researchers and industry stakeholders. Functionalities include setting elastic boundary conditions along the plate edges, visualising eigenshapes, exporting eigenshapes and frequencies, performing a time-domain simulation of the plate equation for sound synthesis, and estimating the elastic modulus of experimental plates. For brevity, not all functionalities can be described in this work, and attention is here restricted to the eigenvalue problem and related implementation. In Section \ref{sec:BackGround}, the background plate physics is described, along with the numerical approach used to perform the simulations; in Section \ref{sec:implementation}, the implementation details of MAGPIE are discussed; finally, Section \ref{sec:Conclusions} draws some final reflections and illustrates future alleys of development. 
+
+Plate vibration is a longstanding topic of research. Plates are common engineering elements finding application in industry and, particularly, in acoustics. Musical instrument soundboards are accurately described using appropriate plate theories such as Kirchhoff-Love \cite{love_small_1888} and Mindlin-Reissner \cite{mindlin_influence_1951}. Furthermore, plates lend themselves naturally to understanding vibration through eigenshape visualisation. They are often used as teaching tools in classrooms for their ability to produce accurate and fascinating Chladni patterns \cite{chladni_treatise_2015}. Eigenshape visualisation techniques are still used today to measure the elastic properties of tonewood \cite{ducceschi_method_2024,fletcher_physics_2012} parallel to numerical simulation. Despite such an ever-growing body of applications, plate simulation is still mostly accessible through dedicated, proprietary software, often out of reach for the typical student's budget or even for small-sized research groups. This work illustrates the theoretical foundation and a first implementation of MAGPIE. MAGPIE is designed to be an open-source platform to simulate the physics of plates, offering easy-to-use visualisation tools and several analysis techniques. The tools can be equally used as a teaching aid for lecturers and as an analysis tool for researchers and industry stakeholders. Functionalities include setting elastic boundary conditions along the plate edges, visualising eigenshapes, exporting eigenshapes and frequencies, performing a time-domain simulation of the plate equation for sound synthesis, and estimating the elastic modulus of experimental plates. For brevity, not all functionalities can be described in this work, and attention is here restricted to the eigenvalue problem and related implementation. 
+
+
+% In Section \ref{sec:BackGround}, the background plate physics is described, along with the numerical approach used to perform the simulations; in Section \ref{sec:implementation}, the implementation details of MAGPIE are discussed; finally, Section \ref{sec:Conclusions} draws some final reflections and illustrates future alleys of development. 
 
 
 \section{Theoretical Background}\label{sec:BackGround}
@@ -272,6 +296,16 @@ Given this result, it can be projected that a diagonal composition in Python wil
 
 Figure \ref{fig:matlab_vs_python} (b) shows the MATLAB eigensolver outperforming the SciPy package's \texttt{eigs} function. It is possible that performance may improve when using a diagonal spare compression format. A non-intuitive result is that fewer modes can compute slower than a higher one. This is due to the search space being proportional to the number of eigenvalues requested, which may lead to eigenvalues being found faster for a higher number of modes. Interestingly enough, there is a similar phenomenon in MATLAB, and it will be of interest when optimizing the speed of MAGPIE in later stages of development. Performance benchmarking of alternative eigensolvers in Python is still ongoing.
 
+
+\subsubsection{Design}\label{design}
+
+Source code was structured using the model-view-controller (MVC) paradigm \cite{krasner_description_1988}, splitting the software into three major components: data (Model), interface (view), and core logic (controller). The MVC approach was taken after the case study of Aurora (see Section \ref{sec:aurora}) where the interweaving of interface and logic made the source code much more difficult to maintain. For MAGPIE, the logic and interface have been separated. The logic is organised into a library, allowing for easy translations across platforms. Source code for the interface to the logic is contained in a separate repository. By separating logic and interface, further developments can be made to one component without impacting the other. 
+The interface repository contains a git submodule reference to the logic repository, such as used in the meta-repository for the harpsichord interface.
+The model (or data) is supplied by the user and would comprise of the measured modal frequencies of a thin plate \cite{duran_use_2025}.
+
+Current implementation are in MATLAB and Python programming languages. The Python implementation also has an interface available using the Jupyter notebooks environment.
+
+% Made available via the python package idex https://pypi.org/project/nemus-magpie as well as version control via github and archiving on zenodo.
 
 \subsection{Case Study: Generalised Boundary Conditions}
 
