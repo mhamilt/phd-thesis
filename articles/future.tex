@@ -1,21 +1,12 @@
 
-\begin{itemize}
-    \item Research study in effect of haptics on harpischord players
-    \item Expansion of magpie to other platforms (specifically webassembly and web technologies)
-    \item Expansion of magpie to include orthogonality and simulation of strutting (get citation from Michele)
-    \item Long term user stufy in museum context 
-\end{itemize}
+\section{Introduction}
+    
+The projects covered in the previous chapters have use cases and application in their current form, however the  work here represents not a terminus of the ideas but rather a rich possibility for expansion.
+By refining and developing the work covered herein, these should hopefully be worthwhile tools within research to come. This chapter covers the areas for development within each project and impact that may have on future research.
 
+\section{Interface}
 
-\section{What was done}\label{what-was-done}
-
-\section{What worked}\label{what-worked}
-
-\section{What didn't}\label{what-didnt}
-
-\section{Where do we go from here?}\label{where-do-we-go-from-here}
-
-\subsection{Interface as Research Probe}
+\subsection{As Research Probe}
 
 One of the richest avenues for further research using the interface is as part of a larger study that explores interface haptic feedback as well as the potency of visual aesthetics to player experience.
 
@@ -82,6 +73,104 @@ Easing acces to fabrication and permitting iteration on designs
 
 
 \subsection{Perpetual Software Refinement}
+
+\section{MAGPIE}
+
+
+\subsection{Further Development}
+
+Development within \textsc{MAGPIE} can be focussed within two directions. One in functionality and the other in portability. The current iteration is a capable illustrative tool for educational purposes and some specific material measurement scenarios. The application for tone wood still needs to be develped further. Similiarly, the tool is available now in the open source language Python, but the current interface relies on the Jupyter notebook system, which comes with its own technical and portability challenges.
+
+Key area for expansion is to translate the source code to a compiled language such as \textsc{C}, \textsc{C++}, and Rust. Such a transition provides more granular control of compiler optimisations, but more interestingly opens potential for deployment. 
+
+The primary bottleneck for development is the eigensolver stage. In MATLAB this achieved with \texttt{eigs} and in python the SciPy linear algebra library's \texttt{scipy.sparse.linalg.eigs}. In both cases, these eigensolvers are an interface to the ARPACK library \cite{lehoucq_arpack_1998}. For MATLAB there is analysis of the target matrix to which the user is not privvy. 
+MATLAB its own sparse library on top of ARPACK \cite{gilbert_sparse_1992} which obfuscates the process further.
+MATLAB's \texttt{eigs} function is not one supported by the software's code generation systems and the function still requires the MATLAB runtime if it is to be interfaced with externally. This has implications for portability issues, with development being constrained to those with paid access to the MATLAB environment.
+
+ARPACK itself is open source \url{https://github.com/opencollab/arpack-ng} and requires The Basic Linear Algebra Subroutines (BLAS) and Linear Algebra PACKage (LAPACK) \url{http://www.netlib.org/blas/} and \url{http://www.netlib.org/lapack/}
+
+In the case of \textsc{C++}, the relevant technologies available for interfacing with ARPACK library. First is the open source Eigen library for C++ \url{https://gitlab.com/libeigen/eigen} and the Spectra library \url{https://spectralib.org} for eigenvalue problems. Spectra consists of a re-write of ARPACK solvers in C++ allowing for direct native compilation. 
+The second technology is the emscripten compiler \url{https://emscripten.org} allowing composition of C++ code for the web browser by use of Web Assembly (WASM) \url{https://webassembly.org}. Web Assmebly is the standard for compiling to a "virtual machine" in the web browser. Assembly code capable of mor performative execution than the equivalent javascript. When combined with native \textsc{C++} source of Eigen and Spectra, the emscripten compiler can potentially be used to compile. This is already been demonstrated in theory \url{https://observablehq.com/@rreusser/eigen} where this more valuable is the specific use cases as applied to the biharmonic matrix with parametric boundary conditions. This would potentially allow for some small scale use of the tool without any requirement for install.
+
+The magpie project repository \cite{hamilton_magpie-cpp_2025} represents a step towards that goal, though the project is still in its infancy. Table~\ref{tab:eig-comp} illustrates a comparison of the first 16 eigenvalues as obtain from the sparse eigensolver in MATLAB, Python (using SciPy) and the C++ spectra library. Error is small enough that it can be considered comparable and a viable substitution for the purposes of \textsc{C++} compilation.
+
+
+\begin{table}
+    \centering
+    \begin{tabular}{|r|r|r|}
+    \hline
+        \textbf{MATLAB} & \textbf{SciPy} & \textbf{Spectra} \\ \hline
+         78.53693736 &  78.53693736 &  78.537 \\ \hline
+        128.58488917 & 128.58488917 & 128.585 \\ \hline
+        187.01330143 & 187.01330143 & 187.013 \\ \hline
+        211.49811507 & 211.49811507 & 211.498 \\ \hline
+        233.26312988 & 233.26312988 & 233.263 \\ \hline
+        311.55085535 & 311.55085535 & 311.551 \\ \hline
+        324.98789855 & 324.98789855 & 324.988 \\ \hline
+        351.43007000 & 351.43007000 & 351.430 \\ \hline
+        396.19915992 & 396.19915992 & 396.199 \\ \hline
+        421.32649079 & 421.32649079 & 421.326 \\ \hline
+        467.79995503 & 467.79995503 & 467.800 \\ \hline
+        471.96030431 & 471.96030431 & 471.960 \\ \hline
+        561.56762671 & 561.56762671 & 561.568 \\ \hline
+        570.48057257 & 570.48057257 & 570.481 \\ \hline
+        578.49204006 & 578.49204006 & 578.492 \\ \hline
+        614.59903001 & 614.59903001 & 614.599 \\ \hline
+    \end{tabular}
+    \caption{A comparison of eigen solver output given the conditions in Figure~\ref{fig:parameters}}
+    \label{tab:eig-comp}
+\end{table}
+
+
+\begin{figure}
+    \centering
+    % \includegraphics[width=0.5\linewidth]{}
+    \caption{Parameters for the Biharmonic used in benchmarking tests/}
+    \label{fig:eigensolver-performance}
+\end{figure}
+
+
+\begin{figure}
+    \centering
+    % \includegraphics[width=0.5\linewidth]{}
+    \caption{Compute time of increasing sized biharmonic in MATLAB, Python and C++.}
+    \label{fig:bihamronic-performance}
+\end{figure}
+
+
+\begin{figure}
+    \centering
+    % \includegraphics[width=0.5\linewidth]{}
+    \caption{Compute time for shift-invert eigen solver with increasing number of modes in MATLAB, Python and C++. System used is giving by the parameters in Figure~\ref{fig:benchmark_parameters}.}
+    \label{fig:eigensolver-performance}
+\end{figure}
+
+MATLAB has functionality to compile its code to WASM (\url{https://www.mathworks.com/matlabcentral/fileexchange/69973-generatejavascriptusingmatlabcoder}). Some functionality such as that in MATLAB's sparse libraries is not currently open to code generation and compilation to a binary outside of the MATLAB runtime (list of functions supported: \url{https://uk.mathworks.com/help/referencelist.html?type=function&capability=codegen&listtype=alpha}) and it is unlikely to be in the near future.
+
+
+A key development for \textsc{MAGPIE} is the addition of an orthotropic model so match more closely that of the quarter-sawn wood as is used for string instrument soundboards. Even further, the addition of braces and lumped masses to the internal system to mimic that of the structural bracing found on physical instruments \cite{ducceschi_open_2024}. 
+
+Presenting the tool kit in an open source well-structure manner should hopefully encourage usage, collaboration and development as the system matures.
+
+
+\subsection{eigensolvers}
+
+
+
+
+The biharmonic is multi-diagonal, sparse, real, and has a possibility to be symmetrical in which case it is positive definite \cite{}. 
+Given these conditions, the subset of relevant matrix operations for eigensolvers is reduced.
+    
+``The shift and invert spectral transformation is used to enhance convergence
+to a desired portion of the spectrum'' \cite{lehoucq_arpack_1998}.
+
+The ARPACK solvers find eigenvalues with the largest magnitude easiest. 
+
+For the biharmonic the eigenvalues are the modal frequencies of the system and for musical acoustics the lower and fundamental modes are the target. The eigensolvers will either converge slowly or fail entirely leading to much longer compute times \url{https://docs.scipy.org/doc/scipy-1.0.0/reference/tutorial/arpack.html} \url{https://jduarte.physics.ucsd.edu/phys142/lectures/10_EigenvalueProblem.pdf}.
+
+
+In order to find these smaller magnitude eigenvalues, the solver must be operated in a shift-inverse mode. This consists of transforming the eigenvalue problem from the traditional \[Ax = \lambda x\] to \[(A- \sigma I)^{-1} = (\frac{1}{\lambda - \sigma})x\] shifting with a value \[\sigma\] and inverting the matrix \[(A - \sigma I)\]. For \[\sigma = 0\], \[(A)^{-1}x = (\frac{1}{\lambda})x\], large \[\lambda\] therefore become small to the solver. 
+
 
 
 \section{Open Hardware Measurement}\label{where-do-we-go-from-here}
@@ -501,3 +590,13 @@ Make the instrument and the audience will follow.
 evaluation guidance limited as the emphasis is on the emulation of the original playing experience, limitations and all, without fixing the original instrument. Something to be said for overcoming limitations instead of pleasing.
 Blisters from playing a string instruments, bleeding lips or puffed cheeks from reed and lip reed instruments.
 If the instruments were invented today, would the be evaluated in a way that suggests they should be pursued. There seems to be some kind of inherent blood sacrifice to playing acoustic instruments that is absent in DMIs.
+
+
+
+\begin{itemize}
+    \item Research study in effect of haptics on harpischord players
+    \item Expansion of magpie to other platforms (specifically webassembly and web technologies)
+    \item Expansion of magpie to include orthogonality and simulation of strutting (get citation from Michele)
+    \item Long term user stufy in museum context 
+\end{itemize}
+

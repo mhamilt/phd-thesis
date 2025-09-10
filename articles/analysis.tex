@@ -251,6 +251,9 @@ Given this result, it can be projected that a diagonal composition in Python wil
 
 Figure \ref{fig:matlab_vs_python} (b) shows the MATLAB eigensolver outperforming the SciPy package's \texttt{eigs} function. It is possible that performance may improve when using a diagonal spare compression format. A non-intuitive result is that fewer modes can compute slower than a higher one. This is due to the search space being proportional to the number of eigenvalues requested, which may lead to eigenvalues being found faster for a higher number of modes. Interestingly enough, there is a similar phenomenon in MATLAB, and it will be of interest when optimizing the speed of \textsc{MAGPIE} in later stages of development. Performance benchmarking of alternative eigensolvers in Python is still ongoing.
 
+\subsection{Eigensolver}\label{design}
+
+For the MATLAB Implementation, the eigensolver computes the smallest absolute values which is a Krylov method using the inverse of the biharmonic \url{https://uk.mathworks.com/help/matlab/ref/eigs.html} \cite{stewart_krylov_2002}.
 
 \subsection{Design}\label{design}
 
