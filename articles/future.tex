@@ -117,7 +117,7 @@ The magpie project repository \cite{hamilton_magpie-cpp_2025} represents a step 
         578.49204006 & 578.49204006 & 578.492 \\ \hline
         614.59903001 & 614.59903001 & 614.599 \\ \hline
     \end{tabular}
-    \caption{A comparison of eigen solver output given the conditions in Figure~\ref{fig:parameters}}
+    \caption{A comparison of eigensolver output given the conditions in Figure~\ref{fig:parameters}}
     \label{tab:eig-comp}
 \end{table}
 
@@ -132,18 +132,30 @@ The magpie project repository \cite{hamilton_magpie-cpp_2025} represents a step 
 
 \begin{figure}
     \centering
-    % \includegraphics[width=0.5\linewidth]{}
-    \caption{Compute time of increasing sized biharmonic in MATLAB, Python and C++.}
+    \includegraphics[width=0.5\linewidth]{img/plot-biharmonic-comparison.pdf}
+    \caption{Compute time of for the biharmonic from 1000 to 1000000 grid points in MATLAB, Python and C++.}
     \label{fig:bihamronic-performance}
 \end{figure}
 
 
 \begin{figure}
     \centering
-    % \includegraphics[width=0.5\linewidth]{}
-    \caption{Compute time for shift-invert eigen solver with increasing number of modes in MATLAB, Python and C++. System used is giving by the parameters in Figure~\ref{fig:benchmark_parameters}.}
+    \includegraphics[width=0.5\linewidth]{img/plot-eigensolver-comparison.pdf}
+    \caption{Compute time for 10 to 500 eigenvalues using an eigensolver in shift-invert mode in MATLAB, Python and C++. Biharmonic consisting of 10000 grid points with parameters given in Figure~\ref{fig:benchmark_parameters}.}
     \label{fig:eigensolver-performance}
 \end{figure}
+
+
+For Figure~\ref{fig:bihamronic-performance} the computation was run over 20 iterations and the fastest time was then selected. For \textsc{C++} the compute times for \textsc{-O3} and \textsc{-Ofast} optimisations settings are shown.
+
+
+% Model Name:	MacBook Pro
+% Model Identifier:	Mac14,9
+% Model Number:	MPHH3T/A
+% Chip:	Apple M2 Pro
+% Total Number of Cores:	10 (6 performance and 4 efficiency)
+% Memory:	16 GB
+
 
 MATLAB has functionality to compile its code to WASM (\url{https://www.mathworks.com/matlabcentral/fileexchange/69973-generatejavascriptusingmatlabcoder}). Some functionality such as that in MATLAB's sparse libraries is not currently open to code generation and compilation to a binary outside of the MATLAB runtime (list of functions supported: \url{https://uk.mathworks.com/help/referencelist.html?type=function&capability=codegen&listtype=alpha}) and it is unlikely to be in the near future.
 
