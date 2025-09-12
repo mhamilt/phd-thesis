@@ -84,15 +84,17 @@ The plate edges can be elastically restrained \cite{li_exact_2009} by terms whic
 
 The biharmonic operator as in \textcite[Chapter 4][p. 233]{graff_wave_1991} and its discrete finite difference form in \textcite[Chapter 10][p. 289]{bilbao_numerical_2009} can be approximated as 
 
-\(
+\[
 \delta\Delta\Delta \approx \delta\Delta\delta\Delta = (\delta_{xx} + \delta_{yy})^{2} = \delta_{xxxx} + 2\delta_{xx}\delta_{yy} + \delta_{yyyy}
-\)
+\]
+
 For an in-depth formulation of the discrete biharmonic, see \textcite[Chapters 10-12]{bilbao_numerical_2009}.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\linewidth]{img/biharmonic.pdf}
-    \caption{Central coefficients for the discrete biharmonic.}
+    \includegraphics[width=0.8\linewidth]{img/biharmonic.pdf}\\
+    \includegraphics[width=0.8\linewidth]{img/biharm-stencil.pdf}
+    \caption{Central coefficients, stencil and matrix format, for the discrete biharmonic.}
     \label{fig:biharmonic}
 \end{figure}
 
