@@ -183,7 +183,35 @@ For the biharmonic the eigenvalues are the modal frequencies of the system and f
 
 In order to find these smaller magnitude eigenvalues, the solver must be operated in a shift-inverse mode. This consists of transforming the eigenvalue problem from the traditional \[Ax = \lambda x\] to \[(A- \sigma I)^{-1} = (\frac{1}{\lambda - \sigma})x\] shifting with a value \[\sigma\] and inverting the matrix \[(A - \sigma I)\]. For \[\sigma = 0\], \[(A)^{-1}x = (\frac{1}{\lambda})x\], large \[\lambda\] therefore become small to the solver. 
 
+Given the matrix is never explicitly inverted and only carried out as part of a forward and backward substitution LU decomposition, the operation can be computationally more efficient.
+\[L\] is lower triangular matrix (with \[1\]s on the diagonal)
+\[U\] is upper triangular matrix
+\[ PA = LU, Ly = Pv, Ux = y, x = (A − \sigma I)^{-1}v\]
 
+for linear system:
+\[ Ax = b, Ly = b, Ux = y, x = (A − \sigma I)^{-1}b\]
+
+LU decomposition:
+\begin{verbatim}
+    for k = 1 to n
+        // Step 1: Pivot selection
+        pivot_row = index of max(abs(A[k:n, k])) + k - 1
+        if pivot_row != k
+            swap row k of A and pivot_row of A
+            swap row k of A and pivot_row of P
+            if k > 1:
+                swap row k of L and pivot_row of L (columns 1..k-1)
+
+        // Step 2: Compute multipliers and elimination
+        for i = k+1 to n
+            L[i,k] = A[i,k] / A[k,k] // multiplier
+            for j = k to n
+                A[i,j] = A[i,j] - L[i,k] * A[k,j]
+
+        // Step 3: Set U row
+        for j = k to n
+            U[k,j] = A[k,j]
+\end{verbatim}
 
 \section{Open Hardware Measurement}\label{where-do-we-go-from-here}
 
