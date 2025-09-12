@@ -41,7 +41,7 @@ The coefficient calculations are thus abstracted into bands for constructing the
 % \section{Theoretical Background}\label{sec:BackGround}
 \begin{figure}
     \centering
-    \includegraphics[width=0.75\linewidth]{img/bhblocks.pdf}
+    \includegraphics[width=0.5\linewidth]{img/bhblocks.pdf}
     \caption{Biharmonic divided into diagonal subblocks.}
     \label{fig:biharm-subblocks}
 \end{figure}
@@ -69,34 +69,33 @@ A central stage of \texttt{magpie} is the \texttt{bhmat} function, which assembl
 
 \subsection{Computing the biharmonic operator}
 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{img/biharmonic.pdf}\\
+    \includegraphics[width=0.7\linewidth]{img/biharm-stencil.pdf}
+    \caption{Central coefficients, stencil and matrix format, for the discrete biharmonic.}
+    \label{fig:biharmonic-stencil}
+\end{figure}
 % The first concerned the approximately 90 individual matrix coefficients as they were calculated in isolation. The original source had been designed for a block sparse format (Figure~\ref{fig:biharm-subblocks}). The block format resulted in more manageable source code in the assembly of the discrete biharmonic but at the cost of performance. The intention as to optimise the assembly of the biharmonic, which takes place in the \texttt{bhmat} function. Optimisation would be made easier if the coefficient calculation were separated from the biharmonic assembly stage. 
 % Given the complexity of the coefficient calculations, by being interwoven with another function, the potential for error would be much higher. Moving a single function without tyyping error is an easier task than moving 20 lines of code.
 % Separating this stage into the \texttt{bhmat} function would also ensure optimisation would cascade to any other source code which used it such as the central \texttt{magpie} function. 
 
-The thin plate \cites[Chapter 12][p. 331]{bilbao_numerical_2009}[Chapter 4][p. 233]{graff_wave_1991} with loss \cites[Chapter 12][p. 341]{bilbao_numerical_2009} and force.
+The thin plate \cites[][p. 331]{bilbao_numerical_2009}[][p. 233]{graff_wave_1991} with loss \cites[][p. 341]{bilbao_numerical_2009} and force.
 
 \begin{equation}
 \rho\zeta\ddot{u} = -\kappa^{2}\Delta\Delta u - 2 \rho\zeta\sigma\dot{u}
 \end{equation}
 
 
-The plate edges can be elastically restrained \cite{li_exact_2009} by terms which control the rotation and displacement of the boundary.
+The plate edges can be elastically restrained \cite{li_exact_2009} by terms which control the rotation and displacement of the boundary. The biharmonic operator as in \textcite[][p. 233]{graff_wave_1991} and its discrete finite difference form in \textcite[][p. 289]{bilbao_numerical_2009} can be approximated as 
 
-The biharmonic operator as in \textcite[Chapter 4][p. 233]{graff_wave_1991} and its discrete finite difference form in \textcite[Chapter 10][p. 289]{bilbao_numerical_2009} can be approximated as 
-
-\[
+\begin{align}
 \delta\Delta\Delta \approx \delta\Delta\delta\Delta = (\delta_{xx} + \delta_{yy})^{2} = \delta_{xxxx} + 2\delta_{xx}\delta_{yy} + \delta_{yyyy}
-\]
+\end{align}
 
-For an in-depth formulation of the discrete biharmonic, see \textcite[Chapters 10-12]{bilbao_numerical_2009}.
+In its discrete form the biharmonic operator has coefficients that can be arranged in a stencil forming the matrix in Figure~\ref{fig:biharmonic-stencil}. This leaves the boundary conditions which result in a multi-diagonal matrix  For an in-depth formulation of the discrete biharmonic, see \textcite[Chapters 10-12]{bilbao_numerical_2009}.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.8\linewidth]{img/biharmonic.pdf}\\
-    \includegraphics[width=0.8\linewidth]{img/biharm-stencil.pdf}
-    \caption{Central coefficients, stencil and matrix format, for the discrete biharmonic.}
-    \label{fig:biharmonic}
-\end{figure}
 
 
 \begin{figure}
@@ -106,6 +105,8 @@ For an in-depth formulation of the discrete biharmonic, see \textcite[Chapters 1
 \end{figure} 
 
 Repeated calculation of the biharmonic operator is central to some of the functionality throughout the rest of MAGPIE. Therefore, optimal construction of the operator was a key factor during development. The biharmonic operator sparsity pattern, described in Figure \ref{fig:fdtd-plate-ghost}, can be decomposed into several methods, of which two will be described. It is worth noting that explicitly declaring the set of coefficients in a loop formulation, though a valid method of using the biharmonic operator, was not considered an option for the current implementations as it does not output a matrix. It is advantageous to declare the biharmonic operator as a matrix as this is the input format used by the eigensolvers in both MATLAB and Python's SciPy package utilised in other parts of MAGPIE. Conveniently, the biharmonic operator is multi-diagonal and lends itself to the sparse matrix formats of MATLAB and SciPy.\\
+
+
  
 In the first approach, the operator can be composed of sparse sub-blocks calculated separately and then concatenated. Figure \ref{fig:bh-block} shows the internal pattern repetition of blocks and how each block can be indexed. After each block is computed separately, they can all be concatenated together. Colour illustrates boundary sections of the biharmonic, with the central repeating section highlighted in blue. This approach simplifies code structure by avoiding the need for zero padding of the computed matrices but has implications for performance. 
 
