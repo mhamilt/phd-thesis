@@ -51,14 +51,66 @@ The script required intimate knowledge of its structure in order to use it thus 
 
 \section{Proposal}
 
-The proposal was the creation of a tool \textsc{MAGPIE} which would collect together the functionality for computing a discrete biharmonic operator with parametric boundary conditions, an eigensolver, impulse response generation through modal time integration, and Young's modulus estimation.
-The first iteration was refactor and functionalise the original 600 line MATLAB script to permit great reusability.
+The proposal was the creation of a tool \textsc{MAGPIE} which would collect together the functionality for computing a discrete biharmonic operator with parametric boundary conditions, an eigensolver, impulse response generation through modal time integration, and Young's modulus estimation. The tool could also function as a teaching aid for lecturers and as an analysis tool for researchers and industry stakeholders. \textsc{MAGPIE} was originally planned exclusively as a library for the Python programming language. Early in development, it became apparent that \textsc{MAGPIE} would have greater reach as a teaching aid and analysis tool if implemented across multiple programming languages. It was devised that  \textsc{MAGPIE} would instead be a core set of functions replicated across languages, beginning with MATLAB given its prevalence within academia and industry. The original script on which \textsc{MAGPIE} is based was written in MATLAB and could function as a know working example. This would avoid an platform specific problem that may arise during the refactoring  process. After the initial refactor in MATLAB, the set of functions could be replicated in other programming languages, ultimately Python and \textsc{C++}. The structure of \textsc{MAGPIE} would allo the ability to design interfaces separately, which would lead to a user-interface using the Jupyter notebooks platform.
 
-The source was split into five areas of functionality. The first concerned the approximately 90 individual matrix coefficients as they were calculated in isolation. The original source had been designed for a block sparse format (Figure~\ref{fig:biharm-subblocks}). The block format resulted in more manageable source code in the assembly of the discrete biharmonic but at the cost of performance. The intention as to optimise the assembly of the biharmonic, which takes place in the \texttt{bhmat} function. Optimisation would be made easier if the coefficient calculation were separated from the biharmonic assembly stage. Separating this stage into the \texttt{bhmat} function would also ensure optimisation would cascade to any other source code which used it such as the central \texttt{magpie} function. This function aimed to consolidate the 16 parameters of the original script into a standard format of six required arguments representing the plate material density, elastic constant, poisson ratio, dimensions, boundary conditions and grid resolution with a validation stage to ensure the correct type for each argument.
-The final functions were for young's modulus estimation and generating an impulse response through modal time integration with loss parameters.
+\subsection{MATLAB}
+
+The first iteration of \textsc{MAGPIE} was a refactor and functionalisation of the original 600 line MATLAB script. The primary goal of this version was to separate the source in order that each component could be developed in isolation without impacting the functionality of other components. The version control software \texttt{git} was used to track changes and permit distribution using the GitHub platform.
+
+% Originals:
+% \url{https://github.com/Nemus-Project/magpie-matlab/blob/d455a8ebb3c157883b68498a3a7f3ded9a6cd336/biharmonicEigs.m}
+% \url{https://github.com/Nemus-Project/magpie-matlab/blob/d455a8ebb3c157883b68498a3a7f3ded9a6cd336/testModal.m}
+
+The source was split into five areas of functionality.
+The core function of the toolkit is the \texttt{magpie} function, which consolidates the 16 parameters of the original script into a standard format of six required arguments representing the plate parameters for material density, elastic constant, Poisson ratio, dimensions, boundary conditions and grid resolution with a validation stage to ensure the correct type for each argument.
+The \texttt{magpie} function is used as part of functions for young's modulus (\texttt{youngcalc}) estimation and generating an impulse response through modal time integration with loss parameters \texttt{ModalTimeInt}.
+A central stage of \texttt{magpie} is the \texttt{bhmat} function, which assembles the discrete biharmonic from the given plate parameters.
+
+
+\subsection{Computing the biharmonic operator}
+
+% The first concerned the approximately 90 individual matrix coefficients as they were calculated in isolation. The original source had been designed for a block sparse format (Figure~\ref{fig:biharm-subblocks}). The block format resulted in more manageable source code in the assembly of the discrete biharmonic but at the cost of performance. The intention as to optimise the assembly of the biharmonic, which takes place in the \texttt{bhmat} function. Optimisation would be made easier if the coefficient calculation were separated from the biharmonic assembly stage. 
 % Given the complexity of the coefficient calculations, by being interwoven with another function, the potential for error would be much higher. Moving a single function without tyyping error is an easier task than moving 20 lines of code.
+% Separating this stage into the \texttt{bhmat} function would also ensure optimisation would cascade to any other source code which used it such as the central \texttt{magpie} function. 
+
+The thin plate \cites[Chapter 12][p. 331]{bilbao_numerical_2009}[Chapter 4][p. 233]{graff_wave_1991} with loss \cites[Chapter 12][p. 341]{bilbao_numerical_2009} and force.
+
+\begin{equation}
+\rho\zeta\ddot{u} = -\kappa^{2}\Delta\Delta u - 2 \rho\zeta\sigma\dot{u}
+\end{equation}
+
+% \begin{equation}
+% \ddot{u} = -\kappa^{2}\Delta\Delta u
+% \end{equation}
 
 
+The plate edges can be elastically restrained \cite{li_exact_2009} by terms which control the rotation and displacement of the boundary.
+
+The biharmonic operator as in \textcite[Chapter 4][p. 233]{graff_wave_1991} and its discrete finite difference form in \textcite[Chapter 10][p. 289]{bilbao_numerical_2009} can be approximated as 
+
+\begin{equation}
+\delta\Delta\Delta \approx \delta\Delta\delta\Delta = (\delta_{xx} + \delta_{yy})^{2} = \delta_{xxxx} + 2\delta_{xx}\delta_{yy} + \delta_{yyyy}
+\end{equation}
+
+For an in-depth formulation of the discrete biharmonic, see \textcite[Chapters 10-12]{bilbao_numerical_2009}.
+
+
+
+
+\begin{figure}
+\centering
+\includegraphics[width=0.4\linewidth]{img/plateBCs1.pdf}
+\caption{Ghost points resulting from applying the biharmonic difference operator to the upper-left corner.}\label{fig:fdtd-plate-ghost}
+\end{figure} 
+
+Repeated calculation of the biharmonic operator is central to some of the functionality throughout the rest of MAGPIE. Therefore, optimal construction of the operator was a key factor during development. The biharmonic operator sparsity pattern, described in Figure \ref{fig:fdtd-plate-ghost}, can be decomposed into several methods, of which two will be described. It is worth noting that explicitly declaring the set of coefficients in a loop formulation, though a valid method of using the biharmonic operator, was not considered an option for the current implementations as it does not output a matrix. It is advantageous to declare the biharmonic operator as a matrix as this is the input format used by the eigensolvers in both MATLAB and Python's SciPy package utilised in other parts of MAGPIE. Conveniently, the biharmonic operator is multi-diagonal and lends itself to the sparse matrix formats of MATLAB and SciPy.\\
+ 
+In the first approach, the operator can be composed of sparse sub-blocks calculated separately and then concatenated. Figure \ref{fig:bh-block} shows the internal pattern repetition of blocks and how each block can be indexed. After each block is computed separately, they can all be concatenated together. Colour illustrates boundary sections of the biharmonic, with the central repeating section highlighted in blue. This approach simplifies code structure by avoiding the need for zero padding of the computed matrices but has implications for performance. 
+
+\subsection{Python}
+
+
+\subsection{C++}
 % D00_coeffs.m
 % D01_coeffs.m
 % D02_coeffs.m
@@ -78,9 +130,6 @@ The final functions were for young's modulus estimation and generating an impuls
 % youngcalc.m
 
 
-Originals:
-\url{https://github.com/Nemus-Project/magpie-matlab/blob/d455a8ebb3c157883b68498a3a7f3ded9a6cd336/biharmonicEigs.m}
-\url{https://github.com/Nemus-Project/magpie-matlab/blob/d455a8ebb3c157883b68498a3a7f3ded9a6cd336/testModal.m}
 % This section aims to cover the main development steps and choices taken during the development of MAGPIE, technical underpinnings, justification and a case study of a hypothetical library application.
 
 
@@ -415,7 +464,7 @@ Originals:
 
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{img/boundary-types.png}
+    \includegraphics[width=0.5\linewidth]{img/boundary-types.png}
     \caption{Enter Caption}
     \label{fig:boundary-types}
 \end{figure}
@@ -423,7 +472,7 @@ Originals:
 
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{img/boundary-conditions-plot.png}
+    \includegraphics[width=0.3\linewidth]{img/boundary-conditions-plot.png}
     \caption{Enter Caption}
     \label{fig:boundary-conditions-plot}
 \end{figure}
