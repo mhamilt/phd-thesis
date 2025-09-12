@@ -79,22 +79,22 @@ The thin plate \cites[Chapter 12][p. 331]{bilbao_numerical_2009}[Chapter 4][p. 2
 \rho\zeta\ddot{u} = -\kappa^{2}\Delta\Delta u - 2 \rho\zeta\sigma\dot{u}
 \end{equation}
 
-% \begin{equation}
-% \ddot{u} = -\kappa^{2}\Delta\Delta u
-% \end{equation}
-
 
 The plate edges can be elastically restrained \cite{li_exact_2009} by terms which control the rotation and displacement of the boundary.
 
 The biharmonic operator as in \textcite[Chapter 4][p. 233]{graff_wave_1991} and its discrete finite difference form in \textcite[Chapter 10][p. 289]{bilbao_numerical_2009} can be approximated as 
 
-\begin{equation}
+\(
 \delta\Delta\Delta \approx \delta\Delta\delta\Delta = (\delta_{xx} + \delta_{yy})^{2} = \delta_{xxxx} + 2\delta_{xx}\delta_{yy} + \delta_{yyyy}
-\end{equation}
-
+\)
 For an in-depth formulation of the discrete biharmonic, see \textcite[Chapters 10-12]{bilbao_numerical_2009}.
 
-
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{img/biharmonic.pdf}
+    \caption{Central coefficients for the discrete biharmonic.}
+    \label{fig:biharmonic}
+\end{figure}
 
 
 \begin{figure}
