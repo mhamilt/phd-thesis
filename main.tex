@@ -37,9 +37,12 @@
       amssymb,
       amstext,
      booktabs,
-      caption,
+      caption,   
+   changepage,
         color,
      enumitem,
+     eqparbox,
+      environ,
      fancyhdr,
         float,
       fourier,
@@ -52,6 +55,7 @@
      setspace,
    subcaption,
           svg,
+   tabularray,           
       txfonts,
         xcolor
 }
@@ -59,6 +63,8 @@
 \usepackage{multirow} % used for the table
 \renewcommand{\arraystretch}{1.2}
 \usepackage[hidelinks]{hyperref}
+\UseTblrLibrary{amsmath}
+\setcounter{MaxMatrixCols}{25}
 %----------------------------------------------------------------------------------------
 \usepackage{newunicodechar}
 \newunicodechar{└}{\textSFii}
@@ -155,12 +161,14 @@
 \newcommand{\innp}[1]{\left\langle#1\right\rangle}
 \newcommand{\virg}[1]{``#1''}
 \DeclareMathOperator{\sinc}{sinc}
+
+
 %==============================================================================
 %%%%%%%%%% DO NOT EDIT %%%%%%%%%%
 %
 % THIS IS THE TITLE PAGE (CONTAINED IN A SEPARATE FOLDER)
 % 	--> The title page itself SHOULD be edited as appropriate for your project
-%
+
 \begin{document}
 % \bibliographystyle{plainnat}
 \input{title-unibo}
