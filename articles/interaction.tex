@@ -52,17 +52,6 @@ The present project, therefore, builds directly on both museum precedents and ha
 It diverges, however, in adopting an aesthetics-first approach: electronics are concealed, serving only as a transparent link between mechanical action and digital sound, so that the tactile and kinaesthetic qualities of the instrument remain central to the visitor’s experience.  
  
 
-\subsection{Visual Aesthetics}
-
-The physical and visual presentation of an instrument might not be the primary concern for a performer, but in the context of a museum exhibition, it is vital to the visitor experience, as demonstrated by \textcite{mcalpine_sampling_2014}. Since the Tagliavini collection hosts primarily early plucked stringed keyboards of Italian origin, the keyboard layout was deliberately modelled after early Italian harpsichords. The aesthetics of the instrument were therefore carefully considered during the design process.
-
-In contrast, many haptic DMI projects place most of the effort into the design and functionality of electronic components, while paying comparatively little attention to visual stimulus. For keyboard interfaces, this is in part due to the limited scope of key modelling \cite{gillespie_haptic_1996,lozada_modelisations_2007,timmermans_multibody-based_2020}, whose form already diverges significantly from performer expectations. For actuated haptic systems, there is also a question of where to place the electronics. A combined approach of realistic haptics and aesthetics presents a challenge: commercial MIDI keyboards are differentiated from acoustic keyboards by the absence of strings, while the interfaces presented here employ strings as both functional haptic mechanisms and visual features. Even if strings were no longer required mechanically, their presence would still be necessary as a visual differentiator; otherwise, the interface risks resembling existing commercial offerings. This then raises the practical issue of electronic footprint, as haptic systems and actuators often require components that extend beyond the confines of the instrument body \cite{mcpherson_augmented_2010, schmidt_sparksichord_2025}.
-
-The importance of visual stimulus should not be underestimated, particularly for musicians. Studies by \textcite{fritz_player_2012, fritz_soloist_2014, fritz_listener_2017} (see Section~\ref{sec:reproduction-or-renovation}) show that visual stimuli can bias auditory perception and therefore should be carefully restricted in experimental settings. \textcite{tsay_sight_2013} further asserts that visual appearance influences quality assessment by both ``novices and experts.'' In all these studies, the visual stimulus was treated as an undesirable influence. This phenomenon, akin to a `musical instrument McGurk effect' \cite{mcgurk_hearing_1976}, is one reason why the electronics in this project were deliberately concealed from view. 
-
-The McGurk effect is a well-known example of cross-modal perception. It typically manifests as an aural illusion: when two videos show a mouth pronouncing ``ba'' and ``fa'' but the audio always contains ``ba,'' the sound heard depends on the mouth movement observed \cite{horizon_seeing_2010}. The effect has been proposed to extend beyond speech into the domain of musical visual cues \cite{saidana_mcgurk_1990}. Its relevance to musicians remains debated: while \textcite{proverbio_skilled_2016} and \textcite{alsius_forty_2018} argue that musicians are less susceptible, \textcite{politzer_mcgurk_2019} refutes this, concluding that musicians may be equally or even more vulnerable. Taken together with \textcite{tsay_sight_2013, fritz_player_2012, fritz_soloist_2014, fritz_listener_2017}, these results highlight the non-negligible influence of visual cues on auditory perception.
-
-Instead of attempting to suppress this influence, the present design seeks to leverage it. Given the extensive research into modelling and recreating piano action \cite{cadoz_modular_1990, gillespie_haptic_1996, lozada_modelisations_2007, timmermans_multibody-based_2020}, the visual component may provide the final persuasive element necessary for acceptance, much like how visual perception shapes judgments of musical performance. The aesthetics of the interface thus enhance its likelihood of being perceived as an `authentic' musical instrument. Building on the observations of \textcite{mcalpine_sampling_2014}, the design asks to what degree visual stimuli can be used to ``sell'' the experience of playing a DMI. When combined with a passive haptic response, aesthetics may provide sufficient influence to shape the player’s perception and lower the barriers to a convincing musical experience.
 
 
 
@@ -110,7 +99,7 @@ Within the DMI literature, \textcite{omodhrain_playing_2000} describes haptics a
 
 Beyond these subsets, \textcite{cook_remutualizing_2004} distinguishes between \emph{passive} and \emph{active} haptics. Passive haptic feedback is achieved by purely mechanical means, without actuators or motors—for example, weighted piano keys or the mechanical jacks of a harpsichord. Using the taxonomy of Figure~\ref{fig:taxonomy} and Cook’s distinction, the interface described herein can be categorised as a passive haptic, force-feedback, tactile interface. For brevity, the term ``haptic'' will be used.  
 
-Finally, it is worth reflecting that all musical instruments involve physical interaction and could therefore be described as inherently haptic. Even the theremin, often cited as an exception, requires specific bodily movement, which may be interpreted as a form of kinaesthetic feedback. While this thesis avoids the ontological implications of such claims, the term haptic feedback is here used to describe design intent.  
+Finally, it is worth reflecting that all musical instruments involve physical interaction and could therefore be described as inherently haptic. Even the theremin, often cited as an exception, requires specific bodily movement, which may be interpreted as a form of kinaesthetic feedback. While this thesis avoids the ontological implications of such claims, the term 'haptic feedback' is used here to describe design intent.  
 
 
 
@@ -224,7 +213,7 @@ Together, these considerations materialised as a chain of sensor boards mounted 
 
 
 
-\section{From Constraints to Design Choices}\label{sec:constraints-to-choices}
+\section{Summary of Informed Design Choices}\label{sec:constraints-to-choices}
 
 The preceding section outlined the mechanical and electronic constraints that guided the development of the augmented keyboard.  
 Before describing the prototypes in detail, it is helpful to summarise how these requirements informed specific design decisions.  
@@ -278,7 +267,25 @@ prototypes validated on a 3-key rig before full-scale build. \\
 
 The table highlights that the same design element often answered several constraints: for instance, the optical gradient not only met the non-invasiveness requirement but also enabled reliable and low-latency sensing, while the modular PCB architecture simultaneously supported maintenance and scalability. Presenting these links up front clarifies why apparently modest details—sensor orientation, baffle geometry, choice of soldering technology—were decisive for meeting the project’s broader aims.
 
-% ---------- NEW: Stage overview + timeline (place before \section{Prototype}) ----------
+\subsection{Visual Aesthetics}
+
+From the outset, one guiding principle of the hardware design was that the keyboard must \emph{look} as authentic as it felt.  
+Beyond the functional demands already outlined in Section~\ref{sec:design-constraints}, the instrument’s external form had to sustain the visual language of a sixteenth-century harpsichord so that visitors would immediately read it as part of the collection rather than as an electronic artefact.  
+This requirement introduced an additional layer of restriction: every sensing or control element needed to be concealed or visually reconciled with historical practice, while the overall proportions and detailing had to echo Italian models of the period.
+
+
+The physical and visual presentation of an instrument might not be the primary concern for a performer, but in the context of a museum exhibition, it is vital to the visitor experience, as demonstrated by \textcite{mcalpine_sampling_2014}. Since the Tagliavini collection hosts primarily early plucked stringed keyboards of Italian origin, the keyboard layout was deliberately modelled after early Italian harpsichords. The aesthetics of the instrument were therefore carefully considered during the design process.
+
+In contrast, many haptic DMI projects place most of the effort into the design and functionality of electronic components, while paying comparatively little attention to visual stimulus. For keyboard interfaces, this is in part due to the limited scope of key modelling \cite{gillespie_haptic_1996,lozada_modelisations_2007,timmermans_multibody-based_2020}, whose form already diverges significantly from performer expectations. For actuated haptic systems, there is also a question of where to place the electronics. A combined approach of realistic haptics and aesthetics presents a challenge: commercial MIDI keyboards are differentiated from acoustic keyboards by the absence of strings, while the interfaces presented here employ strings as both functional haptic mechanisms and visual features. Even if strings were no longer required mechanically, their presence would still be necessary as a visual differentiator; otherwise, the interface risks resembling existing commercial offerings. This then raises the practical issue of electronic footprint, as haptic systems and actuators often require components that extend beyond the confines of the instrument body \cite{mcpherson_augmented_2010, schmidt_sparksichord_2025}.
+
+The importance of visual stimulus should not be underestimated, particularly for musicians. Studies by \textcite{fritz_player_2012, fritz_soloist_2014, fritz_listener_2017} (see Section~\ref{sec:reproduction-or-renovation}) show that visual stimuli can bias auditory perception and therefore should be carefully restricted in experimental settings. \textcite{tsay_sight_2013} further asserts that visual appearance influences quality assessment by both ``novices and experts.'' In all these studies, the visual stimulus was treated as an undesirable influence. This phenomenon, akin to a `musical instrument McGurk effect' \cite{mcgurk_hearing_1976}, is one reason why the electronics in this project were deliberately concealed from view. 
+
+The McGurk effect is a well-known example of cross-modal perception. It typically manifests as an aural illusion: when two videos show a mouth pronouncing ``ba'' and ``fa'' but the audio always contains ``ba,'' the sound heard depends on the mouth movement observed \cite{horizon_seeing_2010}. The effect has been proposed to extend beyond speech into the domain of musical visual cues \cite{saidana_mcgurk_1990}. Its relevance to musicians remains debated: while \textcite{proverbio_skilled_2016} and \textcite{alsius_forty_2018} argue that musicians are less susceptible, \textcite{politzer_mcgurk_2019} refutes this, concluding that musicians may be equally or even more vulnerable. Taken together with \textcite{tsay_sight_2013, fritz_player_2012, fritz_soloist_2014, fritz_listener_2017}, these results highlight the non-negligible influence of visual cues on auditory perception.
+
+Instead of attempting to suppress this influence, the present design seeks to leverage it. Given the extensive research into modelling and recreating piano action \cite{cadoz_modular_1990, gillespie_haptic_1996, lozada_modelisations_2007, timmermans_multibody-based_2020}, the visual component may provide the final persuasive element necessary for acceptance, much like how visual perception shapes judgments of musical performance. The aesthetics of the interface thus enhance its likelihood of being perceived as an `authentic' musical instrument. Building on the observations of \textcite{mcalpine_sampling_2014}, the design asks to what degree visual stimuli can be used to ``sell'' the experience of playing a DMI. When combined with a passive haptic response, aesthetics may provide sufficient influence to shape the player’s perception and lower the barriers to a convincing musical experience.
+
+
+
 \section{Staged Development Overview}
 
 We first received a \emph{3-key prototype} and used it for several months to test sensing approaches and electronics at a small scale. Next, we received the \emph{full keyboard} and, within one week, scaled the system to 48/49 keys and delivered it to San Colombano (\emph{Mark~1}). At delivery, Mark~1 ran a single register with simple thresholding (no hysteresis). After installation, development returned to the 3-key rig, where we added a \emph{second register} and \emph{force sensors} to detect plucks. Finally, a \emph{second full keyboard} (\emph{Mark~2}) was built, in which we implemented the dual-register PCBs and the refined electronics/firmware. See also Fig. \ref{fig:timeline-stages}.
@@ -335,7 +342,7 @@ We first received a \emph{3-key prototype} and used it for several months to tes
   \node[stage, anchor=west] at (1.0,\yC) {\textbf{Back to 3–key rig}
     \begin{itemize}\setlength\itemsep{1pt}
       \item Added force sensing for pluck–timing studies
-      \item Two–threshold hysteresis FSM (\texttt{RELEASED/PLUCKED/PRESSED})
+      \item Two threshold hysteresis FSM (\texttt{RELEASED/PLUCKED/PRESSED})
       \item Timing characterisation; smoothing tuned to latency budget
     \end{itemize}
   };
@@ -344,7 +351,7 @@ We first received a \emph{3-key prototype} and used it for several months to tes
   \draw[timeline] (0,\yD) -- (0.8,\yD);
   \node[stage, anchor=west] at (1.0,\yD) {\textbf{Mark 2 (in progress)}
     \begin{itemize}\setlength\itemsep{1pt}
-      \item Dual–register PCB implementation
+      \item Dual register PCB implementation
       \item FFC/JST harness for serviceable modules
       \item Firmware consolidation for multi–register operation
     \end{itemize}
@@ -361,7 +368,8 @@ The prototyping was staged with ever-increasing complexity to solve jack-displac
 
 \section{Stage 1}
 
-The initial question was whether sensor data could reliably trigger MIDI playback. The custom 3-key mechanism (Figure~\ref{fig:3key}) formed the basis of our tests. This mirrors the methodology in the \textcite{timmermans_multibody-based_2020} \emph{Haptic Key} project: iteratively validate sensor placement, signal processing, and mechanical tolerances on a compact model before scaling to multiple octaves. Our approach follows single-action testbeds in haptics \cite{gillespie_haptic_1996} and harpsichord-specific rigs assembled from luthier parts \cite{perng_physical_2012}. The open-sided construction of the three-key model offered direct access to the key lever and jacks, making it straightforward to mount and align sensors. Multiple keys and registers on the same model enabled more complex iterations (such as sequencing and staggering) without requiring a second rig, while also meeting the visual/aesthetic requirements outlined in our design principles. If used in user studies, this continuity would help control visual context relative to the final interface.
+The initial question was whether sensor data could reliably trigger MIDI playback. The custom 3-key mechanism (Figure~\ref{fig:3key}) formed the basis of our tests. This mirrors the methodology in the \textcite{timmermans_multibody-based_2020} \emph{Haptic Key} project: iteratively validate sensor placement, signal processing, and mechanical tolerances on a compact model before scaling to multiple octaves. Our approach follows single-action testbeds in haptics \cite{gillespie_haptic_1996} and harpsichord-specific rigs assembled from luthier parts \cite{perng_physical_2012}. The open-sided construction of the three-key model offered direct access to the key lever and jacks, making it straightforward to mount and align sensors. Multiple keys and registers on the same model enabled more complex iterations (such as sequencing and staggering) without requiring a second rig, while also meeting the visual/aesthetic requirements outlined in our design principles. 
+
 
 \subsection{Sensor Trials}\label{failed-sensors}
 
@@ -404,7 +412,6 @@ Early optical trials also revealed cross-talk: infrared light reflected from adj
 \end{figure}
 
 A small EAGLE PCB (Figure~\ref{fig:prototype-pcb}) provided simple divider wiring, power, and header breakout to a microcontroller, primarily to validate mounting and pitch spacing. The original plan was a right-angle mount (bending leads; Figure~\ref{fig:prototype-pcb-mount}) so the board could sit on an adjustable 3D-printed bracket at the wrestplank side, setting the sensor–gradient gap. In practice, the optical leads were fragile, and an end-mount approach à la \textcite{mcpherson_portable_2013} was too alignment-sensitive on the jack’s 4.30~mm edge: tiny angular errors produced large signal differences. We therefore switched to sensors soldered \emph{flush} to the PCB and oriented the PCB vertically.
-
 \begin{figure}
     \centering
     \includegraphics[width=0.3\linewidth]{img/prototype-mini-pcb-mount.jpeg}
@@ -419,17 +426,16 @@ A small EAGLE PCB (Figure~\ref{fig:prototype-pcb}) provided simple divider wirin
     \caption{Vertically oriented prototype sensor PCB schematic (top) and traces (bottom).}
     \label{fig:dual-pcb}
 \end{figure}
-
 The vertical redesign (Figure~\ref{fig:dual-pcb}) doubles the sensor layout to accommodate wiring from a single side on the 3-key rig, while keeping identical vertical positioning for the front and rear registers. This minimises signal-range differences and avoids separate offset gradients or separate PCBs. A two-piece 3D-printed bracket holds the board vertically and provides coarse gap adjustment.
 
-\subsection{Stage 2}
+\section{Stage 2}
 
-The first complete interface, \emph{Mark~1}, was designed for exhibition at San Colombano. Development proceeded modularly (mechanical hardware, electronics, audio software; and within electronics, hardware vs.\ firmware), allowing mechanical construction while electronic prototyping continued. Changes or limits in one module could be absorbed by the others.
+After the initial prototyping, the first complete interface, \emph{Mark~1}, was completed for delivery to the Tagliavini collection. Development proceeded modularly (mechanical hardware, electronics, audio software; and within electronics, hardware vs.\ firmware), allowing mechanical construction while electronic prototyping continued. 
 
+\subsection{Keyboard desing}
 
-\subsection{Mechanical Hardware}
+The mechanical design was developed collaboratively with luthier Roberto Livi and curator Catalina Vicens. Working from the priorities summarised in Table~\ref{tab:constraints-choices}—faithfulness to sixteenth-century practice, robustness for public use, and a compact footprint—Livi fabricated the hardware in his Pesaro workshop. The resulting instrument adopted a restrained, rectangular frame (Figure~\ref{fig:compare}), a deliberate response to the gallery’s spatial limits while leaving generous internal cavities to accommodate the sensing system.
 
-Co-authored with luthier Roberto Livi and curator Catalina Vicens under Section~\ref{sec:design-constraints}. After design finalisation, Livi built the hardware in Pesaro. The rectangular frame (Figure~\ref{fig:compare}) preserves gallery space.
 
 \begin{figure}
     \centering
@@ -438,17 +444,14 @@ Co-authored with luthier Roberto Livi and curator Catalina Vicens under Section~
     \label{fig:mark-1-cs}
 \end{figure}
 
-Generous internal cavities capped the electronics footprint (Figure~\ref{fig:mark-1-cs}). Traditional materials (walnut wrestplank; chestnut key levers; boxwood/ebony key covers; cypress case/soundboard) and beech jacks with brass springs and seagull-feather plectra were used. The design takes inspiration from the 1547 Alessandro Trasuntino at San Colombano (two 8′ choirs), but the short octave typical of Italian instruments was replaced by a standard octave layout to simplify sampler mapping.
-
+Generous internal cavities capped the electronics footprint (Figure~\ref{fig:mark-1-cs}). Traditional materials (walnut wrestplank; chestnut key levers; boxwood/ebony key covers; cypress case/soundboard) and beech jacks with brass springs and seagull-feather plectra were used. The design takes inspiration from the 1547 Alessandro Trasuntino at San Colombano (two 8-foot registers), but a standard octave layout replaced the short octave typical of Italian instruments to simplify sampler mapping, as required by the curator. 
 \begin{figure}
     \centering
     \includegraphics[width=0.75\linewidth,angle=270]{img/drawing-all_comparison-90.pdf}
     \caption{Scale comparison: (left to right) the 1547 Trasuntino, 49-key Mark~1 model, and the 3-key prototype. The Trasuntino shows the traditional “logarithmic” outline.}
     \label{fig:compare}
 \end{figure}
-
 The rectangular poplar frame (Figure~\ref{fig:compare}) also facilitated sensor installation (see Figure~\ref{fig:mark-1-bottom} elsewhere in the thesis) without compromising tactile/visual authenticity. Two brass choirs were tensioned to replicate plucking resistance; felt strips damped vibrations.
-
 \begin{figure}
     \centering    
     \includegraphics[width=\linewidth]{img/3-key-side.png}
@@ -769,3 +772,40 @@ A major improvement is the solder-pad junction (Figure~\ref{fig:sensor-schematic
 Starting from a 3-key action before scaling is intuitive for haptic keyboards, provided over-engineering is avoided. Here, a concealed, robust, low-cost optical system sufficed for visitor interaction. In a heritage context, pushing quickly to actuation and high-force feedback \cite{gillespie_haptic_1996, cadoz_modular_1990, timmermans_multibody-based_2020} can become an engineering end in itself; our emphasis was authenticity, concealment, and reliability. By layering digital sensing \emph{behind} historical mechanics and aesthetics \cite{masu_o-in-nime_2023}, Mark~1 provided embodied interaction for the gallery, while Mark~2 internalised those lessons for research with physically informed synthesis \cite{bologna_nemus_2024}.
 
 As \textcite{oboe_mikey_2006} note, many MIDI keyboards reduce control to attack velocity (and sometimes aftertouch). In contrast, our interfaces expose continuous jack states and per-register structure with hysteretic event logic, offering richer control affordances for future engines. Whether such systems ultimately function as faithful replicas or become new instruments lies beyond our scope; what is evident is that restoring the embodied coupling—and exploring how it might be modified or intentionally disrupted—opens new routes for practice and public engagement with historical keyboard performance.
+
+
+
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{|r|l|c|l|}
+        \hline
+        \textbf{Year} & \textbf{Month} & \textbf{Day} & \textbf{Task}                                         \\ \hline
+        2023          & May            & 25           & first design meeting: scope of exhibition              \\ \hline
+        ~             & July           & 6            & 3-Key Prototype Model Received                        \\ \hline
+        ~             & September      & ~            & Prototype Sensor Trials                               \\ \hline
+        ~             & November       & ~            & QRE1113 Tests                                         \\ \hline
+        ~             & ~              & ~            & second design meeting: design principles confirmed    \\ \hline
+        ~             & ~              & ~            & Gradient and speckle pattern print tests              \\ \hline
+        ~             & December       & ~            & Mark 1 model plans confirmed                          \\ \hline
+        2024          & January        & ~            & First prototype PCBs received                         \\ \hline
+        ~             & April          & ~            & Mark 1 Mechanical Interface Model completed            \\ \hline
+        ~             & May            & ~            & Test PCB: Combined sensor and Controller board        \\ \hline
+        ~             & ~              & ~            & Test print of gradient to vinyl adhesive              \\ \hline
+        ~             & July           & ~            & Mark 1 Delivered to NEMUS laboratory                  \\ \hline
+        ~             & October        & 4            & Sensor and Controller PCBs received                   \\ \hline
+        ~             & ~              & 22 - 23      & PCB assembly                                          \\ \hline
+        ~             & ~              & 28 - 31      & Sensor System Installation at NEMUS Laboratory        \\ \hline
+        ~             & November       & 1            & Mark 1 Delivery for exhibition at San Colombano       \\ \hline
+        ~             & ~              & ~            & Calibration                                           \\ \hline
+        ~             & ~              & 19           & Second iteration controller board with JST connectors \\ \hline
+        ~             & ~              & ~            & Mark 2 Sensor and Controller Boards Assembled         \\ \hline
+        2025          & February       & 5            & Remote installation of new controller board           \\ \hline
+        ~             & ~              & 7            & Second Calibration                                    \\ \hline
+        ~             & May            & 1            & Mark 2 Delivered to NEMUS Laboratory                  \\ \hline
+        ~             & ~              & 5            & Mark 2 Sensors Installed                              \\ \hline
+        ~             & ~              & 6            & Mark 1 Exhibition to Una Europa group                 \\ \hline
+        ~             & ~              & 7            & Mark 2 Completed                                      \\ \hline
+    \end{tabular}
+    \caption{Keyboard Project Timeline}
+    \label{tab:timeline}
+\end{table}
