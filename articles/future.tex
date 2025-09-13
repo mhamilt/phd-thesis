@@ -168,7 +168,15 @@ Presenting the tool kit in an open source well-structure manner should hopefully
 \subsection{eigensolvers}
 
 
-
+\begin{quotation}
+    However, we do provide one almost direct technique for computing all the eigen-
+values (but not the eigenvectors) of a real symmetric or complex Hermitian sparse
+matrix. The reverse Cuthill-McKee algorithm is first used to provide a permutation
+that reduces the bandwidth. Then an algorithm of Schwartz [22] provides a sequence
+of plane rotations that further reduces the bandwidth to tridiagonal. Finally, the
+symmetric tridiagonal QR algorithm from dense MATLAB yields all the eigenvalues.
+\end{quotation}
+-- \textcite[p. 351]{gilbert_sparse_1992}
 
 The biharmonic is multi-diagonal, sparse, real, and has a possibility to be symmetrical in which case it is positive definite \cite{}. 
 Given these conditions, the subset of relevant matrix operations for eigensolvers is reduced.
