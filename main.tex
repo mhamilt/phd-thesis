@@ -48,13 +48,19 @@
      graphicx,
   indentfirst,
      listings,
+     multicol,
     pmboxdraw,
      setspace,
    subcaption,
           svg,          
-      txfonts,
         xcolor
 }
+
+\usepackage[T1]{fontenc}      % better font encoding
+\usepackage[utf8]{inputenc}   % if you're on pdfLaTeX
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+
 %----------------------------------------------------------------------------------------
 \usepackage{multirow} % used for the table
 \renewcommand{\arraystretch}{1.2}
@@ -72,7 +78,8 @@
 %----------------------------------------------------------------------------------------
 \usepackage{tikz}
 \usepackage{forest}
-\usetikzlibrary{arrows,positioning, shapes.symbols,shapes.callouts,patterns}
+\usetikzlibrary{arrows, positioning, shapes.symbols, shapes.callouts, patterns, calc}
+\newcommand\rowsep{3.6}
 %----------------------------------------------------------------------------------------
 % Bibliography
 \usepackage[
@@ -225,8 +232,8 @@
 %
 % CHANGE TO REFLECT YOUR CHAPTERS
 %
-% \input{Chapter_1}
-% \input{Chapter_2}
+\input{Chapter_1}
+\input{Chapter_2}
 \input{Chapter_3}
 % \input{Chapter_4}
 % \input{Chapter_5}
