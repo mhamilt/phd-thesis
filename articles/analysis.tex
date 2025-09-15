@@ -113,9 +113,10 @@ B\Delta\Delta \approx \delta\Delta\delta\Delta = (\delta_{xx} + \delta_{yy})^{2}
 
 The finite difference system of the plate grid, with $N_x$ points in the x-axis and $N_y$ point in the y-axis, can be transformed in to a linear indexed vector $N_x$ by $N_y$ in length. (Figure~\ref{fig:fdtd-linear}). The corresponding biharmonic spatial operator will then be a $N_x$ by $N_y$ square matrix the central coefficients forming the stencil and matrix shown in Figure~\ref{fig:biharmonic-stencil}. Once the boundary conditions are taken into consideration, the result is a multi-diagonal matrix with coefficient distribution as given in Figure~\ref{fig:biharm_zoom}. An more in-depth formulation of the discrete finite difference biharmonic operator can be found in \textcite[Chapters 10-12]{bilbao_numerical_2009}.
 
-Given its multi-diagonal structure the biharmonic is largely empty and is well suited for sparse matrix storage formats \cite{gilbert_sparse_1992}. The coefficients would be calculated multiple times for some functionality within \textsc{MAGPIE} and it was clear that the process of assembling the bihamronic would be key for computational performance. Over 200 matrix coefficients first need to be computed before they are assembled. The original source had been designed for a block sparse format (Figure~\ref{fig:biharm-subblocks}). The block format resulted in more manageable source code, but at the cost of performance. The intention as to optimise the assembly of the biharmonic, which takes place in the \texttt{bhmat} function. Optimisation would be made easier if the coefficient calculation were separated from the biharmonic assembly stage. 
-Given the complexity of the coefficient calculations, by being interwoven with another function, the potential for error would be much higher. Moving a single function without tyyping error is an easier task than moving 20 lines of code.
-Separating this stage into the \texttt{bhmat} function would also ensure optimisation would cascade to any other source code which used it such as the central \texttt{magpie} function. 
+
+The biharmonic coefficients would be calculated multiple times for some functionality within \textsc{MAGPIE} and it was clear that the process of assembling the biharmonic would be key for computational performance. Over 200 matrix coefficients first need to be computed before they are assembled. The original source had been designed for a block sparse format (Figure~\ref{fig:biharm-subblocks}). The block format resulted in more manageable source code, but at the cost of performance. The intention as to optimise the assembly of the biharmonic, which takes place in the \texttt{bhmat} function. Optimisation would be made easier if the coefficient calculation were separated from the biharmonic assembly stage. 
+Given the complexity of the coefficient calculations, by being interwoven with another function, the potential for error would be much higher. Avoiding typographic or input errors is a far easier task when moving a single-line function compared to 20 lines of code.
+Consolidating the biharmonic construction stage into the \texttt{bhmat} function would make it much more portable and ensure optimisation would cascade to any other source code which used it such as the central \texttt{magpie} function. 
 
 \begin{figure}
     \centering
@@ -129,6 +130,9 @@ It was necessary to declare the biharmonic operator as in matrix as this is the 
 The biharmonic operator sparsity pattern (Figure \ref{fig:biharm_zoom}) can be decomposed into several methods, of which two will be described. 
 It is worth noting that explicitly declaring the set of coefficients in a loop formulation, though a valid method of using the biharmonic operator, was not considered an option for the current implementations as it does not output a matrix. 
 
+Given its multi-diagonal structure the biharmonic is largely empty and is well suited for sparse matrix storage formats \cite{gilbert_sparse_1992}. 
+Sparse matrices provide optimisation in both storage and computation, since zero multiplication results in zero any zero value in a matrix can be discarded. This quality is only beneficial, however, for matrices with a small enough non-zero content. \footnote{``any matrix
+with enough zeros that it pays to take advantage of them'' \cite{gilbert_sparse_1992} quoting  \cite{wilkinson_algebraic_1965}}
 In the first approach, the operator can be composed of sparse sub-blocks assembled separately and then concatenated later. Figure \ref{fig:biharm-subblocks} shows the pattern of repetition within the biharmonic and how each sub-block can be indexed. The colour of each sub-block illustrates the coefficients of the biharmonic affected by the plate boundaries. The central repeating section, highlighted in blue, represents the central part of the plate extending away from boundaries with ghosts points like in Figure~\ref{fig:ghost-points} and expands upon the stencil in Figure~\ref{fig:biharmonic-stencil}. This approach simplifies code structure by avoiding the need for zero padding of the computed matrices but has implications for performance. 
 MATLAB stores its sparse matrices in a compressed sparse column array format \cite{gilbert_sparse_1992} where the values and indices of the matrix are stored in order or column. 
 
@@ -182,27 +186,172 @@ The Scipy package allows for much more granular control over the sparse matrix f
     \label{fig:sparse-dia}
 \end{figure}
 
-Sparse sub-block building is made even mre trivial with SciPy's \texttt{bmat} function\footnote{https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.bmat.html}.
-
-
-The \texttt{bmat} function, Python's comprehension and array replication constructus allow for a much more concise formulation using the sub-block format and avoids the necessity for excessive array indexing.
+Sparse sub-block building is made even mre trivial with SciPy's \texttt{bmat} function\footnote{https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.bmat.html}. The \texttt{bmat} function, Python's comprehension and array replication constructus allow for a much more concise formulation using the sub-block format and avoids the necessity for excessive array indexing.
 
 \begin{figure}
-\begin{verbatim}
-      bmat([[B11, B12, B13,                *[None] * (M3)],
-            [B21, B22, B23, B24,           *[None] * (M4)],
-            [B31, B32, B33, B34, B35,      *[None] * (M5)]
-  *[[*[None] * r, B31, B32, B33, B34, B35, *[None] * (M(5 + r))] for r in range(1,M4)],
-       [*[None] * (M4), BM1M3, BM1M2, BM1M1, BM1M],
-       [*[None] * (M3),         BMM2,  BMM1,  BMM]
-\end{verbatim}
-\caption{Python syntax for the biharmonic structured from sub-blocks.}
-\label{fig:python-bmat}
+{\footnotesize
+    \begin{verbatim}
+          [[B11, B12, B13,                *[None] *  M3],
+           [B21, B22, B23, B24,           *[None] *  M4],
+           [B31, B32, B33, B34, B35,      *[None] *  M5]
+*[[*[None] *  r, B31, B32, B33, B34, B35, *[None] * (M5 + r)] for r in range(1, M4)],
+  [*[None] * M4,    BM1M3, BM1M2, BM1M1, BM1M],
+  [*[None] * M3,            BMM2,  BMM1,  BMM]
+    \end{verbatim}
+}
+    \caption{Python syntax for the biharmonic structured from a list-of-lists of sub-blocks. \texttt{M} represents $N_y-$.}
+    \label{fig:python-bmat}
+\end{figure}
+Figure~\ref{fig:python-bmat} shows the input format for the \texttt{bmat} function, where a list of lists is passed as an argument.
+Each element in the lists is either a square $N\times N$ sparse matrix or an empty list \texttt{[None]} representing a $N\times N$ of zeros. 
+The polymorphic \texttt{*} operator, as well as providing a multiplication operator, represents two operations in this context. The operator is used for replicating arrays \texttt{[None] * x}, where \texttt{x} is the number of repetitions (e.g. \texttt{[None] * 3} will return \texttt{[None, None, None]}. 
+The second function of the \texttt{*} operator is to execute list unpacking,\footnote{\url{https://docs.python.org/3/reference/expressions.html\#expression-lists}} such that contents of the list are "unpacked" such that \texttt{[B11, B12, B13, *[None] * 3]} becomes list with six elements, \texttt{[B11, B12, B13, None, None, None]}, instead of a four element list where the fourth element is a list \texttt{[B11, B12, B13, [None, None, None]]}.
+All of this allows the syntax to follow very closely the structure of Figure~\ref{fig:biharm-subblocks}, without need for extensive slicing and indexing of the equivalent MATLAB code.
+\footnote{\url{https://github.com/Nemus-Project/magpie-matlab/blob/4198a689178785dc079a22886a9d2f6844bb25c7/bhmat.m\#L361-L387}}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{img/plot_matlab_vs_python.pdf}
+    \caption{Computational performance of the biharmonic assembled in a block format in MATLAB and Python and a diagonal format in MATLAB. Each size of biharmonic was computed 10 times and the shortest time was recorded.}
+    \label{fig:matlab-vs-python}
 \end{figure}
 
-Figure~\ref{fig:python-bmat} shows how the bmat function is used. The \texttt{*} operator in python is polymorphic. As well as providing a multiplication operator, in this context it is used for replicating arrays \texttt{[None] * x}, where \texttt{x} is the number of repetitions, as well as array unpacking.
+Once the Python implementation was confirmed to give identical results to MATLAB both implementations were benchmarked against each other. Comparison between the biharmonic assembly using a block matrix approach in Python and MATLAB is shown Figure~\ref{fig:matlab-vs-python}. It is clear that computation time scales much better than with MATLAB. Since MATLAB does not allow for dynamic concatenation like in Figure~\ref{fig:python-bmat}, a placeholder sparse matrix is used alongside extensive indexing. Figure~\ref{fig:matlab-vs-python} shows that such indexing is not a scalable approach and motivated a diagonalised formulation. Rather than sub-blocks, the biharmonic would assembled by its diagonals (Figure~\ref{bh-diag}) using \texttt{spdiags}. Figure~\ref{fig:matlab-vs-python} shows the computation time for the diagonalised biharmonic in MATLAB performs and scales far better than the python block format. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{img/bh_diag.pdf}
+    \caption{The biharmonic structured by its 13 diagonals. Colours differentiate the diagonals and shapes present the boundary sections such as the rows in Figure~\ref{fig:biharm-subblocks}.}
+    \label{fig:bh-diag}
+\end{figure}
+
+Preliminary tests using the SciPy diagonal matrix construction in Python did not yield greater performance. It is possible that performance with Python could be improved through fine tuning the diagonalisation approach. Another limitation with the SciPy library informed the pursuit of performance with the biharmonic, namely the accuracy of the eigensolver.
+
+\subsubsection{Eigensolver accuracy}
+
+Both MATLAB and Python provide eigensolver functionality through an interface with the ARPACK library \cite{scipy_arpack_2025,gilbert_sparse_1992}. For the standard eigen problem $\textbf{A}\vec{x} = \lambda \vec{x} $ the ARPACK solver routines find eigenvalues iteratively, ranked by magnitude, with the largest magnitude eigenvalues requiring the least computation \cite{lehoucq_arpack_1998}.
+
+The biharmonic is multi-diagonal, sparse, real, and has a possibility to be symmetrical in which case it is positive definite \cite{}. The eigenvalues of the biharmonic are the modes of the system and, for musical acoustics, the lower and fundamental modes are those of greatest interest. 
+For small magnitude eigenvalues, the eigensolvers will either converge slowly or fail entirely leading to much longer compute times \url{https://docs.scipy.org/doc/scipy-1.0.0/reference/tutorial/arpack.html}. 
+Given these conditions, the subset of relevant matrix operations for eigensolvers is reduced.
+
+\begin{figure}
+    \centering
+\begin{verbatim}
+    for k = 1 to n
+        // Step 1: Pivot selection
+        pivot_row = index of max(abs(A[k:n, k])) + k - 1
+        if pivot_row != k
+            swap row k of A and pivot_row of A
+            swap row k of A and pivot_row of P
+            if k > 1:
+                swap row k of L and pivot_row of L (columns 1..k-1)
+
+        // Step 2: Compute multipliers and elimination
+        for i = k+1 to n
+            L[i,k] = A[i,k] / A[k,k] // multiplier
+            for j = k to n
+                A[i,j] = A[i,j] - L[i,k] * A[k,j]
+
+        // Step 3: Set U row
+        for j = k to n
+            U[k,j] = A[k,j]
+\end{verbatim}
+    \caption{Pseudocode for the LU Decomposition algorithm.}
+    \label{fig:lu-decomp}
+\end{figure}
+
+In order to find these smaller magnitude eigenvalues, the solver must be operated in a shift-inverse mode. This consists of transforming the eigenvalue problem from the traditional \[Ax = \lambda x\] to \[(A- \sigma I)^{-1} = (\frac{1}{\lambda - \sigma})x\] shifting with a value \[\sigma\] and inverting the matrix \[(A - \sigma I)\]. For \[\sigma = 0\], \[(A)^{-1}x = (\frac{1}{\lambda})x\], large \[\lambda\] therefore becomes small to the solver and smaller magnitude eigenvalues will be found first. When the biharmonic is large inverting it can be a computationally expensive operation. 
+The biharmonic can be inverted algebraically as part of LU decomposition (Figure~\ref{fig:lu-decomp}).
+
+For a shift-invert solve, the matrix is never explicitly inverted. Instead the backwards substitution of LU decomposition inverts the matrix algebraically which is computationally more efficient as part of the eigensolver. 
+\[L\] is lower triangular matrix (with \[1\]s on the diagonal), \[U\] is upper triangular matrix
+
+\(A = LU\)
+
+\(Ly = \lambda x, Ux = y\)
+
+forward substitution of $y$ with the upper triangular matrix $L$: 
+\(y = L^{-1} \lambda x\)
+
+and backwards substitution of $x$ with the upper triangular matrix $U$: 
+
+\((x = U^{-1}y\)
+
+from which we can derive
+
+\(x = U^{-1}L^{-1}\lambda x, \frac{1}{\lambda}x = U^{-1}L^{-1}x, \frac{1}{\lambda}x = (A)^{-1}x\)
+
+For a shift-invert using $\sigma = 0$ with LU decomposition the $A$ and $\lambda$ will be re-inverted.
+
+For this reasons, the MATLAB and SciPy interfaces with ARPACK can be passed a sigma value. for each interface the option for largest magnitude is kept, but there is a final stage where the eigenvalues are  implicitly inverted. \footnote{This can cause some confusion between MATLAB and SciPys interfaces. If MATLAB's \texttt{eigs} is passed a \texttt{'smallestabs'} option, this is equivalent to a $\sigma 0$ and `largestabs' configuration. SciPy on the otherhand requires the explicit largest magnitude option \texttt{which=`LM'} on top of a $\sigma$ value. For SciPy which=`SM' will always result in a slower or potentially non-converging solve.}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{img/plot-python-sym-gen-clamped-error.pdf}
+    \caption{Percentage error between MATLAB and SciPy for the first 500 eigenvalues.}
+    \label{fig:python-matlab-error}
+\end{figure}
+
+Though SciPy and MATLAB both interface with ARPACK and the default options for fine tuning of the eigensolver appear similar, the error between both is relatively large. Figure~\ref{fig:python-matlab-error} shows the percentage error for the first 500 eigenvalues calculated by the ARPACK interfaces in SciPy and MATLAB. Both system used parameters: 
+
+\(
+L_x = 1.10 \text{m}; L_y = 0.8 \text{m}; L_z = 0.005 \text{m};\\
+E = 9\times10^{9} \text{Pa}, \rho  = 8765 \frac{\text{kg}}{\text{m}^{3}}; \nu   = 0.3 ;\\
+h = \frac{\sqrt{L_xL_y}}{100} \text{m};\\
+R = 1\times10^{15}; K = 1\times10^{15};
+\)
+
+Where:
+
+\begin{itemize}
+    \item $L_x$, $L_y$, and $L_z$ are the dimension of the plate in each direction
+    \item $E$ is Young's modulus of the plate material in pascals
+    \item $\rho$ is plate material density
+    \item $h$ is the spacing between grid points 
+    \item $R$ and $K$ are rotational and displacement elastic restraint
+\end{itemize}
+
+With percentage error as high as 2.4\% and the eigenvalue compute time was noticeably longer in Python compared to MATLAB, the utility of the Python toolbox would only be for rough approximation. It was clear that a further implementation was required in order to confirm if the error was arising from MATLAB or from Python. For that reason a third and final implementation of magpie was authored in \textsc{C++}.
 
 \subsection{C++}
+
+Like python, \textsc{C++} is entirely open source which continued to satisfy the FAIR principles of the open methodology. As both a strongly typed and compiled language, \textsc{C++} presented a greater challenge for development. 
+The primary bottleneck for development i \textsc{MAGPIE} is the eigensolver stage.  As stated previousl, MATLAB and Python's SciPy interface with the ARPACK library \cite{lehoucq_arpack_1998}. MATLAB incorporates some analysis of the target matrix to which the user is not privvy. 
+On top of that, MATLAB uses its own sparse library, \cite{gilbert_sparse_1992} which obfuscates the process further.
+MATLAB's \texttt{eigs} function is not one that is supported by the software's code generation systems and the function still requires the MATLAB runtime if it is to be interfaced with externally. This has implications on the portability of any tool using MATLAB and eigs, with development being constrained to those with paid access to the MATLAB environment.
+ARPACK itself is open source \url{https://github.com/opencollab/arpack-ng} and requires the Basic Linear Algebra Subroutines (BLAS) \url{http://www.netlib.org/blas/} and Linear Algebra PACKage (LAPACK)  and \url{http://www.netlib.org/lapack/} in order to function.
+
+For \textsc{C++}, interfacing with ARPACK is available via the open source Eigen library. ARPACK is written in Fortran and a compiled binary is required for whatever operating system architecture is present.
+Therefore, any tool using ARPACK is limited to the compiler support for Fortran.
+Developing in \textsc{C++} presented an opportunity to bypass this restriction using the open source Spectra library \url{https://spectralib.org}. Spectra is a header-only library for solving eigenvalue problems and consists of a code base that has re-implemented ARPACK solvers in C++. The header-only nature of the library allows for direct, native compilation. Both Spectra and Eigen are heavily templated languages which, though versatile, results in a higher barrier to entry for development. The same structure and development process as taken with Python and MATLAB was applied to the \textsc{C++} implementation. 
+
+The magpie project repository \cite{hamilton_magpie-cpp_2025} represents a step towards that goal, though the project is still in its infancy. Table~\ref{tab:eig-comp} illustrates a comparison of the first 16 eigenvalues as obtain from the sparse eigensolver in MATLAB, Python (using SciPy) and the C++ spectra library. Error is small enough that it can be considered comparable and a viable substitution for the purposes of \textsc{C++} compilation.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{img/plot-biharmonic-comparison.pdf}
+    \caption{Construction of the diagonalised biharmonic in MATLAB, Python and C++.}
+    \label{fig:biharm-diag-comp}
+\end{figure}
+
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{img/plot-eigensolver-comparison.pdf}
+    \caption{Comparison of eigensolver compute time in MATLAB, Python and C++ (Generic and Symmetric Spectra solvers). C++ times using -O3 compiler optimisation.}
+    \label{fig:eigensolver-comp}
+\end{figure}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{img/plot-sym-gen-clamped-error.pdf}
+    \caption{Percentage error between MATLAB's eigs and Spectra's generic and symmetric solvers.}
+    \label{fig:spectra-error}
+\end{figure}
+
 % D00_coeffs.m
 % D01_coeffs.m
 % D02_coeffs.m
