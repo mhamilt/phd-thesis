@@ -1,5 +1,7 @@
 \section{Introduction}
 
+This chapter aims to cover the main development steps of \textsc{MAGPIE}, the design choices taken, technical underpinnings, justification and a case study of a hypothetical library application.
+
 Research into plate vibration have a long-standing and ongoing presence in the scientific literature. Plates are ubiquitous in engineering applications, particularly in acoustics, where they play a critical role in musical instruments. Soundboards of string instruments, for example, are accurately described by classical plate theories such as Kirchhoff-Love \cite{love_small_1888} and Mindlin-Reissner \cite{mindlin_influence_1951} models.
 
 Knowledge of material parameters, particularly elastic constants, provides valuable insight into the structural integrity of a musical instrument. In the case of string instrument soundboards, elastic constants offer a quantitative measure of the instrument’s condition \cite{viala_decision_2025,duran_use_2025}. For collections of musical instruments, understanding the elastic limits of materials is essential for effective conservation \cite[p. 19-20]{barclay_care_1997}. Periodic monitoring of these constants allows curators to assess the state of a soundboard and to intervene when necessary.
@@ -20,17 +22,15 @@ To describe the vibrational modes of wood plates generally requires four elastic
 \end{quotation}
 -- \cite[Rectangular Wood Plates][Section 3.11]{fletcher_physics_2012}
 
-% This chapter aims to cover the main development steps of \textsc{MAGPIE}, the design choices taken, technical underpinnings, justification and a case study of a hypothetical library application.
 
 
 \section{Context}
 
-% The Kirchhoff-Love theory of plates describes the dynamics of thin sheet materials under bending. Assuming constant thickness and density, and with the further hypothesis of isotropy, a linear partial differential equation describing wave propagation is, thus \cite{graff_wave_1991,bilbao_numerical_2009}:
+The Kirchhoff-Love theory of plates describes the dynamics of thin sheet materials under bending. Assuming constant thickness and density, and with the further hypothesis of isotropy, a linear partial differential equation describing wave propagation is, thus \cite{graff_wave_1991,bilbao_numerical_2009}:
 
-% \begin{equation}\label{eq:KLCnt}
-% \rho \zeta \frac{\partial^2 u}{\partial t^2} = - D \Delta\Delta u - 2\rho\zeta\sigma\frac{\partial u}{\partial t} + \delta(x-x_p)\delta(y-y_p)f(t).
-% \end{equation}
-
+\begin{equation}\label{eq:KLCnt}
+\rho \zeta \frac{\partial^2 u}{\partial t^2} = - D \Delta\Delta u - 2\rho\zeta\sigma\frac{\partial u}{\partial t} + \delta(x-x_p)\delta(y-y_p)f(t).
+\end{equation}
 
 % The boundary terms for the edges at $y = 0,L_y$ are obtained using analogous expressions for the force and moment ${\mathfrak F}_y$, ${\mathfrak M}_y$: one only needs to swap $x$ and $y$ in the expressions for ${\mathfrak F}_x$, ${\mathfrak M}_x$. With these in mind, one can easily recover the expressions for free, clamped and simply supported edge conditions: in the free case, the force and the moment vanish; in the clamped case, the displacement and the slope vanish; in the simply supported case, the displacement and the moment vanish. For all such cases, the boundary terms vanish, so the total plate energy follows the energy balance above. One further condition arises at the corner of two free edges, namely:
 
@@ -38,7 +38,7 @@ To describe the vibrational modes of wood plates generally requires four elastic
 % \frac{\partial^2 u}{\partial x \partial y} = 0,
 % \end{equation}
 
-% see, for example, the book by Szilard for an explanation \cite{szilard_theories_2004}.
+see, for example, the book by Szilard for an explanation \cite{szilard_theories_2004}.
 
 \begin{figure}
     \centering
@@ -134,9 +134,6 @@ For the discrete biharmonic operator $B_{\Delta\Delta}$ coefficient calculations
 
 % One can truncate the system to an integer $N < M$, and work with the modes belonging to a given frequency band. One may, for instance, solve the eigenvalue problem \eqref{eq:SemiDisc1} using a very fine grid for increased precision but only retain the modes for which the natural frequency falls within the audible range. System \ref{eq:ModalSyst} may then be updated in time using the ``exact'' integrator for the lossy oscillator, see e.g. \cite{cieslinski_on-exact_2011} thus, yielding numerical simulations with very low numerical dispersion.
 
-
-
-
 Intimate knowledge of the script's structure was required in order to use it, thus limiting its portability. As a piece of research software with multiple use cases across the field and in education it was decided that this script would be developed into an open source software. In keeping with the FAIR principles, the tool would be developed to be easily reusable and interoperable with current acoustics experimental methodology.
 
 \section{Proposal}
@@ -154,26 +151,24 @@ Intimate knowledge of the script's structure was required in order to use it, th
 
 The proposal was the creation of a tool \textsc{MAGPIE} which would collect together the functionality for computing a discrete biharmonic operator with parametric boundary conditions, an eigensolver, impulse response generation through modal time integration, and Young's modulus estimation. The tool could also function as a teaching aid for lecturers and as an analysis tool for researchers and industry stakeholders. \textsc{MAGPIE} was originally planned exclusively as a library for the Python programming language. Early in development, it became apparent that \textsc{MAGPIE} would have greater reach as a teaching aid and analysis tool if implemented across multiple programming languages. It was devised that  \textsc{MAGPIE} would instead be a core set of functions replicated across languages, beginning with MATLAB given its prevalence within academia and industry. The original script on which \textsc{MAGPIE} is based was written in MATLAB and could function as a know working example. This would avoid an platform specific problem that may arise during the refactoring  process. After the initial refactor in MATLAB, the set of functions could be replicated in other programming languages, ultimately Python and \textsc{C++}. The structure of \textsc{MAGPIE} would allow the ability to design interfaces separately, which would lead to a user-interface using the Jupyter notebooks platform.
 
-% \subsection{Design}\label{design}
+\subsection{Design}\label{design}
 
-% Source code was structured using the model-view-controller (MVC) paradigm \cite{krasner_description_1988}, splitting the software into three major components: data (Model), interface (view), and core logic (controller). The MVC approach was taken after the case study of Aurora (see Section \ref{sec:aurora}) where the interweaving of interface and logic made the source code much more difficult to maintain. For MAGPIE, the logic and interface have been separated. The logic is organised into a library, allowing for easy translations across platforms. Source code for the interface to the logic is contained in a separate repository. By separating logic and interface, further developments can be made to one component without impacting the other. 
-% The interface repository contains a git submodule reference to the logic repository, such as used in the meta-repository for the harpsichord interface.
-% The model (or data) is supplied by the user and would comprise of the measured modal frequencies of a thin plate \cite{duran_use_2025}.
+Source code was structured using the model-view-controller (MVC) paradigm \cite{krasner_description_1988}, splitting the software into three major components: data (Model), interface (view), and core logic (controller). The MVC approach was taken after the case study of Aurora (see Section \ref{sec:aurora}) where the interweaving of interface and logic made the source code much more difficult to maintain. For MAGPIE, the logic and interface have been separated. The logic is organised into a library, allowing for easy translations across platforms. Source code for the interface to the logic is contained in a separate repository. By separating logic and interface, further developments can be made to one component without impacting the other. 
+The interface repository contains a git submodule reference to the logic repository, such as used in the meta-repository for the harpsichord interface.
+The model (or data) is supplied by the user and would comprise of the measured modal frequencies of a thin plate \cite{duran_use_2025}.
 
-
-
-% In addition, this format of interacting with the library means that only affected coefficients need to be recalculated and is, therefore, more intuitive than a script structure. Users can alter the number of grid points within the biharmonic to trade-off between responsiveness and accuracy. First, users can explore the parameter space with fewer grid points for quicker computation. When an area of interest is found, the effective resolution can be increased for higher-quality visualisations. Lastly, Jupyter Notebooks allows for the potential to provide \textsc{MAGPIE} as a service on a public server. This would remove the need for installation of additional libraries and dependencies, lowering the barrier of entry to MAGPIE. 
+In addition, this format of interacting with the library means that only affected coefficients need to be recalculated and is, therefore, more intuitive than a script structure. Users can alter the number of grid points within the biharmonic to trade-off between responsiveness and accuracy. First, users can explore the parameter space with fewer grid points for quicker computation. When an area of interest is found, the effective resolution can be increased for higher-quality visualisations. Lastly, Jupyter Notebooks allows for the potential to provide \textsc{MAGPIE} as a service on a public server. This would remove the need for installation of additional libraries and dependencies, lowering the barrier of entry to MAGPIE. 
 
 
 \subsection{MATLAB}
 
-The first iteration of \textsc{MAGPIE} was a refactor and functionalisation of the original 600 line MATLAB script. The primary goal of this version was to separate the source in order that each component could be developed in isolation without impacting the functionality of other components. The version control software \texttt{git} was used to track changes and permit distribution using the GitHub platform.
+The first iteration of \textsc{MAGPIE} was a refactor and functionalisation from the original 600 line MATLAB script to a multi-purpose software library for plate analysis. The primary goal of the initial MATLAB version was to separate the source in order that each component could be developed in isolation without impacting the functionality of other components. The version control software \texttt{git} was used to track changes and permit distribution using the GitHub platform \cite{magpie_matlab_2025}.
 
 % Originals:
 % \url{https://github.com/Nemus-Project/magpie-matlab/blob/d455a8ebb3c157883b68498a3a7f3ded9a6cd336/biharmonicEigs.m}
 % \url{https://github.com/Nemus-Project/magpie-matlab/blob/d455a8ebb3c157883b68498a3a7f3ded9a6cd336/testModal.m}
 
-The source was split into five areas of functionality.
+Following the MVC design pattern, the source code was split into five areas of functionality.
 The core function of the toolkit is the \texttt{magpie} function, which consolidates the 16 parameters of the original script into a standard format of six required arguments representing the plate parameters for material density, elastic constant, Poisson ratio, dimensions, boundary conditions and grid resolution with a validation stage to ensure the correct type for each argument.
 The \texttt{magpie} function is used as part of functions for young's modulus (\texttt{youngcalc}) estimation and generating an impulse response through modal time integration with loss parameters \texttt{ModalTimeInt}.
 A central stage of \texttt{magpie} is the \texttt{bhmat} function, which assembles the discrete biharmonic from the given plate parameters.
@@ -220,7 +215,7 @@ B_{\Delta\Delta} \approx \delta\Delta\delta\Delta = (\delta_{xx} + \delta_{yy})^
     \label{fig:biharmonic-stencil}
 \end{figure}
 
-% The 13-point biharmonic stencil, as shown in Figure \ref{fig:PlateGhostFD}, only has 4 unique coefficients. In addition, two extra coefficients are required for the case of clamped and simply supported boundary conditions, implying that the biharmonic operator in those classical cases is composed of 6 unique coefficients. By contrast, the biharmonic operator with generalised elastic boundary conditions can contain up to 229 unique coefficients. As a result, each block or diagonal sector cannot be constructed through the repetition of a stencil pattern but must be declared explicitly. This lack of pattern repetition also impacts computational performance when constructing the operator. Since the biharmonic operator with generalised boundary condition provides very useful functionality in and of itself, the functionality to compute it is provided with an open interface as part of the library through the \texttt{bhmat} function \cite{nemus_magpie-matlab_2025}. The operator can then be used in further user-defined Finite Difference Time Domain schemes or if the users wish to take a more bespoke approach to eigenvalue/eigenvector calculation.
+The 13-point biharmonic stencil, as shown in Figure \ref{fig:ghost-points}, only has 4 unique coefficients. In addition, two extra coefficients are required for the case of clamped and simply supported boundary conditions, implying that the biharmonic operator in those classical cases is composed of 6 unique coefficients. By contrast, the biharmonic operator with generalised elastic boundary conditions can contain up to 229 unique coefficients. As a result, each block or diagonal sector cannot be constructed through the repetition of a stencil pattern but must be declared explicitly. This lack of pattern repetition also impacts computational performance when constructing the operator. Since the biharmonic operator with generalised boundary condition provides very useful functionality in and of itself, the functionality to compute it is provided with an open interface as part of the library through the \texttt{bhmat} function \cite{magpie_matlab_2025}. The operator can then be used in further user-defined Finite Difference Time Domain schemes or if the users wish to take a more bespoke approach to eigenvalue/eigenvector calculation.
 
 
 The finite difference system of the plate grid, with $N_x$ points in the x-axis and $N_y$ point in the y-axis, can be transformed in to a linear indexed vector $N_x$ by $N_y$ in length. (Figure~\ref{fig:fdtd-linear}). The corresponding biharmonic spatial operator will then be a $N_x$ by $N_y$ square matrix the central coefficients forming the stencil and matrix shown in Figure~\ref{fig:biharmonic-stencil}. Once the boundary conditions are taken into consideration, the result is a multi-diagonal matrix with coefficient distribution as given in Figure~\ref{fig:biharm_zoom}. An more in-depth formulation of the discrete finite difference biharmonic operator can be found in \textcite[Chapters 10-12]{bilbao_numerical_2009}.
@@ -334,15 +329,14 @@ All of this allows the syntax to follow very closely the structure of Figure~\re
     \label{fig:matlab-vs-python}
 \end{figure}
 
-% %One of the final goal of this project is to achieve real time computation of the biharmonic to use in sound-synthesizing modules. 
-% It was initially unclear which approach to composing the operator would yield the best performance. 
-% At the time of writing, the diagonal composition method was not yet finished with the Python implementation. 
+One of the final goals of this project is to achieve real time computation of the biharmonic to use in sound-synthesizing modules. 
+It was initially unclear which approach to composing the operator would yield the best performance. 
+At the time of writing, the diagonal composition method was not yet finished with the Python implementation. 
 
-% Figure \ref{fig:matlab_vs_python} (a) compares the computing time necessary to build the biharmonic with increasing size, using a block structure, diagonal in MATLAB, and a block structure in Python. Each size of biharmonic was computed 10 times and the shortest time was recorded. The speed tests for the biharmonic operator computation in Figure \ref{fig:matlab_vs_python} show a clear performance superiority of the diagonal formulation over the block formulation in both MATLAB and Python languages. For the largest grid size ($3e^{5}$) tested in MATLAB, the diagonal method was forty times faster than the block method (results showing 0.2 seconds against 8 seconds respectively).
-% Given this result, it can be projected that a diagonal composition in Python will likely outperform the block composition method.
+Once the Python implementation was confirmed to give identical results to MATLAB both implementations were benchmarked against each other. 
+Figure \ref{fig:matlab_vs_python} compares the computing time necessary to build the biharmonic with increasing size, using a block structure, diagonal in MATLAB, and a block structure in Python. Each size of biharmonic was computed 10 times and the shortest time was recorded. The speed tests for the biharmonic operator computation in Figure \ref{fig:matlab_vs_python} show a clear performance superiority of the diagonal formulation over the block formulation in both MATLAB and Python languages. For the largest grid size ($3e^{5}$) tested in MATLAB, the diagonal method was forty times faster than the block method (results showing 0.2 seconds against 8 seconds respectively).
 
-
-Once the Python implementation was confirmed to give identical results to MATLAB both implementations were benchmarked against each other. Comparison between the biharmonic assembly using a block matrix approach in Python and MATLAB is shown Figure~\ref{fig:matlab-vs-python}. It is clear that computation time scales much better than with MATLAB. Since MATLAB does not allow for dynamic concatenation like in Figure~\ref{fig:python-bmat}, a placeholder sparse matrix is used alongside extensive indexing. Figure~\ref{fig:matlab-vs-python} shows that such indexing is not a scalable approach and motivated a diagonalised formulation. Rather than sub-blocks, the biharmonic would assembled by its diagonals (Figure~\ref{bh-diag}) using \texttt{spdiags}. Figure~\ref{fig:matlab-vs-python} shows the computation time for the diagonalised biharmonic in MATLAB performs and scales far better than the python block format. 
+It is clear that computation time scales much better than with MATLAB. Since MATLAB does not allow for dynamic concatenation like in Figure~\ref{fig:python-bmat}, a placeholder sparse matrix is used alongside extensive indexing. Figure~\ref{fig:matlab-vs-python} shows that such indexing is not a scalable approach and motivated a diagonalised formulation. Rather than sub-blocks, the biharmonic would assembled by its diagonals (Figure~\ref{bh-diag}) using \texttt{spdiags}. Figure~\ref{fig:matlab-vs-python} shows the computation time for the diagonalised biharmonic in MATLAB performs and scales far better than the python block format. 
 
 \begin{figure}
     \centering
@@ -351,7 +345,7 @@ Once the Python implementation was confirmed to give identical results to MATLAB
     \label{fig:bh-diag}
 \end{figure}
 
-Preliminary tests using the SciPy diagonal matrix construction in Python did not yield greater performance. It is possible that performance with Python could be improved through fine tuning the diagonalisation approach. Another limitation with the SciPy library informed the pursuit of performance with the biharmonic, namely the accuracy of the eigensolver.
+Given the results in Figure~\ref{fig:matlab-vs-python}, it can be projected that a diagonal composition in Python will likely outperform the block composition method. A limitation with the SciPy library informed the pursuit of performance with the biharmonic, namely the accuracy of the eigensolver.
 
 \subsubsection{Eigensolver accuracy}
 
@@ -539,14 +533,10 @@ Secondly, the eigenvalues returned from the eigensolver are used to calculate mo
 
 System is still in early stages 
 
-hope, following best practice and a clear stucture and documentation will encourage engagement and developmenet \cite{OSS_EGAEMENT} with the wider community and that \textsc{MAGPIE} will see usage and growth and enegaement for years to come.
-
-Application already present in research as part of the NEMUS project \cite{}
-
-Development in orthogonal case with lump masses to mimic bracing is ready to be incorporated \cite{ducceschi_method_2024}.
+hope, following best practice and a clear stucture and documentation will encourage engagement and developmenet \cite{OSS_EGAEMENT} with the wider community and that \textsc{MAGPIE} will see usage and growth and enegaement for years to come. \textsc{MAGPIE} is currently being used as part of research within the NEMUS project \cite{}. Development in orthogonal case with lump masses to mimic bracing is ready to be incorporated \cite{ducceschi_method_2024}.
 
 The first version of an open source library for the modal analysis of plates was authored across three programming environments \cite{magpie_python_2025,magpie_cpp_2025,magpie_matlab_2025}. 
-Care and attention has been given to the structure of the code, in order to make the library as modular and reusable to as wide an audience as possible. Central functionality was replicated in both MATLAB and Python, while taking care to accommodate for the conventions used by both programming languages. This functionality was namely the computation of the biharmonic operator in a sparse matrix format with generalized elastic boundary conditions, the computation the eigenfrequencies and eigenmodes, the visualisation the mode shapes. All of these data can then be used in time domain simulations. A graphical interface was designed using the Jupyter Notebooks platform by utilising the Python implementation of the library. \\  
+Care and attention has been given to the structure of the code, in order to make the library as modular and reusable to as wide an audience as possible. Central functionality was replicated in both MATLAB and Python, while taking care to accommodate for the conventions used by both programming languages. This functionality was namely the computation of the biharmonic operator in a sparse matrix format with generalized elastic boundary conditions, the computation the eigenfrequencies and eigenmodes, the visualisation the mode shapes. All of these data can then be used in time domain simulations. A graphical interface was designed using the Jupyter Notebooks platform by utilising the Python implementation of the library.
 
 % % Going Forward:
 % % - implementations
