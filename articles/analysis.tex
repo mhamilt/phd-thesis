@@ -191,12 +191,14 @@ Sparse sub-block building is made even mre trivial with SciPy's \texttt{bmat} fu
 \begin{figure}
 {\footnotesize
     \begin{verbatim}
-          [[B11, B12, B13,                *[None] *  M3],
+          [
+           [B11, B12, B13,                *[None] *  M3],
            [B21, B22, B23, B24,           *[None] *  M4],
            [B31, B32, B33, B34, B35,      *[None] *  M5]
-*[[*[None] *  r, B31, B32, B33, B34, B35, *[None] * (M5 + r)] for r in range(1, M4)],
-  [*[None] * M4,    BM1M3, BM1M2, BM1M1, BM1M],
-  [*[None] * M3,            BMM2,  BMM1,  BMM]
+ *[[*[None] * r, B31, B32, B33, B34, B35, *[None] * (M5 + r)] for r in range(1, M4)],
+  [ *[None] * M4,   BM1M3, BM1M2, BM1M1, BM1M],
+  [ *[None] * M3,           BMM2,  BMM1,  BMM]
+          ]
     \end{verbatim}
 }
     \caption{Python syntax for the biharmonic structured from a list-of-lists of sub-blocks. \texttt{M} represents $N_y-$.}
@@ -261,20 +263,16 @@ Given these conditions, the subset of relevant matrix operations for eigensolver
     \label{fig:lu-decomp}
 \end{figure}
 
-In order to find these smaller magnitude eigenvalues, the solver must be operated in a shift-inverse mode. This consists of transforming the eigenvalue problem from the traditional \[Ax = \lambda x\] to \[(A- \sigma I)^{-1} = (\frac{1}{\lambda - \sigma})x\] shifting with a value \[\sigma\] and inverting the matrix \[(A - \sigma I)\]. For \[\sigma = 0\], \[(A)^{-1}x = (\frac{1}{\lambda})x\], large \[\lambda\] therefore becomes small to the solver and smaller magnitude eigenvalues will be found first. When the biharmonic is large inverting it can be a computationally expensive operation. 
+In order to find these smaller magnitude eigenvalues, the solver must be operated in a shift-inverse mode. This consists of transforming the eigenvalue problem from the traditional $Ax = \lambda x$ to $(A- \sigma I)^{-1} = (\frac{1}{\lambda - \sigma})x$ shifting with a value $\sigma$ and inverting the matrix $(A - \sigma I)$. For $sigma = 0$, $(A)^{-1}x = (\frac{1}{\lambda})x$, large $\lambda$ therefore becomes small to the solver and smaller magnitude eigenvalues will be found first. When the biharmonic is large inverting it can be a computationally expensive operation. 
 The biharmonic can be inverted algebraically as part of LU decomposition (Figure~\ref{fig:lu-decomp}).
 
-For a shift-invert solve, the matrix is never explicitly inverted. Instead the backwards substitution of LU decomposition inverts the matrix algebraically which is computationally more efficient as part of the eigensolver. 
-\[L\] is lower triangular matrix (with \[1\]s on the diagonal), \[U\] is upper triangular matrix
+For a shift-invert solve, the matrix is never explicitly inverted. Instead the backwards substitution of LU decomposition inverts the matrix algebraically which is computationally more efficient as part of the eigensolver. LU decomposition is defined as $A = LU$, where $L$ is the lower triangular matrix (with $1$s on the diagonal), $U$ is upper triangular matrix. This can be applied to the standard eigen problem such that \(Ly = \lambda \vec{x}, U\vec{x} = y\).
 
-\(A = LU\)
+Through forward substitution of $y$ with the upper triangular matrix $L$ we determine: 
 
-\(Ly = \lambda x, Ux = y\)
-
-forward substitution of $y$ with the upper triangular matrix $L$: 
 \(y = L^{-1} \lambda x\)
 
-and backwards substitution of $x$ with the upper triangular matrix $U$: 
+and through backwards substitution of $x$ with the upper triangular matrix $U$: 
 
 \((x = U^{-1}y\)
 
@@ -284,7 +282,7 @@ from which we can derive
 
 For a shift-invert using $\sigma = 0$ with LU decomposition the $A$ and $\lambda$ will be re-inverted.
 
-For this reasons, the MATLAB and SciPy interfaces with ARPACK can be passed a sigma value. for each interface the option for largest magnitude is kept, but there is a final stage where the eigenvalues are  implicitly inverted. \footnote{This can cause some confusion between MATLAB and SciPys interfaces. If MATLAB's \texttt{eigs} is passed a \texttt{'smallestabs'} option, this is equivalent to a $\sigma 0$ and `largestabs' configuration. SciPy on the otherhand requires the explicit largest magnitude option \texttt{which=`LM'} on top of a $\sigma$ value. For SciPy which=`SM' will always result in a slower or potentially non-converging solve.}
+For this reasons, the MATLAB and SciPy interfaces with ARPACK can be passed a sigma value of 0 to find the smallest magnitude eigenvalues. Counter-intuitively, ARPACK requires that the option to find largest magnitude is kept, but when a $\sigma$ values is provided the values will be implicitly passed through a second shift-invert process.\footnote{This can cause some confusion between MATLAB and SciPys interfaces. If MATLAB's \texttt{eigs} is passed a \texttt{'smallestabs'} option, this is equivalent to a $\sigma 0$ and `largestabs' configuration. SciPy on the otherhand requires the explicit largest magnitude option \texttt{which=`LM'} on top of a $\sigma$ value. For SciPy which=`SM' will always result in a slower or potentially non-converging solve.}
 
 \begin{figure}
     \centering
@@ -293,7 +291,26 @@ For this reasons, the MATLAB and SciPy interfaces with ARPACK can be passed a si
     \label{fig:python-matlab-error}
 \end{figure}
 
-Though SciPy and MATLAB both interface with ARPACK and the default options for fine tuning of the eigensolver appear similar, the error between both is relatively large. Figure~\ref{fig:python-matlab-error} shows the percentage error for the first 500 eigenvalues calculated by the ARPACK interfaces in SciPy and MATLAB. Both system used parameters: 
+Though SciPy and MATLAB both interface with ARPACK and the default options for fine tuning of the eigensolver appear similar, the error between both is relatively large. Figure~\ref{fig:python-matlab-error} shows the percentage error for the first 500 eigenvalues calculated by the ARPACK interfaces in SciPy and MATLAB. Table~\ref{tab:parameters} shows the parameters used in Python and MATLAB for the results in Figure~\ref{fig:python-matlab-error}.
+
+\begin{table}
+	\centering
+	\begin{tabular}{lll}
+		\hline
+		\textbf{Parameter} & \textbf{Value}                 & \textbf{Description}                            \\ \hline
+		$L_x$              & 1.10 m                         & Length in the $x$-direction                     \\ \hline
+		$L_y$              & 0.80 m                         & Length in the $y$-direction                     \\ \hline
+		$L_z$              & 0.005 m                        & Thickness                                       \\ \hline
+		$E$                & $9\times 10^{9}$ Pa            & Young's modulus                                 \\ \hline
+		$\rho$             & 8765 kg/m$^3$                  & Density                                         \\ \hline
+		$\nu$              & 0.3                            & Poisson's ratio                                 \\ \hline
+		$h$                & $\frac{\sqrt{L_x L_y}}{100}$ m & Spacing between grid points                     \\ \hline
+		$R$                & $1\times 10^{15}$              & Rotational elastic restraint  (All boundaries)  \\ \hline
+		$K$                & $1\times 10^{15}$              & Displacement elastic restraint (All boundaries) \\ \hline
+		\hline
+	\end{tabular}
+	\label{tab:parameters}
+\end{table}
 
 \(
 L_x = 1.10 \text{m}; L_y = 0.8 \text{m}; L_z = 0.005 \text{m};\\
@@ -317,16 +334,10 @@ With percentage error as high as 2.4\% and the eigenvalue compute time was notic
 \subsection{C++}
 
 Like python, \textsc{C++} is entirely open source which continued to satisfy the FAIR principles of the open methodology. As both a strongly typed and compiled language, \textsc{C++} presented a greater challenge for development. 
-The primary bottleneck for development i \textsc{MAGPIE} is the eigensolver stage.  As stated previousl, MATLAB and Python's SciPy interface with the ARPACK library \cite{lehoucq_arpack_1998}. MATLAB incorporates some analysis of the target matrix to which the user is not privvy. 
+The primary bottleneck for development i \textsc{MAGPIE} is the eigensolver stage.  As stated previously, MATLAB and Python's SciPy interface with the ARPACK library \cite{lehoucq_arpack_1998}. MATLAB incorporates some analysis of the target matrix to which the user is not privvy. 
 On top of that, MATLAB uses its own sparse library, \cite{gilbert_sparse_1992} which obfuscates the process further.
 MATLAB's \texttt{eigs} function is not one that is supported by the software's code generation systems and the function still requires the MATLAB runtime if it is to be interfaced with externally. This has implications on the portability of any tool using MATLAB and eigs, with development being constrained to those with paid access to the MATLAB environment.
 ARPACK itself is open source \url{https://github.com/opencollab/arpack-ng} and requires the Basic Linear Algebra Subroutines (BLAS) \url{http://www.netlib.org/blas/} and Linear Algebra PACKage (LAPACK)  and \url{http://www.netlib.org/lapack/} in order to function.
-
-For \textsc{C++}, interfacing with ARPACK is available via the open source Eigen library. ARPACK is written in Fortran and a compiled binary is required for whatever operating system architecture is present.
-Therefore, any tool using ARPACK is limited to the compiler support for Fortran.
-Developing in \textsc{C++} presented an opportunity to bypass this restriction using the open source Spectra library \url{https://spectralib.org}. Spectra is a header-only library for solving eigenvalue problems and consists of a code base that has re-implemented ARPACK solvers in C++. The header-only nature of the library allows for direct, native compilation. Both Spectra and Eigen are heavily templated languages which, though versatile, results in a higher barrier to entry for development. The same structure and development process as taken with Python and MATLAB was applied to the \textsc{C++} implementation. 
-
-The magpie project repository \cite{hamilton_magpie-cpp_2025} represents a step towards that goal, though the project is still in its infancy. Table~\ref{tab:eig-comp} illustrates a comparison of the first 16 eigenvalues as obtain from the sparse eigensolver in MATLAB, Python (using SciPy) and the C++ spectra library. Error is small enough that it can be considered comparable and a viable substitution for the purposes of \textsc{C++} compilation.
 
 \begin{figure}
     \centering
@@ -335,7 +346,12 @@ The magpie project repository \cite{hamilton_magpie-cpp_2025} represents a step 
     \label{fig:biharm-diag-comp}
 \end{figure}
 
+For \textsc{C++}, interfacing with ARPACK is available via the open source Eigen library \cite{eigen_git_2025}. ARPACK is written in Fortran and a compiled binary is required for whatever operating system architecture is present.
+Therefore, any tool using ARPACK is limited to the compiler support for Fortran.
+Developing in \textsc{C++} presented an opportunity to bypass this restriction using the open source Spectra library \cite{spectra_git_2025}. Spectra is a header-only library for solving eigenvalue problems and consists of a code base that has re-implemented ARPACK solvers in C++. The header-only nature of the library allows for direct, native compilation. Both Spectra and Eigen are heavily templated languages which, though versatile, results in a higher barrier to entry for development. The same structure and development process as taken with the Python and MATLAB version of \textsc{MAGPIE} was applied to the \textsc{C++} implementation \cite{hamilton_magpie-cpp_2025}. 
 
+Although the \textsc{C++} project is still in its infancy, early benchmarking of performance and accuracy shows promise.
+Figure~\ref{fig:biharm-diag-comp} shows the compute time for the biharmonic of increasing grid resolution between all three implementations, with \textsc{C++} showing similar performance to MATLAB and it is likely that further performance improvement could be achieved with further refinement. The Eigen library's sparse implementation is similar to MATLAB's in that it uses CSC format sparse matrices. Where they differ is in the assembly phase, where Eigen allows for matrices to be assembled using "triplet"\footnote{of value, x-coordinate, and y-coordinate} after which the matrix is "finalised", thus avoiding any memory reallocation. 
 
 \begin{figure}
     \centering
@@ -345,10 +361,14 @@ The magpie project repository \cite{hamilton_magpie-cpp_2025} represents a step 
 \end{figure}
 
 
+Figure~\ref{fig:eigensolver-comp} illustrates performance difference between eigensolvers using the parameters in Table~\ref{tab:parameters}. Like SciPy, the Spectra library allows for explicit selection between generic and symmetric solvers. Unlike SciPy, there is a noticeable difference in performance between the generic and symmetric cases, with symmetric performing close if not better than MATLAB in some cases.
+
+Finally, the error between Spectra solvers (generic and symmetric) and MATLAB's \texttt{eigs} is given in Figure~\ref{fig:spectra-error}. Compared to SciPy (Figure~\ref{fig:python-matlab-error}), the percentage error is down many orders of magnitude. Though there is difference between generic and symmetric, relating Figures~\ref{fig:eigensolver-comp}~and~\ref{fig:spectra-error} show that relaxing the accuracy slightly (~$1\times10^{-6})$ can yield significant performance improvement for large matrices. Figure~\ref{fig:spectra-error} would appear to confirm that the high error between SciPy and MATLAB (Figure~\ref{fig:python-matlab-error}) is indeed a problem with the Python implementation and the configuration of the eigensolver.
+
 \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{img/plot-sym-gen-clamped-error.pdf}
-    \caption{Percentage error between MATLAB's eigs and Spectra's generic and symmetric solvers.}
+    \caption{Percentage error between MATLAB's eigs and Spectra's generic and symmetric solvers. Parameters in Table~\ref{tab:parameters}.}
     \label{fig:spectra-error}
 \end{figure}
 
