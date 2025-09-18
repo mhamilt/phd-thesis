@@ -402,7 +402,7 @@ from which we can derive
 
 For a shift-invert using $\sigma = 0$ with LU decomposition the $A$ and $\lambda$ will be re-inverted.
 
-For this reasons, the \textsc{matlab} and SciPy interfaces with ARPACK can be passed a sigma value of 0 to find the smallest magnitude eigenvalues. Counter-intuitively, ARPACK requires that the option to find largest magnitude is kept, but when a $\sigma$ values is provided the values will be implicitly passed through a second shift-invert process.\footnote{This can cause some confusion between \textsc{matlab} and SciPys interfaces. If \textsc{matlab}'s \texttt{eigs} is passed a \texttt{'smallestabs'} option, this is equivalent to a $\sigma 0$ and `largestabs' configuration. SciPy on the otherhand requires the explicit largest magnitude option \texttt{which=`LM'} on top of a $\sigma$ value. For SciPy which=`SM' will always result in a slower or potentially non-converging solve.}
+For this reasons, the \textsc{matlab} and SciPy interfaces with ARPACK can be passed a sigma value of 0 to find the smallest magnitude eigenvalues. Counter-intuitively, ARPACK requires that the option to find largest magnitude is kept, but when a $\sigma$ values is provided the values will be implicitly passed through a second shift-invert process.\footnote{This can cause some confusion between \textsc{matlab} and SciPys interfaces. If \textsc{matlab}'s \texttt{eigs} is passed a \texttt{'smallestabs'} option, this is equivalent to a $\sigma 0$ and `largestabs' configuration. SciPy on the otherhand requires the explicit largest magnitude option \texttt{which='LM'} on top of a $\sigma$ value. For SciPy \texttt{which='SM'} will always result in a slower or potentially non-converging solve.}
 
 \begin{figure}
     \centering
@@ -433,7 +433,7 @@ Though SciPy and \textsc{matlab} both interface with ARPACK and the default opti
 	\label{tab:parameters}
 \end{table}
 
-With percentage error as high as 2.4\% and the eigenvalue compute time was noticeably longer in Python compared to \textsc{matlab}, the utility of the Python toolbox would only be for rough approximation. It was clear that a further implementation was required in order to confirm if the error was arising from \textsc{matlab} or from Python. For that reason a third and final implementation of magpie was authored in \textsc{c++}.
+With percentage error as high as 2.4\% and the eigenvalue compute time was noticeably longer in Python compared to \textsc{matlab}, the utility of the Python toolbox would only be for rough approximation. It was clear that a further implementation was required in order to confirm if the error was arising from \textsc{matlab} or from Python. For that reason a third and final implementation of \textsc{magpie} was authored in \textsc{c++}.
 
 \subsection{\textsc{c++}}
 

@@ -76,6 +76,51 @@ Easing acces to fabrication and permitting iteration on designs
 
 \section{MAGPIE}
 
+\url{https://www.openlab-itemm.com} tools for 
+
+Wood characterization: assessing the density, elasticity, and vibration response of a material,
+Calculation of resonant frequencies of soundboards and bridges,
+Simulation of string tensions based on their material, diameter, and vibrating length
+
+
+Plat analysis \url{https://www.openlab-itemm.com/calculateur-mecanique/rigidite-de-plaques-1/}
+uses  \url{https://fredericablitzer.github.io/soundtools/}
+
+
+Plate Stiffness
+Material Equivalence Geometry
+Strings
+4-Point Bending
+3-Point Bending
+Idiophone Blade Tool
+Quarter Stiffness
+Plates 4-Point Bending
+BEAMS
+
+\url{https://www.openlab-itemm.com/wp-content/plugins/ITEMM-OpenLab-tools-main/js/p_w_script.js?ver=1.0}
+\url{https://www.openlab-itemm.com/wp-content/plugins/ITEMM-OpenLab-tools-main/js/olt_class.js?ver=1.0}
+
+Can be pieced together, not necessarily ``open''
+
+\subsection{Functionality}
+
+\subsubsection{Tuning}
+
+\begin{table}[]
+	\centering
+	\begin{tabular}{l r r r r r r}
+		                    & 1  & 2   & 3   & 4   & 5   & 6   \\ \hline
+		\textbf{Clamped}    & 77 & 153 & 382 & 486 & 596 & 880 \\
+		\textbf{Experiment} & 73 & 148 & 376 & 431 & 559 & 910 \\
+		\textbf{Adjusted}   & 75 & 150 & 370 & 458 & 557 & 844 \\
+	\end{tabular}
+	\caption{Eigenfrequencies for experiment data in \cite{} against a fully clamped and adjusted boundary conditions using \textsc{magpie}}
+	\label{tab:tuning}
+\end{table}
+
+
+
+\subsection{Interface}
 
 \subsection{Further Development}
 
@@ -93,33 +138,6 @@ In the case of \textsc{C++}, the relevant technologies available for interfacing
 The second technology is the emscripten compiler \url{https://emscripten.org} allowing composition of C++ code for the web browser by use of Web Assembly (WASM) \url{https://webassembly.org}. Web Assmebly is the standard for compiling to a "virtual machine" in the web browser. Assembly code capable of mor performative execution than the equivalent javascript. When combined with native \textsc{C++} source of Eigen and Spectra, the emscripten compiler can potentially be used to compile. This is already been demonstrated in theory \url{https://observablehq.com/@rreusser/eigen} where this more valuable is the specific use cases as applied to the biharmonic matrix with parametric boundary conditions. This would potentially allow for some small scale use of the tool without any requirement for install.
 
 The magpie project repository \cite{hamilton_magpie-cpp_2025} represents a step towards that goal, though the project is still in its infancy. Table~\ref{tab:eig-comp} illustrates a comparison of the first 16 eigenvalues as obtain from the sparse eigensolver in MATLAB, Python (using SciPy) and the C++ spectra library. Error is small enough that it can be considered comparable and a viable substitution for the purposes of \textsc{C++} compilation.
-
-
-\begin{table}
-    \centering
-    \begin{tabular}{|r|r|r|}
-    \hline
-        \textbf{MATLAB} & \textbf{SciPy} & \textbf{Spectra} \\ \hline
-         78.53693736 &  78.53693736 &  78.537 \\ \hline
-        128.58488917 & 128.58488917 & 128.585 \\ \hline
-        187.01330143 & 187.01330143 & 187.013 \\ \hline
-        211.49811507 & 211.49811507 & 211.498 \\ \hline
-        233.26312988 & 233.26312988 & 233.263 \\ \hline
-        311.55085535 & 311.55085535 & 311.551 \\ \hline
-        324.98789855 & 324.98789855 & 324.988 \\ \hline
-        351.43007000 & 351.43007000 & 351.430 \\ \hline
-        396.19915992 & 396.19915992 & 396.199 \\ \hline
-        421.32649079 & 421.32649079 & 421.326 \\ \hline
-        467.79995503 & 467.79995503 & 467.800 \\ \hline
-        471.96030431 & 471.96030431 & 471.960 \\ \hline
-        561.56762671 & 561.56762671 & 561.568 \\ \hline
-        570.48057257 & 570.48057257 & 570.481 \\ \hline
-        578.49204006 & 578.49204006 & 578.492 \\ \hline
-        614.59903001 & 614.59903001 & 614.599 \\ \hline
-    \end{tabular}
-    \caption{A comparison of eigensolver output given the conditions in Figure~\ref{fig:parameters}}
-    \label{tab:eig-comp}
-\end{table}
 
 
 \begin{figure}
