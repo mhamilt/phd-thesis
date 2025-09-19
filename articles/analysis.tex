@@ -477,10 +477,9 @@ Figure~\ref{fig:eigensolver-comp} illustrates performance difference between eig
 Finally, the error between Spectra solvers (generic and symmetric) and \textsc{matlab}'s \texttt{eigs} is given in Figure~\ref{fig:spectra-error}. Compared to SciPy (Figure~\ref{fig:python-matlab-error}), the percentage error is down many orders of magnitude. Though there is difference between generic and symmetric, relating Figures~\ref{fig:eigensolver-comp}~and~\ref{fig:spectra-error} show that relaxing the accuracy slightly (~$1\times10^{-6})$ can yield significant performance improvement for large matrices. Figure~\ref{fig:spectra-error} would appear to confirm that the high error between SciPy and \textsc{matlab} (Figure~\ref{fig:python-matlab-error}) is indeed a problem with the Python implementation and the configuration of the eigensolver.
 
 
-\subsection{Interfacing with \textsc{magpie}}
+\subsection{Interfacing with \textsc{magpie}}\label{sec:magpie-jupyter}
 
-
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.75\linewidth]{img/magpie-beta-interface.pdf}
     \caption{Beta version user interface for MAGPIE in Jupyter Notebooks}

@@ -86,6 +86,19 @@ Easing acces to fabrication and permitting iteration on designs
 
 Improvements to \textsc{magpie} can be split between those of functionality and those of interface. The core functions of \textsc{magpie} would already provide support for number of research use cases, but further development is needed to enable it as a powerful open source tool for musical acoustics. Similarly, there is functionality that exists but a efficient interface is needed in order to full utilise it. \textsc{magpie} seeks to turn traditionally physics based problems into a problems of engineering and interface is key in order to facilitate that.
 
+Development within \textsc{MAGPIE} can be focussed within two directions. One in functionality and the other in portability. The current iteration is a capable illustrative tool for educational purposes and some specific material measurement scenarios. The application for tone wood still needs to be develped further. Similiarly, the tool is available now in the open source language Python, but the current interface relies on the Jupyter notebook system, which comes with its own technical and portability challenges.
+
+Key area for expansion is to translate the source code to a compiled language such as \textsc{C}, \textsc{C++}, and Rust. Such a transition provides more granular control of compiler optimisations, but more interestingly opens potential for deployment. 
+
+The primary bottleneck for development is the eigensolver stage. In MATLAB this achieved with \texttt{eigs} and in python the SciPy linear algebra library's \texttt{scipy.sparse.linalg.eigs}. In both cases, these eigensolvers are an interface to the ARPACK library \cite{lehoucq_arpack_1998}. For MATLAB there is analysis of the target matrix to which the user is not privvy. 
+MATLAB its own sparse library on top of ARPACK \cite{gilbert_sparse_1992} which obfuscates the process further.
+MATLAB's \texttt{eigs} function is not one supported by the software's code generation systems and the function still requires the MATLAB runtime if it is to be interfaced with externally. This has implications for portability issues, with development being constrained to those with paid access to the MATLAB environment.
+
+ARPACK itself is open source \url{https://github.com/opencollab/arpack-ng} and requires The Basic Linear Algebra Subroutines (BLAS) and Linear Algebra PACKage (LAPACK) \url{http://www.netlib.org/blas/} and \url{http://www.netlib.org/lapack/}
+
+In the case of \textsc{C++}, the relevant technologies available for interfacing with ARPACK library. First is the open source Eigen library for C++ \url{https://gitlab.com/libeigen/eigen} and the Spectra library \url{https://spectralib.org} for eigenvalue problems. Spectra consists of a re-write of ARPACK solvers in C++ allowing for direct native compilation. 
+
+
 
 \subsection{Functionality}
 
@@ -138,9 +151,37 @@ Given the ultra specific case of the biharmonic, may not require generalised sol
 - juce, open frameworks
 
 
-\subsubsection{Web Assembly}
+\subsubsection{Web Technology}
 
-\paragraph{emscripten}
+Porting \textsc{magpie} to a compiled language like \textsc{C++} open up a number of exciting possibliities. 
+Similarity in results to that of \textsc{matlab} give an indication of a viable plate analysis tool that is not constrained to only those system on which \textsc{matlab} is supported. Of particular  note is the possibility of deploying \textsc{magpie} as an entirely web based application. Traditional software has typically required some form of installation process, where binaries are compiled for a specific machine architecture. Web technologies do away with part of that necessity by delivering software directly through a browser.
+One such technology is Web Assembly (WASM) \url{https://webassembly.org}, which allows for optimised binary code to be executed by a virtual machine in the browser. This is achieved through the emscripten,\footnote{\url{https://emscripten.org}} an open source compiler that enables compilation of \textsc{C} / \textsc{C++} code into WASM. Assembly code capable of more performative execution than the equivalent JavaScript 
+\cite{reiser_accelerate_2017}. When combined with the native \textsc{C++} source of Eigen and Spectra, the emscripten compiler can potentially be used to distribute and execute \textsc{magpie} entirely in the browser.
+\footnote{Such an application using the Eigen library has already been demonstrated as feasible \url{https://observablehq.com/@rreusser/eigen}}. 
+To make a web tool like \textsc{magpie} would traditionally require server architecture in order to execute ARPACK or to host a MATLAB runtime. 
+In a server / client arrangement the bottlenecks on performance are then tied to the slowest of the network and the computation.
+Creating a \textsc{magpie} server would also not be without cost and would also be limited by concurrent usage.
+The server and client can be on the same machine, which is exactly the architecture for the Jupyter interface (Section~\ref{sec:magpie-jupyter}).
+The extra technical requirements for installation of a local server reintroduces platform specific behaviour and limitations, which the browser client is meant to avoid.
+Computational performance in this scenario is also affected compared to an equivalent system using natively compiled binaries.
+The alternative for \textsc{magpie} to execute entirely on the client-side would be an implementation of a sparse matrix library and eigensolver entirely within JavaScript, the result of which would be severely limited in performance \cite{lion_investigating_2022}.
+\textsc{magpie} would likely see much more utility if development is pursued for an entirely native or entirely web client approach.
+The usage of WASM would allow for compilation for both approaches from a single, shared codebase.
+It is worth noting that the above web technologies are not supported equally across all browsers and their versions.\footnote{\url{https://developer.mozilla.org/en-US/docs/WebAssembly\#browser_compatibility}}
+Such limitation of highlight an importance of both open sourcing and version control as multiple systems and deployments can more easily be supported.
+
+WASM addresses the porting of the core \textsc{magpie} to the web browser, but there still remains a question o of interface.
+The Jupyter version of \textsc{magpie} (Section~\ref{sec:magpie-jupyter}) demonstrates one potential interface, but this is limited by the communication happening between IPython the renderer for the browser. Breaking away from the constraint of Jupyter allows for direct usage of further browser technology, notably the WebGL and WebGPU \cite{chickerur_webgl_2024} which allow fast 3D drawing within the browser. Figure~\ref{fig:magpie-p5js} shows a prototype example of the first four eigenshapes of a plate above their corresponding `chladni pattern' projected shadows.\footnote{\url{https://editor.p5js.org/mhamilt/full/WerJc4OJM}} The plates in Figure~\ref{fig:magpie-p5js} are drawn using the \texttt{p5.js} library which has an interface to WebGL.
+\footnote{\url{https://p5js.org/reference/p5/WEBGL/}}
+Each plate in comprised of approximately 1.5k grid points, for a total 12k gridpoints across displacement and projected shadow and running at around 11 frames per second (FPS). The interface is an early proof of concept, using eigenvectors from the \textsc{c++} version of \textsc{magpie} output as javascript arrays. Although the plates are rendered at a low FPS, this would likely be improved by implementing displacement and shading as part of vertex and fragment shaders rather than direct drawing using \texttt{p5.js}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{img/magpie-p5js.png}
+    \caption{Prototype interface using WebGL via p5.js to render plate modes}
+    \label{fig:magpie-p5js}
+\end{figure}
+
 
 \paragraph{ITEMM OpenLab / Existing Tools}
 
@@ -163,27 +204,6 @@ Web tools for plate analysis may be extant, but there is still a gap for a truly
 
 \subsubsection{P5.js}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\linewidth]{img/magpie-p5js.png}
-    \caption{Prototype interface using WebGL via p5.js to render plate modes}
-    \label{fig:magpie-p5js}
-\end{figure}
-
-Development within \textsc{MAGPIE} can be focussed within two directions. One in functionality and the other in portability. The current iteration is a capable illustrative tool for educational purposes and some specific material measurement scenarios. The application for tone wood still needs to be develped further. Similiarly, the tool is available now in the open source language Python, but the current interface relies on the Jupyter notebook system, which comes with its own technical and portability challenges.
-
-Key area for expansion is to translate the source code to a compiled language such as \textsc{C}, \textsc{C++}, and Rust. Such a transition provides more granular control of compiler optimisations, but more interestingly opens potential for deployment. 
-
-The primary bottleneck for development is the eigensolver stage. In MATLAB this achieved with \texttt{eigs} and in python the SciPy linear algebra library's \texttt{scipy.sparse.linalg.eigs}. In both cases, these eigensolvers are an interface to the ARPACK library \cite{lehoucq_arpack_1998}. For MATLAB there is analysis of the target matrix to which the user is not privvy. 
-MATLAB its own sparse library on top of ARPACK \cite{gilbert_sparse_1992} which obfuscates the process further.
-MATLAB's \texttt{eigs} function is not one supported by the software's code generation systems and the function still requires the MATLAB runtime if it is to be interfaced with externally. This has implications for portability issues, with development being constrained to those with paid access to the MATLAB environment.
-
-ARPACK itself is open source \url{https://github.com/opencollab/arpack-ng} and requires The Basic Linear Algebra Subroutines (BLAS) and Linear Algebra PACKage (LAPACK) \url{http://www.netlib.org/blas/} and \url{http://www.netlib.org/lapack/}
-
-In the case of \textsc{C++}, the relevant technologies available for interfacing with ARPACK library. First is the open source Eigen library for C++ \url{https://gitlab.com/libeigen/eigen} and the Spectra library \url{https://spectralib.org} for eigenvalue problems. Spectra consists of a re-write of ARPACK solvers in C++ allowing for direct native compilation. 
-The second technology is the emscripten compiler \url{https://emscripten.org} allowing composition of C++ code for the web browser by use of Web Assembly (WASM) \url{https://webassembly.org}. Web Assmebly is the standard for compiling to a "virtual machine" in the web browser. Assembly code capable of mor performative execution than the equivalent javascript. When combined with native \textsc{C++} source of Eigen and Spectra, the emscripten compiler can potentially be used to compile. This is already been demonstrated in theory \url{https://observablehq.com/@rreusser/eigen} where this more valuable is the specific use cases as applied to the biharmonic matrix with parametric boundary conditions. This would potentially allow for some small scale use of the tool without any requirement for install.
-
-The magpie project repository \cite{hamilton_magpie-cpp_2025} represents a step towards that goal, though the project is still in its infancy. Table~\ref{tab:eig-comp} illustrates a comparison of the first 16 eigenvalues as obtain from the sparse eigensolver in MATLAB, Python (using SciPy) and the C++ spectra library. Error is small enough that it can be considered comparable and a viable substitution for the purposes of \textsc{C++} compilation.
 
 
 \begin{figure}
@@ -233,487 +253,4 @@ Presenting the tool kit in an open source well-structure manner should hopefully
 As part of a lutthier toolkit, more than capable of running on a Bela.
 
 avoiding a tivoized device \url{https://www.gnu.org/philosophy/free-open-overlap.html}
-
-\subsection{eigensolvers}
-
-
-\begin{quotation}
-    However, we do provide one almost direct technique for computing all the eigen-
-values (but not the eigenvectors) of a real symmetric or complex Hermitian sparse
-matrix. The reverse Cuthill-McKee algorithm is first used to provide a permutation
-that reduces the bandwidth. Then an algorithm of Schwartz [22] provides a sequence
-of plane rotations that further reduces the bandwidth to tridiagonal. Finally, the
-symmetric tridiagonal QR algorithm from dense MATLAB yields all the eigenvalues.
-\end{quotation}
--- \textcite[p. 351]{gilbert_sparse_1992}
-
-The biharmonic is multi-diagonal, sparse, real, and has a possibility to be symmetrical in which case it is positive definite \cite{}. 
-Given these conditions, the subset of relevant matrix operations for eigensolvers is reduced.
-    
-``The shift and invert spectral transformation is used to enhance convergence
-to a desired portion of the spectrum'' \cite{lehoucq_arpack_1998}.
-
-The ARPACK solvers find eigenvalues with the largest magnitude easiest. 
-
-For the biharmonic the eigenvalues are the modal frequencies of the system and for musical acoustics the lower and fundamental modes are the target. The eigensolvers will either converge slowly or fail entirely leading to much longer compute times \url{https://docs.scipy.org/doc/scipy-1.0.0/reference/tutorial/arpack.html} \url{https://jduarte.physics.ucsd.edu/phys142/lectures/10_EigenvalueProblem.pdf}.
-
-
-In order to find these smaller magnitude eigenvalues, the solver must be operated in a shift-inverse mode. This consists of transforming the eigenvalue problem from the traditional \[Ax = \lambda x\] to \[(A- \sigma I)^{-1} = (\frac{1}{\lambda - \sigma})x\] shifting with a value \[\sigma\] and inverting the matrix \[(A - \sigma I)\]. For \[\sigma = 0\], \[(A)^{-1}x = (\frac{1}{\lambda})x\], large \[\lambda\] therefore become small to the solver. 
-
-Given the matrix is never explicitly inverted and only carried out as part of a forward and backward substitution LU decomposition, the operation can be computationally more efficient.
-\[L\] is lower triangular matrix (with \[1\]s on the diagonal)
-\[U\] is upper triangular matrix
-\[ PA = LU, Ly = Pv, Ux = y, x = (A − \sigma I)^{-1}v\]
-
-for linear system:
-\[ Ax = b, Ly = b, Ux = y, x = (A − \sigma I)^{-1}b\]
-
-LU decomposition:
-\begin{verbatim}
-    for k = 1 to n
-        // Step 1: Pivot selection
-        pivot_row = index of max(abs(A[k:n, k])) + k - 1
-        if pivot_row != k
-            swap row k of A and pivot_row of A
-            swap row k of A and pivot_row of P
-            if k > 1:
-                swap row k of L and pivot_row of L (columns 1..k-1)
-
-        // Step 2: Compute multipliers and elimination
-        for i = k+1 to n
-            L[i,k] = A[i,k] / A[k,k] // multiplier
-            for j = k to n
-                A[i,j] = A[i,j] - L[i,k] * A[k,j]
-
-        // Step 3: Set U row
-        for j = k to n
-            U[k,j] = A[k,j]
-\end{verbatim}
-
-\section{Open Hardware Measurement}\label{where-do-we-go-from-here}
-
-\subsection{Overview}\label{overview}
-
-Modal analysis provides an understanding of an object's frequency response,
-vibration patterns through mode shapes \cite{skrodzka_modal_2011, le-moyne_restoration_2012}, and can also
-estimate material properties \cite{ducceschi_method_2024}.
-Risk to an instrument is a prominent concern during analysis, particularly to
-historic musical instruments. This has led to the emergence of non-contact
-methods for measuring vibration. These new methods are appealing for modal
-analysis for fragile or expensive instruments. 
-
-
-Laser vibrometry has long been a useful tool for acoustic analysis
-\cite{sririam_mode_1992}, especially with respect to musical instruments \cite{tahvanainen_numerical_2019,alexander-brauchler_numerical_2020,viala_identification_2018,mansour_comparison_2012}. There are two main methods for detecting the vibrations of an object using lasers. There is interferometry, which is based on the interference of lasers, and velocimetry, which is based on the Doppler shift of a single laser.  Laser vibrometry
-provides a non-contact means of obtaining accurate results and is a preferred method for analysing musical instruments. However, it has a cost limitation \cite{duerinck_experimental_2021}. 
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.66\textwidth]{./img/ldv-setup.png}
-  \caption{LDV Measurement Setup in \cite{mansour_comparison_2012}}
-  \label{fig:ldv-setup}
-\end{figure}
-
-A standard Laser Doppler Vibrometer (LDV) costs around €20k. This cost is only for a fixed LDV; an even larger cost is incurred for a scanning LDV, which, unlike a standard LDV, can automatically focus on a new target. Pairing the measurement with specialised analysis software, such as finite element packages, may increase costs even further. This cost is difficult to justify for the usage it would be seen by instrument collectors and museums. 
-%A handful of companies dominate the market for laser vibrometers, and this cost seems unlikely to shrink soon. 
-% Laser vibrometers are precision-engineered for all vibration analysis, a level of accuracy unlikely to be utilised when applied to musical instruments. 
-
-\subsection{Aims and Scope}
-
-
-The proposed project intends to build an affordable LDV for the measurement of . In addition, the project will explore automating the measurement process and provide an open-source framework for analysing results.
-
-
-Automating the measurement process for modal analysis has two benefits. Firstly, automation would allow the entire process to occur with
-minimum manual intervention, saving time in labour and potentially time in
-measurements. Secondly, an automated process would make
-measurements more easily reproducible. Multiple measurements could be
-taken, and the accuracy of the experimental setup could be tested more easily. The project aims to explore viable, affordable and reproducible means for augmenting a laser vibrometer with a scanning laser vibrometer.
-
-Since many important modal analysis applications in musical instrument conservation operate in the low-frequency range, the precision constraints of vibration measurement equipment in the high-frequency range may be relaxed.  The thesis by Malah \cite{malahs_design_2015} outlines such a system for a Grazing Laser Vibrometer (GLV). 
-
-
-The barrier to entry for technical projects of this kind has been lowered over the past few decades. What was once quite a technical undertaking is now more achievable with readily available micro-controller units (MCU) like the Arduino or single-board computers (SBC) like the Raspberry Pi, which can easily interface with sensors and actuators to prototype haptic devices. This proposal will cover what components will be required in the project and what function they will serve.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.66\textwidth]{./img/guitar-mode-table.png}
-\caption{Table of guitar body mode shapes derived from LDV in \cite{skrodzka_modal_2011}}
-\label{fig:guitar-mode-table}
-\end{figure}
-
-\hypertarget{recent-research}{%
-\subsection{Recent Research}\label{recent-research}}
-
-This section will discuss some projects from the last 15 years focused on laser vibrometry and its application in musical acoustics. There will also be a review of recent research into the low-cost fabrication of laser vibrometers and economical methods to implement automated scanning systems for laser vibrometry. I will then elaborate on how the proposed project intends to enhance and build on those projects that have come before. 
-
-\subsection{Laser Vibrometry for Musical Acoustics}\label{lv-for-music}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.66\textwidth]{./img/rau-laser-scan.png}
-    \caption{Scanning LDV setup used in \cite{rau_vibration_2023}}
-    \label{fig:rau-setup}
-\end{figure}
-
-In the paper by Tahvanainen et al. \cite{tahvanainen_numerical_2019}, the measurements of eight
-guitars were required, one using laser vibrometry, to obtain an
-aggregate set of mode shapes and top plate velocities. In this case, research placed at Yamaha Research and Development is the best-case scenario concerning access to materials and tools.  Similarly, Eberhard et al. \cite{alexander-brauchler_numerical_2020} measured guitar mode shapes and frequencies compared to those of a finite element model. A low-cost laser scanning vibrometer would lower the barrier in both cost and labour for projects of this kind, making it more accessible.
-
-% \cite{VIOLIN_3D_SCAN} Scanning laser vibrometer used for top plate measure of a
-% violin fabricated with bio-based composite materials.
-
-The paper by Le Moyne \cite{le-moyne_restoration_2012} provides an example of when non-contact
-measurements are essential in musical instrument restoration. In this case, a 17th-century Couchet harpsichord was to be reconstructed.  In this case, a near-field acoustical holography approach was used. This was to avoid the need for the use of an impact hammer. Less intrusive excitation methods are available, such as those used in \cite{tahvanainen_numerical_2019}, where a non-invasive excitation was achieved using random noise in a speaker. The project would aim to provide a readily available tool for musical instrument collection to monitor and restore musical instruments.
-
-
-\subsection{Low Cost Non-Contact Vibration Measurement}
-
-Matiss Malahs researched building a low-cost laser vibrometer system \cite{malahs_design_2015}. The thesis is an overview of interferometry, LDVs, and GLVs and instructions on fabricating a GLV economically. This project would expand on Matiss's work by exploring the construction of affordable LDV and GLV measurement units, particularly with an application to soundboards. Measuring musical instrument soundboards does not require as wide a frequency bandwidth as other vibration analysis applications. The Polytec PSV400  has resources up to 1000kHz \cite{polytec_psv-400-3d_2009}, compared to soundboards, where only up to 20kHz are considered for measurement as it is the limit of human hearing.
-
-One of the main applications for scanning instruments is the ability to
-cross-reference results with those obtained within simulation. 
-
-Laser vibrometry and its application and practicalities within musical acoustics are still actively being explored, but it is not the only method of non-contact measurement of musical instruments. An array of MEM microphones has been considered an option for non-contact economic modal analysis. This is a promising approach for obtaining FRFs as outlined in \cite{farshidi_noncontact_2010} and may be accurate enough for estimating material properties. MEMs microphone arrays for plate mode measurement are demonstrated in \cite{velsen_plate_2015} as inaccurate.
-
-Since the focus of the project is on the derivation of mode shapes, as well as
-mode frequencies, the usage of MEMs microphone arrays has not been considered.
-
-
-\subsection{Low Cost Scanning Laser Vibrometry}
-
-All the projects that use laser vibrometry in section \ref{lv-for-music}, utilised 
-scanning laservibrometers. A scanning LDV is typically in the price range of £100k 
-as opposedto £30k for a non-scanning LDV. The scanning LDV drastically reduces labour 
-as the need for repositioning the LDV is bypassed entirely. The project aims to
-develop further methods that have been used in recent researched for obtaining
-an affordable method to augment an LDV into a scanning LDV.
-
-The paper of Hui et al. \cite{li_modal_2018} considers the addition of a linear scanning
-unit paired with a laser vibrometer. In this paper high-resolution results were
-obtained with a XY sliding table. A sliding table can be sourced for a
-relatively low cost and is therefore within the scope of an affordable linear
-scanning assembly.
-
-Linear scanning using a standard two-dimensional plotter yielded high-resolution
-results in \cite{li_modal_2018}. Such a measurement arrangement would allow for automated
-scanning. The 3D printed impact hammer used for measurements  in \cite{rau_vibration_2023} can
-also be combined with an actuator (e.g. a solenoid) for reproducible excitation.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.66\textwidth]{./img/linear-scanning-ldv.png}
-\caption{LDV Mounted to plotter (labelled X-Y sliding table) \cite{li_modal_2018}}
-\label{fig:ldv-linear-scanner}
-\end{figure}
-
-One large draw back of the approach in the paper by Hui et al is in scaling the
-project. For the soundboard of an instrument such as a violin or a guitar the
-scale of the sliding table assembly is relatively low cost and achievable. If a
-piano or harpsichord sound board is to be considered the material costs and
-labour cost in assembly are not insignificant. 
-
-Another interesting approach to automated scanning would be through the use of
-mirror galvanometers. A mirror galvanometer consists of a mirror attached to a
-rotating spindle on its central axis. The spindle is attached to an assembly
-similar to that of a stepper motor. The degree of rotation changes depending on
-the voltage applied to the internal circuit. This arrangement allows for a laser
-beam to be aimed at a point on a 2 dimensional plane using the rotational
-movement \ref{fig:mirror-galv}. A common modern commercial application for a
-pair of mirror galvanometers to be used with a laser is in animated laser light
-displays. Given this commercial use, mirror galvanometers can be sourced for an
-economic cost.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.66\textwidth]{./img/mirror-galv.pdf}
-\caption{Setup of mirror galvanometer pair from \cite{hung_optoelectronic_2022} illustrating how
-rotation of mirrors translates to project onto a 2D plane}
-\label{fig:mirror-galv}
-\end{figure}
-
-The benefit of using mirror galvanometers a means of creating a scanning LDV is
-that they would address the problem of scaling to larger soundboards. In order
-to scan a larger area, the laser can simply be moved further away from the
-soundboard. The mechanical travel is also less in comparison to the sliding
-table, meaning scanning time would also be reduced. Such a system was used in
-the thesis by Rau \cite{rau_vibration_2023} to successfully measure the soundboard of a
-guitar. One limitation of digitally controlling a mirror galvanometer is number
-of potential points that can be measured. The bit-depth of the digital to analog
-converter (DAC) that is used dictates the number of available grid points. In
-the thesis by Rau \cite{rau_vibration_2023} a 12-bit DAC was used, which provides a 4096
-x 4096 grid of points that can be measured. A grid of that size would be
-sufficient for a guitar or violin top plate, but in order to accommodate larger
-soundboards, such as for piano or harpsichord, it would be beneficial to select
-a DAC with a higher bit-depth.
-
-\hypertarget{project-description}{%
-\subsection{Project Description}\label{project-description}}
-
-The project aims to to look at two types of laser vibrometry methods. 
-The goal of the project would be the design of an automated non-contact measurement
-system for musical instrument soundboards. The system would aim to be economic
-to fabricate in comparison to current commercially available laser vibrometers.
-
-\begin{itemize}
-
-\item
-  Laser Doppler Velocimetry
-\item
-  Grazing Laser Vibrometry
-\end{itemize}
-
-Each method has a base cost for the most simple instance, with extra costs
-incurred from components with high tolerance and signal filtering.
-
-The initial step of the project would be to construct at the simplest version
-for each vibrometer and test its accuracy. Depending on results, the fabrication
-can then be refined or a second version can be created with higher quality
-components. The benefits provided from these components can be quantified
-against their cost and documented.
-
-The project would focus on the creation of an open source, version controlled
-framework for designing a low-cost, non-contact measurement system for musical
-instrument soundboards consisting of:
-
-\begin{figure}[h]%
-  \centering
-  \subfloat[\centering LDV Block
-  Diagram]{{\includegraphics[width=5cm]{./img/ldv-block.png} }}%
-  \qquad
-  \subfloat[\centering GLV Block
-  Diagrams]{{\includegraphics[width=5cm]{./img/grv-block.png} }}%
-  \caption{Block Diagrams of both LDV and GLV from \cite{malahs_design_2015}}%
-  \label{fig:laser-block}%
-\end{figure}
-
-\begin{itemize}
-
-  \item
-    Operation Manual Repository: An open source repository containing:
-  \begin{itemize}
-  
-    \item
-      Instructions for self-assembly of measurement tools and experiment setup 
-    \item
-      CAD models for digital fabrication of components and PCB
-    \item
-      Control software for automation of a measurement rig
-    \item
-      Analysis software for recording, processing and analysing measurement
-    data.
-  \end{itemize}
-
-\item
-  Technical Documentation: A document containing: , justification of design
-decisions, discussion of formulae required to obtain detain from the system, 
-  \begin{itemize}
-  
-    \item
-      An outline of the design process
-    \item
-      Technical background and justifications for any design decision and
-    components utilised
-    \item
-      Design modifications, their relative cost to the project and impact on
-    results. 
-  \end{itemize}
-\end{itemize}
-
-
-\hypertarget{materials}{%
-\subsubsection{Materials}\label{materials}}
-
-Listed below are materials the materials required categorised by their function
-with a brief explanation of their purpose within the greater project. With
-respect to costing, all prices given are an aggregate of relevant
-suppliers recorded on \date{\today}. Suppliers used are listed before each
-section. Guide prices here a listed to give a rough costing and do not include
-additional costs such as customs and shipping. In some cases there could also be
-a decrease in price when buying multiple units.
-
-\hypertarget{general-electronics}{%
-\subsubsection{General electronics}\label{general-electronics}}
-
-The proposed project will require a workshop space with facilities applicable to
-all approaches of measurement techniques. In addition to access to general
-electronic sundries (resistors, capacitors, potentiometers), a workshop would
-require facilities to aid prototyping. Suppliers RS and Element 14 were used as
-a source for guide prices:
-
-\begin{itemize}
-
-\item
-  Bench Power Supply: Parametric power supply required for prototyping
-  electronics when power requirements are still in flux. (Guide Price: £125)
-\item
-  Function generator: For applying a functional signal to a circuit for
-  simulating input from sensors. (Guide Price: £160)
-\item
-  Oscilloscope: Signal measurement and testing. (Guide Price: £160)
-\item
-  Soldering Station: For soldering though-hole and surface mount components.
-  (optionally) A reflow oven for soldering surface mount components to a pcb.
-  Alternatively this step could be carried out from an external service. (Guide
-  Price: £150)
-\end{itemize}
-
-\hypertarget{laser-components}{%
-\subsubsection{Laser Components}\label{laser-components}}
-
-Components relevant to each vibrometer type are listed below. Suppliers RS and
-Element 14 were used as a source for guide prices:
-
-  \begin{itemize}
-  
-  \item
-    LM348 op-amps: used in the Transimpedance Amplifier as well as filtering
-    circuits, and level shifting. As recommended in \cite{malahs_design_2015} an
-    alternative would aso be sought to improve sensor bandwidth. (Guide Price:
-    £0.70)
-  \item
-    650nm Laser: Bandwidth chosen in \cite{malahs_design_2015} to match the
-    BPW34 photodiodes. The BPW3 is shown to have the best response in the
-    Infrared range so a dual laser system, one for aiming one for measuring,
-    would be desirable. (Guide Price: £20)
-  \item
-    BPW34 photodiodes: Used for detecting changes in the laser beam. Current is
-    induced when the light strikes the surface. (Guide Price: £0.80)
-  \item
-    Analog to Digital Converter: The GLV from \cite{malahs_design_2015} was
-    connected to a National Instruments myDAQ which provided enough resolution
-    for processing data. As such, an ADC of similar specifications would be
-    desirable. (Guide Price: £650)
-  \item
-    Linear Scanning Rig using either:
-    \begin{enumerate}
-    
-    \item
-        An assembly of multiple stepper motors cascaded onto two sets of guide
-        rails to for movement in 2 dimensions. These rigs can be purchased as a
-        kit or assembled from separate parts if a suitable size is not
-        available. This assembly can be seen in Figure
-        \ref{fig:ldv-linear-scanner} labelled as ``X-Y Sliding Table'' (Guide
-        Price: £400). They consist of: 
-        \begin{itemize}
-        
-        \item
-          Stepper Motor: Motors and associated driver chips that can be
-          controlled step-wise for accuracy.
-        \item
-          Micro-Controller Unit: Programmable computer chip that would allow for
-          firmware to be written in order to control the steppers.
-        \item
-          Guide Rails: Lubricated aluminium rails to help guide each platform
-          along a particular dimensions
-        \item
-          Aluminium Extrusion: Used as frame and platform for stepper motors and
-          the vibrometer assembly.
-        \end{itemize}
-    \item
-        A pair of mirror galvanometers, such as in \ref{fig:mirror-galv},
-        controlled by a MCU. Consisting of: 
-        \begin{itemize}
-        
-        \item
-            Mirror Galvanometer pair (Guide Price: £200)
-        \item
-            Micro-controller
-        \item
-            16-bit DAC
-        \end{itemize}
-    \end{enumerate}
-  \end{itemize}
-
-\hypertarget{optics}{%
-\subsubsection{Optical Components}\label{optics}}
-
-The LDV requires some additional optical components in order to function
-correctly and constitute the bulk of the cost of fabrication. Prices for each
-component are an aggregate of those listed for components on Edmund Optics,
-AeroDiode and OptoShop.
-
-\begin{itemize}
-
-\item
-  Beam Splitter: Allows for redirection of laser beam into two direction. (Guide
-  Price: £160)
-\item
-  Mirror: for redirecting beams, Fibre optics are also a possible substitution.
-  (Guide Price: £200)
-\item
-  Bragg Cell: (Optional) Also known as Acousto-optic Modulators. This component
-  modulates the light frequency which produces a fringe pattern on the
-  photodetector. The bragg cell is the most expensive component of the LDV and
-  as suggested in \cite{malahs_design_2015}, the inclusion is not necessary if
-  directional information is not required. The first design of the LDV would
-  omit this component entirely. (Guide Price: £1500)
-\item
-  Focal Lens: (Optional) Should the laser beam need to be focused into a fibre
-  optic cable, a beam splitter would be necessary. (Guide Price: £400)
-\end{itemize}
-
-\hypertarget{safety}{%
-\subsection{Safety}\label{safety}}
-
-Since the project will be working with lasers there are safety concerns. The
-design in \cite{malahs_design_2015} was Category 3R laser with a maximum power
-of 5mW at 3V.
-
-\begin{quote}
-Class 3R lasers are specified as to create no risk to skin and low risk to eyes
-with power limit up to 5 mW [\cite{henderson_laser_2003}]
-\end{quote}
-
-Eye protection would need to be worn and appropriate signage displayed in any
-workshop space.
-
-The designs considered would initially use a commercial power supply unit or
-battery power supply units. As such, power electronic design is not considered
-as part of the design process and no high-voltage power electronic design will
-be taking place.
-
-
-\hypertarget{timeline}{%
-\subsection{Timeline}\label{timeline}}
-
-\paragraph{Stage One: Measurement unit prototyping}
-
-The goal of this stage is to create a LDV and GLV unit. The LDV would not
-contain a Bragg Cell and the viability of the system can be tested against the
-GLV.
-
-\paragraph{Stage Two: Linear Scanning}
-
-Both LDV and GLV units will be tested when mounted on a linear scanning system.
-
-Main goal is to create a means of stipulating geometry and asses each unit
-against a simple rectangular plate.
-
-\paragraph{Stage Three: Documentation}
-
-The final stage will hope to generate a document which will facilitate future
-modal analysis Projects. Focus of this stage is the collation of a written
-thesis, technical documentation and an open source hardware and software
-repository, with a focus on software sustainability to make the project more
-easily developed and reproducible in the future.
-
-\subsection{\cite{omodhrain_framework_2011}}
-
-emphasis on audience, but the interface is designed specifically with the performer in mind.
-
-Make the instrument and the audience will follow.
-
-evaluation guidance limited as the emphasis is on the emulation of the original playing experience, limitations and all, without fixing the original instrument. Something to be said for overcoming limitations instead of pleasing.
-Blisters from playing a string instruments, bleeding lips or puffed cheeks from reed and lip reed instruments.
-If the instruments were invented today, would the be evaluated in a way that suggests they should be pursued. There seems to be some kind of inherent blood sacrifice to playing acoustic instruments that is absent in DMIs.
-
-
-
-\begin{itemize}
-    \item Research study in effect of haptics on harpischord players
-    \item Expansion of magpie to other platforms (specifically webassembly and web technologies)
-    \item Expansion of magpie to include orthogonality and simulation of strutting (get citation from Michele)
-    \item Long term user stufy in museum context 
-\end{itemize}
 
