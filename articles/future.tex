@@ -134,14 +134,15 @@ Taking \textcite[]{duran_experimentally_2023} as an example.
 
 \begin{table}[]
 	\centering
-	\begin{tabular}{l c r r r}
-		Mode &                                                   & \textbf{Experiment} & \textbf{Clamped} & \textbf{Adjusted} \\
-		1    & \includegraphics[width=0.75cm]{img/chladni_1.pdf} & 73                  & 77               & 75                \\
-		2    & \includegraphics[width=0.75cm]{img/chladni_2.pdf} & 148                 & 153              & 150               \\
-		3    & \includegraphics[width=0.75cm]{img/chladni_3.pdf} & 376                 & 382              & 370               \\
-		4    & \includegraphics[width=0.75cm]{img/chladni_4.pdf} & 431                 & 486              & 458               \\
-		5    & \includegraphics[width=0.75cm]{img/chladni_5.pdf} & 559                 & 596              & 557               \\
-		6    & \includegraphics[width=0.75cm]{img/chladni_6.pdf} & 910                 & 880              & 844               \\
+	\begin{tabular}{c r r r}
+		\toprule
+		Mode                                                                              & \textbf{Experiment} & \textbf{Clamped} & \textbf{Adjusted} \\ \hline
+		1     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_1.pdf}}} & 73                  & 77               & 75                \\
+		2     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_2.pdf}}} & 148                 & 153              & 150               \\
+		3     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_3.pdf}}} & 376                 & 382              & 370               \\
+		4     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_4.pdf}}} & 431                 & 486              & 458               \\
+		5     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_5.pdf}}} & 559                 & 596              & 557               \\
+		6     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_6.pdf}}} & 910                 & 880              & 844               \\ \hline
 	\end{tabular}
 	\caption{Eigenfrequencies for experiment data in \cite{duran_experimentally_2023} against a fully clamped and adjusted boundary conditions using \textsc{magpie}}
 	\label{tab:tuning}
