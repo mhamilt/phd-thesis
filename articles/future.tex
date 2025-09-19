@@ -14,6 +14,16 @@ By refining and developing the work covered herein, these should hopefully be wo
 \end{figure}
 
 
+
+$$D_{0}          = \frac{EL_z^3}{12(1-nu^2)}$$
+$$\vec{\omega_n} = \left(\frac{\omega}{\sqrt{D_0 \rho A^2 L_z}}\right)^2$$
+$$\vec{\psi}     = (2 \pi \vec{f})^2 \rho L_z A^2 ;\quad A = L_xL_y ; $$
+$$D_{LS}        = \frac{\vec{\omega_n} \psi}{\vec{\omega_n}\vec{\omega_n}} ;$$
+$$E_{LS}        = \frac{D_{LS}}{12 L_z^3 (1-nu^2)}$$
+
+
+
+
 \subsection{As Research Probe}
 
 One of the richest avenues for further research using the interface is as part of a larger study that explores interface haptic feedback as well as the potency of visual aesthetics to player experience.
@@ -86,7 +96,7 @@ Easing acces to fabrication and permitting iteration on designs
 
 Improvements to \textsc{magpie} can be split between those of functionality and those of interface. The core functions of \textsc{magpie} would already provide support for number of research use cases, but further development is needed to enable it as a powerful open source tool for musical acoustics. Similarly, there is functionality that exists but a efficient interface is needed in order to full utilise it. \textsc{magpie} seeks to turn traditionally physics based problems into a problems of engineering and interface is key in order to facilitate that.
 
-Development within \textsc{MAGPIE} can be focussed within two directions. One in functionality and the other in portability. The current iteration is a capable illustrative tool for educational purposes and some specific material measurement scenarios. The application for tone wood still needs to be develped further. Similiarly, the tool is available now in the open source language Python, but the current interface relies on the Jupyter notebook system, which comes with its own technical and portability challenges.
+Development within \textsc{MAGPIE} can be focussed within two directions. One in functionality and the other in portability. The current iteration is a capable illustrative tool for educational purposes and some specific material measurement scenarios. The application for tone wood still needs to be developed further. Similarly, the tool is available now in the open source language Python, but the current interface relies on the Jupyter notebook system, which comes with its own technical and portability challenges.
 
 Key area for expansion is to translate the source code to a compiled language such as \textsc{C}, \textsc{C++}, and Rust. Such a transition provides more granular control of compiler optimisations, but more interestingly opens potential for deployment. 
 
@@ -104,33 +114,7 @@ In the case of \textsc{C++}, the relevant technologies available for interfacing
 
 \subsubsection{Tuning}
 
-Taking \textcite[]{duran_experimentally_2023} as an example.
-
-\begin{table}[]
-	\centering
-	\begin{tabular}{l r r r r r r}
-		                    & 1  & 2   & 3   & 4   & 5   & 6   \\ \hline
-                            & \includegraphics[width=1cm]{img/chladni_1.pdf}  & 2   & 3   & 4   & 5   & 6   \\ \hline
-		\textbf{Clamped}    & 77 & 153 & 382 & 486 & 596 & 880 \\
-		\textbf{Experiment} & 73 & 148 & 376 & 431 & 559 & 910 \\
-		\textbf{Adjusted}   & 75 & 150 & 370 & 458 & 557 & 844 \\
-	\end{tabular}
-	\caption{Eigenfrequencies for experiment data in \cite{duran_experimentally_2023} against a fully clamped and adjusted boundary conditions using \textsc{magpie}}
-	\label{tab:tuning}
-\end{table}
-
-\begin{table}[]
-\centering
-\begin{tabular}{l r r r r r r}	           
-	                    & \includegraphics[width=1cm]{img/chladni_1.pdf} & \includegraphics[width=1cm]{img/chladni_2.pdf} & \includegraphics[width=1cm]{img/chladni_3.pdf} & \includegraphics[width=1cm]{img/chladni_4.pdf} & \includegraphics[width=1cm]{img/chladni_5.pdf} & \includegraphics[width=1cm]{img/chladni_6.pdf} \\ \hline
-	\textbf{Clamped}    & 77                                             & 153                                            & 382                                            & 486                                            & 596                                            & 880                                            \\
-	\textbf{Experiment} & 73                                             & 148                                            & 376                                            & 431                                            & 559                                            & 910                                            \\
-	\textbf{Adjusted}   & 75                                             & 150                                            & 370                                            & 458                                            & 557                                            & 844                                            \\
-\end{tabular}
-\caption{Eigenfrequencies for experiment data in \cite{duran_experimentally_2023} against a fully clamped and adjusted boundary conditions using \textsc{magpie}}
-\label{tab:tuning}
-\end{table}
-
+Taking \textcite{duran_experimentally_2023} as an example.
 
 \begin{table}[]
 	\centering
@@ -148,11 +132,10 @@ Taking \textcite[]{duran_experimentally_2023} as an example.
 	\label{tab:tuning}
 \end{table}
 
-Young's of 102.03 GPa using the \texttt{youngcalc} function with the exprimental parameters.
-
+ 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\linewidth]{img/magpie-tuning.pdf}
+    \includegraphics[width=0.75\linewidth]{img/magpie-tuning.pdf}
     \caption{Example interface visual feedback for `tuning' boundary conditions and simulation parameters to match known experimental data.}
     \label{fig:magpie-tuning}
 \end{figure}
@@ -208,7 +191,7 @@ Each plate in comprised of approximately 1.5k grid points, for a total 12k grid 
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\linewidth]{img/magpie-p5js.png}
+    \includegraphics[width=0.84\linewidth]{img/magpie-p5js.png}
     \caption{Prototype interface using WebGL via \texttt{p5.js} to render plate modes.}
     \label{fig:magpie-p5js}
 \end{figure}
@@ -233,13 +216,10 @@ The 'open first' design methodology of \textsc{magpie} was in part to avoid issu
 \textcite{stallman_floss_2021} differentiates between free open source software (FOSS) and free / libre open source  software (FLOSS). Such a distinction is to make clear the meaning of `free' given its ambiguity of free as in ``free speech'' or as ``free beer'' \cite{stallman_why_2007}. FLOSS is a distinction of open source software where ``free'' carries both meanings.
 Web tools for plate analysis may be extant, but there is still a gap for a truly free and open tool where the `free' and `open' are not lowercase.
 
-\subsubsection{P5.js}
-
-
 
 \begin{figure}
     \centering
-    % \includegraphics[width=0.5\linewidth]{}
+    \includegraphics[width=0.5\linewidth]{example-image}
     \caption{Parameters for the Biharmonic used in benchmarking tests/}
     \label{fig:eigensolver-performance}
 \end{figure}
@@ -268,8 +248,8 @@ For Figure~\ref{fig:bihamronic-performance} the computation was run over 20 iter
 % Model Identifier:	Mac14,9
 % Model Number:	MPHH3T/A
 % Chip:	Apple M2 Pro
-% Total Number of Cores:	10 (6 performance and 4 efficiency)
-% Memory:	16 GB
+% Total Number of Cores: 10 (6 performance and 4 efficiency)
+% Memory: 16 GB
 
 
 MATLAB has functionality to compile its code to WASM (\url{https://www.mathworks.com/matlabcentral/fileexchange/69973-generatejavascriptusingmatlabcoder}). Some functionality such as that in MATLAB's sparse libraries is not currently open to code generation and compilation to a binary outside of the MATLAB runtime (list of functions supported: \url{https://uk.mathworks.com/help/referencelist.html?type=function&capability=codegen&listtype=alpha}) and it is unlikely to be in the near future.
