@@ -119,6 +119,8 @@ Taking \textcite[]{duran_experimentally_2023} as an example.
 \end{table}
 
 
+Young's of 102.03 GPa using the \texttt{youngcalc} function with the exprimental parameters.
+
 \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{img/magpie-tuning.pdf}
@@ -173,12 +175,12 @@ Such limitation of highlight an importance of both open sourcing and version con
 WASM addresses the porting of the core \textsc{magpie} to the web browser, but there still remains a question o of interface.
 The Jupyter version of \textsc{magpie} (Section~\ref{sec:magpie-jupyter}) demonstrates one potential interface, but this is limited by the communication happening between IPython the renderer for the browser. Breaking away from the constraint of Jupyter allows for direct usage of further browser technology, notably the WebGL and WebGPU \cite{chickerur_webgl_2024} which allow fast 3D drawing within the browser. Figure~\ref{fig:magpie-p5js} shows a prototype example of the first four eigenshapes of a plate above their corresponding `chladni pattern' projected shadows.\footnote{\url{https://editor.p5js.org/mhamilt/full/WerJc4OJM}} The plates in Figure~\ref{fig:magpie-p5js} are drawn using the \texttt{p5.js} library which has an interface to WebGL.
 \footnote{\url{https://p5js.org/reference/p5/WEBGL/}}
-Each plate in comprised of approximately 1.5k grid points, for a total 12k gridpoints across displacement and projected shadow and running at around 11 frames per second (FPS). The interface is an early proof of concept, using eigenvectors from the \textsc{c++} version of \textsc{magpie} output as javascript arrays. Although the plates are rendered at a low FPS, this would likely be improved by implementing displacement and shading as part of vertex and fragment shaders rather than direct drawing using \texttt{p5.js}.
+Each plate in comprised of approximately 1.5k grid points, for a total 12k grid points across four displacement and four projected shadows. The interface render at approximately 11 frames per second (FPS). The interface is an early proof of concept, using eigenvectors from the \textsc{c++} version of \textsc{magpie} output as JavaScript arrays. Although the plates are rendered at a low FPS, this would likely be improved by implementing displacement and shading as part of vertex and fragment shaders rather than direct drawing using \texttt{p5.js}.
 
 \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{img/magpie-p5js.png}
-    \caption{Prototype interface using WebGL via p5.js to render plate modes}
+    \caption{Prototype interface using WebGL via \texttt{p5.js} to render plate modes.}
     \label{fig:magpie-p5js}
 \end{figure}
 
