@@ -6,6 +6,14 @@ By refining and developing the work covered herein, these should hopefully be wo
 
 \section{Interface}
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{example-image}
+    \caption{PLACEHOLDER for}
+    \label{fig:placeholder}
+\end{figure}
+
+
 \subsection{As Research Probe}
 
 One of the richest avenues for further research using the interface is as part of a larger study that explores interface haptic feedback as well as the potency of visual aesthetics to player experience.
@@ -76,35 +84,14 @@ Easing acces to fabrication and permitting iteration on designs
 
 \section{MAGPIE}
 
-\url{https://www.openlab-itemm.com} tools for 
+Improvements to \textsc{magpie} can be split between those of functionality and those of interface. The core functions of \textsc{magpie} would already provide support for number of research use cases, but further development is needed to enable it as a powerful open source tool for musical acoustics. Similarly, there is functionality that exists but a efficient interface is needed in order to full utilise it. \textsc{magpie} seeks to turn traditionally physics based problems into a problems of engineering and interface is key in order to facilitate that.
 
-Wood characterization: assessing the density, elasticity, and vibration response of a material,
-Calculation of resonant frequencies of soundboards and bridges,
-Simulation of string tensions based on their material, diameter, and vibrating length
-
-
-Plat analysis \url{https://www.openlab-itemm.com/calculateur-mecanique/rigidite-de-plaques-1/}
-uses  \url{https://fredericablitzer.github.io/soundtools/}
-
-
-Plate Stiffness
-Material Equivalence Geometry
-Strings
-4-Point Bending
-3-Point Bending
-Idiophone Blade Tool
-Quarter Stiffness
-Plates 4-Point Bending
-BEAMS
-
-\url{https://www.openlab-itemm.com/wp-content/plugins/ITEMM-OpenLab-tools-main/js/p_w_script.js?ver=1.0}
-\url{https://www.openlab-itemm.com/wp-content/plugins/ITEMM-OpenLab-tools-main/js/olt_class.js?ver=1.0}
-
-Can be pieced together, not necessarily ``open''
 
 \subsection{Functionality}
 
 \subsubsection{Tuning}
+
+Taking \textcite[]{duran_experimentally_2023} as an example.
 
 \begin{table}[]
 	\centering
@@ -114,15 +101,74 @@ Can be pieced together, not necessarily ``open''
 		\textbf{Experiment} & 73 & 148 & 376 & 431 & 559 & 910 \\
 		\textbf{Adjusted}   & 75 & 150 & 370 & 458 & 557 & 844 \\
 	\end{tabular}
-	\caption{Eigenfrequencies for experiment data in \cite{} against a fully clamped and adjusted boundary conditions using \textsc{magpie}}
+	\caption{Eigenfrequencies for experiment data in \cite{duran_experimentally_2023} against a fully clamped and adjusted boundary conditions using \textsc{magpie}}
 	\label{tab:tuning}
 \end{table}
 
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{img/magpie-tuning.pdf}
+    \caption{Example interface visual feedback for `tuning' boundary conditions and simulation parameters to match known experimental data.}
+    \label{fig:magpie-tuning}
+\end{figure}
+
+
+\subsubsection{Orthotropic}
+
+
+\cite{ducceschi_method_2024}
+
+as part of that grid spacing separate for x and y directions. Currently the system is optimum for plates that are integer multiple aspect ratios. When plates fall outside of this, such as in \textcite{duran_experimentally_2023}, then accuracy suffers.
+
+\subsubsection{Bracing}
+
+\cite{ducceschi_method_2024}
+
+\subsubsection{Optimisation}
+
+Further refine the \textsc{c++} and python versions. Relationship between sparse format and eigen solver speed is not clear what the optimum options are for the specific case of the biharmoinc.
+
+Given the ultra specific case of the biharmonic, may not require generalised solvers and a more bespoke solving solution may become apparent.
 
 \subsection{Interface}
 
-\subsection{Further Development}
+\subsubsection{C++ Interface}
+
+- juce, open frameworks
+
+
+\subsubsection{Web Assembly}
+
+\paragraph{emscripten}
+
+\paragraph{ITEMM OpenLab / Existing Tools}
+
+\textsc{magpie} is by no means the first tool to provide the functionality described here and neither is it the only ``free'' tool available to do so. The Institut Technologique Européen des Métiers de la Musique (ITEMM) provides a suite of tools for luthiers via its online service known as ITEMM Open Lab\footnote{\url{https://www.openlab-itemm.com}}. ITEMM OpenLab provides resources for thos in the field of musical instrument making, hosting datasets of materials, 3D models and CAD files for instrument parts and tools. Most relevent, is that ITEMM OpenLab also provides a suit of tools for calculating wood properties intended to provide luthiers accesss to toools and processes used in the ITEMM Laboratories.
+% Notre objectif est de rendre accessibles des méthodes scientifiques développées en laboratoire, en les adaptant à des moyens simples et peu onéreux utilisables directement dans un atelier de lutherie.
+% 
+Available tools include those for calculating, resonance frequencies of soundboards and easels, string simulation strings under tension, and wood properties. The \textit{Rigidité de plaques} tool provides a means calculating the elastic constants of wood, .\footnote{\url{https://www.openlab-itemm.com/calculateur-mecanique/rigidite-de-plaques-1/}} using the methodology laid out by \textcite{mcintyre_measuring_1988}. 
+The open availability of the tools at ITEMM OpenLab are adminrable, but there are some inherent restrictions.
+The \textit{Rigidité de plaques}, like the other calculators on OpenLab, is free to use however the tools themselves are accessible only after registering for the service and authenticating. 
+The ``free as in freedom'' distinction made by \textcite{stallman_why_2007} would not classify \textit{Rigidité de plaques} as a FLOSS tool. 
+The source is ``open source'' in the sense that, given it is software delivered via a web browser, the source code is downloaded onto the user's computer, but it is not easily identified nor is it documented.
+ITEMM OpenLab meets a technical definition of free open source software, but sadly one where the free and open are lowercase.
+One can, after time, identify the relevant files,
+\footnote{calculations take pace in \url{https://www.openlab-itemm.com/wp-content/plugins/ITEMM-OpenLab-tools-main/js/p_w_script.js} and an \texttt{olt} utility class \url{https://www.openlab-itemm.com/wp-content/plugins/ITEMM-OpenLab-tools-main/js/olt_class.js} used across calculators, both of which available without authentication.} 
+but they are missing documentation, attribution and an open source licence. 
+The legal notice\footnote{\url{https://www.openlab-itemm.com/mentions-legals/}} on ITEMM OpenLab covers the 3D objects, but this does not naturally extend to the software \cite{cc_can_2025}. Instead, the software calculators should have an explicit open source licence attached to them so that there terms of use are clearer. From ITEMM OpenLab's desciprtive text and legal notice it is clear that attribution and accessibility are core principles, both of which would be better served by a clear citation system \cite{soito_citations_2016}, especially if these tools are to be used for further use.
+The 'open first' design methodology of \textsc{magpie} was in part to avoid issues in lack of clarity for reuse.
+\textcite{stallman_floss_2021} differentiates between free open source software (FOSS) and free / libre open source  software (FLOSS). Such a distinction is to make clear the meaning of `free' given its ambiguity of free as in ``free speech'' or as ``free beer'' \cite{stallman_why_2007}. FLOSS is a distinction of open source software where ``free'' carries both meanings.
+Web tools for plate analysis may be extant, but there is still a gap for a truly free and open tool where the `free' and `open' are not lowercase.
+
+\subsubsection{P5.js}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{img/magpie-p5js.png}
+    \caption{Prototype interface using WebGL via p5.js to render plate modes}
+    \label{fig:magpie-p5js}
+\end{figure}
 
 Development within \textsc{MAGPIE} can be focussed within two directions. One in functionality and the other in portability. The current iteration is a capable illustrative tool for educational purposes and some specific material measurement scenarios. The application for tone wood still needs to be develped further. Similiarly, the tool is available now in the open source language Python, but the current interface relies on the Jupyter notebook system, which comes with its own technical and portability challenges.
 
@@ -182,6 +228,11 @@ A key development for \textsc{MAGPIE} is the addition of an orthotropic model so
 
 Presenting the tool kit in an open source well-structure manner should hopefully encourage usage, collaboration and development as the system matures.
 
+\subsubsection{Emebedded Systems}
+
+As part of a lutthier toolkit, more than capable of running on a Bela.
+
+avoiding a tivoized device \url{https://www.gnu.org/philosophy/free-open-overlap.html}
 
 \subsection{eigensolvers}
 
