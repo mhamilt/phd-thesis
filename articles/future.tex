@@ -110,6 +110,7 @@ Taking \textcite[]{duran_experimentally_2023} as an example.
 	\centering
 	\begin{tabular}{l r r r r r r}
 		                    & 1  & 2   & 3   & 4   & 5   & 6   \\ \hline
+                            & \includegraphics[width=1cm]{img/chladni_1.pdf}  & 2   & 3   & 4   & 5   & 6   \\ \hline
 		\textbf{Clamped}    & 77 & 153 & 382 & 486 & 596 & 880 \\
 		\textbf{Experiment} & 73 & 148 & 376 & 431 & 559 & 910 \\
 		\textbf{Adjusted}   & 75 & 150 & 370 & 458 & 557 & 844 \\
@@ -118,6 +119,33 @@ Taking \textcite[]{duran_experimentally_2023} as an example.
 	\label{tab:tuning}
 \end{table}
 
+\begin{table}[]
+\centering
+\begin{tabular}{l r r r r r r}	           
+	                    & \includegraphics[width=1cm]{img/chladni_1.pdf} & \includegraphics[width=1cm]{img/chladni_2.pdf} & \includegraphics[width=1cm]{img/chladni_3.pdf} & \includegraphics[width=1cm]{img/chladni_4.pdf} & \includegraphics[width=1cm]{img/chladni_5.pdf} & \includegraphics[width=1cm]{img/chladni_6.pdf} \\ \hline
+	\textbf{Clamped}    & 77                                             & 153                                            & 382                                            & 486                                            & 596                                            & 880                                            \\
+	\textbf{Experiment} & 73                                             & 148                                            & 376                                            & 431                                            & 559                                            & 910                                            \\
+	\textbf{Adjusted}   & 75                                             & 150                                            & 370                                            & 458                                            & 557                                            & 844                                            \\
+\end{tabular}
+\caption{Eigenfrequencies for experiment data in \cite{duran_experimentally_2023} against a fully clamped and adjusted boundary conditions using \textsc{magpie}}
+\label{tab:tuning}
+\end{table}
+
+
+\begin{table}[]
+	\centering
+	\begin{tabular}{l c r r r}
+		Mode &                                                   & \textbf{Experiment} & \textbf{Clamped} & \textbf{Adjusted} \\
+		1    & \includegraphics[width=0.75cm]{img/chladni_1.pdf} & 73                  & 77               & 75                \\
+		2    & \includegraphics[width=0.75cm]{img/chladni_2.pdf} & 148                 & 153              & 150               \\
+		3    & \includegraphics[width=0.75cm]{img/chladni_3.pdf} & 376                 & 382              & 370               \\
+		4    & \includegraphics[width=0.75cm]{img/chladni_4.pdf} & 431                 & 486              & 458               \\
+		5    & \includegraphics[width=0.75cm]{img/chladni_5.pdf} & 559                 & 596              & 557               \\
+		6    & \includegraphics[width=0.75cm]{img/chladni_6.pdf} & 910                 & 880              & 844               \\
+	\end{tabular}
+	\caption{Eigenfrequencies for experiment data in \cite{duran_experimentally_2023} against a fully clamped and adjusted boundary conditions using \textsc{magpie}}
+	\label{tab:tuning}
+\end{table}
 
 Young's of 102.03 GPa using the \texttt{youngcalc} function with the exprimental parameters.
 
