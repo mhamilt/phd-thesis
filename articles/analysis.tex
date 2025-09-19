@@ -60,13 +60,35 @@ see, for example, the book by Szilard for an explanation \cite{szilard_theories_
 The origins of \textsc{magpie} extend from a set of \textsc{matlab} scripts used internally at the NEMUS projects. The \textsc{matlab} scripts were created for computing the eigenmodes for an isotropic rectangular Kirschhoff-Love plate model. Additionally, the  plate modelled is under general elastic boundary conditions, which is to say that the boundary coefficients for each edge of the plate are computed parametrically using two boundary constants representing flexural and rotational stiffness.
 The script was therefore multi-modal with use cases of calculating the discrete biharmonic matrix for a finite difference scheme. This generated biharmonic can be used directly with an eigensolver for calculation of the modes and modal shapes, either for analysis or visualisation.  An impulse response of the plate can be generated through a finite difference simulation. Finally, the script was capable of being used as a tool for estimation of the Young's modulus for a real plate. For this process, an experimental setup is created where a plate is put under boundary conditions. An impulse response of the plate can be measured using an impact hammer from which the modal frequencies of the plate can be retrieved. Starting from a best guess Young's estimation, the script could then be used to simulate the physical experiment under multiple iterations with least-squares regression and provide an estimation.
 
-% Process is to get non-dimensional frequencies, least-square (LS) optimisation
+Process is to get non-dimensional frequencies, then least-square (LS) optimisation
 
-% \begin{verbatim}
-%     psi       = (Freq*2*pi).^2 * rho * Lz * A^2 ;
-%     DLS       = (OmNDimsq.'*psi) / (OmNDimsq.' * OmNDimsq) ;
-%     ELS       = DLS / (Lz^3/12/(1-nu^2)) ;
-% \end{verbatim}
+\begin{verbatim}
+% Run magpie first to get non-dimensional frequencies
+Om        = magpie(rho,E0,nu,ldim,h,BCs,Ntrain,"none") ;
+OmNDim    = Om ./ sqrt(D0) * sqrt(rho * A^2 * Lz) ;
+OmNDimsq  = OmNDim.^2 ;
+
+% Least-square (LS) optimisation
+psi       = (2*pi*Freq).^2 * rho * Lz * A^2 ;
+DLS       = (OmNDimsq.' * psi') / (OmNDimsq.' * OmNDimsq) ;
+ELS       = DLS / (Lz^3/12/(1-nu^2));
+    
+\end{verbatim}
+
+
+$$
+D_{0}          = \frac{EL_z^3}{12(1-nu^2)},\quad A = L_xL_y ; \\
+\vec{\omega_n} = \left(\frac{\omega}{\sqrt{D_0 \rho A^2 L_z}}\right)^2\\
+\vec{\psi}     = (2 \pi \vec{F_{e}})^2 \rho L_z A^2 ;\\
+D_{LS}        = (\vec{\omega_n} psi) / (\vec{\omega_n} * \vec{\omega_n}) ;\\
+E_{LS}        = \frac{D_{LS}}{12 L_z^3 (1-nu^2)}
+$$
+
+
+
+For example, using the experiment measurements from \textcite{duran_experimentally_2023} as the input to \texttt{youngcalc} with clamped boundary conditions yields a result of 102.03 GPa. The clamped boundary conditions in this case are represented by rotational and displacement constraints of a suitably high number, in this case $1\times10^{15}$
+
+
 The script consolidated calculation of the biharmonic coefficients. These coefficients were generated through \textsc{matlab} symbolic tool box. Given there generated nature, the coefficient calculations are understandably complex and can consist of over 400 arithmetic operations for a single coefficient. 
 % Derivation of system as I understand originating with \cite{li_exact_2009,li_simple_2009}
 For the discrete biharmonic operator $B_{\Delta\Delta}$ coefficient calculations are abstracted into bands for structuring the biharmonic into sub-blocks of $B_{ii}$ pentagonal, $B_{ii\pm 1}$ tridiagonal, and $B_{ii\pm 2}$ diagonal matrices (Figure~\ref{fig:biharm-subblocks}). 
@@ -170,7 +192,7 @@ The first iteration of \textsc{magpie} was a refactor and functionalisation from
 
 Following the MVC design pattern, the source code was split into five areas of functionality.
 The core function of the toolkit is the \texttt{magpie} function, which consolidates the 16 parameters of the original script into a standard format of six required arguments representing the plate parameters for material density, elastic constant, Poisson ratio, dimensions, boundary conditions and grid resolution with a validation stage to ensure the correct type for each argument.
-The \texttt{magpie} function is used as part of functions for young's modulus (\texttt{youngcalc}) estimation and generating an impulse response through modal time integration with loss parameters \texttt{ModalTimeInt}.
+The \texttt{magpie} function is used as part of functions for young's modulus (\texttt{youngcalc}) estimation and generating an impulse response through modal time integration with loss parameters \texttt{ModalTimeInt}. 
 A central stage of \texttt{magpie} is the \texttt{bhmat} function, which assembles the discrete biharmonic from the given plate parameters.
 
 \subsubsection{Computing the biharmonic operator}
@@ -252,7 +274,7 @@ In the first approach, the operator can be composed of sparse sub-blocks assembl
     \label{fig:ghost-points}
 \end{figure} 
 
-Iteration over columns provides sequential memory access, which provides better performance compared to non-sequential row iteration \cite{dongarra_linpack_1979}. \textsc{matlab}'s specific sparse implementation is covered in \textcite[p. 335]{gilbert_sparse_1992} which states:
+Iteration over columns results in sequential memory access, which provides better performance compared to non-sequential row iteration \cite{dongarra_linpack_1979}. \textsc{matlab}'s specific sparse implementation is covered in \textcite[p. 335]{gilbert_sparse_1992} which states:
 
 \begin{quotation}
    A sparse matrix is stored as the concatenation of the
@@ -262,8 +284,7 @@ integer array of row indices. A second integer array gives the locations in the 
 arrays of the first element in each column.
 \end{quotation}
 
-
-Taking matrix
+For example, taking matrix:
 
 \begin{equation}\label{eq:csc-sparse}
     A = \begin{bmatrix}
@@ -273,7 +294,7 @@ Taking matrix
         \end{bmatrix}; v_{A} =\begin{bmatrix}1\\4\\2\\5\end{bmatrix} ; r_{A} = \begin{bmatrix}1\\3\\2\\3\end{bmatrix}; c_{A} = \begin{bmatrix}1\\3\\4\end{bmatrix}
 \end{equation}
 
-Where $v$ is the concatenated array of sparse matrix values, $r_{A}$ is the array of row indices and $c_{A}$ is the array of first element column indices.\footnote{For a coloumn compressed spasrse format, column indices may also end with a value one greater than the total number of values stored. For eq~\ref{eq:csc-sparse} this would result in a column index array of $c_{A} = [1 3 4 5]$ \cite{nvidia_sparse_2025}}
+where $v$ is the concatenated array of sparse matrix values, $r_{A}$ is the array of row indices and $c_{A}$ is the array of first element column indices.\footnote{For a coloumn compressed spasrse format, column indices may also end with a value one greater than the total number of values stored. For eq~\ref{eq:csc-sparse} this would result in a column index array of $c_{A} = [1 3 4 5]$ \cite{nvidia_sparse_2025}}
 % A sparse vector for a single value would consist of a value from $v_A$ and $r_A$, for instance for an index i = 2, sparse vector $v_1 = [v_{A2},r_{A2}] = [4,1]$.
 
 This would mean that concatenation of blocks would necessitate the reordering and concatenation of the new columns. Such an operation would require the copying and recopying of memory blocks which has a severe impact on computing performance. Before the biharmonic construction was optimised, the function were ported to Python to confirm that the same methodology could be used and confirm the portability of the existing source code.
@@ -288,7 +309,6 @@ For the python variation the biharmonic formulation was update. The new approach
 The Python version of \textsc{magpie} was made publicly available via the python package index (PyPI)\url{ https://pypi.org/project/nemus-magpie}, as well as open source and version control via GitHub and citable archiving via Zenodo \cite{magpie_python_2025}.
 
 The Scipy package allows for much more granular control over the sparse matrix format. Since the biharmonic operator matrix is multi-diagonal a diagonal format sparse matrix appeared to be the best target. As opposed to the compressed sparse column format which stores row indices and first element columns indices, the diagonal stores arrays of diagonal values and their diagonal position (Figure~\ref{fig:sparse-dia}). The diagonal format would require explicit zero values, though there are a relative small number and thus have minmal impact on performance.
-
 
 \begin{figure}
     \centering
@@ -333,7 +353,8 @@ One of the final goals of this project is to achieve real time computation of th
 It was initially unclear which approach to composing the operator would yield the best performance. 
 At the time of writing, the diagonal composition method was not yet finished with the Python implementation. 
 
-Once the Python implementation was confirmed to give identical results to \textsc{matlab} both implementations were benchmarked against each other. 
+Once the Python implementation was confirmed to give identical results to \textsc{matlab} both implementations were benchmarked against each other.
+\footnote{For this and all other benchmarking in this thesis was caqrried out on a MacBook Pro, MPHH3T/A, Apple M2 Pro, 10 cores (6 performance and 4 efficiency) and 16 GB of RAM} 
 Figure \ref{fig:matlab_vs_python} compares the computing time necessary to build the biharmonic with increasing size, using a block structure, diagonal in \textsc{matlab}, and a block structure in Python. Each size of biharmonic was computed 10 times and the shortest time was recorded. The speed tests for the biharmonic operator computation in Figure \ref{fig:matlab_vs_python} show a clear performance superiority of the diagonal formulation over the block formulation in both \textsc{matlab} and Python languages. For the largest grid size ($3e^{5}$) tested in \textsc{matlab}, the diagonal method was forty times faster than the block method (results showing 0.2 seconds against 8 seconds respectively).
 
 It is clear that computation time scales much better than with \textsc{matlab}. Since \textsc{matlab} does not allow for dynamic concatenation like in Figure~\ref{fig:python-bmat}, a placeholder sparse matrix is used alongside extensive indexing. Figure~\ref{fig:matlab-vs-python} shows that such indexing is not a scalable approach and motivated a diagonalised formulation. Rather than sub-blocks, the biharmonic would assembled by its diagonals (Figure~\ref{bh-diag}) using \texttt{spdiags}. Figure~\ref{fig:matlab-vs-python} shows the computation time for the diagonalised biharmonic in \textsc{matlab} performs and scales far better than the python block format. 
@@ -522,6 +543,9 @@ Secondly, the eigenvalues returned from the eigensolver are used to calculate mo
 System is still in early stages 
 
 hope, following best practice and a clear stucture and documentation will encourage engagement and developmenet \cite{OSS_EGAEMENT} with the wider community and that \textsc{magpie} will see usage and growth and enegaement for years to come. \textsc{magpie} is currently being used as part of research within the NEMUS project \cite{}. Development in orthogonal case with lump masses to mimic bracing is ready to be incorporated \cite{ducceschi_method_2024}.
+
+
+
 
 The first version of an open source library for the modal analysis of plates was authored across three programming environments \cite{magpie_python_2025,magpie_cpp_2025,magpie_matlab_2025}. 
 Care and attention has been given to the structure of the code, in order to make the library as modular and reusable to as wide an audience as possible. Central functionality was replicated in both \textsc{matlab} and Python, while taking care to accommodate for the conventions used by both programming languages. This functionality was namely the computation of the biharmonic operator in a sparse matrix format with generalized elastic boundary conditions, the computation the eigenfrequencies and eigenmodes, the visualisation the mode shapes. All of these data can then be used in time domain simulations. A graphical interface was designed using the Jupyter Notebooks platform by utilising the Python implementation of the library.
