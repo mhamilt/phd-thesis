@@ -4,7 +4,14 @@
 The projects covered in the previous chapters have use cases and application in their current form, however the  work here represents not a terminus of the ideas but rather a rich possibility for expansion.
 By refining and developing the work covered herein, these should hopefully be worthwhile tools within research to come. This chapter covers the areas for development within each project and impact that may have on future research.
 
+
+
+
 \section{Interface}
+
+Going forward with the keyboard interface can be split between further refinement and further application.
+This sections first covers the improvements that can be made to entire keyboard system, separated as it was in Chapter~\ref{} in terms of mechanical interface, hardware electronics and firmware.
+
 
 \begin{figure}
     \centering
@@ -14,29 +21,12 @@ By refining and developing the work covered herein, these should hopefully be wo
 \end{figure}
 
 
-
-
-
-
-\subsection{As Research Probe}
-
-One of the richest avenues for further research using the interface is as part of a larger study that explores interface haptic feedback as well as the potency of visual aesthetics to player experience.
-
-Such studies previously mentioned have already covered the harpsichord.
-
-For haptics, A double blind study involving a similar installation as \textcite{mcalpine_sampling_2014} as well as a full scale instrument
-It should first be determined if mechanical recreation is sufficient as part of a digital musical instrument before pursuing elaborate electromechanical emulation.
-Does recreating the harpsichord action at a smaller scale achieve tactile realism? Answer to that question would provide grounds for further work on a purely actuated keyboard.
-
-The ability for the jacks to be disengaged and prevent plucking the string, but still capable of triggering a MIDI message is ripe for exploration. The Mark 2 interface will hopefully serve as a research probe to explore the unique characteristics of the harpsichord and its impact on performance, much in the same manner as other musical haptics studies \cite{charalampos-saitis_musical_2018}.
-
-\subsection{Study of Visitor Feedback}
-
-
-\subsection{Research Software and Academic Institutes}
-
-
 \subsection{Refinement}
+
+\subsubsection{Mechanical Interface}
+
+\paragraph{CAD/CAM processes}
+Easing acces to fabrication and permitting iteration on designs
 
 \begin{itemize}
     \item could be made smaller, but would be sensible to explore if the tactile elements make a difference
@@ -72,19 +62,35 @@ A move from THT to SMD components would be expected to reduce the footprint of t
 
 The system would benefit from single piece mounting bracket which would allow for much more simplified installation. Given the open source nature of the project the advantages come from the ability to modify the design for a bespoke application.
 
-\subsection{Site Specific Enhancements}
 
+
+\subsubsection{Site Specific Enhancements}
 
 adding shakers to seat
 convolving with impulse response from point of audition (IF headphones)
 
+\subsubsection{Electronics}
+QRE
+
+\subsubsection{Firmware}
+
+\subsection{As Research Probe}
+
+One of the richest avenues for further research using the interface is as part of a larger study that explores interface haptic feedback as well as the potency of visual aesthetics to player experience.
+
+Such studies previously mentioned have already covered the harpsichord.
+
+For haptics, A double blind study involving a similar installation as \textcite{mcalpine_sampling_2014} as well as a full scale instrument
+It should first be determined if mechanical recreation is sufficient as part of a digital musical instrument before pursuing elaborate electromechanical emulation.
+Does recreating the harpsichord action at a smaller scale achieve tactile realism? Answer to that question would provide grounds for further work on a purely actuated keyboard.
+
+The ability for the jacks to be disengaged and prevent plucking the string, but still capable of triggering a MIDI message is ripe for exploration. The Mark 2 interface will hopefully serve as a research probe to explore the unique characteristics of the harpsichord and its impact on performance, much in the same manner as other musical haptics studies \cite{charalampos-saitis_musical_2018}.
+
+\subsection{Study of Visitor Feedback}
 
 
-\subsection{CAD/CAM processes}
-Easing acces to fabrication and permitting iteration on designs
+\subsection{Research Software and Academic Institutes}
 
-
-\subsection{Perpetual Software Refinement}
 
 \section{MAGPIE}
 
@@ -298,6 +304,10 @@ Both of these institutes already host their own online git services.\footnote{Uo
 The ideal scenario would be where these services are simply connected together allowing institutes to take responsibility of both version control and it's archiving.
 Academic research is capable of long term usage of software, ARPACK from 1990 \cite{lehoucq_arpack_1998} (discussed in Chapter~\ref{}) serves as one example. Aurora (Section~\ref{sec:aurora}) from just five years later is now at risk of no longer being useable without intervention and development. Research software access and permanence should not be a coin toss weighted by the extent of its adoption. Aurora demonstrated this by being both widely adopted and at risk of obsolescence. Instead, a more deliberate methodology is needed for research software to be accessible and reproducible as is the expectation with other aspects of academic research. 
 
+The praxis of such a open methodology does not come without cost labour and time. Researcher are likely already learning a new skill with respect to programming. With the addition of repository organisation, drafting documentation, learning a version control system and archiving development time can be inflated as a researcher orientates themself with these new tools. 
+Adopting an open methodology as standard practice lessened these costs as support networks are formed.
+It is important to remember that here are no shortcuts in good research and anything worth doing is worth doing well, but acknowledgment of this cost raises an important issue. 
+With respect to the humanities, there is still a gap in  digital skills and best practices in data sustainability that needs to be closed \cite{taylor_shaping_2022}. Academic institutes will also need to take a proactive approach with digital skills literacy if those in the humanities research are to follow best practice with the respect to digital research.
 
 
 
