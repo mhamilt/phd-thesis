@@ -13,13 +13,6 @@ Going forward with the keyboard interface can be split between further refinemen
 This sections first covers the improvements that can be made to entire keyboard system, separated as it was in Chapter~\ref{} in terms of mechanical interface, hardware electronics and firmware.
 
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.7\linewidth]{example-image}
-    \caption{PLACEHOLDER for}
-    \label{fig:placeholder}
-\end{figure}
-
 
 \subsection{Refinement}
 
@@ -28,6 +21,57 @@ This sections first covers the improvements that can be made to entire keyboard 
 \paragraph{CAD/CAM processes}
 Easing acces to fabrication and permitting iteration on designs
 
+A major limitation across all interfaces discussed in Chapter~\ref{} is the gradient stickers used for the sensor. Although the stickers are printed and cut by machines, allowing for large quantitites to be made, they still need to be applied by hand. In the application process it not uncommon for the graident stickers to be too wide. The short edge of the jacks were roughly similar, at around 4.35 mm, but they were made by manually resulting in variation across the full set. The jacks and the jack-slide are wooden and such prone to expansion and contraction with changes in humidity. This was the case for when the Mark 1 (Sections~\ref{sec:mark-1}) was moved from the laboratory, where many jacks that were freely moving became constricted in their slots. This meant that the gradient stickers either needed trimmed or replaced entirely, with reapplication also necessitating re-calibration. Inspecting and adjusting 98 jacks was a time consuming task and one ripe for optimisations.
+The adhesive for the stickers was hi-tack meaning that they were unlikely to fall off. The lifespan of the adhesive is finite, rated to around four years for outdoor use \cite{antalis_coala_2025}. Factoring in that the jacks are moving, creating friction with the inside of the jack slot, will likely mean the lifespan of the sticker adhesive is shorter.
+
+Preferably, the surface for the optical sensors would be intergal to the construction of the jack. Given the small area of a 4.35mm short edge an ~8mm travel, creating a surface of varying reflectance by hand is not feasible. The process would therefore need to be automated or computer aided.
+Two immediate options present themselves: the modification of the current jacks or CAD/CAM fabrication of the jacks entirely.
+
+Research into both approaches were undertaken but ultimately a satisfactory result compared to the gradient sticker approach was not found. Both approaches showed promise but were ultimately too unrefined to be applied to the Mark 1.
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{example-image}
+    \caption{PLACEHOLDER for laser cut speckle pattern on wood. The dynamic range across the gradient was too shallow to be detected by the optical sensor.}
+    \label{fig:laser-speckle}
+\end{figure}
+
+For modification, a laser cutting approach was tested. The hypothesis was for a speckle pattern to be etched into the side of the jack to alter reflectance. A number of materials were tested including mdf, plywood and hardwood. It was found that the available laser cutters were not able to etch a pattern with enough  differentiation between light and dark points. Both a rasterised and vector approach were attempted and it was found that the marks left by the laser cutter were too faint (Figure~\ref{fig:laser-speckle}. When power was increased, scorching of the material bled into the surrounding area, ruining the gradient from high to low reflectance. 
+It is possible that the optical sensor could be wired to an amplifier circuit and tuned to a smaller, more sensitive range, but pursuing this approach would require a major redesign of the electronics system.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{example-image}
+    \caption{PLACEHOLDER 3D model of the jack body used for the CNC router and 3D printer.}
+    \label{fig:jack-model}
+\end{figure}
+
+For CAD/CAM fabrication two methods were tested, a computer numerical control (CNC) router and 3D printing both of which could share the same 3D model (Figure~\ref{fig:jack-model}). The CNC router approach was the first taken as the intention was to pair it with the laser cutter to etch a pattern, which would hopefully offset defect rate of either process by being able to manufacture at a greater volume with far less manual labour. Once it was found the laser cutter approach was not viable, a second design was needed. Rather than reflectance from a speckle pattern, the concept returned to the distance application of the optical sensors. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{example-image}
+    \caption{PLACEHOLDER Design of the jack body with cut out to create a rolling shutter.}
+    \label{fig:jack-cut-out}
+\end{figure}
+
+Taking inspiration from the rolling shutter of a camera,
+section of the jack would be cut out (Figure~\ref{}. As the cut out section passed the optical sensor, a larger amount of light would be reflected. The baffles of the sensor would help restrict the field of view limit the light bleed between sensors. CNC routing of the jack bodies turned out to be time consuming for only a small number. The available router model and CNC bits were also prone to breaking , particularly around the damper slots, where there as commonly tear out. Finally, the materials for the jacks are typically hardwood such as pear, service or beech tree. Available MDF and plywood materials were far less dense than what would ideally be used in the final version and defect rate was unlikely to improve. The wood for the jack bodies would need to be planed first then likely adjusted by hand for width after the CNC process. As such, pursuing that option did not seem viable. The design pivoted instead to a 3D printing approach using PLA as had been used for the brackets and baffles of the sensor board. PLA could be reworked for width if necessary and allowed for experimentation with affect of colour in the design. The 3D print of single jack body was also only 12 minutes, meaning it could be scaled. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{example-image}
+    \caption{PLACEHOLDER Design of the jack body with cut out to create a rolling shutter.}
+    \label{fig:jack-cut-out-3d-print}
+\end{figure}
+
+Figure~\ref{fig:jack-cut-out-3d-print} shows an example of a 3D printed jack of which six were created for use with the prototype (Section~\ref{sec:prototype}). Test using this system were promising but there were a number of limitations. The tongues and plectra still needed fitted to all jacks, which would either need to be done after the printing or as part of the print. 
+Comparing PLA \cite{bcn3d_pla_2019} to Delrin \cite{dupont_delrin_2017}, a common modern substitute for quill plectra \cite{barclay_preservation_2005}, suggested that the PLA would be too brittle and difficult to rework for adjusting the voicing of the jack. Therefore, at the very leats the 3D printed jacks would still need to be quilled by hand, with likely both quilling and tongue fitting being required. Given time constraints for the Mark 1, the option to pursue 3D printed jacks was abandoned in favour of the gradient stickers, which at the point was low cost, relatively reliable and reproducible.
+The 3D printed jacks were also relatively high risk for sensor placement. Should the vertical placement of sensor be misaligned, the gradient stickers could simply be removed and replaced. With the 3D printed approach, like in Figure~\ref{fig:jack-cut-out-3d-print}, if there was misalignment, the entire jack height would need to be readjusted. For the first implementation at scale, the risk was determined to not be worth the additional time cost of adjusting gradient stickers which, in the context of the full install process, was relatively small by comparison.
+
+
+
 \begin{itemize}
     \item could be made smaller, but would be sensible to explore if the tactile elements make a difference
     \item could use cad cam parts, stickers aren't great
@@ -35,6 +79,10 @@ Easing acces to fabrication and permitting iteration on designs
     \item fabrication be largely automated, no need for THT parts. SMD would shrink things massively.
     \item improved circuitry, incorporating a similar op amp circuit from \cite{mcpherson_portable_2013} which can allow for a tuned voltage range, utilising the full range of the ADC used rather than what is given.
 \end{itemize}
+
+
+\subsubsection{Electronics}
+QRE
 
 
 A separate sensor module, splitting the current sensor board into a board containig just the sensor which is then routed to an expanded controller board.
@@ -69,8 +117,6 @@ The system would benefit from single piece mounting bracket which would allow fo
 adding shakers to seat
 convolving with impulse response from point of audition (IF headphones)
 
-\subsubsection{Electronics}
-QRE
 
 \subsubsection{Firmware}
 
