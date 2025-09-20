@@ -58,35 +58,26 @@ see, for example, the book by Szilard for an explanation \cite{szilard_theories_
 
 
 The origins of \textsc{magpie} extend from a set of \textsc{matlab} scripts used internally at the NEMUS projects. The \textsc{matlab} scripts were created for computing the eigenmodes for an isotropic rectangular Kirschhoff-Love plate model. Additionally, the  plate modelled is under general elastic boundary conditions, which is to say that the boundary coefficients for each edge of the plate are computed parametrically using two boundary constants representing flexural and rotational stiffness.
-The script was therefore multi-modal with use cases of calculating the discrete biharmonic matrix for a finite difference scheme. This generated biharmonic can be used directly with an eigensolver for calculation of the modes and modal shapes, either for analysis or visualisation.  An impulse response of the plate can be generated through a finite difference simulation. Finally, the script was capable of being used as a tool for estimation of the Young's modulus for a real plate. For this process, an experimental setup is created where a plate is put under boundary conditions. An impulse response of the plate can be measured using an impact hammer from which the modal frequencies of the plate can be retrieved. Starting from a best guess Young's estimation, the script could then be used to simulate the physical experiment under multiple iterations with least-squares regression and provide an estimation.
+The script was therefore multi-modal with use cases of calculating the discrete biharmonic matrix for a finite difference scheme. This generated biharmonic can be used directly with an eigensolver for calculation of the modes and modal shapes, either for analysis or visualisation.  An impulse response of the plate can be generated through a finite difference simulation. Finally, the script was capable of being used as a tool for estimation of the Young's modulus for a real plate. For this process, an experimental setup is created where a plate is put under boundary conditions. An impulse response of the plate can be measured using an impact hammer from which the modal frequencies of the plate can be retrieved. Starting from a best guess Young's estimation, the script could then be used to simulate the physical experiment under multiple iterations with least-squares regression and provide an estimation. Process is to get non-dimensional frequencies, then least-square (LS) optimisation.
 
-Process is to get non-dimensional frequencies, then least-square (LS) optimisation
+% \begin{verbatim}
+% % Run magpie first to get non-dimensional frequencies
+% Om        = magpie(rho,E0,nu,ldim,h,BCs,Ntrain,"none") ;
+% OmNDim    = Om ./ sqrt(D0) * sqrt(rho * A^2 * Lz) ;
+% OmNDimsq  = OmNDim.^2 ;
 
-\begin{verbatim}
-% Run magpie first to get non-dimensional frequencies
-Om        = magpie(rho,E0,nu,ldim,h,BCs,Ntrain,"none") ;
-OmNDim    = Om ./ sqrt(D0) * sqrt(rho * A^2 * Lz) ;
-OmNDimsq  = OmNDim.^2 ;
-
-% Least-square (LS) optimisation
-psi       = (2*pi*Freq).^2 * rho * Lz * A^2 ;
-DLS       = (OmNDimsq.' * psi') / (OmNDimsq.' * OmNDimsq) ;
-ELS       = DLS / (Lz^3/12/(1-nu^2));
+% % Least-square (LS) optimisation
+% psi       = (2*pi*Freq).^2 * rho * Lz * A^2 ;
+% DLS       = (OmNDimsq.' * psi') / (OmNDimsq.' * OmNDimsq) ;
+% ELS       = DLS / (Lz^3/12/(1-nu^2));
     
-\end{verbatim}
+% \end{verbatim}
 
-
-$$
-D_{0}          = \frac{EL_z^3}{12(1-nu^2)},\quad A = L_xL_y ; \\
-\vec{\omega_n} = \left(\frac{\omega}{\sqrt{D_0 \rho A^2 L_z}}\right)^2\\
-\vec{\psi}     = (2 \pi \vec{F_{e}})^2 \rho L_z A^2 ;\\
-D_{LS}        = (\vec{\omega_n} psi) / (\vec{\omega_n} * \vec{\omega_n}) ;\\
-E_{LS}        = \frac{D_{LS}}{12 L_z^3 (1-nu^2)}
-$$
-
-
-
-For example, using the experiment measurements from \textcite{duran_experimentally_2023} as the input to \texttt{youngcalc} with clamped boundary conditions yields a result of 102.03 GPa. The clamped boundary conditions in this case are represented by rotational and displacement constraints of a suitably high number, in this case $1\times10^{15}$
+% $$D_{0}          = \frac{EL_z^3}{12(1-nu^2)}$$
+% $$\vec{\omega_n} = \left(\frac{\omega}{\sqrt{D_0 \rho A^2 L_z}}\right)^2$$
+% $$\vec{\psi}     = (2 \pi \vec{f})^2 \rho L_z A^2 ;\quad A = L_xL_y ; $$
+% $$D_{LS}        = \frac{\vec{\omega_n} \psi}{\vec{\omega_n}\vec{\omega_n}} ;$$
+% $$E_{LS}        = \frac{D_{LS}}{12 L_z^3 (1-nu^2)}$$
 
 
 The script consolidated calculation of the biharmonic coefficients. These coefficients were generated through \textsc{matlab} symbolic tool box. Given there generated nature, the coefficient calculations are understandably complex and can consist of over 400 arithmetic operations for a single coefficient. 
@@ -193,6 +184,8 @@ The first iteration of \textsc{magpie} was a refactor and functionalisation from
 Following the MVC design pattern, the source code was split into five areas of functionality.
 The core function of the toolkit is the \texttt{magpie} function, which consolidates the 16 parameters of the original script into a standard format of six required arguments representing the plate parameters for material density, elastic constant, Poisson ratio, dimensions, boundary conditions and grid resolution with a validation stage to ensure the correct type for each argument.
 The \texttt{magpie} function is used as part of functions for young's modulus (\texttt{youngcalc}) estimation and generating an impulse response through modal time integration with loss parameters \texttt{ModalTimeInt}. 
+
+
 A central stage of \texttt{magpie} is the \texttt{bhmat} function, which assembles the discrete biharmonic from the given plate parameters.
 
 \subsubsection{Computing the biharmonic operator}
@@ -537,15 +530,12 @@ Secondly, the eigenvalues returned from the eigensolver are used to calculate mo
     \item by doing so create a tool with foundation in conservation practice for material derivation
     \item and educational in plate mechanics
     \item All implementations are open source and available via Github
-    \item work has been archived on zenodo and DOI generated, following from lessons learned with Aurora (See section\ref{sec:aurora})
+    \item work has been archived on Zenodo and DOI generated, following from lessons learned with Aurora (See section\ref{sec:aurora})
 \end{itemize}
 
 System is still in early stages 
 
 hope, following best practice and a clear stucture and documentation will encourage engagement and developmenet \cite{OSS_EGAEMENT} with the wider community and that \textsc{magpie} will see usage and growth and enegaement for years to come. \textsc{magpie} is currently being used as part of research within the NEMUS project \cite{}. Development in orthogonal case with lump masses to mimic bracing is ready to be incorporated \cite{ducceschi_method_2024}.
-
-
-
 
 The first version of an open source library for the modal analysis of plates was authored across three programming environments \cite{magpie_python_2025,magpie_cpp_2025,magpie_matlab_2025}. 
 Care and attention has been given to the structure of the code, in order to make the library as modular and reusable to as wide an audience as possible. Central functionality was replicated in both \textsc{matlab} and Python, while taking care to accommodate for the conventions used by both programming languages. This functionality was namely the computation of the biharmonic operator in a sparse matrix format with generalized elastic boundary conditions, the computation the eigenfrequencies and eigenmodes, the visualisation the mode shapes. All of these data can then be used in time domain simulations. A graphical interface was designed using the Jupyter Notebooks platform by utilising the Python implementation of the library.
