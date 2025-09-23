@@ -84,11 +84,81 @@ The 3D printed jacks were also relatively high risk for sensor placement. Should
 
 \paragraph{PCB layout}
 
-For greater flexibility in the refinement of each stage in the circuitry, it would be beneficial to separate the sensors from the corresponding routing circuitry. One approach would be separating the current sensor board into a sensor module and a PCB containing multiplexing and voltage scaling circuitry.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{example-image}
+    \caption{PLACEHOLDER \textcite{schmidt_sparksichord_2025} sensor module.}
+    \label{fig:schmidt-sensor-board}
+\end{figure}
 
+For greater flexibility in the refinement of each stage in the circuitry, it would be beneficial to separate the sensors from the corresponding routing circuitry. The current vertical orientation of the sensor board makes installation difficult in a small space, with dangling PCBs easily knocked out of alignment. A suggested alternative would be the separation of the current sensor board into two parts, a sensor module and a signal board. 
 
-A similar concept can be seen in \textcite{schmidt_sparksichord_2025}, where optical sensors at a fixed pitch are connected to headers to allow for a more modular assembly. This would help to overcome implementation in a constrained space. The footprint of the pcb being reduced where the vertical span wil no longer be a problem, thus avoiding problems such as blocking the keys.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{example-image}
+    \caption{PLACEHOLDER detail of jacks on a three-register harpsichord.}
+    \label{fig:3-registers}
+\end{figure}
 
+For the sensor module, a similar concept can be seen in \textcite{schmidt_sparksichord_2025} where optical sensors at a fixed pitch are connected to headers to allow for a more modular assembly.
+This would help to overcome implementing the sensors in a constrained space, in particular for a harpsichords with three or more registers. Such a configuration has jacks inline with each other (Figure~\ref{3-registers} and there is much less space to apply the same sensor system.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{example-image}
+    \caption{PLACEHOLDER Block diagram showing the connectivity of the suggested system with sensor modules, signal boards and controller board.}
+    \label{fig:new-pcb-block-diagram}
+\end{figure}
+
+The new sensor module would be connected to the signal board, which houses the routing and signal processing for sensors, which could then be interconnected in much the same way as the Mark 2 sensor board (Figure~\ref{fig:controller-schematic-2}). The signal board can then be mounted horizontally on the underside of the wrestplank requiring a  smaller footprint internally and less risk of damage during install and of blocking the keys. With the change in orientation the LEDs may not be visible for locating key, especially if the lighting conditions are not permissive. A 3D opaque diffuser can be fitted over the led to make the light less directional and make it more visible during calibration (Figure~\ref{fig:led-diffuser}).
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{example-image}
+    \caption{PLACEHOLDER Example diffusers for LEDs.}
+    \label{fig:led-diffuser}
+\end{figure}
+
+\subsubsection{Latency}
+
+Though system is functioning there is still room for improvement with respect to latency. The latency is bottlenecked by two junctions in the system. First the sensor switching and then in the microcontroller itself.
+
+\subsubsection{Sensor Switching}
+
+Currently the signal of the sensors are in voltage divider configuration using a pull-up resistor and a signal on the sensor board is selected through the use of a multiplexer. The voltage divider works as current is induced through the phototransistor, a voltage is therefore present across the pull-up resistor which can be measured against ground by tapping out a signal between the pull-up resistor and the phototransitor collector. The transistor has an inherent parasitic capacitance, which manifests as a low pass filter \cite{falco_understanding_2023} on the output signal and thus slower response time.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{example-image}
+    \caption{PLACEHOLDER Basic TIA circuit using a photodiode \cite[Figure 4.22]{horowitz_art_2015}.}
+    \label{fig:tia-basic}
+\end{figure}
+
+Instead of the pull-up resistor formation a number of transimpedance amplifier (TIA) circuits can be implemented. 
+The most basic TIA for phototransistors can be seen in Figure~\ref{fig:tia-basic}, where the output voltage $V_{\text{out}}$ is the current flowing from the non-inverting input of the op-amp to the (in this case) photodiode, scaled by the feedback resistor $R_{f}$.
+As noted in \textcite{horowitz_art_2015}, this circuit should be assumed to include a capacitor in parallel to the feedback resistor, an example of which can be see in \textcite{pardue_near_2013} (Figure~\ref{vb-tia}(b)).
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{example-image}
+    \caption{PLACEHOLDER (a) pull-up resistor configuration of the phototransistor (b) TIA circuit with voltage offset $V_b$. From \cite[Figure 3]{pardue_near_2013}.}
+    \label{fig:tia-bias}
+\end{figure}
+
+In Figure~\ref{tia-bias} there is a bias voltage $V_{b}$ which increases the voltage between the phototransistor collector and emitter, which in turn should improve the response time of the phototransistor \cite{falco_understanding_2023}. Rail-to-rail op-amps are those that permits the voltage output to be up to the limits of the supply voltage, where op-amps typically limit before this point. In the case of the biased TIA above, there is a risk that the op-amp will be saturated unless it is rail-to-rail. To bypass this limitation, the output voltage can be biased down by introducing a voltage at the inverting input, which is the configuration in Figure~\ref{fig:tia-diff} \cite{mcpherson_portable_2013}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{example-image}
+    \caption{PLACEHOLDER TIA difference amplifier from \textcite[Figure 3]{mcpherson_portable_2013}.}
+    \label{fig:tia-diff}
+\end{figure}
+
+With the addition of $R_4$ to bias the output voltage, the op-amp is now in a differential amplifier configuration, although the current source from the phototransistor means that $\frac{R_5}{R_4} \approx \frac{R_2}{R_3}$ for common-mode rejection ratio (CMRR) and noise reduction. The four unique values mean that the resistor could no be part of a resistor network IC and would have to be sourced as individual resistors.
+
+The addition of an op-amp will likely necessitate SMD parts in order to minimise the footprint. Since op-amps can come in single, dual and quad packages \cite{ti_opa4377_2011}, it may be better use of space for these components to be located on the controller board close to the power supply. 
+
+\subsubsection{Microcontroller}
 One approach would be to change the microcontroller. A test
 was carried out using an Arduino Nano ESP32 which is a NORA-W106, a module containing an ESP32-S3. 
 The benefit of this microcontroller is that it would allow the microcontroller to be swapped and the rest of the PCB
@@ -124,7 +194,7 @@ V_{out} = \frac{R_1}{R_1 + R_2} V_{+} - I_{C}R_{f} + \frac{R_f}{R_{in}}(\frac{R_
 $$
 
 
-and optimum common-mode rejection ratio (CMRR) for noise, resistor ratios should be
+
 $$
 \frac{R_2}{R_1} = \frac{R_4}{R_3}
 $$
@@ -158,6 +228,7 @@ convolving with impulse response from point of audition (IF headphones)
 
 \subsubsection{Firmware}
 
+\subsection{Application}
 \subsection{As Research Probe}
 
 One of the richest avenues for further research using the interface is as part of a larger study that explores interface haptic feedback as well as the potency of visual aesthetics to player experience.
