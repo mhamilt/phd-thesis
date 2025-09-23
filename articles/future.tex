@@ -73,7 +73,7 @@ The 3D printed jacks were also relatively high risk for sensor placement. Should
 \begin{itemize}
     \item could be made smaller, but would be sensible to explore if the tactile elements make a difference
     \item could use cad cam parts, stickers aren't great
-    \item fabrication could be parametarised for jack spacings
+    \item fabrication could be parametrised for jack spacings
     \item fabrication be largely automated, no need for THT parts. SMD would shrink things massively.
     \item improved circuitry, incorporating a similar op amp circuit from \cite{mcpherson_portable_2013} which can allow for a tuned voltage range, utilising the full range of the ADC used rather than what is given.
 \end{itemize}
@@ -110,6 +110,41 @@ A move from THT to SMD components would be expected to reduce the footprint of t
 
 The system would benefit from single piece mounting bracket which would allow for much more simplified installation. Given the open source nature of the project the advantages come from the ability to modify the design for a bespoke application.
 
+
+\paragraph{Trabnsimpedance Amplifier}
+
+Works as a voltage divider as of 
+
+$$
+V{out} = V_{CC} − I_{C}R_{div}
+$$
+
+$$
+V_{out} = \frac{R_1}{R_1 + R_2} V_{+} - I_{C}R_{f} + \frac{R_f}{R_{in}}(\frac{R_1}{R_1 + R_2}V_{+} - V_{-})
+$$
+
+
+and optimum common-mode rejection ratio (CMRR) for noise, resistor ratios should be
+$$
+\frac{R_2}{R_1} = \frac{R_4}{R_3}
+$$
+No current flowing to the phototransistor collector menas no ovltage drop across $R_{\text{div}}$.
+
+Current wil change with the amount of light (or voltage on the base). This is functionally, but it does have a problem when taking into account the inherent parasistic capcicane of transistor.
+
+Rather than a voltage divider like circuit, the trasistor could be attached to a trabsimedance amplifier.
+
+parametric control over impedance with selection of $R_f$ and $R_{\text{in}}$.
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{example-image}
+    \caption{PLACEHOLDER Figure 3 from \cite{jsokolovskis_optical_2014} and \cite{pardue_near_2013}.}
+    \label{fig:transimpedance-amplifier}
+\end{figure}
+
+Variation in \cite{pardue_near_2013,jsokolovskis_optical_2014} figure
 
 
 \subsubsection{Site Specific Enhancements}
