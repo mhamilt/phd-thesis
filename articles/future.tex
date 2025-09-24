@@ -134,8 +134,14 @@ Currently the signal of the sensors are in voltage divider configuration using a
     \label{fig:tia-basic}
 \end{figure}
 
+
 Instead of the pull-up resistor formation a number of transimpedance amplifier (TIA) circuits can be implemented. 
-The most basic TIA for phototransistors can be seen in Figure~\ref{fig:tia-basic}, where the output voltage $V_{\text{out}}$ is the current flowing from the non-inverting input of the op-amp to the (in this case) photodiode, scaled by the feedback resistor $R_{f}$.
+The most basic TIA for phototransistors can be seen in Figure~\ref{fig:tia-basic}, where the output voltage $V_{\text{out}}$ is the current flowing from the non-inverting input of the op-amp through the (in this case) photodiode $I_{C}$, scaled by the feedback resistor $R_{f}$.
+
+$$
+V{out} = I_{C}R_{div}
+$$
+
 As noted in \textcite{horowitz_art_2015}, this circuit should be assumed to include a capacitor in parallel to the feedback resistor, an example of which can be see in \textcite{pardue_near_2013} (Figure~\ref{vb-tia}(b)).
 
 \begin{figure}
@@ -145,7 +151,13 @@ As noted in \textcite{horowitz_art_2015}, this circuit should be assumed to incl
     \label{fig:tia-bias}
 \end{figure}
 
-In Figure~\ref{tia-bias} there is a bias voltage $V_{b}$ which increases the voltage between the phototransistor collector and emitter, which in turn should improve the response time of the phototransistor \cite{falco_understanding_2023}. Rail-to-rail op-amps are those that permits the voltage output to be up to the limits of the supply voltage, where op-amps typically limit before this point. In the case of the biased TIA above, there is a risk that the op-amp will be saturated unless it is rail-to-rail. To bypass this limitation, the output voltage can be biased down by introducing a voltage at the inverting input, which is the configuration in Figure~\ref{fig:tia-diff} \cite{mcpherson_portable_2013}.
+In Figure~\ref{tia-bias} there is a bias voltage $V_{b}$ which increases the voltage between the phototransistor collector and emitter, which in turn should improve the response time of the phototransistor \cite{falco_understanding_2023}. 
+
+$$
+V_{out} = V_{b} + I_{C}R_{1}
+$$
+
+Rail-to-rail op-amps are those that permits the voltage output to be up to the limits of the supply voltage, where op-amps typically limit before this point. In the case of the biased TIA above, there is a risk that the op-amp will be saturated unless it is rail-to-rail. To bypass this limitation, the output voltage can be biased down by introducing a voltage at the inverting input, which is the configuration in Figure~\ref{fig:tia-diff} \cite{mcpherson_portable_2013}.
 
 \begin{figure}
     \centering
@@ -154,9 +166,43 @@ In Figure~\ref{tia-bias} there is a bias voltage $V_{b}$ which increases the vol
     \label{fig:tia-diff}
 \end{figure}
 
-With the addition of $R_4$ to bias the output voltage, the op-amp is now in a differential amplifier configuration, although the current source from the phototransistor means that $\frac{R_5}{R_4} \approx \frac{R_2}{R_3}$ for common-mode rejection ratio (CMRR) and noise reduction. The four unique values mean that the resistor could no be part of a resistor network IC and would have to be sourced as individual resistors.
 
-The addition of an op-amp will likely necessitate SMD parts in order to minimise the footprint. Since op-amps can come in single, dual and quad packages \cite{ti_opa4377_2011}, it may be better use of space for these components to be located on the controller board close to the power supply. 
+Voltage output $V_{\text{out}}$ is given as
+
+$$
+V_{out} = \frac{R_1}{R_1 + R_2} V_{cc} + I_{C}R_{f} + \frac{R_f}{R_{in}}V_{cc}(\frac{R_1}{R_1 + R_2} - 1)
+$$
+
+With the addition of $R_4$ to bias the output voltage, the op-amp is now in a differential amplifier configuration. 
+Typically for a difference amplifier the ratio of resistor for each channel should be equal for optimal common-mode rejection ratio (CMRR) \cite{olson_optimizing_2023}. 
+Using the convention of Figure~\ref{fig:tia-diff}, the rule for would be $\frac{R_5}{R_4} = \frac{R_2}{R_3}$. 
+With the addition of a current source in the form of the phototransistor, optimum CMRR is less definite, with $\frac{R_5}{R_4} \approx \frac{R_2}{R_3}$. Given variation in all components, this becomes more of an engineer exercise,  with best noise reduction found through trial and error. Typically a difference amplifier could employ a quad network of resistors \cite[p. 227]{horowitz_art_2015}. The asymmetric biasing of Figure~\ref{fig:tia-diff} values means that the four unique, high-tolerance resistor, values are needed. 
+Variation across the optical sensors means that the feedback (or load) resistor 
+\footnote{$R_5$ in Figure~\ref{fig:tia-diff}, $R_1$ in Figure~\ref{fig:tia-bias}}
+may need adjustment across all sensors as was the case in \textcite{pardue_near_2013}.\footnote{``Early on it was noticed that different sensors of the same make yielded significantly different current response even when in the same configurations. With the QRE1113 sensors, we have used load resistors ranging between 12kΩ to 47kΩ to achieve similar range.''}
+If multiple optical sensors are to share the same TIA, such as in \textcite{mcpherson_portable_2013}, then the values will always be a best average. A bespoke circuit for each sensor is feasible, but highly impractical. Given the sufficient operation of the current pull-up configuration, the improvement in response time would be sufficient without too much concern about additional noise.
+Since op-amps can come in single, dual and quad packages \cite{ti_opa4377_2011}, it may be better use of space allow easier routing if the TIA circuits are located on the controller board close to the power supply, rather than the newly siggested signal boards. 
+The decision to use TIA is not a trivial one and will have an impact on the requirements for the overall project.
+The design principles of the keyboard (Section~\ref{sec:design-constraints}) taken in hand with the FAIR principles of the open methodology (Section~\ref{sec:open-methods}) informed the design of the electronics system. 
+The intention was to demonstrate the creation of an interface using economic electronics, a low technical knowledge barrier without a dependence on specialist facilities.
+Components for electronic system could be sourced and assembled using a modestly outfitted university maker space and small scale PCB manufacturing services such as JLCPCB or PCBWay.
+\footnote{Although the current design is \textit{just} about practical with prototyping board, the assembly of it would not be enviable.}
+Components such as op-amps are not commonly found in THT packaging, but rather in surface-mount device (SMD) format (Figure~\ref{fig:tht-vs-smd}).
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{example-image}
+    \caption{PLACEHOLDER The QRE1113 optical sensor in both THT and SMD formats with a XX for scale.}
+    \label{fig:tht-vs-smd}
+\end{figure}
+
+
+THT parts are more permissible to the prototyping process, allowing for ```spur of the moment'' \cite[p. 268]{horowitz_art_2015} circuit wiring. By contrast, SMD components are soldered directly to `pads' on the surface of a PCB. SMD are much smaller compared to their THT equivalent, saving on space and are typically much more energy efficient with reduced inductances \cite[p. 268]{horowitz_art_2015}. As a result, SMD components are much less permissive to the prototyping process compared to THT.
+With SMD parts comes a technological burden, requiring access to equipment such as re-flow ovens and hot air rework station.
+Soldering these components is possible with hand soldering tools, but the process becomes much less practical.
+Alternatively, the burden can shifted to the PCB manufacturing services to detriment of cost, lead times and the ability to experiment.
+Ten PCBs can potentially be wired ten different ways, but this can only be done if one has the facilities to achieve it.
+The circuits for the Mark 1 and Mark 2 keyboards represent the crossing point where the THT-over-SMD principle applied to the design will need to be compromised in order for improvements to be enacted.
 
 \subsubsection{Microcontroller}
 One approach would be to change the microcontroller. A test
@@ -170,7 +216,7 @@ The same logic as the original firmware was programmed and the latency was reduc
 It is possible that the 10 ms latency could be improved upon with appropriate optimisation, but there would be a cost in the form of development time. 
 Consideration would need to be made on the time to port existing source code for the I2C FRAM chip or fall back on a simpler storage option.
 
-Use of QRD1114 which has a faster rise time, greater sensitivity. Rest of the deisgn could be keptthe same and the QRD1114 dropped in place of the QRE1113. This is at the cost of greater power consumption (around 0.1V per sensor, but current would also change)
+Use of QRD1114 which has a faster rise time, greater sensitivity. Rest of the design could be kept the same and the QRD1114 dropped in place of the QRE1113. This is at the cost of greater power consumption (around 0.1V per sensor, but current would also change)
 
 \url{https://www.onsemi.com/pdf/datasheet/qrd1114-d.pdf}
 \url{https://www.onsemi.com/download/data-sheet/pdf/qre1113-d.pdf}
@@ -181,43 +227,6 @@ A move from THT to SMD components would be expected to reduce the footprint of t
 The system would benefit from single piece mounting bracket which would allow for much more simplified installation. Given the open source nature of the project the advantages come from the ability to modify the design for a bespoke application.
 
 
-\paragraph{Trabnsimpedance Amplifier}
-
-Works as a voltage divider as of 
-
-$$
-V{out} = V_{CC} − I_{C}R_{div}
-$$
-
-$$
-V_{out} = \frac{R_1}{R_1 + R_2} V_{+} - I_{C}R_{f} + \frac{R_f}{R_{in}}(\frac{R_1}{R_1 + R_2}V_{+} - V_{-})
-$$
-
-
-
-$$
-\frac{R_2}{R_1} = \frac{R_4}{R_3}
-$$
-No current flowing to the phototransistor collector menas no ovltage drop across $R_{\text{div}}$.
-
-Current wil change with the amount of light (or voltage on the base). This is functionally, but it does have a problem when taking into account the inherent parasistic capcicane of transistor.
-
-Rather than a voltage divider like circuit, the trasistor could be attached to a trabsimedance amplifier.
-
-parametric control over impedance with selection of $R_f$ and $R_{\text{in}}$.
-
-Opamp packages across multiple ICs, better on controller, otherwise on a signakl board.
-
-
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.7\linewidth]{example-image}
-    \caption{PLACEHOLDER Figure 3 from \cite{jsokolovskis_optical_2014} and \cite{pardue_near_2013}.}
-    \label{fig:transimpedance-amplifier}
-\end{figure}
-
-Variation in \cite{pardue_near_2013,jsokolovskis_optical_2014} figure
 
 
 \subsubsection{Site Specific Enhancements}
