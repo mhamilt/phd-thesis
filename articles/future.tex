@@ -204,21 +204,15 @@ Alternatively, the burden can shifted to the PCB manufacturing services to detri
 Ten PCBs can potentially be wired ten different ways, but this can only be done if one has the facilities to achieve it.
 The circuits for the Mark 1 and Mark 2 keyboards represent the crossing point where the THT-over-SMD principle applied to the design will need to be compromised in order for improvements to be enacted.
 
-A move to entirely SMD components would be expected to reduce the footprint of the PCB by half \cite{prasad_surface_1997} allowing the space to be used for a refined op-amp design \cite{mcpherson_portable_2013} or the ability to install in more constrained spaces or flush mounted to surface as one edge of the PCB could be cleared of potruding components.
+A move to entirely SMD components would be expected to reduce the footprint of the PCB by half \cite{prasad_surface_1997} allowing the space to be used for a refined op-amp design \cite{mcpherson_portable_2013} or the ability to install in more constrained spaces or flush mounted to surface as one edge of the PCB could be cleared of protruding components.
 
 The sensor system would benefit from single piece mounting bracket which would allow for much more simplified installation. Given the open source nature of the project the advantages come from the ability to modify the design for a bespoke application.
 
 \subsubsection{Optical Sensor}
-Switching to another optical sensor may yield better response time. Use of QRD1114 which has a faster rise time, greater sensitivity. 
+Switching to another optical sensor may yield better response time. Use of QRD1114 which has a faster rise time and greater sensitivity \cite{onsemiconductor_qrd1114_2024} when compared to the QRE1113 \cite{onsemiconductor_qre1113_2024}. 
 The remainder of the design could be kept the same and the QRD1114 dropped in place of the QRE1113. 
-This is at the cost of greater power consumption (around 0.1V per sensor, but current would also change)
-
-\url{https://www.onsemi.com/pdf/datasheet/qrd1114-d.pdf}
-\url{https://www.onsemi.com/download/data-sheet/pdf/qre1113-d.pdf}
-
-
-
-
+This is at the cost of greater power consumption (around 0.1V per sensor, but current would also change).
+With
 
 \subsubsection{Microcontroller}
 
@@ -230,7 +224,7 @@ The constraint of using platform independent libraries restricted the usage of h
 For the Mark 1, the central programme loop executes as quickly as possible, the result of which is jitter around the base latency for generating MIDI data. 
 To counter act jitter a high-precision, typically hardware, timer would need to be used. The timer either sets a flag to trigger, or executes directly, the routine for reading sensor data and sending MIDI data.
 Timer interrupts and high precision timer logic are chipset and microcontroller specific. 
-Programming the hardware timer Atmels ATMega family of microcontrollers \cite{gammon_interrupts_2012} is very different from Noridic's nRF52 microcontrollers \cite{wolff_realtime_2019}, such as is present on the Nano 33 BLE.
+Programming the hardware timer Atmel's ATMega family of microcontrollers \cite{gammon_interrupts_2012} is very different from Noridic's nRF52 microcontrollers \cite{wolff_realtime_2019}, such as is present on the Nano 33 BLE.
 Commitment to a hardware timer interface or API immediately restricts the types microcontrollers which can be used. Timer code is also not easily ported without sacrificing functionality or adding unnecessary complexity.
 Like the case of the TIA in Section~\ref{sec:tia}, improving the jitter will require a compromise the design and methodology principles of project. Once again it is compromise in accessibility and reproducibility. Not all microarchitectures are equal and neither will they be readily available long into the future. 
 Restricting the microcontroller architecture comes at the risk of obsolescence. This is another reason why documentation and archiving of firmware is important as it can serve as a record of functionality.
@@ -238,7 +232,7 @@ The function of the sensor system at this point is fixed and archived.
 Refining the operation of the firmware through architecture specific code makes it much more likely that it would need to be rewritten for another architecture in the future.
 The nRF52 of the Nano 33 BLE is proven to be more than capable of the task been a part of successful implementation in the Mark 1 keyboard with sub-optimal firmware.
 Continuing to use the Nano 33 BLE, the firmware would be best improved through use of either Nordic's
-\texttt{NRF_TIMERx} API \cite{nordic_timer_2023,nordic_timer_2025} or the \texttt{mbed::Ticker} API \cite{mbed_ticker_2023}. As a hardware timer, the \texttt{NRF_TIMERx}  would provide the greatest temporal resolution and lowest jitter, but manual register setu would prove a much lower eas of use compared to the software \textsc{c++} and object orientated \texttt{mbed::Ticker} API. 
+\texttt{NRF\_TIMERx} API \cite{nordic_timer_2023, nordic_timer_2025} or the \texttt{mbed\:\:Ticker} API \cite{mbed_ticker_2023}. As a hardware timer, the \texttt{NRF\_TIMERx}  would provide the greatest temporal resolution and lowest jitter, but manual register setup would prove a much lower eas of use compared to the software \textsc{c++} and object orientated \texttt{mbed\:\:Ticker} API. 
 Best practice dictates that the timer interrupt should be as short as possible.
 \footnote{``Conventional wisdom among real-time programmers is that ISRs
 should be as short as possible: clear the interrupt, maybe transfer a
@@ -439,7 +433,7 @@ Web tools for plate analysis may be extant, but there is still a gap for a truly
 \end{figure}
 
 
-For Figure~\ref{fig:bihamronic-performance} the computation was run over 20 iterations and the fastest time was then selected. For \textsc{C++} the compute times for \textsc{-O3} and \textsc{-Ofast} optimisations settings are shown.
+For Figure~\ref{fig:bihamronic-performance} the computation was run over 20 iterations and the fastest time was then selected. For \textsc{C++} the compute times for \texttt{-O3} and \texttt{-Ofast} optimisations settings are shown.
 
 
 % Model Name:	MacBook Pro
