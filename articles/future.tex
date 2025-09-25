@@ -134,7 +134,7 @@ V{out} = I_{C}R_{div}
 $$
 
 
-As noted in \textcite{horowitz_art_2015}, this circuit should be assumed to include a capacitor in parallel to the feedback resistor. The phototransistor will begin conducting with a lower light presence, if their is a bias voltage present across the collector and emitter ($V_{CE}$). An example of such a circuit can be see in \textcite{pardue_near_2013} (Figure~\ref{vb-tia}(b)).
+As noted in \textcite{horowitz_art_2015}, this circuit should be assumed to include a capacitor in parallel to the feedback resistor. The phototransistor will begin conducting with a lower light presence, if their is a bias voltage present across the collector and emitter ($V_{CE}$). An example of such a circuit can be see in \textcite{pardue_near_2013} (Figure~\ref{fig:vb-tia}(b)).
 
 \begin{figure}
     \centering
@@ -143,7 +143,7 @@ As noted in \textcite{horowitz_art_2015}, this circuit should be assumed to incl
     \label{fig:tia-bias}
 \end{figure}
 
-In Figure~\ref{tia-bias} there is a bias voltage $V_{b}$ which increases the voltage between the phototransistor collector and emitter, which in turn should improve the response time of the phototransistor \cite{falco_understanding_2023}. 
+In Figure~\ref{fig:tia-bias} there is a bias voltage $V_{b}$ which increases the voltage between the phototransistor collector and emitter, which in turn should improve the response time of the phototransistor \cite{falco_understanding_2023}. 
 
 $$
 V_{out} = V_{b} + I_{C}R_{1}
@@ -350,7 +350,7 @@ For haptics, A double blind study involving a similar installation as \textcite{
 It should first be determined if mechanical recreation is sufficient as part of a digital musical instrument before pursuing elaborate electromechanical emulation.
 Does recreating the harpsichord action at a smaller scale achieve tactile realism? Answer to that question would provide grounds for further work on a purely actuated keyboard.
 
-The ability for the jacks to be disengaged and prevent plucking the string, but still capable of triggering a MIDI message is ripe for exploration. The Mark 2 interface will hopefully serve as a research probe to explore the unique characteristics of the harpsichord and its impact on performance, much in the same manner as other musical haptics studies \cite{charalampos-saitis_musical_2018,fontana_perception_2018}.
+The ability for the jacks to be disengaged and prevent plucking the string, but still capable of triggering a MIDI message is ripe for exploration. The Mark 2 interface will hopefully serve as a research probe to explore the unique characteristics of the harpsichord and its impact on performance, much in the same manner as other musical haptics studies on pianos \cite{charalampos_role_2018, fontana_perception_2018}.
 
 \subsubsection{New Expression}
 
@@ -377,14 +377,13 @@ ARPACK itself is open source \url{https://github.com/opencollab/arpack-ng} and r
 In the case of \textsc{C++}, the relevant technologies available for interfacing with ARPACK library. First is the open source Eigen library for C++ \url{https://gitlab.com/libeigen/eigen} and the Spectra library \url{https://spectralib.org} for eigenvalue problems. Spectra consists of a re-write of ARPACK solvers in C++ allowing for direct native compilation. 
 
 
-
 \subsection{Functionality}
 
 \subsubsection{Tuning}
 
 Taking \textcite{duran_experimentally_2023} as an example.
 
-\begin{table}[]
+\begin{table}
 	\centering
 	\begin{tabular}{c r r r}
 		\toprule
@@ -431,16 +430,19 @@ Further refine the \textsc{c++} and python versions. Relationship between sparse
 
 Given the ultra specific case of the biharmonic, may not require generalised solvers and a more bespoke solving solution may become apparent.
 
-\subsection{Interface}
+\subsection{Interfacing}
+
+Graphical interfaces provide a means to change multiple parameters quickly in a way that is more intuitive for the end user. An interface has already been created in using Jupyter notebooks, but with the implementation of the library in C++ a number of possibilities open up.
 
 \subsubsection{C++ Interface}
 
-- juce, open frameworks
+Graphical user interfaces are typically platform specific, Cocoa for macOS, win32 for windows and either GTK or QT for Linux operating systems, each of which require platform specific implementation. The JUCE framework therefore provides an appealing solution to target all 3 core operating systems simultaneously, with its cross-platform native wrappings for audio libraries and OpenGL for graphics card rendering. The more graphics orientated, but still open source, bgfx\footnote{\url{https://github.com/bkaradzic/bgfx}} may also be more appropriate given its support of multiple 3D graphics rendering libraries.
 
+If the ultimate goal is provide a tool that is easily accessible and cross-platform, developments within web technology may provide the best solution.
 
 \subsubsection{Web Technology}
 
-Porting \textsc{magpie} to a compiled language like \textsc{C++} open up a number of exciting possibliities. 
+Porting \textsc{magpie} to a compiled language like \textsc{C++} open up a number of exciting possibilities. 
 Similarity in results to that of \textsc{matlab} give an indication of a viable plate analysis tool that is not constrained to only those system on which \textsc{matlab} is supported. Of particular  note is the possibility of deploying \textsc{magpie} as an entirely web based application. Traditional software has typically required some form of installation process, where binaries are compiled for a specific machine architecture. Web technologies do away with part of that necessity by delivering software directly through a browser.
 One such technology is Web Assembly (WASM) \url{https://webassembly.org}, which allows for optimised binary code to be executed by a virtual machine in the browser. This is achieved through the emscripten,\footnote{\url{https://emscripten.org}} an open source compiler that enables compilation of \textsc{C} / \textsc{C++} code into WASM. Assembly code capable of more performative execution than the equivalent JavaScript 
 \cite{reiser_accelerate_2017}. When combined with the native \textsc{C++} source of Eigen and Spectra, the emscripten compiler can potentially be used to distribute and execute \textsc{magpie} entirely in the browser.
