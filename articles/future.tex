@@ -19,8 +19,6 @@ Points to hit:
 Going forward with the keyboard interface can be split between further refinement and further application.
 This sections first covers the improvements that can be made to entire keyboard system, separated as it was in Chapter~\ref{} in terms of mechanical interface, hardware electronics and firmware.
 
-\subsection{Refinement}
-
 \subsubsection{Mechanical Interface}
 
 \paragraph{CAD/CAM processes}\label{sec:cad-cam-jacks}
@@ -75,10 +73,7 @@ Figure~\ref{fig:jack-cut-out-3d-print} shows an example of a 3D printed jack of 
 Comparing PLA \cite{bcn3d_pla_2019} to Delrin \cite{dupont_delrin_2017}, a common modern substitute for quill plectra \cite{barclay_preservation_2005}, suggested that the PLA would be too brittle and difficult to rework for adjusting the voicing of the jack. Therefore, at the very leats the 3D printed jacks would still need to be quilled by hand, with likely both quilling and tongue fitting being required. Given time constraints for the Mark 1, the option to pursue 3D printed jacks was abandoned in favour of the gradient stickers, which at the point was low cost, relatively reliable and reproducible.
 The 3D printed jacks were also relatively high risk for sensor placement. Should the vertical placement of sensor be misaligned, the gradient stickers could simply be removed and replaced. With the 3D printed approach, like in Figure~\ref{fig:jack-cut-out-3d-print}, if there was misalignment, the entire jack height would need to be readjusted. For the first implementation at scale, the risk was determined to not be worth the additional time cost of adjusting gradient stickers which, in the context of the full install process, was relatively small by comparison.
 
-\subsubsection{Electronics}
-
-
-\paragraph{PCB layout}
+\subsubsection{PCB Layout}
 
 \begin{figure}
     \centering
@@ -303,6 +298,8 @@ The same logic as the original firmware was programmed and the latency was reduc
 It is possible that the 10 ms latency could be improved upon with appropriate optimisation, but there would be a cost in the form of development time. 
 Consideration would need to be made on the time to port existing source code for the I2C FRAM chip or fall back on a simpler storage option.
 
+
+
 \subsubsection{Exhibition Enhancements}
 
 There are site-specific possibilities for refining the exhibition experience.
@@ -321,9 +318,11 @@ The current audio engine is restrictive to the user experience as their is disco
 An area of improvement that is far outside the scope of this thesis, but still worth covering, is the very nature of visitor interaction within the museum context.
 Spatial observations of visitors during the workshop highlighted that a proportion of visitors walked past the Mark 1 without interacting with it.
 There is the obvious point that visitors will naturally have different experience with same activity \cite{dorph_visitor_2019} and this can be partly put down to which model of visitor they fall into \cite{templeton_museum_2018}. There are also holistic factors to consider which may impact the level of engagement with the exhibit.
+
 The Mark 1 currently sits within the oratory of the museum, surrounded by period instruments to which visitors can only be spectators. The ``hands-off'' model of museum curatorship is one that is typical of the twentieth-century museums, but this was not always the case \cite{howes_introduction_2014}. By contrast, the museums of the seventeenth and eighteenth centuries were very much regarded as ``hands-on'' sites \cite{howes_introduction_2014}, where visitors had permission to touch the exhibits \cite{classen_touch_2005}.
 The idea that we should look, but should not touch, in the museum context is very much learned
 and reinforced by the environment.
+
 By striving for comparable aesthetics to the instruments around, there perhaps arises ambiguity. Every exhibit in the museum is assumed to not be touched. Signage may also be a source of confusion \cite{khalifa_visitors_2025} as it encourages visitors to play the Mark 1, the one exception within the museum, but that may not be enough to overcome the ingrained idea of the museum as a ``site of pure spectatorship'' \cite{howes_introduction_2014}. One might instead hesitate and think twice that perhaps the signage providing permission is misplaced, the risk-benefit analysis of which might leave the visitor inclined to `leave well alone'.
 
 A proposed means to overcome this behaviour is the usage of light. 
@@ -338,7 +337,10 @@ Such a display may be enough to catch the eye of visitors and proactively encour
 
 
 \subsection{Application}
-\subsection{As Research Probe}
+
+Further application of the keyboard system beyond its exhibition at San Colombano.
+
+\subsubsection{As Research Probe}
 
 One of the richest avenues for further research using the interface is as part of a larger study that explores interface haptic feedback as well as the potency of visual aesthetics to player experience.
 
@@ -348,13 +350,15 @@ For haptics, A double blind study involving a similar installation as \textcite{
 It should first be determined if mechanical recreation is sufficient as part of a digital musical instrument before pursuing elaborate electromechanical emulation.
 Does recreating the harpsichord action at a smaller scale achieve tactile realism? Answer to that question would provide grounds for further work on a purely actuated keyboard.
 
-The ability for the jacks to be disengaged and prevent plucking the string, but still capable of triggering a MIDI message is ripe for exploration. The Mark 2 interface will hopefully serve as a research probe to explore the unique characteristics of the harpsichord and its impact on performance, much in the same manner as other musical haptics studies \cite{charalampos-saitis_musical_2018}.
+The ability for the jacks to be disengaged and prevent plucking the string, but still capable of triggering a MIDI message is ripe for exploration. The Mark 2 interface will hopefully serve as a research probe to explore the unique characteristics of the harpsichord and its impact on performance, much in the same manner as other musical haptics studies \cite{charalampos-saitis_musical_2018,fontana_perception_2018}.
 
-\subsection{Study of Visitor Feedback}
+\subsubsection{New Expression}
 
+Pressure control hinted at by \textcite{oboe_mikey_2006} or the transient control that organist believe they have \cite{woolley_musical_2017}, can finally be provided while retaining the key haptic profile of their instrument.
 
-\subsection{Research Software and Academic Institutes}
+Aftertouch, note on and off velocities
 
+The inclusion of for sensitive resistors shown to be viable for \cite{hamilton_two_2025} provides pressure, both against the string and the jack rail. Provide a much quicker and automated means of calibrating the jack displacements and identify false positives.
 
 \section{MAGPIE}
 
@@ -470,6 +474,14 @@ Each plate in comprised of approximately 1.5k grid points, for a total 12k grid 
 \end{figure}
 
 
+MATLAB has functionality to compile its code to WASM (\url{https://www.mathworks.com/matlabcentral/fileexchange/69973-generatejavascriptusingmatlabcoder}). Some functionality such as that in MATLAB's sparse libraries is not currently open to code generation and compilation to a binary outside of the MATLAB runtime (list of functions supported: \url{https://uk.mathworks.com/help/referencelist.html?type=function&capability=codegen&listtype=alpha}) and it is unlikely to be in the near future.
+
+
+A key development for \textsc{MAGPIE} is the addition of an orthotropic model so match more closely that of the quarter-sawn wood as is used for string instrument soundboards. Even further, the addition of braces and lumped masses to the internal system to mimic that of the structural bracing found on physical instruments \cite{ducceschi_open_2024}. 
+
+Presenting the tool kit in an open source well-structure manner should hopefully encourage usage, collaboration and development as the system matures.
+
+
 \paragraph{ITEMM OpenLab / Existing Tools}
 
 \textsc{magpie} is by no means the first tool to provide the functionality described here and neither is it the only ``free'' tool available to do so. The Institut Technologique Européen des Métiers de la Musique (ITEMM) provides a suite of tools for luthiers via its online service known as ITEMM Open Lab\footnote{\url{https://www.openlab-itemm.com}}. ITEMM OpenLab provides resources for thos in the field of musical instrument making, hosting datasets of materials, 3D models and CAD files for instrument parts and tools. Most relevent, is that ITEMM OpenLab also provides a suit of tools for calculating wood properties intended to provide luthiers accesss to toools and processes used in the ITEMM Laboratories.
@@ -486,54 +498,11 @@ One can, after time, identify the relevant files,
 \footnote{calculations take pace in \url{https://www.openlab-itemm.com/wp-content/plugins/ITEMM-OpenLab-tools-main/js/p_w_script.js} and an \texttt{olt} utility class \url{https://www.openlab-itemm.com/wp-content/plugins/ITEMM-OpenLab-tools-main/js/olt_class.js} used across calculators, both of which available without authentication.} 
 but they are missing documentation, attribution and an open source licence. 
 
-The legal notice\footnote{\url{https://www.openlab-itemm.com/mentions-legals/}} on ITEMM OpenLab covers the 3D objects, but this does not naturally extend to the software \cite{cc_can_2025}. Instead, the software calculators should have an explicit open source licence attached to them so that there terms of use are clearer. From ITEMM OpenLab's desciprtive text and legal notice it is clear that attribution and accessibility are core principles, both of which would be better served by a clear citation system \cite{soito_citations_2016}, especially if these tools are to be used for further use.
+The legal notice\footnote{\url{https://www.openlab-itemm.com/mentions-legals/}} on ITEMM OpenLab covers the 3D objects, but this does not naturally extend to the software \cite{cc_can_2025}. Instead, the software calculators should have an explicit open source licence attached to them so that there terms of use are clearer. From ITEMM OpenLab's descriptive text and legal notice it is clear that attribution and accessibility are core principles, both of which would be better served by a clear citation system \cite{soito_citations_2016}, especially if these tools are to be used for further use.
 The 'open first' design methodology of \textsc{magpie} was in part to avoid issues in lack of clarity for reuse.
 
 \textcite{stallman_floss_2021} differentiates between free open source software (FOSS) and free / libre open source  software (FLOSS). Such a distinction is to make clear the meaning of `free' given its ambiguity of free as in ``free speech'' or as ``free beer'' \cite{stallman_why_2007}. FLOSS is a distinction of open source software where ``free'' carries both meanings.
 Web tools for plate analysis may be extant, but there is still a gap for a truly free and open tool where the `free' and `open' are not lowercase.
-
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\linewidth]{example-image}
-    \caption{Parameters for the Biharmonic used in benchmarking tests/}
-    \label{fig:eigensolver-performance}
-\end{figure}
-
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\linewidth]{img/plot-biharmonic-comparison.pdf}
-    \caption{Compute time of for the biharmonic from 1000 to 1000000 grid points in MATLAB, Python and C++.}
-    \label{fig:bihamronic-performance}
-\end{figure}
-
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\linewidth]{img/plot-eigensolver-comparison.pdf}
-    \caption{Compute time for 10 to 500 eigenvalues using an eigensolver in shift-invert mode in MATLAB, Python and C++. Biharmonic consisting of 10000 grid points with parameters given in Figure~\ref{fig:benchmark_parameters}.}
-    \label{fig:eigensolver-performance}
-\end{figure}
-
-
-For Figure~\ref{fig:bihamronic-performance} the computation was run over 20 iterations and the fastest time was then selected. For \textsc{C++} the compute times for \texttt{-O3} and \texttt{-Ofast} optimisations settings are shown.
-
-
-% Model Name:	MacBook Pro
-% Model Identifier:	Mac14,9
-% Model Number:	MPHH3T/A
-% Chip:	Apple M2 Pro
-% Total Number of Cores: 10 (6 performance and 4 efficiency)
-% Memory: 16 GB
-
-
-MATLAB has functionality to compile its code to WASM (\url{https://www.mathworks.com/matlabcentral/fileexchange/69973-generatejavascriptusingmatlabcoder}). Some functionality such as that in MATLAB's sparse libraries is not currently open to code generation and compilation to a binary outside of the MATLAB runtime (list of functions supported: \url{https://uk.mathworks.com/help/referencelist.html?type=function&capability=codegen&listtype=alpha}) and it is unlikely to be in the near future.
-
-
-A key development for \textsc{MAGPIE} is the addition of an orthotropic model so match more closely that of the quarter-sawn wood as is used for string instrument soundboards. Even further, the addition of braces and lumped masses to the internal system to mimic that of the structural bracing found on physical instruments \cite{ducceschi_open_2024}. 
-
-Presenting the tool kit in an open source well-structure manner should hopefully encourage usage, collaboration and development as the system matures.
 
 \subsubsection{Emebedded Systems}
 
