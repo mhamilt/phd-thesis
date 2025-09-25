@@ -5,21 +5,26 @@ The projects covered in the previous chapters have use cases and application in 
 By refining and developing the work covered herein, these should hopefully be worthwhile tools within research to come. This chapter covers the areas for development within each project and impact that may have on future research.
 
 
-
+Points to hit:
+\begin{itemize}
+    \item could be made smaller, but would be sensible to explore if the tactile elements make a difference
+    \item could use cad cam parts, stickers aren't great
+    \item fabrication could be parametrised for jack spacings
+    \item fabrication be largely automated, no need for THT parts. SMD would shrink things massively.
+    \item improved circuitry, incorporating a similar op amp circuit from \cite{mcpherson_portable_2013} which can allow for a tuned voltage range, utilising the full range of the ADC used rather than what is given.
+\end{itemize}
 
 \section{Interface}
 
 Going forward with the keyboard interface can be split between further refinement and further application.
 This sections first covers the improvements that can be made to entire keyboard system, separated as it was in Chapter~\ref{} in terms of mechanical interface, hardware electronics and firmware.
 
-
-
 \subsection{Refinement}
 
 \subsubsection{Mechanical Interface}
 
-\paragraph{CAD/CAM processes}
-Easing acces to fabrication and permitting iteration on designs
+\paragraph{CAD/CAM processes}\label{sec:cad-cam-jacks}
+Easing access to fabrication and permitting iteration on designs
 
 A major limitation across all interfaces discussed in Chapter~\ref{} is the gradient stickers used for the sensor. Although the stickers are printed and cut by machines, allowing for large quantitites to be made, they still need to be applied by hand. In the application process it not uncommon for the graident stickers to be too wide. The short edge of the jacks were roughly similar, at around 4.35 mm, but they were made by manually resulting in variation across the full set. The jacks and the jack-slide are wooden and such prone to expansion and contraction with changes in humidity. This was the case for when the Mark 1 (Sections~\ref{sec:mark-1}) was moved from the laboratory, where many jacks that were freely moving became constricted in their slots. This meant that the gradient stickers either needed trimmed or replaced entirely, with reapplication also necessitating re-calibration. Inspecting and adjusting 98 jacks was a time consuming task and one ripe for optimisations.
 The adhesive for the stickers was hi-tack meaning that they were unlikely to fall off. The lifespan of the adhesive is finite, rated to around four years for outdoor use \cite{antalis_coala_2025}. Factoring in that the jacks are moving, creating friction with the inside of the jack slot, will likely mean the lifespan of the sticker adhesive is shorter.
@@ -69,15 +74,6 @@ section of the jack would be cut out (Figure~\ref{}. As the cut out section pass
 Figure~\ref{fig:jack-cut-out-3d-print} shows an example of a 3D printed jack of which six were created for use with the prototype (Section~\ref{sec:prototype}). Test using this system were promising but there were a number of limitations. The tongues and plectra still needed fitted to all jacks, which would either need to be done after the printing or as part of the print. 
 Comparing PLA \cite{bcn3d_pla_2019} to Delrin \cite{dupont_delrin_2017}, a common modern substitute for quill plectra \cite{barclay_preservation_2005}, suggested that the PLA would be too brittle and difficult to rework for adjusting the voicing of the jack. Therefore, at the very leats the 3D printed jacks would still need to be quilled by hand, with likely both quilling and tongue fitting being required. Given time constraints for the Mark 1, the option to pursue 3D printed jacks was abandoned in favour of the gradient stickers, which at the point was low cost, relatively reliable and reproducible.
 The 3D printed jacks were also relatively high risk for sensor placement. Should the vertical placement of sensor be misaligned, the gradient stickers could simply be removed and replaced. With the 3D printed approach, like in Figure~\ref{fig:jack-cut-out-3d-print}, if there was misalignment, the entire jack height would need to be readjusted. For the first implementation at scale, the risk was determined to not be worth the additional time cost of adjusting gradient stickers which, in the context of the full install process, was relatively small by comparison.
-
-\begin{itemize}
-    \item could be made smaller, but would be sensible to explore if the tactile elements make a difference
-    \item could use cad cam parts, stickers aren't great
-    \item fabrication could be parametrised for jack spacings
-    \item fabrication be largely automated, no need for THT parts. SMD would shrink things massively.
-    \item improved circuitry, incorporating a similar op amp circuit from \cite{mcpherson_portable_2013} which can allow for a tuned voltage range, utilising the full range of the ADC used rather than what is given.
-\end{itemize}
-
 
 \subsubsection{Electronics}
 
@@ -142,7 +138,8 @@ $$
 V{out} = I_{C}R_{div}
 $$
 
-As noted in \textcite{horowitz_art_2015}, this circuit should be assumed to include a capacitor in parallel to the feedback resistor, an example of which can be see in \textcite{pardue_near_2013} (Figure~\ref{vb-tia}(b)).
+
+As noted in \textcite{horowitz_art_2015}, this circuit should be assumed to include a capacitor in parallel to the feedback resistor. The phototransistor will begin conducting with a lower light presence, if their is a bias voltage present across the collector and emitter ($V_{CE}$). An example of such a circuit can be see in \textcite{pardue_near_2013} (Figure~\ref{vb-tia}(b)).
 
 \begin{figure}
     \centering
@@ -167,10 +164,10 @@ Rail-to-rail op-amps are those that permits the voltage output to be up to the l
 \end{figure}
 
 
-Voltage output $V_{\text{out}}$ is given as
+Voltage output $V_{\text{out}}$ in this circuit becomes:
 
 $$
-V_{out} = \frac{R_1}{R_1 + R_2} V_{cc} + I_{C}R_{f} + \frac{R_f}{R_{in}}V_{cc}(\frac{R_1}{R_1 + R_2} - 1)
+V_{out} = V_{ref} + I_{C}R_{5} + \frac{R_5}{R_4}(3.3 - V_{\text{ref}})
 $$
 
 With the addition of $R_4$ to bias the output voltage, the op-amp is now in a differential amplifier configuration. 
@@ -212,14 +209,60 @@ A move to entirely SMD components would be expected to reduce the footprint of t
 The sensor system would benefit from single piece mounting bracket which would allow for much more simplified installation. Given the open source nature of the project the advantages come from the ability to modify the design for a bespoke application.
 
 \subsubsection{Optical Sensor}
-Switching to another optical sensor may yield better response time. Use of QRD1114 which has a faster rise time and greater sensitivity \cite{onsemiconductor_qrd1114_2024} when compared to the QRE1113 \cite{onsemiconductor_qre1113_2024}. 
-The remainder of the design could be kept the same and the QRD1114 dropped in place of the QRE1113. 
-This is at the cost of greater power consumption (around 0.1V per sensor, but current would also change).
-The different properties of the QRD1114 and the QRE1113 are such that the resistor values of Figure~\ref{fig:tia-basic}, ~\ref{fig:tia-bias}, and ~\ref{fig:tia-diff} will likely need to change.
-The QRD1114 seems to have different rise and fall times suggesting that 
 
-1. tye bias of these circuits needs to be different
-2. the input resistor for inverting input needs to be lower.
+Switching to another variety of optical sensor, such as the On Semiconductor QRD1114 \cite{onsemiconductor_qrd1114_2024} may yield better results. 
+The optical characteristics of the QRD1114 \cite{onsemiconductor_qrd1114_2024} and the QRE1113 \cite{onsemiconductor_qre1113_2024} differ enough that resistor values of the TIA circuit in \textcite{mcpherson_portable_2013} will need to change. For clarity, a more generalised phototransitor TIA circuit is given in Figure~\ref{fig:general-tia}:
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{example-image}
+    \caption{PLACEHOLDER Generalised TIA circuit for a optoisolator such as the optical sensors QRE1113 and QRD1114.}
+    \label{fig:general-tia}
+\end{figure}
+
+To restate the parameters and constraints of the generalised phototransitor TIA circuit: 
+
+\begin{itemize}
+    \item $R_{in}$ will dictate the impedance seem by the phototransistor $Q$. 
+    \item $R_{f}$ will dictate scaling of change in collector current $I_{C}$ to the change output voltage $V_{\text{out}}$ such that $\Delta V_{\text{out}} = \Delta I_C R_f$  \cite{mcpherson_portable_2013}.
+    \item CMRR is adjusted in the ratios of all four resistor, with an approximate rule of $\frac{R_f}{R_{in}} \approx \frac{R_1}{R_2}$
+    \item $V_{\text{ref}}$ the resulting reference voltage of the voltage divider from $R_1$ and $R_2$ will apply result in voltage bias across the collector and emitter $V_{CE} \approx V_{\text{ref}}$
+    \item to avoid the need for a rail-to-rail op-amp, the inverting input is biased by $V_{CC}$ resulting in a $V_{out}$ of:
+\end{itemize}
+
+$$
+V_{out} = \frac{R_1}{R_1 + R_2} V_{cc} + I_{C}R_{f} + \frac{R_f}{R_{in}}V_{cc}(\frac{R_1}{R_1 + R_2} - 1)
+$$
+The QRD1114 has a faster rise time and greater sensitivity \cite{onsemiconductor_qrd1114_2024} when compared to the QRE1113 \cite{onsemiconductor_qre1113_2024} and could be used as a drop-in replacement, with the remainder of the design being unchanged. While the QRD1114 has a faster rise time its asymmetric rise and fall times and the higher fall time suggests a greater presence parasitic capacitance. The effect can be mitigated by the usage of a smaller pull-up resistor ($R_1$ in Figure~\ref{fig:simple-schematic}) or smaller value $R_{in}$ in Figure~\ref{fig:general-tia}, the substitution of which would necessitate new choice of values for the remaining three resistors.
+With careful choice of TIA circuit, the QRD1114 may provide the sensitivity required to reintroduce the laser-cut speckle pattern as suggested in Section~\ref{sec:cad-cam-jacks}.
+% \begin{table}
+% 	\centering
+% 	\begin{tabular}{|l|l|l|l|l|l|l|}
+% 		\hline
+% 		\textbf{Symbol} & \textbf{Parameter}                   & \textbf{Test Conditions}                           & \textbf{min} & \textbf{Typical} & \textbf{Max} & \textbf{unit} \\ \hline
+% 		$I_{D}$         & Dark Current                         & $V_{CE} = 10V,  I_{F} = 0mA$                       &              &                  & 100          & $nA$          \\ \hline
+% 		$I_{C(ON)}$     & On-State Collector Current           & $I_{F} = 20 mA, V_{CE} = 5, D = ~1mm$              & 1            &                  &              & $mA$          \\ \hline
+% 		$V_{CE(SAT)}$   & Collector Emitter Saturation Voltage & $I_F = 40mA, I\_C = 100 µA, D = ~1mm$              &              &                  & 0.4          & $V$           \\ \hline
+% 		$I_{CX}$        & Cross Talk                           & $I_F = 20mA,   V_{CE} = 5V$                        &              & 0.2              & 10           & $µA$          \\ \hline
+% 		$t_r$           & Rise Time                            & $V_{CE} = 5 V, R_{L} = 100 ohms, I_{C(ON)} = 5 mA$ &              & 10               &              & $µs$          \\ \hline
+% 		$t_f$           & Fall Time                            & $V_{CE} = 5 V, R_{L} = 100 ohms, I_{C(ON)} = 5 mA$ &              & 50               &              & $µs$          \\ \hline
+% 	\end{tabular}
+% \end{table}
+
+% \begin{table}
+% 	\centering
+% 	\begin{tabular}{|l|l|l|l|l|l|l|}
+% 		\hline
+% 		\textbf{Symbol} & \textbf{Parameter}                   & \textbf{Test Conditions}                             & \textbf{min} & \textbf{Type} & \textbf{Max} & \textbf{unit} \\ \hline
+% 		$I_{D}$         & Dark Current                         & $V_{CE} = 20V,  I_{F} = 0mA$                         &              &               & 100          & $nA$          \\ \hline
+% 		$I_{C(ON)}$     & On-State Collector Current           & $I_{F} = 20 mA, V_{CE} = 5, D = \~1mm$               & 0.3          & 0.9           &              & $mA$          \\ \hline
+% 		$V_{CE(SAT)}$   & Collector Emitter Saturation Voltage & $I_F = 20mA,    I_{C} = µA$                          &              &               & 0.3          & $V$           \\ \hline
+% 		$I_{CX}$        & Cross Talk                           & $I_F = 20mA,    V_{CE} = 5V$                         &              &               & 1            & $µA$          \\ \hline
+% 		$t_r$           & Rise Time                            & $V_{CE} = 5 V,  R_{L} = 1 kOhms, I_{C(ON)} = 100 µA$ &              & 20            &              & $µs$          \\ \hline
+% 		$t_f$           & Fall Time                            & $V_{CE} = 5 V,  R_{L} = 1 kOhms, I_{C(ON)} = 100 µA$ &              & 20            &              & $µs$          \\ \hline
+% 	\end{tabular}
+% \end{table}
+
 
 
 \subsubsection{Microcontroller}
@@ -260,12 +303,52 @@ The same logic as the original firmware was programmed and the latency was reduc
 It is possible that the 10 ms latency could be improved upon with appropriate optimisation, but there would be a cost in the form of development time. 
 Consideration would need to be made on the time to port existing source code for the I2C FRAM chip or fall back on a simpler storage option.
 
-\subsubsection{Site Specific Enhancements}
+\subsubsection{Exhibition Enhancements}
 
-adding shakers to seat
+
+\paragraph{Vibration}
+
+adding shakers to seat \cite{merchel_vibratory_2009, merchel_functional_2018}
+- The perceived overall quality of concert DVD reproduction can be improved by adding vertical whole body vibrations.
+- The vibration signals for the selected sequences could be generated by low pass filtering the audio sum signal.
+- The ideal low pass frequency depends on the specific music content.
+- The preference for a specific whole body vibration amplitude varies.
+- the lower cutoff frequency is recommended to minimize sound generation from the vibration system.
+Could be deployed as seat, or a vibrating floor panel, though the former would be a much smaller technical challenge.
+To this end, one successful approach involves compression in the frequency range, e.g., using octave shifting. 
+In particular, frequency resolution and pitch perception are strongly restricted [42] for touch, which allows the modification of frequency content within a wide range.
+
+
+\begin{quotation}
+    This fact is particularly critical if the audio signal is reproduced for one person via headphones,
+    as a second person in the room would be quite disturbed by only hearing the sound generated by the shaker. An attempt was undertaken to further reduce such undesired sound. This goal could be accomplished, e.g., by insulating the vibrating surfaces as much as possible. Because good insulation is difficult to achieve in our case, one effective approach would be to reduce the vibration signal to the fundamental spectral component contained in the signal.
+\end{quotation}
+
+\paragraph{Convolution}
+
 convolving with impulse response from point of audition (IF headphones)
 
-\subsubsection{Firmware}
+\paragraph{Encouraging Engagement}
+
+An area of improvement that is far outside the scope of this thesis, but still worth covering, is the very nature of visitor interaction within the museum context.
+Spatial observations of visitors during the workshop highlighted that a proportion of visitors walked past the Mark 1 without interacting with it.
+There is the obvious point that visitors will naturally have different experience with same activity \cite{dorph_visitor_2019} and this can be partly put down to which model of visitor they fall into \cite{templeton_museum_2018}. There are also holistic factors to consider which may impact the level of engagement with the exhibit.
+The Mark 1 currently sits within the oratory of the museum, surrounded by period instruments to which visitors can only be spectators. The ``hands-off'' model of museum curatorship is one that is typical of the twentieth-century museums, but this was not always the case \cite{howes_introduction_2014}. By contrast, the museums of the seventeenth and eighteenth centuries were very much regarded as ``hands-on'' sites \cite{howes_introduction_2014}, where visitors had permission to touch the exhibits \cite{classen_touch_2005}.
+The idea that we should look, but should not touch, in the museum context is very much learned
+and reinforced by the environment.
+By striving for comparable aesthetics to the instruments around, there perhaps arises ambiguity. Every exhibit in the museum is assumed to not be touched. Signage may also be a source of confusion \cite{khalifa_visitors_2025} as it encourages visitors to play the Mark 1, the one exception within the museum, but that may not be enough to overcome the ingrained idea of the museum as a ``site of pure spectatorship'' \cite{howes_introduction_2014}. One might instead hesitate and think twice that perhaps the signage providing permission is misplaced, the risk-benefit analysis of which might leave the visitor inclined to `leave well alone'.
+
+A proposed means to overcome this behaviour is the usage of light. 
+As part of an exhibition, light influences and encourages us where to look. 
+Light grabs our intention and differentiates objects within the space.  
+As shown in Figure~\ref{fig:mark1-leds} and \ref{fig:mark-2}, both keyboards contain an LED lighting system that is used as a visual aid during the calibration. Once calibration is complete, however, the LEDs lay completely dormant and unused. 
+Since the aesthetic are similar to the surrounding historic instruments, the exhibition keyboard requires some method to differentiate it form the other, marking it out as different. 
+The RGB LEDs may provide a means to achieve this and would give them a second purpose as part of the exhibition.
+The diagnostic lighting of Figure~\ref{fig:mark1-leds} and \ref{fig:mark-2} is perhaps not the best aesthetic choice for the museum context.
+More fitting would be a slow oscillating (breathing) warm white LED display which would activate after some period of dormancy. 
+Such a display may be enough to catch the eye of visitors and proactively encourage interaction.
+
+
 \subsection{Application}
 \subsection{As Research Probe}
 
