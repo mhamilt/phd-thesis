@@ -926,14 +926,14 @@ A set wrapper functions was written for the FRAM library \footnote{Adafruit SPI 
     \label{tab:fram-structure}
 \end{table}
 
-If the firmware starts in the `calibration state', the threshold values can modified and written to FRAM. In this mode, data from a single, selected sensor is written over the serial bus which can then be visualised. Figure~\ref{fig:serial_monitor} shows the threshold values being plotted , utilising the serial plotter of the Arduino IDE, alongside a live sensor reading to help identify the correct pluck point. The thresholds were calibrated first roughly calibrated in the NEM US laboratory through visual reference to the serial monitor (Figure \ref{fig:serial_monitor}) and the open source MIDI Monitor
-software \footnote{\url{https://github.com/krevis/MIDIApps}}. The calibration workflow was carried out with the support of Dr. Craig Webb who, being unfamiliar with the system, could help with drawing up a workflow to disseminate to an untrained user. Adjustments were made to the firmware to to make it more intuitive for the staff at San Colombano where a finer calibration process was carried out with the guidance of expert harpsichord performer Catalina Vicens.
-A MIDI message is generated as the sensor reading passes the thresholds allowing the user to audition the keyboard with a sampler and adjust the thresholds accordingly. The jack's corresponding LED reports with colours green (\texttt{PLUCKED}), orange (\texttt{PRESSED}) and blue (\texttt{RELEASED}) for quick visual confirmation of key state. Red is used to indicate sensor readings outside expected values that are close to either the minimum or maximum of the ADC, which would indicate a malfunctioning or misaligned sensor board.
+If the firmware starts in the `calibration state', the threshold values can modified and written to FRAM. In this mode, data from a single, selected sensor is written over the serial bus which can then be visualised. Figure~\ref{fig:serial_monitor} shows the threshold values being plotted , utilising the serial plotter of the Arduino IDE, alongside a live sensor reading to help identify the correct pluck point. The thresholds were calibrated first roughly calibrated in the NEMUS laboratory through visual reference to the serial monitor (Figure \ref{fig:serial_monitor}) and the open source MIDI Monitor
+software \footnote{\url{https://github.com/krevis/MIDIApps}}. The calibration workflow was carried out with the support of Dr Craig Webb, who, being unfamiliar with the system, could help with drawing up a workflow to disseminate to an untrained user. Adjustments were made to the firmware to make it more intuitive for the staff at San Colombano, where a finer calibration process was carried out with the guidance of expert harpsichord performer Catalina Vicens.
+A MIDI message is generated as the sensor reading passes the thresholds, allowing the user to audition the keyboard with a sampler and adjust the thresholds accordingly. The jack's corresponding LED reports colours green (\texttt{PLUCKED}), orange (\texttt{PRESSED}), and blue (\texttt{RELEASED}) for quick visual confirmation of the key state. Red is used to indicate sensor readings outside expected values that are close to either the minimum or maximum of the ADC, which would indicate a malfunctioning or misaligned sensor board.
 
 \begin{figure}  
   \centering
   \includegraphics[width=1\linewidth]{img/serial_monitor.png} 
-  \caption{Example of calibrating a pluck threshold using the Arduino IDE Serial Plotter in a 10-bit ADC mode. Plot shows the key at index 32 (\texttt{K32}) and its current pluck threshold (\texttt{T32}). \texttt{M} and \texttt{m} are the maximum and minimum values to normalise the y axis of the plot.}   
+  \caption{Example of calibrating a pluck threshold using the Arduino IDE Serial Plotter in a 10-bit ADC mode. Plot shows the key at index 32 (\texttt{K32}) and its current pluck threshold (\texttt{T32}). \texttt{M} and \texttt{m} are the maximum and minimum values to normalise the y-axis of the plot.}   
   \label{fig:serial_monitor}
 \end{figure}
 
@@ -946,10 +946,10 @@ A MIDI message is generated as the sensor reading passes the thresholds allowing
     \label{fig:installation}
 \end{figure}
 
-Once a sensor system had been fabricated, the next stage was to install it within the mechanical interface.  Electronics were designed to be a bespoke installation, after which brackets and enclosures could be drafted to hasten the install process. This also provided flexibility to adjust wiring and fitting should there be any unforeseen problems. One such problem was the change from a horizontal to a vertical design
+Once a sensor system had been fabricated, the next stage was to install it within the mechanical interface.  Electronics were designed to be a bespoke installation, after which brackets and enclosures could be drafted to hasten the installation process. This also provided flexibility to adjust wiring and fittings should any unforeseen problems arise. One such problem was the change from a horizontal to a vertical design.
 
-The electronic components were partly pre-assembled at the university of
-Edinburgh. Though all measurements were known ahead, enough flexibility was
+The electronic components were partly pre-assembled at the University of
+Edinburgh. Though all measurements were known ahead of time, enough flexibility was
 needed to allow for problems to be solved in situ.
 
 The final assembly took place at the NEMUS lab at the University of Bologna over

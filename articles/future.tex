@@ -338,7 +338,7 @@ Such a display may be enough to catch the eye of visitors and proactively encour
 
 \subsection{Application}
 
-Further application of the keyboard system beyond its exhibition at San Colombano.
+As well as a means of engagement and conservation of instructional value within musical cultural heritage the keyboard interfaces presented in this thesis are not limited to just this application. This section briefly discusses further application and areas for research of which the augmented interface, or a future version, may have in other field of research.
 
 \subsubsection{As Research Probe}
 
@@ -352,13 +352,26 @@ Does recreating the harpsichord action at a smaller scale achieve tactile realis
 
 The ability for the jacks to be disengaged and prevent plucking the string, but still capable of triggering a MIDI message is ripe for exploration. The Mark 2 interface will hopefully serve as a research probe to explore the unique characteristics of the harpsichord and its impact on performance, much in the same manner as other musical haptics studies on pianos \cite{charalampos_role_2018, fontana_perception_2018}.
 
-\subsubsection{New Expression}
+\subsubsection{Old Interfaces, New Expression}
 
-Pressure control hinted at by \textcite{oboe_mikey_2006} or the transient control that organist believe they have \cite{woolley_musical_2017}, can finally be provided while retaining the key haptic profile of their instrument.
+Much has been discussed already about musical cultural heritage and the purpose of interface for providing a means for instructional engagement.
+That is not to say that the purpose of such interfaces can and should be constrained to only this scope.
+In Section~\ref{} we mentioned the research by \textcite{oboe_mikey_2006} which briefly hint at limitation in expressive for the harpsichord and more broadly keyboard instruments as a whole. 
+The ability to affect the note after it has been played has long been a debate among piano, harpsichord and keyboard players alike \cite{}. With traditional acoustic keyboard instrument, this is just not possible. Further, the manner in which an organ key is pressed has been claimed to affect the transients of the notes, but this is has also been shown to be a false \cite{woolley_musical_2017}.
 
-Aftertouch, note on and off velocities
+On the other hand, an augmented interface with sensors tracking key velocity and pressure is capable of providing these modes of expression.
+This is part of the intention with the Mark 2 keyboard, which by its open and documented construction allows for wealth of modification possibilities within its firmware.
+For traditional MIDI keyboards, aftertouch is not a new concept, beginning to be used in 1983 in the Prophet T8 \cite{wiffen_prophet_1983} and a part of the MIDI standard authored in the same year \cite{jungleib_complete_1983}.
+The triggering system for MIDI notes works on passing thresholds in the optical sensor signal, but there is still a stream of data waiting.
+The open source nature of firmware means that the end user is not locked out of parameter "mapping" process \cite{hunt_importance_2002}, but instead they can directly change what the available data can control.
+The sensor data can be used to track velocity and jack displacement both before and after plucks. 
 
-The inclusion of for sensitive resistors shown to be viable for \cite{hamilton_two_2025} provides pressure, both against the string and the jack rail. Provide a much quicker and automated means of calibrating the jack displacements and identify false positives.
+MIDI note on and note off messages give a natural point of entry for such data.
+The addition or pressure sensors in the key bed, or on the jack rail would provide  an additional vector of musical expression \cite{hamilton_two_2025}.
+In combination with the haptic nature of the interface, such developments to the firmware would give a means to return these transient controls \cite{woolley_musical_2017} back to the performer.
+
+The interface provides a method for retaining kinaesthetic information that would be present in original music played on the harpsichord. 
+The interface can equally, and hopefully, be used as conduit for engaging the traditional and the modern, harnessing the kinaesthetics of an old interface, but for new expressions in modern music.
 
 \section{MAGPIE}
 
