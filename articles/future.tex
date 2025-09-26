@@ -1,6 +1,6 @@
 \chapter{Future Development}\label{ch:future-development}
 
-\section{Introduction}
+% \section{Introduction}
     
 The two projects covered in the previous chapters have use cases and application in their current form, however the work presented in this thesis does not represents a terminus, but rather a starting point with rich possibilities for expansion.
 By refining and developing the work covered herein, these should hopefully be worthwhile tools within research to come. Some developments could not be undertaken due to restraints in time, while other would compromise in some manner the core design principles or aspects of the open methodology. This chapter covers the areas for development within both projects and the impact that may have on future research. Where relevant justification is given for why some developments were not pursued as well as guidance and caution as to how some devlopments may impact other aspects of the project.
@@ -9,19 +9,20 @@ Section~\ref{sec:future-magpie} discusses the further developments to be made to
 
 \section{Interaction}\label{sec:future-interaction}
 
-Going forward with the keyboard interface can be split between further refinement and further application.
-This sections first covers the improvements that can be made to entire keyboard system, separated as it was in Chapter~\ref{} in terms of mechanical interface, hardware electronics and firmware.
+Developments to the the keyboard interface can be split between further refinement in both its execution, improvements when deployed within an exhibition context and further application beyond the exhibition at San Colombano.
+Refinements to the interface include the adoption of CAD/CAM processes during the mechanical interface construction process as well as major and minor improvements to the executions of the optical sensing system.
 
 \subsection{CAD/CAM processes}\label{sec:cad-cam-jacks}
-Easing access to fabrication and permitting iteration on designs
 
 A major limitation across all interfaces discussed in Chapter~\ref{} is the gradient stickers used for the sensor. Although the stickers are printed and cut by machines, allowing for large quantities to be made, they still need to be applied by hand. In the application process it not uncommon for the gradient stickers to be too wide. The short edge of the jacks were roughly similar, at around 4.35 mm, but they were made by manually resulting in variation across the full set. The jacks and the jack-slide are wooden and such prone to expansion and contraction with changes in humidity. This was the case for when the Mark 1 (Sections~\ref{sec:mark-1}) was moved from the laboratory, where many jacks that were freely moving became constricted in their slots. This meant that the gradient stickers either needed trimmed or replaced entirely, with reapplication also necessitating re-calibration. Inspecting and adjusting 98 jacks was a time consuming task and one ripe for optimisations.
 The adhesive for the stickers was hi-tack meaning that they were unlikely to fall off. The lifespan of the adhesive is finite, rated to around four years for outdoor use \cite{antalis_coala_2025}. Factoring in that the jacks are moving, creating friction with the inside of the jack slot, will likely mean the lifespan of the sticker adhesive is shorter.
 
 Preferably, the surface for the optical sensors would be integral to the construction of the jack. Given the small area of a 4.35mm short edge an ~8mm travel, creating a surface of varying reflectance by hand is not feasible. The process would therefore need to be automated or computer aided.
-Two immediate options present themselves: the modification of the current jacks or CAD/CAM fabrication of the jacks entirely.
+Two immediate options present themselves: the modification of the current jacks or CAD/CAM fabrication of the jacks entirely, the latter of which has become much more accessible in recent years. CAD/CAM in this context includes 3D printing, computer numerical control routing, and laser cutting, which requires either 3D modelling or vector graphics software. 
+For 3D modelling, AutoDesk's Fusion 360\footnote{\url{https://www.autodesk.com/products/fusion-360/personal}} has a free tier available for personal use and was used for the modelling throughout the project. Vector graphics for laser cutting can be achieved either through open source projects like InkScape,\footnote{\url{https://inkscape.org}}. Given the very simple but large quantity of shapes involved many of the laser cutting vector files were produced through the Processing\footnote{\url{https://processing.org}} development environment. 
+Though they may not be always used a final design, CAD/CAM prototypes ease access to fabrication process and permit much quicker iterations on designs.
 
-Research into both approaches were undertaken but ultimately a satisfactory result compared to the gradient sticker approach was not found. Both approaches showed promise but were ultimately too unrefined to be applied to the Mark 1.
+Research into both modification of the jacks or their CAD/CAM manufacture were undertaken, but ultimately a satisfactory result compared to the gradient sticker approach was not found. Both approaches showed promise but were ultimately too unrefined to be applied to the Mark 1.
 
 
 \begin{figure}
@@ -101,9 +102,10 @@ The new sensor module would be connected to the signal board, which houses the r
     \label{fig:led-diffuser}
 \end{figure}
 
-\subsection{Latency}
+\subsection{Latency and Jitter}
 
-Though system is functioning there is still room for improvement with respect to latency. The latency is bottlenecked by two junctions in the system. First the sensor switching and then in the microcontroller itself.
+Though sensor system is working effectively in the measurement of jack displacement, there is still room for improvement with respect to latency. Latency in this case is the time between a string being plucked and the corresponding MIDI signal being sent. As covered in Section~\ref{sec:latency}, the latency of the current system averages at 2 milliseconds with 1 millisecond of jitter. The latency is bottlenecked by two points in the system: the sensor signal measurement and then in the microcontroller itself.
+Limitation in the sensor signal measurement is affected the inherent parasitic capacitance that is present on all transistors. The microcontroller is limited by the response time of the phototransistors. Even if the response rate is improved the microcontroller, or its firmware, could still contribute to suboptimal latency. As such, in terms of latency, the sensor signal measurement should be addressed first. Besides latency the microcontroller is the sole contributor to jitter. Irregular timing in the central firmware loop results in deviation in time. This section will cover the methods for reducing jitter, but the consequences that impact the rest of design as a result.
 
 \subsubsection{Sensor Signal Measurement}\label{sec:tia}
 
