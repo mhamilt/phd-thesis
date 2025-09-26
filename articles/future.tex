@@ -1,33 +1,24 @@
+\chapter{Future Development}\label{ch:future-development}
 
 \section{Introduction}
     
-The projects covered in the previous chapters have use cases and application in their current form, however the  work here represents not a terminus of the ideas but rather a rich possibility for expansion.
-By refining and developing the work covered herein, these should hopefully be worthwhile tools within research to come. This chapter covers the areas for development within each project and impact that may have on future research.
+The two projects covered in the previous chapters have use cases and application in their current form, however the work presented in this thesis does not represents a terminus, but rather a starting point with rich possibilities for expansion.
+By refining and developing the work covered herein, these should hopefully be worthwhile tools within research to come. Some developments could not be undertaken due to restraints in time, while other would compromise in some manner the core design principles or aspects of the open methodology. This chapter covers the areas for development within both projects and the impact that may have on future research. Where relevant justification is given for why some developments were not pursued as well as guidance and caution as to how some devlopments may impact other aspects of the project.
+The sections are split by project with Section~\ref{sec:future-interaction} covering developments to the keyboard, in particular improvements to the method for measuring the optical sensor current and concessions that would need to be made.
+Section~\ref{sec:future-magpie} discusses the further developments to be made to \textsc{magpie}, which as an open source project will hopefully see much more expansion for years to come. This section serves as a roadmap for how \textsc{magpie} could be expanded and core motivations.
 
-
-Points to hit:
-\begin{itemize}
-    \item could be made smaller, but would be sensible to explore if the tactile elements make a difference
-    \item could use cad cam parts, stickers aren't great
-    \item fabrication could be parametrised for jack spacings
-    \item fabrication be largely automated, no need for THT parts. SMD would shrink things massively.
-    \item improved circuitry, incorporating a similar op amp circuit from \cite{mcpherson_portable_2013} which can allow for a tuned voltage range, utilising the full range of the ADC used rather than what is given.
-\end{itemize}
-
-\section{Interface}
+\section{Interaction}\label{sec:future-interaction}
 
 Going forward with the keyboard interface can be split between further refinement and further application.
 This sections first covers the improvements that can be made to entire keyboard system, separated as it was in Chapter~\ref{} in terms of mechanical interface, hardware electronics and firmware.
 
-\subsubsection{Mechanical Interface}
-
-\paragraph{CAD/CAM processes}\label{sec:cad-cam-jacks}
+\subsection{CAD/CAM processes}\label{sec:cad-cam-jacks}
 Easing access to fabrication and permitting iteration on designs
 
-A major limitation across all interfaces discussed in Chapter~\ref{} is the gradient stickers used for the sensor. Although the stickers are printed and cut by machines, allowing for large quantitites to be made, they still need to be applied by hand. In the application process it not uncommon for the graident stickers to be too wide. The short edge of the jacks were roughly similar, at around 4.35 mm, but they were made by manually resulting in variation across the full set. The jacks and the jack-slide are wooden and such prone to expansion and contraction with changes in humidity. This was the case for when the Mark 1 (Sections~\ref{sec:mark-1}) was moved from the laboratory, where many jacks that were freely moving became constricted in their slots. This meant that the gradient stickers either needed trimmed or replaced entirely, with reapplication also necessitating re-calibration. Inspecting and adjusting 98 jacks was a time consuming task and one ripe for optimisations.
+A major limitation across all interfaces discussed in Chapter~\ref{} is the gradient stickers used for the sensor. Although the stickers are printed and cut by machines, allowing for large quantities to be made, they still need to be applied by hand. In the application process it not uncommon for the gradient stickers to be too wide. The short edge of the jacks were roughly similar, at around 4.35 mm, but they were made by manually resulting in variation across the full set. The jacks and the jack-slide are wooden and such prone to expansion and contraction with changes in humidity. This was the case for when the Mark 1 (Sections~\ref{sec:mark-1}) was moved from the laboratory, where many jacks that were freely moving became constricted in their slots. This meant that the gradient stickers either needed trimmed or replaced entirely, with reapplication also necessitating re-calibration. Inspecting and adjusting 98 jacks was a time consuming task and one ripe for optimisations.
 The adhesive for the stickers was hi-tack meaning that they were unlikely to fall off. The lifespan of the adhesive is finite, rated to around four years for outdoor use \cite{antalis_coala_2025}. Factoring in that the jacks are moving, creating friction with the inside of the jack slot, will likely mean the lifespan of the sticker adhesive is shorter.
 
-Preferably, the surface for the optical sensors would be intergal to the construction of the jack. Given the small area of a 4.35mm short edge an ~8mm travel, creating a surface of varying reflectance by hand is not feasible. The process would therefore need to be automated or computer aided.
+Preferably, the surface for the optical sensors would be integral to the construction of the jack. Given the small area of a 4.35mm short edge an ~8mm travel, creating a surface of varying reflectance by hand is not feasible. The process would therefore need to be automated or computer aided.
 Two immediate options present themselves: the modification of the current jacks or CAD/CAM fabrication of the jacks entirely.
 
 Research into both approaches were undertaken but ultimately a satisfactory result compared to the gradient sticker approach was not found. Both approaches showed promise but were ultimately too unrefined to be applied to the Mark 1.
@@ -40,7 +31,7 @@ Research into both approaches were undertaken but ultimately a satisfactory resu
     \label{fig:laser-speckle}
 \end{figure}
 
-For modification, a laser cutting approach was tested. The hypothesis was for a speckle pattern to be etched into the side of the jack to alter reflectance. A number of materials were tested including mdf, plywood and hardwood. It was found that the available laser cutters were not able to etch a pattern with enough  differentiation between light and dark points. Both a rasterised and vector approach were attempted and it was found that the marks left by the laser cutter were too faint (Figure~\ref{fig:laser-speckle}. When power was increased, scorching of the material bled into the surrounding area, ruining the gradient from high to low reflectance. 
+For modification, a laser cutting approach was tested. The hypothesis was for a speckle pattern to be etched into the side of the jack to alter reflectance. A number of materials were tested including MDF, plywood and hardwood. It was found that the available laser cutters were not able to etch a pattern with enough  differentiation between light and dark points. Both a rasterised and vector approach were attempted and it was found that the marks left by the laser cutter were too faint (Figure~\ref{fig:laser-speckle}. When power was increased, scorching of the material bled into the surrounding area, ruining the gradient from high to low reflectance. 
 It is possible that the optical sensor could be wired to an amplifier circuit and tuned to a smaller, more sensitive range, but pursuing this approach would require a major redesign of the electronics system.
 
 \begin{figure}
@@ -73,7 +64,7 @@ Figure~\ref{fig:jack-cut-out-3d-print} shows an example of a 3D printed jack of 
 Comparing PLA \cite{bcn3d_pla_2019} to Delrin \cite{dupont_delrin_2017}, a common modern substitute for quill plectra \cite{barclay_preservation_2005}, suggested that the PLA would be too brittle and difficult to rework for adjusting the voicing of the jack. Therefore, at the very leats the 3D printed jacks would still need to be quilled by hand, with likely both quilling and tongue fitting being required. Given time constraints for the Mark 1, the option to pursue 3D printed jacks was abandoned in favour of the gradient stickers, which at the point was low cost, relatively reliable and reproducible.
 The 3D printed jacks were also relatively high risk for sensor placement. Should the vertical placement of sensor be misaligned, the gradient stickers could simply be removed and replaced. With the 3D printed approach, like in Figure~\ref{fig:jack-cut-out-3d-print}, if there was misalignment, the entire jack height would need to be readjusted. For the first implementation at scale, the risk was determined to not be worth the additional time cost of adjusting gradient stickers which, in the context of the full install process, was relatively small by comparison.
 
-\subsubsection{PCB Layout}
+\subsection{PCB Layout}
 
 \begin{figure}
     \centering
@@ -110,13 +101,20 @@ The new sensor module would be connected to the signal board, which houses the r
     \label{fig:led-diffuser}
 \end{figure}
 
-\subsubsection{Latency}
+\subsection{Latency}
 
 Though system is functioning there is still room for improvement with respect to latency. The latency is bottlenecked by two junctions in the system. First the sensor switching and then in the microcontroller itself.
 
 \subsubsection{Sensor Signal Measurement}\label{sec:tia}
 
-Currently the signal of the sensors are in voltage divider configuration using a pull-up resistor and a signal on the sensor board is selected through the use of a multiplexer. The voltage divider works as current is induced through the phototransistor, a voltage is therefore present across the pull-up resistor which can be measured against ground by tapping out a signal between the pull-up resistor and the phototransitor collector. The transistor has an inherent parasitic capacitance, which manifests as a low pass filter \cite{falco_understanding_2023} on the output signal and thus slower response time.
+Currently the signal of the sensors are in voltage divider configuration using a pull-up resistor and a signal on the sensor board is selected through the use of a multiplexer. The voltage divider works as current is induced through the phototransistor, a voltage is then present across the pull-up resistor. This voltage can be measured against transistor current by creating a signal path between the pull-up resistor and the phototransitor collector that is then connected to an analogue-to-digital converter. 
+The motivations behind this configuration were manifold, but each other related back to the principles of accessibility and reproducibility within FAIR framework.
+A single resistor is a cheap and simplistic method for measuring the current through the transistor as voltage with a low technical barrier to implement it.
+It is also more reproducible as the resistor is a fundamental component of electronics.
+The specific model and manufacturer of the resistor may become obsolete, but the very idea of   a resistor at the value of 100 k$\Omega$s will not.
+The same cannot be said for the integrated circuits (ICs) as used to package operational amplifiers, resistor networks, programmable memory \&c. which may ``here yesterday, gone today'',  becoming obsolete or unavailable for all manner of reasons \cite[p. 273]{horowitz_art_2015}.
+There are problems to which only these more complex ICs can provide a solution.
+The phototransistor has an inherent parasitic capacitance, which manifests as a low pass filter \cite{falco_understanding_2023} on the output signal and thus slower response time.
 
 \begin{figure}
     \centering
@@ -172,7 +170,7 @@ With the addition of a current source in the form of the phototransistor, optimu
 
 Variation across the optical sensors means that the feedback (or load) resistor 
 \footnote{$R_5$ in Figure~\ref{fig:tia-diff}, $R_1$ in Figure~\ref{fig:tia-bias}}
-may need adjustment across all sensors as was the case in \textcite{pardue_near_2013}.\footnote{``Early on it was noticed that different sensors of the same make yielded significantly different current response even when in the same configurations. With the QRE1113 sensors, we have used load resistors ranging between 12kΩ to 47kΩ to achieve similar range.''}
+may need adjustment across all sensors as was the case in \textcite{pardue_near_2013}.\footnote{``Early on it was noticed that different sensors of the same make yielded significantly different current response even when in the same configurations. With the QRE1113 sensors, we have used load resistors ranging between 12k$\Omega$ to 47k$\Omega$ to achieve similar range.''}
 If multiple optical sensors are to share the same TIA, such as in \textcite{mcpherson_portable_2013}, then the values will always be a best average. A bespoke circuit for each sensor is feasible, but highly impractical. Given the sufficient operation of the current pull-up configuration, the improvement in response time would be sufficient without too much concern about additional noise.
 Since op-amps can come in single, dual and quad packages \cite{ti_opa4377_2011}, it may be better use of space allow easier routing if the TIA circuits are located on the controller board close to the power supply, rather than the newly suggested signal boards. 
 
@@ -228,36 +226,26 @@ To restate the parameters and constraints of the generalised phototransitor TIA 
 $$
 V_{out} = \frac{R_1}{R_1 + R_2} V_{cc} + I_{C}R_{f} + \frac{R_f}{R_{in}}V_{cc}(\frac{R_1}{R_1 + R_2} - 1)
 $$
+
+Table~\ref{tab:qre-vs-qrd} shows the key electrical characteristics that differ between the QRE1113 and QRD1114.
 The QRD1114 has a faster rise time and greater sensitivity \cite{onsemiconductor_qrd1114_2024} when compared to the QRE1113 \cite{onsemiconductor_qre1113_2024} and could be used as a drop-in replacement, with the remainder of the design being unchanged. While the QRD1114 has a faster rise time its asymmetric rise and fall times and the higher fall time suggests a greater presence parasitic capacitance. The effect can be mitigated by the usage of a smaller pull-up resistor ($R_1$ in Figure~\ref{fig:simple-schematic}) or smaller value $R_{in}$ in Figure~\ref{fig:general-tia}, the substitution of which would necessitate new choice of values for the remaining three resistors.
 With careful choice of TIA circuit, the QRD1114 may provide the sensitivity required to reintroduce the laser-cut speckle pattern as suggested in Section~\ref{sec:cad-cam-jacks}.
-% \begin{table}
-% 	\centering
-% 	\begin{tabular}{|l|l|l|l|l|l|l|}
-% 		\hline
-% 		\textbf{Symbol} & \textbf{Parameter}                   & \textbf{Test Conditions}                           & \textbf{min} & \textbf{Typical} & \textbf{Max} & \textbf{unit} \\ \hline
-% 		$I_{D}$         & Dark Current                         & $V_{CE} = 10V,  I_{F} = 0mA$                       &              &                  & 100          & $nA$          \\ \hline
-% 		$I_{C(ON)}$     & On-State Collector Current           & $I_{F} = 20 mA, V_{CE} = 5, D = ~1mm$              & 1            &                  &              & $mA$          \\ \hline
-% 		$V_{CE(SAT)}$   & Collector Emitter Saturation Voltage & $I_F = 40mA, I\_C = 100 µA, D = ~1mm$              &              &                  & 0.4          & $V$           \\ \hline
-% 		$I_{CX}$        & Cross Talk                           & $I_F = 20mA,   V_{CE} = 5V$                        &              & 0.2              & 10           & $µA$          \\ \hline
-% 		$t_r$           & Rise Time                            & $V_{CE} = 5 V, R_{L} = 100 ohms, I_{C(ON)} = 5 mA$ &              & 10               &              & $µs$          \\ \hline
-% 		$t_f$           & Fall Time                            & $V_{CE} = 5 V, R_{L} = 100 ohms, I_{C(ON)} = 5 mA$ &              & 50               &              & $µs$          \\ \hline
-% 	\end{tabular}
-% \end{table}
 
-% \begin{table}
-% 	\centering
-% 	\begin{tabular}{|l|l|l|l|l|l|l|}
-% 		\hline
-% 		\textbf{Symbol} & \textbf{Parameter}                   & \textbf{Test Conditions}                             & \textbf{min} & \textbf{Type} & \textbf{Max} & \textbf{unit} \\ \hline
-% 		$I_{D}$         & Dark Current                         & $V_{CE} = 20V,  I_{F} = 0mA$                         &              &               & 100          & $nA$          \\ \hline
-% 		$I_{C(ON)}$     & On-State Collector Current           & $I_{F} = 20 mA, V_{CE} = 5, D = \~1mm$               & 0.3          & 0.9           &              & $mA$          \\ \hline
-% 		$V_{CE(SAT)}$   & Collector Emitter Saturation Voltage & $I_F = 20mA,    I_{C} = µA$                          &              &               & 0.3          & $V$           \\ \hline
-% 		$I_{CX}$        & Cross Talk                           & $I_F = 20mA,    V_{CE} = 5V$                         &              &               & 1            & $µA$          \\ \hline
-% 		$t_r$           & Rise Time                            & $V_{CE} = 5 V,  R_{L} = 1 kOhms, I_{C(ON)} = 100 µA$ &              & 20            &              & $µs$          \\ \hline
-% 		$t_f$           & Fall Time                            & $V_{CE} = 5 V,  R_{L} = 1 kOhms, I_{C(ON)} = 100 µA$ &              & 20            &              & $µs$          \\ \hline
-% 	\end{tabular}
-% \end{table}
 
+\begin{table}
+	\centering
+	\begin{tabular}{|l|l|r|r|l|}
+		\hline
+		\textbf{Symbol} & \textbf{Parameter}                   & \textbf{QRD1114} & \textbf{QRE1113} & \textbf{Unit} \\ \hline
+		$I_{C(ON)}$     & On-State Collector Current           & 1 (min)          & 0.3 (min)        & mA            \\ \hline
+		$V_{CE(SAT)}$   & Collector-Emitter Saturation Voltage & 0.4 (max)        & 0.3 (max)        & V             \\ \hline
+		$I_{CX}$        & Cross Talk                           & 10 (max)         & 1   (max)        & $\mu$A        \\ \hline
+		$t_r$           & Rise Time                            & 10  (typ)        & 20  (typ)        & $\mu$s        \\ \hline
+		$t_f$           & Fall Time                            & 50  (typ)        & 20  (typ)        & $\mu$s        \\ \hline
+	\end{tabular}
+	\caption{Electrical characteristic comparison between the QRD1114 \cite{onsemiconductor_qrd1114_2024} and the QRE1113 \cite{onsemiconductor_qre1113_2024}. typ denotes typical performance.}
+	\label{tab:qre-vs-qrd}
+\end{table}
 
 
 \subsubsection{Microcontroller}
@@ -300,20 +288,20 @@ Consideration would need to be made on the time to port existing source code for
 
 
 
-\subsubsection{Exhibition Enhancements}
+\subsection{Exhibition Enhancements}
 
 There are site-specific possibilities for refining the exhibition experience.
 
-\paragraph{Vibration}
+\subsubsection{Vibration}
 
 To augment the user experience and immersion, low-pass filtered audio signal from the audio synthesis engine could be fed back to the user in the form of local vibrations. Reaserch carried out by \textcite{merchel_vibratory_2009} and in \textcite{merchel_functional_2018}, looked at the addition of a shaker to a seat to simulate low vibrations as would felt during a concert. Audio from a 5.1 surround concert was summed and low-passed before being routed to an electrodynamical shaker in order to generates whole body vibration for participants. The studies showed an overall preference for the presence of seat vibrations among participants who also reported improved quality of the audio reproduction. Given the diffusion of audio in exhibition over headphones, adherence to noise reduction process in \textcite{merchel_functional_2018} would be recommended. Where headphones are used, a lower cut-off was used on the audio signal as well as octave shifting or reducing the vibration signal to its fundamental component. Since our touch is less refined than our hearing, there is greater scope for shifting the frequency content of an audio signal if it is to be experienced as vibration \cite{summers_single_2000}.
 Though the \textcite{merchel_functional_2018} related to concert audio, the same principles should apply to the experience of playing  instrument, especially given change in experience reported with the presence of vibrotactile feedback in piano playing / other musical instrument interfaces \cite{}. 
 
-\paragraph{Convolution}
+\subsubsection{Convolution}
 
 The current audio engine is restrictive to the user experience as their is disconnect between the acoustics of the space and the those applied to the sampled harpsichord signal. An easy improvement would be the addition of a signal processing stage which convolves the audio engine output with an impulse response of the exhibition space. Coupled with open-back headphones, this would ideally prevent the user from being isolated from the space. This could be further augmented through the use of IMU enabled binaural head-tracking, which can also be achieved through open source electronics \cite{franvcek_performance_2023}.\footnote{ane example of which can be found at \url{https://github.com/ysoldak/HeadTracker}}
 
-\paragraph{Encouraging Engagement}
+\subsubsection{Encouraging Engagement}
 
 An area of improvement that is far outside the scope of this thesis, but still worth covering, is the very nature of visitor interaction within the museum context.
 Spatial observations of visitors during the workshop highlighted that a proportion of visitors walked past the Mark 1 without interacting with it.
@@ -373,7 +361,7 @@ In combination with the haptic nature of the interface, such developments to the
 The interface provides a method for retaining kinaesthetic information that would be present in original music played on the harpsichord. 
 The interface can equally, and hopefully, be used as conduit for engaging the traditional and the modern, harnessing the kinaesthetics of an old interface, but for new expressions in modern music.
 
-\section{MAGPIE}
+\section{MAGPIE}\label{sec:future-magpie}
 
 Improvements to \textsc{magpie} can be split between those of functionality and those of interface. The core functions of \textsc{magpie} would already provide support for number of research use cases, but further development is needed to enable it as a powerful open source tool for musical acoustics. Similarly, there is functionality that exists but a efficient interface is needed in order to full utilise it. \textsc{magpie} seeks to turn traditionally physics based problems into a problems of engineering and interface is key in order to facilitate that.
 
@@ -394,23 +382,7 @@ In the case of \textsc{C++}, the relevant technologies available for interfacing
 
 \subsubsection{Tuning}
 
-Taking \textcite{duran_experimentally_2023} as an example.
 
-\begin{table}
-	\centering
-	\begin{tabular}{c r r r}
-		\toprule
-		Mode                                                                              & \textbf{Experiment} & \textbf{Clamped} & \textbf{Adjusted} \\ \hline
-		1     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_1.pdf}}} & 73                  & 77               & 75                \\
-		2     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_2.pdf}}} & 148                 & 153              & 150               \\
-		3     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_3.pdf}}} & 376                 & 382              & 370               \\
-		4     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_4.pdf}}} & 431                 & 486              & 458               \\
-		5     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_5.pdf}}} & 559                 & 596              & 557               \\
-		6     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_6.pdf}}} & 910                 & 880              & 844               \\ \hline
-	\end{tabular}
-	\caption{Eigenfrequencies for experiment data in \cite{duran_experimentally_2023} against a fully clamped and adjusted boundary conditions using \textsc{magpie}}
-	\label{tab:tuning}
-\end{table}
 
  
 \begin{figure}
@@ -433,9 +405,10 @@ With the same principles applied to orthotropic case, magpie would be capable of
 
 Require a validation stage and reference against experimental data \cite{}
 
-\subsubsection{Bracing}
+\subsubsection{Lumped Masses}
 
 \cite{ducceschi_method_2024}
+
 
 \subsubsection{Optimisation}
 
@@ -496,29 +469,6 @@ A key development for \textsc{MAGPIE} is the addition of an orthotropic model so
 
 Presenting the tool kit in an open source well-structure manner should hopefully encourage usage, collaboration and development as the system matures.
 
-
-\paragraph{ITEMM OpenLab / Existing Tools}
-
-\textsc{magpie} is by no means the first tool to provide the functionality described here and neither is it the only ``free'' tool available to do so. The Institut Technologique Européen des Métiers de la Musique (ITEMM) provides a suite of tools for luthiers via its online service known as ITEMM Open Lab\footnote{\url{https://www.openlab-itemm.com}}. ITEMM OpenLab provides resources for thos in the field of musical instrument making, hosting datasets of materials, 3D models and CAD files for instrument parts and tools. Most relevent, is that ITEMM OpenLab also provides a suit of tools for calculating wood properties intended to provide luthiers accesss to toools and processes used in the ITEMM Laboratories.
-% Notre objectif est de rendre accessibles des méthodes scientifiques développées en laboratoire, en les adaptant à des moyens simples et peu onéreux utilisables directement dans un atelier de lutherie.
-% 
-Available tools include those for calculating, resonance frequencies of soundboards and easels, string simulation strings under tension, and wood properties. The \textit{Rigidité de plaques} tool provides a means calculating the elastic constants of wood, .\footnote{\url{https://www.openlab-itemm.com/calculateur-mecanique/rigidite-de-plaques-1/}} using the methodology laid out by \textcite{mcintyre_measuring_1988}. 
-The open availability of the tools at ITEMM OpenLab are adminrable, but there are some inherent restrictions.
-
-The \textit{Rigidité de plaques}, like the other calculators on OpenLab, is free to use however the tools themselves are accessible only after registering for the service and authenticating. 
-The ``free as in freedom'' distinction made by \textcite{stallman_why_2007} would not classify \textit{Rigidité de plaques} as a FLOSS tool. 
-The source is ``open source'' in the sense that, given it is software delivered via a web browser, the source code is downloaded onto the user's computer, but it is not easily identified nor is it documented.
-ITEMM OpenLab meets a technical definition of free open source software, but sadly one where the free and open are lowercase.
-One can, after time, identify the relevant files,
-\footnote{calculations take pace in \url{https://www.openlab-itemm.com/wp-content/plugins/ITEMM-OpenLab-tools-main/js/p_w_script.js} and an \texttt{olt} utility class \url{https://www.openlab-itemm.com/wp-content/plugins/ITEMM-OpenLab-tools-main/js/olt_class.js} used across calculators, both of which available without authentication.} 
-but they are missing documentation, attribution and an open source licence. 
-
-The legal notice\footnote{\url{https://www.openlab-itemm.com/mentions-legals/}} on ITEMM OpenLab covers the 3D objects, but this does not naturally extend to the software \cite{cc_can_2025}. Instead, the software calculators should have an explicit open source licence attached to them so that there terms of use are clearer. From ITEMM OpenLab's descriptive text and legal notice it is clear that attribution and accessibility are core principles, both of which would be better served by a clear citation system \cite{soito_citations_2016}, especially if these tools are to be used for further use.
-The 'open first' design methodology of \textsc{magpie} was in part to avoid issues in lack of clarity for reuse.
-
-\textcite{stallman_floss_2021} differentiates between free open source software (FOSS) and free / libre open source  software (FLOSS). Such a distinction is to make clear the meaning of `free' given its ambiguity of free as in ``free speech'' or as ``free beer'' \cite{stallman_why_2007}. FLOSS is a distinction of open source software where ``free'' carries both meanings.
-Web tools for plate analysis may be extant, but there is still a gap for a truly free and open tool where the `free' and `open' are not lowercase.
-
 \subsubsection{Emebedded Systems}
 
 As part of a luthier toolkit, more than capable of running on a Bela.
@@ -547,7 +497,6 @@ That responsibility should instead lie with institutes.
 Academic institutes do not defer responsibility of storing and distributing academic research literature from the Microsoft library and the same should also be true for research software.
 
 The Zenodo archive operated from CERN provides integration with GitHub, reducing the impedance to archiving digital software and providing a DOI. 
-
 The DOI functions is a similar manner to the ISBN and ISSN, identifying a digital artefact without ambiguity. Enabling software citation through a DOI stresses software's importance, permitting attribution, while facilitating access and version specificity \cite{soito_citations_2016}.
 Research to rely on an external service, like Zenodo, is perhaps still an abdication of responsibility. 
 Institutes have support for digital archives such as the Edinburgh Research Archive

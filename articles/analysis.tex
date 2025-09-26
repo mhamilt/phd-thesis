@@ -1,3 +1,5 @@
+\chapter{Analysis}\label{ch:analysis}
+
 \section{Introduction}
 
 This chapter aims to cover the main development steps of \textsc{magpie}, the design choices taken, technical underpinnings, justification and a case study of a hypothetical library application.
@@ -148,6 +150,30 @@ For the discrete biharmonic operator $B_{\Delta\Delta}$ coefficient calculations
 % One can truncate the system to an integer $N < M$, and work with the modes belonging to a given frequency band. One may, for instance, solve the eigenvalue problem \eqref{eq:SemiDisc1} using a very fine grid for increased precision but only retain the modes for which the natural frequency falls within the audible range. System \ref{eq:ModalSyst} may then be updated in time using the ``exact'' integrator for the lossy oscillator, see e.g. \cite{cieslinski_on-exact_2011} thus, yielding numerical simulations with very low numerical dispersion.
 
 Intimate knowledge of the script's structure was required in order to use it, thus limiting its portability. As a piece of research software with multiple use cases across the field and in education it was decided that this script would be developed into an open source software. In keeping with the FAIR principles, the tool would be developed to be easily reusable and interoperable with current acoustics experimental methodology.
+
+\subsection{ITEMM OpenLab / Existing Tools}
+
+\textsc{magpie} is by no means the first tool to provide the functionality described here and neither is it the only ``free'' tool available to do so. The Institut Technologique Européen des Métiers de la Musique (ITEMM) provides a suite of tools for luthiers via its online service known as ITEMM Open Lab\footnote{\url{https://www.openlab-itemm.com}}. ITEMM OpenLab provides resources for thos in the field of musical instrument making, hosting datasets of materials, 3D models and CAD files for instrument parts and tools. Most relevent, is that ITEMM OpenLab also provides a suit of tools for calculating wood properties intended to provide luthiers accesss to toools and processes used in the ITEMM Laboratories.
+% Notre objectif est de rendre accessibles des méthodes scientifiques développées en laboratoire, en les adaptant à des moyens simples et peu onéreux utilisables directement dans un atelier de lutherie.
+% 
+
+Available tools include those for calculating, resonance frequencies of soundboards and easels, string simulation strings under tension, and wood properties. The \textit{Rigidité de plaques} tool provides a means calculating the elastic constants of wood, .\footnote{\url{https://www.openlab-itemm.com/calculateur-mecanique/rigidite-de-plaques-1/}} using the methodology laid out by \textcite{mcintyre_measuring_1988}. 
+The open availability of the tools at ITEMM OpenLab are adminrable, but there are some inherent restrictions.
+
+The \textit{Rigidité de plaques}, like the other calculators on OpenLab, is free to use however the tools themselves are accessible only after registering for the service and authenticating. 
+The ``free as in freedom'' distinction made by \textcite{stallman_why_2007} would not classify \textit{Rigidité de plaques} as a FLOSS tool. 
+The source is ``open source'' in the sense that, given it is software delivered via a web browser, the source code is downloaded onto the user's computer, but it is not easily identified nor is it documented.
+ITEMM OpenLab meets a technical definition of free open source software, but sadly one where the free and open are lowercase.
+One can, after time, identify the relevant files,
+\footnote{calculations take pace in \url{https://www.openlab-itemm.com/wp-content/plugins/ITEMM-OpenLab-tools-main/js/p_w_script.js} and an \texttt{olt} utility class \url{https://www.openlab-itemm.com/wp-content/plugins/ITEMM-OpenLab-tools-main/js/olt_class.js} used across calculators, both of which available without authentication.} 
+but they are missing documentation, attribution and an open source licence. 
+
+The legal notice\footnote{\url{https://www.openlab-itemm.com/mentions-legals/}} on ITEMM OpenLab covers the 3D objects, but this does not naturally extend to the software \cite{cc_can_2025}. Instead, the software calculators should have an explicit open source licence attached to them so that there terms of use are clearer. From ITEMM OpenLab's descriptive text and legal notice it is clear that attribution and accessibility are core principles, both of which would be better served by a clear citation system \cite{soito_citations_2016}, especially if these tools are to be used for further use.
+The 'open first' design methodology of \textsc{magpie} was in part to avoid issues in lack of clarity for reuse.
+
+\textcite{stallman_floss_2021} differentiates between free open source software (FOSS) and free / libre open source  software (FLOSS). Such a distinction is to make clear the meaning of `free' given its ambiguity of free as in ``free speech'' or as ``free beer'' \cite{stallman_why_2007}. FLOSS is a distinction of open source software where ``free'' carries both meanings.
+Web tools for plate analysis may be extant, but there is still a gap for a truly free and open tool where the `free' and `open' are not lowercase.
+
 
 \section{Proposal}
 
@@ -443,7 +469,7 @@ Though SciPy and \textsc{matlab} both interface with ARPACK and the default opti
 		$K$                & $1\times 10^{15}$              & Displacement elastic restraint (All boundaries) \\ \hline
 		
 	\end{tabular}
-    \caption{}
+    \caption{\textsc{magpie} parameters used throughout benchmarking tests in this chapter.}
 	\label{tab:parameters}
 \end{table}
 
@@ -521,6 +547,32 @@ Secondly, the eigenvalues returned from the eigensolver are used to calculate mo
     \caption{FRF of impulse response from simulations of the same plate under different boundary conditions.}
     \label{fig:frf-bcs}
 \end{figure}
+
+\subsection{Material Property Measurement with \textsc{magpie}: A Case Study}\label{sec:magpie-case-study}
+
+A case study taking the experimental admeasurements from \textcite{duran_experimentally_2023} to calculate young's modulus using magpie.
+
+\begin{table}
+	\centering
+	\begin{tabular}{c r r r}
+		\toprule
+		Mode                                                                              & \textbf{Experiment} & \textbf{Clamped} & \textbf{Adjusted} \\ \hline
+		1     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_1.pdf}}} & 73                  & 77               & 75                \\
+		2     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_2.pdf}}} & 148                 & 153              & 150               \\
+		3     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_3.pdf}}} & 376                 & 382              & 370               \\
+		4     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_4.pdf}}} & 431                 & 486              & 458               \\
+		5     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_5.pdf}}} & 559                 & 596              & 557               \\
+		6     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_6.pdf}}} & 910                 & 880              & 844               \\ \hline
+	\end{tabular}
+	\caption{Eigenfrequencies for experiment data in \cite{duran_experimentally_2023} against a fully clamped and adjusted boundary conditions using \textsc{magpie}}
+	\label{tab:case-study}
+\end{table}
+
+In \textcite{duran_experimentally_2023}, a copper plate was put in a cantilever formation, and struck with a hammer. Table~\ref{tab:case-study} shows the frequencies recorded during that experiment alongside those generated by \textsc{magpie} under ideal constraints, with clamped
+\footnote{With the elastic boundary constants, a clamped condition is rotational and displacement constraints set to a suitable high value. e.g. $1\times10^{15}$}
+one one side and free on the remaining three sides,
+and with ``adjusted'' constraints to closer match the frequencies. In the adjusted case, the two elastic constraints are relieved to a smaller value, as ideal clamped conditions are unlikely to be achieved in experimental measurements.
+
 
 \section{Conclusions}\label{sec:Conclusions}
 
