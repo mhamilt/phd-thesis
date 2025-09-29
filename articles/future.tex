@@ -372,9 +372,9 @@ Development within \textsc{MAGPIE} can be focussed within two directions. One in
 
 Key area for expansion is to translate the source code to a compiled language such as \textsc{C}, \textsc{C++}, and Rust. Such a transition provides more granular control of compiler optimisations, but more interestingly opens potential for deployment. 
 
-The primary bottleneck for development is the eigensolver stage. In MATLAB this achieved with \texttt{eigs} and in python the SciPy linear algebra library's \texttt{scipy.sparse.linalg.eigs}. In both cases, these eigensolvers are an interface to the ARPACK library \cite{lehoucq_arpack_1998}. For MATLAB there is analysis of the target matrix to which the user is not privvy. 
-MATLAB its own sparse library on top of ARPACK \cite{gilbert_sparse_1992} which obfuscates the process further.
-MATLAB's \texttt{eigs} function is not one supported by the software's code generation systems and the function still requires the MATLAB runtime if it is to be interfaced with externally. This has implications for portability issues, with development being constrained to those with paid access to the MATLAB environment.
+The primary bottleneck for development is the eigensolver stage. In \textsc{matlab} this achieved with \texttt{eigs} and in python the SciPy linear algebra library's \texttt{scipy.sparse.linalg.eigs}. In both cases, these eigensolvers are an interface to the ARPACK library \cite{lehoucq_arpack_1998}. For \textsc{matlab} there is analysis of the target matrix to which the user is not privvy. 
+\textsc{matlab} its own sparse library on top of ARPACK \cite{gilbert_sparse_1992} which obfuscates the process further.
+\textsc{matlab}'s \texttt{eigs} function is not one supported by the software's code generation systems and the function still requires the \textsc{matlab} runtime if it is to be interfaced with externally. This has implications for portability issues, with development being constrained to those with paid access to the \textsc{matlab} environment.
 
 ARPACK itself is open source \url{https://github.com/opencollab/arpack-ng} and requires The Basic Linear Algebra Subroutines (BLAS) and Linear Algebra PACKage (LAPACK) \url{http://www.netlib.org/blas/} and \url{http://www.netlib.org/lapack/}
 
@@ -383,10 +383,9 @@ In the case of \textsc{C++}, the relevant technologies available for interfacing
 
 \subsection{Functionality}
 
-Some functionality is emergent from the interface. What is covered here is development of the core functionality as it is apart of the \textsc{magpie} framework. Such development means the rewriting and current \textsc{magpie} function suite, as well as the addition of further functions. As an open source project, the state of the project is constantly fluid. At time of writing the latest release of the \textsc{matlab} magpie version is 0.0.2 \cite{magpie_matlab_2025}, which consists of the functionality as discussed in Chapter~\ref{ch:analysis}.
+What is covered here is development of the core functionality as it is apart of the \textsc{magpie} framework. Such development means the rewriting and current \textsc{magpie} function suite, as well as the addition of further functions. As an open source project, the state of the project is constantly fluid. At time of writing the latest release of the \textsc{matlab} magpie version is 0.0.2 \cite{magpie_matlab_2025}, which consists of the functionality as discussed in Chapter~\ref{ch:analysis}.
 
 \subsubsection{Orthotropic Case}
-
 
 The grid spacing ($h$) for \textcite{magpie_matlab_2025} is currently shared in both the x and y directions. This has the major implication of the model being most accurate for integer ratio plate dimensions. 
 Currently the system is optimum  where the ratio  of plate dimensions $L_x$ and $L_y$ is equal to the ratio of the number of grid points in each dimension $N_x$ and $N_y$. The alternative approach is to choose a grid spacing and truncate $\frac{L_x}{h}$ and $\frac{L_y}{h}$. Shared grid spacing has the effect of the system losing accuracy outside of these very tight constraints. 
@@ -414,17 +413,22 @@ Features such as independent grid spacing, which is implemented as part of an or
 \end{figure}
 
 
-The latest developments have implemented a lumped mass model. The addition of lumped masses to the system allows for modelling of the wooden braces that provide strength to musical instrument soundboards (Figure~\ref{fig:bracing}). Furthermore, lumped masses should also provide a means to compensating for the effects of components such a as accelerometers or exciters which are attached to plate as part of experimental measurement, such as the accelerometer in \textcite{duran_experimentally_2023}.
+The latest developments have implemented a lumped mass model. The addition of lumped masses to the system allows for modelling of the wooden braces that provide strength to musical instrument soundboards (Figure~\ref{fig:bracing}). Furthermore, lumped masses should also provide a means to compensating for the effects of components such a as accelerometers or exciters which are attached to plate as part of experimental measurement, such as the accelerometer in \textcite{duran_experimentally_2023}. Such a set of features are not best explored through a code interface, but instead can best be leveraged with graphical user interfaces.
 
-\subsubsection{Optimisation}
+\subsection{GUIs}
 
-Further refine the \textsc{c++} and python versions. Relationship between sparse format and eigensolver speed is not clear what the optimum options are for the specific case of the biharmonic.
+A graphical user interfaces provide a means to change multiple parameters quickly in a way that is more intuitive for the end user. In addition to intuitive access to a libraries functions, there is also interactions that arise from constraints \cite{wang_artful_2018}.\footnote{``Principle 1.11 Design is constraints which give rise to interactions.''}
+\textsc{magpie} as a software library naturally provides a programmatic interface in each of its implementations. Complex, algorithmic iteration over parameters that allow for simulations to be run over long periods without intervention. Providing the user with a huge parameter space is only as powerful as the ability to explore it. There are commonly subtle transition points where small changes in any one parameter will have a dramatic affect on mode shapes or frequencies. 
+When the user is constrained, however, to the interesting areas of the parameter space then the system becomes much easier to explore. Likewise, the small adjustments in parameters are isolated to a single mouse interaction which would be otherwise difficult or unwieldy to change and explore if it were attempted to be achieved through the command-line interface or re-compilation of software.
 
-Given the ultra specific case of the biharmonic, may not require generalised solvers and a more bespoke solving solution may become apparent.
 
-\subsection{Interfacing}
+An interface has already been created in using Jupyter notebooks as discussed in Section~\ref{sec:jupyter}.
+The Jupyter interface is quite limited, and allows for only those designs which can easily implemented using the IPywidgets. Functionality such as adjustable range constraints, though technically possible, are more easily implemented.  Similarly, \textsc{matlab}'s App Designer
+\footnote{\url{}}
+would provide the same mode switching for end users. The App Designer is constrained to only those elements made available.
 
-Graphical interfaces provide a means to change multiple parameters quickly in a way that is more intuitive for the end user. An interface has already been created in using Jupyter notebooks, but with the implementation of the library in C++ a number of possibilities open up.
+\textsc{MATLAB} also has deployment constraints as \texttt{eigs} function is not one that is supported by the software's code generation systems and the function still requires the \textsc{matlab} runtime if it is to be interfaced with externally. Such constraints have implications on the accessibility and maintainability, with practical development being constrained to only those who have paid for access to the \textsc{matlab} environment.
+That is not to say that the \textsc{matlab} and Jupyter GUIs are redundant, on the contrary, they facilitate quick parameter exploration that could subsequently be automated directly through the library. Neither Jupyter nor \textsc{matlab}'s App Designer are permissive to all design approaches, but with the implementation of the library in C++ a number of possibilities become available. This section will discuss some potential deployments for a \textsc{magpie} GUI, the technical requirements, and what benefits there are to gained form such development.
 
 \subsubsection{C++ Interface}
 
@@ -439,7 +443,7 @@ Similarity in results to that of \textsc{matlab} give an indication of a viable 
 One such technology is Web Assembly (WASM) \url{https://webassembly.org}, which allows for optimised binary code to be executed by a virtual machine in the browser. This is achieved through the emscripten,\footnote{\url{https://emscripten.org}} an open source compiler that enables compilation of \textsc{C} / \textsc{C++} code into WASM. Assembly code capable of more performative execution than the equivalent JavaScript 
 \cite{reiser_accelerate_2017}. When combined with the native \textsc{C++} source of Eigen and Spectra, the emscripten compiler can potentially be used to distribute and execute \textsc{magpie} entirely in the browser.
 \footnote{Such an application using the Eigen library has already been demonstrated as feasible \url{https://observablehq.com/@rreusser/eigen}}. 
-To make a web tool like \textsc{magpie} would traditionally require server architecture in order to execute ARPACK or to host a MATLAB runtime. 
+To make a web tool like \textsc{magpie} would traditionally require server architecture in order to execute ARPACK or to host a \textsc{matlab} runtime. 
 In a server / client arrangement the bottlenecks on performance are then tied to the slowest of the network and the computation.
 Creating a \textsc{magpie} server would also not be without cost and would also be limited by concurrent usage.
 
@@ -468,7 +472,7 @@ Each plate in comprised of approximately 1.5k grid points, for a total 12k grid 
 \end{figure}
 
 
-MATLAB has functionality to compile its code to WASM (\url{https://www.mathworks.com/matlabcentral/fileexchange/69973-generatejavascriptusingmatlabcoder}). Some functionality such as that in MATLAB's sparse libraries is not currently open to code generation and compilation to a binary outside of the MATLAB runtime (list of functions supported: \url{https://uk.mathworks.com/help/referencelist.html?type=function&capability=codegen&listtype=alpha}) and it is unlikely to be in the near future.
+\textsc{matlab} has functionality to compile its code to WASM (\url{https://www.mathworks.com/matlabcentral/fileexchange/69973-generatejavascriptusingmatlabcoder}). Some functionality such as that in \textsc{matlab}'s sparse libraries is not currently open to code generation and compilation to a binary outside of the \textsc{matlab} runtime (list of functions supported: \url{https://uk.mathworks.com/help/referencelist.html?type=function&capability=codegen&listtype=alpha}) and it is unlikely to be in the near future.
 
 
 A key development for \textsc{MAGPIE} is the addition of an orthotropic model so match more closely that of the quarter-sawn wood as is used for string instrument soundboards. Even further, the addition of braces and lumped masses to the internal system to mimic that of the structural bracing found on physical instruments \cite{ducceschi_open_2024}. 
@@ -497,7 +501,7 @@ can linear interpolate and loop values but there is no intuitive way to start ex
 
 Alternatively as a view that would provide feedback on the percentage error of each mode like as shown in Figure~\ref{fig:error-bars}. Serving the dual function of fine tuning results but also as practical understanding and exploring how each parameter impacts the simulation.
 
-\textsc{magpie} as a library naturally provides a programmatic interface in each of its implementations. Complex, algorithmic iteration over parameters that allow for simulations tow be run over long periods without intervention. Providing the user with a huge parameter space is only as powerful as the ability to explore it. There are commonly subtle transition points where small changes in any one parameter will have a dramatic affect on mode shapes or frequencies. One of the limitation of the Jupyter interface is in its fixed constraints after the interface is compiled. Though it is technically possible to permit the end user to edit these constraints, the limitations of API do not permit for easy presentation. This is and instance where user interface libraries, such a App Designer for MATLAB or JUCE for C++, would be more appropriate. 
+
 
 
 \begin{figure}
