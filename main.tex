@@ -7,15 +7,19 @@
 %%%%%%%%%% DO NOT EDIT %%%%%%%%%%
 \input{setup} % all usepackages and bibliogrpahy setup are in setup.tex
 %%%%%%%%%% DO NOT EDIT %%%%%%%%%%
-%
-% THIS IS THE TITLE PAGE (CONTAINED IN A SEPARATE FOLDER)
-% 	--> The title page itself SHOULD be edited as appropriate for your project
-
 \begin{document}
-% \bibliographystyle{plainnat}
 \input{title-unibo}
 \cleardoublepage{}
 %%%%%%%%%% DO NOT EDIT %%%%%%%%%%
+\newcommand{\magpie}{\textsc{m\raisebox{-0.4\height}{\includegraphics[height=0.7em]{img/magpie.pdf}}gpie}}
+\newcommand{\chladniOne}{\raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_1.pdf}}}}
+\newcommand{\chladniTwo}{\raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_2.pdf}}}}
+\newcommand{\chladniThr}{\raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_3.pdf}}}}
+\newcommand{\chladniFou}{\raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_4.pdf}}}}
+\newcommand{\chladniFiv}{\raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_5.pdf}}}}
+\newcommand{\chladniSix}{\raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_6.pdf}}}}
+
+
 
 %%%%%%%%%% DO NOT EDIT (UNLESS REMOVING ANY UNWANTED PAGE INSERTIONS) %%%%%%%%%%
 \fancypagestyle{plain}{
@@ -72,9 +76,9 @@
 %%%%%%%%%%%% EDIT %%%%%%%%%%%%
 % Chapters
 
-\include{articles/context}
-\include{articles/interaction}
-\include{articles/analysis}
+% \include{articles/context}
+% \include{articles/interaction}
+% \include{articles/analysis}
 \include{articles/future}
 
 \printbibliography

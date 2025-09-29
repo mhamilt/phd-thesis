@@ -1,190 +1,29 @@
 \chapter{Analysis}\label{ch:analysis}
 
+\section{Introduction}
 
-This chapter introduces \textsc{magpie}, a free/libre, open, and citable toolkit for the analysis, visualisation, and pedagogical use of plate vibration models in musical acoustics. Whereas the previous chapter centred on \emph{user interaction} with digital reconstructions of cultural heritage—through the San Colombano keyboard project—our focus here shifts to \emph{analysis}, in particular the determination of wood properties that underpin conservation practice. The ability to extract elastic constants from non-intrusive vibration measurements addresses a persistent challenge in both the conservation of antique instruments and the making of new ones. Within the broader framework of \textsc{NEMUS}, \textsc{magpie} extends the project’s goals by providing curators, conservators, and instrument makers with an accessible, open-source environment in which plate models can be simulated, visualised, and compared to experimental data \cite{nemus_site,nemus_project_page,cordis_nemus,nemus_background}.
+This chapter aims to cover the main development steps of \textsc{magpie}, the design choices taken, technical underpinnings, justification and a case study of a hypothetical library application.
 
+Research into plate vibration have a long-standing and ongoing presence in the scientific literature. Plates are ubiquitous in engineering applications, particularly in acoustics, where they play a critical role in musical instruments. Soundboards of string instruments, for example, are accurately described by classical plate theories such as Kirchhoff-Love \cite{love_small_1888} and Mindlin-Reissner \cite{mindlin_influence_1951} models.
 
+Knowledge of material parameters, particularly elastic constants, provides valuable insight into the structural integrity of a musical instrument. In the case of string instrument soundboards, elastic constants offer a quantitative measure of the instrument’s condition \cite{viala_decision_2025,duran_use_2025}. For collections of musical instruments, understanding the elastic limits of materials is essential for effective conservation \cite[p. 19-20]{barclay_care_1997}. Periodic monitoring of these constants allows curators to assess the state of a soundboard and to intervene when necessary.
 
+Determining the material properties of a complete instrument is challenging \cite{viala_model_2019}. Conventional mechanical tests—such as bending, tensile, or compression experiments—cannot be conducted in situ and are typically destructive. In contrast, vibration-based measurements provide a minimally invasive approach, offering low-risk assessment of elastic constants.
 
-For both the conservation of historical instruments and the making of new ones or faithful copies, reliable material parameters are indispensable. In wooden soundboards and plates, the elastic behaviour is orthotropic, with distinct properties along and across the grain. Conventional destructive or quasi-destructive tests (bending, tensile, compression) are impractical for whole instruments and generally incompatible with curatorial practice. Conversely, vibration-based measurements—e.g., eigenfrequency/eigenshape identification and Chladni visualisation—offer a minimally invasive alternative that can be performed \emph{in situ}. Recent work in \textsc{NEMUS} has produced a practical inverse-modelling method to estimate the rectangular orthotropic plate elastic constants from measured modes and Chladni patterns via a linear least-squares formulation \cite{ducceschi_orthotropic_2024,ducceschi_arxiv_2023,ducceschi_uop_2024}. This approach is robust to boundary condition choices, leads to a transparent matrix inversion for the constants, and is well-suited to museum workflows where repeatable, low-risk procedures are essential. In this chapter, we package, document, and expose this capability to non-specialists through \textsc{magpie}, with particular attention to reproducibility and ease of use in a web browser.
+Characterization of tonewood elastic properties can be achieved by representing eigenvectors as mode shapes (eigenshapes) \cite{ducceschi_method_2024}, complementing numerical simulations. Despite their proliferation, plate simulations are still largely accessible only through proprietary software, often beyond the budget of students or small research groups. Finite element tools, such as those employed in modelling instrument vibrations \cite{viala_model_2019}, frequently present financial or technical barriers.
 
+This situation motivated the development of a software library, \textsc{magpie}, designed for the non-invasive derivation of material parameters. \textsc{magpie} is intended as an open-source platform for simulating the physics of plates, offering intuitive visualization tools and a range of analysis techniques. \textsc{magpie} represents the second branch the thesis 'heritage conservation through analytical methods.' This chapter covers the the creation of the \textsc{magpie} including the background plate physics, the numerical approach for simulations, and the implementation details. 
 
-Plate simulations, eigenshape rendering (including Chladni plots), modal parameter estimation, and impulse-response synthesis are often available only in proprietary software stacks or bespoke research scripts with steep learning curves. The immediate need, expressed by both curators and instrument makers, is for an open, well-documented toolchain that (i) implements standard thin-plate models (e.g., Kirchhoff–Love and variants) with elastic boundary restraints, (ii) supports inverse estimation of orthotropic constants from museum-grade measurements, and (iii) lowers the barrier to entry via an interactive browser interface. \textsc{magpie} addresses this gap by consolidating numerics (sparse finite-difference biharmonics, eigenanalysis), analysis utilities (mode sorting, Chladni rendering), and inversion routines into a coherent, cross-language codebase released under a permissive licence and distributed through the \textsc{NEMUS} organisation on GitHub \cite{nemus_github}.
-
-
-To ensure that \textsc{magpie} is not just \emph{available} but \emph{reusable} in the long term, we align the project with the FAIR Guiding Principles (Findable, Accessible, Interoperable, Reusable) \cite{wilkinson_fair_2016,go_fair}. In practical terms, this means: (1) assigning persistent identifiers (e.g., DOIs via archival services) to code, releases, and datasets; (2) providing machine- and human-readable metadata, explicit licences, and provenance; (3) maintaining stable, versioned APIs and minimal, well-specified dependencies; and (4) supplying rich documentation, examples, and curated notebooks that demonstrate museum-focused workflows (from data capture to inversion to reporting). Complementarily, we adopt the FORCE11 Software Citation Principles so that \textsc{magpie} and its companion assets can be cited like any other research output, enabling credit and traceability for developers and curators alike \cite{smith_software_2016,force11_pdf}.
-
-
-Beyond supporting conservation practice, \textsc{magpie} is intended as a teaching aid. Plates are a canonical gateway into structural acoustics: their eigenshapes are visually compelling and highly informative, and Chladni patterns are a familiar, laboratory-friendly way to connect theory and measurement. By offering side-by-side simulation, mode visualisation, and inverse estimation, the tool enables students to explore how boundary conditions, thickness, and orthotropy influence spectra and modal topology, and then validate those insights against bench-top Chladni experiments. In this sense, \textsc{magpie} serves both as an analysis workbench and as a \emph{pedagogical bridge} between computational acoustics and hands-on instrument studies.
-
-\paragraph{Scope of the chapter.}
-The remainder of the chapter develops the design choices behind \textsc{magpie} and their implications for conservation, lutherie, and education. We (i) situate the model choices and numerical methods, with an emphasis on transparent sparse operators suitable for inverse workflows; (ii) describe the cross-language architecture and the web-facing interface, designed for museum deployment; and (iii) demonstrate a representative case study: estimation of elastic constants from measured modes and Chladni patterns on a rectangular plate. Throughout, we prioritise replicability (scripts and notebooks), citeable artefacts (software, datasets, configurations), and alignment with museum constraints on access, handling, and documentation, consistent with the mission of \textsc{NEMUS}.
+Plates are particularly well-suited for studying vibration through eigenshape visualization. They are commonly used as educational tools for demonstrating Chladni patterns \cite{chladni_treatise_2015}, providing both accurate results and visually engaging representations. Presenting eigenshapes as Chladni patterns can also be used a visual verification tool for matching conditions during a physical experiment. A platform such as \textsc{magpie} can serve the dual purposes an analytical tool for researchers and industry practitioners and also a teaching aid for instructors. \textsc{magpie}'s functionalities include applying elastic boundary conditions along plate edges, visualizing and exporting eigenshapes and frequencies, performing time-domain simulations of the plate equation for sound synthesis, and estimating the elastic modulus of experimental plates. 
 
 
+\begin{quotation}
+Wood can be described as an orthotropic material; it has different mechanical properties along three perpendicular axes (longitudinal, radial, and tangential, which we denote by L, R, and T).
+...
+To describe the vibrational modes of wood plates generally requires four elastic constants. These may be Young's moduli along ($E_x$) and across ($E_y$) the grain, the in-plane shear modulus $G$, and the larger of the two Poisson ratios $\nu_{xy}$' For a quarter-cut plate in the xy plane,$E_x= E_L$,$E_y= E_R$,$G= G_{LR}$, $\nu_{xy} = \nu_{LR}$ , and $\nu_{yx} = \nu_{RL}\frac{E_R}{E_L}$' 
+\end{quotation}
+-- \cite[Rectangular Wood Plates][Section 3.11]{fletcher_physics_2012}
 
-
-\section{Existing Tools: ITEMM OpenLab}
-
-\textsc{magpie} is not the first attempt to make plate analysis accessible, nor is it the only tool marketed as ``free.'' The Institut Technologique Européen des Métiers de la Musique (ITEMM) maintains an online platform, ITEMM Open Lab,\footnote{\url{https://www.openlab-itemm.com}} which provides luthiers and makers with resources ranging from datasets of materials to CAD models of instrument parts. Most relevant for present purposes, OpenLab also includes a suite of calculators for acoustical and mechanical properties of wood, offering workshop access to methods otherwise restricted to laboratory environments. 
-
-Among the available tools are calculators for string behaviour under tension, resonance frequencies of soundboards and bridges, and a plate-stiffness tool, \textit{Rigidité de plaques},\footnote{\url{https://www.openlab-itemm.com/calculateur-mecanique/rigidite-de-plaques-1/}} which implements the methodology of \textcite{mcintyre_measuring_1988} to estimate elastic constants. The initiative is admirable: ITEMM has put genuinely useful processes within reach of practitioners who might otherwise lack the means. But the openness has limits.
-
-Although freely accessible once registered, OpenLab tools follow a distribution model that differs from the approach taken here. In Stallman’s terms, they are closer to ``free as in beer'' than ``free as in freedom'' \cite{stallman_why_2007}. The code that underpins calculators such as \textit{Rigidité de plaques} is delivered through the browser and can, in principle, be examined,\footnote{Calculations are carried out in \url{https://www.openlab-itemm.com/wp-content/plugins/ITEMM-OpenLab-tools-main/js/p_w_script.js} with support from an \texttt{olt} utility class at \url{https://www.openlab-itemm.com/wp-content/plugins/ITEMM-OpenLab-tools-main/js/olt_class.js}, both accessible without authentication.} but documentation, licensing, and citation pathways are not yet foregrounded. ITEMM’s legal framework, for example, explicitly covers 3D models\footnote{\url{https://www.openlab-itemm.com/mentions-legals/}} but does not naturally extend to the software calculators themselves \cite{cc_can_2025}. 
-
-By contrast, the development of \textsc{magpie} follows an ``open first'' methodology guided by the FAIR principles \cite{wilkinson_fair_2016,go_fair}. This means that source code, metadata, and licensing are made explicit from the outset, persistent identifiers are assigned, and scholarly attribution is supported through standard citation practices \cite{soito_citations_2016}. In this way, \textsc{magpie} seeks not only to provide functionality comparable to existing online tools, but also to embed sustainability, interoperability, and citability as core design objectives.
-
-\textcite{stallman_floss_2021} stresses the importance of distinguishing between open-source software (FOSS) and free/libre open-source software (FLOSS). The intent behind \textsc{magpie} is to occupy this latter category: a toolkit for plate analysis that is genuinely free and open in both senses of the word, and designed from the ground up as shared research infrastructure.
-
-
-\section{Methodology}
-\label{sec:methodology}
-
-The modelling strategy underpinning \textsc{magpie} rests on classical thin-plate theory, discretised through finite differences and extended to cover generalised boundary conditions. This section aims to summarise the governing equations, the energy framework, and the semi-discrete formulation that lead naturally to modal analysis and time-domain simulation. It is anticipated that the fully isotropic case is considered here, and inclusion of orthotropic properties is left as a near-future update.
-
-\subsection{Kirchhoff--Love framework}
-
-The Kirchhoff--Love describes thin plates undergoing bending deformation \cite{love_small_1888}. For a homogeneous isotropic plate of thickness $\zeta$ and uniform density $\rho$, the transverse displacement $u = u(x,y,t)$ over a rectangular domain $D = [0,L_x]\times[0,L_y]$ satisfies the following partial differential equation \cite{graff_wave_1991,bilbao_numerical_2009}:
-%
-\begin{equation}
-\rho \zeta \frac{\partial^2 u}{\partial t^2}
-= -D \Delta \Delta u - 2 \rho \zeta \sigma \frac{\partial u}{\partial t}
-+ \delta(x - x_p)\delta(y - y_p) f(t),
-\label{eq:plate_pde}
-\end{equation}
-%
-where $D = E \zeta^3/[12(1-\nu^2)]$ is the flexural rigidity in terms of Young's modulus $E$ and Poisson's ratio $\nu$, and $\sigma$ is a damping coefficient. The forcing is represented as a point excitation at $(x_p,y_p)$ with temporal profile $f(t)$, distributed spatially by a double Dirac delta. The operator $\Delta$ denotes the two-dimensional Laplacian
-%
-\begin{equation}
-\Delta = \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2},
-\label{eq:laplacian}
-\end{equation}
-%
-so that $\Delta\Delta$ is the biharmonic operator. Equation~\eqref{eq:plate_pde} can be derived from an energy balance. For smooth functions $f,g$ on $D$, define the inner product and associated norm as
-%
-\begin{equation}
-\langle f,g \rangle = \int_D f g \, dx dy, \qquad 
-\| f \| = \sqrt{\langle f,f \rangle}.
-\end{equation}
-%
-In addition, introduce the bilinear form
-%
-\begin{equation}
-L(f,g) = \frac{\partial^2 f}{\partial x^2}\frac{\partial^2 g}{\partial y^2}
-+ \frac{\partial^2 f}{\partial y^2}\frac{\partial^2 g}{\partial x^2}
-- 2 \frac{\partial^2 f}{\partial x \partial y}\frac{\partial^2 g}{\partial x \partial y}.
-\end{equation}
-%
-With this notation, the total energy of the system is
-%
-\begin{equation}
-H = \frac{\rho}{2} \left\| \frac{\partial u}{\partial t} \right\|^2
-+ \frac{D}{2} \left( \| \Delta u \|^2 + (\nu-1)\langle L(u,u),1\rangle \right).
-\end{equation}
-%
-Its rate of change is given by
-%
-\begin{equation}
-\frac{dH}{dt} = -2 \rho \zeta \sigma \left\| \frac{\partial u}{\partial t} \right\|^2
-+ \frac{\partial u}{\partial t}(x_p,y_p,t) f(t).
-\end{equation}
-%
-In the absence of losses and external forcing, energy is conserved. Boundary terms, involving shear forces and bending moments, determine which constraints (free, clamped, simply supported) yield vanishing flux at the edges. For instance, along an edge normal to the $x$-axis,
-\begin{equation}
-F_x = D\!\left(\frac{\partial^3 u}{\partial x^3}+(2-\nu)\frac{\partial^3 u}{\partial x \partial y^2}\right), \quad
-M_x = -D\!\left(\frac{\partial^2 u}{\partial x^2}+\nu\frac{\partial^2 u}{\partial y^2}\right),
-\end{equation}
-and the corresponding boundary contributions are
-\begin{equation}
-B_{x=L_x} = \int_0^{L_y}\!\left(\frac{\partial u}{\partial t}F_x + \frac{\partial^2 u}{\partial t\partial x}M_x\right)\Big|_{x=L_x} dy, \qquad
-B_{x=0} = -\int_0^{L_y}\!\left(\frac{\partial u}{\partial t}F_x + \frac{\partial^2 u}{\partial t\partial x}M_x\right)\Big|_{x=0} dy.
-\end{equation}
-At free edges, $F_x=M_x=0$; at clamped edges, $u=\partial_x u=0$; at simply supported edges, $u=M_x=0$. An additional compatibility condition occurs at the intersection of two free sides:
-\begin{equation}
-\frac{\partial^2 u}{\partial x \partial y} = 0.
-\end{equation}
-To interpolate between the classical edge conditions, elastic supports may be added at the boundaries. Each edge is coupled to springs that resist both displacement and rotation, with stiffness constants $K_\circ$ and $R_\circ$. For example, at $x=0$ and $x=L_x$ the conditions read
-%
-\begin{subequations}
-\begin{align}
-K_{x=L_x} u(L_x,y,t) &= F_x(L_x,y,t), & R_{x=L_x} \frac{\partial u}{\partial x}(L_x,y,t) &= M_x(L_x,y,t), \\
-K_{x=0} u(0,y,t) &= -F_x(0,y,t), & R_{x=0} \frac{\partial u}{\partial x}(0,y,t) &= -M_x(0,y,t).
-\end{align}
-\end{subequations}
-%
-Analogous expressions hold along the $y$-edges. In the limits $K_\circ\to 0$ or $R_\circ\to 0$ one recovers free boundaries, whereas $K_\circ\to\infty$ or $R_\circ\to\infty$ enforce zero displacement or zero slope, respectively.
-
-\subsection{Finite-difference discretisation}
-
-The continuous problem is discretised on a uniform grid with spacing $h$. Denoting the discrete displacement by $u_{l,m}$, finite-difference operators are defined as
-%
-\begin{subequations}
-\begin{align}
-\delta_x u_{l,m} &= \tfrac{1}{2h}(u_{l+1,m}-u_{l-1,m}) \approx \partial_x u, \\
-\delta_{xx} u_{l,m} &= \tfrac{1}{h^2}(u_{l+1,m}-2u_{l,m}+u_{l-1,m}) \approx \partial_{xx} u, \\
-\delta_{xxxx} u_{l,m} &= \delta_{xx}(\delta_{xx}u_{l,m}) \approx \partial_{xxxx} u,
-\end{align}
-\end{subequations}
-%
-with similar definitions in $y$. The biharmonic operator is then approximated as
-%
-\begin{equation}
-\Delta\Delta \approx \delta_{xxxx} + \delta_{yyyy} + 2 \delta_{xx}\delta_{yy}.
-\end{equation}
-%
-Boundary conditions are enforced by modifying stencil coefficients, e.g.
-%
-\begin{equation}
-K_{x=0} u_{0,m} = -D(\delta_{xx}+(2-\nu)\delta_{yy}) \delta_x u_{0,m}, \qquad
-R_{x=0} \delta_x u_{0,m} = D(\delta_{xx}+\nu\delta_{yy}) u_{0,m}.
-\end{equation}
-%
-At corners, additional constraints like
-%
-\begin{equation}
-\delta_x \delta_y u_{0,0} = 0
-\end{equation}
-%
-must be imposed.
-
-\subsection{Eigenvalue formulation and modal system}
-
-Let $B$ be the sparse matrix representation of the biharmonic operator. Although generally non-symmetric, for sufficiently fine grids, it admits a complete set of eigenvectors with real eigenvalues bounded as
-%
-\begin{equation}
-0 \lesssim \lambda_B \leq 64 h^{-4}
-\end{equation}
-%
-in the free case, and
-%
-\begin{equation}
-0 \lesssim \lambda_B \leq \mathcal{O}(\max(R_\circ,K_\circ))
-\end{equation}
-%
-with elastic supports. Writing
-%
-\begin{equation}
-B = Q \Lambda Q^{-1},
-\end{equation}
-%
-the modal angular frequencies are
-%
-\begin{equation}
-\Omega = \sqrt{\tfrac{D}{\rho \zeta} \Lambda}.
-\end{equation}
-%
-The semi-discrete form of Equation~\eqref{eq:plate_pde} is
-%
-\begin{equation}
-\rho \zeta \ddot{u}(t) = -D Bu(t) - 2\rho \zeta \sigma \dot{u}(t) + h^{-2} J f(t),
-\end{equation}
-%
-with $J$ a sparse excitation vector. Transforming with $w(t) = Q^{-1}u(t)$ yields a diagonal system of forced oscillators,
-%
-\begin{equation}
-\ddot{w}(t) = -\Omega^2 w(t) - 2C \dot{w}(t) + \rho^{-1}\zeta^{-1}h^{-2} Q^{-1}J f(t),
-\end{equation}
-%
-where $C$ is a (possibly mode-dependent) damping matrix. The system can be truncated to the first $N$ modes in a frequency band of interest, allowing efficient time integration with exact update formulas for lossy harmonic oscillators \cite{cieslinski_exact_2011}.
 
 
 \section{Context}
@@ -194,6 +33,12 @@ The Kirchhoff-Love theory of plates describes the dynamics of thin sheet materia
 \begin{equation}\label{eq:KLCnt}
 \rho \zeta \frac{\partial^2 u}{\partial t^2} = - D \Delta\Delta u - 2\rho\zeta\sigma\frac{\partial u}{\partial t} + \delta(x-x_p)\delta(y-y_p)f(t).
 \end{equation}
+
+% The boundary terms for the edges at $y = 0,L_y$ are obtained using analogous expressions for the force and moment ${\mathfrak F}_y$, ${\mathfrak M}_y$: one only needs to swap $x$ and $y$ in the expressions for ${\mathfrak F}_x$, ${\mathfrak M}_x$. With these in mind, one can easily recover the expressions for free, clamped and simply supported edge conditions: in the free case, the force and the moment vanish; in the clamped case, the displacement and the slope vanish; in the simply supported case, the displacement and the moment vanish. For all such cases, the boundary terms vanish, so the total plate energy follows the energy balance above. One further condition arises at the corner of two free edges, namely:
+
+% \begin{equation}\label{eq:CornerCnt}
+% \frac{\partial^2 u}{\partial x \partial y} = 0,
+% \end{equation}
 
 see, for example, the book by Szilard for an explanation \cite{szilard_theories_2004}.
 
@@ -217,7 +62,24 @@ see, for example, the book by Szilard for an explanation \cite{szilard_theories_
 The origins of \textsc{magpie} extend from a set of \textsc{matlab} scripts used internally at the NEMUS projects. The \textsc{matlab} scripts were created for computing the eigenmodes for an isotropic rectangular Kirschhoff-Love plate model. Additionally, the  plate modelled is under general elastic boundary conditions, which is to say that the boundary coefficients for each edge of the plate are computed parametrically using two boundary constants representing flexural and rotational stiffness.
 The script was therefore multi-modal with use cases of calculating the discrete biharmonic matrix for a finite difference scheme. This generated biharmonic can be used directly with an eigensolver for calculation of the modes and modal shapes, either for analysis or visualisation.  An impulse response of the plate can be generated through a finite difference simulation. Finally, the script was capable of being used as a tool for estimation of the Young's modulus for a real plate. For this process, an experimental setup is created where a plate is put under boundary conditions. An impulse response of the plate can be measured using an impact hammer from which the modal frequencies of the plate can be retrieved. Starting from a best guess Young's estimation, the script could then be used to simulate the physical experiment under multiple iterations with least-squares regression and provide an estimation. Process is to get non-dimensional frequencies, then least-square (LS) optimisation.
 
+% \begin{verbatim}
+% % Run magpie first to get non-dimensional frequencies
+% Om        = magpie(rho,E0,nu,ldim,h,BCs,Ntrain,"none") ;
+% OmNDim    = Om ./ sqrt(D0) * sqrt(rho * A^2 * Lz) ;
+% OmNDimsq  = OmNDim.^2 ;
 
+% % Least-square (LS) optimisation
+% psi       = (2*pi*Freq).^2 * rho * Lz * A^2 ;
+% DLS       = (OmNDimsq.' * psi') / (OmNDimsq.' * OmNDimsq) ;
+% ELS       = DLS / (Lz^3/12/(1-nu^2));
+    
+% \end{verbatim}
+
+% $$D_{0}          = \frac{EL_z^3}{12(1-nu^2)}$$
+% $$\vec{\omega_n} = \left(\frac{\omega}{\sqrt{D_0 \rho A^2 L_z}}\right)^2$$
+% $$\vec{\psi}     = (2 \pi \vec{f})^2 \rho L_z A^2 ;\quad A = L_xL_y ; $$
+% $$D_{LS}        = \frac{\vec{\omega_n} \psi}{\vec{\omega_n}\vec{\omega_n}} ;$$
+% $$E_{LS}        = \frac{D_{LS}}{12 L_z^3 (1-nu^2)}$$
 
 
 The script consolidated calculation of the biharmonic coefficients. These coefficients were generated through \textsc{matlab} symbolic tool box. Given there generated nature, the coefficient calculations are understandably complex and can consist of over 400 arithmetic operations for a single coefficient. 
@@ -244,9 +106,74 @@ For the discrete biharmonic operator $B_{\Delta\Delta}$ coefficient calculations
     \label{fig:biharm-subblocks}
 \end{figure}
 
+% \subsection{Eigenvalue problem and time stepping scheme}
 
+% Let $\bf B$ denote the resulting biharmonic matrix of size $M \times M$. $\bf B$ is generally not symmetric, but it possesses a set of $M$ independent, real eigenvectors for sufficiently small $h$. The eigenvalues are also real and bounded from below. For a completely free plate, the eigenvalues are found in the range
+
+% \begin{equation}\label{eq:EigenBounds}
+% 0  \lessapprox \lambda_{\bf B} \leq 64 h^{-4},
+% \end{equation}
+
+% where the approximate left inequality is due to the rigid-body eigenvalues becoming negative in a very small neighbourhood around zero. For elastically restrained plates, the eigenvalues are bounded according to:
+
+% \begin{equation}
+% 0 \lessapprox \lambda_{\bf B} \leq \mathcal{O}(\text{max}(R_\circ,K_\circ)), 
+% \end{equation}
+
+% where the ``big-Oh'' notation was used. Thus, when the plate is restrained using very stiff springs, the spectral radius of the matrix becomes large. Whilst most of the eigenvalues will still be found within the bounds in \eqref{eq:EigenBounds}, a handful of ``spurious'' eigenvalues and associated modal shapes may result from applying the elastic boundary conditions using very large stiffness constants. In any case, the matrix $\bf B$ is factorised according to:
+
+% \begin{equation}\label{eq:factorisation}
+% {\bf B} = {\bf Q}{\boldsymbol \Lambda}{\bf Q}^{-1},
+% \end{equation}
+
+% where ${\boldsymbol \Lambda}$ is a diagonal matrix of eigenvalues, and $\bf Q$ is a matrix of associated column eigenvectors. The plate eigenfrequencies, in radians per second, are obtained as:
+
+% \begin{equation}
+% {\boldsymbol \Omega} = \sqrt{\frac{D}{\rho\zeta}} \sqrt{{\boldsymbol \Lambda}},
+% \end{equation}
+
+% where taking the square root of the eigenvalues is justified according to the bounds above. A semi-discrete version of \eqref{eq:KLCnt} results as:
+
+% \begin{equation}\label{eq:SemiDisc1}
+% \rho \zeta \ddot {\bf u}(t) = -D{\bf B}{\bf u}(t) - 2\rho\zeta\sigma\dot {\bf u}(t) + h^{-2}{\bf J} f(t).
+% \end{equation}
+
+% Note that overdots now denote total time derivates. In the above, $\bf J$ is a sparse vector discretising the double Dirac delta. Many options are available, such as via Lagrange interpolants, see \cite{bilbao_numerical_2009}. Using the factorisation \eqref{eq:factorisation}, diving both sides of \eqref{eq:SemiDisc1} by $\rho \zeta$ and multiplying both sides by ${\bf Q}^{-1}$, the following system results:
+
+% \begin{equation}\label{eq:ModalSyst}
+% \ddot {\bf w}(t) = -{\boldsymbol \Omega}^2 {\bf w}(t) -2 {\bf C}\dot {\bf w}(t) + \rho^{-1}\zeta^{-1}h^{-2}{\bf Q}^{-1}{\bf J}f(t),
+% \end{equation}
+
+% where ${\bf w}(t) := {\bf Q}^{-1}{\bf u}(t)$. This is a completely parallel (i.e. diagonal) system of $M$ lossy, forced oscillators, with natural frequency $\Omega_m$, $1\leq m\leq M$. Note that the loss matrix $\bf C$ can now contain different loss factors $\sigma_m$ for different modes, such as from experimental measurements.  
+
+
+% One can truncate the system to an integer $N < M$, and work with the modes belonging to a given frequency band. One may, for instance, solve the eigenvalue problem \eqref{eq:SemiDisc1} using a very fine grid for increased precision but only retain the modes for which the natural frequency falls within the audible range. System \ref{eq:ModalSyst} may then be updated in time using the ``exact'' integrator for the lossy oscillator, see e.g. \cite{cieslinski_on-exact_2011} thus, yielding numerical simulations with very low numerical dispersion.
 
 Intimate knowledge of the script's structure was required in order to use it, thus limiting its portability. As a piece of research software with multiple use cases across the field and in education it was decided that this script would be developed into an open source software. In keeping with the FAIR principles, the tool would be developed to be easily reusable and interoperable with current acoustics experimental methodology.
+
+\subsection{ITEMM OpenLab / Existing Tools}
+
+\textsc{magpie} is by no means the first tool to provide the functionality described here and neither is it the only ``free'' tool available to do so. The Institut Technologique Européen des Métiers de la Musique (ITEMM) provides a suite of tools for luthiers via its online service known as ITEMM Open Lab\footnote{\url{https://www.openlab-itemm.com}}. ITEMM OpenLab provides resources for thos in the field of musical instrument making, hosting datasets of materials, 3D models and CAD files for instrument parts and tools. Most relevent, is that ITEMM OpenLab also provides a suit of tools for calculating wood properties intended to provide luthiers accesss to toools and processes used in the ITEMM Laboratories.
+% Notre objectif est de rendre accessibles des méthodes scientifiques développées en laboratoire, en les adaptant à des moyens simples et peu onéreux utilisables directement dans un atelier de lutherie.
+% 
+
+Available tools include those for calculating, resonance frequencies of soundboards and easels, string simulation strings under tension, and wood properties. The \textit{Rigidité de plaques} tool provides a means calculating the elastic constants of wood, .\footnote{\url{https://www.openlab-itemm.com/calculateur-mecanique/rigidite-de-plaques-1/}} using the methodology laid out by \textcite{mcintyre_measuring_1988}. 
+The open availability of the tools at ITEMM OpenLab are adminrable, but there are some inherent restrictions.
+
+The \textit{Rigidité de plaques}, like the other calculators on OpenLab, is free to use however the tools themselves are accessible only after registering for the service and authenticating. 
+The ``free as in freedom'' distinction made by \textcite{stallman_why_2007} would not classify \textit{Rigidité de plaques} as a FLOSS tool. 
+The source is ``open source'' in the sense that, given it is software delivered via a web browser, the source code is downloaded onto the user's computer, but it is not easily identified nor is it documented.
+ITEMM OpenLab meets a technical definition of free open source software, but sadly one where the free and open are lowercase.
+One can, after time, identify the relevant files,
+\footnote{calculations take pace in \url{https://www.openlab-itemm.com/wp-content/plugins/ITEMM-OpenLab-tools-main/js/p_w_script.js} and an \texttt{olt} utility class \url{https://www.openlab-itemm.com/wp-content/plugins/ITEMM-OpenLab-tools-main/js/olt_class.js} used across calculators, both of which available without authentication.} 
+but they are missing documentation, attribution and an open source licence. 
+
+The legal notice\footnote{\url{https://www.openlab-itemm.com/mentions-legals/}} on ITEMM OpenLab covers the 3D objects, but this does not naturally extend to the software \cite{cc_can_2025}. Instead, the software calculators should have an explicit open source licence attached to them so that there terms of use are clearer. From ITEMM OpenLab's descriptive text and legal notice it is clear that attribution and accessibility are core principles, both of which would be better served by a clear citation system \cite{soito_citations_2016}, especially if these tools are to be used for further use.
+The 'open first' design methodology of \textsc{magpie} was in part to avoid issues in lack of clarity for reuse.
+
+\textcite{stallman_floss_2021} differentiates between free open source software (FOSS) and free / libre open source  software (FLOSS). Such a distinction is to make clear the meaning of `free' given its ambiguity of free as in ``free speech'' or as ``free beer'' \cite{stallman_why_2007}. FLOSS is a distinction of open source software where ``free'' carries both meanings.
+Web tools for plate analysis may be extant, but there is still a gap for a truly free and open tool where the `free' and `open' are not lowercase.
+
 
 \section{Proposal}
 
@@ -629,13 +556,13 @@ A case study taking the experimental admeasurements from \textcite{duran_experim
 	\centering
 	\begin{tabular}{c r r r}
 		\toprule
-		Mode                                                                              & \textbf{Experiment} & \textbf{Clamped} & \textbf{Adjusted} \\ \hline
-		1     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_1.pdf}}} & 73                  & 77               & 75                \\
-		2     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_2.pdf}}} & 148                 & 153              & 150               \\
-		3     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_3.pdf}}} & 376                 & 382              & 370               \\
-		4     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_4.pdf}}} & 431                 & 486              & 458               \\
-		5     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_5.pdf}}} & 559                 & 596              & 557               \\
-		6     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_6.pdf}}} & 910                 & 880              & 844               \\ \hline
+		Mode              & \textbf{Experiment} & \textbf{Clamped} & \textbf{Adjusted} \\ \hline
+		1     \chladniOne & 73                  & 77               & 75                \\
+		2     \chladniTwo & 148                 & 153              & 150               \\
+		3     \chladniThr & 376                 & 382              & 370               \\
+		4     \chladniFou & 431                 & 486              & 458               \\
+		5     \chladniFiv & 559                 & 596              & 557               \\
+		6     \chladniSix & 910                 & 880              & 844               \\ \hline
 	\end{tabular}
 	\caption{Eigenfrequencies for experiment data in \cite{duran_experimentally_2023} against a fully clamped and adjusted boundary conditions using \textsc{magpie}}
 	\label{tab:case-study}
