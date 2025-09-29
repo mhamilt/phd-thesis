@@ -1,0 +1,40 @@
+This thesis has intended to illustrate the importance of an open methodology as well as demonstrate two use cases for its importance within digital research
+When applies to digital conservation, the intention is to show that we must take the same approach to conservation of cultural heritage as we do to the methodologies applied to carry it out. 
+There is an ``as above so below'' symmetry to digital cultural heritage, where the both heritage and the digital tools require conservation.
+With musical instrument heritage there is the added value of interaction and instruction which are not simply conserved by create a digital facsimile of the heritage. Instead we must look at alternatives for conserving experience alongside the raw data of dimensions, materials and construction. 
+
+The open methodology described here has tried to demonstrate the need for careful separation of components into digital repositories in order that each component can be reusable and iterated upon without affecting others.
+The keyboard interface is separated into physical mechanical, digital software, and the boundary between both in the form of electronics hardware designed in software. Software itself has been separated into components of data, processing and interface.
+Each digital component is stored in a version control repository, whose functions are many. The version control repository is a tool that simultaneously allows for access to older versions of source code, ensuring the ability to access older versions of software, but it can also serve as a record of how ideas are developed. 
+% Rafael Bombelli (1526–1572) letters to Cardano are a cornerstone for complex mathematics. The Goldbach’s Conjecture comes from letters between Euler and Christian Goldbach. These are not published works, but rather correspondence was typically ephemeral. For the digital age, ideas and concepts ar not necessarily worked out on paper, but rather in code. In a digital form, these records are much more precarious, requiring technology to render them and with great ease all record can be eradicated entirely. The version control repository goes some way to keeping a record of code in the same manner that historic diaries and correspondance have offered insight into published work.
+Through online git services, the version control repository can also act as the means of software being open source. 
+Git repositories are decentralised and a combination of local and cloud service storage provides some degree of parity and preservation, but one this is coincidental and not deliberate.
+Services such as GitHub are owned and operated by commercial entities ad should not be depended upon to provide an resolvable DOI and digital archive. 
+Relying on web archive projects to keep a record of these repositories is neither deliberate nor reliable \cite{calano_github_2025}.
+That responsibility should instead lie with institutes.
+Academic institutes do not defer responsibility of storing and distributing academic research literature from the Microsoft library and the same should also be true for research software.
+
+The Zenodo archive operated from CERN provides integration with GitHub, reducing the impedance to archiving digital software and providing a DOI. 
+The DOI functions is a similar manner to the ISBN and ISSN, identifying a digital artefact without ambiguity. Enabling software citation through a DOI stresses software's importance, permitting attribution, while facilitating access and version specificity \cite{soito_citations_2016}.
+Research to rely on an external service, like Zenodo, is perhaps still an abdication of responsibility. 
+Institutes have support for digital archives such as the Edinburgh Research Archive
+\footnote{\url{https://era.ed.ac.uk/}}
+at the University of Edinburgh and Sistema Biblioteca Atteneo
+\footnote{\url{https://sba.unibo.it/en/almadl/almadl-services/assigning-a-doi}}
+at the Università di Bologna, but these services are still tailored toward traditional publications and datasets rather than software repositories.
+Both of these institutes already host their own online git services.\footnote{UoE ECDF \url{git.ecdf.ed.ac.uk} and multiple departmental GitLab services at Unibo.} 
+The ideal scenario would be where these services are simply connected together allowing institutes to take responsibility of both version control and it's archiving.
+
+Academic research is capable of long term usage of software, ARPACK from 1990 \cite{lehoucq_arpack_1998} (discussed in Chapter~\ref{}) serves as one example. Aurora (Section~\ref{sec:aurora}) from just five years later is now at risk of no longer being useable without intervention and development. Research software access and permanence should not be a coin toss weighted by the extent of its adoption. Aurora demonstrated this by being both widely adopted and at risk of obsolescence. Instead, a more deliberate methodology is needed for research software to be accessible and reproducible as is the expectation with other aspects of academic research. 
+
+The praxis of such a open methodology does not come without cost labour and time. Researcher are likely already learning a new skill with respect to programming. With the addition of repository organisation, drafting documentation, learning a version control system and archiving development time can be inflated as a researcher orientates themself with these new tools. 
+
+Adopting an open methodology as standard practice lessened these costs as support networks are formed.
+It is important to remember that here are no shortcuts in good research and anything worth doing is worth doing well, but acknowledgment of this cost raises an important issue. 
+With respect to the humanities, there is still a gap in  digital skills and best practices in data sustainability that needs to be closed \cite{taylor_shaping_2022}. Academic institutes will also need to take a proactive approach with digital skills literacy if those in the humanities research are to follow best practice with the respect to digital research.
+
+We do not only have to think of the impact of software sustainability if digital research, but also what the implication is for digital cultural heritage.
+When applied to cultural heritage, it is paramount that we approach digital conservation through a critical lens.
+Whatever approach is taken to digital conservation, it should be carried out deliberately, with the consequences of conservation decisions being intentional, not accidental. 
+\textcite{barclay_preservation_2005} and \textcite{desilvey_curated_2017} proclaim the same thing We should not ``pickle''\cite{desilvey_curated_2017} the past as that is what we are inclined to do, neither should we idly transition musical instruments across states of currency, conservation, and restoration while neglecting the consequences of those decisions. Better yet, if there is neglect should consequences be damned let it be explicit \cite[p. 75-76]{barclay_preservation_2005}.
+Similarly for the digital tools we employ in the process of that conservation. If these digital tools are disposable, then there should be intentionality in the ephemerality. If these tools should be enduring, then steps need to be taken to make sure they endure. 

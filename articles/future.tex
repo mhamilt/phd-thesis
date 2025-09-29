@@ -331,7 +331,7 @@ As well as a means of engagement and conservation of instructional value within 
 
 \subsubsection{As Research Probe}
 
-One of the richest avenues for further research using the interface is as part of a larger study that explores interface haptic feedback as well as the potency of visual aesthetics to player experience. In the same manner as the Yamaha AvantGrande\footnote{\url{https://uk.yamaha.com/en/musical-instruments/pianos/products/avantgrand/}} and Diskavier\footnote{\url{https://uk.yamaha.com/en/musical-instruments/pianos/products/disklavier/}} pianos have been used in perceptual studies of the effect of haptics on piano \cite{fontana_perception_2018, charalampos_role_2018}, so too could the interface and sensor system presented here be applied to harpsichord players.
+One of the richest avenues for further research using the interface is as part of a larger study that explores interface haptic feedback as well as the potency of visual aesthetics to player experience. In the same manner as the Yamaha AvantGrande\footnote{\url{https://uk.yamaha.com/en/musical-instruments/pianos/products/avantgrand/}} and Disklavier\footnote{\url{https://uk.yamaha.com/en/musical-instruments/pianos/products/disklavier/}} pianos have been used in perceptual studies of the effect of haptics on piano \cite{fontana_perception_2018, charalampos_role_2018}, so too could the interface and sensor system presented here be applied to harpsichord players.
 
 The ability for the jacks to be disengaged and prevent plucking the string, but still capable of triggering a MIDI message is ripe for exploration. 
 The ability to disengage the registers independent of each other permits research into the effects of staggering on player performance.
@@ -421,9 +421,39 @@ A graphical user interfaces provide a means to change multiple parameters quickl
 \textsc{magpie} as a software library naturally provides a programmatic interface in each of its implementations. Complex, algorithmic iteration over parameters that allow for simulations to be run over long periods without intervention. Providing the user with a huge parameter space is only as powerful as the ability to explore it. There are commonly subtle transition points where small changes in any one parameter will have a dramatic affect on mode shapes or frequencies. 
 When the user is constrained, however, to the interesting areas of the parameter space then the system becomes much easier to explore. Likewise, the small adjustments in parameters are isolated to a single mouse interaction which would be otherwise difficult or unwieldy to change and explore if it were attempted to be achieved through the command-line interface or re-compilation of software.
 
+An example of the functionality that emerges from a GUI would be in the presentation of computational results versus those of a real experiment. 
+ 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{img/magpie-tuning.pdf}
+    \caption{Example interface visual feedback for `tuning' boundary conditions and simulation parameters to match known experimental data.}
+    \label{fig:magpie-tuning}
+\end{figure}
 
-An interface has already been created in using Jupyter notebooks as discussed in Section~\ref{sec:jupyter}.
-The Jupyter interface is quite limited, and allows for only those designs which can easily implemented using the IPywidgets. Functionality such as adjustable range constraints, though technically possible, are more easily implemented.  Similarly, \textsc{matlab}'s App Designer
+On could iterate over a range of values, but there is no intuitive way to start exploring subranges within the larger parameter space; interrupting exploration in one space to tangentially explore another.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{example-image}
+    \caption{PLACEHOLDER \textsc{magpie} error view showing percentage error between the first 6 modal frequencies from an experiment and the computed modes.}
+    \label{fig:error-bars}
+\end{figure}
+
+Alternatively as a view that would provide feedback on the percentage error of each mode like as shown in Figure~\ref{fig:error-bars}. Serving the dual function of fine tuning results but also as practical understanding and exploring how each parameter impacts the simulation.
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{example-image}
+    \caption{PLACEHOLDER Example of editing a slider sub-range for finer parameter exploration.}
+    \label{fig:slider-subrange}
+\end{figure}
+
+
+The user should be given the flexibility to change slider limits based on the sub-parameter space they are trying to explore. Resolution, or step size, of a graphical slider is limited by the resolution of on which it is displayed. Minute movements are not a pleasant solution to the problem of sub-parameter space exploration. Instead, the user could be allowed to edit the limits directly giving a method to move from a macro level exploration of a parameter zoom into a sub-range of interest (Figure~\ref{fig:slider-subrange}) 
+
+As discussed in Section~\ref{sec:jupyter}, an interface for the python version of \textsc{magpie} \cite{magpie_python_2025} has already been created using the Jupyter notebooks development environment.
+The Jupyter interface \cite{magpie_jupyter_2025} is quite limited, and allows for only those designs which can easily implemented using the IPywidgets. Functionality such as adjustable range constraints, though technically possible, are more easily implemented.  Similarly, \textsc{matlab}'s App Designer
 \footnote{\url{}}
 would provide the same mode switching for end users. The App Designer is constrained to only those elements made available.
 
@@ -479,62 +509,31 @@ A key development for \textsc{MAGPIE} is the addition of an orthotropic model so
 
 Presenting the tool kit in an open source well-structure manner should hopefully encourage usage, collaboration and development as the system matures.
 
-\subsubsection{Tuning}
-
-An example of emergent functionality from \textsc{magpie} would be in its presentation of computational results versus those of a real experiment. 
- 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\linewidth]{img/magpie-tuning.pdf}
-    \caption{Example interface visual feedback for `tuning' boundary conditions and simulation parameters to match known experimental data.}
-    \label{fig:magpie-tuning}
-\end{figure}
-
-can linear interpolate and loop values but there is no intuitive way to start exploring subranges within the larger parameter space, interrupting exploration on space to tangentially explore another.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\linewidth]{example-image}
-    \caption{PLACEHOLDER \textsc{magpie} error view showing percentage error between the first 6 modal frequencies from an experiment and the computed modes.}
-    \label{fig:error-bars}
-\end{figure}
-
-Alternatively as a view that would provide feedback on the percentage error of each mode like as shown in Figure~\ref{fig:error-bars}. Serving the dual function of fine tuning results but also as practical understanding and exploring how each parameter impacts the simulation.
 
 
+% \subsubsection{Emebedded Systems}
 
+% As part of a luthier toolkit, more than capable of running on a Bela.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\linewidth]{example-image}
-    \caption{PLACEHOLDER Example of editing a slider sub-range for finer parameter exploration.}
-    \label{fig:slider-subrange}
-\end{figure}
-
-
-The user should be given the flexibility to change slider limits based on the sub-parameter space they are trying to explore. Resolution, or step size, of a graphical slider is limited by the resolution of on which it is displayed. Minute movements are not a pleasant solution to the problem of sub-parameter space exploration. Instead, the user could be allowed to edit the limits directly giving a method to move from a macro level exploration of a parameter zoom into a sub-range of interest (Figure~\ref{fig:slider-subrange}) 
-
-
-\subsubsection{Emebedded Systems}
-
-As part of a luthier toolkit, more than capable of running on a Bela.
-
-avoiding a tivoized device \url{https://www.gnu.org/philosophy/free-open-overlap.html}
+% avoiding a tivoized device \url{https://www.gnu.org/philosophy/free-open-overlap.html}
 
 
 
 \section{Closing Remarks}
 
-
 This thesis has intended to illustrate the importance of an open methodology as well as demonstrate two use cases for its importance within digital research
 When applies to digital conservation, the intention is to show that we must take the same approach to conservation of cultural heritage as we do to the methodologies applied to carry it out. 
-There is an ``as above so below'' symmetry to digital cultural heritage, where the both heritage and the digital tools require conservation.
-With musical instrument heritage there is the added value of interaction and instruction which are not simply conserved by create a digital facsimile of the heritage. Instead we must look at alternatives for conserving experience alongside the raw data of dimensions, materials and construction. 
+Two projects were presented, an interface for conserving the instructional value of musical instrument heritage artefacts and a plate analysis software toolkit. Both projects look to tackle polar ends of the heritage conservation spectrum, the act conservation and the act of engagement with that which is conserved.
+There is an ``as above so below'' symmetry to digital cultural heritage, where both the heritage and the digital tools require conservation.
+With musical instrument heritage there is the added value of interaction and instruction which are not simply conserved by creating a digital facsimile of that heritage. Instead we must look at alternatives for conserving experience alongside the raw data of dimensions, materials and construction. 
+
+
+% Both digital and analogue objects rely on physical storage mediums\nocite{Rubio2020}, but the financial and energy cost of preserving something digitally can often be orders of magnitude greater than an `analogue' equivalent\nocite{Cieply2007}.
 
 The open methodology described here has tried to demonstrate the need for careful separation of components into digital repositories in order that each component can be reusable and iterated upon without affecting others.
 The keyboard interface is separated into physical mechanical, digital software, and the boundary between both in the form of electronics hardware designed in software. Software itself has been separated into components of data, processing and interface.
 Each digital component is stored in a version control repository, whose functions are many. The version control repository is a tool that simultaneously allows for access to older versions of source code, ensuring the ability to access older versions of software, but it can also serve as a record of how ideas are developed. 
-% Rafael Bombelli (1526–1572) letters to Cardano are a cornerstone for complex mathematics. The Goldbach’s Conjecture comes from letters between Euler and Christian Goldbach. These are not published works, but rather correspondence was typically ephemeral. For the digital age, ideas and concepts ar not necessarily worked out on paper, but rather in code. In a digital form, these records are much more precarious, requiring technology to render them and with great ease all record can be eradicated entirely. The version control repository goes some way to keeping a record of code in the same manner that historic diaries and correspondance have offered insight into published work.
+
 Through online git services, the version control repository can also act as the means of software being open source. 
 Git repositories are decentralised and a combination of local and cloud service storage provides some degree of parity and preservation, but one this is coincidental and not deliberate.
 Services such as GitHub are owned and operated by commercial entities ad should not be depended upon to provide an resolvable DOI and digital archive. 
@@ -561,5 +560,10 @@ Adopting an open methodology as standard practice lessened these costs as suppor
 It is important to remember that here are no shortcuts in good research and anything worth doing is worth doing well, but acknowledgment of this cost raises an important issue. 
 With respect to the humanities, there is still a gap in  digital skills and best practices in data sustainability that needs to be closed \cite{taylor_shaping_2022}. Academic institutes will also need to take a proactive approach with digital skills literacy if those in the humanities research are to follow best practice with the respect to digital research.
 
+We do not only have to think of the impact of software sustainability if digital research, but also what the implication is for digital cultural heritage.
+When applied to cultural heritage, it is paramount that we approach digital conservation through a critical lens, otherwise we risk active harm to the heritage at stake \cite{rubio_work_2020,schwarz_disk_2006,parry_museums_2010,cieply_afterlife_2007}.
+Whatever approach is taken to digital conservation, it should be carried out deliberately, with the consequences of conservation decisions being intentional, not accidental. 
+\textcite{barclay_preservation_2005} and \textcite{desilvey_curated_2017} proclaim the same thing We should not ``pickle''\cite{desilvey_curated_2017} the past as that is what we are inclined to do, neither should we idly transition musical instruments across states of currency, conservation, and restoration while neglecting the consequences of those decisions. Better yet, if there is neglect should consequences be damned let it be explicit \cite[p. 75-76]{barclay_preservation_2005}.
+Similarly for the digital tools we employ in the process of that conservation. If these digital tools are disposable, then there should be intentionality in the ephemerality. If these tools should be enduring, then steps need to be taken to make sure they endure. 
 
-
+% Rafael Bombelli (1526–1572) letters to Cardano are a cornerstone for complex mathematics. The Goldbach’s Conjecture comes from letters between Euler and Christian Goldbach. These are not published works, but rather correspondence was typically ephemeral. For the digital age, ideas and concepts ar not necessarily worked out on paper, but rather in code. In a digital form, these records are much more precarious, requiring technology to render them and with great ease all record can be eradicated entirely. The version control repository goes some way to keeping a record of code in the same manner that historic diaries and correspondance have offered insight into published work.
