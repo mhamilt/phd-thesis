@@ -32,9 +32,9 @@ addresses two aspects of the conservation process relevant to these collections
 termed `Analysis' and `Interaction'.
 
 This thesis addresses these questions through two interconnected projects.
-Chapter~\ref{chapter:keyboard} examines what occurs after digitisation has taken
+Chapter~\ref{ch:interaction} examines what occurs after digitisation has taken
 place, asking: how can interaction with a digitised musical instrument be
-meaningfully facilitated? Chapter~\ref{chapter:magpie} focuses on the
+meaningfully facilitated? Chapter~\ref{ch:analysis} focuses on the
 development of an open-source software tool for plate simulation, designed to be
 used alongside measurements to support decision-making in conservation
 strategies \cite{barclay_care_1997}. Linking these two case studies is a broader
@@ -681,44 +681,43 @@ Aurora and YIN. These experiences have informed the methodology for project
 structure, documentation and the broader digital output of this research. 
 
 
-\section{Thesis Outline [Under Construction]}
+\section{Thesis Outline}
 
-Two aspects of the conservation pipeline represented within this thesis. The
-Chapter~\ref{chapter:keyboard} represents the aspect once digital conservation
+This thesis describes to two digital projects, each of which addresses an aspect 
+of the conservation pipeline. 
+The Chapter~\ref{ch:interaction} represents the aspect once digital conservation
 has taken place and asks the question: how do you facilitate interaction with a
-digitised musical instrument? Chapter~\ref{chapter:magpie} represents the
+digitised musical instrument? Chapter~\ref{ch:analysis} represents the
 beginning where analysis of materials take place, in the case of the
 harpsichord, which can be used alongside measurements to make further decisions
 about conservation routes \cite{barclay_care_1997}.
 
-
-Chapter~\ref{chapter:magpie} discusses the steps taken for sustainability with a
+Chapter~\ref{ch:analysis} discusses the steps taken for sustainability with a
 purely software project where a distinct functional software library and
 interface library were created for the MAGPIE software.  For electronic
 hardware, the problem of sustainability is compounded compounded with the
 addition of physical components, their schematics and assembly on top of the
 firmware and software required to make the hardware function. Process for
-addressing this is covered further in Chapter~\ref{chapter:interaction}.
+addressing this is covered further in Chapter~\ref{ch:interaction}.
 
-
+Binding these projects together is the open methodology, the system of methods, 
+tools and processes that should be considered as part of any digital cultural heritage project
 This thesis aims to demonstrate the considerations necessary to adhere to these
 four FAIR principles, particularly within a cross-disciplinary project. All
 digital assets—whether source code, measurement data, or CAD files—are managed
 accordingly.
 
-For the digital output of this thesis has confirmed to the following. All work
-digital has been put under version control using the git version control system.
-Version controlled repository are stored on the GitHub platform to allow for
-public access.
+The digital output of this thesis has conformed to the following requirements. 
+All digital assets have been put under version control using the git version control system.
+Version controlled repositories are stored on the GitHub platform to allow for
+public access. When a release of the repository is created, it is integrated with the
+Zenodo archive from which a DOI is generated.
 
-A `release` is defined as any self-contained working version of an asset that
-was used in the course of research. Digital assets are living and can travel
-through periods of transition. A release of represents a version that is
-self-contained, in some final form at a particular moment in time.
+With respect to the project repositories, a `release` is defined as any self-contained, working version of an asset that was used in the course of research. Digital assets are living and as such are constantly changing as they transition from one release to the next.
 
 \subsection{Chapter 2: Interaction}
 
-This chapter covers the creation of a model harpsichord interface that was
+Chapter~\ref{ch:interaction} discusses the creation of a model harpsichord interface that was
 augmented with an optical electronic sensor system to allow for interaction with
 digital software instruments. Incorporates the design, prototyping and
 fabrication stages as well as the final deployment as part of an exhibition at
@@ -763,75 +762,31 @@ design principles, technical implementation, and implications, emphasising its
 contribution to public engagement and the long-term preservation of musical
 heritage.
 
-% Related Work and Motivations
-% Harpsichord Mechanics
-% Design Constraints
-% Summary of Informed Design Choices
-% Staged Development Overview
-% Stage 1
-% Stage 2
-% Stage 3
-% Stage 4
-% Discussion
+Chapter~\ref{ch:interaction} begins by looking at related work over the last 40 years
+in the field of haptic keyboard musical interfaces and musical heritage interaction in museums.
+These specific context are then related to the wider discussion of digital cultural heritage and musical instrument conservation (as discussed above), its influence on the interface design process, and the constraints that imposed arising from this wider context. The projects is separated into its discrete stages from design process, through the prototyping process and finally the fabrication of two final interfaces: one interface for exhibition at Museo San Colombano and the second for further research as part of the NEMUS project.   
 
 \subsection{Chapter 3: Analysis}
 
-This chapter covers the creation of an open source software tool for plate
-vibration analysis, material property estimation and acoustics education.
-% Introduction
-% Context
-% Eigenvalue problem and time stepping scheme
-% Proposal
-% Design
-% \textsc{matlab}
-% Computing the biharmonic operator
-% Python
-% Eigensolver accuracy
-% \textsc{c++}
-% Interfacing with \textsc{magpie}
-% Conclusions
-% Main Points
-% Application
+Chapter~\ref{ch:analysis} looks at the  the creation of an open source software tool for plate
+vibration analysis, material property estimation and musical acoustics education.
+Although applications of plate simulation continue to expand, access remains largely limited to specialized, proprietary software—often prohibitively expensive for students or even smaller research groups. This work presents the theoretical background and initial implementation of \textsc{magpie}, an open-source platform for simulating plate physics. \textsc{magpie} provides intuitive visualization tools and a range of analysis methods, making it useful both as a teaching aid for instructors and as a research tool for academics and industry professionals. Its features include defining elastic boundary conditions along plate edges, visualizing and exporting eigenshapes and corresponding frequencies, running time-domain simulations of the plate equation for sound synthesis, and estimating the elastic constants of experimental plates. This final function or elastic constants forms the basis of a tool for soundboard analysis to aid luthiers and conservators of historical string and keyboard instruments. 
+
+\textsc{magpie} would provide a valuable data point, giving insight into the internal condition of wood as through its elastic constants in a non-destructive and inexpensive manner without a requirement for costly finite-element software. 
+In tandem, \textsc{magpie} strives to make open and accessible the scientific tools developed in the NEMUS laboratory which have been adapted to simplify use and lower the technical barrier of entry.
+
+Chapter~\ref{ch:analysis} begins by discussing the existing software for plate analysis and the core mathematical problems that need to be solved. The development of \textsc{magpie} is then discussed from its initial proof-of-concept to a formally structured software library. The development of \textsc{magpie} across multiple programming languages is discussed alongside the application of the open methodology.
+
+
 \subsection{Chapter 4: Going Forward}
 
-where do we go from here?
+The final chapter asks the question ``where do we go from here?'' with the projects in Chapters~\ref{ch:interaction} and \ref{ch:analysis}. Neither project is at an end point and their are multitude of developments for expansion, optimisation and refinement. A selection of possible developments are discussed for the interface and \textsc{magpie} in turn, outlining the technical challenges of development and the impact they would have on the open methodology and the adherence to the FAIR principles.
 
-This chapter discusses improvements and refinements to the core two projects and discusses what further applications the might have with suggested development routes
+Developments for the interface are split between the fabrication process in the mechanical interface, in particular the jacks that are used and incorporation of a sensor surface within them. This is followed by discussion development in the electronics system , the refinement of the sensor circuitry as well as the expansion in its functionality and the consideration that would have on the accessibility of the project.
+This concludes with a discussion and a look towards the future for interface as a tool for research and musical expression and the capabilities of the interface that have not yet been explored.
 
-This chapter covers the intersection of chapters 2 and 3 where a numerical modal
-was designed around a modified version of the interface. A bespoke synthesis
-engine that utilises the data available from embedded electronic sensors inside
-the keyboard. Synthesis designed around measurements taken during research as
-well the harpsichord specific mechanics of jack staggering and the timing
-differences between register plucks.
+The future of \textsc{magpie} is then discussed in terms of expanded functionality and the changes that have already taken place at time of writing, but have yet to be consolidated into a release format. Finally, the  development of \textsc{magpie}'s graphical interfaces is outlined with description of the emerging technologies (in particular web technologies) which would make the software even more accessible.
 
-Uses of projects within the wild.
-
-- NEMUS work that has been using and building upon the MAGPIE software -
-keyboard integrated with custom software
-
-% \item Interface
-% \item Mechanical Interface
-% \item PCB Layout
-% \item Latency
-% \item Sensor Signal Measurement
-% \item Optical Sensor
-% \item Microcontroller
-% \item Exhibition Enhancements
-% \item Application
-% \item As Research Probe
-% \item New Expression
-% \item MAGPIE
-% \item Functionality
-% \item Tuning
-% \item Orthotropic
-% \item Bracing
-% \item Optimisation
-% \item Interface
-% \item C++ Interface
-% \item Web Technology
-% \item Emebedded Systems
-% \item Closing Remarks
 
 
 
