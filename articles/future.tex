@@ -368,13 +368,13 @@ The interface can equally, and hopefully, be used as conduit for engaging the tr
 
 Improvements to \textsc{magpie} can be split between those of functionality and those of interface. The core functions of \textsc{magpie} would already provide support for number of research use cases, but further development is needed to enable it as a powerful open source tool for musical acoustics. Similarly, there is functionality that exists but a efficient interface is needed in order to full utilise it. \textsc{magpie} seeks to turn traditionally physics based problems into a problems of engineering and interface is key in order to facilitate that.
 
-Development within \textsc{MAGPIE} can be focussed within two directions. One in functionality and the other in portability. The current iteration is a capable illustrative tool for educational purposes and some specific material measurement scenarios. The application for tone wood still needs to be developed further. Similarly, the tool is available now in the open source language Python, but the current interface relies on the Jupyter notebook system, which comes with its own technical and portability challenges.
+Development within \textsc{magpie} can be focussed within two directions. One in functionality and the other in portability. The current iteration is a capable illustrative tool for educational purposes and some specific material measurement scenarios. The application for tone wood still needs to be developed further. Similarly, the tool is available now in the open source language Python, but the current interface relies on the Jupyter notebook system, which comes with its own technical and portability challenges.
 
 Key area for expansion is to translate the source code to a compiled language such as \textsc{C}, \textsc{C++}, and Rust. Such a transition provides more granular control of compiler optimisations, but more interestingly opens potential for deployment. 
 
-The primary bottleneck for development is the eigensolver stage. In \textsc{matlab} this achieved with \texttt{eigs} and in python the SciPy linear algebra library's \texttt{scipy.sparse.linalg.eigs}. In both cases, these eigensolvers are an interface to the ARPACK library \cite{lehoucq_arpack_1998}. For \textsc{matlab} there is analysis of the target matrix to which the user is not privvy. 
-\textsc{matlab} its own sparse library on top of ARPACK \cite{gilbert_sparse_1992} which obfuscates the process further.
-\textsc{matlab}'s \texttt{eigs} function is not one supported by the software's code generation systems and the function still requires the \textsc{matlab} runtime if it is to be interfaced with externally. This has implications for portability issues, with development being constrained to those with paid access to the \textsc{matlab} environment.
+The primary bottleneck for development is the eigensolver stage. In M\textsc{atlab} this achieved with \texttt{eigs} and in python the SciPy linear algebra library's \texttt{scipy.sparse.linalg.eigs}. In both cases, these eigensolvers are an interface to the ARPACK library \cite{lehoucq_arpack_1998}. For M\textsc{atlab} there is analysis of the target matrix to which the user is not privvy. 
+M\textsc{atlab} its own sparse library on top of ARPACK \cite{gilbert_sparse_1992} which obfuscates the process further.
+M\textsc{atlab}'s \texttt{eigs} function is not one supported by the software's code generation systems and the function still requires the M\textsc{atlab} runtime if it is to be interfaced with externally. This has implications for portability issues, with development being constrained to those with paid access to the M\textsc{atlab} environment.
 
 ARPACK itself is open source \url{https://github.com/opencollab/arpack-ng} and requires The Basic Linear Algebra Subroutines (BLAS) and Linear Algebra PACKage (LAPACK) \url{http://www.netlib.org/blas/} and \url{http://www.netlib.org/lapack/}
 
@@ -383,7 +383,7 @@ In the case of \textsc{C++}, the relevant technologies available for interfacing
 
 \subsection{Functionality}
 
-What is covered here is development of the core functionality as it is apart of the \textsc{magpie} framework. Such development means the rewriting and current \textsc{magpie} function suite, as well as the addition of further functions. As an open source project, the state of the project is constantly fluid. At time of writing the latest release of the \textsc{matlab} magpie version is 0.0.2 \cite{magpie_matlab_2025}, which consists of the functionality as discussed in Chapter~\ref{ch:analysis}.
+What is covered here is development of the core functionality as it is apart of the \textsc{magpie} framework. Such development means the rewriting and current \textsc{magpie} function suite, as well as the addition of further functions. As an open source project, the state of the project is constantly fluid. At time of writing the latest release of the M\textsc{atlab} magpie version is 0.0.2 \cite{magpie_matlab_2025}, which consists of the functionality as discussed in Chapter~\ref{ch:analysis}.
 
 \subsubsection{Orthotropic Case}
 
@@ -403,7 +403,7 @@ For example, the plate in Figure~\ref{fig:grid-error} is of dimensions $L_x$ = 1
 The number of bytes for the sparse biharmonic scales $N_{xy}$ by a factor of 104, with 13 diagonals and double precision. Additional overhead is also required for the eigensolver stage which, with benchmarking, adds a further factor of 50. 
 A shared grid spacing would require approximately 4.2 gigabytes of RAM before it would match the accuracy of the independent $h_x, h_y$ grid spacing. By contrast, the final grid size to the rightmost of Figure~\ref{fig:grid-error} comes at a cost of \~118 megabytes of RAM for the sparse biharmonic and eigensolver. Where this is relevant is deployment in resource constrains settings such as part of an embedded system, where RAM and processing requirements come at a financial cost of implementation or in the context of a web browser where overall performance will be much slower compared to a native implementation.
 
-Features such as independent grid spacing, which is implemented as part of an orthotropic plate model, have been merged into the the \textsc{matlab} library repository of \textsc{magpie}, which  were based on the orthotropic and lumped mass model as described in \textcite{ducceschi_method_2024}. The source is not yet in a format which would be distributable. The same principles in exploring the isotropic case can be applied to the orthotropic case, magpie would be capable of applying the same process to the  elastic constants of a wooden plate, two elastic moduli $E_x$ and $E_y$ and  a shear modulus $G_{xy}$. 
+Features such as independent grid spacing, which is implemented as part of an orthotropic plate model, have been merged into the the M\textsc{atlab} library repository of \textsc{magpie}, which  were based on the orthotropic and lumped mass model as described in \textcite{ducceschi_method_2024}. The source is not yet in a format which would be distributable. The same principles in exploring the isotropic case can be applied to the orthotropic case, magpie would be capable of applying the same process to the  elastic constants of a wooden plate, two elastic moduli $E_x$ and $E_y$ and  a shear modulus $G_{xy}$. 
 
 \begin{figure}
     \centering
@@ -453,12 +453,12 @@ Alternatively as a view that would provide feedback on the percentage error of e
 The user should be given the flexibility to change slider limits based on the sub-parameter space they are trying to explore. Resolution, or step size, of a graphical slider is limited by the resolution of on which it is displayed. Minute movements are not a pleasant solution to the problem of sub-parameter space exploration. Instead, the user could be allowed to edit the limits directly giving a method to move from a macro level exploration of a parameter zoom into a sub-range of interest (Figure~\ref{fig:slider-subrange}) 
 
 As discussed in Section~\ref{sec:jupyter}, an interface for the python version of \textsc{magpie} \cite{magpie_python_2025} has already been created using the Jupyter notebooks development environment.
-The Jupyter interface \cite{magpie_jupyter_2025} is quite limited, and allows for only those designs which can easily implemented using the IPywidgets. Functionality such as adjustable range constraints, though technically possible, are more easily implemented.  Similarly, \textsc{matlab}'s App Designer
+The Jupyter interface \cite{magpie_jupyter_2025} is quite limited, and allows for only those designs which can easily implemented using the IPywidgets. Functionality such as adjustable range constraints, though technically possible, are more easily implemented.  Similarly, M\textsc{atlab}'s App Designer
 \footnote{\url{}}
 would provide the same mode switching for end users. The App Designer is constrained to only those elements made available.
 
-\textsc{MATLAB} also has deployment constraints as \texttt{eigs} function is not one that is supported by the software's code generation systems and the function still requires the \textsc{matlab} runtime if it is to be interfaced with externally. Such constraints have implications on the accessibility and maintainability, with practical development being constrained to only those who have paid for access to the \textsc{matlab} environment.
-That is not to say that the \textsc{matlab} and Jupyter GUIs are redundant, on the contrary, they facilitate quick parameter exploration that could subsequently be automated directly through the library. Neither Jupyter nor \textsc{matlab}'s App Designer are permissive to all design approaches, but with the implementation of the library in C++ a number of possibilities become available. This section will discuss some potential deployments for a \textsc{magpie} GUI, the technical requirements, and what benefits there are to gained form such development.
+M\textsc{atlab} also has deployment constraints as \texttt{eigs} function is not one that is supported by the software's code generation systems and the function still requires the M\textsc{atlab} runtime if it is to be interfaced with externally. Such constraints have implications on the accessibility and maintainability, with practical development being constrained to only those who have paid for access to the M\textsc{atlab} environment.
+That is not to say that the M\textsc{atlab} and Jupyter GUIs are redundant, on the contrary, they facilitate quick parameter exploration that could subsequently be automated directly through the library. Neither Jupyter nor M\textsc{atlab}'s App Designer are permissive to all design approaches, but with the implementation of the library in C++ a number of possibilities become available. This section will discuss some potential deployments for a \textsc{magpie} GUI, the technical requirements, and what benefits there are to gained form such development.
 
 \subsubsection{C++ Interface}
 
@@ -469,11 +469,11 @@ If the ultimate goal is provide a tool that is easily accessible and cross-platf
 \subsubsection{Web Technology}
 
 Porting \textsc{magpie} to a compiled language like \textsc{C++} open up a number of exciting possibilities. 
-Similarity in results to that of \textsc{matlab} give an indication of a viable plate analysis tool that is not constrained to only those system on which \textsc{matlab} is supported. Of particular  note is the possibility of deploying \textsc{magpie} as an entirely web based application. Traditional software has typically required some form of installation process, where binaries are compiled for a specific machine architecture. Web technologies do away with part of that necessity by delivering software directly through a browser.
+Similarity in results to that of M\textsc{atlab} give an indication of a viable plate analysis tool that is not constrained to only those system on which M\textsc{atlab} is supported. Of particular  note is the possibility of deploying \textsc{magpie} as an entirely web based application. Traditional software has typically required some form of installation process, where binaries are compiled for a specific machine architecture. Web technologies do away with part of that necessity by delivering software directly through a browser.
 One such technology is Web Assembly (WASM) \url{https://webassembly.org}, which allows for optimised binary code to be executed by a virtual machine in the browser. This is achieved through the emscripten,\footnote{\url{https://emscripten.org}} an open source compiler that enables compilation of \textsc{C} / \textsc{C++} code into WASM. Assembly code capable of more performative execution than the equivalent JavaScript 
 \cite{reiser_accelerate_2017}. When combined with the native \textsc{C++} source of Eigen and Spectra, the emscripten compiler can potentially be used to distribute and execute \textsc{magpie} entirely in the browser.
 \footnote{Such an application using the Eigen library has already been demonstrated as feasible \url{https://observablehq.com/@rreusser/eigen}}. 
-To make a web tool like \textsc{magpie} would traditionally require server architecture in order to execute ARPACK or to host a \textsc{matlab} runtime. 
+To make a web tool like \textsc{magpie} would traditionally require server architecture in order to execute ARPACK or to host a M\textsc{atlab} runtime. 
 In a server / client arrangement the bottlenecks on performance are then tied to the slowest of the network and the computation.
 Creating a \textsc{magpie} server would also not be without cost and would also be limited by concurrent usage.
 
@@ -502,10 +502,10 @@ Each plate in comprised of approximately 1.5k grid points, for a total 12k grid 
 \end{figure}
 
 
-\textsc{matlab} has functionality to compile its code to WASM (\url{https://www.mathworks.com/matlabcentral/fileexchange/69973-generatejavascriptusingmatlabcoder}). Some functionality such as that in \textsc{matlab}'s sparse libraries is not currently open to code generation and compilation to a binary outside of the \textsc{matlab} runtime (list of functions supported: \url{https://uk.mathworks.com/help/referencelist.html?type=function&capability=codegen&listtype=alpha}) and it is unlikely to be in the near future.
+M\textsc{atlab} has functionality to compile its code to WASM (\url{https://www.mathworks.com/matlabcentral/fileexchange/69973-generatejavascriptusingmatlabcoder}). Some functionality such as that in M\textsc{atlab}'s sparse libraries is not currently open to code generation and compilation to a binary outside of the M\textsc{atlab} runtime (list of functions supported: \url{https://uk.mathworks.com/help/referencelist.html?type=function&capability=codegen&listtype=alpha}) and it is unlikely to be in the near future.
 
 
-A key development for \textsc{MAGPIE} is the addition of an orthotropic model so match more closely that of the quarter-sawn wood as is used for string instrument soundboards. Even further, the addition of braces and lumped masses to the internal system to mimic that of the structural bracing found on physical instruments \cite{ducceschi_open_2024}. 
+A key development for \textsc{magpie} is the addition of an orthotropic model so match more closely that of the quarter-sawn wood as is used for string instrument soundboards. Even further, the addition of braces and lumped masses to the internal system to mimic that of the structural bracing found on physical instruments \cite{ducceschi_open_2024}. 
 
 Presenting the tool kit in an open source well-structure manner should hopefully encourage usage, collaboration and development as the system matures.
 
