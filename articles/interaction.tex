@@ -35,7 +35,7 @@ The work builds on prior studies of musical heritage
 \cite{mcalpine_sampling_2014,baldwin_tromba_2016} and draws on a long history of research into haptic keyboard design. While the immediate goal was to enhance the visitor experience within the museum, the project also responds to a broader challenge: the sustainability of digital research. 
 The optical sensing approach adapts earlier techniques developed for the piano \cite{mcpherson_portable_2013}, here reinterpreted for the harpsichord.  Thus, the project situates itself within best practices for archiving and long-term reuse \cite{smith_software_2016}, engaging with ongoing discussions around the durability of DMIs and electronics hardware \cite{mcpherson_nimehub_2016,fiordelmondo_longevity_2024}. 
 
-\section{Related Work and Motivations}\label{related-work}
+\section{Related Work and Motivations}\label{sec:related-work}
 
 The Benton Fletcher Collection at Fenton House in England presents an instructive case of the recurring challenge of providing meaningful interaction with historical instruments while safeguarding fragile originals. \textcite{mcalpine_sampling_2014} developed a sampling campaign and a custom MIDI interface to enable public engagement without endangering the instruments. Although successful in preserving access, the commercial weighted keyboards used failed to capture the distinctive feel of historical plucked mechanisms, a limitation common in digital musical instruments \cite{magnusson_survey_2007}. 
 The Tromba Moderna project \cite{baldwin_tromba_2016}, developed in collaboration between the Music Museum in Copenhagen and a group of researchers from Aalborg University, took a more embodied approach, reconstructing and augmenting a tromba marina replica with embedded sensors and actuators. This strategy exemplifies what \textcite{cook_remutualizing_2004} terms ``remutualising'' the interface: restoring a closer relationship between gesture and sound.
@@ -429,7 +429,7 @@ The prototyping was staged with ever-increasing complexity to solve jack-displac
 \label{fig:timeline-vertical}
 \end{figure}
 
-\section{Stage 1}
+\section{Stage 1}\label{sec:prototype}
 
 \begin{figure}
     \centering    
@@ -498,7 +498,7 @@ A small EAGLE PCB (Figure~\ref{fig:prototype-pcb}) provided simple divider wirin
 \end{figure}
 The vertical redesign (Figure~\ref{fig:dual-pcb}) doubles the sensor layout to accommodate wiring from a single side on the 3-key rig, while keeping identical vertical positioning for the front and rear registers. This minimises signal-range differences and avoids separate offset gradients or separate PCBs. A two-piece 3D-printed bracket holds the board vertically and provides coarse gap adjustment.
 
-\section{Stage 2}
+\section{Stage 2}\label{sec:mark-1}
 
 After the initial prototyping, the first complete interface, \emph{Mark I}, was completed for delivery to the Tagliavini collection. Development proceeded modularly (mechanical hardware, electronics, audio software; and within electronics, hardware vs.\ firmware), allowing mechanical construction while electronic prototyping continued. 
 

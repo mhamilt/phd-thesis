@@ -14,7 +14,7 @@ Refinements to the interface include the adoption of CAD/CAM processes during th
 
 \subsection{CAD/CAM processes}\label{sec:cad-cam-jacks}
 
-A major limitation across all interfaces discussed in Chapter~\ref{} is the gradient stickers used for the sensor. Although the stickers are printed and cut by machines, allowing for large quantities to be made, they still need to be applied by hand. In the application process it not uncommon for the gradient stickers to be too wide. The short edge of the jacks were roughly similar, at around 4.35 mm, but they were made by manually resulting in variation across the full set. The jacks and the jack-slide are wooden and such prone to expansion and contraction with changes in humidity. This was the case for when the Mark 1 (Sections~\ref{sec:mark-1}) was moved from the laboratory, where many jacks that were freely moving became constricted in their slots. This meant that the gradient stickers either needed trimmed or replaced entirely, with reapplication also necessitating re-calibration. Inspecting and adjusting 98 jacks was a time consuming task and one ripe for optimisations.
+A major limitation across all interfaces discussed in Chapter~\ref{ch:interaction} is the gradient stickers used for the sensor. Although the stickers are printed and cut by machines, allowing for large quantities to be made, they still need to be applied by hand. In the application process it not uncommon for the gradient stickers to be too wide. The short edge of the jacks were roughly similar, at around 4.35 mm, but they were made by manually resulting in variation across the full set. The jacks and the jack-slide are wooden and such prone to expansion and contraction with changes in humidity. This was the case for when the Mark 1 (Sections~\ref{sec:mark-1}) was moved from the laboratory, where many jacks that were freely moving became constricted in their slots. This meant that the gradient stickers either needed trimmed or replaced entirely, with reapplication also necessitating re-calibration. Inspecting and adjusting 98 jacks was a time consuming task and one ripe for optimisations.
 The adhesive for the stickers was hi-tack meaning that they were unlikely to fall off. The lifespan of the adhesive is finite, rated to around four years for outdoor use \cite{antalis_coala_2025}. Factoring in that the jacks are moving, creating friction with the inside of the jack slot, will likely mean the lifespan of the sticker adhesive is shorter.
 
 Preferably, the surface for the optical sensors would be integral to the construction of the jack. Given the small area of a 4.35mm short edge an ~8mm travel, creating a surface of varying reflectance by hand is not feasible. The process would therefore need to be automated or computer aided.
@@ -52,7 +52,7 @@ For CAD/CAM fabrication two methods were tested, a computer numerical control (C
 \end{figure}
 
 Taking inspiration from the rolling shutter of a camera,
-section of the jack would be cut out (Figure~\ref{}. As the cut out section passed the optical sensor, a larger amount of light would be reflected. The baffles of the sensor would help restrict the field of view limit the light bleed between sensors. CNC routing of the jack bodies turned out to be time consuming for only a small number. The available router model and CNC bits were also prone to breaking , particularly around the damper slots, where there as commonly tear out. Finally, the materials for the jacks are typically hardwood such as pear, service or beech tree. Available MDF and plywood materials were far less dense than what would ideally be used in the final version and defect rate was unlikely to improve without extensive testing experimentation with router bits. The wood for the jack bodies would need to be planed first then likely adjusted by hand for width after the CNC process. The additional equipment requirement of a CNC router also reduced the accessibility of the project, which stood in contradiction to the open methodology. 3D Printers are now relatively common in institutional maker spaces. Given these limitations the CNC, pursuing that option did not seem viable. The design pivoted instead to a 3D printing approach using PLA as had been used for the brackets and baffles of the sensor board. PLA could be reworked for width if necessary and allowed for experimentation with affect of colour in the design. The 3D print of single jack body was also only 12 minutes, meaning it could be scaled. 
+section of the jack would be cut out (Figure~\ref{fig:jack-cut-out}. As the cut out section passed the optical sensor, a larger amount of light would be reflected. The baffles of the sensor would help restrict the field of view limit the light bleed between sensors. CNC routing of the jack bodies turned out to be time consuming for only a small number. The available router model and CNC bits were also prone to breaking , particularly around the damper slots, where there as commonly tear out. Finally, the materials for the jacks are typically hardwood such as pear, service or beech tree. Available MDF and plywood materials were far less dense than what would ideally be used in the final version and defect rate was unlikely to improve without extensive testing experimentation with router bits. The wood for the jack bodies would need to be planed first then likely adjusted by hand for width after the CNC process. The additional equipment requirement of a CNC router also reduced the accessibility of the project, which stood in contradiction to the open methodology. 3D Printers are now relatively common in institutional maker spaces. Given these limitations the CNC, pursuing that option did not seem viable. The design pivoted instead to a 3D printing approach using PLA as had been used for the brackets and baffles of the sensor board. PLA could be reworked for width if necessary and allowed for experimentation with affect of colour in the design. The 3D print of single jack body was also only 12 minutes, meaning it could be scaled. 
 
 \begin{figure}
     \centering
@@ -65,7 +65,7 @@ Figure~\ref{fig:jack-cut-out-3d-print} shows an example of a 3D printed jack of 
 Comparing PLA \cite{bcn3d_pla_2019} to Delrin \cite{dupont_delrin_2017}, a common modern substitute for quill plectra \cite{barclay_preservation_2005}, suggested that the PLA would be too brittle and difficult to rework for adjusting the voicing of the jack. Therefore, at the very leats the 3D printed jacks would still need to be quilled by hand, with likely both quilling and tongue fitting being required. Given time constraints for the Mark 1, the option to pursue 3D printed jacks was abandoned in favour of the gradient stickers, which at the point was low cost, relatively reliable and reproducible.
 The 3D printed jacks were also relatively high risk for sensor placement. Should the vertical placement of sensor be misaligned, the gradient stickers could simply be removed and replaced. With the 3D printed approach, like in Figure~\ref{fig:jack-cut-out-3d-print}, if there was misalignment, the entire jack height would need to be readjusted. For the first implementation at scale, the risk was determined to not be worth the additional time cost of adjusting gradient stickers which, in the context of the full install process, was relatively small by comparison.
 
-\subsection{PCB Layout}
+\subsection{PCB Layout}\label{sec:future-pcb-layout}
 
 \begin{figure}
     \centering
@@ -84,7 +84,7 @@ For greater flexibility in the refinement of each stage in the circuitry, it wou
 \end{figure}
 
 For the sensor module, a similar concept can be seen in \textcite{schmidt_sparksichord_2025} where optical sensors at a fixed pitch are connected to headers to allow for a more modular assembly.
-This would help to overcome implementing the sensors in a constrained space, in particular for a harpsichords with three or more registers. Such a configuration has jacks inline with each other (Figure~\ref{3-registers} and there is much less space to apply the same sensor system.
+This would help to overcome implementing the sensors in a constrained space, in particular for a harpsichords with three or more registers. Such a configuration has jacks inline with each other (Figure~\ref{fig:3-registers} and there is much less space to apply the same sensor system.
 
 \begin{figure}
     \centering
@@ -102,7 +102,7 @@ The new sensor module would be connected to the signal board, which houses the r
     \label{fig:led-diffuser}
 \end{figure}
 
-\subsection{Latency and Jitter}
+\subsection{Latency and Jitter}\label{sec:latency}
 
 Though sensor system is working effectively in the measurement of jack displacement, there is still room for improvement with respect to latency. Latency in this case is the time between a string being plucked and the corresponding MIDI signal being sent. As covered in Section~\ref{sec:latency}, the latency of the current system averages at 2 milliseconds with 1 millisecond of jitter. The latency is bottlenecked by two points in the system: the sensor signal measurement and then in the microcontroller itself.
 Limitation in the sensor signal measurement is affected the inherent parasitic capacitance that is present on all transistors. The microcontroller is limited by the response time of the phototransistors. Even if the response rate is improved the microcontroller, or its firmware, could still contribute to suboptimal latency. As such, in terms of latency, the sensor signal measurement should be addressed first. Besides latency the microcontroller is the sole contributor to jitter. Irregular timing in the central firmware loop results in deviation in time. This section will cover the methods for reducing jitter, but the consequences that impact the rest of design as a result.
@@ -134,7 +134,7 @@ V{out} = I_{C}R_{div}
 $$
 
 
-As noted in \textcite{horowitz_art_2015}, this circuit should be assumed to include a capacitor in parallel to the feedback resistor. The phototransistor will begin conducting with a lower light presence, if their is a bias voltage present across the collector and emitter ($V_{CE}$). An example of such a circuit can be see in \textcite{pardue_near_2013} (Figure~\ref{fig:vb-tia}(b)).
+As noted in \textcite{horowitz_art_2015}, this circuit should be assumed to include a capacitor in parallel to the feedback resistor. The phototransistor will begin conducting with a lower light presence, if their is a bias voltage present across the collector and emitter ($V_{CE}$). An example of such a circuit can be see in \textcite{pardue_near_2013} (Figure~\ref{fig:tia-bias}(b)).
 
 \begin{figure}
     \centering
@@ -349,7 +349,7 @@ Begging the question, does recreating the harpsichord action at a smaller scale 
 
 Much has been discussed already about musical cultural heritage and the purpose of interface for providing a means for instructional engagement.
 That is not to say that the purpose of such interfaces can and should be constrained to only this scope.
-In Section~\ref{} we mentioned the research by \textcite{oboe_mikey_2006} which briefly hint at limitation in expressive for the harpsichord and more broadly keyboard instruments as a whole. 
+In Section~\ref{sec:related-work} we discussed the research by \textcite{oboe_mikey_2006}, which briefly hint at limitation in expressive for the harpsichord and more broadly keyboard instruments as a whole. 
 The ability to affect the note after it has been played has long been a debate among piano, harpsichord and organ players alike \cite{macritchie_using_2015}. With traditional acoustic keyboard instrument, this is just not possible. Further, the manner in which an organ key is pressed has been claimed to affect the transients of the notes, but this is has also been shown to be a false \cite{woolley_musical_2017}.
 
 On the other hand, an augmented interface with sensors tracking key velocity and pressure is capable of providing these modes of expression.
@@ -370,9 +370,7 @@ The interface can equally, and hopefully, be used as conduit for engaging the tr
 
 Improvements to \textsc{magpie} can be split between those of functionality and those of interface. The core functions of \textsc{magpie} would already provide support for number of research use cases, but further development is needed to enable it as a powerful open source tool for musical acoustics. Similarly, there is functionality that exists but a efficient interface is needed in order to full utilise it. \textsc{magpie} seeks to turn traditionally physics based problems into a problems of engineering and interface is key in order to facilitate that.
 
-Development within \textsc{magpie} can be focussed within two directions. One in functionality and the other in portability. The current iteration is a capable illustrative tool for educational purposes and some specific material measurement scenarios. The application for tone wood still needs to be developed further. Similarly, the tool is available now in the open source language Python, but the current interface relies on the Jupyter notebook system, which comes with its own technical and portability challenges.
-
-Key area for expansion is to translate the source code to a compiled language such as \textsc{C}, \textsc{C++}, and Rust. Such a transition provides more granular control of compiler optimisations, but more interestingly opens potential for deployment. 
+Development within \textsc{magpie} can be focussed within two directions. One in functionality and the other in portability. The current iteration is a capable illustrative tool for educational purposes and some specific material measurement scenarios. The application for tone wood still needs to be developed further. Similarly, the tool is available now in the open source language Python, but the current interface relies on the Jupyter notebook system, which comes with its own technical and portability challenges. One key area for expansion is to translate the source code to a compiled language such as \textsc{C}~/~\textsc{C++} and Rust. Such a transition provides more granular control of compiler optimisations, but more interestingly opens potential for deployment. 
 
 The primary bottleneck for development is the eigensolver stage. In M\textsc{atlab} this achieved with \texttt{eigs} and in python the SciPy linear algebra library's \texttt{scipy.sparse.linalg.eigs}. In both cases, these eigensolvers are an interface to the ARPACK library \cite{lehoucq_arpack_1998}. For M\textsc{atlab} there is analysis of the target matrix to which the user is not privvy. 
 M\textsc{atlab} its own sparse library on top of ARPACK \cite{gilbert_sparse_1992} which obfuscates the process further.
@@ -417,7 +415,7 @@ Features such as independent grid spacing, which is implemented as part of an or
 \end{figure}
 
 
-The latest developments have implemented a lumped mass model. The addition of lumped masses to the system allows for modelling of the wooden braces that provide strength to musical instrument soundboards (Figure~\ref{fig:bracing}). Furthermore, lumped masses should also provide a means to compensating for the effects of components such a as accelerometers or exciters which are attached to plate as part of experimental measurement, such as the accelerometer in \textcite{duran_experimentally_2023}. Such a set of features are not best explored through a code interface, but instead can best be leveraged with graphical user interfaces.
+The latest developments to \textsc{magpie} have implemented a lumped mass model. The addition of lumped masses to the system allows for modelling of the wooden braces that provide strength to musical instrument soundboards (Figure~\ref{fig:bracing}). Furthermore, lumped masses should also provide a means to compensating for the effects of components such a as accelerometers or exciters which are attached to plate as part of experimental measurement, such as the accelerometer in \textcite{duran_experimentally_2023}. Such a set of features are not best explored through a code interface, but instead can best be leveraged with graphical user interfaces.
 
 \subsection{GUIs}
 
@@ -425,8 +423,6 @@ A graphical user interfaces provide a means to change multiple parameters quickl
 \textsc{magpie} as a software library naturally provides a programmatic interface in each of its implementations. Complex, algorithmic iteration over parameters that allow for simulations to be run over long periods without intervention. Providing the user with a huge parameter space is only as powerful as the ability to explore it. There are commonly subtle transition points where small changes in any one parameter will have a dramatic affect on mode shapes or frequencies. 
 When the user is constrained, however, to the interesting areas of the parameter space then the system becomes much easier to explore. Likewise, the small adjustments in parameters are isolated to a single mouse interaction which would be otherwise difficult or unwieldy to change and explore if it were attempted to be achieved through the command-line interface or re-compilation of software.
 
-An example of the functionality that emerges from a GUI would be in the presentation of computational results versus those of a real experiment. 
- 
 \begin{figure}
     \centering
     \includegraphics[width=0.75\linewidth]{img/magpie-tuning.pdf}
@@ -434,11 +430,12 @@ An example of the functionality that emerges from a GUI would be in the presenta
     \label{fig:magpie-tuning}
 \end{figure}
 
-On could iterate over a range of values, but there is no intuitive way to start exploring subranges within the larger parameter space; interrupting exploration in one space to tangentially explore another.
+
+An example of the functionality that emerges from a GUI would be in the presentation of computational results versus those of a real experiment. One could iterate over a range of values, but there is no intuitive way to start exploring subranges within the larger parameter space; interrupting exploration in one space to tangentially explore another.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.75\linewidth]{example-image}
+    \includegraphics[width=0.7\linewidth]{example-image}
     \caption{PLACEHOLDER \textsc{magpie} error view showing percentage error between the first 6 modal frequencies from an experiment and the computed modes.}
     \label{fig:error-bars}
 \end{figure}
@@ -448,7 +445,7 @@ Alternatively as a view that would provide feedback on the percentage error of e
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.75\linewidth]{example-image}
+    \includegraphics[width=0.7\linewidth]{example-image}
     \caption{PLACEHOLDER Example of editing a slider sub-range for finer parameter exploration.}
     \label{fig:slider-subrange}
 \end{figure}
@@ -474,14 +471,14 @@ If the ultimate goal is provide a tool that is easily accessible and cross-platf
 
 Porting \textsc{magpie} to a compiled language like \textsc{C++} open up a number of exciting possibilities. 
 Similarity in results to that of M\textsc{atlab} give an indication of a viable plate analysis tool that is not constrained to only those system on which M\textsc{atlab} is supported. Of particular  note is the possibility of deploying \textsc{magpie} as an entirely web based application. Traditional software has typically required some form of installation process, where binaries are compiled for a specific machine architecture. Web technologies do away with part of that necessity by delivering software directly through a browser.
-One such technology is Web Assembly (WASM) \url{https://webassembly.org}, which allows for optimised binary code to be executed by a virtual machine in the browser. This is achieved through the emscripten,\footnote{\url{https://emscripten.org}} an open source compiler that enables compilation of \textsc{C} / \textsc{C++} code into WASM. Assembly code capable of more performative execution than the equivalent JavaScript 
+One such technology is Web Assembly (WASM) \url{https://webassembly.org}, which allows for optimised binary code to be executed by a virtual machine in the browser. This is achieved through the emscripten,\footnote{\url{https://emscripten.org}} an open source compiler that enables compilation of \textsc{C}~/~\textsc{C++} code into WASM. Assembly code capable of more performative execution than the equivalent JavaScript 
 \cite{reiser_accelerate_2017}. When combined with the native \textsc{C++} source of Eigen and Spectra, the emscripten compiler can potentially be used to distribute and execute \textsc{magpie} entirely in the browser.%
-\footnote{Such an application using the Eigen library has already been demonstrated as feasible \url{https://observablehq.com/@rreusser/eigen}}. 
+\footnote{Such an application using the Eigen library has already been demonstrated as feasible\\ \url{https://observablehq.com/@rreusser/eigen}}. 
 To make a web tool like \textsc{magpie} would traditionally require server architecture in order to execute ARPACK or to host a M\textsc{atlab} runtime. 
 In a server / client arrangement the bottlenecks on performance are then tied to the slowest of the network and the computation.
 Creating a \textsc{magpie} server would also not be without cost and would also be limited by concurrent usage.
 
-The server and client can be on the same machine, which is exactly the architecture for the Jupyter interface (Section~\ref{sec:magpie-jupyter}).
+The server and client can be on the same machine, which is exactly the architecture for the Jupyter interface (Section~\ref{sec:jupyter}).
 The extra technical requirements for installation of a local server reintroduces platform specific behaviour and limitations, which the browser client is meant to avoid.
 Computational performance in this scenario is also affected compared to an equivalent system using natively compiled binaries.
 The alternative for \textsc{magpie} to execute entirely on the client-side would be an implementation of a sparse matrix library and eigensolver entirely within JavaScript, the result of which would be severely limited in performance \cite{lion_investigating_2022}.
@@ -492,7 +489,7 @@ It is worth noting that the above web technologies are not supported equally acr
 Such limitation of highlight an importance of both open sourcing and version control as multiple systems and deployments can more easily be supported.
 
 WASM addresses the porting of the core \textsc{magpie} to the web browser, but there still remains a question o of interface.
-The Jupyter version of \textsc{magpie} (Section~\ref{sec:magpie-jupyter}) demonstrates one potential interface, but this is limited by the communication happening between IPython the renderer for the browser. Breaking away from the constraint of Jupyter allows for direct usage of further browser technology, notably the WebGL and WebGPU \cite{chickerur_webgl_2024} which allow fast 3D drawing within the browser. Figure~\ref{fig:magpie-p5js} shows a prototype example of the first four eigenshapes of a plate above their corresponding `chladni pattern' projected shadows.\footnote{\url{https://mhamilt.github.io/eigenvis/}} 
+The Jupyter version of \textsc{magpie} (Section~\ref{sec:jupyter}) demonstrates one potential interface, but this is limited by the communication happening between IPython the renderer for the browser. Breaking away from the constraint of Jupyter allows for direct usage of further browser technology, notably the WebGL and WebGPU \cite{chickerur_webgl_2024} which allow fast 3D drawing within the browser. Figure~\ref{fig:magpie-p5js} shows a prototype example of the first four eigenshapes of a plate above their corresponding `chladni pattern' projected shadows.\footnote{\url{https://mhamilt.github.io/eigenvis/}} 
 The plates in Figure~\ref{fig:magpie-p5js} are drawn using the \texttt{p5.js} library which has an interface to WebGL.%
 \footnote{\url{https://p5js.org/reference/p5/WEBGL/}}
 
@@ -506,9 +503,7 @@ Each plate in comprised of approximately 1.5k grid points, for a total 12k grid 
 \end{figure}
 
 
-M\textsc{atlab} has functionality to compile its code to WASM.%%
-\footnote{\url{https://www.mathworks.com/matlabcentral/fileexchange/69973-generatejavascriptusingmatlabcoder}}
-Some functionality such as that in M\textsc{atlab}'s sparse libraries is not currently open to code generation and compilation to a binary outside of the M\textsc{atlab} runtime%
+M\textsc{atlab} has functionality to compile its code to WASM \cite{mcvittie_generatejavascriptusingmatlabcoder_2021}, however some functionality such as that in M\textsc{atlab}'s sparse libraries is not currently open to code generation and compilation to a binary outside of the M\textsc{atlab} runtime%
 \footnote{(list of functions supported: \url{https://uk.mathworks.com/help/referencelist.html?type=function&capability=codegen&listtype=alpha}} 
 and it is unlikely to be in the near future.
 
@@ -555,7 +550,7 @@ at the Università di Bologna, but these services are still tailored toward trad
 Both of these institutes already host their own online git services.\footnote{UoE ECDF \url{git.ecdf.ed.ac.uk} and multiple departmental GitLab services at Unibo.} 
 The ideal scenario would be where these services are simply connected together allowing institutes to take responsibility of both version control and it's archiving.
 
-Academic research is capable of long term usage of software, ARPACK from 1990 \cite{lehoucq_arpack_1998} (discussed in Chapter~\ref{}) serves as one example. Aurora (Section~\ref{sec:aurora}) from just five years later is now at risk of no longer being useable without intervention and development. Research software access and permanence should not be a coin toss weighted by the extent of its adoption. Aurora demonstrated this by being both widely adopted and at risk of obsolescence. Instead, a more deliberate methodology is needed for research software to be accessible and reproducible as is the expectation with other aspects of academic research. 
+Academic research is capable of long term usage of software, ARPACK from 1990 \cite{lehoucq_arpack_1998} (discussed in Chapter~\ref{ch:analysis}) serves as one example. Aurora (Section~\ref{sec:aurora}) from just five years later is now at risk of no longer being useable without intervention and development. Research software access and permanence should not be a coin toss weighted by the extent of its adoption. Aurora demonstrated this by being both widely adopted and at risk of obsolescence. Instead, a more deliberate methodology is needed for research software to be accessible and reproducible as is the expectation with other aspects of academic research. 
 
 The praxis of such a open methodology does not come without cost labour and time. Researcher are likely already learning a new skill with respect to programming. With the addition of repository organisation, drafting documentation, learning a version control system and archiving development time can be inflated as a researcher orientates themself with these new tools. 
 
