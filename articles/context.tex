@@ -9,9 +9,10 @@ restoring it would compromise its structural or historical integrity---can
 interaction be reintroduced through digitisation? Digitisation may involve
 sampling an instrument
 \cite{mcalpine_sampling_2014,paradiso_to-save_2019,tasten_project_2018} or
-reconstructing it through numerical simulation \cite{XXXX}. Despite the
-emergence of these techniques, the question of how to provide meaningful access
-to digitised instruments within museum contexts remains unresolved
+reconstructing it through numerical simulation
+\cite{bevilacqua_sound_2023,sun_3d_2020}. Despite the emergence of these
+techniques, the question of how to provide meaningful access to digitised
+instruments within museum contexts remains unresolved
 \cite{woodmusick_effects_2015,holzer_imperfect_2025}.
 
 These challenges are exemplified by the renowned Tagliavini Collection in
@@ -34,10 +35,10 @@ termed `Analysis' and `Interaction'.
 This thesis addresses these questions through two interconnected projects.
 Chapter~\ref{ch:interaction} examines what occurs after digitisation has taken
 place, asking: how can interaction with a digitised musical instrument be
-meaningfully facilitated? Chapter~\ref{ch:analysis} focuses on the
-development of an open-source software tool for plate simulation, designed to be
-used alongside measurements to support decision-making in conservation
-strategies \cite{barclay_care_1997}. Linking these two case studies is a broader
+meaningfully facilitated? Chapter~\ref{ch:analysis} focuses on the development
+of an open-source software tool for plate simulation, designed to be used
+alongside measurements to support decision-making in conservation strategies
+\cite{barclay_care_1997}. Linking these two case studies is a broader
 investigation into the sustainability and reproducibility of digital
 conservation and the tools that underpin it. Reproducibility poses a significant
 challenge for digital research \cite{perkel_challenge_2020}. Accordingly, this
@@ -141,18 +142,28 @@ organisations, summarised in Table \ref{tab:values_comparison}.
     \centering
         \begin{tabular}{llll}
             \toprule
-\textbf{Art History} & \textbf{ICOMOS Australia} & \textbf{Economics} & \textbf{English Heritage} \\
-       Alois Reigl   &             Burra Charter &        Bruno Frey  &                           \\ 
-       1902          &             1998          &        1997        &  1999                     \\ \hline
-       Age           &             Aesthetic     &        Monetary    &  Cultural                 \\ 
-       Historical    &             Historic      &        Option      &  Educational and academic \\ 
-       Commemorative &             Scientific    &        Existence   &  Economic                 \\ 
-       Use           &             Social        &        Bequest     &  Resource                 \\ 
-                     &                           &        Prestige    &  Recreational             \\
-                     &                           &        Educational &  Aesthetic                \\
+\textbf{Art History} & \textbf{ICOMOS Australia} & \textbf{Economics} &
+\textbf{English Heritage} \\
+       Alois Reigl   &             Burra Charter &        Bruno Frey  &
+       \\ 
+       1902          &             1998          &        1997        &  1999
+       \\ \hline
+       Age           &             Aesthetic     &        Monetary    &
+       Cultural                 \\ 
+       Historical    &             Historic      &        Option      &
+       Educational and academic \\ 
+       Commemorative &             Scientific    &        Existence   &
+       Economic                 \\ 
+       Use           &             Social        &        Bequest     &
+       Resource                 \\ 
+                     &                           &        Prestige    &
+                     Recreational             \\
+                     &                           &        Educational &
+                     Aesthetic                \\
             \bottomrule
         \end{tabular}    
-    \caption{Comparative Analysis of Value Systems in Heritage Conservation adapted from \textcite{avrami_values_2000}.}
+    \caption{Comparative Analysis of Value Systems in Heritage Conservation
+    adapted from \textcite{avrami_values_2000}.}
     \label{tab:values_comparison}
 \end{table}
 
@@ -228,10 +239,10 @@ instructional roles. This integration opens pathways to novel conservation
 strategies that extend beyond current paradigms.
 
 
-% Musical instruments have a duality of both tangible and intangible heritage. 
-% Emphasis placed on the intagible 'sound' but they also embody
-% not just musical tradition but also traditional craft \cite{howard_musical_2022}.
-% 
+% Musical instruments have a duality of both tangible and intangible heritage.
+% Emphasis placed on the intagible 'sound' but they also embody not just musical
+% tradition but also traditional craft \cite{howard_musical_2022}.
+%
 
 \subsection{Reproduction or Renovation}\label{sec:reproduction-or-renovation}
 
@@ -344,11 +355,16 @@ making that are currently subject to CITES regulations.
     \small
     \begin{tabular}{lrcll}
       \toprule
-      \textbf{Common Name} & \textbf{Scientific Name} & \textbf{Appendix} & \textbf{Year Added}           & \textbf{Use} \\ \hline
-      Brazilian Rosewood   & Dalbergia Nigra          & I                 & 1992 \cite{cites_cop17_2017}  & Fretboards   \\
-      Pernambuco           & Paubrasilia Echinata     & II                & 2007 \cite{cites_cop19_2019}  & Bows         \\
-      Madagascar Ebony     & Diospyros spp.           & II                & 2013 \cite{cites_timber_2023} & Fingerboards \\
-      Rosewood             & Dalbergia spp.           & II                & 2017 \cite{usda_species_2025} & Fretboards   \\
+      \textbf{Common Name} & \textbf{Scientific Name} & \textbf{Appendix} &
+      \textbf{Year Added}           & \textbf{Use} \\ \hline
+      Brazilian Rosewood   & Dalbergia Nigra          & I                 & 1992
+      \cite{cites_cop17_2017}  & Fretboards   \\
+      Pernambuco           & Paubrasilia Echinata     & II                & 2007
+      \cite{cites_cop19_2019}  & Bows         \\
+      Madagascar Ebony     & Diospyros spp.           & II                & 2013
+      \cite{cites_timber_2023} & Fingerboards \\
+      Rosewood             & Dalbergia spp.           & II                & 2017
+      \cite{usda_species_2025} & Fretboards   \\
       \bottomrule
     \end{tabular}
     \caption{Species of wood used in musical instrument manufacture, their CITES Appendix and the year the were added}
@@ -428,9 +444,14 @@ To clarify the terminology used throughout the remainder of this thesis, the
 following definitions are provided:
 
 \begin{itemize}
-    \item \textbf{Digital preservation} is the process of digitising an artefact for the purpose of a permanent record.
-    \item \textbf{Digital heritage} constitutes all ``digital materials of enduring value'' \cite{unesco_heritage_2003} including documents, datasets and software.
-    \item \textbf{Digital cultural heritage} are heritage artefacts with have undergone the process of digitisation. This specifically references to the digital instance of heritage objects
+    \item \textbf{Digital preservation} is the process of digitising an artefact
+    for the purpose of a permanent record.
+    \item \textbf{Digital heritage} constitutes all ``digital materials of
+    enduring value'' \cite{unesco_heritage_2003} including documents, datasets
+    and software.
+    \item \textbf{Digital cultural heritage} are heritage artefacts with have
+    undergone the process of digitisation. This specifically references to the
+    digital instance of heritage objects
 \end{itemize}
 
 Digital conservation is a compound problem, encompassing both the specific
@@ -683,14 +704,14 @@ structure, documentation and the broader digital output of this research.
 
 \section{Thesis Outline}
 
-This thesis describes to two digital projects, each of which addresses an aspect 
-of the conservation pipeline. 
-The Chapter~\ref{ch:interaction} represents the aspect once digital conservation
-has taken place and asks the question: how do you facilitate interaction with a
-digitised musical instrument? Chapter~\ref{ch:analysis} represents the
-beginning where analysis of materials take place, in the case of the
-harpsichord, which can be used alongside measurements to make further decisions
-about conservation routes \cite{barclay_care_1997}.
+This thesis describes to two digital projects, each of which addresses an aspect
+of the conservation pipeline. The Chapter~\ref{ch:interaction} represents the
+aspect once digital conservation has taken place and asks the question: how do
+you facilitate interaction with a digitised musical instrument?
+Chapter~\ref{ch:analysis} represents the beginning where analysis of materials
+take place, in the case of the harpsichord, which can be used alongside
+measurements to make further decisions about conservation routes
+\cite{barclay_care_1997}.
 
 Chapter~\ref{ch:analysis} discusses the steps taken for sustainability with a
 purely software project where a distinct functional software library and
@@ -700,93 +721,143 @@ addition of physical components, their schematics and assembly on top of the
 firmware and software required to make the hardware function. Process for
 addressing this is covered further in Chapter~\ref{ch:interaction}.
 
-Binding these projects together is the open methodology, the system of methods, 
-tools and processes that should be considered as part of any digital cultural heritage project
-This thesis aims to demonstrate the considerations necessary to adhere to these
-four FAIR principles, particularly within a cross-disciplinary project. All
-digital assets—whether source code, measurement data, or CAD files—are managed
-accordingly.
+Binding these projects together is the open methodology, the system of methods,
+tools and processes that should be considered as part of any digital cultural
+heritage project This thesis aims to demonstrate the considerations necessary to
+adhere to these four FAIR principles, particularly within a cross-disciplinary
+project. All digital assets—whether source code, measurement data, or CAD
+files—are managed accordingly.
 
-The digital output of this thesis has conformed to the following requirements. 
-All digital assets have been put under version control using the git version control system.
-Version controlled repositories are stored on the GitHub platform to allow for
-public access. When a release of the repository is created, it is integrated with the
-Zenodo archive from which a DOI is generated.
+The digital output of this thesis has conformed to the following requirements.
+All digital assets have been put under version control using the git version
+control system. Version controlled repositories are stored on the GitHub
+platform to allow for public access. When a release of the repository is
+created, it is integrated with the Zenodo archive from which a DOI is generated.
 
-With respect to the project repositories, a `release` is defined as any self-contained, working version of an asset that was used in the course of research. Digital assets are living and as such are constantly changing as they transition from one release to the next.
+With respect to the project repositories, a `release` is defined as any
+self-contained, working version of an asset that was used in the course of
+research. Digital assets are living and as such are constantly changing as they
+transition from one release to the next.
 
 \subsection{Chapter 2: Interaction}
 
-Chapter~\ref{ch:interaction} discusses the creation of a model harpsichord interface that was
-augmented with an optical electronic sensor system to allow for interaction with
-digital software instruments. Incorporates the design, prototyping and
-fabrication stages as well as the final deployment as part of an exhibition at
-Museo San Colombano, Bologna.
+Chapter~\ref{ch:interaction} discusses the creation of a model harpsichord
+interface that was augmented with an optical electronic sensor system to allow
+for interaction with digital software instruments. Incorporates the design,
+prototyping and fabrication stages as well as the final deployment as part of an
+exhibition at Museo San Colombano, Bologna.
 
-Technological advances have transformed how museums document, present and
-interpret their collections. Immersive experiences are realised through tools
-such as 3D printing and virtual reality
-\cite{allard_use-of-hand-held_2005,wachowiak_3d-scanning_2009,music_3d-printed_2024,kuzminsky_three-dimensional_2012,schaich_from_2007}.
-These technologies form a kind of experiential authenticity, enabling encounters
-that evoke the past's sensory, emotional, and intellectual essence
-\cite{trant_when_1999}. Achieving authenticity requires museums to navigate the
-delicate balance between preservation and meaningful engagement
-\cite{pine_museums_2007}—a challenge that is particularly evident in the case of
-historical musical instrument collections \cite{mcalpine_sampling_2014}. Musical
-instruments present an interesting problem for cultural heritage as they are
-both an aesthetic physical object, but also a tool with an inherent tactile
-experience \cite{charalampos_role_2018}. However, musical instruments
-inevitably decay until they reach a point where they are too fragile for
-continued interaction \cite{paradiso_to-save_2019}. Museums face a constant
-tension between accessibility and preservation, restricting how visitors can
-interact with collections \cite{templeton_museum_2018, mcalpine_sampling_2014}.
-What can be done to preserve not just the object, but the tactile experiences of
-playing a musical instrument? The chapter discusses the motivations, design and
-creation of a replica harpsichord keyboard with a typical early Italian layout,
-electronically augmented for an interactive exhibition. Thinking beyond the
-``red velvet cord''\cite{mcalpine_sampling_2014, masu_o-in-nime_2023}, the
-replica keyboard aims to provide an opportunity to enhance visitor interaction
-with cultural heritage while safeguarding delicate artefacts. Rather than
-prioritising technical novelty, the project demonstrates how digital
-interventions can support meaningful interaction with a shared musical heritage,
-ensuring its continued relevance in contemporary museum contexts. An exhibition
-was held at Museo San Colombano, Bologna, which aimed to enhance the visitor
-experience by providing an interface to digitised versions of instruments within
-the collection by leveraging the propensity humans have to being influenced by
-visual components when making musical judgements \cite{fritz_player_2012,
-fritz_soloist_2014, fritz_listener_2017, tsay_sight_2013}. The exhibition
-attempted to balance the competing demands of historical authenticity, public
-accessibility, and preservation while situating itself within broader
-discussions on the role of technology in museums. Discussed are the keyboard's
-design principles, technical implementation, and implications, emphasising its
-contribution to public engagement and the long-term preservation of musical
-heritage.
+Technological advances have reshaped the ways museums document, present, and
+interpret their collections. Immersive experiences are now made possible through
+tools such as 3D printing and virtual reality, but such experiences can place a
+veil over the user and remove, rather than engage them with the heritage. These
+technologies are capable of facilitating experiential authenticity, yet
+achieving it requires museums to carefully negotiate the balance between
+preservation and meaningful engagement \cite{pine_museums_2007}—a tension that
+is especially pronounced with historical musical instrument collections
+\cite{mcalpine_sampling_2014}.
 
-Chapter~\ref{ch:interaction} begins by looking at related work over the last 40 years
-in the field of haptic keyboard musical interfaces and musical heritage interaction in museums.
-These specific context are then related to the wider discussion of digital cultural heritage and musical instrument conservation (as discussed above), its influence on the interface design process, and the constraints that imposed arising from this wider context. The projects is separated into its discrete stages from design process, through the prototyping process and finally the fabrication of two final interfaces: one interface for exhibition at Museo San Colombano and the second for further research as part of the NEMUS project.   
+Musical instruments occupy a distinctive position within cultural heritage: they
+are not only aesthetic artefacts but also functional tools with an inherently
+tactile dimension \cite{charalampos_role_2018}. Over time, however, they
+inevitably deteriorate to the point where they become too fragile for continued
+handling \cite{paradiso_to-save_2019}. This places museums in a persistent
+dilemma between accessibility and conservation, often limiting how visitors can
+interact with collections \cite{templeton_museum_2018,mcalpine_sampling_2014}.
+The key question, then, is how to preserve not just the physical object, but
+also the embodied experience of playing it.
+
+This chapter addresses that question by presenting the design and creation of a
+replica harpsichord keyboard with a typical early Italian layout, electronically
+augmented for use in an interactive exhibition. Moving beyond the constraints of
+the traditional “red velvet cord”
+\cite{mcalpine_sampling_2014,masu_o-in-nime_2023}, the replica aims to enhance
+visitor interaction while protecting fragile originals. Rather than focusing on
+technical novelty, the project demonstrates how digital interventions can foster
+meaningful engagement with shared musical heritage, helping to sustain its
+relevance in contemporary museum practice.
+
+The resulting exhibition, hosted at Museo San Colombano in Bologna, provided
+visitors with a tactile interface to digitised versions of instruments in the
+collection. It built on the understanding that human perception of music is
+strongly shaped by visual cues
+\cite{fritz_player_2012,fritz_soloist_2014,fritz_listener_2017,tsay_sight_2013}.
+The installation sought to balance historical authenticity, accessibility, and
+preservation, while contributing to broader debates on the role of technology in
+museums. The chapter discusses the keyboard’s design principles, technical
+implementation, and implications, highlighting its potential for deepening
+public engagement and supporting the long-term preservation of musical heritage.
+
+Chapter~\ref{ch:interaction} begins by looking at related work over the last 40
+years in the field of haptic keyboard musical interfaces and musical heritage
+interaction in museums. These specific context are then related to the wider
+discussion of digital cultural heritage and musical instrument conservation (as
+discussed above), its influence on the interface design process, and the
+constraints that imposed arising from this wider context. The projects is
+separated into its discrete stages from design process, through the prototyping
+process and finally the fabrication of two final interfaces: one interface for
+exhibition at Museo San Colombano and the second for further research as part of
+the NEMUS project.   
 
 \subsection{Chapter 3: Analysis}
 
-Chapter~\ref{ch:analysis} looks at the  the creation of an open source software tool for plate
-vibration analysis, material property estimation and musical acoustics education.
-Although applications of plate simulation continue to expand, access remains largely limited to specialized, proprietary software—often prohibitively expensive for students or even smaller research groups. This work presents the theoretical background and initial implementation of \textsc{magpie}, an open-source platform for simulating plate physics. \textsc{magpie} provides intuitive visualization tools and a range of analysis methods, making it useful both as a teaching aid for instructors and as a research tool for academics and industry professionals. Its features include defining elastic boundary conditions along plate edges, visualizing and exporting eigenshapes and corresponding frequencies, running time-domain simulations of the plate equation for sound synthesis, and estimating the elastic constants of experimental plates. This final function or elastic constants forms the basis of a tool for soundboard analysis to aid luthiers and conservators of historical string and keyboard instruments. 
+Chapter~\ref{ch:analysis} looks at the  the creation of an open source software
+tool for plate vibration analysis, material property estimation and musical
+acoustics education. Although applications of plate simulation continue to
+expand, access remains largely limited to specialized, proprietary
+software—often prohibitively expensive for students or even smaller research
+groups. This work presents the theoretical background and initial implementation
+of \textsc{magpie}, an open-source platform for simulating plate physics.
+\textsc{magpie} provides intuitive visualization tools and a range of analysis
+methods, making it useful both as a teaching aid for instructors and as a
+research tool for academics and industry professionals. Its features include
+defining elastic boundary conditions along plate edges, visualizing and
+exporting eigenshapes and corresponding frequencies, running time-domain
+simulations of the plate equation for sound synthesis, and estimating the
+elastic constants of experimental plates. This final function or elastic
+constants forms the basis of a tool for soundboard analysis to aid luthiers and
+conservators of historical string and keyboard instruments. 
 
-\textsc{magpie} would provide a valuable data point, giving insight into the internal condition of wood as through its elastic constants in a non-destructive and inexpensive manner without a requirement for costly finite-element software. 
-In tandem, \textsc{magpie} strives to make open and accessible the scientific tools developed in the NEMUS laboratory which have been adapted to simplify use and lower the technical barrier of entry.
+\textsc{magpie} would provide a valuable data point, giving insight into the
+internal condition of wood as through its elastic constants in a non-destructive
+and inexpensive manner without a requirement for costly finite-element software.
+In tandem, \textsc{magpie} strives to make open and accessible the scientific
+tools developed in the NEMUS laboratory which have been adapted to simplify use
+and lower the technical barrier of entry.
 
-Chapter~\ref{ch:analysis} begins by discussing the existing software for plate analysis and the core mathematical problems that need to be solved. The development of \textsc{magpie} is then discussed from its initial proof-of-concept to a formally structured software library. The development of \textsc{magpie} across multiple programming languages is discussed alongside the application of the open methodology.
+Chapter~\ref{ch:analysis} begins by discussing the existing software for plate
+analysis and the core mathematical problems that need to be solved. The
+development of \textsc{magpie} is then discussed from its initial
+proof-of-concept to a formally structured software library. The development of
+\textsc{magpie} across multiple programming languages is discussed alongside the
+application of the open methodology.
 
 
 \subsection{Chapter 4: Going Forward}
 
-The final chapter asks the question ``where do we go from here?'' with the projects in Chapters~\ref{ch:interaction} and \ref{ch:analysis}. Neither project is at an end point and their are multitude of developments for expansion, optimisation and refinement. A selection of possible developments are discussed for the interface and \textsc{magpie} in turn, outlining the technical challenges of development and the impact they would have on the open methodology and the adherence to the FAIR principles.
+The final chapter asks the question ``where do we go from here?'' with the
+projects in Chapters~\ref{ch:interaction} and \ref{ch:analysis}. Neither project
+is at an end point and their are multitude of developments for expansion,
+optimisation and refinement. A selection of possible developments are discussed
+for the interface and \textsc{magpie} in turn, outlining the technical
+challenges of development and the impact they would have on the open methodology
+and the adherence to the FAIR principles.
 
-Developments for the interface are split between the fabrication process in the mechanical interface, in particular the jacks that are used and incorporation of a sensor surface within them. This is followed by discussion development in the electronics system , the refinement of the sensor circuitry as well as the expansion in its functionality and the consideration that would have on the accessibility of the project.
-This concludes with a discussion and a look towards the future for interface as a tool for research and musical expression and the capabilities of the interface that have not yet been explored.
+Developments for the interface are split between the fabrication process in the
+mechanical interface, in particular the jacks that are used and incorporation of
+a sensor surface within them. This is followed by discussion development in the
+electronics system , the refinement of the sensor circuitry as well as the
+expansion in its functionality and the consideration that would have on the
+accessibility of the project. This concludes with a discussion and a look
+towards the future for interface as a tool for research and musical expression
+and the capabilities of the interface that have not yet been explored.
 
-The future of \textsc{magpie} is then discussed in terms of expanded functionality and the changes that have already taken place at time of writing, but have yet to be consolidated into a release format. Finally, the  development of \textsc{magpie}'s graphical interfaces is outlined with description of the emerging technologies (in particular web technologies) which would make the software even more accessible.
-
+The future of \textsc{magpie} is then discussed in terms of expanded
+functionality and the changes that have already taken place at time of writing,
+but have yet to be consolidated into a release format. Finally, the  development
+of \textsc{magpie}'s graphical interfaces is outlined with description of the
+emerging technologies (in particular web technologies) which would make the
+software even more accessible.
 
 
 
