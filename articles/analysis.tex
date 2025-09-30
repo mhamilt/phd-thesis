@@ -660,10 +660,12 @@ and with ``adjusted'' constraints to closer match the frequencies. In the adjust
 
 System is still in early stages 
 
-hope, following best practice and a clear stucture and documentation will encourage engagement and developmenet \cite{OSS_EGAEMENT} with the wider community and that \textsc{magpie} will see usage and growth and enegaement for years to come. \textsc{magpie} is currently being used as part of research within the NEMUS project \cite{}. Development in orthogonal case with lump masses to mimic bracing is ready to be incorporated \cite{ducceschi_method_2024}.
+hope, following best practice and a clear stucture and documentation will encourage engagement and development \cite{colazo_licence_2009} with the wider community and that \textsc{magpie} will see usage and growth and engagement for years to come. \textsc{magpie} is currently being used as part of research within the NEMUS project \cite{}. Development in orthogonal case with lump masses to mimic bracing is ready to be incorporated \cite{ducceschi_method_2024}.
 
 The first version of an open source library for the modal analysis of plates was authored across three programming environments \cite{magpie_python_2025,magpie_cpp_2025,magpie_matlab_2025}. 
 Care and attention has been given to the structure of the code, in order to make the library as modular and reusable to as wide an audience as possible. Central functionality was replicated in both \textsc{matlab} and Python, while taking care to accommodate for the conventions used by both programming languages. This functionality was namely the computation of the biharmonic operator in a sparse matrix format with generalized elastic boundary conditions, the computation the eigenfrequencies and eigenmodes, the visualisation the mode shapes. All of these data can then be used in time domain simulations. A graphical interface was designed using the Jupyter Notebooks platform by utilising the Python implementation of the library.
+
+Going forward, a broader set of models will be considered. The ongoing work concerns the Föppl–von Kármán model for nonlinear thin plates \cite{karman_festigkeitsprobleme_1910}, which calls for the implementation of other operators in sparse matrix form. These operators are used in a variety of other models, such as the nonlinear bar and nonlinear string, which are other models that will be developed in MAGPIE. The orthotropic Kirchoff-Love plate is another direction to explore. The orthotropic model is the most interesting from a musical instrument manufacturing perspective as it would be a better approximation of wooden soundboard vibration. In combination with  generalised boundary conditions, an orthotropic model would allow for easier experimental comparison than the tools currently available. In terms of time efficiency, parallel computation of sectors and block have not yet been tested, but may yield better performances. The biharmonic operator computational performance could be further improved by separately considering specific cases such as square plate and symmetric boundary conditions where repeating coefficient patterns are more prevalent. Future development will include the implementation of a \textsc{matlab} package, a \textsc{c} / \textsc{c++} library in addition to the expansion of the existing Jupyter Notebooks interface.
 
 % % Going Forward:
 % % - implementations
@@ -695,11 +697,6 @@ Care and attention has been given to the structure of the code, in order to make
 % %   - broader models in general (nonlinear bars and strings)
 % %   - Generalised Finite Difference Models
 % %     - fidimat check (kinda\\
-
-Going forward, a broader set of models will be considered. The ongoing work concerns the Föppl–von Kármán model for nonlinear thin plates \cite{karman_festigkeitsprobleme_1910}, which calls for the implementation of other operators in sparse matrix form. These operators are used in a variety of other models, such as the nonlinear bar and nonlinear string, which are other models that will be developed in MAGPIE. The orthotropic Kirchoff-Love plate is another direction to explore. The orthotropic model is the most interesting from a musical instrument manufacturing perspective as it would be a better approximation of wooden soundboard vibration. In combination with  generalised boundary conditions, an orthotropic model would allow for easier experimental comparison than the tools currently available. In terms of time efficiency, parallel computation of sectors and block have not yet been tested, but may yield better performances. The biharmonic operator computational performance could be further improved by separately considering specific cases such as square plate and symmetric boundary conditions where repeating coefficient patterns are more prevalent. Future development will include the implementation of a \textsc{matlab} package, a \textsc{c} / \textsc{c++} library in addition to the expansion of the existing Jupyter Notebooks interface.
-
-
-\textsc{m\raisebox{-0.3\height}{\includegraphics[height=1em]{img/magpie.pdf}}gpie}
 
 % \section{Main Points}
 
