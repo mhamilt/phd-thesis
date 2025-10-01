@@ -225,8 +225,6 @@ The origins of \textsc{magpie} extend from a set of M\textsc{atlab} scripts used
 The script was therefore multi-modal with use cases of calculating the discrete biharmonic matrix for a finite difference scheme. This generated biharmonic can be used directly with an eigensolver for calculation of the modes and modal shapes, either for analysis or visualisation.  An impulse response of the plate can be generated through a finite difference simulation. Finally, the script was capable of being used as a tool for estimation of the Young's modulus for a real plate. For this process, an experimental setup is created where a plate is put under boundary conditions. An impulse response of the plate can be measured using an impact hammer from which the modal frequencies of the plate can be retrieved. Starting from a best guess Young's estimation, the script could then be used to simulate the physical experiment under multiple iterations with least-squares regression and provide an estimation. Process is to get non-dimensional frequencies, then least-square (LS) optimisation.
 
 
-
-
 The script consolidated calculation of the biharmonic coefficients. These coefficients were generated through M\textsc{atlab} symbolic tool box. Given there generated nature, the coefficient calculations are understandably complex and can consist of over 400 arithmetic operations for a single coefficient. 
 % Derivation of system as I understand originating with \cite{li_exact_2009,li_simple_2009}
 For the discrete biharmonic operator $B_{\Delta\Delta}$ coefficient calculations are abstracted into bands for structuring the biharmonic into sub-blocks of $B_{ii}$ pentagonal, $B_{ii\pm 1}$ tridiagonal, and $B_{ii\pm 2}$ diagonal matrices (Figure~\ref{fig:biharm-subblocks}). 
@@ -246,7 +244,7 @@ For the discrete biharmonic operator $B_{\Delta\Delta}$ coefficient calculations
 	\end{equation*}
 	\[\downarrow\]
     \includegraphics[width=0.4\linewidth]{img/biharmonic-block-M.pdf}
-	\caption{Sparsity pattern for the biharmonic divided into  \(N_y \times N_y\) diagonal sub-blocks.\\ $M_{yx}$ is the sub-block at location $B_{N_y-yN_y-x}$}
+	\caption{Sparsity pattern for the biharmonic divided into  \(N_y \times N_y\) diagonal sub-blocks.\\ $M_{yx}$ is the sub-block at location $B_{(N_y-y)(N_y-x)}$}
 	\label{fig:biharm-subblocks}
 \end{figure}
 
@@ -323,14 +321,25 @@ B_{\Delta\Delta} \approx \delta\Delta\delta\Delta = (\delta_{xx} + \delta_{yy})^
 % K_{x0}u_{0,m}=-D(\dss + (2-\nu)\delta_{yy})\dsd u_{0,m}, \quad R_{x0}\dsd u_{0,m} = D(\dss + \nu\delta_{yy})u_{0,m}.
 % \end{equation}
 
-
-
 \begin{figure}
-    \centering
-    \includegraphics[width=0.6\linewidth]{img/biharmonic.pdf}\\
-    \includegraphics[width=0.5\linewidth]{img/biharm-stencil.pdf}
-    \caption{Central coefficients, stencil and matrix format, for the discrete biharmonic.}
-    \label{fig:biharmonic-stencil}
+	\centering
+	{\footnotesize
+	\begin{equation*}
+	D_{\Delta\Delta}=\begin{+bmatrix}[
+	colspec={@{~}ccccccccccccccccccccc@{~}},
+	colsep=1pt
+	]
+	\ddots &     & \ddots & \ddots & \ddots &    & \ddots & \ddots & \ddots & \ddots & \ddots &        & \ddots & \ddots & \ddots &    & \ddots &        &        &     &        \\
+	...    & 1   & ...    & 2      & -8     & 2  & ...    & 1      & - 8    & 20     & -8     & 1      & ...    & 2      & -8     & 2  & ...    & 1      & ...    &     &        \\
+	& ... & 1      & ...    & 2      & -8 & 2      & ...    & 1      & - 8    & 20     & -8     & 1      & ...    & 2      & -8 & 2      & ...    & 1      & ... &        \\
+	&     & ...    & 1      & ...    & 2  & -8     & 2      & ...    & 1      & - 8    & 20     & -8     & 1      & ...    & 2  & -8     & 2      & ...    & 1   & ...    \\
+	&     &        &        & \ddots &    & \ddots & \ddots & \ddots &        & \ddots & \ddots & \ddots & \ddots & \ddots &    & \ddots & \ddots & \ddots &     & \ddots
+	\end{+bmatrix}
+	\end{equation*}
+	}
+	\includegraphics[width=0.5\linewidth]{img/biharm-stencil.pdf}
+	\caption{Central coefficients, matrix and stencil, for the discrete biharmonic.}
+	\label{fig:biharmonic-stencil}
 \end{figure}
 
 The 13-point biharmonic stencil, as shown in Figure \ref{fig:ghost-points}, only has 4 unique coefficients. In addition, two extra coefficients are required for the case of clamped and simply supported boundary conditions, implying that the biharmonic operator in those classical cases is composed of 6 unique coefficients. By contrast, the biharmonic operator with generalised elastic boundary conditions can contain up to 229 unique coefficients. As a result, each block or diagonal sector cannot be constructed through the repetition of a stencil pattern but must be declared explicitly. This lack of pattern repetition also impacts computational performance when constructing the operator. Since the biharmonic operator with generalised boundary condition provides very useful functionality in and of itself, the functionality to compute it is provided with an open interface as part of the library through the \texttt{bhmat} function \cite{magpie_matlab_2025}. The operator can then be used in further user-defined Finite Difference Time Domain schemes or if the users wish to take a more bespoke approach to eigenvalue/eigenvector calculation.

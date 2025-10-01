@@ -104,10 +104,6 @@ Beyond these subsets, \textcite{cook_remutualizing_2004} distinguishes between \
 Finally, it is worth reflecting that all musical instruments involve physical interaction and could therefore be described as inherently haptic. Even the theremin, often cited as an exception, requires specific bodily movement, which may be interpreted as a form of kinaesthetic feedback. While this thesis avoids the ontological implications of such claims, the term 'haptic feedback' is used here to describe design intent.  
 
 
-
-
-
-
 \section{Harpsichord Mechanics}
 
 % \begin{figure}
@@ -155,32 +151,32 @@ By the sixteenth century, it was common for Italian harpsichords to employ more 
 The augmented replica keyboard for the Museo San Colombano was steered by two interlocking sets of constraints: one governing the \emph{mechanical interface} (how the instrument should look, feel, and behave), and one governing the \emph{electronic sensor system} (how motion is detected, processed, and conveyed to sound synthesis). These constraints simultaneously served as design principles and evaluative criteria throughout the prototyping and deployment phases. To orient the reader before the detailed discussion that follows, Table~\ref{tab:design-constraints} summarises the key requirements and their immediate implications for the rest of the chapter.
 
 \begin{table}[hbt!]
-\centering
-\caption{Design constraints for the augmented harpsichord keyboard and their immediate implications.}
-\label{tab:design-constraints}
-\begin{tabular}{p{0.27\linewidth}p{0.36\linewidth}p{0.29\linewidth}}
-\hline
-\textbf{Category} & \textbf{Constraint} & \textbf{Immediate Implications} \\
-\hline
-\multirow{4}{*}{Mechanical interface}
-& \textbf{Faithfulness}:\newline Preserve the authentic feel and behaviour of a sixteenth-century harpsichord. & No mechanical ``improvements'' to the action; electronics must observe rather than alter jack behaviour. \\
-\cline{2-3}
-& \textbf{Robustness}:\newline Withstand frequent public use; allow maintenance by non-specialist staff. & Preference for durable materials and serviceable assemblies; tolerance for minor misalignments. \\
-\cline{2-3}
-& \textbf{Concealment}:\newline No visible electronics, except headphones and a small display. & All sensing, cabling, and control hardware are internal/hidden; external aesthetics remain historical. \\
-\cline{2-3}
-& \textbf{Compactness}:\newline Minimal footprint in the gallery. & Rectilinear casework and tight internal packaging; no external modules or frames. \\
-\hline
-\multirow{4}{*}{Electronics}
-& \textbf{Non-invasiveness}:\newline No modifications to visible historical parts. & Sensors mounted off key surfaces; use of add-on targets and internal fixtures instead of altering the action. \\
-\cline{2-3}
-& \textbf{Low latency}:\newline End-to-end read/process budget $<10$\,ms for 49 keys \cite{jack_effect_2016}. & Efficient multiplexing; lightweight filtering; avoidance of heavy interrupt schemes that conflict with monitoring. \\
-\cline{2-3}
-& \textbf{Reliability}:\newline Readings respond only to jack motion; minimal drift/noise. & Controlled illumination and shielding; avoidance of ambient-light sensitivity; robust calibration storage. \\
-\cline{2-3}
-& \textbf{Scalability}:\newline Economically extend from a 3-key rig to a 49-key keyboard (and beyond). & Modular PCBs and looms; repeatable alignment features; component choices that tolerate mass assembly. \\
-\hline
-\end{tabular}
+	\centering
+	\caption{Design constraints for the augmented harpsichord keyboard and their immediate implications.}
+	\label{tab:design-constraints}
+	\begin{tabular}{p{0.27\linewidth}p{0.36\linewidth}p{0.29\linewidth}}
+		\hline
+		\textbf{Category} & \textbf{Constraint}                                                                                          & \textbf{Immediate Implications}                                                                                    \\
+		\hline
+		\multirow{4}{*}{Mechanical interface}
+		                  & \textbf{Faithfulness}:\newline Preserve the authentic feel and behaviour of a sixteenth-century harpsichord. & No mechanical ``improvements'' to the action; electronics must observe rather than alter jack behaviour.           \\
+		\cline{2-3}
+		                  & \textbf{Robustness}:\newline Withstand frequent public use; allow maintenance by non-specialist staff.       & Preference for durable materials and serviceable assemblies; tolerance for minor misalignments.                    \\
+		\cline{2-3}
+		                  & \textbf{Concealment}:\newline No visible electronics, except headphones and a small display.                 & All sensing, cabling, and control hardware are internal/hidden; external aesthetics remain historical.             \\
+		\cline{2-3}
+		                  & \textbf{Compactness}:\newline Minimal footprint in the gallery.                                              & Rectilinear casework and tight internal packaging; no external modules or frames.                                  \\
+		\hline
+		\multirow{4}{*}{Electronics}
+		                  & \textbf{Non-invasiveness}:\newline No modifications to visible historical parts.                             & Sensors mounted off key surfaces; use of add-on targets and internal fixtures instead of altering the action.      \\
+		\cline{2-3}
+		                  & \textbf{Low latency}:\newline End-to-end read/process budget $<10$\,ms for 49 keys \cite{jack_effect_2016}.  & Efficient multiplexing; lightweight filtering; avoidance of heavy interrupt schemes that conflict with monitoring. \\
+		\cline{2-3}
+		                  & \textbf{Reliability}:\newline Readings respond only to jack motion; minimal drift/noise.                     & Controlled illumination and shielding; avoidance of ambient-light sensitivity; robust calibration storage.         \\
+		\cline{2-3}
+		                  & \textbf{Scalability}:\newline Economically extend from a 3-key rig to a 49-key keyboard (and beyond).        & Modular PCBs and looms; repeatable alignment features; component choices that tolerate mass assembly.              \\
+		\hline
+	\end{tabular}
 \end{table}
 
 \subsection{Mechanical Interface}
