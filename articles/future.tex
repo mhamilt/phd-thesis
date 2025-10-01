@@ -19,11 +19,14 @@ The adhesive for the stickers was hi-tack meaning that they were unlikely to fal
 
 Preferably, the surface for the optical sensors would be integral to the construction of the jack. Given the small area of a 4.35mm short edge an ~8mm travel, creating a surface of varying reflectance by hand is not feasible. The process would therefore need to be automated or computer aided.
 Two immediate options present themselves: the modification of the current jacks or CAD/CAM fabrication of the jacks entirely, the latter of which has become much more accessible in recent years. CAD/CAM in this context includes 3D printing, computer numerical control routing, and laser cutting, which requires either 3D modelling or vector graphics software. 
-For 3D modelling, AutoDesk's Fusion 360\footnote{\url{https://www.autodesk.com/products/fusion-360/personal}} has a free tier available for personal use and was used for the modelling throughout the project. Vector graphics for laser cutting can be achieved either through open source projects like InkScape,\footnote{\url{https://inkscape.org}}. Given the very simple but large quantity of shapes involved many of the laser cutting vector files were produced through the Processing\footnote{\url{https://processing.org}} development environment. 
+For 3D modelling, AutoDesk's Fusion 360%
+\footnote{\url{https://www.autodesk.com/products/fusion-360/personal}} has a free tier available for personal use and was used for the modelling throughout the project. Vector graphics for laser cutting can be achieved either through open source projects like InkScape.%
+\footnote{\url{https://inkscape.org}} 
+Given the very simple but large quantity of shapes involved many of the laser cutting vector files were produced through the Processing%
+\footnote{\url{https://processing.org}} development environment. 
 Though they may not be always used a final design, CAD/CAM prototypes ease access to fabrication process and permit much quicker iterations on designs.
 
 Research into both modification of the jacks or their CAD/CAM manufacture were undertaken, but ultimately a satisfactory result compared to the gradient sticker approach was not found. Both approaches showed promise but were ultimately too unrefined to be applied to the Mark 1.
-
 
 \begin{figure}
     \centering
@@ -172,7 +175,8 @@ With the addition of a current source in the form of the phototransistor, optimu
 
 Variation across the optical sensors means that the feedback (or load) resistor%
 \footnote{$R_5$ in Figure~\ref{fig:tia-diff}, $R_1$ in Figure~\ref{fig:tia-bias}}
-may need adjustment across all sensors as was the case in \textcite{pardue_near_2013}.\footnote{``Early on it was noticed that different sensors of the same make yielded significantly different current response even when in the same configurations. With the QRE1113 sensors, we have used load resistors ranging between 12k$\Omega$ to 47k$\Omega$ to achieve similar range.''}
+may need adjustment across all sensors as was the case in \textcite{pardue_near_2013}.%
+\footnote{``Early on it was noticed that different sensors of the same make yielded significantly different current response even when in the same configurations. With the QRE1113 sensors, we have used load resistors ranging between 12k$\Omega$ to 47k$\Omega$ to achieve similar range.''}
 If multiple optical sensors are to share the same TIA, such as in \textcite{mcpherson_portable_2013}, then the values will always be a best average. A bespoke circuit for each sensor is feasible, but highly impractical. Given the sufficient operation of the current pull-up configuration, the improvement in response time would be sufficient without too much concern about additional noise.
 Since op-amps can come in single, dual and quad packages \cite{ti_opa4377_2011}, it may be better use of space allow easier routing if the TIA circuits are located on the controller board close to the power supply, rather than the newly suggested signal boards. 
 
@@ -295,13 +299,14 @@ There are site-specific possibilities for refining the manner in which the keybo
 \subsubsection{Convolution}
 
 The current audio engine is restrictive to the user experience as their is disconnect between the acoustics of the space and the those applied to the sampled harpsichord signal. An easy improvement would be the addition of a signal processing stage which convolves the audio engine output with an impulse response of the exhibition space at the point of audition. Coupled with open-back headphones, this would ideally prevent the user from being isolated from the space.
-This could be further augmented through the use of IMU enabled binaural head-tracking, which can also be achieved through open source electronics such as the Arduino Nano 33 BLE \cite{franvcek_performance_2023}.\footnote{an example of which can be found at \url{https://github.com/ysoldak/HeadTracker}}
+This could be further augmented through the use of IMU enabled binaural head-tracking, which can also be achieved through open source electronics such as the Arduino Nano 33 BLE \cite{franvcek_performance_2023}.%
+\footnote{an example of which can be found at \url{https://github.com/ysoldak/HeadTracker}}
 
 \subsubsection{Vibration}
 
 To augment the user experience and immersion, low-pass filtered audio signal from the audio synthesis engine could be fed back to the user in the form of local vibrations. Research carried out by \textcite{merchel_vibratory_2009} and in \textcite{merchel_functional_2018}, looked at the addition of a shaker to a seat to simulate low vibrations as would felt during a concert. Audio from a 5.1 surround concert was summed and low-passed before being routed to an electrodynamical shaker in order to generates whole body vibration for participants. The studies showed an overall preference for the presence of seat vibrations among participants who also reported improved quality of the audio reproduction. Given the diffusion of audio in exhibition over headphones, adherence to noise reduction process in \textcite{merchel_functional_2018} would be recommended. Where headphones are used, a lower cut-off was used on the audio signal as well as octave shifting or reducing the vibration signal to its fundamental component. Since our touch is less refined than our hearing, there is greater scope for shifting the frequency content of an audio signal if it is to be experienced as vibration \cite{summers_single_2000}.
 Though the \textcite{merchel_functional_2018} related to concert audio, the same principles should apply to the experience of playing instrument. 
-\textcite{young_musical_2018} findings suggest that kinaesthetic feedback is the dominant haptic component with the most influence the performance experience, but that vibrotactile feedback does not have a negligible affect. The same principle applied, but to the key bed of the interface may provide another step towards immersion and is the grounds for further development and research.
+\citep{young_musical_2018} findings suggest that kinaesthetic feedback is the dominant haptic component with the most influence the performance experience, but that vibrotactile feedback does not have a negligible affect. The same principle applied, but to the key bed of the interface may provide another step towards immersion and is the grounds for further development and research.
 
 \subsubsection{Encouraging Engagement}
 
@@ -419,7 +424,8 @@ The latest developments to \textsc{magpie} have implemented a lumped mass model.
 
 \subsection{GUIs}
 
-A graphical user interfaces provide a means to change multiple parameters quickly in a way that is more intuitive for the end user. In addition to intuitive access to a libraries functions, there is also interactions that arise from constraints \cite{wang_artful_2018}.\footnote{``Principle 1.11 Design is constraints which give rise to interactions.''}
+A graphical user interfaces provide a means to change multiple parameters quickly in a way that is more intuitive for the end user. In addition to intuitive access to a libraries functions, there is also interactions that arise from constraints \cite{wang_artful_2018}.%
+\footnote{``Principle 1.11 Design is constraints which give rise to interactions.''}
 \textsc{magpie} as a software library naturally provides a programmatic interface in each of its implementations. Complex, algorithmic iteration over parameters that allow for simulations to be run over long periods without intervention. Providing the user with a huge parameter space is only as powerful as the ability to explore it. There are commonly subtle transition points where small changes in any one parameter will have a dramatic affect on mode shapes or frequencies. 
 When the user is constrained, however, to the interesting areas of the parameter space then the system becomes much easier to explore. Likewise, the small adjustments in parameters are isolated to a single mouse interaction which would be otherwise difficult or unwieldy to change and explore if it were attempted to be achieved through the command-line interface or re-compilation of software.
 
@@ -463,17 +469,18 @@ That is not to say that the M\textsc{atlab} and Jupyter GUIs are redundant, on t
 
 \subsubsection{C++ Interface}
 
-Graphical user interfaces are typically platform specific, Cocoa for macOS, win32 for windows and either GTK or QT for Linux operating systems, each of which require platform specific implementation. The JUCE framework therefore provides an appealing solution to target all 3 core operating systems simultaneously, with its cross-platform native wrappings for audio libraries and OpenGL for graphics card rendering. The more graphics orientated, but still open source, bgfx\footnote{\url{https://github.com/bkaradzic/bgfx}} may also be more appropriate given its support of multiple 3D graphics rendering libraries.
-
-If the ultimate goal is provide a tool that is easily accessible and cross-platform, developments within web technology may provide the best solution.
+Graphical user interfaces are typically platform specific, Cocoa for macOS, win32 for windows and either GTK or QT for Linux operating systems, each of which require platform specific implementation. The JUCE framework therefore provides an appealing solution to target all 3 core operating systems simultaneously, with its cross-platform native wrappings for audio libraries and OpenGL for graphics card rendering. The more graphics orientated, but still open source, \texttt{bgfx}%
+\footnote{\url{https://github.com/bkaradzic/bgfx}}
+may also be more appropriate given its support of multiple 3D graphics rendering libraries. If the ultimate goal is provide a tool that is easily accessible and cross-platform, developments within web technology may provide the best solution.
 
 \subsubsection{Web Technology}
 
 Porting \textsc{magpie} to a compiled language like \textsc{C++} open up a number of exciting possibilities. 
 Similarity in results to that of M\textsc{atlab} give an indication of a viable plate analysis tool that is not constrained to only those system on which M\textsc{atlab} is supported. Of particular  note is the possibility of deploying \textsc{magpie} as an entirely web based application. Traditional software has typically required some form of installation process, where binaries are compiled for a specific machine architecture. Web technologies do away with part of that necessity by delivering software directly through a browser.
-One such technology is Web Assembly (WASM) \url{https://webassembly.org}, which allows for optimised binary code to be executed by a virtual machine in the browser. This is achieved through the emscripten,\footnote{\url{https://emscripten.org}} an open source compiler that enables compilation of \textsc{C}~/~\textsc{C++} code into WASM. Assembly code capable of more performative execution than the equivalent JavaScript 
+One such technology is Web Assembly (WASM) \url{https://webassembly.org}, which allows for optimised binary code to be executed by a virtual machine in the browser. This is achieved through the emscripten,%
+\footnote{\url{https://emscripten.org}} an open source compiler that enables compilation of \textsc{C}~/~\textsc{C++} code into WASM. Assembly code capable of more performative execution than the equivalent JavaScript 
 \cite{reiser_accelerate_2017}. When combined with the native \textsc{C++} source of Eigen and Spectra, the emscripten compiler can potentially be used to distribute and execute \textsc{magpie} entirely in the browser.%
-\footnote{Such an application using the Eigen library has already been demonstrated as feasible\\ \url{https://observablehq.com/@rreusser/eigen}}. 
+\footnote{Such an application using the Eigen library has already been demonstrated as feasible\\ \url{https://observablehq.com/@rreusser/eigen}} 
 To make a web tool like \textsc{magpie} would traditionally require server architecture in order to execute ARPACK or to host a M\textsc{atlab} runtime. 
 In a server / client arrangement the bottlenecks on performance are then tied to the slowest of the network and the computation.
 Creating a \textsc{magpie} server would also not be without cost and would also be limited by concurrent usage.
@@ -485,11 +492,13 @@ The alternative for \textsc{magpie} to execute entirely on the client-side would
 \textsc{magpie} would likely see much more utility if development is pursued for an entirely native or entirely web client approach.
 
 The usage of WASM would allow for compilation for both approaches from a single, shared codebase.
-It is worth noting that the above web technologies are not supported equally across all browsers and their versions.\footnote{\url{https://developer.mozilla.org/en-US/docs/WebAssembly\#browser_compatibility}}
+It is worth noting that the above web technologies are not supported equally across all browsers and their versions.%
+\footnote{\url{https://developer.mozilla.org/en-US/docs/WebAssembly\#browser_compatibility}}
 Such limitation of highlight an importance of both open sourcing and version control as multiple systems and deployments can more easily be supported.
 
 WASM addresses the porting of the core \textsc{magpie} to the web browser, but there still remains a question o of interface.
-The Jupyter version of \textsc{magpie} (Section~\ref{sec:jupyter}) demonstrates one potential interface, but this is limited by the communication happening between IPython the renderer for the browser. Breaking away from the constraint of Jupyter allows for direct usage of further browser technology, notably the WebGL and WebGPU \cite{chickerur_webgl_2024} which allow fast 3D drawing within the browser. Figure~\ref{fig:magpie-p5js} shows a prototype example of the first four eigenshapes of a plate above their corresponding `chladni pattern' projected shadows.\footnote{\url{https://mhamilt.github.io/eigenvis/}} 
+The Jupyter version of \textsc{magpie} (Section~\ref{sec:jupyter}) demonstrates one potential interface, but this is limited by the communication happening between IPython the renderer for the browser. Breaking away from the constraint of Jupyter allows for direct usage of further browser technology, notably the WebGL and WebGPU \cite{chickerur_webgl_2024} which allow fast 3D drawing within the browser. Figure~\ref{fig:magpie-p5js} shows a prototype example of the first four eigenshapes of a plate above their corresponding `chladni pattern' projected shadows.%
+\footnote{\url{https://mhamilt.github.io/eigenvis/}} 
 The plates in Figure~\ref{fig:magpie-p5js} are drawn using the \texttt{p5.js} library which has an interface to WebGL.%
 \footnote{\url{https://p5js.org/reference/p5/WEBGL/}}
 
@@ -544,10 +553,11 @@ The DOI functions is a similar manner to the ISBN and ISSN, identifying a digita
 Research to rely on an external service, like Zenodo, is perhaps still an abdication of responsibility. 
 Institutes have support for digital archives such as the Edinburgh Research Archive%
 \footnote{\url{https://era.ed.ac.uk/}}
-at the University of Edinburgh and Sistema Biblioteca Atteneo
-%\footnote{\url{https://sba.unibo.it/en/almadl/almadl-services/assigning-a-doi}}
+at the University of Edinburgh and Sistema Biblioteca Atteneo%
+\footnote{\url{https://sba.unibo.it/en/almadl/almadl-services/assigning-a-doi}}
 at the Università di Bologna, but these services are still tailored toward traditional publications and datasets rather than software repositories.
-Both of these institutes already host their own online git services.\footnote{UoE ECDF \url{git.ecdf.ed.ac.uk} and multiple departmental GitLab services at Unibo.} 
+Both of these institutes already host their own online git services.%
+\footnote{UoE ECDF \url{git.ecdf.ed.ac.uk} and multiple departmental GitLab services at Unibo.} 
 The ideal scenario would be where these services are simply connected together allowing institutes to take responsibility of both version control and it's archiving.
 
 Academic research is capable of long term usage of software, ARPACK from 1990 \cite{lehoucq_arpack_1998} (discussed in Chapter~\ref{ch:analysis}) serves as one example. Aurora (Section~\ref{sec:aurora}) from just five years later is now at risk of no longer being useable without intervention and development. Research software access and permanence should not be a coin toss weighted by the extent of its adoption. Aurora demonstrated this by being both widely adopted and at risk of obsolescence. Instead, a more deliberate methodology is needed for research software to be accessible and reproducible as is the expectation with other aspects of academic research. 
