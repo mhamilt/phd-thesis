@@ -232,26 +232,23 @@ The script consolidated calculation of the biharmonic coefficients. These coeffi
 For the discrete biharmonic operator $B_{\Delta\Delta}$ coefficient calculations are abstracted into bands for structuring the biharmonic into sub-blocks of $B_{ii}$ pentagonal, $B_{ii\pm 1}$ tridiagonal, and $B_{ii\pm 2}$ diagonal matrices (Figure~\ref{fig:biharm-subblocks}). 
 
 \begin{figure}
-    \centering
-    {\scriptsize
-    \[
-    B_{\Delta\Delta} = \begin{bmatrix}
-        B_{11} & B_{12} & B_{13}             &                     &                     &                   \\
-        B_{21} & B_{22} & B_{23}             & B_{24}             &                     &                   \\
-        B_{31} & B_{32} & B_{33}             & B_{34}             & B_{35}             &                   \\
-                & \ddots  & \ddots              & \ddots              & \ddots              & \ddots            \\
-                &         & B_{N_{y}-1N_{y}-3} & B_{N_{y}-1N_{y}-2} & B_{N_{y}-1N_{y}-1} & B_{N_{y}-1N_{y}} \\
-                &         &                     & B_{N_{y}N_{y}-2}   & B_{N_{y}N_{y}-1}   & B_{N_{y},N_{y}}
-    \end{bmatrix}
-    \]
-    }
-
-    \hskip 1cm \includegraphics[width=0.45\linewidth]{img/biharmonic-block.pdf}    
-    \caption{Sparsity pattern for the biharmonic divided into  \(N_y \times N_y\) diagonal sub-blocks.}
-    \label{fig:biharm-subblocks}
+	\centering    
+	\begin{equation*}
+       \hspace*{-1cm} 
+		B_{\Delta\Delta} = \begin{bmatrix}
+			B_{11} & B_{12} & B_{13}     &            &            &            \\
+			B_{21} & B_{22} & B_{23}     & B_{24}     &            &            \\
+			B_{31} & B_{32} & B_{33}     & B_{34}     & B_{35}     &            \\
+			       & \ddots & \ddots     & \ddots     & \ddots     & \ddots     \\
+			       &        & B_{M_{13}} & B_{M_{12}} & B_{M_{11}} & B_{M_{10}} \\
+			       &        &            & B_{M_{02}} & B_{M_{01}} & B_{M_{00}}
+		\end{bmatrix}
+	\end{equation*}
+	\[\downarrow\]
+    \includegraphics[width=0.3\linewidth]{biharmonic-block-M.pdf}
+	\caption{Sparsity pattern for the biharmonic divided into  \(N_y \times N_y\) diagonal sub-blocks. $M_{yx}$ is the sub-block at location $B_{(N_y-y)(N_y-x)}$}
+	\label{fig:biharm-subblocks}
 \end{figure}
-
-
 
 Intimate knowledge of the script's structure was required in order to use it, thus limiting its portability. As a piece of research software with multiple use cases across the field and in education it was decided that this script would be developed into an open source software. In keeping with the FAIR principles, the tool would be developed to be easily reusable and interoperable with current acoustics experimental methodology.
 
