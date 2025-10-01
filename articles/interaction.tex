@@ -24,12 +24,12 @@ As \textcite{oboe_mikey_2006} observes:
 \begin{quotation}
     (the haptic information) allows the player to perceive the ``state'' of the mechanism being manipulated through the key. By using this knowledge about the state of the mechanism and correlating it with the sound generated, the player learns a strategy to obtain desired tones.
 \end{quotation}
+
 The expressive potential of commercial MIDI interfaces is further limited by their reduction of musical nuance to a single parameter: key attack velocity, which, as \textcite{oboe_mikey_2006} writes:  
+
 \begin{quotation}
     constitutes a significant limitation for the musician, who loses expressive control of the instrument and, in turn, of the generated sound.
 \end{quotation}
-
-
 
 This chapter presents the development of two digital musical instruments (DMIs). It begins by outlining the motivations, constraints and methodological approach, 
 before following the design process from early prototypes through to the completed system. 
@@ -41,8 +41,8 @@ The optical sensing approach adapts earlier techniques developed for the piano \
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.4\linewidth]{}
-    \includegraphics[width=0.4\linewidth]{}
+    \includegraphics[width=0.774\linewidth]{img/mcalpine_sampling_2014.jpg}
+    \includegraphics[width=0.207\linewidth]{img/tromba-moderna-1.jpg}
     \caption{The \citep{mcalpine_sampling_2014} Interface for the Benton Fletcher (Left) and \citep{baldwin_tromba_2016} Tromba Moderna for the Musikmuseet, Copenhagen.}
     \label{fig:placeholder}
 \end{figure}
@@ -52,17 +52,13 @@ The Benton Fletcher Collection at Fenton House in England presents an instructiv
 The Tromba Moderna project \cite{baldwin_tromba_2016}, developed in collaboration between the Music Museum in Copenhagen and a group of researchers from Aalborg University, took a more embodied approach, reconstructing and augmenting a tromba marina replica with embedded sensors and actuators. This strategy exemplifies what \textcite{cook_remutualizing_2004} terms ``remutualising'' the interface: restoring a closer relationship between gesture and sound.
 
 In parallel to these museum-focused initiatives, four decades of research 
-have explored haptic keyboard design. The lineage begins with Cadoz et. al.'s modular feedback keyboard \cite{cadoz_synthese_1981,cadoz_modular_1990}, which introduced tactilo-proprio-kinesthetic elements through polarisation magnets and flat coils, originally intended for applications in teleoperation and virtual reality. \textcite{gillespie_dynamical_1992} advanced the field with a single-key linear motor prototype, later simplified to enable more realistic emulation of keyboard performance \cite{gillespie_virtual_1994}. These efforts culminated in the MIKEY project, a multi-modal interface capable of reproducing piano, harpsichord and organ actions \cite{oboe_mikey_2006}. Subsequent explorations have included magneto-rheological actuation \cite{lozada_novel_2007}, ultrasonic haptics combined with virtual reality \cite{hwang_airpiano_2017}, and multibody-based designs using low-cost electronics while preserving key mechanics \cite{timmermans_multibody-based_2020}.  
+have explored haptic keyboard design. The lineage begins with \citep{cadoz_modular_1990} modular feedback keyboard, which introduced tactilo-proprio-kinesthetic elements through polarisation magnets and flat coils, originally intended for applications in teleoperation and virtual reality. \textcite{gillespie_dynamical_1992} advanced the field with a single-key linear motor prototype, later simplified to enable more realistic emulation of keyboard performance \cite{gillespie_virtual_1994}. These efforts culminated in the MIKEY project, a multi-modal interface capable of reproducing piano, harpsichord and organ actions \cite{oboe_mikey_2006}. Subsequent explorations have included magneto-rheological actuation \cite{lozada_novel_2007}, ultrasonic haptics combined with virtual reality \cite{hwang_airpiano_2017}, and multibody-based designs using low-cost electronics while preserving key mechanics \cite{timmermans_multibody-based_2020}.  
 
 Despite their variety, these systems share a common limitation: they are generally restricted to a single key or a small number of keys. For heritage applications such as the Tagliavini 
 collection, an interface must span 38--53 keys to match historical harpsichords \cite{tagliavini_clavicembali_1987}. 
 The present project, therefore, builds directly on both museum precedents and haptic keyboard research. 
 It diverges, however, in adopting an aesthetics-first approach: electronics are concealed, serving only as a transparent link between mechanical action and digital sound, so that the tactile and kinaesthetic qualities of the instrument remain central to the visitor’s experience.  
  
-
-
-
-
 \subsection{Haptics Terminology}
 
 
@@ -152,12 +148,8 @@ By the sixteenth century, it was common for Italian harpsichords to employ more 
 % \end{figure}
 
 
-
-\section{Design Constraints}\label{sec:design-constraints}
-
-The augmented replica keyboard for the Museo San Colombano was steered by two interlocking sets of constraints: one governing the \emph{mechanical interface} (how the instrument should look, feel, and behave), and one governing the \emph{electronic sensor system} (how motion is detected, processed, and conveyed to sound synthesis). These constraints simultaneously served as design principles and evaluative criteria throughout the prototyping and deployment phases. To orient the reader before the detailed discussion that follows, Table~\ref{tab:design-constraints} summarises the key requirements and their immediate implications for the rest of the chapter.
-
-\begin{table}[hbt!]
+\clearpage
+\begin{table}
 	\centering
 	\caption{Design constraints for the augmented harpsichord keyboard and their immediate implications.}
 	\label{tab:design-constraints}
@@ -185,6 +177,11 @@ The augmented replica keyboard for the Museo San Colombano was steered by two in
 		\hline
 	\end{tabular}
 \end{table}
+\clearpage
+
+\section{Design Constraints}\label{sec:design-constraints}
+
+The augmented replica keyboard for the Museo San Colombano was steered by two interlocking sets of constraints: one governing the \emph{mechanical interface} (how the instrument should look, feel, and behave), and one governing the \emph{electronic sensor system} (how motion is detected, processed, and conveyed to sound synthesis). These constraints simultaneously served as design principles and evaluative criteria throughout the prototyping and deployment phases. To orient the reader before the detailed discussion that follows, Table~\ref{tab:design-constraints} summarises the key requirements and their immediate implications for the rest of the chapter.
 
 \subsection{Mechanical Interface}
 
@@ -207,16 +204,6 @@ Foremost among these was \emph{non-invasiveness}: the historical geometry of key
 
 Together, these considerations materialised as a chain of sensor boards mounted under the wrest plank (Figure~\ref{fig:mark-1-bottom}), each integrating illumination, sensing, and simple aggregation logic. Through-hole technology (THT) components were used wherever possible to facilitate easier soldering and rework, while socketed microcontrollers and detachable looms ensured serviceability. The resulting design balances accessibility and cost with the open-source ethos of the project, adapting established piano-tracking techniques \cite{mcpherson_portable_2013} to the idiosyncrasies of a plucked harpsichord action, where discrete pluck and release events dominate but continuous motion remains observable.
 
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.85\linewidth]{img/mark-1-bottom-sensors-no-keys.jpg}
-  \caption{Underside of the keyboard showing optical-sensor PCBs mounted beneath the wrest plank.}
-  \label{fig:mark-1-bottom}
-\end{figure}
-
-
-
 \section{Summary of Informed Design Choices}\label{sec:constraints-to-choices}
 
 The preceding section outlined the mechanical and electronic constraints that guided the development of the augmented keyboard.  
@@ -224,7 +211,7 @@ Before describing the prototypes in detail, it is helpful to summarise how these
 Table~\ref{tab:constraints-choices} anticipates the results by linking each constraint to the principal strategies adopted in the final system.  
 This mapping clarifies the rationale behind the hardware architecture and highlights how apparently competing demands—historical fidelity, robustness, the invisibility of electronics, and scalability — were reconciled.
 
-\begin{table}[hbt!]
+\begin{table}
 \centering
 \caption{Design constraints and corresponding design choices for the augmented harpsichord keyboard.}
 \label{tab:constraints-choices}
@@ -271,12 +258,18 @@ prototypes validated on a 3-key rig before full-scale build. \\
 
 The table highlights that the same design element often answered several constraints: for instance, the optical gradient not only met the non-invasiveness requirement but also enabled reliable and low-latency sensing, while the modular PCB architecture simultaneously supported maintenance and scalability. Presenting these links up front clarifies why apparently modest details—sensor orientation, baffle geometry, choice of soldering technology—were decisive for meeting the project’s broader aims.
 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.85\linewidth]{img/mark-1-bottom-sensors-no-keys.jpg}
+  \caption{Underside of the keyboard showing optical-sensor PCBs mounted beneath the wrest plank.}
+  \label{fig:mark-1-bottom}
+\end{figure}
+
 \subsection{Visual Aesthetics}
 
 From the outset, one guiding principle of the hardware design was that the keyboard must \emph{look} as authentic as it felt.  
 Beyond the functional demands already outlined in Section~\ref{sec:design-constraints}, the instrument’s external form had to sustain the visual language of a sixteenth-century harpsichord so that visitors would immediately read it as part of the collection rather than as an electronic artefact.  
 This requirement introduced an additional layer of restriction: every sensing or control element needed to be concealed or visually reconciled with historical practice, while the overall proportions and detailing had to echo Italian models of the period.
-
 
 The physical and visual presentation of an instrument might not be the primary concern for a performer, but in the context of a museum exhibition, it is vital to the visitor experience, as demonstrated by \textcite{mcalpine_sampling_2014}. Since the Tagliavini collection hosts primarily early plucked stringed keyboards of Italian origin, the keyboard layout was deliberately modelled after early Italian harpsichords. The aesthetics of the instrument were therefore carefully considered during the design process.
 
@@ -294,7 +287,36 @@ Instead of attempting to suppress this influence, the present design seeks to le
 
 We first received a \emph{3-key prototype} and used it for several months to test sensing approaches and electronics at a small scale. Next, we received the \emph{full keyboard} and, within one week, scaled the system to 48/49 keys and delivered it to San Colombano (\emph{Mark I}). At delivery, Mark I ran a single register with simple thresholding (no hysteresis). After installation, development returned to the 3-key rig, where we added a \emph{second register} and \emph{force sensors} to detect plucks. Finally, a \emph{second full keyboard} (\emph{Mark II}) was built, in which we implemented the dual-register PCBs and the refined electronics/firmware. See also Fig. \ref{fig:timeline-stages}.
 
+The prototyping was staged with ever-increasing complexity to solve jack-displacement sensing in the simplest controllable case before scaling up: single action $\rightarrow$ multi-register action $\rightarrow$ multi-key interface. The system evolved from simple threshold tests to a multi-sensor interface capable of triggering MIDI events. The four development stages are now reviewed in detail. For reference, Fig. \ref{fig:timeline-vertical} shows a timeline of all four stages. 
 
+
+
+\section{Stage 1}\label{sec:prototype}
+
+\begin{figure}
+    \centering    
+    \includegraphics[width=0.85\linewidth]{img/3-key-side.png}
+    \caption{3-key model harpsichord mechanism.}
+    \label{fig:3key}
+\end{figure}
+
+The initial question was whether sensor data could reliably trigger MIDI playback. The custom 3-key mechanism (Figure~\ref{fig:3key}) formed the basis of our tests. This mirrors the methodology in the \textcite{timmermans_multibody-based_2020} \emph{Haptic Key} project: iteratively validate sensor placement, signal processing, and mechanical tolerances on a compact model before scaling to multiple octaves. Our approach follows single-action testbeds in haptics \cite{gillespie_haptic_1996} and harpsichord-specific rigs assembled from luthier parts \cite{perng_physical_2012}. The open-sided construction of the three-key model offered direct access to the key lever and jacks, making it straightforward to mount and align sensors. Multiple keys and registers on the same model enabled more complex iterations (such as sequencing and staggering) without requiring a second rig, while also meeting the visual/aesthetic requirements outlined in our design principles. 
+
+
+\subsection{Sensor Trials}\label{failed-sensors}
+
+A range of sensing strategies was explored against the project’s constraints of non-invasiveness, concealment, reliability, and scalability.
+
+\paragraph{IMU.}
+A six-DoF IMU (accelerometer + gyroscope) mounted on a single key yielded a recognisable “fingerprint” for each gesture, but the resulting features were not sufficiently separable across neighbouring keys, and the per-key cost remained high even at scale.
+
+\paragraph{Magnetic (reed / Hall).}
+Reed switches and Hall sensors were tested with small magnets embedded in the jacks. Both provided repeatable threshold detection, yet each introduced difficulties: reed switches placed calibration entirely in the mechanical domain and scaled poorly; Hall sensors demanded precise positioning and per-key software trimming. Limited internal space made such adjustment impractical, and embedding magnets in the jacks was neither non-invasive nor low-risk.
+
+\paragraph{LDR near the jack rail.}
+Light-dependent resistors placed at the rail (above the jacks) produced a usable signal—less light as the jack rose—but were highly sensitive to ambient illumination. Mitigating this would have required continual re-balancing or a dedicated light-balance circuit. Mounting the devices outside the cavity also conflicted with the requirement for concealment. Nevertheless, these trials suggested that a \emph{local} light source, if fully enclosed, could be viable.
+
+\clearpage
 \begin{figure}
 \centering
 \begin{tikzpicture}[
@@ -367,8 +389,6 @@ We first received a \emph{3-key prototype} and used it for several months to tes
 \label{fig:timeline-stages}
 \end{figure}
 
-The prototyping was staged with ever-increasing complexity to solve jack-displacement sensing in the simplest controllable case before scaling up: single action $\rightarrow$ multi-register action $\rightarrow$ multi-key interface. The system evolved from simple threshold tests to a multi-sensor interface capable of triggering MIDI events. The four development stages are now reviewed in detail. For reference, Fig. \ref{fig:timeline-vertical} shows a timeline of all four stages. 
-
 \begin{figure}
 \centering
 \begin{tikzpicture}[
@@ -380,7 +400,6 @@ The prototyping was staged with ever-increasing complexity to solve jack-displac
 ]
 
 \def\ystep{-1.4}
-
 % ---- Events ----
 \node[dot] (e1) at (0,0) {};
 \node[eventR,right=6mm of e1] {\textbf{May 2023}\\First design meeting: scope of exhibition};
@@ -432,34 +451,10 @@ The prototyping was staged with ever-increasing complexity to solve jack-displac
 \label{fig:timeline-vertical}
 \end{figure}
 
-\section{Stage 1}\label{sec:prototype}
-
-\begin{figure}
-    \centering    
-    \includegraphics[width=0.85\linewidth]{img/3-key-side.png}
-    \caption{3-key model harpsichord mechanism.}
-    \label{fig:3key}
-\end{figure}
-
-The initial question was whether sensor data could reliably trigger MIDI playback. The custom 3-key mechanism (Figure~\ref{fig:3key}) formed the basis of our tests. This mirrors the methodology in the \textcite{timmermans_multibody-based_2020} \emph{Haptic Key} project: iteratively validate sensor placement, signal processing, and mechanical tolerances on a compact model before scaling to multiple octaves. Our approach follows single-action testbeds in haptics \cite{gillespie_haptic_1996} and harpsichord-specific rigs assembled from luthier parts \cite{perng_physical_2012}. The open-sided construction of the three-key model offered direct access to the key lever and jacks, making it straightforward to mount and align sensors. Multiple keys and registers on the same model enabled more complex iterations (such as sequencing and staggering) without requiring a second rig, while also meeting the visual/aesthetic requirements outlined in our design principles. 
-
-
-\subsection{Sensor Trials}\label{failed-sensors}
-
-A range of sensing strategies was explored against the project’s constraints of non-invasiveness, concealment, reliability, and scalability.
-
-\paragraph{IMU.}
-A six-DoF IMU (accelerometer + gyroscope) mounted on a single key yielded a recognisable “fingerprint” for each gesture, but the resulting features were not sufficiently separable across neighbouring keys, and the per-key cost remained high even at scale.
-
-\paragraph{Magnetic (reed / Hall).}
-Reed switches and Hall sensors were tested with small magnets embedded in the jacks. Both provided repeatable threshold detection, yet each introduced difficulties: reed switches placed calibration entirely in the mechanical domain and scaled poorly; Hall sensors demanded precise positioning and per-key software trimming. Limited internal space made such adjustment impractical, and embedding magnets in the jacks was neither non-invasive nor low-risk.
-
-\paragraph{LDR near the jack rail.}
-Light-dependent resistors placed at the rail (above the jacks) produced a usable signal—less light as the jack rose—but were highly sensitive to ambient illumination. Mitigating this would have required continual re-balancing or a dedicated light-balance circuit. Mounting the devices outside the cavity also conflicted with the requirement for concealment. Nevertheless, these trials suggested that a \emph{local} light source, if fully enclosed, could be viable.
 
 \paragraph{Optical reflectance (final choice).}
-Building on \textcite{mcpherson_portable_2013, moro_platform_2020}, we adopted the Fairchild QRE1113%
-\footnote{Fairchild, now ON Semiconductor, QRE1113 datasheet \url{https://www.onsemi.com/download/data-sheet/pdf/qre1113-d.pdf}}
+Building on \textcite{mcpherson_portable_2013, moro_platform_2020}, we adopted the Fairchild QRE1113
+\footnote{Fairchild, now ON Semiconductor, QRE1113 datasheet \url{https://www.onsemi.com/download/data-sheet/pdf/qre1113-d.pdf}} 
 infrared reflectance sensor in a simple voltage-divider circuit (Figure~\ref{fig:simple-schematic}). Unlike earlier key-displacement systems \cite{mcpherson_portable_2013, moro_platform_2020}, we needed to sense the motion of the \emph{jack} while keeping hardware invisible. The solution was to rotate the geometry: each sensor looked sideways onto a \emph{grey-scale reflectance gradient} applied to the jack body (Figure~\ref{fig:jack-tags}). This borrowed the controlled-contrast approach of line-following robots \cite{ramesh_turning_2017}, giving a smooth, monotonic response without exposing the emitters.
 
 To prototype the target surface, gradients were initially printed on paper and taped to the jacks. For production, they were rendered as full-length vinyl stickers%%
@@ -478,7 +473,7 @@ Early optical trials also revealed cross-talk: infrared light reflected from adj
 
 \subsection{Prototype PCB}
 
-\begin{figure}
+\begin{figure}[!b]
     \centering
     \includesvg[inkscapelatex=false,width=0.85\linewidth]{img/pcb-miniboard-schematic.svg} \\
     \includegraphics[width=0.85\linewidth]{img/pcb-prototype-mini-board-bw.png}
@@ -487,6 +482,7 @@ Early optical trials also revealed cross-talk: infrared light reflected from adj
 \end{figure}
 
 A small EAGLE PCB (Figure~\ref{fig:prototype-pcb}) provided simple divider wiring, power, and header breakout to a microcontroller, primarily to validate mounting and pitch spacing. The original plan was a right-angle mount (bending leads; Figure~\ref{fig:prototype-pcb-mount}) so the board could sit on an adjustable 3D-printed bracket at the wrestplank side, setting the sensor–gradient gap. In practice, the optical leads were fragile, and an end-mount approach à la \textcite{mcpherson_portable_2013} was too alignment-sensitive on the jack’s 4.30~mm edge: tiny angular errors produced large signal differences. We therefore switched to sensors soldered \emph{flush} to the PCB and oriented the PCB vertically.
+
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{img/prototype-mini-pcb-mount.jpeg}
@@ -494,14 +490,16 @@ A small EAGLE PCB (Figure~\ref{fig:prototype-pcb}) provided simple divider wirin
     \label{fig:prototype-pcb-mount}
 \end{figure}
 
-\begin{figure}
+
+The vertical redesign (Figure~\ref{fig:dual-pcb}) doubles the sensor layout to accommodate wiring from a single side on the 3-key rig, while keeping identical vertical positioning for the front and rear registers. This minimises signal-range differences and avoids separate offset gradients or separate PCBs. A two-piece 3D-printed bracket holds the board vertically and provides coarse gap adjustment.
+
+\begin{figure}[!b]
     \centering
     \includesvg[inkscapelatex=false,width=0.9\linewidth]{img/pcb-dual-sensor-board.svg} \\
     \includesvg[inkscapelatex=false,width=0.9\linewidth]{img/pcb-dual-sensor-board-traces.svg}
     \caption{Vertically oriented prototype sensor PCB schematic (top) and traces (bottom).}
     \label{fig:dual-pcb}
 \end{figure}
-The vertical redesign (Figure~\ref{fig:dual-pcb}) doubles the sensor layout to accommodate wiring from a single side on the 3-key rig, while keeping identical vertical positioning for the front and rear registers. This minimises signal-range differences and avoids separate offset gradients or separate PCBs. A two-piece 3D-printed bracket holds the board vertically and provides coarse gap adjustment.
 
 \section{Stage 2}\label{sec:mark-1}
 
@@ -511,22 +509,26 @@ After the initial prototyping, the first complete interface, \emph{Mark I}, was 
 
 The mechanical design was developed in close collaboration with luthier Roberto Livi and curator Catalina Vicens, guided by the priorities outlined in Table~\ref{tab:constraints-choices}: faithfulness to sixteenth-century practice, robustness for public use, and a compact footprint.  
 Livi fabricated the instrument in his Pesaro workshop, adopting a restrained rectangular frame (Figure~\ref{fig:compare}) that answered the gallery’s spatial limits while leaving generous internal cavities for the sensing system (Figure~\ref{fig:mark-1-cs}).  
+
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{img/drawing-mark-1-model-cross-section.pdf}
+    \includegraphics[width=0.9\linewidth]{img/drawing-mark-1-model-cross-section.pdf}
     \caption{Cross-section of keyboard mechanics by Roberto Livi. The original design reserved space for a horizontal circuit board of 50\,mm $\times$ 6\,mm.}
     \label{fig:mark-1-cs}
 \end{figure}
+
 Traditional materials were employed throughout: a walnut wrestplank, chestnut key levers, boxwood and ebony key covers, and a cypress case and soundboard; the jacks were beech with brass springs and seagull-feather plectra.  
 The design drew on the 1547 Alessandro Trasuntino harpsichord at San Colombano—particularly its two 8′ choirs—while replacing the historical short octave with a standard layout, as requested by the curator, to simplify mapping to sampled sounds. This modernised geometry, combined with the rectangular poplar frame, also eased installation of optical sensors beneath the wrestplank without compromising tactile or visual authenticity (see Figure~\ref{fig:mark-1-bottom}). Two brass choirs were tensioned to reproduce plucking resistance, and felt strips were added to damp residual vibration.
+
 \begin{figure}
     \centering
-    \includegraphics[width=0.75\linewidth,angle=270]{img/drawing-all_comparison-90.pdf}
+    \includegraphics[height=4cm]{img/drawing-all_comparison-90-1.pdf}\hfill
+    \includegraphics[height=4cm]{img/drawing-all_comparison-90-2.pdf}\hfill
+    \includegraphics[height=4cm]{img/drawing-all_comparison-90-3.pdf}
+    % \includegraphics[width=0.7\linewidth,angle=270]{img/drawing-all_comparison-90.pdf}
     \caption{Scale comparison: (left to right) the 1547 Trasuntino, 49-key Mark I model, and the 3-key prototype. The Trasuntino shows the traditional “logarithmic” outline.}
     \label{fig:compare}
 \end{figure}
-
-
 
 \subsection{Electronic Components}
 

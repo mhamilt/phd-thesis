@@ -22,6 +22,7 @@
 \usepackage{
     adjustbox,
      amsfonts,
+    afterpage,
       amsmath,
       amssymb,
       amstext,
@@ -119,14 +120,15 @@
     % delete space but give a warning
     \ifhmode
       \ifdim\lastskip>0pt
-        \unskip % delete the preceding space
+        \unskip % delete the preceding space    
+    \fi
+
       %   \PackageWarning{footnote-check}
       %     {Removed\space a\space space\space immediately\space before\space \string\footnote}
       % \fi
-    \fi
 
     % Insert the real footnote
-    \origfootnote{#1}
+    \origfootnote{#1}\space
 
     % --- check for punctuation immediately after ---
     \peek_meaning:NTF . { \__fn_bad_punct: } {
