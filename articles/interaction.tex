@@ -505,7 +505,7 @@ The vertical redesign (Figure~\ref{fig:dual-pcb}) doubles the sensor layout to a
 
 After the initial prototyping, the first complete interface, \emph{Mark I}, was completed for delivery to the Tagliavini collection. Development proceeded modularly (mechanical hardware, electronics, audio software; and within electronics, hardware vs.\ firmware), allowing mechanical construction while electronic prototyping continued. 
 
-\subsection{Keyboard desing}
+\subsection{Keyboard design}
 
 The mechanical design was developed in close collaboration with luthier Roberto Livi and curator Catalina Vicens, guided by the priorities outlined in Table~\ref{tab:constraints-choices}: faithfulness to sixteenth-century practice, robustness for public use, and a compact footprint.  
 Livi fabricated the instrument in his Pesaro workshop, adopting a restrained rectangular frame (Figure~\ref{fig:compare}) that answered the gallery’s spatial limits while leaving generous internal cavities for the sensing system (Figure~\ref{fig:mark-1-cs}).  
@@ -522,9 +522,11 @@ The design drew on the 1547 Alessandro Trasuntino harpsichord at San Colombano�
 
 \begin{figure}
     \centering
-    \includegraphics[height=4cm]{img/drawing-all_comparison-90-1.pdf}\hfill
-    \includegraphics[height=4cm]{img/drawing-all_comparison-90-2.pdf}\hfill
-    \includegraphics[height=4cm]{img/drawing-all_comparison-90-3.pdf}
+    \hspace*{0.1\textwidth}
+    \includegraphics[height=0.3\textheight]{img/drawing-all_comparison-90-1.pdf}\hfill
+    \includegraphics[height=0.3\textheight]{img/drawing-all_comparison-90-2.pdf}\hfill
+    \includegraphics[height=0.3\textheight]{img/drawing-all_comparison-90-3.pdf}
+    \hspace*{0.1\textwidth}
     % \includegraphics[width=0.7\linewidth,angle=270]{img/drawing-all_comparison-90.pdf}
     \caption{Scale comparison: (left to right) the 1547 Trasuntino, 49-key Mark I model, and the 3-key prototype. The Trasuntino shows the traditional “logarithmic” outline.}
     \label{fig:compare}
@@ -551,7 +553,7 @@ All signals terminate at a microcontroller that samples analogue inputs and cont
 
 \paragraph{Printed Circuit Boards} Two PCBs were designed to stabilise connections, minimise footprint, and fix sensor pitch to the jacks: (i) a \emph{sensor board} and (ii) a \emph{controller board}. Figure~\ref{fig:system-block-diagram} shows the macro-level connections.
 
-\begin{figure}
+\begin{figure}[b]
     \centering
     \includegraphics[width=0.85\linewidth]{img/block-diagram-2.pdf}
     \caption{Block diagram of PCB connections. Each sensor board’s analogue signal (\texttt{SIG}) returns individually to the controller; LED and MUX control lines are daisy-chained.}
@@ -663,7 +665,7 @@ on a Mac mini housed in the lower compartment; cables were routed through hidden
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\linewidth,trim={0 5cm 0 0},clip]{img/mac-mini.jpg}
+    \includegraphics[width=0.6\linewidth,trim={0 5cm 0 0},clip]{img/mac-mini.jpg}
     \caption{Components and cabling concealed in the lower compartment.}
     \label{fig:mac-mini}
 \end{figure}
