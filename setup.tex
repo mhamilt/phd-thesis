@@ -100,4 +100,51 @@
 %%%%%%%%%% DO NOT EDIT %%%%%%%%%%
 
 %----------------------------------------------------------------------------------------
-% Special Symbols
+% Footnote Formatting
+\usepackage{xparse}
+\usepackage{expl3}
+
+\ExplSyntaxOn
+
+% Save original \footnote
+\cs_new_eq:NN \origfootnote \footnote
+
+% Define our safe version
+\RenewDocumentCommand \footnote { m }
+  {
+    % delete space but give a warning
+    \ifhmode
+      \ifdim\lastskip>0pt
+        \unskip % delete the preceding space
+      %   \PackageWarning{footnote-check}
+      %     {Removed\space a\space space\space immediately\space before\space \string\footnote}
+      % \fi
+    \fi
+
+    % Insert the real footnote
+    \origfootnote{#1}
+
+    % --- check for punctuation immediately after ---
+    \peek_meaning:NTF . { \__fn_bad_punct: } {
+    \peek_meaning:NTF , { \__fn_bad_punct: } {
+    \peek_meaning:NTF ; { \__fn_bad_punct: } {
+    \peek_meaning:NTF : { \__fn_bad_punct: } {
+    \peek_meaning:NTF ? { \__fn_bad_punct: } {
+    \peek_meaning:NTF ! { \__fn_bad_punct: } {
+    \peek_meaning:NTF ) { \__fn_bad_punct: } {
+    \peek_meaning:NTF ] { \__fn_bad_punct: } {
+    \peek_meaning:NTF } { \__fn_bad_punct: } {
+      % no punctuation immediately after -> OK
+    }}}}}}}}    
+  }
+
+% Helper macro for bad punctuation
+\cs_new_protected:Npn \__fn_bad_punct:
+  {
+    \PackageError{footnote-check}
+    {Footnote\space immediately\space followed\space by\space punctuation}
+    {Remove\space the\space punctuation\space or\space place\space it\space differently.}
+  }
+
+\ExplSyntaxOff
+%----------------------------------------------------------------------------------------

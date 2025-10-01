@@ -1,6 +1,8 @@
 \chapter{Interaction}\label{ch:interaction}
 
-As part of a broader commitment to accessibility, the Museo San Colombano-Tagliavini Collection, situated within Fondazione Carisbo's cultural itinerary in Bologna \cite{meer_collezione_2007}, has undertaken a series of projects aimed at enhancing both cognitive and sensory engagement. Supported by funding from NextGenerationEU\footnote{https://openpnrr.it/progetti/143852/}, these initiatives seek to leverage the collection’s rich holdings to create immersive and interactive modes of encounter with the exhibited heritage. Central to this vision is the reinterpretation of historical musical objects through their tactile and auditory dimensions, making the exhibition more inclusive for blind and partially sighted visitors, as well as the general public. The Tagliavini Collection comprises over fifty historical keyboard instruments, with a particular focus on Italian plucked string instruments. The collection represents a unique resource of interest to musicologists, organologists, and performers. Tagliavini's guiding principle was one of authenticity: instruments were acquired with the explicit aim of restoring them to playing condition with as little intervention as possible. Clearly, the cultural value of such instruments extends beyond their visual presence, 
+As part of a broader commitment to accessibility, the Museo San Colombano-Tagliavini Collection, situated within Fondazione Carisbo's cultural itinerary in Bologna \cite{meer_collezione_2007}, has undertaken a series of projects aimed at enhancing both cognitive and sensory engagement. Supported by funding from NextGenerationEU,%
+\footnote{https://openpnrr.it/progetti/143852/}
+these initiatives seek to leverage the collection’s rich holdings to create immersive and interactive modes of encounter with the exhibited heritage. Central to this vision is the reinterpretation of historical musical objects through their tactile and auditory dimensions, making the exhibition more inclusive for blind and partially sighted visitors, as well as the general public. The Tagliavini Collection comprises over fifty historical keyboard instruments, with a particular focus on Italian plucked string instruments. The collection represents a unique resource of interest to musicologists, organologists, and performers. Tagliavini's guiding principle was one of authenticity: instruments were acquired with the explicit aim of restoring them to playing condition with as little intervention as possible. Clearly, the cultural value of such instruments extends beyond their visual presence, 
 encompassing tactile and auditory dimensions of performance \cite{fritz_listener_2017}. 
 
 
@@ -43,7 +45,7 @@ The Tromba Moderna project \cite{baldwin_tromba_2016}, developed in collaboratio
 
 
 In parallel to these museum-focused initiatives, four decades of research 
-have explored haptic keyboard design. The lineage begins with Cadoz et. al., and their modular feedback keyboard \cite{cadoz_synthese_1981,cadoz_modular_1990}, which introduced tactilo-proprio-kinesthetic elements through polarisation magnets and flat coils, originally intended for applications in teleoperation and virtual reality. \textcite{gillespie_dynamical_1992} advanced the field with a single-key linear motor prototype, later simplified to enable more realistic emulation of keyboard performance \cite{gillespie_virtual_1994}. These efforts culminated in the MIKEY project, a multi-modal interface capable of reproducing piano, harpsichord and organ actions \cite{oboe_mikey_2006}. Subsequent explorations have included magneto-rheological actuation \cite{lozada_novel_2007}, ultrasonic haptics combined with virtual reality \cite{hwang_airpiano_2017}, and multibody-based designs using low-cost electronics while preserving key mechanics \cite{timmermans_multibody-based_2020}.  
+have explored haptic keyboard design. The lineage begins with Cadoz et. al.'s modular feedback keyboard \cite{cadoz_synthese_1981,cadoz_modular_1990}, which introduced tactilo-proprio-kinesthetic elements through polarisation magnets and flat coils, originally intended for applications in teleoperation and virtual reality. \textcite{gillespie_dynamical_1992} advanced the field with a single-key linear motor prototype, later simplified to enable more realistic emulation of keyboard performance \cite{gillespie_virtual_1994}. These efforts culminated in the MIKEY project, a multi-modal interface capable of reproducing piano, harpsichord and organ actions \cite{oboe_mikey_2006}. Subsequent explorations have included magneto-rheological actuation \cite{lozada_novel_2007}, ultrasonic haptics combined with virtual reality \cite{hwang_airpiano_2017}, and multibody-based designs using low-cost electronics while preserving key mechanics \cite{timmermans_multibody-based_2020}.  
 
 Despite their variety, these systems share a common limitation: they are generally restricted to a single key or a small number of keys. For heritage applications such as the Tagliavini 
 collection, an interface must span 38--53 keys to match historical harpsichords \cite{tagliavini_clavicembali_1987}. 
@@ -59,7 +61,8 @@ It diverges, however, in adopting an aesthetics-first approach: electronics are 
 
 There is some confusion in the usage of terminology around haptic interfaces, as seen in the DMI communities, such as NIME. Much of this terminology takes its cues from the field of Human-Computer Interaction (HCI), where terms such as \emph{haptic}, \emph{tactual}, \emph{tactile}, \emph{vibrotactile}, \emph{kinaesthetic}, \emph{proprioception}, and \emph{force feedback} are all in circulation, often without strict or consistent definition. This section, therefore, seeks to define the relevant terms as they apply to musical instrument interfaces, to bring clarity to the remainder of the thesis.  
 
-The archive of DMIs available from the NIME conference will serve as the primary source of definitions and examples of usage, made possible by its open-access status under the Creative Commons Attribution 4.0 International License (CC BY 4.0).\footnote{\url{https://creativecommons.org/licenses/by/4.0/}}  
+The archive of DMIs available from the NIME conference will serve as the primary source of definitions and examples of usage, made possible by its open-access status under the Creative Commons Attribution 4.0 International License (CC BY 4.0).%
+\footnote{\url{https://creativecommons.org/licenses/by/4.0/}}  
 
 For this thesis, \emph{feedback} refers broadly to physical sensory feedback: the sense of forces, movement, position, and pressure as perceived by the human body. The following subsections outline specific terms.  
 
@@ -204,7 +207,7 @@ Together, these considerations materialised as a chain of sensor boards mounted 
 
 \begin{figure}
   \centering
-  \includegraphics[width=\linewidth]{img/mark-1-bottom-sensors-no-keys.jpg}
+  \includegraphics[width=0.85\linewidth]{img/mark-1-bottom-sensors-no-keys.jpg}
   \caption{Underside of the keyboard showing optical-sensor PCBs mounted beneath the wrest plank.}
   \label{fig:mark-1-bottom}
 \end{figure}
@@ -433,7 +436,7 @@ The prototyping was staged with ever-increasing complexity to solve jack-displac
 
 \begin{figure}
     \centering    
-    \includegraphics[width=\linewidth]{img/3-key-side.png}
+    \includegraphics[width=0.85\linewidth]{img/3-key-side.png}
     \caption{3-key model harpsichord mechanism.}
     \label{fig:3key}
 \end{figure}
@@ -455,7 +458,9 @@ Reed switches and Hall sensors were tested with small magnets embedded in the ja
 Light-dependent resistors placed at the rail (above the jacks) produced a usable signal—less light as the jack rose—but were highly sensitive to ambient illumination. Mitigating this would have required continual re-balancing or a dedicated light-balance circuit. Mounting the devices outside the cavity also conflicted with the requirement for concealment. Nevertheless, these trials suggested that a \emph{local} light source, if fully enclosed, could be viable.
 
 \paragraph{Optical reflectance (final choice).}
-Building on \textcite{mcpherson_portable_2013, moro_platform_2020}, we adopted the Fairchild QRE1113\footnote{Fairchild, now ON Semiconductor, QRE1113 datasheet \url{https://www.onsemi.com/download/data-sheet/pdf/qre1113-d.pdf}} infrared reflectance sensor in a simple voltage-divider circuit (Figure~\ref{fig:simple-schematic}). Unlike earlier key-displacement systems \cite{mcpherson_portable_2013, moro_platform_2020}, we needed to sense the motion of the \emph{jack} while keeping hardware invisible. The solution was to rotate the geometry: each sensor looked sideways onto a \emph{grey-scale reflectance gradient} applied to the jack body (Figure~\ref{fig:jack-tags}). This borrowed the controlled-contrast approach of line-following robots \cite{ramesh_turning_2017}, giving a smooth, monotonic response without exposing the emitters.
+Building on \textcite{mcpherson_portable_2013, moro_platform_2020}, we adopted the Fairchild QRE1113%
+\footnote{Fairchild, now ON Semiconductor, QRE1113 datasheet \url{https://www.onsemi.com/download/data-sheet/pdf/qre1113-d.pdf}}
+infrared reflectance sensor in a simple voltage-divider circuit (Figure~\ref{fig:simple-schematic}). Unlike earlier key-displacement systems \cite{mcpherson_portable_2013, moro_platform_2020}, we needed to sense the motion of the \emph{jack} while keeping hardware invisible. The solution was to rotate the geometry: each sensor looked sideways onto a \emph{grey-scale reflectance gradient} applied to the jack body (Figure~\ref{fig:jack-tags}). This borrowed the controlled-contrast approach of line-following robots \cite{ramesh_turning_2017}, giving a smooth, monotonic response without exposing the emitters.
 
 To prototype the target surface, gradients were initially printed on paper and taped to the jacks. For production, they were rendered as full-length vinyl stickers%%
 \footnote{Coala, 1D 100 Gloss P, white gloss, 300 g/m\textsuperscript{2}, 100 µm, 1370 mm $\times$ 50 m}
@@ -475,8 +480,8 @@ Early optical trials also revealed cross-talk: infrared light reflected from adj
 
 \begin{figure}
     \centering
-    \includesvg[inkscapelatex=false,width=0.75\linewidth]{img/pcb-miniboard-schematic.svg} \\
-    \includegraphics[width=0.75\linewidth]{img/pcb-prototype-mini-board-bw.png}
+    \includesvg[inkscapelatex=false,width=0.85\linewidth]{img/pcb-miniboard-schematic.svg} \\
+    \includegraphics[width=0.85\linewidth]{img/pcb-prototype-mini-board-bw.png}
     \caption{PCB schematic of the prototype sensor board and its board silkscreen.}
     \label{fig:prototype-pcb}
 \end{figure}
@@ -484,15 +489,15 @@ Early optical trials also revealed cross-talk: infrared light reflected from adj
 A small EAGLE PCB (Figure~\ref{fig:prototype-pcb}) provided simple divider wiring, power, and header breakout to a microcontroller, primarily to validate mounting and pitch spacing. The original plan was a right-angle mount (bending leads; Figure~\ref{fig:prototype-pcb-mount}) so the board could sit on an adjustable 3D-printed bracket at the wrestplank side, setting the sensor–gradient gap. In practice, the optical leads were fragile, and an end-mount approach à la \textcite{mcpherson_portable_2013} was too alignment-sensitive on the jack’s 4.30~mm edge: tiny angular errors produced large signal differences. We therefore switched to sensors soldered \emph{flush} to the PCB and oriented the PCB vertically.
 \begin{figure}
     \centering
-    \includegraphics[width=0.3\linewidth]{img/prototype-mini-pcb-mount.jpeg}
+    \includegraphics[width=0.7\linewidth]{img/prototype-mini-pcb-mount.jpeg}
     \caption{Prototype PCB attached to 3D-printed adjustment bracket.}
     \label{fig:prototype-pcb-mount}
 \end{figure}
 
 \begin{figure}
     \centering
-    \includesvg[inkscapelatex=false,width=0.75\linewidth]{img/pcb-dual-sensor-board.svg} \\
-    \includesvg[inkscapelatex=false,width=0.75\linewidth]{img/pcb-dual-sensor-board-traces.svg}
+    \includesvg[inkscapelatex=false,width=0.9\linewidth]{img/pcb-dual-sensor-board.svg} \\
+    \includesvg[inkscapelatex=false,width=0.9\linewidth]{img/pcb-dual-sensor-board-traces.svg}
     \caption{Vertically oriented prototype sensor PCB schematic (top) and traces (bottom).}
     \label{fig:dual-pcb}
 \end{figure}
@@ -546,7 +551,7 @@ All signals terminate at a microcontroller that samples analogue inputs and cont
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{img/block-diagram-2.pdf}
+    \includegraphics[width=0.85\linewidth]{img/block-diagram-2.pdf}
     \caption{Block diagram of PCB connections. Each sensor board’s analogue signal (\texttt{SIG}) returns individually to the controller; LED and MUX control lines are daisy-chained.}
     \label{fig:system-block-diagram}
 \end{figure}
@@ -561,7 +566,7 @@ All signals terminate at a microcontroller that samples analogue inputs and cont
 
 \begin{figure}
     \centering
-    \includesvg[inkscapelatex=false, width=\linewidth]{img/pcb_sensor_schematic_v1.svg}            
+    \includesvg[inkscapelatex=false, width=0.85\linewidth]{img/pcb_sensor_schematic_v1.svg}            
         \caption{Mark I sensor board schematic. `\texttt{D}' = LEDs; `\texttt{Q}' = optical sensors; `\texttt{C}' = MUX channels. Labels indicate current direction.}
     \label{fig:sensor-schematic-1}
 \end{figure}
@@ -631,7 +636,7 @@ Estimated power draw is $\sim$1.1~A at 5~V with inrush variation. Sensors stayed
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\linewidth]{img/installation.png}
+    \includegraphics[width=0.7\linewidth]{img/installation.png}
     \caption{Keyboard being installed for exhibition in the Oratory at San Colombano.}
     \label{fig:installation}
 \end{figure}
@@ -650,7 +655,9 @@ Fitting the keyframe required temporarily removing the keys. Brackets were secur
   \label{fig:milling}
 \end{figure}
 
-For the first exhibition, a harpsichord sample library ran in Kontakt\footnote{\href{https://www.native-instruments.com/en/products/komplete/samplers/kontakt-8/?srsltid=AfmBOorKUf43SoIxGBS2-GnXmKHHkgcfcfWRskpweDhLSG3FiF0qrf2w}{Kontakt webpage} (Accessed 31 Jan 2025)} on a Mac mini housed in the lower compartment; cables were routed through hidden holes (Figure~\ref{fig:mac-mini}). An iPad exposed controls for tuning, voicing, and stop selection.
+For the first exhibition, a harpsichord sample library ran in Kontakt%
+\footnote{\href{https://www.native-instruments.com/en/products/komplete/samplers/kontakt-8/?srsltid=AfmBOorKUf43SoIxGBS2-GnXmKHHkgcfcfWRskpweDhLSG3FiF0qrf2w}{Kontakt webpage} (Accessed 31 Jan 2025)}
+on a Mac mini housed in the lower compartment; cables were routed through hidden holes (Figure~\ref{fig:mac-mini}). An iPad exposed controls for tuning, voicing, and stop selection.
 
 \begin{figure}
     \centering
@@ -716,7 +723,9 @@ Across 10\,000 iterations, the sampling loop (including multiplexing and filteri
 Pluck and release thresholds were stored in non-volatile FRAM so that calibration survived power cycles.  
 The layout adopted a RIFF-style chunk structure \cite{ibm_riff_1991}, shown in Table~\ref{tab:fram-structure}.  
 On startup, the firmware checked the identifiers at \texttt{0x00} and \texttt{0x66} (``MAXI'' and ``MINI''); if absent, memory was initialised with default values.  
-A lightweight wrapper around the Adafruit SPI-FRAM library\footnote{Adafruit SPI FRAM Driver v2.6.2 \url{https://github.com/adafruit/Adafruit_FRAM_SPI/releases/tag/2.6.2}} simplified read/write operations.
+A lightweight wrapper around the Adafruit SPI-FRAM library%
+\footnote{Adafruit SPI FRAM Driver v2.6.2\\ \url{https://github.com/adafruit/Adafruit_FRAM_SPI/releases/tag/2.6.2}}
+simplified read/write operations.
 
 \begin{table}[h]
     \centering
@@ -735,7 +744,9 @@ A lightweight wrapper around the Adafruit SPI-FRAM library\footnote{Adafruit SPI
 \paragraph{Calibration workflow.}
 During calibration, the selected key streamed raw values over the serial connection (Figure~\ref{fig:serial_monitor}) while the encoder adjusted thresholds in real time.  
 Addressable LEDs echoed the current state—green for \texttt{PLUCKED}, orange for \texttt{PRESSED}, blue for \texttt{RELEASED}, and red when approaching ADC limits.  
-An initial pass was performed at NEMUS using the Arduino serial plotter and MIDI Monitor\footnote{\url{https://github.com/krevis/MIDIApps}}, followed by fine adjustments in situ with guidance from the curator-performer.
+An initial pass was performed at NEMUS using the Arduino serial plotter and MIDI Monitor,%
+\footnote{\url{https://github.com/krevis/MIDIApps}}
+followed by fine adjustments in situ with guidance from the curator-performer.
 
 \begin{figure}[h]
   \centering
@@ -794,7 +805,9 @@ The development of the interface culminated in its public installation, research
 
 \paragraph{Embodiment and Public Encounter}
 
-When \emph{Mark I} was installed in the Oratory at San Colombano, alongside the 1547 Trasuntino harpsichord and the 1540 spinet by the same maker,\footnote{\href{https://digital.fondazionecarisbo.it/artwork/arpicordo-a-pianta-poligonale-anonimo-attr-ad-alessandro-trasuntino}{Trasuntino harpsichord – Fondazione Carisbo}} the emphasis on historical appearance and tactile plausibility paid dividends. Visitors could approach the keyboard without encountering cables, displays, or other cues that might mark it as “technology.” Reports of the “disconnect” between action and sound noted by \textcite{mcalpine_sampling_2014} were absent among staff, surveillance personnel, and trained visitors (approximately twenty participants). The instrument’s restrained frame and hidden sensors (Figures~\ref{fig:oratory}, \ref{fig:mark-1-pcbs}) enabled an experience in which haptic response and sonic result felt coherent.
+When \emph{Mark I} was installed in the Oratory at San Colombano, alongside the 1547 Trasuntino harpsichord and the 1540 spinet by the same maker,%
+\footnote{\href{https://digital.fondazionecarisbo.it/artwork/arpicordo-a-pianta-poligonale-anonimo-attr-ad-alessandro-trasuntino}{Trasuntino harpsichord – Fondazione Carisbo}} 
+the emphasis on historical appearance and tactile plausibility paid dividends. Visitors could approach the keyboard without encountering cables, displays, or other cues that might mark it as “technology.” Reports of the “disconnect” between action and sound noted by \textcite{mcalpine_sampling_2014} were absent among staff, surveillance personnel, and trained visitors (approximately twenty participants). The instrument’s restrained frame and hidden sensors (Figures~\ref{fig:oratory}, \ref{fig:mark-1-pcbs}) enabled an experience in which haptic response and sonic result felt coherent.
 
 \begin{figure}
     \centering

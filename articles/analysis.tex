@@ -25,15 +25,19 @@ The remainder of the chapter develops the design choices behind \textsc{magpie} 
 
 \section{Existing Tools: ITEMM OpenLab}
 
-\textsc{magpie} is not the first attempt to make plate analysis accessible, nor is it the only tool marketed as ``free.'' The Institut Technologique Européen des Métiers de la Musique (ITEMM) maintains an online platform, ITEMM Open Lab,\footnote{\url{https://www.openlab-itemm.com}} which provides luthiers and makers with resources ranging from datasets of materials to CAD models of instrument parts. Most relevant for present purposes, OpenLab also includes a suite of calculators for acoustical and mechanical properties of wood, offering workshop access to methods otherwise restricted to laboratory environments. 
+\textsc{magpie} is not the first attempt to make plate analysis accessible, nor is it the only tool marketed as ``free.'' The Institut Technologique Européen des Métiers de la Musique (ITEMM) maintains an online platform, ITEMM Open Lab,%
+\footnote{\url{https://www.openlab-itemm.com}} which provides luthiers and makers with resources ranging from datasets of materials to CAD models of instrument parts. Most relevant for present purposes, OpenLab also includes a suite of calculators for acoustical and mechanical properties of wood, offering workshop access to methods otherwise restricted to laboratory environments. 
 
-Among the available tools are calculators for string behaviour under tension, resonance frequencies of soundboards and bridges, and a plate-stiffness tool, \textit{Rigidité de plaques},\footnote{\url{https://www.openlab-itemm.com/calculateur-mecanique/rigidite-de-plaques-1/}} which implements the methodology of \textcite{mcintyre_measuring_1988} to estimate elastic constants. The initiative is admirable: ITEMM has put genuinely useful processes within reach of practitioners who might otherwise lack the means. But the openness has limits.
+Among the available tools are calculators for string behaviour under tension, resonance frequencies of soundboards and bridges, and a plate-stiffness tool, \textit{Rigidité de plaques},%
+\footnote{\url{https://www.openlab-itemm.com/calculateur-mecanique/rigidite-de-plaques-1/}} which implements the methodology of \textcite{mcintyre_measuring_1988} to estimate elastic constants. The initiative is admirable: ITEMM has put genuinely useful processes within reach of practitioners who might otherwise lack the means. But the openness has limits.
 
 Although freely accessible once registered, OpenLab tools follow a distribution model that differs from the approach taken here. In Stallman’s terms, they are closer to ``free as in beer'' than ``free as in freedom'' \cite{stallman_why_2007}. 
-The code that underpins calculators such as \textit{Rigidité de plaques} is delivered through the browser and can, in principle, be examined,
+The code that underpins calculators such as \textit{Rigidité de plaques} is delivered through the browser and can, in principle, be examined,%
 \footnote{Calculations are carried out in \href{https://www.openlab-itemm.com/wp-content/plugins/ITEMM-OpenLab-tools-main/js/p_w_script.js}{\texttt{js/p\_w\_script.js}} with support from an \texttt{olt} utility class at \href{https://www.openlab-itemm.com/wp-content/plugins/ITEMM-OpenLab-tools-main/js/olt_class.js}{\texttt{js/olt\_class.js}}, both accessible without authentication.} 
 but documentation, licensing, and citation pathways are not yet foregrounded. 
-ITEMM’s legal framework, for example, explicitly covers 3D models\footnote{\url{https://www.openlab-itemm.com/mentions-legals/}} but does not naturally extend to the software calculators themselves \cite{cc_can_2025}. 
+ITEMM’s legal framework, for example, explicitly covers 3D models%
+\footnote{\url{https://www.openlab-itemm.com/mentions-legals/}}
+but does not naturally extend to the software calculators themselves \cite{cc_can_2025}. 
 
 By contrast, the development of \textsc{magpie} follows an ``open first'' methodology guided by the FAIR principles \cite{wilkinson_fair_2016,go_fair_2016}. This means that source code, metadata, and licensing are made explicit from the outset, persistent identifiers are assigned, and scholarly attribution is supported through standard citation practices \cite{soito_citations_2016}. In this way, \textsc{magpie} seeks not only to provide functionality comparable to existing online tools, but also to embed sustainability, interoperability, and citability as core design objectives.
 
@@ -357,9 +361,9 @@ The biharmonic operator sparsity pattern (Figure \ref{fig:biharm_zoom}) can be d
 It is worth noting that explicitly declaring the set of coefficients in a loop formulation, though a valid method of using the biharmonic operator, was not considered an option for the current implementations as it does not output a matrix. 
 
 Given its multi-diagonal structure the biharmonic is largely empty and is well suited for sparse matrix storage formats \cite{gilbert_sparse_1992}. 
-Sparse matrices provide optimisation in both storage and computation, since zero multiplication results in zero any zero value in a matrix can be discarded. This quality is only beneficial, however, for matrices with a small enough non-zero content. \footnote{``any matrix
-with enough zeros that it pays to take advantage of them'' \cite{gilbert_sparse_1992} quoting  \cite{wilkinson_handbook_1971}. Quote in \cite[p. 191]{wilkinson_handbook_1971} ``a matrix [is] dense if the percentage of zero elements or its distribution is such as to make it uneconomic to take advantage of their presence''}
-In the first approach, the operator can be composed of sparse sub-blocks assembled separately and then concatenated later. Figure \ref{fig:biharm-subblocks} shows the pattern of repetition within the biharmonic and how each sub-block can be indexed. The colour of each sub-block illustrates the coefficients of the biharmonic affected by the plate boundaries. The central repeating section, highlighted in blue, represents the central part of the plate extending away from boundaries with ghosts points like in Figure~\ref{fig:ghost-points} and expands upon the stencil in Figure~\ref{fig:biharmonic-stencil}. This approach simplifies code structure by avoiding the need for zero padding of the computed matrices but has implications for performance. 
+Sparse matrices provide optimisation in both storage and computation, since zero multiplication results in zero any zero value in a matrix can be discarded. This quality is only beneficial, however, for matrices with a small enough non-zero content.%
+\footnote{``any matrix with enough zeros that it pays to take advantage of them'' \cite{gilbert_sparse_1992} quoting  \cite{wilkinson_handbook_1971}. Quote in \cite[p. 191]{wilkinson_handbook_1971} ``a matrix [is] dense if the percentage of zero elements or its distribution is such as to make it uneconomic to take advantage of their presence''}
+In the first approach, the biharmonic operator can be composed of sparse sub-blocks assembled separately and then concatenated later. Figure \ref{fig:biharm-subblocks} shows the pattern of repetition within the biharmonic and how each sub-block can be indexed. The colour of each sub-block illustrates the coefficients of the biharmonic affected by the plate boundaries. The central repeating section, highlighted in blue, represents the central part of the plate extending away from boundaries with ghosts points like in Figure~\ref{fig:ghost-points} and expands upon the stencil in Figure~\ref{fig:biharmonic-stencil}. This approach simplifies code structure by avoiding the need for zero padding of the computed matrices but has implications for performance. 
 M\textsc{atlab} stores its sparse matrices in a compressed sparse column array format \cite{gilbert_sparse_1992} where the values and indices of the matrix are stored in order or column. 
 
 \begin{figure}
@@ -389,7 +393,8 @@ For example, taking matrix:
         \end{bmatrix}; v_{A} =\begin{bmatrix}1\\4\\2\\5\end{bmatrix} ; r_{A} = \begin{bmatrix}1\\3\\2\\3\end{bmatrix}; c_{A} = \begin{bmatrix}1\\3\\4\end{bmatrix}
 \end{equation}
 
-where $v$ is the concatenated array of sparse matrix values, $r_{A}$ is the array of row indices and $c_{A}$ is the array of first element column indices.\footnote{For a coloumn compressed spasrse format, column indices may also end with a value one greater than the total number of values stored. For eq~\ref{eq:csc-sparse} this would result in a column index array of $c_{A} = [1,\ 3,\ 4,\ 5]$ \cite{nvidia_sparse_2025}}
+where $v$ is the concatenated array of sparse matrix values, $r_{A}$ is the array of row indices and $c_{A}$ is the array of first element column indices.%
+\footnote{For a coloumn compressed spasrse format, column indices may also end with a value one greater than the total number of values stored. For eq~\ref{eq:csc-sparse} this would result in a column index array of $c_{A} = [1,\ 3,\ 4,\ 5]$ \cite{nvidia_sparse_2025}}
 % A sparse vector for a single value would consist of a value from $v_A$ and $r_A$, for instance for an index i = 2, sparse vector $v_1 = [v_{A2},r_{A2}] = [4,1]$.
 
 This would mean that concatenation of blocks would necessitate the reordering and concatenation of the new columns. Such an operation would require the copying and recopying of memory blocks which has a severe impact on computing performance. Before the biharmonic construction was optimised, the function were ported to Python to confirm that the same methodology could be used and confirm the portability of the existing source code.
@@ -401,7 +406,7 @@ Unlike M\textsc{atlab}, Python is an entirely open source programming language w
 % Changes to biharmonic formulation
 For the python variation the biharmonic formulation was update. The new approach was to decompose the operator across the 13 diagonals and to separate them into non-repeating sectors. Each diagonal array is split into 3-5 sectors; each diagonal sector contains between 3-5 unique coefficients. Care must be taken to zero pad diagonals where necessary. The two boundary conditions (flexural and rotational spring stiffness) per edge of the plate mean 8 boundary stiffness coefficients (BSP), which impacts the repetition of diagonal patterns in the distribution of coefficients. Figure \ref{fig:biharm_zoom} illustrates the distribution of unique coefficients within the operator. As in Figure \ref{fig:bh-diag}, Figure \ref{fig:biharm_zoom} shows a repeating central section but an overall lack of repeating diagonal patterns. 
 
-The Python version of \textsc{magpie} was made publicly available via the python package index (PyPI),
+The Python version of \textsc{magpie} was made publicly available via the python package index (PyPI),%
 \footnote{\url{ https://pypi.org/project/nemus-magpie}} 
 as well as open source and version control via GitHub and citable archiving via Zenodo \cite{magpie_python_2025}.
 
@@ -436,7 +441,7 @@ Figure~\ref{fig:python-bmat} shows the input format for the \texttt{bmat} functi
 Each element in the lists is either a square $N\times N$ sparse matrix or an empty list \texttt{[None]} representing a $N\times N$ of zeros. 
 The polymorphic \texttt{*} operator, as well as providing a multiplication operator, represents two operations in this context. The operator is used for replicating arrays \texttt{[None] * x}, where \texttt{x} is the number of repetitions (e.g. \texttt{[None] * 3} will return \texttt{[None, None, None]}. 
 The second function of the \texttt{*} operator is to execute list unpacking \cite{python_expression_2025}, such that contents of the list are "unpacked" such that \texttt{[B11, B12, B13, *[None] * 3]} becomes list with six elements, \texttt{[B11, B12, B13, None, None, None]}, instead of a four element list where the fourth element is a list \texttt{[B11, B12, B13, [None, None, None]]}.
-All of this allows the syntax to follow very closely the structure of Figure~\ref{fig:biharm-subblocks}, without need for extensive slicing and indexing of the equivalent M\textsc{atlab} code.
+All of this allows the syntax to follow very closely the structure of Figure~\ref{fig:biharm-subblocks}, without need for extensive slicing and indexing of the equivalent M\textsc{atlab} code.%
 \footnote{\textcite{magpie_cpp_2025} \href{https://github.com/Nemus-Project/magpie-matlab/blob/4198a689178785dc079a22886a9d2f6844bb25c7/bhmat.m\#L361-L387}{\texttt{@4198a}, Lines 361-387}.}
 
 \begin{figure}
@@ -450,7 +455,7 @@ One of the final goals of this project is to achieve real time computation of th
 It was initially unclear which approach to composing the operator would yield the best performance. 
 At the time of writing, the diagonal composition method was not yet finished with the Python implementation. 
 
-Once the Python implementation was confirmed to give identical results to M\textsc{atlab} both implementations were benchmarked against each other.
+Once the Python implementation was confirmed to give identical results to M\textsc{atlab} both implementations were benchmarked against each other.%
 \footnote{For this and all other benchmarking in this thesis was carried out on a MacBook Pro, MPHH3T/A, Apple M2 Pro, 10 cores (6 performance and 4 efficiency) and 16 GB of RAM} 
 Figure \ref{fig:matlab_vs_python} compares the computing time necessary to build the biharmonic with increasing size, using a block structure, diagonal in M\textsc{atlab}, and a block structure in Python. Each size of biharmonic was computed 10 times and the shortest time was recorded. The speed tests for the biharmonic operator computation in Figure \ref{fig:matlab_vs_python} show a clear performance superiority of the diagonal formulation over the block formulation in both M\textsc{atlab} and Python languages. For the largest grid size ($3e^{5}$) tested in M\textsc{atlab}, the diagonal method was forty times faster than the block method (results showing 0.2 seconds against 8 seconds respectively).
 
@@ -520,7 +525,8 @@ from which we can derive
 
 For a shift-invert using $\sigma = 0$ with LU decomposition the $A$ and $\lambda$ will be re-inverted.
 
-For this reasons, the M\textsc{atlab} and SciPy interfaces with ARPACK can be passed a sigma value of 0 to find the smallest magnitude eigenvalues. Counter-intuitively, ARPACK requires that the option to find largest magnitude is kept, but when a $\sigma$ values is provided the values will be implicitly passed through a second shift-invert process.\footnote{This can cause some confusion between M\textsc{atlab} and SciPys interfaces. If M\textsc{atlab}'s \texttt{eigs} is passed a \texttt{'smallestabs'} option, this is equivalent to a $\sigma 0$ and `largestabs' configuration. SciPy on the otherhand requires the explicit largest magnitude option \texttt{which='LM'} on top of a $\sigma$ value. For SciPy \texttt{which='SM'} will always result in a slower or potentially non-converging solve.}
+For this reasons, the M\textsc{atlab} and SciPy interfaces with ARPACK can be passed a sigma value of 0 to find the smallest magnitude eigenvalues. Counter-intuitively, ARPACK requires that the option to find largest magnitude is kept, but when a $\sigma$ values is provided the values will be implicitly passed through a second shift-invert process.%
+\footnote{This can cause some confusion between M\textsc{atlab} and SciPys interfaces. If M\textsc{atlab}'s \texttt{eigs} is passed a \texttt{'smallestabs'} option, this is equivalent to a $\sigma 0$ and `largestabs' configuration. SciPy on the otherhand requires the explicit largest magnitude option \texttt{which='LM'} on top of a $\sigma$ value. For SciPy \texttt{which='SM'} will always result in a slower or potentially non-converging solve.}
 
 \begin{figure}
     \centering
@@ -558,7 +564,12 @@ Like python, C\textsc{++} is entirely open source which continued to satisfy the
 The primary bottleneck for development in \textsc{magpie} is the eigensolver stage.  As stated previously, M\textsc{atlab} and Python's SciPy interface with the ARPACK library \cite{lehoucq_arpack_1998}. M\textsc{atlab} incorporates some analysis of the target matrix to which the user is not privvy. 
 On top of that, M\textsc{atlab} uses its own sparse library, \cite{gilbert_sparse_1992} which obfuscates the process further.
 M\textsc{atlab}'s \texttt{eigs} function is not one that is supported by the software's code generation systems and the function still requires the M\textsc{atlab} runtime if it is to be interfaced with externally. This has implications on the portability of any tool using M\textsc{atlab} and eigs, with development being constrained to those with paid access to the M\textsc{atlab} environment.
-ARPACK itself is open source\footnote{The \href{https://github.com/opencollab/arpack-ng}{actively maintained fork arpack-ng} is available via GitHub. } and requires the Basic Linear Algebra Subroutines (BLAS) \footnote{\url{http://www.netlib.org/blas/}} and Linear Algebra PACKage (LAPACK)  and \footnote{\url{http://www.netlib.org/lapack/}} in order to function.
+ARPACK itself is open source%
+\footnote{The \href{https://github.com/opencollab/arpack-ng}{actively maintained fork arpack-ng} is available via GitHub.} 
+and requires the Basic Linear Algebra Subroutines (BLAS)%
+\footnote{\url{http://www.netlib.org/blas/}}
+and Linear Algebra PACKage (LAPACK) and%
+\footnote{\url{http://www.netlib.org/lapack/}} in order to function.
 
 \begin{figure}
     \centering
@@ -572,7 +583,9 @@ Therefore, any tool using ARPACK is limited to the compiler support for Fortran.
 Developing in C\textsc{++} presented an opportunity to bypass this restriction using the open source Spectra library \cite{spectra_git_2025}. Spectra is a header-only library for solving eigenvalue problems and consists of a code base that has re-implemented ARPACK solvers in C\textsc{++}. The header-only nature of the library allows for direct, native compilation. Both Spectra and Eigen are heavily templated languages which, though versatile, results in a higher barrier to entry for development. The same structure and development process as taken with the Python and M\textsc{atlab} version of \textsc{magpie} was applied to the C\textsc{++} implementation \cite{magpie_cpp_2025}. 
 
 Although the C\textsc{++} project is still in its infancy, early benchmarking of performance and accuracy shows promise.
-Figure~\ref{fig:biharm-diag-comp} shows the compute time for the biharmonic of increasing grid resolution between all three implementations, with C\textsc{++} showing similar performance to M\textsc{atlab} and it is likely that further performance improvement could be achieved with further refinement. The Eigen library's sparse implementation is similar to M\textsc{atlab}'s in that it uses CSC format sparse matrices. Where they differ is in the assembly phase, where Eigen allows for matrices to be assembled using "triplet"\footnote{in the format \texttt{value, x-coordinate, and y-coordinate}} after which the matrix is "finalised", thus avoiding any memory reallocation. 
+Figure~\ref{fig:biharm-diag-comp} shows the compute time for the biharmonic of increasing grid resolution between all three implementations, with C\textsc{++} showing similar performance to M\textsc{atlab} and it is likely that further performance improvement could be achieved with further refinement. The Eigen library's sparse implementation is similar to M\textsc{atlab}'s in that it uses CSC format sparse matrices. Where they differ is in the assembly phase, where Eigen allows for matrices to be assembled using "triplet"%
+\footnote{in the format \texttt{value, x-coordinate, and y-coordinate}}
+after which the matrix is "finalised", thus avoiding any memory reallocation. 
 
 \begin{figure}
     \centering
@@ -633,19 +646,20 @@ A case study taking the experimental admeasurements from \textcite{duran_experim
 	\centering
 	\begin{tabular}{c r r r}
 		\toprule
-		Mode                                                                              & \textbf{Experiment} & \textbf{Clamped} & \textbf{Adjusted} \\ \hline
-		1     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_1.pdf}}} & 73                  & 77               & 75                \\
-		2     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_2.pdf}}} & 148                 & 153              & 150               \\
-		3     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_3.pdf}}} & 376                 & 382              & 370               \\
-		4     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_4.pdf}}} & 431                 & 486              & 458               \\
-		5     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_5.pdf}}} & 559                 & 596              & 557               \\
-		6     \raisebox{-0.3em}{\frame{\includegraphics[width=1.5em]{img/chladni_6.pdf}}} & 910                 & 880              & 844               \\ \hline
+		Mode          & \textbf{Experiment} & \textbf{Clamped} & \textbf{Adjusted} \\ \hline
+		1\hspace{1em}\chladniOne & 73                  & 77               & 75                \\
+		2\hspace{1em}\chladniTwo & 148                 & 153              & 150               \\
+		3\hspace{1em}\chladniThr & 376                 & 382              & 370               \\
+		4\hspace{1em}\chladniFou & 431                 & 486              & 458               \\
+		5\hspace{1em}\chladniFiv & 559                 & 596              & 557               \\
+		6\hspace{1em}\chladniSix & 910                 & 880              & 844               \\ 
+        \bottomrule
 	\end{tabular}
 	\caption{Eigenfrequencies in Hz for experiment data in \textcite{duran_experimentally_2023} against a fully clamped and adjusted boundary conditions using \textsc{magpie}}
 	\label{tab:case-study}
 \end{table}
 
-In \textcite{duran_experimentally_2023}, a copper plate was put in a cantilever formation, and struck with a hammer. Table~\ref{tab:case-study} shows the frequencies recorded during that experiment alongside those generated by \textsc{magpie} under ideal constraints, with clamped
+In \textcite{duran_experimentally_2023}, a copper plate was put in a cantilever formation, and struck with a hammer. Table~\ref{tab:case-study} shows the frequencies recorded during that experiment alongside those generated by \textsc{magpie} under ideal constraints, with clamped%
 \footnote{With the elastic boundary constants, a clamped condition is rotational and displacement constraints set to a suitable high value. e.g. $10^{15}$}
 one one side and free on the remaining three sides,
 and with ``adjusted'' constraints to closer match the frequencies. In the adjusted case, the two elastic constraints are relieved to a smaller value, as ideal clamped conditions are unlikely to be achieved in experimental measurements.
