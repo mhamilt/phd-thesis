@@ -108,6 +108,7 @@ Beyond these subsets, \textcite{cook_remutualizing_2004} distinguishes between \
 
 Finally, it is worth reflecting that all musical instruments involve physical interaction and could therefore be described as inherently haptic. Even the theremin, often cited as an exception, requires specific bodily movement, which may be interpreted as a form of kinaesthetic feedback. While this thesis avoids the ontological implications of such claims, the term 'haptic feedback' is used here to describe design intent.  
 
+
 \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{img/drawing-jack_forces.pdf}\\[1ex]
@@ -118,18 +119,29 @@ Finally, it is worth reflecting that all musical instruments involve physical in
 
 \section{Harpsichord Mechanics}
 
-% \begin{figure}
-%     \centering
-%     \frame{\includegraphics[width=1\linewidth]{img/drawing-3-key-mechanism.pdf}}
-%     \caption{Single–manual, two–register action as used on the 1547 Alessandro Trasuntino and on the model interfaces.}
-%     \label{fig:mechanism}
-% \end{figure}
+\begin{figure}
+    \centering
+    \frame{\includegraphics[width=1\linewidth]{img/drawing-3-key-mechanism.pdf}}
+    \caption{Single–manual, two–register action as used on the 1547 Alessandro Trasuntino and on the model interfaces.}
+    \label{fig:mechanism}
+\end{figure}
 
 The harpsichord emerged in the latter half of the fourteenth century, its design partly derived from what contemporary sources termed the ``eschaquier'' or ``eschequier'' \cite{koster_keyboard_1994,dewhirst_stringed_2016}, and from the plucking action of the psaltery \cite{campbell_musician_1987}.  
 
-At the core of the instrument lies a simple plucking mechanism based on a second–class lever: depression of the key lifts a \emph{jack}, which drives a plectrum upward to pluck a string. Historically, plectra were most often made of quill, though leather was also used.  Each jack is a two–part wooden element consisting of a \emph{body} and a pivoting \emph{tongue}. The plectrum is wedged into a slot on the tongue, which is attached to the body by a pin. A tapered tongue and a correspondingly tapered recess allow the tongue to return to an upright position against a spring—commonly a strip of brass, though quill or boar hair were sometimes employed \cite{tagliavini_clavicembali_1987}.  As the jack rises, the plectrum presses laterally against the string until it slips past and releases it. The resisting force of the quill is relatively constant, so the amplitude of the pluck—and therefore the volume of the note—is largely fixed, a defining characteristic of the harpsichord’s dynamics.
+At the core of the instrument lies a simple plucking mechanism (Figure~\ref{fig:mechanism}) based on a second–class lever: depression of the key lifts a \emph{jack}, which drives a plectrum upward to pluck a string. Historically, plectra were most often made of quill, though leather was also used.  Each jack is a two–part wooden element consisting of a \emph{body} and a pivoting \emph{tongue}. The plectrum is wedged into a slot on the tongue, which is attached to the body by a pin. A tapered tongue and a correspondingly tapered recess allow the tongue to return to an upright position against a spring—commonly a strip of brass, though quill or boar hair were sometimes employed \cite{tagliavini_clavicembali_1987}.  As the jack rises, the plectrum presses laterally against the string until it slips past and releases it. The resisting force of the quill is relatively constant, so the amplitude of the pluck—and therefore the volume of the note—is largely fixed, a defining characteristic of the harpsichord’s dynamics.
+
+\begin{figure}[!b]
+    \centering
+    % \includegraphics[width=0.75\linewidth]{img/drawing-jack_forces.pdf}\\[1ex]
+    % \includegraphics[width=0.75\linewidth]{img/film-strip.jpeg}
+    
+    \caption{Forces acting on the jack during plucking and release (adapted from \textcite[Figure~1.7]{perng_physical_2012}) alongside a high–speed photo series (1000~fps) of jack displacement.}
+    \label{fig:jack-forces}
+\end{figure}
 
 By the sixteenth century, it was common for Italian harpsichords to employ more than one string per key, each with its own jack. These jacks were arranged in rows and staggered in height so that, over the key’s travel, each register was plucked sequentially rather than simultaneously \cite{veroli_optimising_2012}. Accurate detection of the plucking event, therefore, requires measuring the displacement of each jack individually, rather than only the key motion, owing to subtle hand–crafted variations across the keyboard. Fig. \ref{fig:jack-forces} depicts snapshots of the plucking mechanism, highlighting the jack mechanics and the jack-string interaction.
+
+
 
 
 % \begin{figure}[!t]
