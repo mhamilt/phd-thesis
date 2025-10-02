@@ -566,8 +566,11 @@ All signals terminate at a microcontroller that samples analogue inputs and cont
     \label{fig:system-block-diagram}
 \end{figure}
 
-\paragraph{Sensor Board} Each board measures vertical jack displacement. Distributing sensors across multiple boards reduced cost, eased installation, and allowed coarse adjustment in both stand-off and lateral centring over seven jacks. We kept sensor–MUX traces short to minimise noise. Per board:
-\begin{itemize}
+\paragraph{Sensor Board} Each board measures vertical jack displacement. Distributing sensors across multiple boards reduced cost, eased installation, and allowed coarse adjustment in both stand-off and lateral centring over seven jacks. We kept sensor–MUX traces short to minimise noise. 
+
+Per board:
+
+\begin{itemize}[itemsep=0pt, parsep=0pt, topsep=1em, partopsep=0pt]
     \item 7 QRE1113 optical sensors
     \item 7 100~$\Omega$ resistors and 7 10~k$\Omega$ resistors (later reduced to one shared resistor per board)
     \item 1 Texas Instruments \texttt{CD4051BE} multiplexer
@@ -576,14 +579,14 @@ All signals terminate at a microcontroller that samples analogue inputs and cont
 
 \begin{figure}
     \centering
-    \includesvg[inkscapelatex=false, width=1\linewidth]{img/pcb_sensor_schematic_v1.svg}\\
+    \includegraphics[width=0.85\linewidth,angle=270]{img/pcb_controller_schematic_v1.pdf}
         
-    \bigskip
-    
-    \includegraphics[width=0.75\linewidth]{img/mark-1-pcbs.jpg}    
-    \caption{Mark I sensor board schematic (Top) and in situ (Bottom). `\texttt{D}' = RGB LED; `\texttt{Q}' = optical sensor; `\texttt{C}' = MUX channel. Labels indicate current direction. Daisy-chain ribbon cables connect \texttt{Input}/\texttt{Output} headers (Figure~\ref{fig:sensor-schematic-1}). The multicolour loom carries each board’s \texttt{SIG}; the green loom is the unused \texttt{INT} later tied to \texttt{GND}.}
-    \label{fig:sensor-schematic-1}
-    \label{fig:mark-1-pcbs}
+    % \bigskip
+        
+    \includesvg[inkscapelatex=false, width=1\linewidth]{img/pcb_sensor_schematic_v1.svg}\\        
+    \caption{Mark I controller board (Top) sensor board (Centre) schematics and the sensor boards in situ (Bottom). `\texttt{D}' = RGB LED; `\texttt{Q}' = optical sensor; `\texttt{C}' = MUX channel. Labels indicate current direction. Daisy-chain ribbon cables connect \texttt{Input}/\texttt{Output} headers (Figure~\ref{fig:sensor-schematic-1}). The multicolour loom carries each board’s \texttt{SIG}; the green loom is the unused \texttt{INT} later tied to \texttt{GND}.}
+    \label{fig:sensor-schematic-1}    
+    \label{fig:controller-schematic-1}
 \end{figure}
 
 \noindent
@@ -599,66 +602,76 @@ Figure~\ref{fig:sensor-schematic-1} shows the sensor board schematic. The analog
 Ribbon cables linked \texttt{Input}/\texttt{Output} between boards prior to installation; the assembly was fitted as a single chain. Each board’s \texttt{SIG} was brought separately to the controller (Figure~\ref{fig:controller-schematic-1}). The same 3D-printed baffles used on the prototype eliminated cross-talk (Figure~\ref{fig:baffles}). As shown in Figure~\ref{fig:sensor-physical-pcbs}, the baffles, an adjustment plate, and a vertical back plate form a three-part bracket. Push-fit dovetails allow off-site printing and on-site assembly; two 3~mm holes in the PCB allow it to be sandwiched between back plate and baffle.
 
 \begin{figure}
-  \centering
-  \includegraphics[width=0.6\linewidth,trim={0 1.5cm 0 1.5cm},clip]{img/sensor-board-w-baffles.jpeg}
-    \\
-  \includegraphics[width=0.6\linewidth,trim={4.45cm 4.5cm 5.25cm 4cm},clip]{img/sensor-board-reverse-side.png} 
-  \caption{Sensor board front (top) with baffles and rear (bottom) after ribbon installation; \texttt{SIG}/\texttt{INT} not yet connected.}
-  \label{fig:sensor-physical-pcbs}
-\end{figure}
-
-\begin{figure}
     \centering
-    \includegraphics[width=0.6\linewidth,trim={0 2cm 0 2.5cm},clip]{img/baffles.png}
-    \caption{3D-printed baffles to prevent IR cross-talk.}
-    \label{fig:baffles}
+    \includegraphics[width=0.75\linewidth]{img/mark-1-pcbs.jpg}    
+    \caption{Sensor boards in situ. Daisy-chain ribbon cables connect \texttt{Input}/\texttt{Output} headers (Figure~\ref{fig:sensor-schematic-1}). The multicoloured cable loom carries each board’s \texttt{SIG}; the green loom is the unused \texttt{INT} later tied to \texttt{GND}.}
+    \label{fig:mark-1-pcbs}    
 \end{figure}
 
-\begin{figure}
-    \centering    
-    \label{fig:sensor-bracket}
-\end{figure}
+% \begin{figure}
+%   \centering
+%   \includegraphics[width=0.6\linewidth,trim={0 1.5cm 0 1.5cm},clip]{img/sensor-board-w-baffles.jpeg}
+%     \\
+%   \includegraphics[width=0.6\linewidth,trim={4.45cm 4.5cm 5.25cm 4cm},clip]{img/sensor-board-reverse-side.png} 
+%   \caption{Sensor board front (top) with baffles and rear (bottom) after ribbon installation; \texttt{SIG}/\texttt{INT} not yet connected.}
+%   \label{fig:sensor-physical-pcbs}
+% \end{figure}
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.6\linewidth,trim={0 2cm 0 2.5cm},clip]{img/baffles.png}
+%     \caption{3D-printed baffles to prevent IR cross-talk.}
+%     \label{fig:baffles}
+% \end{figure}
+
+% \begin{figure}
+%     \centering    
+%     \label{fig:sensor-bracket}
+% \end{figure}
 
 \paragraph{Controller Board}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\linewidth,angle=180]{img/pcb_controller_schematic_v1.pdf}
-    \caption{Mark I controller board schematic.}
-    \label{fig:controller-schematic-1}
-\end{figure}
+% \begin{figure}
+%     \centering
+    % \includegraphics[width=0.6\linewidth,angle=270]{img/pcb_controller_schematic_v1.pdf}
+    % \caption{Mark I controller board schematic.}
+    % \label{fig:controller-schematic-1}
+% \end{figure}
 
-The controller board reliably connects all components to the Nano BLE (Figure~\ref{fig:controller-schematic-1}). Components:
-\begin{itemize}
+The controller board reliably connects all components to the Nano BLE (Figure~\ref{fig:controller-schematic-1}). 
+
+Components:
+
+\begin{itemize}[itemsep=0pt, parsep=0pt, topsep=1em, partopsep=0pt]
     \item 1 Arduino Nano 33 BLE
     \item 1 Fujitsu MB85RS64 SPI FRAM
     \item 1 EC11 rotary encoder with integrated tactile switch
     \item 1 momentary reset switch
 \end{itemize}
 
-Power enters via barrel jack \texttt{J1}. Headers separate \texttt{RESET}, \texttt{ROTARY}, and \texttt{FRAM}; sensor connections are split as analogue \texttt{SIGNALS} and \texttt{SENSOR\_BOARD} (power, MUX select, LED data). On the silkscreen (Figure~\ref{fig:controller-board-1}), \texttt{SENSOR\_BOARD} is marked \texttt{FACEBOARD}. The Nano BLE is socketed to permit rapid swap if a unit fails or needs reflashing (no reliable museum internet). The front reset switch provides a reachable hard reset without power-cycling.
+Power enters via barrel jack \texttt{J1}. Headers separate \texttt{RESET}, \texttt{ROTARY}, and \texttt{FRAM}; sensor connections are split as analogue \texttt{SIGNALS} and \texttt{SENSOR\_BOARD} (power, MUX select, LED data). The Nano BLE is socketed to permit rapid swap if a unit fails or needs reflashing (no reliable museum internet). The front reset switch provides a reachable hard reset without power-cycling.
 
-\begin{figure}
-    \centering
-    \includegraphics[angle=-90,width=0.66\linewidth]{img/pcb-controller-board-v0.1.0.png}
-    \caption{Mark I controller board.}
-    \label{fig:controller-board-1}
-\end{figure}
+% \begin{figure}
+%     \centering
+%     \includegraphics[angle=-90,width=0.66\linewidth]{img/pcb-controller-board-v0.1.0.png}
+%     \caption{Mark I controller board.}
+%     \label{fig:controller-board-1}
+% \end{figure}
 
 Estimated power draw is $\sim$1.1~A at 5~V with inrush variation. Sensors stayed continuously powered in v1; future designs may modulate emitters dynamically \cite{mcpherson_portable_2013}.
 
 \subsection{Installation}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.7\linewidth]{img/installation.png}
-    \caption{Keyboard being installed for exhibition in the Oratory at San Colombano.}
-    \label{fig:installation}
-\end{figure}
-
 Once fabricated, the electronics were fitted to the instrument as a bespoke installation, with brackets and enclosures added to ease future servicing without constraining the design. Some of the geometry inevitably evolved during fitting—most notably the shift from horizontal to vertical sensor boards—showing how fabrication and assembly remained in dialogue until the last moment.
 
 Pre-assembly took place in Edinburgh, while the final build was completed in the NEMUS Lab in Bologna during the last week of October 2024; delivery and exhibition followed in the first week of November. Power and data were carried through a daisy-chained loom, while the \texttt{SIG} lines ran separately to reduce noise. Ribbon cables were hand-cut to length so they could be repositioned later, a decision that improved flexibility but added time—an insight folded into Mark II through the adoption of flat-flex cabling. The controller’s location was revised when the rear-chamber dimensions proved tighter than those assumed for the Mac mini housing the sampler.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{img/installation.png}
+    \caption{Keyboard being installed for exhibition in the Oratory at San Colombano.}
+    \label{fig:installation}
+\end{figure}
 
 Fitting the keyframe required temporarily removing the keys. Brackets were secured to the underside with round-head self-tappers and left slightly loose for coarse positioning; final alignment was completed in firmware. Each jack was prepared with a varnished short side for better sticker adhesion, the gradients were trimmed to length, and the free travel of every jack was checked. Preliminary calibration took place before the keys were replaced, with outliers traced and corrected. A single clearance error blocked key travel entirely, forcing a 10 mm × 15 mm recess to be milled into each key (Figure~\ref{fig:milling}) and the leather pads refitted—an extra day's work, but one that informed later geometry and cabling changes adopted in Mark II.
 
@@ -666,27 +679,25 @@ Fitting the keyframe required temporarily removing the keys. Brackets were secur
   \centering
   \includegraphics[width=0.75\linewidth]{img/keys-milled.jpeg}\\
   \includegraphics[width=0.75\linewidth]{img/milled-keys.jpg} 
-  \caption{Keys after rough milling (top) and after squaring/finishing the recess (bottom).} 
+  \caption{Keys after rough milling (Top Right) and after squaring/finishing the recess (Bottom Right). Components and cabling concealed in the lower compartment (Left).} 
+  \label{fig:mac-mini}
   \label{fig:milling}
 \end{figure}
 
 For the first exhibition, a harpsichord sample library ran in Kontakt%
-\footnote{\href{https://www.native-instruments.com/en/products/komplete/samplers/kontakt-8/?srsltid=AfmBOorKUf43SoIxGBS2-GnXmKHHkgcfcfWRskpweDhLSG3FiF0qrf2w}{Kontakt webpage} (Accessed 31 Jan 2025)}
+\footnote{\href{https://www.native-instruments.com/en/products/komplete/samplers/kontakt-8/?srsltid=AfmBOorKUf43SoIxGBS2-GnXmKHHkgcfcfWRskpweDhLSG3FiF0qrf2w}{Kontakt webpage} (Accessed: 31 Jan 2025)}
 on a Mac mini housed in the lower compartment; cables were routed through hidden holes (Figure~\ref{fig:mac-mini}). An iPad exposed controls for tuning, voicing, and stop selection.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.6\linewidth,trim={0 5cm 0 0},clip]{img/mac-mini.jpg}
-    \caption{Components and cabling concealed in the lower compartment.}
-    \label{fig:mac-mini}
-\end{figure}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.5\linewidth,trim={0 5cm 0 0},clip]{img/mac-mini.jpg}
+%     \caption{Components and cabling concealed in the lower compartment.}
+%     \label{fig:mac-mini}
+% \end{figure}
 
 \subsection{Calibration}
 
 The rotary encoder selects a key, edits thresholds, and saves to FRAM. Defaults are mid-range; each sensor is plotted against its threshold (Figure~\ref{fig:serial_monitor}) and adjusted until the threshold is crossed only at the pluck. LEDs identify the active key and report state; red indicates readings near ADC rails (misalignment/fault).
-
-
-
 
 \section{Stage 3}
 
@@ -750,17 +761,17 @@ A lightweight wrapper around the Adafruit SPI-FRAM library%
 simplified read/write operations.
 
 \begin{table}
-    \centering
-    \begin{tabular}{|l|l|r|l|}
-        \hline
-        \textbf{Address} & \textbf{Field Name}     & \textbf{Size} & \textbf{C Type}        \\ \hline
-        \texttt{0x00}    & Pluck Chunk ID          & 4             & \texttt{uint32\_t} \\ \hline
-        \texttt{0x04}    & Pluck Threshold Chunk   & 98            & \texttt{uint16\_t[49]} \\ \hline
-        \texttt{0x66}    & Release Chunk ID        & 4             & \texttt{uint32\_t} \\ \hline
-        \texttt{0x6A}    & Release Threshold Chunk & 98            & \texttt{uint16\_t[49]} \\ \hline
-    \end{tabular}
-    \caption{Calibration data layout in non-volatile memory.}
-    \label{tab:fram-structure}
+	\centering
+	\begin{tabular}{|l|l|r|l|}
+		\hline
+		\textbf{Address} & \textbf{Field Name}     & \textbf{Size} & \textbf{C Type}        \\ \hline
+		\texttt{0x00}    & Pluck Chunk ID          & 4             & \texttt{uint32\_t}     \\ \hline
+		\texttt{0x04}    & Pluck Threshold Chunk   & 98            & \texttt{uint16\_t[49]} \\ \hline
+		\texttt{0x66}    & Release Chunk ID        & 4             & \texttt{uint32\_t}     \\ \hline
+		\texttt{0x6A}    & Release Threshold Chunk & 98            & \texttt{uint16\_t[49]} \\ \hline
+	\end{tabular}
+	\caption{Calibration data layout in non-volatile memory.}
+	\label{tab:fram-structure}
 \end{table}
 
 \paragraph{Calibration workflow.}
