@@ -478,9 +478,11 @@ Light-dependent resistors placed at the rail (above the jacks) produced a usable
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.3\linewidth]{img/qre1113-schematic.pdf}
-  \caption{Optical sensor in a simple voltage-divider circuit.}
+  % \includegraphics[width=0.3\linewidth]{img/qre1113-schematic.pdf}
+  \includegraphics[width=1\linewidth]{img/simple-schematic-joined.pdf}
+  \caption{Optical sensor in a simple voltage-divider circuit (Left) and its application in the prototype sensor board schematic (Right).}
   \label{fig:simple-schematic}
+  \label{fig:prototype-pcb}
 \end{figure}
 
 \paragraph{Optical reflectance (final choice).}
@@ -496,16 +498,16 @@ Early optical trials also revealed cross-talk: infrared light reflected from adj
 
 \subsection{Prototype PCB}
 
-\begin{figure}
-    \centering
-    \includesvg[inkscapelatex=false,width=1\linewidth]{img/pcb-miniboard-schematic.svg} 
+% \begin{figure}
+%     \centering
+%     \includesvg[inkscapelatex=false,width=1\linewidth]{img/pcb-miniboard-schematic.svg} 
             
-    \bigskip
+%     \bigskip
     
-    \includegraphics[width=0.85\linewidth]{img/pcb-prototype-mini-board-bw.png}
-    \caption{PCB schematic of the prototype sensor board and its board silkscreen.}
-    \label{fig:prototype-pcb}
-\end{figure}
+%     \includegraphics[width=0.85\linewidth]{img/pcb-prototype-mini-board-bw.png}
+%     \caption{PCB schematic of the prototype sensor board and its board silkscreen.}
+%     \label{fig:prototype-pcb}
+% \end{figure}
 
 A small EAGLE PCB (Figure~\ref{fig:prototype-pcb}) provided simple divider wiring, power, and header breakout to a microcontroller, primarily to validate mounting and pitch spacing. The original plan was a right-angle mount (bending leads; Figure~\ref{fig:prototype-pcb-mount}) so the board could sit on an adjustable 3D-printed bracket at the wrestplank side, setting the sensor–gradient gap. In practice, the optical leads were fragile, and an end-mount approach à la \textcite{mcpherson_portable_2013} was too alignment-sensitive on the jack’s 4.30~mm edge: tiny angular errors produced large signal differences. We therefore switched to sensors soldered \emph{flush} to the PCB and oriented the PCB vertically.
 
@@ -520,11 +522,7 @@ A small EAGLE PCB (Figure~\ref{fig:prototype-pcb}) provided simple divider wirin
 The vertical redesign (Figure~\ref{fig:dual-pcb}) doubles the sensor layout to accommodate wiring from a single side on the 3-key rig, while keeping identical vertical positioning for the front and rear registers. This minimises signal-range differences and avoids separate offset gradients or separate PCBs. A two-piece 3D-printed bracket holds the board vertically and provides coarse gap adjustment.
 
 \begin{figure}
-    \centering
-    \includesvg[inkscapelatex=false,width=1\linewidth]{img/pcb-dual-sensor-board.svg} \\
-            
-    \bigskip
-    
+    \centering    
     \includesvg[inkscapelatex=false,width=0.9\linewidth]{img/pcb-dual-sensor-board-traces.svg}
     \caption{Vertically oriented prototype sensor PCB schematic (top) and traces (bottom).}
     \label{fig:dual-pcb}
