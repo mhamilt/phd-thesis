@@ -463,7 +463,7 @@ To prototype the target surface, gradients were initially printed on paper and t
 \footnote{Coala, 1D 100 Gloss P, white gloss, 300 g/m\textsuperscript{2}, 100 µm, 1370 mm $\times$ 50 m}
 using an HP Latex 115 and cut on a Summa 150 from vector outlines. The print-and-cut process scaled cleanly from six prototype jacks to the ninety-eight required for Mark I, satisfying the scalability criterion. Short “gradient-only” strips sometimes curled at their ink edges or caught against neighbouring parts; full-length stickers provided greater adhesion and kept heavy ink away from the edges, eliminating binding.
 
-Early optical trials also revealed cross-talk: infrared light reflected from adjacent jacks contaminated nearby sensors. We designed matte, dark-pigmented PLA baffles to wrap each device and block stray light. Printed on a Bambu X1, these baffles (Figures~\ref{fig:baffles},~\ref{fig:sensor-physical-pcbs}) removed interference entirely and became part of the standard mounting.
+Early optical trials also revealed cross-talk: infrared light reflected from adjacent jacks contaminated nearby sensors. We designed matte, dark-pigmented PLA baffles to wrap each device and block stray light. Printed on a Bambu X1, these baffles (Figures~\ref{fig:sensor-physical-pcbs}) removed interference entirely and became part of the standard mounting.
 
 \begin{figure}
   \centering
@@ -611,14 +611,15 @@ Figure~\ref{fig:sensor-schematic-1} shows the sensor board schematic. The analog
 
 Ribbon cables linked \texttt{Input}/\texttt{Output} between boards prior to installation; the assembly was fitted as a single chain. Each board’s \texttt{SIG} was brought separately to the controller (Figure~\ref{fig:controller-schematic-1}). The same 3D-printed baffles used on the prototype eliminated cross-talk (Figure~\ref{fig:baffles}). As shown in Figure~\ref{fig:sensor-physical-pcbs}, the baffles, an adjustment plate, and a vertical back plate form a three-part bracket. Push-fit dovetails allow off-site printing and on-site assembly; two 3~mm holes in the PCB allow it to be sandwiched between back plate and baffle.
 
-% \begin{figure}
-%   \centering
-%   \includegraphics[width=0.6\linewidth,trim={0 1.5cm 0 1.5cm},clip]{img/sensor-board-w-baffles.jpeg}
-%     \\
-%   \includegraphics[width=0.6\linewidth,trim={4.45cm 4.5cm 5.25cm 4cm},clip]{img/sensor-board-reverse-side.png} 
-%   \caption{Sensor board front (top) with baffles and rear (bottom) after ribbon installation; \texttt{SIG}/\texttt{INT} not yet connected.}
-%   \label{fig:sensor-physical-pcbs}
-% \end{figure}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.75\linewidth,trim={0 1.5cm 0 1.5cm},clip]{img/sensor-board-w-baffles.jpeg}
+    \\
+  % \includegraphics[width=0.6\linewidth,trim={4.45cm 4.5cm 5.25cm 4cm},clip]{img/sensor-board-reverse-side.png} 
+  \caption{Sensor board front with baffles.}
+  \label{fig:sensor-physical-pcbs}
+  \label{fig:baffles}
+\end{figure}
 
 % \begin{figure}
 %     \centering
@@ -743,7 +744,7 @@ Across 10\,000 iterations, the sampling loop (including multiplexing and filteri
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\linewidth]{img/plot-jack-states.pdf}
+    \includegraphics[width=1\linewidth]{img/plot-jack-states-wide.pdf}
     \caption{Two-threshold hysteresis: full press–release on an Arduino Nano~33~BLE (12-bit ADC). \texttt{PLUCKED} begins at \texttt{pluck\_threshold}; \texttt{RELEASED} returns at the lower \texttt{release\_threshold}.}
     \label{fig:jack-states}
 \end{figure}
@@ -756,7 +757,7 @@ A lightweight wrapper around the Adafruit SPI-FRAM library%
 \footnote{Adafruit SPI FRAM Driver v2.6.2\\ \url{https://github.com/adafruit/Adafruit_FRAM_SPI/releases/tag/2.6.2}}
 simplified read/write operations.
 
-\begin{table}
+\begin{table}[b]
 	\centering
 	\begin{tabular}{|l|l|r|l|}
 		\hline
