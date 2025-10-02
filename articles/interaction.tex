@@ -286,13 +286,25 @@ From the outset, one guiding principle of the hardware design was that the keybo
 Beyond the functional demands already outlined in Section~\ref{sec:design-constraints}, the instrument’s external form had to sustain the visual language of a sixteenth-century harpsichord so that visitors would immediately read it as part of the collection rather than as an electronic artefact.  
 This requirement introduced an additional layer of restriction: every sensing or control element needed to be concealed or visually reconciled with historical practice, while the overall proportions and detailing had to echo Italian models of the period.
 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{img/horizons-mcgurk-1x2.png}
+    % \includegraphics[width=0.8\linewidth]{img/horizons-mcgurk-2x2.png}
+    \caption{McGurk Effect as demonstrated on \citetitle{horizon_seeing_2010}. The left-hand side of the video shows the mouth movements for ``fa'' and the right-hand shows ``ba''. Copyright BBC (2010).}
+    \label{fig:placeholder}
+\end{figure}
+
 The physical and visual presentation of an instrument might not be the primary concern for a performer, but in the context of a museum exhibition, it is vital to the visitor experience, as demonstrated by \textcite{mcalpine_sampling_2014}. Since the Tagliavini collection hosts primarily early plucked stringed keyboards of Italian origin, the keyboard layout was deliberately modelled after early Italian harpsichords. The aesthetics of the instrument were therefore carefully considered during the design process.
 
 In contrast, many haptic DMI projects place most of the effort into the design and functionality of electronic components, while paying comparatively little attention to visual stimulus. For keyboard interfaces, this is in part due to the limited scope of key modelling \cite{gillespie_haptic_1996,lozada_modelisations_2007,timmermans_multibody-based_2020}, whose form already diverges significantly from performer expectations. For actuated haptic systems, there is also a question of where to place the electronics. A combined approach of realistic haptics and aesthetics presents a challenge: commercial MIDI keyboards are differentiated from acoustic keyboards by the absence of strings, while the interfaces presented here employ strings as both functional haptic mechanisms and visual features. Even if strings were no longer required mechanically, their presence would still be necessary as a visual differentiator; otherwise, the interface risks resembling existing commercial offerings. This then raises the practical issue of electronic footprint, as haptic systems and actuators often require components that extend beyond the confines of the instrument body \cite{mcpherson_augmented_2010, schmidt_sparksichord_2025}.
 
+
 The importance of visual stimulus should not be underestimated, particularly for musicians. Studies by \textcite{fritz_player_2012, fritz_soloist_2014, fritz_listener_2017} (see Section~\ref{sec:reproduction-or-renovation}) show that visual stimuli can bias auditory perception and therefore should be carefully restricted in experimental settings. \textcite{tsay_sight_2013} further asserts that visual appearance influences quality assessment by both ``novices and experts.'' In all these studies, the visual stimulus was treated as an undesirable influence. This phenomenon, akin to a `musical instrument McGurk effect' \cite{mcgurk_hearing_1976}, is one reason why the electronics in this project were deliberately concealed from view. 
 
-The McGurk effect is a well-known example of cross-modal perception. It typically manifests as an aural illusion: when two videos show a mouth pronouncing ``ba'' and ``fa'' but the audio always contains ``ba,'' the sound heard depends on the mouth movement observed \cite{horizon_seeing_2010}. The effect has been proposed to extend beyond speech into the domain of musical visual cues \cite{saidana_mcgurk_1990}. Its relevance to musicians remains debated: while \textcite{proverbio_skilled_2016} and \textcite{alsius_forty_2018} argue that musicians are less susceptible, \textcite{politzer_mcgurk_2019} refutes this, concluding that musicians may be equally or even more vulnerable. Taken together with \textcite{tsay_sight_2013, fritz_player_2012, fritz_soloist_2014, fritz_listener_2017}, these results highlight the non-negligible influence of visual cues on auditory perception.
+The McGurk effect is a well-known example of cross-modal perception. It typically manifests as an aural illusion: when two videos show a mouth pronouncing ``ba'' and ``fa'' but the audio always contains ``ba,'' the sound heard depends on the mouth movement observed \cite{horizon_seeing_2010} (Figure~\ref{fig:mcgurk}). \footnote{Timestamp 00:12:54 of \textcite{horizon_seeing_2010}} 
+
+The effect has been proposed to extend beyond speech into the domain of musical visual cues \cite{saidana_mcgurk_1990}. Its relevance to musicians remains debated: while \textcite{proverbio_skilled_2016} and \textcite{alsius_forty_2018} argue that musicians are less susceptible, \textcite{politzer_mcgurk_2019} refutes this, concluding that musicians may be equally or even more vulnerable. Taken together with \textcite{tsay_sight_2013, fritz_player_2012, fritz_soloist_2014, fritz_listener_2017}, these results highlight the non-negligible influence of visual cues on auditory perception.
 
 Instead of attempting to suppress this influence, the present design seeks to leverage it. Given the extensive research into modelling and recreating piano action \cite{cadoz_modular_1990, gillespie_haptic_1996, lozada_modelisations_2007, timmermans_multibody-based_2020}, the visual component may provide the final persuasive element necessary for acceptance, much like how visual perception shapes judgments of musical performance. The aesthetics of the interface thus enhance its likelihood of being perceived as an `authentic' musical instrument. Building on the observations of \textcite{mcalpine_sampling_2014}, the design asks to what degree visual stimuli can be used to ``sell'' the experience of playing a DMI. When combined with a passive haptic response, aesthetics may provide sufficient influence to shape the player’s perception and lower the barriers to a convincing musical experience.
 
@@ -329,7 +341,7 @@ Reed switches and Hall sensors were tested with small magnets embedded in the ja
 \paragraph{LDR near the jack rail.}
 Light-dependent resistors placed at the rail (above the jacks) produced a usable signal—less light as the jack rose—but were highly sensitive to ambient illumination. Mitigating this would have required continual re-balancing or a dedicated light-balance circuit. Mounting the devices outside the cavity also conflicted with the requirement for concealment. Nevertheless, these trials suggested that a \emph{local} light source, if fully enclosed, could be viable.
 
-\clearpage
+% \clearpage
 \begin{figure}
 \centering
 \begin{tikzpicture}[
@@ -464,6 +476,12 @@ Light-dependent resistors placed at the rail (above the jacks) produced a usable
 \label{fig:timeline-vertical}
 \end{figure}
 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.3\linewidth]{img/qre1113-schematic.pdf}
+  \caption{Optical sensor in a simple voltage-divider circuit.}
+  \label{fig:simple-schematic}
+\end{figure}
 
 \paragraph{Optical reflectance (final choice).}
 Building on \textcite{mcpherson_portable_2013, moro_platform_2020}, we adopted the Fairchild QRE1113
@@ -476,17 +494,9 @@ using an HP Latex 115 and cut on a Summa 150 from vector outlines. The print-and
 
 Early optical trials also revealed cross-talk: infrared light reflected from adjacent jacks contaminated nearby sensors. We designed matte, dark-pigmented PLA baffles to wrap each device and block stray light. Printed on a Bambu X1, these baffles (Figures~\ref{fig:sensor-physical-pcbs}) removed interference entirely and became part of the standard mounting.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.3\linewidth]{img/qre1113-schematic.pdf}
-  \caption{Optical sensor in a simple voltage-divider circuit.}
-  \label{fig:simple-schematic}
-\end{figure}
-
-
 \subsection{Prototype PCB}
 
-\begin{figure}[!b]
+\begin{figure}
     \centering
     \includesvg[inkscapelatex=false,width=1\linewidth]{img/pcb-miniboard-schematic.svg} 
             
@@ -509,7 +519,7 @@ A small EAGLE PCB (Figure~\ref{fig:prototype-pcb}) provided simple divider wirin
 
 The vertical redesign (Figure~\ref{fig:dual-pcb}) doubles the sensor layout to accommodate wiring from a single side on the 3-key rig, while keeping identical vertical positioning for the front and rear registers. This minimises signal-range differences and avoids separate offset gradients or separate PCBs. A two-piece 3D-printed bracket holds the board vertically and provides coarse gap adjustment.
 
-\begin{figure}[!b]
+\begin{figure}
     \centering
     \includesvg[inkscapelatex=false,width=1\linewidth]{img/pcb-dual-sensor-board.svg} \\
             
@@ -522,19 +532,19 @@ The vertical redesign (Figure~\ref{fig:dual-pcb}) doubles the sensor layout to a
 
 \section{Stage 2}\label{sec:mark-1}
 
-After the initial prototyping, the first complete interface, \emph{Mark I}, was completed for delivery to the Tagliavini collection. Development proceeded modularly (mechanical hardware, electronics, audio software; and within electronics, hardware vs.\ firmware), allowing mechanical construction while electronic prototyping continued. 
-
-\subsection{Keyboard design}
-
-The mechanical design was developed in close collaboration with luthier Roberto Livi and curator Catalina Vicens, guided by the priorities outlined in Table~\ref{tab:constraints-choices}: faithfulness to sixteenth-century practice, robustness for public use, and a compact footprint.  
-Livi fabricated the instrument in his Pesaro workshop, adopting a restrained rectangular frame (Figure~\ref{fig:compare}) that answered the gallery’s spatial limits while leaving generous internal cavities for the sensing system (Figure~\ref{fig:mark-1-cs}).  
-
 \begin{figure}
     \centering
     \includegraphics[width=0.9\linewidth]{img/drawing-mark-1-model-cross-section.pdf}
     \caption{Cross-section of keyboard mechanics by Roberto Livi. The original design reserved space for a horizontal circuit board of 50\,mm $\times$ 6\,mm.}
     \label{fig:mark-1-cs}
 \end{figure}
+
+After the initial prototyping, the first complete interface, \emph{Mark I}, was completed for delivery to the Tagliavini collection. Development proceeded modularly (mechanical hardware, electronics, audio software; and within electronics, hardware vs.\ firmware), allowing mechanical construction while electronic prototyping continued. 
+
+\subsection{Keyboard design}
+
+The mechanical design was developed in close collaboration with luthier Roberto Livi and curator Catalina Vicens, guided by the priorities outlined in Table~\ref{tab:constraints-choices}: faithfulness to sixteenth-century practice, robustness for public use, and a compact footprint.  
+Livi fabricated the instrument in his Pesaro workshop, adopting a restrained rectangular frame (Figure~\ref{fig:compare}) that answered the gallery’s spatial limits while leaving generous internal cavities for the sensing system (Figure~\ref{fig:mark-1-cs}).  
 
 Traditional materials were employed throughout: a walnut wrestplank, chestnut key levers, boxwood and ebony key covers, and a cypress case and soundboard; the jacks were beech with brass springs and seagull-feather plectra.  
 The design drew on the 1547 Alessandro Trasuntino harpsichord at San Colombano—particularly its two 8′ choirs—while replacing the historical short octave with a standard layout, as requested by the curator, to simplify mapping to sampled sounds. This modernised geometry, combined with the rectangular poplar frame, also eased installation of optical sensors beneath the wrestplank without compromising tactile or visual authenticity (see Figure~\ref{fig:mark-1-bottom}). Two brass choirs were tensioned to reproduce plucking resistance, and felt strips were added to damp residual vibration.
@@ -767,19 +777,6 @@ A lightweight wrapper around the Adafruit SPI-FRAM library%
 \footnote{Adafruit SPI FRAM Driver v2.6.2\\ \url{https://github.com/adafruit/Adafruit_FRAM_SPI/releases/tag/2.6.2}}
 simplified read/write operations.
 
-\begin{table}[b]
-	\centering
-	\begin{tabular}{|l|l|r|l|}
-		\hline
-		\textbf{Address} & \textbf{Field Name}     & \textbf{Size} & \textbf{C Type}        \\ \hline
-		\texttt{0x00}    & Pluck Chunk ID          & 4             & \texttt{uint32\_t}     \\ \hline
-		\texttt{0x04}    & Pluck Threshold Chunk   & 98            & \texttt{uint16\_t[49]} \\ \hline
-		\texttt{0x66}    & Release Chunk ID        & 4             & \texttt{uint32\_t}     \\ \hline
-		\texttt{0x6A}    & Release Threshold Chunk & 98            & \texttt{uint16\_t[49]} \\ \hline
-	\end{tabular}
-	\caption{Calibration data layout in non-volatile memory.}
-	\label{tab:fram-structure}
-\end{table}
 
 \paragraph{Calibration workflow.}
 During calibration, the selected key streamed raw values over the serial connection (Figure~\ref{fig:serial_monitor}) while the encoder adjusted thresholds in real time.  
@@ -796,22 +793,29 @@ followed by fine adjustments in situ with guidance from the curator-performer.
 \end{figure}
 
 
-
 \section{Stage 4}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.7\linewidth]{img/mark2.png}\\[1ex]
-    \includegraphics[width=0.7\linewidth,trim={0 20cm 0 .5cm},clip]{img/mark-2-front-internal.jpeg}
-    \caption{\emph{Mark II}: overall view (top) and front-register sensor boards behind the nameplate (bottom).}
-    \label{fig:mark-2}
-\end{figure}
+
+
 
 Building on the lessons of \emph{Mark I}, a second interface—\emph{Mark II}—was commissioned by NEMUS for laboratory research with numerically simulated physical models and whole multi-register operation. Where the first build prioritised public robustness and single-register clarity, the new instrument consolidated the sensing and firmware refinements developed in Stage~3 and set out to demonstrate a complete dual-register system.  
 Parametric Python scripts generated EAGLE footprints from the measured jack pitch, speeding the layout of new circuit boards.
 
 Mechanically, \emph{Mark II} adopted forty-five keys rather than forty-nine, following the short-octave layout found in Italian plucked keyboards of the sixteenth to eighteenth centuries \cite[p.~46]{tagliavini_clavicembali_1987}.  
 The mapping is handled in firmware, allowing the hardware to retain historical proportions without constraining later experiments with tuning or sample mapping.
+\begin{table}
+	\centering
+	\begin{tabular}{|l|l|r|l|}
+		\hline
+		\textbf{Address} & \textbf{Field Name}     & \textbf{Size} & \textbf{C Type}        \\ \hline
+		\texttt{0x00}    & Pluck Chunk ID          & 4             & \texttt{uint32\_t}     \\ \hline
+		\texttt{0x04}    & Pluck Threshold Chunk   & 98            & \texttt{uint16\_t[49]} \\ \hline
+		\texttt{0x66}    & Release Chunk ID        & 4             & \texttt{uint32\_t}     \\ \hline
+		\texttt{0x6A}    & Release Threshold Chunk & 98            & \texttt{uint16\_t[49]} \\ \hline
+	\end{tabular}
+	\caption{Calibration data layout in non-volatile memory.}
+	\label{tab:fram-structure}
+\end{table}
 
 % \begin{figure}
     % \centering
@@ -819,6 +823,13 @@ The mapping is handled in firmware, allowing the hardware to retain historical p
     % \caption{Controller board, version~2.}
     % \label{fig:controller-schematic-2}
 % \end{figure}
+\begin{figure}[!b]
+    \centering
+    \includegraphics[width=0.7\linewidth]{img/mark2.png}\\[1ex]
+    \includegraphics[width=0.7\linewidth,trim={0 20cm 0 .5cm},clip]{img/mark-2-front-internal.jpeg}
+    \caption{\emph{Mark II}: overall view (top) and front-register sensor boards behind the nameplate (bottom).}
+    \label{fig:mark-2}
+\end{figure}
 
 Electronics were redesigned with maintainability in mind.  
 The new controller (Figure~\ref{fig:controller-schematic-2}, Page \pageref{fig:controller-schematic-2}) introduces keyed JST-PH ports for the FRAM, encoder, and reset switch, alongside flat-flex (FFC) headers for the sensor harness.  
