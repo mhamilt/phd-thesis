@@ -465,7 +465,7 @@ Early optical trials also revealed cross-talk: infrared light reflected from adj
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.5\linewidth]{img/qre1113-schematic.pdf}
+  \includegraphics[width=0.3\linewidth]{img/qre1113-schematic.pdf}
   \caption{Optical sensor in a simple voltage-divider circuit.}
   \label{fig:simple-schematic}
 \end{figure}
@@ -475,7 +475,10 @@ Early optical trials also revealed cross-talk: infrared light reflected from adj
 
 \begin{figure}[!b]
     \centering
-    \includesvg[inkscapelatex=false,width=0.85\linewidth]{img/pcb-miniboard-schematic.svg} \\
+    \includesvg[inkscapelatex=false,width=1\linewidth]{img/pcb-miniboard-schematic.svg} 
+            
+    \bigskip
+    
     \includegraphics[width=0.85\linewidth]{img/pcb-prototype-mini-board-bw.png}
     \caption{PCB schematic of the prototype sensor board and its board silkscreen.}
     \label{fig:prototype-pcb}
@@ -495,7 +498,10 @@ The vertical redesign (Figure~\ref{fig:dual-pcb}) doubles the sensor layout to a
 
 \begin{figure}[!b]
     \centering
-    \includesvg[inkscapelatex=false,width=0.9\linewidth]{img/pcb-dual-sensor-board.svg} \\
+    \includesvg[inkscapelatex=false,width=1\linewidth]{img/pcb-dual-sensor-board.svg} \\
+            
+    \bigskip
+    
     \includesvg[inkscapelatex=false,width=0.9\linewidth]{img/pcb-dual-sensor-board-traces.svg}
     \caption{Vertically oriented prototype sensor PCB schematic (top) and traces (bottom).}
     \label{fig:dual-pcb}
@@ -570,20 +576,25 @@ All signals terminate at a microcontroller that samples analogue inputs and cont
 
 \begin{figure}
     \centering
-    \includesvg[inkscapelatex=false, width=0.85\linewidth]{img/pcb_sensor_schematic_v1.svg}            
-        \caption{Mark I sensor board schematic. `\texttt{D}' = LEDs; `\texttt{Q}' = optical sensors; `\texttt{C}' = MUX channels. Labels indicate current direction.}
+    \includesvg[inkscapelatex=false, width=1\linewidth]{img/pcb_sensor_schematic_v1.svg}\\
+        
+    \bigskip
+    
+    \includegraphics[width=0.75\linewidth]{img/mark-1-pcbs.jpg}    
+    \caption{Mark I sensor board schematic (Top) and in situ (Bottom). `\texttt{D}' = RGB LED; `\texttt{Q}' = optical sensor; `\texttt{C}' = MUX channel. Labels indicate current direction. Daisy-chain ribbon cables connect \texttt{Input}/\texttt{Output} headers (Figure~\ref{fig:sensor-schematic-1}). The multicolour loom carries each board’s \texttt{SIG}; the green loom is the unused \texttt{INT} later tied to \texttt{GND}.}
     \label{fig:sensor-schematic-1}
+    \label{fig:mark-1-pcbs}
 \end{figure}
 
 \noindent
 Figure~\ref{fig:sensor-schematic-1} shows the sensor board schematic. The analogue \texttt{SIG} output is routed through the MUX but returns separately to the controller in v1 (to reserve board space for an unused MUX interrupt \texttt{INT}). MUX select lines \texttt{A}/\texttt{B}/\texttt{C} implement 3-bit channel selection (Table~\ref{tab:mux-encoding}).
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\linewidth]{img/mark-1-pcbs.jpg}
-    \caption{Mark I sensor boards in situ. Daisy-chain ribbon cables connect \texttt{Input}/\texttt{Output} headers (Figure~\ref{fig:sensor-schematic-1}). The multicolour loom carries each board’s \texttt{SIG}; the green loom is the unused \texttt{INT} later tied to \texttt{GND}.}
-    \label{fig:mark-1-pcbs}
-\end{figure}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.75\linewidth]{img/mark-1-pcbs.jpg}
+%     \caption{Mark I sensor boards in situ. Daisy-chain ribbon cables connect \texttt{Input}/\texttt{Output} headers (Figure~\ref{fig:sensor-schematic-1}). The multicolour loom carries each board’s \texttt{SIG}; the green loom is the unused \texttt{INT} later tied to \texttt{GND}.}
+%     \label{fig:mark-1-pcbs}
+% \end{figure}
 
 Ribbon cables linked \texttt{Input}/\texttt{Output} between boards prior to installation; the assembly was fitted as a single chain. Each board’s \texttt{SIG} was brought separately to the controller (Figure~\ref{fig:controller-schematic-1}). The same 3D-printed baffles used on the prototype eliminated cross-talk (Figure~\ref{fig:baffles}). As shown in Figure~\ref{fig:sensor-physical-pcbs}, the baffles, an adjustment plate, and a vertical back plate form a three-part bracket. Push-fit dovetails allow off-site printing and on-site assembly; two 3~mm holes in the PCB allow it to be sandwiched between back plate and baffle.
 
@@ -598,7 +609,7 @@ Ribbon cables linked \texttt{Input}/\texttt{Output} between boards prior to inst
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\linewidth,trim={0 2cm 0 2.5cm},clip]{img/baffles.png}
+    \includegraphics[width=0.6\linewidth,trim={0 2cm 0 2.5cm},clip]{img/baffles.png}
     \caption{3D-printed baffles to prevent IR cross-talk.}
     \label{fig:baffles}
 \end{figure}
@@ -784,15 +795,15 @@ Parametric Python scripts generated EAGLE footprints from the measured jack pitc
 Mechanically, \emph{Mark II} adopted forty-five keys rather than forty-nine, following the short-octave layout found in Italian plucked keyboards of the sixteenth to eighteenth centuries \cite[p.~46]{tagliavini_clavicembali_1987}.  
 The mapping is handled in firmware, allowing the hardware to retain historical proportions without constraining later experiments with tuning or sample mapping.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\linewidth]{img/pcb_controller_schematic_v2.pdf}
-    \caption{Controller board, version~2.}
-    \label{fig:controller-schematic-2}
-\end{figure}
+% \begin{figure}
+    % \centering
+    % \includegraphics[width=0.5\linewidth]{img/pcb_controller_schematic_v2.pdf}
+    % \caption{Controller board, version~2.}
+    % \label{fig:controller-schematic-2}
+% \end{figure}
 
 Electronics were redesigned with maintainability in mind.  
-The new controller (Figure~\ref{fig:controller-schematic-2}) introduces keyed JST-PH ports for the FRAM, encoder, and reset switch, alongside flat-flex (FFC) headers for the sensor harness.  
+The new controller (Figure~\ref{fig:controller-schematic-2}, Page \pageref{fig:controller-schematic-2}) introduces keyed JST-PH ports for the FRAM, encoder, and reset switch, alongside flat-flex (FFC) headers for the sensor harness.  
 Both connector types are asymmetric, preventing accidental reversal; the FFC ribbons also route neatly between the frame and outer case, making installation faster and tidier than in the previous loom-based arrangement.
 
 Sensor boards retained the seven-sensor pitch of \emph{Mark I}, a compromise that maximises firmware reuse and avoids wasting multiplexer channels.  
@@ -800,9 +811,14 @@ Boards at the ends of a register can simply leave unused sensors unpopulated rat
 
 \begin{figure}
     \centering
-    \includesvg[inkscapelatex=false,width=0.8\linewidth]{img/pcb_sensor_schematic_v2.svg}
-    \caption{Sensor board for \emph{Mark II}. RGB LEDs (\texttt{D}); optical sensors (\texttt{Q}); signal routing (\texttt{S}). The solder-pad junction assigns the muxed \texttt{SIG} to an \texttt{S} channel on the FFC.}
+    \includegraphics[width=0.8\linewidth]{img/pcb_controller_schematic_v2.pdf}            
+            
+    \bigskip
+    
+    \includesvg[inkscapelatex=false,width=1\linewidth]{img/pcb_sensor_schematic_v2.svg}
+    \caption{Updated controller board (Top) and sensor board (Bottom) schematics for \emph{Mark~II}. RGB LEDs (\texttt{D}); optical sensors (\texttt{Q}); signal routing (\texttt{S}). The solder-pad junction on the sensor board assigns the muxed \texttt{SIG} to an \texttt{S} channel on the FFC.}
     \label{fig:sensor-schematic-2}
+    \label{fig:controller-schematic-2}
 \end{figure}
 
 A small but significant refinement lies in the solder-pad junction on each board (Figure~\ref{fig:sensor-schematic-2}), which routes the multiplexed \texttt{SIG} to a defined ADC line via the FFC.  
