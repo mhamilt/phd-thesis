@@ -61,6 +61,27 @@ It diverges, however, in adopting an aesthetics-first approach: electronics are 
  
 \subsection{Haptics Terminology}
 
+\begin{figure}
+    \begin{center}
+        \begin{minipage}{0.66\linewidth}
+            \begin{verbatim}
+                Haptic Feedback
+                ├── Mechanical        
+                │   ├── Tactile      
+                │   │   └── Vibrotactile
+                │   └── Kinaesthetic
+                │       └── Force
+                ├── Thermal
+                ├── Electrical
+                │   └── Electrotactile
+                ├── Ultrasonic
+                ...
+            \end{verbatim}
+        \end{minipage}
+    \end{center}
+    \caption{An incomplete, informal taxonomy of haptic feedback.}
+    \label{fig:taxonomy}
+\end{figure}
 
 There is some confusion in the usage of terminology around haptic interfaces, as seen in the DMI communities, such as NIME. Much of this terminology takes its cues from the field of Human-Computer Interaction (HCI), where terms such as \emph{haptic}, \emph{tactual}, \emph{tactile}, \emph{vibrotactile}, \emph{kinaesthetic}, \emph{proprioception}, and \emph{force feedback} are all in circulation, often without strict or consistent definition. This section, therefore, seeks to define the relevant terms as they apply to musical instrument interfaces, to bring clarity to the remainder of the thesis.  
 
@@ -83,29 +104,17 @@ Within the DMI literature, \textcite{omodhrain_playing_2000} describes haptics a
 
 \paragraph{Force Feedback:} A subset of kinaesthetic feedback derived from physical impedance \cite{giordano_force_2012} or forces perceived by muscles and joints. It allows users to feel weight, resistance, or motion. Examples in DMIs include the FireFader \cite{berdahl_firefader_2013} and the TorqueTuner \cite{kirkegaard_torquetuner_2020}.  
 
-\begin{figure}
-    \centering
-    \begin{verbatim}
-        Haptic Feedback
-        ├── Mechanical        
-        │   ├── Tactile      
-        │   │   └── Vibrotactile
-        │   └── Kinaesthetic
-        │       └── Force
-        ├── Thermal
-        ├── Electrical
-        │   └── Electrotactile
-        ├── Ultrasonic
-        ...
-    \end{verbatim}
-    \caption{An incomplete, informal taxonomy of haptic feedback.}
-    \label{fig:taxonomy}
-\end{figure}
-
 Beyond these subsets, \textcite{cook_remutualizing_2004} distinguishes between \emph{passive} and \emph{active} haptics. Passive haptic feedback is achieved by purely mechanical means, without actuators or motors—for example, weighted piano keys or the mechanical jacks of a harpsichord. Using the taxonomy of Figure~\ref{fig:taxonomy} and Cook’s distinction, the interface described herein can be categorised as a passive haptic, force-feedback, tactile interface. For brevity, the term ``haptic'' will be used.  
 
 Finally, it is worth reflecting that all musical instruments involve physical interaction and could therefore be described as inherently haptic. Even the theremin, often cited as an exception, requires specific bodily movement, which may be interpreted as a form of kinaesthetic feedback. While this thesis avoids the ontological implications of such claims, the term 'haptic feedback' is used here to describe design intent.  
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{img/drawing-jack_forces.pdf}\\[1ex]
+    \includegraphics[width=0.5\linewidth]{img/film-strip.jpeg}
+    \caption{Forces acting on the jack during plucking and release (adapted from \textcite[Figure~1.7]{perng_physical_2012}) alongside a high–speed photo series (1000~fps) of jack displacement.}
+    \label{fig:jack-forces}
+\end{figure}
 
 \section{Harpsichord Mechanics}
 
@@ -120,13 +129,6 @@ The harpsichord emerged in the latter half of the fourteenth century, its design
 
 At the core of the instrument lies a simple plucking mechanism based on a second–class lever: depression of the key lifts a \emph{jack}, which drives a plectrum upward to pluck a string. Historically, plectra were most often made of quill, though leather was also used.  Each jack is a two–part wooden element consisting of a \emph{body} and a pivoting \emph{tongue}. The plectrum is wedged into a slot on the tongue, which is attached to the body by a pin. A tapered tongue and a correspondingly tapered recess allow the tongue to return to an upright position against a spring—commonly a strip of brass, though quill or boar hair were sometimes employed \cite{tagliavini_clavicembali_1987}.  As the jack rises, the plectrum presses laterally against the string until it slips past and releases it. The resisting force of the quill is relatively constant, so the amplitude of the pluck—and therefore the volume of the note—is largely fixed, a defining characteristic of the harpsichord’s dynamics.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\linewidth]{img/drawing-jack_forces.pdf}\\[1ex]
-    \includegraphics[width=0.5\linewidth]{img/film-strip.jpeg}
-    \caption{Forces acting on the jack during plucking and release (adapted from \textcite[Figure~1.7]{perng_physical_2012}) alongside a high–speed photo series (1000~fps) of jack displacement.}
-    \label{fig:jack-forces}
-\end{figure}
 By the sixteenth century, it was common for Italian harpsichords to employ more than one string per key, each with its own jack. These jacks were arranged in rows and staggered in height so that, over the key’s travel, each register was plucked sequentially rather than simultaneously \cite{veroli_optimising_2012}. Accurate detection of the plucking event, therefore, requires measuring the displacement of each jack individually, rather than only the key motion, owing to subtle hand–crafted variations across the keyboard. Fig. \ref{fig:jack-forces} depicts snapshots of the plucking mechanism, highlighting the jack mechanics and the jack-string interaction.
 
 
@@ -153,7 +155,7 @@ By the sixteenth century, it was common for Italian harpsichords to employ more 
 	\centering
 	\caption{Design constraints for the augmented harpsichord keyboard and their immediate implications.}
 	\label{tab:design-constraints}
-	\begin{tabular}{p{0.27\linewidth}p{0.36\linewidth}p{0.29\linewidth}}
+	\begin{tabular}{p{0.23\linewidth}p{0.4\linewidth}p{0.37\linewidth}}
 		\hline
 		\textbf{Category} & \textbf{Constraint}                                                                                          & \textbf{Immediate Implications}                                                                                    \\
 		\hline
@@ -550,7 +552,7 @@ All signals terminate at a microcontroller that samples analogue inputs and cont
 \paragraph{RGB LEDs} Scaling from six to 98 jacks introduced “problems of scale”: tracking which key is being calibrated and spotting out-of-range sensors. Addressable WS2812 LEDs were aligned to keys and driven programmatically; colour states (Figure~\ref{fig:mark1-leds}) provided immediate feedback during calibration and debugging. We avoided separate drivers (e.g., \texttt{TLC5940} in \textcite{mcpherson_portable_2013}) to reduce assembly complexity. While chain failure can cascade past a dead LED, LEDs are hidden in regular operation and non-critical to playability; replacing the affected PCB remains the practical remedy.
 \begin{figure}
     \centering
-     \includegraphics[width=0.66\linewidth]{img/mark-1-leds.png}
+     \includegraphics[width=0.75\linewidth]{img/mark-1-leds.png}
     \caption{Mark I demonstrating the addressable RGB LED array.}
     \label{fig:mark1-leds}
 \end{figure}
@@ -561,14 +563,22 @@ All signals terminate at a microcontroller that samples analogue inputs and cont
 
 \begin{figure}[b]
     \centering
-    \includegraphics[width=0.85\linewidth]{img/block-diagram-2.pdf}
+    \includegraphics[width=0.9\linewidth]{img/block-diagram-2.pdf}
     \caption{Block diagram of PCB connections. Each sensor board’s analogue signal (\texttt{SIG}) returns individually to the controller; LED and MUX control lines are daisy-chained.}
     \label{fig:system-block-diagram}
 \end{figure}
 
 \paragraph{Sensor Board} Each board measures vertical jack displacement. Distributing sensors across multiple boards reduced cost, eased installation, and allowed coarse adjustment in both stand-off and lateral centring over seven jacks. We kept sensor–MUX traces short to minimise noise. 
-
+\bigskip
 Per board:
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{img/mark-1-pcbs.jpg}    
+    \caption{Sensor boards in situ. Daisy-chain ribbon cables connect \texttt{Input}/\texttt{Output} headers (Figure~\ref{fig:sensor-schematic-1}). The multicoloured cable loom carries each board’s \texttt{SIG}; the green loom is the unused \texttt{INT} later tied to \texttt{GND}.}
+    \label{fig:mark-1-pcbs}    
+\end{figure}
+
 
 \begin{itemize}[itemsep=0pt, parsep=0pt, topsep=1em, partopsep=0pt]
     \item 7 QRE1113 optical sensors
@@ -600,13 +610,6 @@ Figure~\ref{fig:sensor-schematic-1} shows the sensor board schematic. The analog
 % \end{figure}
 
 Ribbon cables linked \texttt{Input}/\texttt{Output} between boards prior to installation; the assembly was fitted as a single chain. Each board’s \texttt{SIG} was brought separately to the controller (Figure~\ref{fig:controller-schematic-1}). The same 3D-printed baffles used on the prototype eliminated cross-talk (Figure~\ref{fig:baffles}). As shown in Figure~\ref{fig:sensor-physical-pcbs}, the baffles, an adjustment plate, and a vertical back plate form a three-part bracket. Push-fit dovetails allow off-site printing and on-site assembly; two 3~mm holes in the PCB allow it to be sandwiched between back plate and baffle.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\linewidth]{img/mark-1-pcbs.jpg}    
-    \caption{Sensor boards in situ. Daisy-chain ribbon cables connect \texttt{Input}/\texttt{Output} headers (Figure~\ref{fig:sensor-schematic-1}). The multicoloured cable loom carries each board’s \texttt{SIG}; the green loom is the unused \texttt{INT} later tied to \texttt{GND}.}
-    \label{fig:mark-1-pcbs}    
-\end{figure}
 
 % \begin{figure}
 %   \centering
@@ -666,19 +669,12 @@ Once fabricated, the electronics were fitted to the instrument as a bespoke inst
 
 Pre-assembly took place in Edinburgh, while the final build was completed in the NEMUS Lab in Bologna during the last week of October 2024; delivery and exhibition followed in the first week of November. Power and data were carried through a daisy-chained loom, while the \texttt{SIG} lines ran separately to reduce noise. Ribbon cables were hand-cut to length so they could be repositioned later, a decision that improved flexibility but added time—an insight folded into Mark II through the adoption of flat-flex cabling. The controller’s location was revised when the rear-chamber dimensions proved tighter than those assumed for the Mac mini housing the sampler.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.9\linewidth]{img/installation.png}
-    \caption{Keyboard being installed for exhibition in the Oratory at San Colombano.}
-    \label{fig:installation}
-\end{figure}
-
 Fitting the keyframe required temporarily removing the keys. Brackets were secured to the underside with round-head self-tappers and left slightly loose for coarse positioning; final alignment was completed in firmware. Each jack was prepared with a varnished short side for better sticker adhesion, the gradients were trimmed to length, and the free travel of every jack was checked. Preliminary calibration took place before the keys were replaced, with outliers traced and corrected. A single clearance error blocked key travel entirely, forcing a 10 mm × 15 mm recess to be milled into each key (Figure~\ref{fig:milling}) and the leather pads refitted—an extra day's work, but one that informed later geometry and cabling changes adopted in Mark II.
 
 \begin{figure}  
   \centering
-  \includegraphics[width=0.75\linewidth]{img/keys-milled.jpeg}\\
-  \includegraphics[width=0.75\linewidth]{img/milled-keys.jpg} 
+  \includegraphics[width=0.75\linewidth]{img/problem-solving.png}
+  % \includegraphics[width=0.75\linewidth]{img/milled-keys.jpg} 
   \caption{Keys after rough milling (Top Right) and after squaring/finishing the recess (Bottom Right). Components and cabling concealed in the lower compartment (Left).} 
   \label{fig:mac-mini}
   \label{fig:milling}
