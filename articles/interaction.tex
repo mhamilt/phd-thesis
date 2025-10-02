@@ -1,6 +1,8 @@
 \chapter{Interaction}\label{ch:interaction}
 
-As part of a broader commitment to accessibility, the Museo San Colombano-Tagliavini Collection, situated within Fondazione Carisbo's cultural itinerary in Bologna \cite{meer_collezione_2007}, has undertaken a series of projects aimed at enhancing both cognitive and sensory engagement. Supported by funding from NextGenerationEU,%
+As part of a broader commitment to accessibility, the Museo San Colombano-Tagliavini Collection,
+\footnote{\url{https://genusbononiae.it/san-colombano-collezione-tagliavini/}}
+situated within Fondazione Carisbo's cultural itinerary in Bologna \cite{meer_collezione_2007}, has undertaken a series of projects aimed at enhancing both cognitive and sensory engagement. Supported by funding from NextGenerationEU,%
 \footnote{https://openpnrr.it/progetti/143852/}
 these initiatives seek to leverage the collection’s rich holdings to create immersive and interactive modes of encounter with the exhibited heritage. Central to this vision is the reinterpretation of historical musical objects through their tactile and auditory dimensions, making the exhibition more inclusive for blind and partially sighted visitors, as well as the general public. The Tagliavini Collection comprises over fifty historical keyboard instruments, with a particular focus on Italian plucked string instruments. The collection represents a unique resource of interest to musicologists, organologists, and performers. Tagliavini's guiding principle was one of authenticity: instruments were acquired with the explicit aim of restoring them to playing condition with as little intervention as possible. Clearly, the cultural value of such instruments extends beyond their visual presence, 
 encompassing tactile and auditory dimensions of performance \cite{fritz_listener_2017}. 
@@ -8,12 +10,21 @@ encompassing tactile and auditory dimensions of performance \cite{fritz_listener
 
 In the museum context, they may be played under carefully controlled conditions, typically by experienced historical keyboard specialists or by students under the close supervision of the curator. Thus, the experiential access remains limited for the general public. As \textcite{mcalpine_sampling_2014} describes through the ``red velvet cord'' metaphor \cite{mcalpine_sampling_2014}, collections such as Tagliavini's prioritise protection of fragile mechanisms by limiting use.  
 
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.5\linewidth]{img/mark-1-front-top.png}
+%     \caption{Top and front view of the augmented keyboard interface for exhibition at Museo San Colombano.}
+%     \label{fig:mark-1-front}
+% \end{figure}
+
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\linewidth]{img/mark-1-front-top.png}
-    \caption{Top and front view of the augmented keyboard interface for exhibition at Museo San Colombano.}
+    \includegraphics[width=0.9\linewidth]{img/installation.png}
+    \caption{Keyboard being installed for exhibition in the Oratory at San Colombano.}
+    \label{fig:installation}
     \label{fig:mark-1-front}
 \end{figure}
+
 
 This limitation prompted a collaboration between Museo San Colombano and the NEMUS project, aiming to develop an interface to digital representations of historical instruments. The installation, conceived for the San Colombano exhibition space, sought to reproduce the haptic experience of a sixteenth-century Italian harpsichord. At its centre was an electronically augmented keyboard: a replica designed to capture the tactile and kinaesthetic qualities of the original while removing any risk to the artefacts themselves. Shown in Figure~\ref{fig:mark-1-front}, the replica serves as a controller for a digitally emulated harpsichord, implemented through sampling or physical modelling, with sound delivered to visitors via headphones. 
 
@@ -83,7 +94,9 @@ It diverges, however, in adopting an aesthetics-first approach: electronics are 
     \label{fig:taxonomy}
 \end{figure}
 
-There is some confusion in the usage of terminology around haptic interfaces, as seen in the DMI communities, such as NIME. Much of this terminology takes its cues from the field of Human-Computer Interaction (HCI), where terms such as \emph{haptic}, \emph{tactual}, \emph{tactile}, \emph{vibrotactile}, \emph{kinaesthetic}, \emph{proprioception}, and \emph{force feedback} are all in circulation, often without strict or consistent definition. This section, therefore, seeks to define the relevant terms as they apply to musical instrument interfaces, to bring clarity to the remainder of the thesis.  
+There is some confusion in the usage of terminology around haptic interfaces, as seen in the DMI communities, such as NIME.
+\footnote{\url{https://nime.org}}
+Much of this terminology takes its cues from the field of Human-Computer Interaction (HCI), where terms such as \emph{haptic}, \emph{tactual}, \emph{tactile}, \emph{vibrotactile}, \emph{kinaesthetic}, \emph{proprioception}, and \emph{force feedback} are all in circulation, often without strict or consistent definition. This section, therefore, seeks to define the relevant terms as they apply to musical instrument interfaces, to bring clarity to the remainder of the thesis.  
 
 The archive of DMIs available from the NIME conference will serve as the primary source of definitions and examples of usage, made possible by its open-access status under the Creative Commons Attribution 4.0 International License (CC BY 4.0).%
 \footnote{\url{https://creativecommons.org/licenses/by/4.0/}}  
@@ -113,7 +126,7 @@ Finally, it is worth reflecting that all musical instruments involve physical in
 
 \begin{figure}
     \centering
-    \frame{\includegraphics[width=1\linewidth]{img/drawing-3-key-mechanism.pdf}}
+    \includegraphics[width=1\linewidth]{img/drawing-3-key-mechanism.pdf}
     \caption{Single–manual, two–register action as used on the 1547 Alessandro Trasuntino and on the model interfaces.}
     \label{fig:mechanism}
 \end{figure}
@@ -122,7 +135,7 @@ The harpsichord emerged in the latter half of the fourteenth century, its design
 
 At the core of the instrument lies a simple plucking mechanism (Figure~\ref{fig:mechanism}) based on a second–class lever: depression of the key lifts a \emph{jack}, which drives a plectrum upward to pluck a string. Historically, plectra were most often made of quill, though leather was also used.  Each jack is a two–part wooden element consisting of a \emph{body} and a pivoting \emph{tongue}. The plectrum is wedged into a slot on the tongue, which is attached to the body by a pin. A tapered tongue and a correspondingly tapered recess allow the tongue to return to an upright position against a spring—commonly a strip of brass, though quill or boar hair were sometimes employed \cite{tagliavini_clavicembali_1987}.  As the jack rises, the plectrum presses laterally against the string until it slips past and releases it. The resisting force of the quill is relatively constant, so the amplitude of the pluck—and therefore the volume of the note—is largely fixed, a defining characteristic of the harpsichord’s dynamics.
 
-\begin{figure}[!b]
+\begin{figure}
     \centering
     \includegraphics[width=1\linewidth]{img/jack-anatomy.pdf}    
     \caption{Forces acting on the jack during plucking and release (adapted from \textcite[Figure~1.7]{perng_physical_2012}) alongside a high–speed photo series (1000~fps) of jack displacement.}
@@ -130,9 +143,6 @@ At the core of the instrument lies a simple plucking mechanism (Figure~\ref{fig:
 \end{figure}
 
 By the sixteenth century, it was common for Italian harpsichords to employ more than one string per key, each with its own jack. These jacks were arranged in rows and staggered in height so that, over the key’s travel, each register was plucked sequentially rather than simultaneously \cite{veroli_optimising_2012}. Accurate detection of the plucking event, therefore, requires measuring the displacement of each jack individually, rather than only the key motion, owing to subtle hand–crafted variations across the keyboard. Fig. \ref{fig:jack-forces} depicts snapshots of the plucking mechanism, highlighting the jack mechanics and the jack-string interaction.
-
-
-
 
 % \begin{figure}[!t]
 %   \centering
@@ -267,6 +277,7 @@ The table highlights that the same design element often answered several constra
   \includegraphics[width=0.85\linewidth]{img/hidden-electronics.png}
   \caption{Underside of the keyboard showing optical-sensor PCBs mounted beneath the wrest plank.}
   \label{fig:mark-1-bottom}
+  \label{fig:mac-mini}
 \end{figure}
 
 \subsection{Visual Aesthetics}
@@ -676,8 +687,7 @@ Fitting the keyframe required temporarily removing the keys. Brackets were secur
   \centering
   \includegraphics[width=0.65\linewidth]{img/keys-milled.jpeg}
   \includegraphics[width=0.65\linewidth]{img/milled-keys.jpg} 
-  \caption{Keys after rough milling (Top Right) and after squaring/finishing the recess (Bottom Right). Components and cabling concealed in the lower compartment (Left).} 
-  \label{fig:mac-mini}
+  \caption{Keys after rough milling (Top Right) and after squaring/finishing the recess (Bottom Right). Components and cabling concealed in the lower compartment (Left).}   
   \label{fig:milling}
 \end{figure}
 
