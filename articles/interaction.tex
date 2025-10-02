@@ -124,10 +124,7 @@ At the core of the instrument lies a simple plucking mechanism (Figure~\ref{fig:
 
 \begin{figure}[!b]
     \centering
-    % \includegraphics[width=0.75\linewidth]{img/drawing-jack_forces.pdf}\\[1ex]
-    % \includegraphics[width=0.75\linewidth]{img/film-strip.jpeg}
-    \includegraphics[width=0.75\linewidth]{img/jack-}
-    
+    \includegraphics[width=1\linewidth]{img/jack-anatomy.pdf}    
     \caption{Forces acting on the jack during plucking and release (adapted from \textcite[Figure~1.7]{perng_physical_2012}) alongside a high–speed photo series (1000~fps) of jack displacement.}
     \label{fig:jack-forces}
 \end{figure}
@@ -267,7 +264,7 @@ The table highlights that the same design element often answered several constra
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.85\linewidth]{img/mark-1-bottom-sensors-no-keys.jpg}
+  \includegraphics[width=0.85\linewidth]{img/hidden-electronics.png}
   \caption{Underside of the keyboard showing optical-sensor PCBs mounted beneath the wrest plank.}
   \label{fig:mark-1-bottom}
 \end{figure}
@@ -296,16 +293,14 @@ We first received a \emph{3-key prototype} and used it for several months to tes
 
 The prototyping was staged with ever-increasing complexity to solve jack-displacement sensing in the simplest controllable case before scaling up: single action $\rightarrow$ multi-register action $\rightarrow$ multi-key interface. The system evolved from simple threshold tests to a multi-sensor interface capable of triggering MIDI events. The four development stages are now reviewed in detail. For reference, Fig. \ref{fig:timeline-vertical} shows a timeline of all four stages. 
 
-
-
-\section{Stage 1}\label{sec:prototype}
-
-\begin{figure}
+\begin{figure}[!b]
     \centering    
     \includegraphics[width=0.85\linewidth]{img/3-key-side.png}
     \caption{3-key model harpsichord mechanism.}
     \label{fig:3key}
 \end{figure}
+
+\section{Stage 1}\label{sec:prototype}
 
 The initial question was whether sensor data could reliably trigger MIDI playback. The custom 3-key mechanism (Figure~\ref{fig:3key}) formed the basis of our tests. This mirrors the methodology in the \textcite{timmermans_multibody-based_2020} \emph{Haptic Key} project: iteratively validate sensor placement, signal processing, and mechanical tolerances on a compact model before scaling to multiple octaves. Our approach follows single-action testbeds in haptics \cite{gillespie_haptic_1996} and harpsichord-specific rigs assembled from luthier parts \cite{perng_physical_2012}. The open-sided construction of the three-key model offered direct access to the key lever and jacks, making it straightforward to mount and align sensors. Multiple keys and registers on the same model enabled more complex iterations (such as sequencing and staggering) without requiring a second rig, while also meeting the visual/aesthetic requirements outlined in our design principles. 
 
@@ -678,8 +673,8 @@ Fitting the keyframe required temporarily removing the keys. Brackets were secur
 
 \begin{figure}  
   \centering
-  \includegraphics[width=0.75\linewidth]{img/problem-solving.png}
-  % \includegraphics[width=0.75\linewidth]{img/milled-keys.jpg} 
+  \includegraphics[width=0.65\linewidth]{img/keys-milled.jpeg}
+  \includegraphics[width=0.65\linewidth]{img/milled-keys.jpg} 
   \caption{Keys after rough milling (Top Right) and after squaring/finishing the recess (Bottom Right). Components and cabling concealed in the lower compartment (Left).} 
   \label{fig:mac-mini}
   \label{fig:milling}
@@ -700,18 +695,7 @@ on a Mac mini housed in the lower compartment; cables were routed through hidden
 
 The rotary encoder selects a key, edits thresholds, and saves to FRAM. Defaults are mid-range; each sensor is plotted against its threshold (Figure~\ref{fig:serial_monitor}) and adjusted until the threshold is crossed only at the pluck. LEDs identify the active key and report state; red indicates readings near ADC rails (misalignment/fault).
 
-\section{Stage 3}
-
-With \emph{Mark I} delivered and installed for the San Colombano exhibition, development returned to the three–key prototype to address a weakness that had become apparent during calibration.  
-In the first full instrument, key events were detected by a single threshold with no hysteresis: simple to implement, but prone to chatter near the decision point and awkward to calibrate across forty–nine keys.  
-The smaller rig offered a controlled setting in which to rethink the detection pipeline and firmware before committing changes to a second full build.
-
-\paragraph{Force sensing and firmware.}
-We added force sensors to the three–key action and redesigned the firmware around a clearer separation between \emph{Calibration} and \emph{Operation}.  
-On boot, the microcontroller configured its GPIO lines and verified the presence of SPI FRAM, then entered one of the two modes according to the state of the rotary encoder.  
-During normal play, sensors were read in groups of seven; a 3-bit address (\texttt{A}, \texttt{B}, \texttt{C}) advanced the multiplexer through its eight channels, as summarised in Table~\ref{tab:mux-encoding}.
-
-\begin{table}
+\begin{table}[b]
     \centering
     {
         \ttfamily
@@ -739,6 +723,17 @@ During normal play, sensors were read in groups of seven; a 3-bit address (\text
     \label{tab:mux-encoding}
 \end{table}
 
+\section{Stage 3}
+
+With \emph{Mark I} delivered and installed for the San Colombano exhibition, development returned to the three–key prototype to address a weakness that had become apparent during calibration.  
+In the first full instrument, key events were detected by a single threshold with no hysteresis: simple to implement, but prone to chatter near the decision point and awkward to calibrate across forty–nine keys.  
+The smaller rig offered a controlled setting in which to rethink the detection pipeline and firmware before committing changes to a second full build.
+
+\paragraph{Force sensing and firmware.}
+We added force sensors to the three–key action and redesigned the firmware around a clearer separation between \emph{Calibration} and \emph{Operation}.  
+On boot, the microcontroller configured its GPIO lines and verified the presence of SPI FRAM, then entered one of the two modes according to the state of the rotary encoder.  
+During normal play, sensors were read in groups of seven; a 3-bit address (\texttt{A}, \texttt{B}, \texttt{C}) advanced the multiplexer through its eight channels, as summarised in Table~\ref{tab:mux-encoding}.
+
 \paragraph{Hysteresis and timing.}
 Central to the revision was a two-threshold finite-state machine (FSM) with states \texttt{RELEASED}, \texttt{PLUCKED}, and \texttt{PRESSED}.  
 A note was triggered only when the signal rose above the \texttt{pluck\_threshold} from \texttt{RELEASED}; it returned to \texttt{RELEASED} only when falling below a lower \texttt{release\_threshold} (Figure~\ref{fig:jack-states}).  
@@ -748,7 +743,7 @@ Across 10\,000 iterations, the sampling loop (including multiplexing and filteri
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.6\linewidth]{img/plot-jack-states.pdf}
+    \includegraphics[width=0.5\linewidth]{img/plot-jack-states.pdf}
     \caption{Two-threshold hysteresis: full press–release on an Arduino Nano~33~BLE (12-bit ADC). \texttt{PLUCKED} begins at \texttt{pluck\_threshold}; \texttt{RELEASED} returns at the lower \texttt{release\_threshold}.}
     \label{fig:jack-states}
 \end{figure}
