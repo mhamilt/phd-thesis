@@ -511,7 +511,8 @@ Early optical trials also revealed cross-talk: infrared light reflected from adj
 
 \begin{figure}[b]
     \centering
-    \includegraphics[width=0.8\linewidth]{img/prototype-mini-pcb-mount.jpeg}
+    % \includegraphics[width=0.8\linewidth]{img/prototype-mini-pcb-mount.jpeg}
+    \includegraphics[width=0.8\linewidth]{img/proto-bracket-1.jpeg}
     \caption{Prototype PCB attached to 3D-printed adjustment bracket.}
     \label{fig:prototype-pcb-mount}
 \end{figure}
@@ -879,6 +880,32 @@ Expert feedback nonetheless identified two limits. First, per-key calibration oc
 A second, informal survey (\(\sim\)50 postgraduate visitors) revealed that some assumed the keyboard was off-limits, an ``aesthetic success'' in that it conveyed authenticity, but also a reminder that museum interfaces benefit from clear interaction cues.
 
 \paragraph{Open Source Practice}
+
+
+There has been a concerted effort to address the problem of archiving and open-sourcing of DMI over the past 10 years \cite{mcpherson_nimehub_2016,fiordelmondo_longevity_2024,fiordelmondo_towards_2025}. This is not a challenge constrained to just DMI, but is also being addressed as part of the growing open hardware movement.
+Open hardware, like open software, is the provision of making electronics designs accessible allowing fabrication outside of a central manufacturer.
+\textcite{mcpherson_nimehub_2016} and \textcite{calegario_documentation_2021} outline largely the same principles as that of the Open Source Hardware Association in 2013 \cite{oshwa_best_2013}, that  unlike software, open hardware cannot be simply distributed as a licence and set of source files (Figure~\ref{fig:osh-taxonomy}), lest it fall afoul of ``openwashing.'' 
+\footnote{when a project  ``is claimed to be open source whereas no intention to publish product-related information is given'' \cite{bonvoisin_source_2017}.}  
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{img/bonvoisin_source_2017-open-hardware.png}
+    \caption{Taxonomy of openness from \textcite[Figure~1]{bonvoisin_source_2017}.}
+    \label{fig:osh-taxonomy}
+\end{figure}
+
+Open source hardware has great potential benefits for use in academia \cite{oellermann_open_2022} and those same benefits can extent to the heritage sector. \textcite{mcpherson_nimehub_2016} rightfully raises concerns of tackling hardware obsolescence and how that is tackled as part of the archiving process. Proprietary systems limit the potential for innovation or reproducibility and, when these systems fail, repairs rely on the original manufacturer who may have ceased support or production of replacement parts \cite{oellermann_open_2022}.
+To facilitate reproduction of hardware, it should be self-evident but, any form of archiving and provision of access to source material makes the task much more feasible. Reproduction is made even easier by incorporating open hardware.
+
+This highlights a core problem with digital cultural heritage, which is if we rely on proprietary system for digital conservation, then they will be locked in an ecosystem which is designed to chase change. If heritage institutions are using proprietary digital systems \cite{innocente_framework_2023} they should be aware of their choice of digital infrastructure and the implications that will have on a project's longevity. As \textcite{bonvoisin_source_2017} coined ``openwashing'' likewise with digital conservation we run a risk of ``heritagewashing'' where digital projects claim to serve the conservation of cultural heritage, but are in fact ephemera. That is not to say that ephemeral heritage projects are forbidden, but this should be a conscious choice made at a project's inception and not one applied at a point in the future when the task of archiving a work becomes too great. An open methodology needs to be `baked-in' to the research process and it is not something trivially applied after the fact. It is of course better to do it afterwards and not at all, but the information at stake is constitutes also the development process, not just the end product. The point at which a project is abandoned is not the key point of record, which given their `living` status is likely to have undergone some further modifications.
+
+Both \textcite{mcpherson_nimehub_2016} and \cite{fiordelmondo_towards_2025} approach hardware archiving in a repository format. \textcite{mcpherson_nimehub_2016} proposed a workshop with the intention to create a a central repository (or database) for DMI designs. Part of that workshop's primary eight goals were the FAIR adjacent aims of encouraging reproducibility, open access and encouraging a normalised practice of documentation. Both \textcite{mcpherson_nimehub_2016} and \cite{fiordelmondo_towards_2025} raise the issue of repository structure with the latter proposing a a prescriptive measure which can be applied to any DMI project.
+
+Research in the form of Open Hardware, open software, research product can and should take advantage of the platforms available for distribution of the work,
+\footnote{such as github, gitlab for source code or thingiverse for 3D models \cite{oshwa_best_2013}.}
+but the work still needs to be citable \cite{smith_software_2016}, and cross-reference-able \cite{stall_journal_2023} if that work is to be built upon.
+
+The limitation here is assuming that the constituent parts of a DMI are a collective to archive and version controlled. This is true to some degree, there is a complete artifact to be documented, but it is very much made of constituent parts that develop and are swapped out. There is the interface the electronics and the firmware, whose versions current and old can be used in all number of combinations of versions. Keeping these components contained to a single version control repository limits their modularity and potential for reuse.
 
 Parallel to the physical design, attention was given to documentation and dissemination. Following DMI documentation guidelines \cite{calegario_documentation_2021} and open-science practice \cite{stall_journal_2023}, the entire project was archived: source code, firmware, bill of materials, CAD schematics, STL models, photographs, and build instructions were placed in public repositories. The material is organised into three submodules—\emph{Firmware} \cite{hamilton_firmware_2025}, \emph{CAD} \cite{hamilton_cad_2025}, and \emph{Model Data} \cite{hamilton_models_2025}—combined via a meta-repository (Figure~\ref{fig:repo-relation}). This structure allows individual components (e.g., a PCB or an optical sensor) to be reused or substituted without restructuring the entire system.
 
