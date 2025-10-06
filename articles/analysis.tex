@@ -398,6 +398,15 @@ This would mean that concatenation of blocks would necessitate the reordering an
 
 \subsection{Python}
 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{img/sparse-format-placeholder.png}
+    \caption{PLACEHOLDER: Compressed Sparse Column and Diagonal format sparse matrix storage structure.}
+    \label{fig:sparse-dia}
+\end{figure}
+
+
 Unlike M\textsc{atlab}, Python is an entirely open source programming language with growing use within scientific research \cite{guo_python_2014}. These qualities made Python a obvious first choice for porting the \textsc{magpie} as it conformed to the accessible and reusable principles of the projects open methodology.
 
 % Changes to biharmonic formulation
@@ -412,19 +421,7 @@ It is worth noting that additional configuration such as the SciPy sparse librar
 Such is the case here, for the proprietary MATLAB the user does not need to engage with directly with the sparsity format, rather they are given a single format, CSC \cite{gilbert_sparse_1992}, and a small set of functions with which to construct a sparse matrix.
 \footnote{\texttt{spdiags} for banded matrices and the \texttt{sparse} function for triplet format or dense matrix conversion.}
 
-With SciPy, the user will need to confront aspects of sparse matrix construction that they might not otherwise in the proprietary M\textsc{atlab}, such as intermediate ``construction'' \cite{eding_sparse_2019} formats like co-ordinate or list-of-list. These construction matrices will then need explicit compression into formats such as CSC or DIA (Figure~\ref{fig:sparse-dia}), steps that are invisible to the M\textsc{atlab} user. This extra granularity provided by FOSS is neither a net negative nor positive, but it is double-edged. The additional debt of technical knowledge is off-set by the freedom to scrutinise the process. Such is the case with matrix construction illustrated in Figure~\ref{fig:matlab_vs_python} where two approaches can result in vastly different performance results. The additional technical complexity also permits multiple points of entry which can provide an optimal solution for a specific approach taken, in this case a block matrix construction with SciPy. Figure~\ref{fig:matlab_vs_python}
-clearly shows that SciPy is not as high computationally performance as the optimal M\textsc{atlab} approach, but neither does punish the developer exponentially.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\linewidth]{img/sparse_diagonal.png}
-    \caption{PLACEHOLDER: Compressed Sparse Column and Diagonal format sparse matrix}
-    \label{fig:sparse-dia}
-\end{figure}
-
-Sparse sub-block building is made even more trivial with SciPy's \texttt{bmat} function \cite{scipy_bmat_2025}. The \texttt{bmat} function, Python's comprehension and array replication construction that allows for a much more concise formulation using the sub-block format and avoids the necessity for excessive array indexing.
-
-\begin{figure}
+\begin{figure}[h]
 {\footnotesize
     \begin{verbatim}
           [
@@ -440,6 +437,12 @@ Sparse sub-block building is made even more trivial with SciPy's \texttt{bmat} f
     \caption{Python syntax for the biharmonic structured from a list-of-lists of sub-blocks. \texttt{Ma} represents $N_y - a$.}
     \label{fig:python-bmat}
 \end{figure}
+
+With SciPy, the user will need to confront aspects of sparse matrix construction that they might not otherwise in the proprietary M\textsc{atlab}, such as intermediate ``construction'' \cite{eding_sparse_2019} formats like co-ordinate or list-of-list. These construction matrices will then need explicit compression into formats such as CSC or DIA (Figure~\ref{fig:sparse-dia}), steps that are invisible to the M\textsc{atlab} user. This extra granularity provided by FOSS is neither a net negative nor positive, but it is double-edged. The additional debt of technical knowledge is off-set by the freedom to scrutinise the process. Such is the case with matrix construction illustrated in Figure~\ref{fig:matlab_vs_python} where two approaches can result in vastly different performance results. The additional technical complexity also permits multiple points of entry which can provide an optimal solution for a specific approach taken, in this case a block matrix construction with SciPy. Figure~\ref{fig:matlab_vs_python}
+clearly shows that SciPy is not as high computationally performance as the optimal M\textsc{atlab} approach, but neither does punish the developer exponentially.
+
+Sparse sub-block building is made even more trivial with SciPy's \texttt{bmat} function \cite{scipy_bmat_2025}. The \texttt{bmat} function, Python's comprehension and array replication construction that allows for a much more concise formulation using the sub-block format and avoids the necessity for excessive array indexing.
+
 Figure~\ref{fig:python-bmat} shows the input format for the \texttt{bmat} function, where a list of lists is passed as an argument.
 Each element in the lists is either a square $N\times N$ sparse matrix or an empty list \texttt{[None]} representing a $N\times N$ of zeros. 
 The polymorphic \texttt{*} operator, as well as providing a multiplication operator, represents two operations in this context. The operator is used for replicating arrays \texttt{[None] * x}, where \texttt{x} is the number of repetitions (e.g. \texttt{[None] * 3} will return \texttt{[None, None, None]}. 
@@ -449,9 +452,11 @@ All of this allows the syntax to follow very closely the structure of Figure~\re
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\linewidth]{img/plot_matlab_vs_python.pdf}
+    \includegraphics[width=0.49\linewidth]{img/plot_matlab_vs_python.pdf}
+    \includegraphics[width=0.49\linewidth]{img/plot-python-sym-gen-clamped-error.pdf}
     \caption{Computational performance of the biharmonic assembled in a block format in M\textsc{atlab} and Python and a diagonal format in M\textsc{atlab}. Each size of biharmonic was computed 10 times and the shortest time was recorded.}
     \label{fig:matlab_vs_python}
+    \label{fig:python-matlab-error}
 \end{figure}
 
 One of the final goals of this project is to achieve real time computation of the biharmonic to use in sound-synthesizing modules. 
@@ -531,12 +536,12 @@ For a shift-invert using $\sigma = 0$ with LU decomposition the $A$ and $\lambda
 For this reasons, the M\textsc{atlab} and SciPy interfaces with ARPACK can be passed a sigma value of 0 to find the smallest magnitude eigenvalues. Counter-intuitively, ARPACK requires that the option to find largest magnitude is kept, but when a $\sigma$ values is provided the values will be implicitly passed through a second shift-invert process.%
 \footnote{This can cause some confusion between M\textsc{atlab} and SciPys interfaces. If M\textsc{atlab}'s \texttt{eigs} is passed a \texttt{'smallestabs'} option, this is equivalent to a $\sigma 0$ and `largestabs' configuration. SciPy on the otherhand requires the explicit largest magnitude option \texttt{which='LM'} on top of a $\sigma$ value. For SciPy \texttt{which='SM'} will always result in a slower or potentially non-converging solve.}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\linewidth]{img/plot-python-sym-gen-clamped-error.pdf}
-    \caption{Percentage error between M\textsc{atlab} and SciPy for the first 500 eigenvalues.}
-    \label{fig:python-matlab-error}
-\end{figure}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.5\linewidth]{img/plot-python-sym-gen-clamped-error.pdf}
+%     \caption{Percentage error between M\textsc{atlab} and SciPy for the first 500 eigenvalues.}
+%     \label{fig:python-matlab-error}
+% \end{figure}
 
 Though SciPy and M\textsc{atlab} both interface with ARPACK and the default options for fine tuning of the eigensolver appear similar, the error between both is relatively large. Figure~\ref{fig:python-matlab-error} shows the percentage error for the first 500 eigenvalues calculated by the ARPACK interfaces in SciPy and M\textsc{atlab}. Table~\ref{tab:parameters} shows the parameters used in Python and M\textsc{atlab} for the results in Figure~\ref{fig:python-matlab-error}.
 
@@ -592,19 +597,21 @@ after which the matrix is "finalised", thus avoiding any memory reallocation.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\linewidth]{img/plot-eigensolver-comparison.pdf}
+    \includegraphics[width=0.49\linewidth]{img/plot-eigensolver-comparison.pdf}
+    \includegraphics[width=0.49\linewidth]{img/plot-sym-gen-clamped-error.pdf}
     \caption{Comparison of eigensolver compute time in M\textsc{atlab}, Python and C\textsc{++} (Generic and Symmetric Spectra solvers). C\textsc{++} times using -O3 compiler optimisation.}
     \label{fig:eigensolver-comp}
+    \label{fig:spectra-error}
 \end{figure}
 
 Figure~\ref{fig:eigensolver-comp} illustrates performance difference between eigensolvers using the parameters in Table~\ref{tab:parameters}. Like SciPy, the Spectra library allows for explicit selection between generic and symmetric solvers. Unlike SciPy, there is a noticeable difference in performance between the generic and symmetric cases, with symmetric performing close if not better than M\textsc{atlab} in some cases.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\linewidth]{img/plot-sym-gen-clamped-error.pdf}
-    \caption{Percentage error between M\textsc{atlab}'s eigs and Spectra's generic and symmetric solvers. Parameters in Table~\ref{tab:parameters}.}
-    \label{fig:spectra-error}
-\end{figure}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.5\linewidth]{img/plot-sym-gen-clamped-error.pdf}
+%     \caption{Percentage error between M\textsc{atlab}'s eigs and Spectra's generic and symmetric solvers. Parameters in Table~\ref{tab:parameters}.}
+%     \label{fig:spectra-error}
+% \end{figure}
 
 Finally, the error between Spectra solvers (generic and symmetric) and M\textsc{atlab}'s \texttt{eigs} is given in Figure~\ref{fig:spectra-error}. Compared to SciPy (Figure~\ref{fig:python-matlab-error}), the percentage error is down many orders of magnitude. Though there is difference between generic and symmetric, relating Figures~\ref{fig:eigensolver-comp}~and~\ref{fig:spectra-error} show that relaxing the accuracy slightly (~$1\times10^{-6})$ can yield significant performance improvement for large matrices. Figure~\ref{fig:spectra-error} would appear to confirm that the high error between SciPy and M\textsc{atlab} (Figure~\ref{fig:python-matlab-error}) is indeed a problem with the Python implementation and the configuration of the eigensolver.
 
