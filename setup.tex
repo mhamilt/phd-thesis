@@ -86,6 +86,41 @@
           url = false,
 ]{biblatex} 
 \addbibresource{main.bib}
+
+%% Possessive Citation
+\DeclareNameFormat{poss}{%%
+  \nameparts{#1}%%
+  \ifnum\value{listcount}=1%
+    \ifnum\value{liststop}=1%
+      % single author: add 's%
+      \usebibmacro{name:last}{\namepartfamily}{\namepartgiven}{\namepartprefix}{\namepartsuffix}'s%%
+    \else%
+      % multiple authors: no 's yet%
+      \usebibmacro{name:last}{\namepartfamily}{\namepartgiven}{\namepartprefix}{\namepartsuffix}%%
+    \fi%
+  \else%
+    \ifnum\value{listcount}<\value{liststop}%
+      {, }%%
+    \else%
+      % last author in multiple list: add 's%
+      \usebibmacro{name:last}{\namepartfamily}{\namepartgiven}{\namepartprefix}{\namepartsuffix}'s%%
+    \fi%
+  \fi%
+}%
+
+\DeclareCiteCommand{\citep}[] % keep prenote/postnote machinery%
+  {\usebibmacro{prenote}}%
+  {%%
+    % Author name(s) in possessive form%
+    \printnames[poss]{author}%%
+    \setunit{\space}%%
+    % Now the numeric citation%
+    \printtext{[\printfield{labelnumber}]}%%
+  }%
+  {\multicitedelim}%
+  {\usebibmacro{postnote}%
+}%
+
 %----------------------------------------------------------------------------------------
 
 \makeatletter
