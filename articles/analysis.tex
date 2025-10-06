@@ -490,26 +490,28 @@ Given these conditions, the subset of relevant matrix operations for eigensolver
 
 \begin{figure}
     \centering
-\begin{verbatim}
-    for k = 1 to n
-        // Step 1: Pivot selection
-        pivot_row = index of max(abs(A[k:n, k])) + k - 1
-        if pivot_row != k
-            swap row k of A and pivot_row of A
-            swap row k of A and pivot_row of P
-            if k > 1:
-                swap row k of L and pivot_row of L (columns 1..k-1)
-
-        // Step 2: Compute multipliers and elimination
-        for i = k+1 to n
-            L[i,k] = A[i,k] / A[k,k] // multiplier
+    {\footnotesize
+    \begin{verbatim}
+        for k = 1 to n
+            // Step 1: Pivot selection
+            pivot_row = index of max(abs(A[k:n, k])) + k - 1
+            if pivot_row != k
+                swap row k of A and pivot_row of A
+                swap row k of A and pivot_row of P
+                if k > 1:
+                    swap row k of L and pivot_row of L (columns 1..k-1)
+    
+            // Step 2: Compute multipliers and elimination
+            for i = k+1 to n
+                L[i,k] = A[i,k] / A[k,k] // multiplier
+                for j = k to n
+                    A[i,j] = A[i,j] - L[i,k] * A[k,j]
+    
+            // Step 3: Set U row
             for j = k to n
-                A[i,j] = A[i,j] - L[i,k] * A[k,j]
-
-        // Step 3: Set U row
-        for j = k to n
-            U[k,j] = A[k,j]
-\end{verbatim}
+                U[k,j] = A[k,j]
+    \end{verbatim}
+    }
     \caption{Pseudocode for the LU Decomposition algorithm.}
     \label{fig:lu-decomp}
 \end{figure}
@@ -579,9 +581,9 @@ and requires the Basic Linear Algebra Subroutines (BLAS)%
 and Linear Algebra PACKage (LAPACK) and%
 \footnote{\url{http://www.netlib.org/lapack/}} in order to function.
 
-\begin{figure}
+\begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\linewidth]{img/plot-biharmonic-comparison.pdf}
+    \includegraphics[width=0.5\linewidth]{img/plot-biharmonic-comparison-alt.pdf}
     \caption{Construction of the diagonalised biharmonic in M\textsc{atlab}, Python and C\textsc{++}.}
     \label{fig:biharm-diag-comp}
 \end{figure}
@@ -619,7 +621,7 @@ Finally, the error between Spectra solvers (generic and symmetric) and M\textsc{
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.75\linewidth]{img/magpie-beta-interface.pdf}
+    \includegraphics[width=1\linewidth]{img/magpie-beta-interface.pdf}
     \caption{Beta version user interface for \textsc{magpie} in Jupyter Notebooks}
     \label{fig:magpie-ui}
 \end{figure}
@@ -630,7 +632,7 @@ The intention was to design an interface to the M\textsc{atlab} version of \text
 
 The user wishes to compare with Chladni patterns recorded during the course of experiments on a real plate. As such, the user chooses the 'Chladni' format option for plotting mode shapes. The `Chladni' option renders a top-down 2D visualisation of mode patterns where points at or near zero are highlighted. This allows the user to render Figure \ref{fig:bc_transitions}, which shows the effect of transition in the rotational stiffness.  From these plots obtained by \textsc{magpie}, the user can illustrate how the mode shapes develop between simply supported and clamped cases. As expected, an increase in rotational stiffness increases modal frequency.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.75\linewidth]{img/bc-transition.pdf}
     \caption{Simulated Chladni patterns of modes 10, 11, 12, 13, and 16, for a plate with free boundary conditions along all edges except the leftmost one. The last condition moves from simply supported (\textbf{S}) to a fully clamped cantilever case (\textbf{C}), with an intermediary step corresponding to a high rotation stiffness (\textbf{T}). The choice of specific modes is the result of an exploration using the Jupyter Notebook graphical interface depicted in Figure \ref{fig:magpie-ui} }
@@ -639,7 +641,7 @@ The user wishes to compare with Chladni patterns recorded during the course of e
 
 Secondly, the eigenvalues returned from the eigensolver are used to calculate modal frequencies. The user can then use the modal time integration functionality of \textsc{magpie} using these modal frequencies, producing a simulated impulse response of the plate. The impulse response of the simulated is then used to create a series of FRF plots contrasting the transition between boundary conditions, as can be created as shown in \ref{fig:frf-bcs}.
 
-\begin{figure}
+\begin{figure}[b]
     \centering
     \includegraphics[width=0.8\linewidth]{img/plot-frf-bcs.pdf}
     \caption{FRF of impulse response from simulations of the same plate under different boundary conditions.}
