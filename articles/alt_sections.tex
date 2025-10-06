@@ -25,3 +25,22 @@ The limitation here is assuming that the constituent parts of a DMI are a collec
 
 Proposed here is not a question of either / or but rather both! So much research can go into these projects, creation may be modular and re usable elsewhere. Boxing it all together prevents the porting. The effort to treat these objects as a collection f modules isn’t much greater than treating as a whole, but the avoidance of losing work is worth it
 
+
+
+
+The SciPy package allows for much more granular control over the sparse matrix format. Since the biharmonic operator matrix is multi-diagonal a diagonal format sparse matrix appeared to be the best target. As opposed to the compressed sparse column format which stores row indices and first element columns indices, the diagonal stores arrays of diagonal values and their diagonal position (Figure~\ref{fig:sparse-dia}). The diagonal format would require explicit zero values, though there are a relative small number and thus have minimal impact on performance. 
+It is worth noting that additional configuration such as the SciPy sparse library requires is not a unique phenomenon when it comes to FOSS. With the openness there also comes a cost in the form of a technical skill barrier.
+Such is the case here, for the proprietary MATLAB the user does not need to engage with directly with the sparsity format, rather they are given a single format, CSC \cite{gilbert_sparse_1992}, and a small set of functions with which to construct a sparse matrix.
+\footnote{\texttt{spdiags} for banded matrices and the \texttt{sparse} function for triplet format or dense matrix conversion.}
+For SciPy the user will need to confront aspects of sparse matrix construction that they might not otherwise, such as intermediate ``construction'' \cite{eding_sparse_2019} formats like co-ordinate or list-of-list. These construction matrices will then need explicit compression into formats such as CSC or DIA (Figure~\ref{fig:sparse-dia}), which are steps that would be otherwise invisible to the MATLAB user. This is granularity is not a net negative or positive, but  it is double-edged. The additional debt of technical knowledge is off-set by the freedom to scrutinise the process. Such is the case with matrix construction illustrated in Figure~\ref{fig:matlab_vs_python} where two approaches can result in vastly different performance results. The additional technical complexity also permits multiple points of entry which can provide an optimal solution for a specific approach taken, in this case a block matrix construction with SciPy. Figure~\ref{fig:matlab_vs_python}
+clearly shows that SciPy is not as high computationally performance as the optimal M\textsc{atlab} approach, but neither does punish the developer exponentially.
+
+SciPy is also in the process of migrating its sparse matrix infrastructure, so there are likely to breaking changes if a later version of SciPy is used with the current \citetitle{magpie_python_2025}. Listing dependencies does not stop this kind of breaking change, but it does make it more explicit and provide a means of avoiding it. \url{https://docs.scipy.org/doc/scipy/reference/sparse.migration_to_sparray.html#sparse-migration-construction}
+
+
+
+
+Successful project: modularise, standardise, avoid duplication, doing it right, Backward compatibility right license \cite{bangerth_makes_2013}
+
+
+we found that high initial internal documentation seemed to spur evolution in the projects, and that projects that evolved tended toward a common level of structural complexity \cite{darcy_exploring_2010}
