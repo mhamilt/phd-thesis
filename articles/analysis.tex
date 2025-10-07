@@ -398,6 +398,10 @@ This would mean that concatenation of blocks would necessitate the reordering an
 
 \subsection{Python}
 
+Unlike M\textsc{atlab}, Python is an entirely open source programming language with growing use within scientific research \cite{guo_python_2014}. These qualities made Python a obvious first choice for porting the \textsc{magpie} as it conformed to the accessible and reusable principles of the projects open methodology.
+
+% Changes to biharmonic formulation
+For the python variation the biharmonic formulation was update. The new approach was to decompose the operator across the 13 diagonals and to separate them into non-repeating sectors. Each diagonal array is split into 3-5 sectors; each diagonal sector contains between 3-5 unique coefficients. Care must be taken to zero pad diagonals where necessary. The two boundary conditions (flexural and rotational spring stiffness) per edge of the plate mean 8 boundary stiffness coefficients (BSP), which impacts the repetition of diagonal patterns in the distribution of coefficients. Figure \ref{fig:biharm_zoom} illustrates the distribution of unique coefficients within the operator. As in Figure \ref{fig:bh-diag}, Figure \ref{fig:biharm_zoom} shows a repeating central section but an overall lack of repeating diagonal patterns. 
 
 \begin{figure}
     \centering
@@ -405,12 +409,6 @@ This would mean that concatenation of blocks would necessitate the reordering an
     \caption{PLACEHOLDER: Compressed Sparse Column and Diagonal format sparse matrix storage structure.}
     \label{fig:sparse-dia}
 \end{figure}
-
-
-Unlike M\textsc{atlab}, Python is an entirely open source programming language with growing use within scientific research \cite{guo_python_2014}. These qualities made Python a obvious first choice for porting the \textsc{magpie} as it conformed to the accessible and reusable principles of the projects open methodology.
-
-% Changes to biharmonic formulation
-For the python variation the biharmonic formulation was update. The new approach was to decompose the operator across the 13 diagonals and to separate them into non-repeating sectors. Each diagonal array is split into 3-5 sectors; each diagonal sector contains between 3-5 unique coefficients. Care must be taken to zero pad diagonals where necessary. The two boundary conditions (flexural and rotational spring stiffness) per edge of the plate mean 8 boundary stiffness coefficients (BSP), which impacts the repetition of diagonal patterns in the distribution of coefficients. Figure \ref{fig:biharm_zoom} illustrates the distribution of unique coefficients within the operator. As in Figure \ref{fig:bh-diag}, Figure \ref{fig:biharm_zoom} shows a repeating central section but an overall lack of repeating diagonal patterns. 
 
 The Python version of \textsc{magpie} was made publicly available via the python package index (PyPI),%
 \footnote{\url{ https://pypi.org/project/nemus-magpie}} 
@@ -472,7 +470,7 @@ It is clear that computation time scales much better than with M\textsc{atlab}. 
 \begin{figure}
     \centering
     \includegraphics[width=0.49\linewidth]{img/bh_diag.pdf}
-    \includegraphics[width=0.49\linewidth]{img/bh_block.pdf}
+    \includegraphics[width=0.49\linewidth]{img/bh_block_open.pdf}
     \caption{The biharmonic structured by its 13 diagonals and its original block format. Colours differentiate the diagonals and shapes present the boundary sections in the same fashion as the block row colours of the original.}
     \label{fig:bh-diag}
 \end{figure}

@@ -37,10 +37,61 @@ clearly shows that SciPy is not as high computationally performance as the optim
 
 SciPy is also in the process of migrating its sparse matrix infrastructure, so there are likely to breaking changes if a later version of SciPy is used with the current \citetitle{magpie_python_2025}. Listing dependencies does not stop this kind of breaking change, but it does make it more explicit and provide a means of avoiding it. \url{https://docs.scipy.org/doc/scipy/reference/sparse.migration_to_sparray.html#sparse-migration-construction}
 
-
-
-
 Successful project: modularise, standardise, avoid duplication, doing it right, Backward compatibility right license \cite{bangerth_makes_2013}
 
+we found that high initial internal documentation seemed to spur evolution in the projects, and that projects that evolved tended toward a common level of structural complexity \cite{darcy_exploring_2010}]
 
-we found that high initial internal documentation seemed to spur evolution in the projects, and that projects that evolved tended toward a common level of structural complexity \cite{darcy_exploring_2010}
+\section{Existing Acoustics Free Open Source Software}
+
+Before discussing the development of the \texsc{magpie} framework it is worthwhile discussing the state of free open source software in the field of acoustics.
+Section~\ref{sec:aurora} has already covered the case of the Aurora plug-ins created by Angelo Farina and the influence of that software of the open methodology of \textsc{magpie}.
+This section will look at a broader set of acoustics software, all of which would fall under the umbrella of FOSS, though maybe not explicitly.
+Taken as whole they should provide an insight into FOSS practice within acoustics and what areas the community needs to develop.
+
+Each example may not have a direct application within the heritage sector, but as is shown with Aurora, there is no reason that they could not be.
+
+First a clarification, when discussing documentation it is not just the instructions for the use of the software but also the way that is structured. A interconnected set of documents that describe the class hierarchies and function usage.
+The documentation is ideally generated from the source code though documentation comments, this stops duplication, but also provides a means for automation as comments.
+There are many documentation standards in one single language let alone across the three programming languages discussed in this chapter: MATLAB, Python, and C\textsc{++}. 
+MATLAB has its style for comments and generating documentation from them while Python \cite{vanrossum_pep8_2001,goodger_pep257_2001} and C++ have a number of competing standards
+\footnote{Doxygen, Sphinx, HeaderDoc to name a few documentation systems with respective documentation syntax. Distribution of popularity for these documentation systems would be difficult to ascertain without a comprehensive analysis of open source projects. The popular computer programming question-and-answer site stackoverflow provides open meta-data exploration and a query of tags reveals Doxygen to be a clear frontrunner followed by sphynx.\\\url{https://data.stackexchange.com/stackoverflow/query/1069131/get-all-tags}}
+There is a stress \textit{for} documentation for as part of best practice in software sustainability \cite{smith_software_2016}, but less on what that documentation should contain. 
+
+from industry \cite{google_documentation_2025}
+
+
+Documentation strings are not manual, but rather references
+
+Summary line — one-sentence description of purpose.
+Detailed description — what it does, algorithm overview if non-trivial.
+Inputs / parameters — names, types, meaning, and valid ranges.
+Outputs / returns — names, types, and meaning.
+Side effects — global changes, I/O, randomness, etc.
+Exceptions / errors — what conditions trigger them.
+Examples / usage — short reproducible snippet.
+References / related functions — optional but useful in libraries.
+
+
+
+Docmentation should be comprehensive to multiple modes, for usage, for development, and should be also proved functioning self-contained examples \cite{aghajani_software_2020}.
+references what should be in documentation for hardware \cite{oshwa_best_2013}
+
+
+katz_recognizing_2021
+stall_journal_2023
+
+
+Examples are:
+
+\item VK-Gong: \url{https://vkgong.ensta-paris.fr}
+\item ITEMM Open Lab no repo, no doi, no licence, no documentation
+\item NESS: \url{https://github.com/Edinburgh-Acoustics-and-Audio-Group/ness} open source git repository of the Next Generation Sound Synthesis project. A suite of software for the modelling musical instrument systems and acoustic spaces. No user manual, no DOI, version controlled, compiler instructions for arm achitecture
+\item PFFDTD
+
+Vk-gong \url{https://vkgong.ensta-paris.fr} extensive documentation \url{https://vkgong.ensta-paris.fr/files/VKgong1.0_documentation.pdf} based on research in \cite{ducceschi_simulations_2015}
+\cite{nguyen_nonlinear_2019} ``The input parameters of the force are thus the time t0, the temporal width of the interaction Twid, and the amplitude of the force pm in N. All the computations have been implemented using the software vk-gong,25 an open source code developed to handle nonlinear vibrations of plates and built from previous works by the second author.''
+
+and \cite{diaz_fast_2025}
+
+``The open source repository includes utilities for computing analytical modes and eigenvalues of fixed strings, membranes and plates. For plates, we provide a Python implementation of the approach described in [11] to compute non-linear coupling coefficients``
+
