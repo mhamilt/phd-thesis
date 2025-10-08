@@ -54,13 +54,29 @@ First a clarification, when discussing documentation it is not just the instruct
 The documentation is ideally generated from the source code though documentation comments, this stops duplication, but also provides a means for automation as comments.
 There are many documentation standards in one single language let alone across the three programming languages discussed in this chapter: MATLAB, Python, and C\textsc{++}. 
 MATLAB has its style for comments and generating documentation from them while Python \cite{vanrossum_pep8_2001,goodger_pep257_2001} and C++ have a number of competing standards
-\footnote{Doxygen, Sphinx, HeaderDoc to name a few documentation systems with respective documentation syntax. Distribution of popularity for these documentation systems would be difficult to ascertain without a comprehensive analysis of open source projects. The popular computer programming question-and-answer site stackoverflow provides open meta-data exploration and a query of tags reveals Doxygen to be a clear frontrunner followed by sphynx.\\\url{https://data.stackexchange.com/stackoverflow/query/1069131/get-all-tags}}
+\footnote{Doxygen, Sphinx, HeaderDoc to name a few documentation systems with respective documentation syntax. Distribution of popularity for these documentation systems would be difficult to ascertain without a comprehensive analysis of open source projects. The popular computer programming question-and-answer site stackoverflow provides open meta-data exploration and a query of tags reveals Doxygen to be a clear frontrunner followed by Sphynx.\\\url{https://data.stackexchange.com/stackoverflow/query/1069131/get-all-tags}}
 There is a stress \textit{for} documentation for as part of best practice in software sustainability \cite{smith_software_2016}, but less on what that documentation should contain. 
 
 from industry \cite{google_documentation_2025}
 
+Generating documentation comments can that can use markup like HTML to enable cross referencing and easier searching of the source that can be done separate to the development environment
 
-Documentation strings are not manual, but rather references
+The documentation does not just serve an outer community but also provides an aid memoire for
+``Understand your code in 6 months'' \cite{writethedocs_sowftware_2025} 
+
+
+\textcite{writethedocs_sowftware_2025} provides a comprehensive guide on documentation best practice
+
+Documentation is aimed at two audiences, users and developers who can sometimes be the same person.
+
+Documentation should be there to aid developers and user alike, who might sometimes even be the same person.
+
+There is no strict guideline on exactly what developer documentation should contain. A general rule being that documentation should provide a means to ``understand your code in 6 months'' \cite{writethedocs_sowftware_2025} with the consequences of not adhering this rule illustrated multiple times in \textcite{perkel_challenge_2020}.
+
+Such developer documentation is typically contained directly in the comments of the source code. Generating documentation comments can that can use markup like HTML to enable cross referencing and easier searching of the source that can be done separate to the development environment.
+
+
+Documentation comments strings are not manual, but rather references 
 
 Summary line — one-sentence description of purpose.
 Detailed description — what it does, algorithm overview if non-trivial.
@@ -72,13 +88,63 @@ Examples / usage — short reproducible snippet.
 References / related functions — optional but useful in libraries.
 
 
+\url{https://www.software.ac.uk/blog/code-works-isnt-always-code-lasts}
+\url{https://diataxis.fr} 4-point framework of Reference, How-To, Tutorials, Explanation.
 
-Docmentation should be comprehensive to multiple modes, for usage, for development, and should be also proved functioning self-contained examples \cite{aghajani_software_2020}.
+\cite[Section 6.2]{stallman_gnu_1992} warns against the conflation of developer ``Doc Strings'' and a user manual. A stand alone user manual \cite{lehoucq_arpack_1998, },
+
+
+
+
+DOI for the sowftare as a whole and one for each release \cite{smith_software_2016}
+
+
+https://www.software.ac.uk/guide/good-practice-submitting-software-outputs-ref2021
+source code;
+compiled code and/or instructions on how to compile or install the software;
+user documentation;
+test suite and/or quality assurance procedures.
+
+DOI for a companion software paper;
+DOIs for research outputs resulting from use of the software;
+Usage metrics.
+
+Requirements
+
+\url{https://spdx.org/licenses/} SPDX License List
+
+Some requirements not explicitly stated, with a version control repository there also typically comes issue tracking and contribution functionality. Similarly, if a version control repository is absent then a project is also unlikely to contribution and code of conduct.
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{c|c}
+         &  \\
+         & 
+    \end{tabular}
+    \caption{Acoustics FOSS compliance Overview}
+    \label{tab:placeholder}
+\end{table}
+
+
+```Some programming systems, such as Emacs, provide a documentation string for each func- tion, command or variable. You may be tempted to write a reference manual by compiling the documentation strings and writing a little additional text to go around them—but you must not do it. That approach is a fundamental mistake. The text of well-written documentation strings will be entirely wrong for a manual.
+A documentation string needs to stand alone—when it appears on the screen, there will be no other text to introduce or explain it. Meanwhile, it can be rather informal in style.
+The text describing a function or variable in a manual must not stand alone; it appears in the context of a section or subsection. Other text at the beginning of the section should explain some of the concepts, and should often make some general points that apply to several functions or variables. The previous descriptions of functions and variables in the section will also have given information about the topic. A description written to stand alone would repeat some of that information; this redundancy looks bad. Meanwhile, the informality that is acceptable in a documentation string is totally unacceptable in a manual.
+The only good way to use documentation strings in writing a good manual is to use them as a source of information for writing good text.``
+
+- Reference (Developer) Documentation
+- A User Guide
+- A Unique Identifier (DOI)
+- A Version controlled
+
+
+Documentation should be comprehensive to multiple modes, for usage, for development, and should be also proved functioning self-contained examples \cite{aghajani_software_2020}.
 references what should be in documentation for hardware \cite{oshwa_best_2013}
 
 
-katz_recognizing_2021
-stall_journal_2023
+Creative Commons discourages usage of its licence for software \cite{cc_can_2025}
+\footnote{Although CC-BY-NC-SA-4.0 is ``one-way'' and CC0 fully GPL ``compatible'' they are still discouraged by the Creative Commons \cite{cc_faq_2016} } and no creative commons licence is Open Source Initiative approved \cite{osi_licenses_2025,spdx_licenses_2025}.
+
+https://spdx.org/licenses/
 
 
 Examples are:

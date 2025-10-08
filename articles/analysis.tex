@@ -1,8 +1,8 @@
 \chapter{Analysis}\label{ch:analysis}
 
-This chapter introduces \textsc{magpie}, a free/libre, open, and citable toolkit for the analysis, visualisation, and pedagogical use of plate vibration models in musical acoustics. Whereas the previous chapter centred on \emph{user interaction} with digital reconstructions of cultural heritage—through the San Colombano keyboard project—our focus here shifts to \emph{analysis}, in particular the determination of wood properties that underpin conservation practice. The ability to extract elastic constants from non-intrusive vibration measurements addresses a persistent challenge in both the conservation of antique instruments and the making of new ones. Within the broader framework of \textsc{NEMUS}, \textsc{magpie} extends the project’s goals by providing curators, conservators, and instrument makers with an accessible, open-source environment in which plate models can be simulated, visualised, and compared to experimental data \cite{nemus_site,nemus_project_page,cordis_nemus,nemus_background}.
+This chapter introduces \textsc{magpie}, a free/libre, open, and citable toolkit for the analysis, visualisation, and pedagogical use of plate vibration models in musical acoustics. Whereas the previous chapter centred on \emph{user interaction} with digital reconstructions of cultural heritage—through the San Colombano keyboard project—our focus here shifts to \emph{analysis}, in particular the determination of wood properties that underpin conservation practice. The ability to extract elastic constants from non-intrusive vibration measurements addresses a persistent challenge in both the conservation of antique instruments and the making of new ones. Within the broader framework of \textsc{NEMUS}, \textsc{magpie} extends the project’s goals by providing curators, conservators, and instrument makers with an accessible, open-source environment in which plate models can be simulated, visualised, and compared to experimental data.
 
-For both the conservation of historical instruments and the making of new ones or faithful copies, reliable material parameters are indispensable. In wooden soundboards and plates, the elastic behaviour is orthotropic, with distinct properties along and across the grain. Conventional destructive or quasi-destructive tests (bending, tensile, compression) are impractical for whole instruments and generally incompatible with curatorial practice. Conversely, vibration-based measurements—e.g., eigenfrequency/eigenshape identification and Chladni visualisation—offer a minimally invasive alternative that can be performed \emph{in situ}. Recent work in \textsc{NEMUS} has produced a practical inverse-modelling method to estimate the rectangular orthotropic plate elastic constants from measured modes and Chladni patterns via a linear least-squares formulation \cite{ducceschi_orthotropic_2024,ducceschi_arxiv_2023,ducceschi_uop_2024}. This approach is robust to boundary condition choices, leads to a transparent matrix inversion for the constants, and is well-suited to museum workflows where repeatable, low-risk procedures are essential. In this chapter, we package, document, and expose this capability to non-specialists through \textsc{magpie}, with particular attention to reproducibility and ease of use in a web browser.
+For both the conservation of historical instruments and the making of new ones or faithful copies, reliable material parameters are indispensable. In wooden soundboards and plates, the elastic behaviour is orthotropic, with distinct properties along and across the grain. Conventional destructive or quasi-destructive tests (bending, tensile, compression) are impractical for whole instruments and generally incompatible with curatorial practice. Conversely, vibration-based measurements—e.g., eigenfrequency/eigenshape identification and Chladni visualisation—offer a minimally invasive alternative that can be performed \emph{in situ}. Recent work in \textsc{NEMUS} has produced a practical inverse-modelling method to estimate the rectangular orthotropic plate elastic constants from measured modes and Chladni patterns via a linear least-squares formulation \cite{ducceschi_method_2024,ducceschi_open_2024}. This approach is robust to boundary condition choices, leads to a transparent matrix inversion for the constants, and is well-suited to museum workflows where repeatable, low-risk procedures are essential. In this chapter, we package, document, and expose this capability to non-specialists through \textsc{magpie}, with particular attention to reproducibility and ease of use in a web browser.
 
 Plate simulations, eigenshape rendering (including Chladni plots), modal parameter estimation, and impulse-response synthesis are often available only in proprietary software stacks or bespoke research scripts with steep learning curves. The immediate need, expressed by both curators and instrument makers, is for an open, well-documented toolchain that (i) implements standard thin-plate models (e.g., Kirchhoff–Love and variants) with elastic boundary restraints, (ii) supports inverse estimation of orthotropic constants from museum-grade measurements, and (iii) lowers the barrier to entry via an interactive browser interface. \textsc{magpie} addresses this gap by consolidating numerics (sparse finite-difference biharmonics, eigenanalysis), analysis utilities (mode sorting, Chladni rendering), and inversion routines into a coherent, cross-language codebase released under a permissive licence and distributed through the \textsc{NEMUS} organisation on GitHub \cite{nemus_github}.
 
@@ -13,13 +13,34 @@ Beyond supporting conservation practice, \textsc{magpie} is intended as a teachi
 \paragraph{Scope of the chapter.}
 The remainder of the chapter develops the design choices behind \textsc{magpie} and their implications for conservation, lutherie, and education. We (i) situate the model choices and numerical methods, with an emphasis on transparent sparse operators suitable for inverse workflows; (ii) describe the cross-language architecture and the web-facing interface, designed for museum deployment; and (iii) demonstrate a representative case study: estimation of elastic constants from measured modes and Chladni patterns on a rectangular plate. Throughout, we prioritise replicability (scripts and notebooks), citeable artefacts (software, datasets, configurations), and alignment with museum constraints on access, handling, and documentation, consistent with the mission of \textsc{NEMUS}.
 
-\section{Existing Tools: ITEMM OpenLab}
+\section{Existing Tools: ITEMM OpenLab [Under Construction]}
+
+
+
+\begin{table}[]
+	\centering
+	\begin{tabular}{|r|l|c|c|c|c|l|}
+		\hline
+		\textbf{Project} & \textbf{Source}        & \textbf{VCS} & \textbf{Reference}         & \textbf{Manual}            & \textbf{Licence}                             & \textbf{DOI}          \\\hline
+		\textit{Aurora}           & Yes\textsuperscript{*} & Yes          & No                         & Yes                        & GPL-3.0-or-later                             & No                    \\
+		\textit{ITA Toolbox}      & Yes                    & Yes          & No                         & Partial\textsuperscript{*} & BSD-4-Clause\textsuperscript{\textdagger}    & No\textsuperscript{*} \\
+		\textit{ITEMM OpenLab}    & No\textsuperscript{*}  & No           & No                         & No                         & CC-BY-SA\textsuperscript{*\textdagger}       & No                    \\
+		\textit{NESS}             & Yes                    & Yes          & Partial\textsuperscript{*} & No                         & MIT                                          & No                    \\
+		\textit{PFFDTD}           & Yes                    & Yes          & No                         & Yes                        & MIT                                          & No                    \\
+		\textit{VK-Gong}          & Yes                    & No           & No                         & Yes                        & CC-BY-NC-SA-4.0\textsuperscript{\textdagger} & No                    \\
+		\textit{YIN}              & Yes                    & No           & No                         & Partial\textsuperscript{*} & Bespoke\textsuperscript{*\textdagger}        & No                    \\
+		\hline
+	\end{tabular}
+	\caption{Acoustics FOSS compliance Overview. \textdagger Not Open Source Initiative approved.\\ * See relevant project section for further discussion.}
+	\label{tab:placeholder}
+\end{table}
+
 
 \textsc{magpie} is not the first attempt to make plate analysis accessible, nor is it the only tool marketed as ``free.'' The Institut Technologique Européen des Métiers de la Musique (ITEMM) maintains an online platform, ITEMM Open Lab,%
 \footnote{\url{https://www.openlab-itemm.com}} which provides luthiers and makers with resources ranging from datasets of materials to CAD models of instrument parts. Most relevant for present purposes, OpenLab also includes a suite of calculators for acoustical and mechanical properties of wood, offering workshop access to methods otherwise restricted to laboratory environments. 
 
 Among the available tools are calculators for string behaviour under tension, resonance frequencies of soundboards and bridges, and a plate-stiffness tool, \textit{Rigidité de plaques},%
-\footnote{\url{https://www.openlab-itemm.com/calculateur-mecanique/rigidite-de-plaques-1/}} which implements the methodology of \textcite{mcintyre_measuring_1988} to estimate elastic constants. The initiative is admirable: ITEMM has put genuinely useful processes within reach of practitioners who might otherwise lack the means. But the openness has limits.
+\footnote{\url{https://www.openlab-itemm.com/calculateur-mecanique/rigidite-de-plaques-1/}} which implements the methodology of \textcite{mcintyre_measuring_1988} to estimate elastic constants. The initiative is admirable: ITEMM has made genuinely useful processes accessible to practitioners who might otherwise lack the means. But the openness has limits.
 
 Although freely accessible once registered, OpenLab tools follow a distribution model that differs from the approach taken here. In Stallman’s terms, they are closer to ``free as in beer'' than ``free as in freedom'' \cite{stallman_why_2007}. 
 The code that underpins calculators such as \textit{Rigidité de plaques} is delivered through the browser and can, in principle, be examined,%
@@ -41,7 +62,7 @@ The modelling strategy underpinning \textsc{magpie} rests on classical thin-plat
 
 \subsection{Kirchhoff--Love framework}
 
-The Kirchhoff--Love describes thin plates undergoing bending deformation \cite{love_small_1888}. For a homogeneous isotropic plate of thickness $\zeta$ and uniform density $\rho$, the transverse displacement $u = u(x,y,t)$ over a rectangular domain $D = [0,L_x]\times[0,L_y]$ satisfies the following partial differential equation \cite{graff_wave_1991,bilbao_numerical_2009}:
+The Kirchhoff--Love describes thin plates undergoing bending deformation \cite{love_small_1888}. For a homogeneous isotropic plate of thickness $\zeta$ and uniform density $\rho$, the transverse displacement $u = u(x,y,t)$ over a rectangular domain ${\mathcal D} = [0,L_x]\times[0,L_y]$ satisfies the following partial differential equation \cite{graff_wave_1991,bilbao_numerical_2009}:
 %
 \begin{equation}
 \rho \zeta \frac{\partial^2 u}{\partial t^2}
@@ -86,35 +107,61 @@ Its rate of change is given by
 + \frac{\partial u}{\partial t}(x_p,y_p,t) f(t).
 \end{equation}
 %
-In the absence of losses and external forcing, energy is conserved. Boundary terms, involving shear forces and bending moments, determine which constraints (free, clamped, simply supported) yield vanishing flux at the edges. For instance, along an edge normal to the $x$-axis,
-\begin{equation}
-F_x = D\!\left(\frac{\partial^3 u}{\partial x^3}+(2-\nu)\frac{\partial^3 u}{\partial x \partial y^2}\right), \quad
-M_x = -D\!\left(\frac{\partial^2 u}{\partial x^2}+\nu\frac{\partial^2 u}{\partial y^2}\right),
-\end{equation}
+In the absence of losses and external forcing, energy is conserved. Boundary terms, involving shear forces and bending moments, determine which constraints (free, clamped, simply-supported) yield vanishing flux at the edges. For instance, along an edge normal to the $x$-axis,
+\begin{subequations}
+\begin{eqnarray}
+F_x &=& D\!\left(\frac{\partial^3 u}{\partial x^3}+(2-\nu)\frac{\partial^3 u}{\partial x \partial y^2}\right), \\
+M_x &=& -D\!\left(\frac{\partial^2 u}{\partial x^2}+\nu\frac{\partial^2 u}{\partial y^2}\right),
+\end{eqnarray}
+\end{subequations}
 and the corresponding boundary contributions are
-\begin{equation}
-B_{x=L_x} = \int_0^{L_y}\!\left(\frac{\partial u}{\partial t}F_x + \frac{\partial^2 u}{\partial t\partial x}M_x\right)\Big|_{x=L_x} dy, \qquad
-B_{x=0} = -\int_0^{L_y}\!\left(\frac{\partial u}{\partial t}F_x + \frac{\partial^2 u}{\partial t\partial x}M_x\right)\Big|_{x=0} dy.
-\end{equation}
+\begin{subequations}
+\begin{eqnarray}
+B_{x=L_x} &=& \int_0^{L_y}\!\left(\frac{\partial u}{\partial t}F_x + \frac{\partial^2 u}{\partial t\partial x}M_x\right)\Big|_{x=L_x} dy, \\
+B_{x=0} &=& -\int_0^{L_y}\!\left(\frac{\partial u}{\partial t}F_x + \frac{\partial^2 u}{\partial t\partial x}M_x\right)\Big|_{x=0} dy.
+\end{eqnarray}
+\end{subequations}
 At free edges, $F_x=M_x=0$; at clamped edges, $u=\partial_x u=0$; at simply supported edges, $u=M_x=0$. An additional compatibility condition occurs at the intersection of two free sides:
-\begin{equation}
+\begin{equation}\label{eq:CornerCndCnt}
 \frac{\partial^2 u}{\partial x \partial y} = 0.
 \end{equation}
 To interpolate between the classical edge conditions, elastic supports may be added at the boundaries. Each edge is coupled to springs that resist both displacement and rotation, with stiffness constants $K_\circ$ and $R_\circ$. For example, at $x=0$ and $x=L_x$ the conditions read
 %
-\begin{subequations}
-\begin{align}
-K_{x=L_x} u(L_x,y,t) &= F_x(L_x,y,t), & R_{x=L_x} \frac{\partial u}{\partial x}(L_x,y,t) &= M_x(L_x,y,t), \\
-K_{x=0} u(0,y,t) &= -F_x(0,y,t), & R_{x=0} \frac{\partial u}{\partial x}(0,y,t) &= -M_x(0,y,t).
-\end{align}
+\begin{subequations}\label{eq:ElasticBCsCnt}
+\begin{eqnarray}
+K_{x=L_x} u(L_x,y,t) &=& F_x(L_x,y,t), \\ 
+R_{x=L_x} \frac{\partial u}{\partial x}(L_x,y,t) &=& M_x(L_x,y,t), \\
+K_{x=0} u(0,y,t) &=& -F_x(0,y,t), \\ 
+R_{x=0} \frac{\partial u}{\partial x}(0,y,t) &=& -M_x(0,y,t).
+\end{eqnarray}
 \end{subequations}
 %
-Analogous expressions hold along the $y$-edges. In the limits $K_\circ\to 0$ or $R_\circ\to 0$ one recovers free boundaries, whereas $K_\circ\to\infty$ or $R_\circ\to\infty$ enforce zero displacement or zero slope, respectively.
+Analogous expressions hold along the $y$-edges. In the limits $K_\circ\to 0$ or $R_\circ\to 0$, one recovers free boundaries, whereas $K_\circ\to\infty$ or $R_\circ\to\infty$ enforces zero displacement or zero slope, respectively. Note that eight such constants, two per edge, must be specified, as per Figure \ref{fig:elasticCnts}.
+\begin{figure}
+\begin{verbatim}
+    
+                          [K_{xL_y},R_{xL_y}]
+                  ---------------------                       ^
+                 |                     |                      |
+                 |                     |                      | 
+ [K_{0y},R_{0y}] |                     |                      |
+                 |                     |                       L_y
+                 |                     |[K_{L_xy},R_{L_xy}]   |
+                 |                     |                      |
+                 |                     |                      |
+                  ---------------------                       ˇ
+               [K_{x0},R_{x0}]
+
+                 <-------- L_x -------->
+
+\end{verbatim}
+\caption{Representation of the eight edge elastic constants.}\label{fig:elasticCnts}
+\end{figure}
 
 \subsection{Finite-difference discretisation}
 
-The continuous problem is discretised on a uniform grid with spacing $h$. Denoting the discrete displacement by $u_{l,m}$, finite-difference operators are defined as
-%
+
+The finite difference method can be used to approximate \eqref{eq:plate_pde} along with the boundary conditions of elastic type \eqref{eq:ElasticBCsCnt}. The first step is to discretise the spatial domain by introducing a uniform grid along the \(x\) and \(y\) directions, with grid spacing \(h\). The domain \(\mathcal D\) is then represented by a two-dimensional grid containing \(N := (N_x + 1)(N_y + 1)\) points, where \(N_x\) and \(N_y\) denote the number of subintervals along the \(x\)- and \(y\)-axes, respectively. The continuous displacement \(u(x,y,t)\) is replaced by the grid function \(u_{l,m}\) at the grid locations $x = lh$, $y=mh$. Derivatives are approximated using centred differences \cite{szilard_theories_2004}:
 \begin{subequations}
 \begin{align}
 \delta_x u_{l,m} &= \tfrac{1}{2h}(u_{l+1,m}-u_{l-1,m}) \approx \partial_x u, \\
@@ -122,27 +169,34 @@ The continuous problem is discretised on a uniform grid with spacing $h$. Denoti
 \delta_{xxxx} u_{l,m} &= \delta_{xx}(\delta_{xx}u_{l,m}) \approx \partial_{xxxx} u,
 \end{align}
 \end{subequations}
-%
-with similar definitions in $y$. The biharmonic operator is then approximated as
-%
+with similar definitions in $y$. Boundary conditions are enforced by direct discretisation of \eqref{eq:ElasticBCsCnt}. As an example, for the edge at $x=0$, one has:
+\begin{subequations}
+\begin{eqnarray}
+K_{x=0} u_{0,m} &=& -D(\delta_{xx}+(2-\nu)\delta_{yy}) \delta_x u_{0,m}, \\
+R_{x=0} \delta_x u_{0,m} &=& D(\delta_{xx}+\nu\delta_{yy}) u_{0,m},
+\end{eqnarray}
+\end{subequations}
+with analogous discretisations enforced at the other edges. The corner condition \eqref{eq:CornerCndCnt} is discretised as:
 \begin{equation}
-\Delta\Delta \approx \delta_{xxxx} + \delta_{yyyy} + 2 \delta_{xx}\delta_{yy}.
+\delta_x \delta_y u_{0,0} = 0.
 \end{equation}
-%
-Boundary conditions are enforced by modifying stencil coefficients, e.g.
-%
+The biharmonic operator is then approximated as:
 \begin{equation}
-K_{x=0} u_{0,m} = -D(\delta_{xx}+(2-\nu)\delta_{yy}) \delta_x u_{0,m}, \qquad
-R_{x=0} \delta_x u_{0,m} = D(\delta_{xx}+\nu\delta_{yy}) u_{0,m}.
+B := (\delta_{xx} + \delta_{yy})^{2} = \delta_{xxxx} + 2\delta_{xx}\delta_{yy} + \delta_{yyyy} \approx
+\Delta\Delta.
 \end{equation}
+It is convenient to recast the two-dimensional grid function $u_{l,m}$ into a column vector \({\bf u}(t)\) of length \(N\). As illustrated in Figure~\ref{fig:fdtd-linear}, this vectorisation is obtained by stacking successive strips of grid points with the same index \(l\).
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{img/biharm-grid.pdf}
+    \caption{Arrangement of the finite difference plate as a linear vector.}
+    \label{fig:fdtd-linear}
+\end{figure}
+The biharmonic, then, becomes the matrix ${\bf B}\in {\mathbb R}^{N\times N}$. 
 %
-At corners, additional constraints like
-%
-\begin{equation}
-\delta_x \delta_y u_{0,0} = 0
-\end{equation}
-%
-must be imposed.
+
+The two
+
 
 \subsection{Eigenvalue formulation and modal system}
 
@@ -185,62 +239,62 @@ with $J$ a sparse excitation vector. Transforming with $w(t) = Q^{-1}u(t)$ yield
 where $C$ is a (possibly mode-dependent) damping matrix. The system can be truncated to the first $N$ modes in a frequency band of interest, allowing efficient time integration with exact update formulas for lossy harmonic oscillators \cite{cieslinski_exact_2011}.
 
 
-\section{Context}
+% \section{Context}
 
-The Kirchhoff-Love theory of plates describes the dynamics of thin sheet materials under bending. Assuming constant thickness and density, and with the further hypothesis of isotropy, a linear partial differential equation describing wave propagation is, thus \cite{graff_wave_1991,bilbao_numerical_2009}:
+% The Kirchhoff-Love theory of plates describes the dynamics of thin sheet materials under bending. Assuming constant thickness and density, and with the further hypothesis of isotropy, a linear partial differential equation describing wave propagation is, thus \cite{graff_wave_1991,bilbao_numerical_2009}:
 
-\begin{equation}\label{eq:KLCnt}
-\rho \zeta \frac{\partial^2 u}{\partial t^2} = - D \Delta\Delta u - 2\rho\zeta\sigma\frac{\partial u}{\partial t} + \delta(x-x_p)\delta(y-y_p)f(t).
-\end{equation}
+% \begin{equation}\label{eq:KLCnt}
+% \rho \zeta \frac{\partial^2 u}{\partial t^2} = - D \Delta\Delta u - 2\rho\zeta\sigma\frac{\partial u}{\partial t} + \delta(x-x_p)\delta(y-y_p)f(t).
+% \end{equation}
 
-see, for example, the book by Szilard for an explanation \cite{szilard_theories_2004}.
+% see, for example, the book by Szilard for an explanation \cite{szilard_theories_2004}.
+
+% % \begin{figure}
+% %     \centering
+% %     \includegraphics[width=0.5\linewidth]{img/boundary-types.png}
+% %     \caption{Enter Caption}
+% %     \label{fig:boundary-types}
+% % \end{figure}
+
+% % \begin{figure}
+% %     \centering
+% %     \includegraphics[width=0.3\linewidth]{img/boundary-conditions-plot.png}
+% %     \caption{Enter Caption}
+% %     \label{fig:boundary-conditions-plot}
+% % \end{figure}
+
+% The origins of \textsc{magpie} extend from a set of M\textsc{atlab} scripts used internally at the NEMUS projects. The M\textsc{atlab} scripts were created for computing the eigenmodes for an isotropic rectangular Kirschhoff-Love plate model. Additionally, the  plate modelled is under general elastic boundary conditions, which is to say that the boundary coefficients for each edge of the plate are computed parametrically using two boundary constants representing flexural and rotational stiffness.
+% The script was therefore multi-modal with use cases of calculating the discrete biharmonic matrix for a finite difference scheme. This generated biharmonic can be used directly with an eigensolver for calculation of the modes and modal shapes, either for analysis or visualisation.  An impulse response of the plate can be generated through a finite difference simulation. Finally, the script was capable of being used as a tool for estimation of the Young's modulus for a real plate. For this process, an experimental setup is created where a plate is put under boundary conditions. An impulse response of the plate can be measured using an impact hammer from which the modal frequencies of the plate can be retrieved. Starting from a best guess Young's estimation, the script could then be used to simulate the physical experiment under multiple iterations with least-squares regression and provide an estimation. Process is to get non-dimensional frequencies, then least-square (LS) optimisation.
+
+% The script consolidated calculation of the biharmonic coefficients. These coefficients were generated through M\textsc{atlab} symbolic tool box. Given there generated nature, the coefficient calculations are understandably complex and can consist of over 400 arithmetic operations for a single coefficient. 
+% % Derivation of system as I understand originating with \cite{li_exact_2009,li_simple_2009}
+% For the discrete biharmonic operator $B_{\Delta\Delta}$ coefficient calculations are abstracted into bands for structuring the biharmonic into sub-blocks of $B_{ii}$ pentagonal, $B_{ii\pm 1}$ tridiagonal, and $B_{ii\pm 2}$ diagonal matrices (Figure~\ref{fig:biharm-subblocks}). 
 
 % \begin{figure}
-%     \centering
-%     \includegraphics[width=0.5\linewidth]{img/boundary-types.png}
-%     \caption{Enter Caption}
-%     \label{fig:boundary-types}
+% 	\centering    
+% 	\begin{equation*}
+%     {
+%        \renewcommand{\arraystretch}{0.91} 
+%        \hspace*{-1.2cm} 
+% 		B_{\Delta\Delta} = \begin{bmatrix}
+% 			B_{11} & B_{12} & B_{13}     &            &            &            \\
+% 			B_{21} & B_{22} & B_{23}     & B_{24}     &            &            \\
+% 			B_{31} & B_{32} & B_{33}     & B_{34}     & B_{35}     &            \\
+% 			       & \ddots & \ddots     & \ddots     & \ddots     & \ddots     \\
+% 			       &        & B_{M_{13}} & B_{M_{12}} & B_{M_{11}} & B_{M_{10}} \\
+% 			       &        &            & B_{M_{02}} & B_{M_{01}} & B_{M_{00}}
+% 		\end{bmatrix}
+%     }
+% 	\end{equation*}
+% 	\[\downarrow\]
+%     \includegraphics[width=0.39\linewidth]{img/biharmonic-block-M.pdf}
+% 	\caption{Sparsity pattern for the biharmonic divided into  \(N_y \times N_y\) diagonal sub-blocks.\\ $M_{yx}$ is the sub-block at location $B_{(N_y-y)(N_y-x)}$}
+% 	\label{fig:biharm-subblocks}
 % \end{figure}
 
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=0.3\linewidth]{img/boundary-conditions-plot.png}
-%     \caption{Enter Caption}
-%     \label{fig:boundary-conditions-plot}
-% \end{figure}
+% Intimate knowledge of the script's structure was required in order to use it, thus limiting its portability. As a piece of research software with multiple use cases across the field and in education it was decided that this script would be developed into an open source software. In keeping with the FAIR principles, the tool would be developed to be easily reusable and interoperable with current acoustics experimental methodology.
 
-The origins of \textsc{magpie} extend from a set of M\textsc{atlab} scripts used internally at the NEMUS projects. The M\textsc{atlab} scripts were created for computing the eigenmodes for an isotropic rectangular Kirschhoff-Love plate model. Additionally, the  plate modelled is under general elastic boundary conditions, which is to say that the boundary coefficients for each edge of the plate are computed parametrically using two boundary constants representing flexural and rotational stiffness.
-The script was therefore multi-modal with use cases of calculating the discrete biharmonic matrix for a finite difference scheme. This generated biharmonic can be used directly with an eigensolver for calculation of the modes and modal shapes, either for analysis or visualisation.  An impulse response of the plate can be generated through a finite difference simulation. Finally, the script was capable of being used as a tool for estimation of the Young's modulus for a real plate. For this process, an experimental setup is created where a plate is put under boundary conditions. An impulse response of the plate can be measured using an impact hammer from which the modal frequencies of the plate can be retrieved. Starting from a best guess Young's estimation, the script could then be used to simulate the physical experiment under multiple iterations with least-squares regression and provide an estimation. Process is to get non-dimensional frequencies, then least-square (LS) optimisation.
-
-The script consolidated calculation of the biharmonic coefficients. These coefficients were generated through M\textsc{atlab} symbolic tool box. Given there generated nature, the coefficient calculations are understandably complex and can consist of over 400 arithmetic operations for a single coefficient. 
-% Derivation of system as I understand originating with \cite{li_exact_2009,li_simple_2009}
-For the discrete biharmonic operator $B_{\Delta\Delta}$ coefficient calculations are abstracted into bands for structuring the biharmonic into sub-blocks of $B_{ii}$ pentagonal, $B_{ii\pm 1}$ tridiagonal, and $B_{ii\pm 2}$ diagonal matrices (Figure~\ref{fig:biharm-subblocks}). 
-
-\begin{figure}
-	\centering    
-	\begin{equation*}
-    {
-       \renewcommand{\arraystretch}{0.91} 
-       \hspace*{-1.2cm} 
-		B_{\Delta\Delta} = \begin{bmatrix}
-			B_{11} & B_{12} & B_{13}     &            &            &            \\
-			B_{21} & B_{22} & B_{23}     & B_{24}     &            &            \\
-			B_{31} & B_{32} & B_{33}     & B_{34}     & B_{35}     &            \\
-			       & \ddots & \ddots     & \ddots     & \ddots     & \ddots     \\
-			       &        & B_{M_{13}} & B_{M_{12}} & B_{M_{11}} & B_{M_{10}} \\
-			       &        &            & B_{M_{02}} & B_{M_{01}} & B_{M_{00}}
-		\end{bmatrix}
-    }
-	\end{equation*}
-	\[\downarrow\]
-    \includegraphics[width=0.39\linewidth]{img/biharmonic-block-M.pdf}
-	\caption{Sparsity pattern for the biharmonic divided into  \(N_y \times N_y\) diagonal sub-blocks.\\ $M_{yx}$ is the sub-block at location $B_{(N_y-y)(N_y-x)}$}
-	\label{fig:biharm-subblocks}
-\end{figure}
-
-Intimate knowledge of the script's structure was required in order to use it, thus limiting its portability. As a piece of research software with multiple use cases across the field and in education it was decided that this script would be developed into an open source software. In keeping with the FAIR principles, the tool would be developed to be easily reusable and interoperable with current acoustics experimental methodology.
-
-\section{Proposal}
+\section{Development}
 
 % - The aim  for an open source library for modal analysis plate that is open source language agnostic.
 %   - Project is open source available on the Nemus project's GitHub https://github.com/orgs/Nemus-Project/teams/magpie/repositories
@@ -252,22 +306,21 @@ Intimate knowledge of the script's structure was required in order to use it, th
 %     - Time domain simulations
 %   - an interface to the library through jupyter notebooks\\
 
-The proposal was the creation of a tool \textsc{magpie} which would collect together the functionality for computing a discrete biharmonic operator with parametric boundary conditions, an eigensolver, impulse response generation through modal time integration, and Young's modulus estimation. The tool could also function as a teaching aid for lecturers and as an analysis tool for researchers and industry stakeholders. \textsc{magpie} was originally planned exclusively as a library for the Python programming language. Early in development, it became apparent that \textsc{magpie} would have greater reach as a teaching aid and analysis tool if implemented across multiple programming languages. It was devised that  \textsc{magpie} would instead be a core set of functions replicated across languages, beginning with M\textsc{atlab} given its prevalence within academia and industry. The original script on which \textsc{magpie} is based was written in M\textsc{atlab} and could function as a know working example. This would avoid an platform specific problem that may arise during the refactoring  process. After the initial refactor in M\textsc{atlab}, the set of functions could be replicated in other programming languages, ultimately Python and C\textsc{++}. The structure of \textsc{magpie} would allow the ability to design interfaces separately, which would lead to a user-interface using the Jupyter notebooks platform.
+The proposal was the creation of a tool \textsc{magpie} which would collect together the functionality for computing a discrete biharmonic operator with parametric boundary conditions, an eigensolver, impulse response generation through modal time integration, and Young's modulus estimation. The tool could also function as a teaching aid for lecturers and as an analysis tool for researchers and industry stakeholders. \textsc{magpie} was originally planned exclusively as a library for the Python programming language. Early in development, it became apparent that \textsc{magpie} would have greater reach as a teaching aid and analysis tool if implemented across multiple programming languages. It was devised that  \textsc{magpie} would instead be a core set of functions replicated across languages, beginning with M\textsc{atlab} given its prevalence within academia and industry. The original script on which \textsc{magpie} is based was written in M\textsc{atlab} and could function as a known working example. This would avoid a platform-specific problem that may arise during the refactoring process. After the initial refactor in M\textsc{atlab}, the set of functions could be replicated in other programming languages, ultimately Python and C\textsc{++}. The structure of \textsc{magpie} would enable the design of interfaces separately, leading to a user interface that utilises the Jupyter Notebooks platform.
 
 \subsection{Design}\label{design}
 
-Source code was structured using the model-view-controller (MVC) paradigm \cite{krasner_description_1988}, splitting the software into three major components: data (Model), interface (view), and core logic (controller). The MVC approach was taken after the case study of Aurora (see Section \ref{sec:aurora}) where the interweaving of interface and logic made the source code much more difficult to maintain. For \textsc{magpie}, the logic and interface have been separated. The logic is organised into a library, allowing for easy translations across platforms. Source code for the interface to the logic is contained in a separate repository. By separating logic and interface, further developments can be made to one component without impacting the other. 
-The interface repository contains a git submodule reference to the logic repository, such as used in the meta-repository for the harpsichord interface.
-The model (or data) is supplied by the user and would comprise of the measured modal frequencies of a thin plate \cite{duran_use_2025}.
+The source code was structured using the model-view-controller (MVC) paradigm \cite{krasner_description_1988}, splitting the software into three major components: data (Model), interface (View), and core logic (Controller). The MVC approach was taken after the case study of Aurora (see Section \ref{sec:aurora}), where the interweaving of interface and logic made the source code much more difficult to maintain. For \textsc{magpie}, the logic and interface have been separated. The logic is organised into a library, allowing for easy translations across platforms. Source code for the interface to the logic is contained in a separate repository. By separating logic and interface, further developments can be made to one component without impacting the other. 
+The interface repository contains a git submodule reference to the logic repository, as used in the meta-repository for the harpsichord interface.
+The user supplies the model (or data), which would comprise the measured modal frequencies of a thin plate \cite{duran_use_2025}.
 
-In addition, this format of interacting with the library means that only affected coefficients need to be recalculated and is, therefore, more intuitive than a script structure. Users can alter the number of grid points within the biharmonic to trade-off between responsiveness and accuracy. First, users can explore the parameter space with fewer grid points for quicker computation. When an area of interest is found, the effective resolution can be increased for higher-quality visualisations. Lastly, Jupyter Notebooks allows for the potential to provide \textsc{magpie} as a service on a public server. This would remove the need for installation of additional libraries and dependencies, lowering the barrier of entry to \textsc{magpie}. 
+In addition, this format of interacting with the library means that only the affected coefficients need to be recalculated, and it is, therefore, more intuitive than a script structure. Users can alter the number of grid points within the biharmonic to trade off between responsiveness and accuracy. First, users can explore the parameter space with fewer grid points, resulting in quicker computation. When an area of interest is identified, the effective resolution can be increased to achieve higher-quality visualisations. Lastly, Jupyter Notebooks allows for the potential to provide \textsc{magpie} as a service on a public server. This would remove the need for installation of additional libraries and dependencies, lowering the barrier of entry to \textsc{magpie}. 
 
 
 \subsection{M\textsc{atlab}}
 
-The first iteration of \textsc{magpie} was a refactoring of the original 600 line M\textsc{atlab} script to a multi-purpose software library for plate analysis.  
-The refactoring process consisted of decomposing the source into blocks of logic and extracting reusable functions subsequently modularising the code..
-The primary goal of the initial M\textsc{atlab} version was to separate the source in order that each component could be developed in isolation without impacting the functionality of other components. The version control software \texttt{git} was used to track changes and permit distribution using the GitHub platform \cite{magpie_matlab_2025}.
+The first iteration of \textsc{magpie} was a refactoring of an original 600-line MATLAB script to a multi-purpose software library for plate analysis. The refactoring process consisted of decomposing the source into blocks of logic and extracting reusable functions, subsequently modularising the code.
+The primary goal of the initial M\textsc{atlab} version was to separate the source so that each component could be developed in isolation without impacting the functionality of other components. The version control software \texttt{git} was used to track changes and permit distribution using the GitHub platform \cite{magpie_matlab_2025}.
 
 % Originals:
 % \url{https://github.com/Nemus-Project/magpie-matlab/blob/d455a8ebb3c157883b68498a3a7f3ded9a6cd336/biharmonicEigs.m}
@@ -297,12 +350,7 @@ B_{\Delta\Delta} \approx \delta\Delta\delta\Delta = (\delta_{xx} + \delta_{yy})^
 \Delta\Delta = \frac{\delta^4}{\delta x^4} + 2\frac{\delta^4}{\delta x^2 \delta y2} + \frac{\delta^4}{\delta y^4}
 \]
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\linewidth]{img/biharm-grid.pdf}
-    \caption{Arrangement of the finite difference plate as a linear vector.}
-    \label{fig:fdtd-linear}
-\end{figure}
+
 
 % When applied to a grid point away from the boundary, the resulting 13-point biharmonic difference operator has coefficients as per Figure \ref{fig:PlateFD}. Closer to the boundary, the coefficients must be specialised to account for the boundary conditions. A discretisation of, e.g. \eqref{eq:BCsCnt2} is given here as:
 
@@ -676,6 +724,8 @@ and with ``adjusted'' constraints to closer match the frequencies. In the adjust
 \section{Conclusions}\label{sec:Conclusions}
 
 The \textsc{magpie} software is still in its infancy, though we hope that having followed best practice, giving it a clear structure, FOSS licence and documentation, will encourage engagement and development \cite{colazo_licence_2009} with the wider community and that \textsc{magpie} will see usage and growth and engagement for years to come. \textsc{magpie} is currently being used as part of research within the NEMUS project \cite{bologna_nemus_2024}. Development in orthogonal case with lump masses to mimic bracing is ready to be incorporated \cite{ducceschi_method_2024}.
+
+% Usage in other research at NEMUS \cite{mousseau_vkplate_2025}
 
 The first version of an open source library for the modal analysis of plates was authored across three programming environments \cite{magpie_python_2025,magpie_cpp_2025,magpie_matlab_2025}. 
 Care and attention has been given to the structure of the code, in order to make the library as modular and reusable to as wide an audience as possible. Central functionality was replicated in both M\textsc{atlab} and Python, while taking care to accommodate for the conventions used by both programming languages. This functionality was namely the computation of the biharmonic operator in a sparse matrix format with generalized elastic boundary conditions, the computation the eigenfrequencies and eigenmodes, the visualisation the mode shapes. All of these data can then be used in time domain simulations. A graphical interface was designed using the Jupyter Notebooks platform by utilising the Python implementation of the library.
