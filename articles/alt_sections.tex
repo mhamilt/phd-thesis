@@ -89,14 +89,12 @@ References / related functions — optional but useful in libraries.
 
 
 \url{https://www.software.ac.uk/blog/code-works-isnt-always-code-lasts}
-\url{https://diataxis.fr} 4-point framework of Reference, How-To, Tutorials, Explanation.
+\cite{procida_diataxis_2025} 4-point framework of Reference, How-To, Tutorials, Explanation.
 
 \cite[Section 6.2]{stallman_gnu_1992} warns against the conflation of developer ``Doc Strings'' and a user manual. A stand alone user manual \cite{lehoucq_arpack_1998, },
 
 
-
-
-DOI for the sowftare as a whole and one for each release \cite{smith_software_2016}
+DOI for the software as a whole and one for each release \cite{smith_software_2016}
 
 
 https://www.software.ac.uk/guide/good-practice-submitting-software-outputs-ref2021
@@ -136,7 +134,6 @@ The only good way to use documentation strings in writing a good manual is to us
 - A Unique Identifier (DOI)
 - A Version controlled
 
-
 Documentation should be comprehensive to multiple modes, for usage, for development, and should be also proved functioning self-contained examples \cite{aghajani_software_2020}.
 references what should be in documentation for hardware \cite{oshwa_best_2013}
 
@@ -146,12 +143,18 @@ Creative Commons discourages usage of its licence for software \cite{cc_can_2025
 
 https://spdx.org/licenses/
 
+Taking all that has been discussed so far and using the \citp{ssi_checklist_2018} checklist we can narrow down the core requirements of an open source research project as source code availability, a version control system (VCS), documentation (developer reference and user manual, a compliant open source licence and a unique identifier, typically a DOI. There is a distinction here between the source availability (the ``open'' in ``open source'') and the presence of a version control system. A FOSS project can consist of all the base elements listed above but may not choose to have a public version control system. A pubic VCS by definition implies an availability of the source, but the reverse is not automatically true, which we will see with the projects discussed in this section. 
+
+Recommendation for research software extend beyond these categories, but they are dependant on their existence. For instance, contribution policies, issue tracking and code of conduct only apply if the source code is available and VCS has been implemented. Open source projects should first be the base requirements before they are assessed for more comprehensive compliance. 
+
+This section will discuss seven open source research software projects pertaining to the field of acoustics, of which applications within musical acoustics and further have viable usage within musical cultural heritage studies.
+
 
 Examples are:
 
 \item VK-Gong: \url{https://vkgong.ensta-paris.fr}
 \item ITEMM Open Lab no repo, no doi, no licence, no documentation
-\item NESS: \url{https://github.com/Edinburgh-Acoustics-and-Audio-Group/ness} open source git repository of the Next Generation Sound Synthesis project. A suite of software for the modelling musical instrument systems and acoustic spaces. No user manual, no DOI, version controlled, compiler instructions for arm achitecture
+\item NESS: \url{https://github.com/Edinburgh-Acoustics-and-Audio-Group/ness} open source git repository of the Next Generation Sound Synthesis project. A suite of software for the modelling musical instrument systems and acoustic spaces. No user manual, no DOI, version controlled, compiler instructions for arm architecture
 \item PFFDTD
 
 Vk-gong \url{https://vkgong.ensta-paris.fr} extensive documentation \url{https://vkgong.ensta-paris.fr/files/VKgong1.0_documentation.pdf} based on research in \cite{ducceschi_simulations_2015}
@@ -161,25 +164,68 @@ and \cite{diaz_fast_2025}
 
 ``The open source repository includes utilities for computing analytical modes and eigenvalues of fixed strings, membranes and plates. For plates, we provide a Python implementation of the approach described in [11] to compute non-linear coupling coefficients``
 
-
 \subsection{Aurora}
-\cite{farina_aurora_1995}, \cite{farina_new_2009}
+
+The status of Aurora has already been discussed Section~\ref{sec:aurora} in the context of its influence on the open methodology applied to the projects of this thesis. In terms of meeting the base components, compliance has only happened relatively recently. The source is open and
+, \cite{farina_new_2009} Created in 1995, Aurora is the oldest FOSS project among the sample set. Although ``free''
+\footnote{as in beer, not as in freedom.}
+the ``open'' only began to start in 2009 with the porting of Aurora to the Audacity open source audio editor \cite{farina_new_2009}. The source was open on request and would be shared by the authors, but was not available for direct public download.
+
+With the transition to an entirely open source code base \cite{farina_aurora_2025}, Aurora now has a unique identifier for citation, a open source initiative compliant licence. Documentation is lacking, however, with the source code being largely under documented and no developer reference that can be consulted. Similarly, a user manual exists of sorts, but it is not open to contribution and exists, currently, on Farina's Aurora Plugins website,
+\footnote{\url{https://www.aurora-plugins.com/Package.htm}}
+the future of which is uncertain.
+
 
 \subsection{ITA Toolbox}
-\cite{berzborn_ita_2017}
+
+The ITA toolbox  had its genesis in 2010 \cite{dietrich_matlab_2010} and migrated to the RWTH Aachen hosted GitLab VCS in 2016 and announcement of  an explicit open source model in 2017 \cite{berzborn_ita_2017}. ITA Toolbox can be viewed as a successor to the aurora plug-ins \cite{dietrich_influence_2013}, providing tools for impulse response measurement and analysis. 
+
+
+Source code developer documentation is extensive and uses MATLAB's internal documentation system and standards but, as warned by \textcite{stallman_gnu_1992}, ``doc strings'' are not a substitute for a user manual. The user documentation is limited to what would be deemed ``Tutorials'' in the \citetitle{procida_diataxis_2025} \cite{procida_diataxis_2025}, but the other three documentation forms of ``How-To``, ``Explanation`` and ``Reference`` are more limited. What is primarily missing from the ITA Toolbox is documentation that exists outside of the M\textsc{ATLAB} environment and more openly available for consultation. 
+
+The user manual and citation system are entertwined as part its publication historu
+Recommended citation is through ITA Toolboxes publication history
+Source exists under a single, release https://git.rwth-aachen.de/ita/toolbox/-/releases
+
+
+
+
+\textcite{berzborn_ita_2017} states the project's intention to register a DOI via the Zenondo platform, but as of writing this has not yet been carried out.
+
+It is worth noting also that operates with the proprietary MATLAB environment and requires the additional DSP System, Signal Processing  and Curve Fitting Toolboxes restricting users to only those whose licences cover these additional dependencies. Although the source is open and can be ported to any language, the use of proprietary tool boxes makes this a much less practical undertaking. On a final note, the variant of the BSD-4-Clause License
+\footnote{\url{https://spdx.org/licenses/BSD-4-Clause.html}}
+used for ITA Toolbox is not currently approved by the open source initiative. 
+
+
+
+
+ITA Toolbox represents one of the most successful open source endeavours in this sample set and is the only project whose version control is hosted by its institution.
+
+
 
 \subsection{ITEMM OpenLab}
-\cite{viala_guide_2021,charrier_lopen_2023}
 
-``pour la filière des instruments de musique.''\cite{charrier_lopen_2023}
+% \cite{viala_guide_2021,charrier_lopen_2023}
 
-``Tools:
+% ``pour la filière des instruments de musique.''\cite{charrier_lopen_2023}
 
-This part will give access to online tools that measure the rigidity of plates, beams, wooden quarters, more generally to identify the properties of materials. It will also offer a module for piano strings and the piano string plan. This section will allow you to calculate the properties of composite materials in advance.
+% ``Tools:
 
-Finally, an interface will offer the ability to extract the audio characteristics of a recorded sound.''
+% This part will give access to online tools that measure the rigidity of plates, beams, wooden quarters, more generally to identify the properties of materials. It will also offer a module for piano strings and the piano string plan. This section will allow you to calculate the properties of composite materials in advance.
+
+% Finally, an interface will offer the ability to extract the audio characteristics of a recorded sound.''
+
+
 
 \subsection{NeSS}
+The Next Generation Sound Synthesis project from the University of Edinburgh is a suite of physically modelled sound synthesis algorithms. For these algorithms, Graphics Processing Units were leveraged for large scale, parallelised numerical simulations such as brass instrument, string / fretboard interaction and virtual room acoustics. NESS was a joint project between the Acoustics and Audio Group at the University of Edinburgh and the Edinburgh Parallel Computing Centre, running for five years between ran between 2012 and 2017. 
+
+During the course of this thesis the source code for NeSS was made publicly available under an OSI approved MIT Licence via the online VCS service GitHub.
+
+
+Like ITA Toolbox, User manual exists in some for through its publication http://www.ness.music.ed.ac.uk/music-and-tools/publications
+
+
 \cite{bilbao_physical_2019}
 
 \subsection{PFFDTD}
