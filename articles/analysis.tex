@@ -4,9 +4,9 @@ This chapter introduces \textsc{magpie}, a free/libre, open, and citable toolkit
 
 For both the conservation of historical instruments and the making of new ones or faithful copies, reliable material parameters are indispensable. In wooden soundboards and plates, the elastic behaviour is orthotropic, with distinct properties along and across the grain. Conventional destructive or quasi-destructive tests (bending, tensile, compression) are impractical for whole instruments and generally incompatible with curatorial practice. Conversely, vibration-based measurements—e.g., eigenfrequency/eigenshape identification and Chladni visualisation—offer a minimally invasive alternative that can be performed \emph{in situ}. Recent work in \textsc{NEMUS} has produced a practical inverse-modelling method to estimate the rectangular orthotropic plate elastic constants from measured modes and Chladni patterns via a linear least-squares formulation \cite{ducceschi_method_2024,ducceschi_open_2024}. This approach is robust to boundary condition choices, leads to a transparent matrix inversion for the constants, and is well-suited to museum workflows where repeatable, low-risk procedures are essential. In this chapter, we package, document, and expose this capability to non-specialists through \textsc{magpie}, with particular attention to reproducibility and ease of use in a web browser.
 
-Plate simulations, eigenshape rendering (including Chladni plots), modal parameter estimation, and impulse-response synthesis are often available only in proprietary software stacks or bespoke research scripts with steep learning curves. The immediate need, expressed by both curators and instrument makers, is for an open, well-documented toolchain that (i) implements standard thin-plate models (e.g., Kirchhoff–Love and variants) with elastic boundary restraints, (ii) supports inverse estimation of orthotropic constants from museum-grade measurements, and (iii) lowers the barrier to entry via an interactive browser interface. \textsc{magpie} addresses this gap by consolidating numerics (sparse finite-difference biharmonics, eigenanalysis), analysis utilities (mode sorting, Chladni rendering), and inversion routines into a coherent, cross-language codebase released under a permissive licence and distributed through the \textsc{NEMUS} organisation on GitHub \cite{nemus_github}.
+Plate simulations, eigenshape rendering (including Chladni plots), modal parameter estimation, and impulse-response synthesis are often available only in proprietary software stacks or bespoke research scripts, which usually have steep learning curves. The immediate need, expressed by both curators and instrument makers, is for an open, well-documented toolchain that (i) implements standard thin-plate models (e.g., Kirchhoff–Love and variants) with elastic boundary restraints, (ii) supports inverse estimation of orthotropic constants from museum-grade measurements, and (iii) lowers the barrier to entry via an interactive browser interface. \textsc{magpie} addresses this gap by consolidating numerics (sparse finite-difference biharmonics, eigenanalysis), analysis utilities (mode sorting, Chladni rendering), and inversion routines into a coherent, cross-language codebase released under a permissive licence and distributed on GitHub\footnote{ \href{https://github.com/orgs/Nemus-Project/teams/magpie/repositories}{MAGPIE repositories}} through the \textsc{NEMUS} project.
 
-To ensure that \textsc{magpie} is not just \emph{available} but \emph{reusable} in the long term, we align the project with the FAIR Guiding Principles (Findable, Accessible, Interoperable, Reusable) \cite{wilkinson_fair_2016,go_fair_2016}. In practical terms, this means: (1) assigning persistent identifiers (e.g., DOIs via archival services) to code, releases, and datasets; (2) providing machine- and human-readable metadata, explicit licences, and provenance; (3) maintaining stable, versioned APIs and minimal, well-specified dependencies; and (4) supplying rich documentation, examples, and curated notebooks that demonstrate museum-focused workflows (from data capture to inversion to reporting). Complementarily, we adopt the FORCE11 Software Citation Principles so that \textsc{magpie} and its companion assets can be cited like any other research output, enabling credit and traceability for developers and curators alike \cite{smith_software_2016,force11_pdf}.
+To ensure that \textsc{magpie} is not just \emph{available} but \emph{reusable} in the long term, we align the project with the FAIR Guiding Principles (Findable, Accessible, Interoperable, Reusable) \cite{wilkinson_fair_2016,go_fair_2016}. In practical terms, this means: (1) assigning persistent identifiers (e.g., DOIs via archival services) to code, releases, and datasets; (2) providing machine- and human-readable metadata, explicit licences, and provenance; (3) maintaining stable, versioned APIs and minimal, well-specified dependencies; and (4) supplying rich documentation, examples, and curated notebooks that demonstrate museum-focused workflows (from data capture to inversion to reporting). Complementarily, we adopt the FORCE11 Software Citation Principles so that \textsc{magpie} and its companion assets can be cited like any other research output, enabling credit and traceability for developers and curators alike \cite{smith_software_2016}.
 
 Beyond supporting conservation practice, \textsc{magpie} is intended as a teaching aid. Plates are a canonical gateway into structural acoustics: their eigenshapes are visually compelling and highly informative, and Chladni patterns are a familiar, laboratory-friendly way to connect theory and measurement. By offering side-by-side simulation, mode visualisation, and inverse estimation, the tool enables students to explore how boundary conditions, thickness, and orthotropy influence spectra and modal topology, and then validate those insights against bench-top Chladni experiments. In this sense, \textsc{magpie} serves both as an analysis workbench and as a \emph{pedagogical bridge} between computational acoustics and hands-on instrument studies.
 
@@ -14,6 +14,7 @@ Beyond supporting conservation practice, \textsc{magpie} is intended as a teachi
 The remainder of the chapter develops the design choices behind \textsc{magpie} and their implications for conservation, lutherie, and education. We (i) situate the model choices and numerical methods, with an emphasis on transparent sparse operators suitable for inverse workflows; (ii) describe the cross-language architecture and the web-facing interface, designed for museum deployment; and (iii) demonstrate a representative case study: estimation of elastic constants from measured modes and Chladni patterns on a rectangular plate. Throughout, we prioritise replicability (scripts and notebooks), citeable artefacts (software, datasets, configurations), and alignment with museum constraints on access, handling, and documentation, consistent with the mission of \textsc{NEMUS}.
 
 \section{Existing Tools: ITEMM OpenLab [Under Construction]}
+% \section{Free Open Source Acoustics Research Software [Under Construction]}
 
 
 
@@ -25,7 +26,7 @@ The remainder of the chapter develops the design choices behind \textsc{magpie} 
 		\textit{Aurora}           & Yes\textsuperscript{*} & Yes          & No                         & Yes                        & GPL-3.0-or-later                             & No                    \\
 		\textit{ITA Toolbox}      & Yes                    & Yes          & No                         & Partial\textsuperscript{*} & BSD-4-Clause\textsuperscript{\textdagger}    & No\textsuperscript{*} \\
 		\textit{ITEMM OpenLab}    & No\textsuperscript{*}  & No           & No                         & No                         & CC-BY-SA\textsuperscript{*\textdagger}       & No                    \\
-		\textit{NESS}             & Yes                    & Yes          & Partial\textsuperscript{*} & No                         & MIT                                          & No                    \\
+		\textit{NeSS}             & Yes                    & Yes          & Partial\textsuperscript{*} & No                         & MIT                                          & No                    \\
 		\textit{PFFDTD}           & Yes                    & Yes          & No                         & Yes                        & MIT                                          & No                    \\
 		\textit{VK-Gong}          & Yes                    & No           & No                         & Yes                        & CC-BY-NC-SA-4.0\textsuperscript{\textdagger} & No                    \\
 		\textit{YIN}              & Yes                    & No           & No                         & Partial\textsuperscript{*} & Bespoke\textsuperscript{*\textdagger}        & No                    \\
@@ -58,7 +59,7 @@ By contrast, the development of \textsc{magpie} follows an ``open first'' method
 
 \section{Methodology}\label{sec:methodology}
 
-The modelling strategy underpinning \textsc{magpie} rests on classical thin-plate theory, discretised through finite differences and extended to cover generalised boundary conditions. This section aims to summarise the governing equations, the energy framework, and the semi-discrete formulation that lead naturally to modal analysis and time-domain simulation. It is anticipated that the fully isotropic case is considered here, and inclusion of orthotropic properties is left as a near-future update.
+The modelling strategy underpinning \textsc{magpie} rests on classical thin-plate theory, discretised through finite differences and extended to cover generalised boundary conditions. This section aims to summarise the governing equations, the energy framework, and the semi-discrete formulation that lead naturally to modal analysis and time-domain simulation. It is anticipated that the fully isotropic case will be considered here. For this specific case, cross-language implementations are available in MATLAB, Python, and C++, along with a graphical user interface developed as a Jupyter notebook. The fully orthotropic model, more closely connected to instrument making, will be illustrated as a case study at the end of the chapter. 
 
 \subsection{Kirchhoff--Love framework}
 
@@ -193,9 +194,27 @@ It is convenient to recast the two-dimensional grid function $u_{l,m}$ into a co
     \label{fig:fdtd-linear}
 \end{figure}
 The biharmonic, then, becomes the matrix ${\bf B}\in {\mathbb R}^{N\times N}$. 
-%
 
-The two
+\begin{figure}
+	\centering
+	{\footnotesize
+	\begin{equation*}
+	{\bf B}=\begin{+bmatrix}[
+	colspec={@{~}ccccccccccccccccccccc@{~}},
+	colsep=1pt
+	]
+	\ddots &     & \ddots & \ddots & \ddots &    & \ddots & \ddots & \ddots & \ddots & \ddots &        & \ddots & \ddots & \ddots &    & \ddots &        &        &     &        \\
+	...    & 1   & ...    & 2      & -8     & 2  & ...    & 1      & - 8    & 20     & -8     & 1      & ...    & 2      & -8     & 2  & ...    & 1      & ...    &     &        \\
+	& ... & 1      & ...    & 2      & -8 & 2      & ...    & 1      & - 8    & 20     & -8     & 1      & ...    & 2      & -8 & 2      & ...    & 1      & ... &        \\
+	&     & ...    & 1      & ...    & 2  & -8     & 2      & ...    & 1      & - 8    & 20     & -8     & 1      & ...    & 2  & -8     & 2      & ...    & 1   & ...    \\
+	&     &        &        & \ddots &    & \ddots & \ddots & \ddots &        & \ddots & \ddots & \ddots & \ddots & \ddots &    & \ddots & \ddots & \ddots &     & \ddots
+	\end{+bmatrix}
+	\end{equation*}
+	}
+	\includegraphics[width=0.5\linewidth]{img/biharm-stencil.pdf}
+	\caption{Central coefficients, matrix and stencil, for the discrete biharmonic.}
+	\label{fig:biharmonic-stencil}
+\end{figure}
 
 
 \subsection{Eigenvalue formulation and modal system}
@@ -358,26 +377,7 @@ B_{\Delta\Delta} \approx \delta\Delta\delta\Delta = (\delta_{xx} + \delta_{yy})^
 % K_{x0}u_{0,m}=-D(\dss + (2-\nu)\delta_{yy})\dsd u_{0,m}, \quad R_{x0}\dsd u_{0,m} = D(\dss + \nu\delta_{yy})u_{0,m}.
 % \end{equation}
 
-\begin{figure}
-	\centering
-	{\footnotesize
-	\begin{equation*}
-	D_{\Delta\Delta}=\begin{+bmatrix}[
-	colspec={@{~}ccccccccccccccccccccc@{~}},
-	colsep=1pt
-	]
-	\ddots &     & \ddots & \ddots & \ddots &    & \ddots & \ddots & \ddots & \ddots & \ddots &        & \ddots & \ddots & \ddots &    & \ddots &        &        &     &        \\
-	...    & 1   & ...    & 2      & -8     & 2  & ...    & 1      & - 8    & 20     & -8     & 1      & ...    & 2      & -8     & 2  & ...    & 1      & ...    &     &        \\
-	& ... & 1      & ...    & 2      & -8 & 2      & ...    & 1      & - 8    & 20     & -8     & 1      & ...    & 2      & -8 & 2      & ...    & 1      & ... &        \\
-	&     & ...    & 1      & ...    & 2  & -8     & 2      & ...    & 1      & - 8    & 20     & -8     & 1      & ...    & 2  & -8     & 2      & ...    & 1   & ...    \\
-	&     &        &        & \ddots &    & \ddots & \ddots & \ddots &        & \ddots & \ddots & \ddots & \ddots & \ddots &    & \ddots & \ddots & \ddots &     & \ddots
-	\end{+bmatrix}
-	\end{equation*}
-	}
-	\includegraphics[width=0.5\linewidth]{img/biharm-stencil.pdf}
-	\caption{Central coefficients, matrix and stencil, for the discrete biharmonic.}
-	\label{fig:biharmonic-stencil}
-\end{figure}
+
 
 The 13-point biharmonic stencil, as shown in Figure \ref{fig:ghost-points}, only has 4 unique coefficients. In addition, two extra coefficients are required for the case of clamped and simply supported boundary conditions, implying that the biharmonic operator in those classical cases is composed of 6 unique coefficients. By contrast, the biharmonic operator with generalised elastic boundary conditions can contain up to 229 unique coefficients. As a result, each block or diagonal sector cannot be constructed through the repetition of a stencil pattern but must be declared explicitly. This lack of pattern repetition also impacts computational performance when constructing the operator. Since the biharmonic operator with generalised boundary condition provides very useful functionality in and of itself, the functionality to compute it is provided with an open interface as part of the library through the \texttt{bhmat} function \cite{magpie_matlab_2025}. The operator can then be used in further user-defined Finite Difference Time Domain schemes or if the users wish to take a more bespoke approach to eigenvalue/eigenvector calculation.
 
