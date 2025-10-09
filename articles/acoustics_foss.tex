@@ -1,52 +1,18 @@
-There has been a concerted effort to address the problem of archiving and open-sourcing of DMI over the past 10 years \cite{mcpherson_nimehub_2016,fiordelmondo_longevity_2024,fiordelmondo_towards_2025}. This is not a challenge constrained to just DMI, but is also being addressed as part of the growing open hardware movement.
-Open hardware, like open software, is the provision of making electronics designs accessible allowing fabrication outside of a central manufacturer.
-\textcite{mcpherson_nimehub_2016} and \textcite{calegario_documentation_2021} outline largely the same principles as that of the Open Source Hardware Association in 2013 \cite{oshwa_best_2013}, that  unlike software, open hardware cannot be simply distributed as a licence and set of source files (Figure~\ref{fig:osh-taxonomy}), lest it fall afoul of ``openwashing.'' 
-\footnote{when a project  ``is claimed to be open source whereas no intention to publish product-related information is given'' \cite{bonvoisin_source_2017}.}  
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\linewidth]{img/bonvoisin_source_2017-open-hardware.png}
-    \caption{Taxonomy of openness from \textcite[Figure~1]{bonvoisin_source_2017}.}
-    \label{fig:osh-taxonomy}
-\end{figure}
-
-Open source hardware has great potential benefits for use in academia \cite{oellermann_open_2022} and those same benefits can extent to the heritage sector. \textcite{mcpherson_nimehub_2016} rightfully raises concerns of tackling hardware obsolescence and how that is tackled as part of the archiving process. Proprietary systems limit the potential for innovation or reproducibility and, when these systems fail, repairs rely on the original manufacturer who may have ceased support or production of replacement parts \cite{oellermann_open_2022}.
-To facilitate reproduction of hardware, it should be self-evident but, any form of archiving and provision of access to source material makes the task much more feasible. Reproduction is made even easier by incorporating open hardware.
-
-This highlights a core problem with digital cultural heritage, which is if we rely on proprietary system for digital conservation, then they will be locked in an ecosystem which is designed to chase change. If heritage institutions are using proprietary digital systems \cite{innocente_framework_2023} they should be aware of their choice of digital infrastructure and the implications that will have on a project's longevity. As \textcite{bonvoisin_source_2017} coined ``openwashing'' likewise with digital conservation we run a risk of ``heritagewashing'' where digital projects claim to serve the conservation of cultural heritage, but are in fact ephemera. That is not to say that ephermeral heritage projects are forbidden, but this should be a conscious choice made at a project's inception and not one applied at a point in the future when the task of archiving a work becomes too great. An open methodology needs to be `baked-in' to the research process and it is not something trivially applied after the fact. It is of course better to do it afterwards and not at all, but the information at stake is constitutes also the development process, not just the end product. The point at which a project is abandoned is not the key point of record, which given their `living` status is likely to have undergone some further modifications.
-
-Both \textcite{mcpherson_nimehub_2016} and \cite{fiordelmondo_towards_2025} approach hardware archiving in a repository format. \textcite{mcpherson_nimehub_2016} proposed a workshop with the intention to create a a central repository (or database) for DMI designs. Part of that workshop's primary eight goals were the FAIR adjacent aims of encouraging reproducibility, open access and encouraging a normalised practice of documentation. Both \textcite{mcpherson_nimehub_2016} and \cite{fiordelmondo_towards_2025} raise the issue of repository structure with the latter proposing a a prescriptive measure which can be applied to any DMI project.
-
-Research in the form of Open Hardware, open software, research product can and should take advantage of the platforms available for distribution of the work,
-\footnote{such as github, gitlab for source code or thingiverse for 3D models \cite{oshwa_best_2013}.}
-but the work still needs to be citable \cite{smith_software_2016}, and cross-reference-able \cite{stall_journal_2023} if that work is to be built upon.
-
-The limitation here is assuming that the constituent parts of a DMI are a collective to archive and version controlled. This is true to some degree, there is a complete artifact to be documented, but it is very much made of constituent parts that develop and are swapped out. There is the interface the electronics and the firmware, whose versions current and old can be used in all number of combinations of versions. Keeping these components contained to a single version control repository limits their modularity and potential for reuse.
-
-Proposed here is not a question of either / or but rather both! So much research can go into these projects, creation may be modular and re usable elsewhere. Boxing it all together prevents the porting. The effort to treat these objects as a collection f modules isn’t much greater than treating as a whole, but the avoidance of losing work is worth it
-
-
-
-
-The SciPy package allows for much more granular control over the sparse matrix format. Since the biharmonic operator matrix is multi-diagonal a diagonal format sparse matrix appeared to be the best target. As opposed to the compressed sparse column format which stores row indices and first element columns indices, the diagonal stores arrays of diagonal values and their diagonal position (Figure~\ref{fig:sparse-dia}). The diagonal format would require explicit zero values, though there are a relative small number and thus have minimal impact on performance. 
-It is worth noting that additional configuration such as the SciPy sparse library requires is not a unique phenomenon when it comes to FOSS. With the openness there also comes a cost in the form of a technical skill barrier.
-Such is the case here, for the proprietary MATLAB the user does not need to engage with directly with the sparsity format, rather they are given a single format, CSC \cite{gilbert_sparse_1992}, and a small set of functions with which to construct a sparse matrix.
-\footnote{\texttt{spdiags} for banded matrices and the \texttt{sparse} function for triplet format or dense matrix conversion.}
-For SciPy the user will need to confront aspects of sparse matrix construction that they might not otherwise, such as intermediate ``construction'' \cite{eding_sparse_2019} formats like co-ordinate or list-of-list. These construction matrices will then need explicit compression into formats such as CSC or DIA (Figure~\ref{fig:sparse-dia}), which are steps that would be otherwise invisible to the MATLAB user. This is granularity is not a net negative or positive, but  it is double-edged. The additional debt of technical knowledge is off-set by the freedom to scrutinise the process. Such is the case with matrix construction illustrated in Figure~\ref{fig:matlab_vs_python} where two approaches can result in vastly different performance results. The additional technical complexity also permits multiple points of entry which can provide an optimal solution for a specific approach taken, in this case a block matrix construction with SciPy. Figure~\ref{fig:matlab_vs_python}
-clearly shows that SciPy is not as high computationally performance as the optimal M\textsc{atlab} approach, but neither does punish the developer exponentially.
-
-SciPy is also in the process of migrating its sparse matrix infrastructure, so there are likely to breaking changes if a later version of SciPy is used with the current \citetitle{magpie_python_2025}. Listing dependencies does not stop this kind of breaking change, but it does make it more explicit and provide a means of avoiding it. \url{https://docs.scipy.org/doc/scipy/reference/sparse.migration_to_sparray.html#sparse-migration-construction}
-
-Successful project: modularise, standardise, avoid duplication, doing it right, Backward compatibility right license \cite{bangerth_makes_2013}
-
-we found that high initial internal documentation seemed to spur evolution in the projects, and that projects that evolved tended toward a common level of structural complexity \cite{darcy_exploring_2010}]
-
 \section{Existing Acoustics Free Open Source Software}
 
 Before discussing the development of the \texsc{magpie} framework it is worthwhile discussing the state of free open source software in the field of acoustics.
 Section~\ref{sec:aurora} has already covered the case of the Aurora plug-ins created by Angelo Farina and the influence of that software of the open methodology of \textsc{magpie}.
 This section will look at a broader set of acoustics software, all of which would fall under the umbrella of FOSS, though maybe not explicitly.
 Taken as whole they should provide an insight into FOSS practice within acoustics and what areas the community needs to develop.
+
+An overview of specifically open source room acoustics software can be found in \textcite{hornikx_exploring_2024}.
+
+Software discussed here has direct application in the heritage sector, either through measurement of heritage architecture \cite{tronchin_acoustics_1997,fagerlande_adequaccao_2020} or through digital reconstruction \cite{katz_exploring_2020}
+
+
+Measurement provided by tools such as the ITA toolbox, aurora. Simualation provided by NeSS, PFFDTD 
+
+``Exploring cultural heritage through acoustic digital reconstruction provides historians, musicologists, and others with a perspective not available using more established research methods. Furthermore, it brings a powerful means of communicating and delivering memorable, meaningful, and most importantly, multisensory experiences. The effectiveness of digital reconstruction is evident through the range of projects undertaken throughout Europe'' \cite{katz_exploring_2020}
 
 Each example may not have a direct application within the heritage sector, but as is shown with Aurora, there is no reason that they could not be.
 
@@ -77,16 +43,6 @@ Such developer documentation is typically contained directly in the comments of 
 
 
 Documentation comments strings are not manual, but rather references 
-
-Summary line — one-sentence description of purpose.
-Detailed description — what it does, algorithm overview if non-trivial.
-Inputs / parameters — names, types, meaning, and valid ranges.
-Outputs / returns — names, types, and meaning.
-Side effects — global changes, I/O, randomness, etc.
-Exceptions / errors — what conditions trigger them.
-Examples / usage — short reproducible snippet.
-References / related functions — optional but useful in libraries.
-
 
 \url{https://www.software.ac.uk/blog/code-works-isnt-always-code-lasts}
 \cite{procida_diataxis_2025} 4-point framework of Reference, How-To, Tutorials, Explanation.
@@ -212,6 +168,7 @@ ITA Toolbox represents one of the most successful open source endeavours in this
 
 % Finally, an interface will offer the ability to extract the audio characteristics of a recorded sound.''
 
+In its legal text, OpenLab states that its  work under a CC-BY-SA though the version is not explicitly stated this is an implied CC-BY-SA-4.0.
 
 
 \subsection{NeSS}
@@ -225,6 +182,9 @@ Like ITA Toolbox, User manual exists in some for through its publication http://
 
 Cultural heritage usage \cite{katz_exploring_2020}
 
+
+NeSS has implemented alternative compilation instructions for newer arm processors.
+
 \cite{bilbao_physical_2019}
 
 \subsection{PFFDTD}
@@ -235,10 +195,38 @@ provides:
 - background references
 
 \subsection{VK-Gong}
-\cite{ducceschi_modal_2015}
+
+VK-Gong is software created out of ENSTA Paris for the numerical simulation of nonlinear plates and shells using Föppl–von Kármán theory for nonlinear vibrations. Such non linear systems would be found in percussive instruments such as gongs, cymbals and bells. 
+
+VK-Gongs provides its source code, in MATLAB and C\textsc{++}, from an ENSTA Paris hosted site. The project hosts one of the most comprehensive user manuals \cite{vkgong_manual_2017} as part of this sample set, which provides the technical background and usage instructions in both a `how-to' and tutorial format, although this applies entirely to the MATLAB version of the source. The C\textsc{++} is marked as ``preliminary'' with documentation to be ``ready in summer 2017.''
+
+VK-Gong's site states the work under is under the CC-BY-NC-SA-4.0 licence,
+\footnote{\url{https://creativecommons.org/licenses/by-nc-sa/4.0/}}
+although the license text does not appear within the source as either a document string or a separate license file. The usage of CC licenses for software is discouraged by both the Creative Commons and Open Source Initiative and though the CC-BY-SA-4.0 is ``one way'' compliant with the GPLv3 \cite{cc_can_2025}, the CC-BY-NC-SA-4.0 is not.
+
+Though the source is openly available from the VK-Gong site, it does not use any version control system. Without a VCS, the growth of the software is stunted which is a missed opportunity especially given the C\textsc{++} version of VK-Gong is still in its preliminary stages. The CC-BY-NC-SA-4.0 licence permits the mirroring of the source code,
+\footnote{\url{https://github.com/rodrigodzf/VKGong}}
+uploading of this code onto an online archive platform like Zeonodo is not compliant with its rules \cite{zenodo_metadata_2025}. 
+
+The main technical obstacle with VK-Gong source code is the usage of SSE intrinsic instructions, which are only applicable to intel processors. The SSE instructions NeSS source code, separate compilation instructions have been provided for specific CPU architecture and operating system.
+
+
 
 \subsection{YIN}
-\cite{cheveigne_yin_2002}
+The YIN pitch detection algorithm was also briefly discussed in Section~\ref{sec:aurora} alongside the case study of Aurora as example open source acoustics software practice.
+
+The theory behind the YIN algorithm is discussed in \textcite{cheveigne_yin_2002} and its MATLAB source code code see direct usage in research.
+
+Like Aurora, YINs source code has no single fixed URI, let alone a DOI with which it can be cited and traced. YIN also also has one of the most restrictive licences with the original MATLAB source limited to ``FOR RESEARCH PURPOSES''
+\footnote{\url{https://github.com/mhamilt/yin/blob/main/LICENCE}}
+which is not an OSI compliant clause and would disqualify its categorisation as FOSS.
+
+Used in \textcite{bowen_assessing_2019} as part of a study on musical instrument heritage clarinets that were not playable.
+\footnote{\textcite{bowen_assessing_2019} cites \textcite{cheveigne_yin_2002} but also remarks that the MATLAB was used as part of the study, making highly likely that the paper used the original YIN source code.}
+
+
+The documentation for YIN is in the form of the associated publication \cite{cheveigne_yin_2002}, which would constitute the ``Explanation'' form of documentation in \textcite{procida_diataxis_2025}, developer documentation is absent.
+Like the problematic SSE intrinsics in VK-Gong, YINs technical stumbling block is the usage of MATLAB's MEX compilation system \cite{matlab_mex_2025}. In YIN's currently form, as it was 2003, the compiled \texttt{.mex} files will not execute correctly in any MATLAB version from R2016a onwards. Instead, the \texttt{.mex} must be recreated due to changes in the compilation system. Recompiling does not provide a great obstacle, and the correct syntax can be quickly found by consulting the documentation, but this becomes a problem that \textit{every} user needs to solve. Not all researcher will have the same technical background and skill-set and without a centralised source, like a version controlled repository, there is no single place to raise or document such technical problems.
 
 
 \subsection{Summary of Acoustics Software Practice}
@@ -249,15 +237,18 @@ From the set of seven acoustics software we can we can see a inclination towards
 Unique identifiers are absent across all examples, though some such as \citetitle{hamilton_pffdtd_2021}, \citetitle{berzborn_ita_2017} have taken step towards citablility by providing an explicit citation.
 
 This is a step in the right direction, but it makes an assumption that software will stay static. The dual DOI for version and for the base software provides the ability to discuss variations of the software. Software functionality may grow or become more accurate or conversely, bugs within a programme may be present in on version and it should be easier to find if research was carried out on potentially malfunctioning software.
+Lack of unique identifers also identified in \textcite{hornikx_exploring_2024}.
+
 
 When citations are distributed across multiple papers such as for the ITA Toolbox, there is unnecessary complexity added to the process of tracking usage and cross referencing, but its is still achievable.
 
 For those without a suggested citation, tracking and cross referencing tends to settle on a finite set of urls or specific articles such as for Aurora and YIN. The usage is difficult to differentiate as a without further scrutiny as these may be citations to the article's contents and not necessarily the usage of the software.
 
-
 Licensing is fairly comprehensive, though there is some misapplication of Creative Commons licenses where \cite{cc_can_2025,hong_choosing_2025}. Though the BSD 4-Clause is not OSI compliant 
 \footnote{\url{https://www.gnu.org/licenses/bsd.en.html}}
 
+
+As the methodology applied to the keyboard interfaces provides an example of open hardware practice for a research product, so to is \textsc{magpie} intended to serve as example for open source research software.
 
 
 
