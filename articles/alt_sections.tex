@@ -47,9 +47,9 @@ Before discussing the development of the \texsc{magpie} framework it is worthwhi
 Section~\ref{sec:aurora} has already covered the case of the Aurora plug-ins created by Angelo Farina and the influence of that software of the open methodology of \textsc{magpie}.
 This section will look at a broader set of acoustics software, all of which would fall under the umbrella of FOSS, though maybe not explicitly.
 Taken as whole they should provide an insight into FOSS practice within acoustics and what areas the community needs to develop.
+Software discussed here has direct application in the heritage sector, either through measurement of heritage architecture \cite{tronchin_acoustics_1997,fagerlande_adequaccao_2020} or through digital reconstruction \cite{katz_exploring_2020}
 
-Each example may not have a direct application within the heritage sector, but as is shown with Aurora, there is no reason that they could not be.
-
+\section{Software Documentation}
 First a clarification, when discussing documentation it is not just the instructions for the use of the software but also the way that is structured. A interconnected set of documents that describe the class hierarchies and function usage.
 The documentation is ideally generated from the source code though documentation comments, this stops duplication, but also provides a means for automation as comments.
 There are many documentation standards in one single language let alone across the three programming languages discussed in this chapter: MATLAB, Python, and C\textsc{++}. 
@@ -57,112 +57,51 @@ MATLAB has its style for comments and generating documentation from them while P
 \footnote{Doxygen, Sphinx, HeaderDoc to name a few documentation systems with respective documentation syntax. Distribution of popularity for these documentation systems would be difficult to ascertain without a comprehensive analysis of open source projects. The popular computer programming question-and-answer site stackoverflow provides open meta-data exploration and a query of tags reveals Doxygen to be a clear frontrunner followed by Sphynx.\\\url{https://data.stackexchange.com/stackoverflow/query/1069131/get-all-tags}}
 There is a stress \textit{for} documentation for as part of best practice in software sustainability \cite{smith_software_2016}, but less on what that documentation should contain. 
 
-from industry \cite{google_documentation_2025}
-
-Generating documentation comments can that can use markup like HTML to enable cross referencing and easier searching of the source that can be done separate to the development environment
-
-The documentation does not just serve an outer community but also provides an aid memoire for
-``Understand your code in 6 months'' \cite{writethedocs_sowftware_2025} 
-
+% Generating documentation from source code comments can that can use markup like HTML to enable cross referencing and easier searching of the source that can be done separate to the development environment
 
 \textcite{writethedocs_sowftware_2025} provides a comprehensive guide on documentation best practice
 
-Documentation is aimed at two audiences, users and developers who can sometimes be the same person.
+From \textcite{writethedocs_sowftware_2025} we can divide the audience for documentation into two categories, users and developers. What can cause difficulty in the research software development process is separation of these audiences two, as they commonly apply to the researcher who is simultaneously `user' and also `researcher'
+The documentation does not just serve an outer `user' community but also provides an \textit{aide memoire} to
+``Understand your code in 6 months'' \cite{writethedocs_sowftware_2025} 
+% Part of confusionwho can sometimes be the same person.
 
-Documentation should be there to aid developers and user alike, who might sometimes even be the same person.
-
-There is no strict guideline on exactly what developer documentation should contain. A general rule being that documentation should provide a means to ``understand your code in 6 months'' \cite{writethedocs_sowftware_2025} with the consequences of not adhering this rule illustrated multiple times in \textcite{perkel_challenge_2020}.
-
-Such developer documentation is typically contained directly in the comments of the source code. Generating documentation comments can that can use markup like HTML to enable cross referencing and easier searching of the source that can be done separate to the development environment.
-
-
-Documentation comments strings are not manual, but rather references 
-
-Summary line — one-sentence description of purpose.
-Detailed description — what it does, algorithm overview if non-trivial.
-Inputs / parameters — names, types, meaning, and valid ranges.
-Outputs / returns — names, types, and meaning.
-Side effects — global changes, I/O, randomness, etc.
-Exceptions / errors — what conditions trigger them.
-Examples / usage — short reproducible snippet.
-References / related functions — optional but useful in libraries.
+Therefore, software documentation requires multiple forms in order to serve these audiences. \textcite{procida_diataxis_2025} divides documentation into 4 forms ``Tutorials'', ``How-to guides'', ``Explanation'' and ``Reference'', the last of which is primarily aimed at developers. Both \textcite[\href{https://diataxis.fr/reference/}{\#reference}]{procida_diataxis_2025} and \textcite[Section 6.2]{stallman_gnu_1992} warn of the danger of generated reference documentation as a substitute for more comprehensive user manual, but as we will see with the examples below, this seems to be the opposite case with the software that will be discussed.
 
 
-\url{https://www.software.ac.uk/blog/code-works-isnt-always-code-lasts}
-\cite{procida_diataxis_2025} 4-point framework of Reference, How-To, Tutorials, Explanation.
+There is no strict guideline on exactly what developer documentation should contain. A general rule being that documentation should provide a means to ``understand your code in 6 months'' \cite{writethedocs_sowftware_2025} with the consequences of not adhering this rule illustrated multiple times in \textcite{perkel_challenge_2020}. Such developer documentation is typically contained directly in the comments of the source code. Generating documentation comments can that can use markup like HTML to enable cross referencing and easier searching of the source that can be done separate to the development environment.
 
-\cite[Section 6.2]{stallman_gnu_1992} warns against the conflation of developer ``Doc Strings'' and a user manual. A stand alone user manual \cite{lehoucq_arpack_1998, },
-
-
-DOI for the software as a whole and one for each release \cite{smith_software_2016}
-
-
-https://www.software.ac.uk/guide/good-practice-submitting-software-outputs-ref2021
-source code;
-compiled code and/or instructions on how to compile or install the software;
-user documentation;
-test suite and/or quality assurance procedures.
-
-DOI for a companion software paper;
-DOIs for research outputs resulting from use of the software;
-Usage metrics.
-
-Requirements
-
-\url{https://spdx.org/licenses/} SPDX License List
-
-Some requirements not explicitly stated, with a version control repository there also typically comes issue tracking and contribution functionality. Similarly, if a version control repository is absent then a project is also unlikely to contribution and code of conduct.
-
-\begin{table}[]
-    \centering
-    \begin{tabular}{c|c}
-         &  \\
-         & 
-    \end{tabular}
-    \caption{Acoustics FOSS compliance Overview}
-    \label{tab:placeholder}
-\end{table}
-
-
-```Some programming systems, such as Emacs, provide a documentation string for each func- tion, command or variable. You may be tempted to write a reference manual by compiling the documentation strings and writing a little additional text to go around them—but you must not do it. That approach is a fundamental mistake. The text of well-written documentation strings will be entirely wrong for a manual.
-A documentation string needs to stand alone—when it appears on the screen, there will be no other text to introduce or explain it. Meanwhile, it can be rather informal in style.
-The text describing a function or variable in a manual must not stand alone; it appears in the context of a section or subsection. Other text at the beginning of the section should explain some of the concepts, and should often make some general points that apply to several functions or variables. The previous descriptions of functions and variables in the section will also have given information about the topic. A description written to stand alone would repeat some of that information; this redundancy looks bad. Meanwhile, the informality that is acceptable in a documentation string is totally unacceptable in a manual.
-The only good way to use documentation strings in writing a good manual is to use them as a source of information for writing good text.``
-
-- Reference (Developer) Documentation
-- A User Guide
-- A Unique Identifier (DOI)
-- A Version controlled
-
-Documentation should be comprehensive to multiple modes, for usage, for development, and should be also proved functioning self-contained examples \cite{aghajani_software_2020}.
-references what should be in documentation for hardware \cite{oshwa_best_2013}
-
-
-Creative Commons discourages usage of its licence for software \cite{cc_can_2025}
-\footnote{Although CC-BY-NC-SA-4.0 is ``one-way'' and CC0 fully GPL ``compatible'' they are still discouraged by the Creative Commons \cite{cc_faq_2016} } and no creative commons licence is Open Source Initiative approved \cite{osi_licenses_2025,spdx_licenses_2025}.
-
-https://spdx.org/licenses/
 
 Taking all that has been discussed so far and using the \citp{ssi_checklist_2018} checklist we can narrow down the core requirements of an open source research project as source code availability, a version control system (VCS), documentation (developer reference and user manual, a compliant open source licence and a unique identifier, typically a DOI. There is a distinction here between the source availability (the ``open'' in ``open source'') and the presence of a version control system. A FOSS project can consist of all the base elements listed above but may not choose to have a public version control system. A pubic VCS by definition implies an availability of the source, but the reverse is not automatically true, which we will see with the projects discussed in this section. Similarly a unique identifier such as a DOI implies digital archiving has taken place but, again, not necessarily the reverse.
+
+A DOI should be present for the software as a whole and one for each release \cite{smith_software_2016}. An OSI licence should be clearly applied to all source code \cite{hong_choosing_2025}.
 
 Recommendation for research software extend beyond these categories, but they are dependant on their existence. For instance, contribution policies, issue tracking and code of conduct only apply if the source code is available and VCS has been implemented. Open source projects should first be the base requirements before they are assessed for more comprehensive compliance. 
 
 This section will discuss seven open source research software projects pertaining to the field of acoustics, of which applications within musical acoustics and further have viable usage within musical cultural heritage studies.
 
 
-Examples are:
+% Documentation should be comprehensive to multiple modes, for usage, for development, and should be also proved functioning self-contained examples \cite{aghajani_software_2020}.
+% references what should be in documentation for hardware \cite{oshwa_best_2013
 
-\item VK-Gong: \url{https://vkgong.ensta-paris.fr}
-\item ITEMM Open Lab no repo, no doi, no licence, no documentation
-\item NESS: \url{https://github.com/Edinburgh-Acoustics-and-Audio-Group/ness} open source git repository of the Next Generation Sound Synthesis project. A suite of software for the modelling musical instrument systems and acoustic spaces. No user manual, no DOI, version controlled, compiler instructions for arm architecture
-\item PFFDTD
+% Creative Commons discourages usage of its licence for software \cite{cc_can_2025}
+% \footnote{Although CC-BY-NC-SA-4.0 is ``one-way'' and CC0 fully GPL ``compatible'' they are still discouraged by the Creative Commons \cite{cc_faq_2016} } and no creative commons licence is Open Source Initiative approved \cite{osi_licenses_2025,spdx_licenses_2025}.
 
-Vk-gong \url{https://vkgong.ensta-paris.fr} extensive documentation \url{https://vkgong.ensta-paris.fr/files/VKgong1.0_documentation.pdf} based on research in \cite{ducceschi_simulations_2015}
-\cite{nguyen_nonlinear_2019} ``The input parameters of the force are thus the time t0, the temporal width of the interaction Twid, and the amplitude of the force pm in N. All the computations have been implemented using the software vk-gong,25 an open source code developed to handle nonlinear vibrations of plates and built from previous works by the second author.''
+% https://spdx.org/licenses/
 
-and \cite{diaz_fast_2025}
+% Examples are:
 
-``The open source repository includes utilities for computing analytical modes and eigenvalues of fixed strings, membranes and plates. For plates, we provide a Python implementation of the approach described in [11] to compute non-linear coupling coefficients``
+% \item VK-Gong: \url{https://vkgong.ensta-paris.fr}
+% \item ITEMM Open Lab no repo, no doi, no licence, no documentation
+% \item NESS: \url{https://github.com/Edinburgh-Acoustics-and-Audio-Group/ness} open source git repository of the Next Generation Sound Synthesis project. A suite of software for the modelling musical instrument systems and acoustic spaces. No user manual, no DOI, version controlled, compiler instructions for arm architecture
+% \item PFFDTD
+
+% Vk-gong \url{https://vkgong.ensta-paris.fr} extensive documentation \url{https://vkgong.ensta-paris.fr/files/VKgong1.0_documentation.pdf} based on research in \cite{ducceschi_simulations_2015}
+% \cite{nguyen_nonlinear_2019} ``The input parameters of the force are thus the time t0, the temporal width of the interaction Twid, and the amplitude of the force pm in N. All the computations have been implemented using the software vk-gong,25 an open source code developed to handle nonlinear vibrations of plates and built from previous works by the second author.''
+
+% and \cite{diaz_fast_2025}
+
+% ``The open source repository includes utilities for computing analytical modes and eigenvalues of fixed strings, membranes and plates. For plates, we provide a Python implementation of the approach described in [11] to compute non-linear coupling coefficients``
 
 \subsection{Aurora}
 
@@ -175,11 +114,9 @@ With the transition to an entirely open source code base \cite{farina_aurora_202
 \footnote{\url{https://www.aurora-plugins.com/Package.htm}}
 the future of which is uncertain.
 
-
 \subsection{ITA Toolbox}
 
 The ITA toolbox  had its genesis in 2010 \cite{dietrich_matlab_2010} and migrated to the RWTH Aachen hosted GitLab VCS in 2016 and announcement of  an explicit open source model in 2017 \cite{berzborn_ita_2017}. ITA Toolbox can be viewed as a successor to the aurora plug-ins \cite{dietrich_influence_2013}, providing tools for impulse response measurement and analysis. 
-
 
 Source code developer documentation is extensive and uses MATLAB's internal documentation system and standards but, as warned by \textcite{stallman_gnu_1992}, ``doc strings'' are not a substitute for a user manual. The user documentation is limited to what would be deemed ``Tutorials'' in the \citetitle{procida_diataxis_2025} \cite{procida_diataxis_2025}, but the other three documentation forms of ``How-To``, ``Explanation`` and ``Reference`` are more limited. What is primarily missing from the ITA Toolbox is documentation that exists outside of the M\textsc{ATLAB} environment and more openly available for consultation. 
 
@@ -198,66 +135,108 @@ used for ITA Toolbox is not currently approved by the open source initiative.
 
 ITA Toolbox represents one of the most successful open source endeavours in this sample set and is the only project whose version control is hosted by its institution.
 
-
-
 \subsection{ITEMM OpenLab}
 
-% \cite{viala_guide_2021,charrier_lopen_2023}
+\textsc{magpie} is not the first attempt to make plate analysis accessible, nor is it the only tool marketed as ``free.'' The Institut Technologique Européen des Métiers de la Musique (ITEMM) maintains an online platform, ITEMM Open Lab,%
+\footnote{\url{https://www.openlab-itemm.com}} which provides luthiers and makers with resources ranging from datasets of materials to CAD models of instrument parts. Most relevant for present purposes, OpenLab also includes a suite of calculators for acoustical and mechanical properties of wood, offering workshop access to methods otherwise restricted to laboratory environments. 
 
-% ``pour la filière des instruments de musique.''\cite{charrier_lopen_2023}
+Among the available tools are calculators for string behaviour under tension, resonance frequencies of soundboards and bridges, and a plate-stiffness tool, \textit{Rigidité de plaques},%
+\footnote{\url{https://www.openlab-itemm.com/calculateur-mecanique/rigidite-de-plaques-1/}} which implements the methodology of \textcite{mcintyre_measuring_1988} to estimate elastic constants. The initiative is admirable: ITEMM has made genuinely useful processes accessible to practitioners who might otherwise lack the means. But the openness has limits.
 
-% ``Tools:
+Although freely accessible once registered, OpenLab tools follow a free distribution model. In Stallman’s terms, they are closer to ``free as in beer'' than ``free as in freedom'' \cite{stallman_why_2007}. 
+The code that underpins calculators such as \textit{Rigidité de plaques} is delivered through the browser and can, in principle, be examined,
+\footnote{Calculations are carried out in \href{https://www.openlab-itemm.com/wp-content/plugins/ITEMM-OpenLab-tools-main/js/p_w_script.js}{\texttt{js/p\_w\_script.js}} with support from an \texttt{olt} utility class at \href{https://www.openlab-itemm.com/wp-content/plugins/ITEMM-OpenLab-tools-main/js/olt_class.js}{\texttt{js/olt\_class.js}}, both accessible without authentication.} 
+but documentation, licensing, and citation pathways are not yet foregrounded.
 
-% This part will give access to online tools that measure the rigidity of plates, beams, wooden quarters, more generally to identify the properties of materials. It will also offer a module for piano strings and the piano string plan. This section will allow you to calculate the properties of composite materials in advance.
+ITEMM’s legal framework, for example, explicitly covers 3D models%
+\footnote{\url{https://www.openlab-itemm.com/mentions-legals/}} 
+under a CC-BY-SA
+\footnote{Although the version is not explicitly stated, this can be implied as a CC-BY-SA-4.0.}
+but does not naturally extend to the software calculators themselves \cite{cc_can_2025}. 
 
-% Finally, an interface will offer the ability to extract the audio characteristics of a recorded sound.''
+By contrast, the development of \textsc{magpie} follows an ``open first'' methodology guided by the FAIR principles \cite{wilkinson_fair_2016,go_fair_2016}. This means that source code, metadata, and licensing are made explicit from the outset, persistent identifiers are assigned, and scholarly attribution is supported through standard citation practices \cite{soito_citations_2016}. In this way, \textsc{magpie} seeks not only to provide functionality comparable to existing online tools, but also to embed sustainability, interoperability, and citability as core design objectives.
 
+\textcite{stallman_floss_2021} stresses the importance of distinguishing between open-source software (FOSS) and free/libre open-source software (FLOSS). The intent behind \textsc{magpie} is to occupy this latter category: a toolkit for plate analysis that is genuinely free and open in both senses of the word, and designed from the ground up as shared research infrastructure.
 
 
 \subsection{NeSS}
+
 The Next Generation Sound Synthesis project from the University of Edinburgh is a suite of physically modelled sound synthesis algorithms. For these algorithms, Graphics Processing Units were leveraged for large scale, parallelised numerical simulations such as brass instrument, string / fretboard interaction and virtual room acoustics. NESS was a joint project between the Acoustics and Audio Group at the University of Edinburgh and the Edinburgh Parallel Computing Centre, running for five years between ran between 2012 and 2017. 
 
-During the course of this thesis the source code for NeSS was made publicly available under an OSI approved MIT Licence via the online VCS service GitHub.
+During the course of this thesis the source code for NeSS was made publicly available by the Edinburgh Acoustics and Audio Group under an OSI approved MIT Licence via the online VCS service GitHub. The repository has a flattened structure with all NeSS source code files placed in a single directory, with only a shared library for sparse matrix operations separated in a sub-directory. 
+The repository documentation covers the compilation of the source code as well as an incomplete overview of structure and usage.
+\footnote{https://github.com/Edinburgh-Acoustics-and-Audio-Group/ness/tree/main/doc}
+The associated website 
+\footnote{\url{https://www.ness.music.ed.ac.uk}}
+provides explanatory documentation for each of the core components of the software and working examples for each of the NeSS instruments as well as the central \citetitle{ness_welcome_2016} \cite{ness_welcome_2016}. 
+Since the NeSS software was only very recently made open source, it does not currently have usage in research outside of the project itself. 
 
-
-Like ITA Toolbox, User manual exists in some for through its publication http://www.ness.music.ed.ac.uk/music-and-tools/publications
-
-
-Cultural heritage usage \cite{katz_exploring_2020}
-
-\cite{bilbao_physical_2019}
 
 \subsection{PFFDTD}
-\cite{hamilton_pffdtd_2021}
-provides: 
 
-- suggested citation
-- background references
+PFFDTD \cite{hamilton_pffdtd_2021} is software which provides an open source means for creating room acoustic simulation from a source model created using the proprietary SketchUp 3D modelling software.
+\footnote{\url{https://sketchup.trimble.com}}
+An extension of room acoustics modelling from the NeSS project, simulations are run exclusively using the CUDA framework for GPU parallelisation of computations. With the exception of SketchUp source model, PFFDTD uses the open source Ruby, Python and C languages installation and execution. 
+The source code is provided under an OSI approved MIT license
+Room acoustic simulation software, such as PFFDTD, provides a means of ``exploring cultural heritage through acoustic digital reconstruction provides historians, musicologists, and others with a perspective not available using more established research methods'' \cite{katz_exploring_2020}. Such software allows  a more accessible means of research early music heritage in a virtual acoustic spaces \cite{tronchin_acoustics_1997} ``with attendant gains in
+aural vividness and, perhaps, historical insight'' \cite{cook_hearing_2023}.
+
+PFFDTD provides explanatory documentation, in the form of references, and installation instructions within the repository \texttt{README.md}. The \texttt{README.md} also provides a brief how-to guide but assumes a base proficiency and familiarity wit the material. PFFDTD is also the only software to state a suggested, single citation to reference the software. Although a DOI would be preferable it sets a standard for citation, making its usage easier to track.
 
 \subsection{VK-Gong}
-\cite{ducceschi_modal_2015}
+
+VK-Gong is software created out of ENSTA Paris for the numerical simulation of nonlinear plates and shells using Föppl–von Kármán theory for nonlinear vibrations. Such non linear systems would be found in percussive instruments such as gongs, cymbals and bells.  The VK-Gong source code, in MATLAB and C\textsc{++}, is hosted from an ENSTA Paris site. The project contains one of the most comprehensive user manuals \cite{vkgong_manual_2017} among the  software in this sample set, which outlines the technical background and usage instructions in both a `how-to' and tutorial format, although this applies entirely to the MATLAB version of the source. The C\textsc{++} is marked as ``preliminary'' with documentation to be ``ready in summer 2017.''
+
+VK-Gong's site states that the work is distributed under the CC-BY-NC-SA-4.0 licence,
+\footnote{\url{https://creativecommons.org/licenses/by-nc-sa/4.0/}}
+although the license text does not appear within the source as either a document string or a separate license file. The usage of CC licenses for software is discouraged by both the Creative Commons and Open Source Initiative and though the CC-BY-SA-4.0 is ``one way'' compliant with the GPLv3 \cite{cc_can_2025}, the CC-BY-NC-SA-4.0 is not.
+
+Though the source is openly available from the VK-Gong site, it does not use any version control system. Without a VCS, the growth of the software is stunted which is a missed opportunity especially given the C\textsc{++} version of VK-Gong is still in its preliminary stages. The CC-BY-NC-SA-4.0 licence permits the mirroring of the source code,
+\footnote{\url{https://github.com/rodrigodzf/VKGong}}
+uploading of this code onto an online archive platform like Zeonodo is not compliant with its rules \cite{zenodo_metadata_2025}. 
+The lack of a DOI or provision of a citation standard make tracking usage of the software in research tricky to undertake, though it has seen usage \cite{nguyen_nonlinear_2019}.
+
+The main technical obstacle with VK-Gong source code is the usage of SSE single instruction multiple data (SIMD) instructions, also known as intrinsics,
+\footnote{\url{https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html}}
+which are only applicable to Intel processors. There are also SSE SIMD instructions used within the NeSS source code, although separate compilation instructions have been provided for specific CPU architecture and operating system. The SSE SIMD instructions are not compatible with Arm architecture processors, therefore the pre-compiled binary files that are distributed with the C\textsc{++} code would not be executable on a incompatible processor. Any users with an arm processor would therefore need to recompile the source code themselves would find them selves unable to do so with the provided \texttt{Makefile}. NeSS and VK-Gong have a common library used for matrix multiplication and therefore there usage of SSE SIMD is identical. To compile the VK-Gong source on an arm processor the user would have to edit or create a new make file with the \texttt{USE_SSE} flag removed as well as removing the \texttt{sse.c} file from the list of compiled files. Alternatively, the user could also employ a translation file to move from Intel's SSE to Arm's NEON SIMD instructions.
+\footnote{\url{https://github.com/DLTcollab/sse2neon}}
+Since there is no version control repository or public issue tracking, the same modifications would need to be research and carried out by every potential user.
 
 \subsection{YIN}
-\cite{cheveigne_yin_2002}
+The YIN pitch detection algorithm was also briefly discussed in Section~\ref{sec:aurora} alongside the case study of Aurora as example open source acoustics software practice.
+The theory behind the YIN algorithm is discussed in \textcite{cheveigne_yin_2002} and its MATLAB source code code see direct usage in research.
+Like Aurora, YINs source code has no single fixed URI, let alone a DOI with which it can be cited and traced. YIN also also has one of the most restrictive licences with the original MATLAB source limited to ``FOR RESEARCH PURPOSES''
+\footnote{\url{https://github.com/mhamilt/yin/blob/main/LICENCE}}
+which is not an OSI compliant clause and would disqualify its categorisation as FOSS.
+Used in \textcite{bowen_assessing_2019} as part of a study on musical instrument heritage clarinets that were not playable.
+\footnote{\textcite{bowen_assessing_2019} cites \textcite{cheveigne_yin_2002} but also remarks that the MATLAB was used as part of the study, making highly likely that the paper used the original YIN source code.}
+
+The documentation for YIN takes the form of the associated publication \cite{cheveigne_yin_2002}, which would constitute the ``Explanation'' form of documentation in \textcite{procida_diataxis_2025}, developer documentation is absent.
+Like the problematic SSE intrinsics in VK-Gong, YINs technical stumbling block is the usage of MATLAB's MEX compilation system \cite{matlab_mex_2025}. In YIN's currently form, as it was 2003, the compiled \texttt{.mex} files will not execute correctly in any MATLAB version from R2016a onwards, a not to dissimilar situation as the SSE instruction hurdle in VK-Gong. Instead, the \texttt{.mex} must be recreated due to changes in the compilation system. Recompiling does not provide a great obstacle, and the correct syntax can be quickly found by consulting the documentation, but this becomes a problem that \textit{every} user needs to solve. Not all researcher will have the same technical background and skill-set and without a centralised source, like a version controlled repository, there is no single place to raise or document such technical problems.
 
 
 \subsection{Summary of Acoustics Software Practice}
 
+From the set of seven acoustics software we can we can see a inclination towards an open source model, but not yet full compliance with current guidance. Table~\ref{tab:foss-compliance} provides an overview of the software that has been discussed and where the comply in terms of source availability, version control, documentation, licensing and unique identification.  
 
-From the set of seven acoustics software we can we can see a inclination towards an open source model, but not yet full compliance with current guidance.
+It is apparent that unique identifiers are absent across all examples, though some such as \citetitle{hamilton_pffdtd_2021}, \citetitle{berzborn_ita_2017} have taken step towards citablility by providing an explicit citation, which is the same observation made in \textcite{hornikx_exploring_2024}.
 
-Unique identifiers are absent across all examples, though some such as \citetitle{hamilton_pffdtd_2021}, \citetitle{berzborn_ita_2017} have taken step towards citablility by providing an explicit citation.
+It is also clear that developer documentation is largely missing from these projects. The audience served is  primarily users, but from the level of documentation, one with an assumed base level of technical knowledge. Assumption of technical skill excludes a potential audience, in particular those who are not from the field of acoustics, but would wish to apply this software to other research.
 
 This is a step in the right direction, but it makes an assumption that software will stay static. The dual DOI for version and for the base software provides the ability to discuss variations of the software. Software functionality may grow or become more accurate or conversely, bugs within a programme may be present in on version and it should be easier to find if research was carried out on potentially malfunctioning software.
+
+Each project that has been discussed is a technical marvel, but there is more work to be done if research of this kind is to have longevity and further impact.
+It has been demonstrated a cross-disciplinary application, and each project has a direct application for musical heritage research. There exists still a technical barrier which in part stems from the execution of an open source methodology.
 
 When citations are distributed across multiple papers such as for the ITA Toolbox, there is unnecessary complexity added to the process of tracking usage and cross referencing, but its is still achievable.
 
 For those without a suggested citation, tracking and cross referencing tends to settle on a finite set of urls or specific articles such as for Aurora and YIN. The usage is difficult to differentiate as a without further scrutiny as these may be citations to the article's contents and not necessarily the usage of the software.
 
-
 Licensing is fairly comprehensive, though there is some misapplication of Creative Commons licenses where \cite{cc_can_2025,hong_choosing_2025}. Though the BSD 4-Clause is not OSI compliant 
 \footnote{\url{https://www.gnu.org/licenses/bsd.en.html}}
 
+
+As the methodology applied to the keyboard interfaces provides an example of open hardware practice for a research product, so to is \textsc{magpie} intended to serve as example for open source research software.
 
 
 
