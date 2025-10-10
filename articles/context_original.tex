@@ -424,127 +424,287 @@ instrument for as long as possible through careful treatment.
 
 \section{Digital Conservation}
 
-Having outlined the broader challenges of musical instrument conservation, this section considers the role of digital technology within that context under the term \emph{digital conservation}. Although the phrase more commonly appears in biodiversity and environmental work \cite{vanderwal_digital_2015}, here it is recast with reference to ``digital heritage'' \cite{unesco_heritage_2003}, ``digital preservation'' \cite{garrett_preserving_1996}, and ``digital cultural heritage'' \cite{fresa_digital_2014}.
+Having discussed the broader challenges of musical instrument conservation, this
+section turns to the role of digital technology within that context, framed here
+under the term \emph{digital conservation}. Although the phrase \emph{digital
+conservation} has more commonly been associated with biodiversity and
+environmental preservation \cite{vanderwal_digital_2015}, in this thesis it is
+redefined to draw on concepts from the fields of ``digital heritage''
+\cite{unesco_heritage_2003}, ``digital preservation''
+\cite{garrett_preserving_1996}, and ``digital cultural heritage''
+\cite{fresa_digital_2014}.
 
-To clarify the terminology used throughout the thesis:
+
+To clarify the terminology used throughout the remainder of this thesis, the
+following definitions are provided:
 
 \begin{itemize}
-    \item \textbf{Digital preservation} is the process of creating and maintaining digital surrogates of artefacts for the purpose of a persistent record.
-    \item \textbf{Digital heritage} comprises all ``digital materials of enduring value'' \cite{unesco_heritage_2003}, including documents, datasets, and software.
-    \item \textbf{Digital cultural heritage} refers to heritage artefacts that have undergone digitisation, with specific reference to their digital instances.
+    \item \textbf{Digital preservation} is the process of digitising an artefact
+    for the purpose of a permanent record.
+    \item \textbf{Digital heritage} constitutes all ``digital materials of
+    enduring value'' \cite{unesco_heritage_2003} including documents, datasets
+    and software.
+    \item \textbf{Digital cultural heritage} are heritage artefacts with have
+    undergone the process of digitisation. This specifically references to the
+    digital instance of heritage objects
 \end{itemize}
 
-Digital conservation is a compound problem. It inherits the systemic issues of digital preservation while introducing domain-specific challenges for musical instruments, notably the difficulty of preserving the tactile, embodied experience of performance. As discussed previously, this is not a uniquely digital problem, but it becomes more acute when interaction is mediated through screens, sensors, and code.
+Digital conservation is a compound problem, encompassing both the specific
+challenges of digital conservation for musical instruments and the broader,
+systemic issues facing digital conservation as a whole. One of the significant
+challenges of digital musical instruments is preserving the tactile and embodied
+experience of performance. As discussed in the previous section, this issue is
+not exclusive to digital conservation; however, it becomes even more complex
+when interaction is mediated through digital means.
 
-The heritage sector’s use of digital technology is far from settled. Immersive media and interactive systems are frequently heralded as transformative \cite{gedert_technology_2017, li_systematic_2024, dutot_changing_2021}, yet the question remains: have museums been transformed by digital technologies, or deployed them with an analogue mindset? The digital should not replace the physical artefact; it should extend the artefact’s reach and interpretive context \cite{foster_defining_1998, parry_museums_2010}. Digitisation is not a single act but a continuing process \cite{rubio_work_2020, kelley_digital_2018}. Both digital and analogue collections depend on physical media \cite{rubio_work_2020}, and the financial and energy costs of keeping bits alive can exceed those of maintaining an analogue equivalent \cite{cieply_afterlife_2007}.
+Digital preservation and the integration of digital technology within the
+heritage sector are also not solved problems. Digital technology and immersive
+experiences technology are frequently declared to be `transforming' the idea of
+the museum \cite{gedert_technology_2017, li_systematic_2024,
+dutot_changing_2021}. We need to ask ourselves: have museums been transformed by
+digital technologies? Or have digital technologies simply been wielded with an
+analogue mentality? The `digital' in a museum should not be a substitute for the
+physical artefact, but rather an extension of its reach
+\cite{foster_defining_1998, parry_museums_2010}. It is worth keeping in mind
+that `digitisation' of an object is also not a single act, but a perpetual
+process \cite{rubio_work_2020, kelley_digital_2018}. Both digital and analogue
+objects rely on physical storage mediums \cite{rubio_work_2020}, but the
+financial and energy cost of preserving something digitally can often be orders
+of magnitude greater than an `analogue' equivalent \cite{cieply_afterlife_2007}.
 
-One clear advantage of the digital is aggregation. Projects such as Musical Instrument Museums Online (MIMO) collate catalogue data from distributed collections, improving access and enabling comparison at scale. The usefulness of such systems hinges on data quality and stewardship \cite{dolan_mimo_2017}, which in turn demand multidisciplinary skills. Museum professionals require training in data management, obsolescence, and silent corruption \cite{rubio_work_2020,schwarz_disk_2006,parry_museums_2010}; across the humanities, gaps remain in sustainable data practices \cite{taylor_shaping_2022}.
+One advantage of digital technologies is the ability to provide a central point
+of access to disparate and distributed collections, specifically the data of
+those collections. The Musical Instrument Museums Online (MIMO) project, an
+online catalogue that aggregates the data from collections of participating
+musical instrument museums around the globe, is a perfect example of this
+advantage. The key to the usability \cite{dolan_mimo_2017} of these systems lies
+within their data, the collection and management of which requires
+multidisciplinary skills. Museum professionals need adequate training to have an
+understanding of digital data and its inherent problems of obsolescence and
+silent corruption \cite{rubio_work_2020,schwarz_disk_2006,parry_museums_2010}.
+Concerning the humanities, there is still a gap in digital skills and best
+practices in data sustainability that needs to be closed
+\cite{taylor_shaping_2022}. 
 
-A further consideration concerns the \emph{digital heritage we create}: software, datasets, and workflows produced during conservation. If instruments are preserved digitally, the tools of preservation must themselves be preservable. Software reproducibility is a persistent problem \cite{perkel_challenge_2020}, with processes becoming irreproducible after surprisingly short periods \cite{robert_reproducibility_2020}.
+There is also the question of the digital heritage, such as software or data
+sets, that are either utilised or created as part of the conservation process.
+If musical instruments are to be preserved digitally, we need to be aware of how
+the tools that are created for the process of conservation are themselves
+conserved. Software has a reproducibility problem \cite{perkel_challenge_2020}
+where it can be difficult to recreate the process or results after only
+historically relatively short periods \cite{robert_reproducibility_2020}.
 
-The digital components of this thesis therefore follow current best-practice guidelines. The remainder of the section outlines the organisational approach and motivations behind the chosen methodology.
+The digital components of this thesis have strived to follow the current best
+practice guidelines. This section discusses the organisation and structure of
+all digital components and the motivations behind this methodology.
 
 \subsection{Open Methods}\label{sec:open-methods}
 
-Addressing digital musical instrument conservation requires frameworks that speak to preservation, access, and reuse. Open Science \cite{unesco_open_2021} provides a foundation by encouraging the open sharing not only of results%
-\footnote{Examples include original research outputs, research data, software, source code, workflows and protocols, and digital representations of pictorial and graphical materials \cite{unesco_open_2021}.}
-but also of the processes by which those results are obtained. Digital technologies make such openness feasible, but they also require structure. The FAIR principles---\emph{Findable, Accessible, Interoperable, Reusable}---offer a practical framework for digital assets \cite{wilkinson_fair_2016}:
+To effectively tackle the problem of digital musical instrument conservation, we
+require frameworks that address each of the components discussed above. 
+
+Connected with the concept digital preservation is the movement of towards Open
+Science \cite{unesco_open_2021}, a philosophy of academic research that
+advocates for openly sharing not only the the results of research%
+\footnote{
+``e.g. original   scientific   research   results,   research  data,  software,
+source  code,  source  materials,  workflows  and  protocols,  digital
+representations  of  pictorial  and  graphical  materials   and   scholarly
+multimedia   material'' \cite{unesco_open_2021}}
+but also the processes and
+methodologies necessary to achieve those results. Digital technologies make a
+concepts like Open Science feasible, but when applied to the digital assets, a
+robust framework is required to make Open Science achievable. The FAIR
+principles provide such framework, focussing on the ``Findability,
+Accessibility, Interoperability, and Reuse [FAIR] of digital assets''
+\cite{wilkinson_fair_2016}.
 
 \begin{itemize}
-\item \textbf{Findability:} digital assets carry rich metadata and persistent identifiers.
-\item \textbf{Accessibility:} access protocols are open, free, and universally implementable.
-\item \textbf{Interoperability:} data and tools integrate across heterogeneous systems with minimal effort.
-\item \textbf{Reuse:} assets are released with clear, accessible licensing and provenance.
+\item Findability: Digital assets are described with rich metadata with a
+persistent location
+\item Accessibility: protocol is open, free, and universally implementable
+\item Interoperability: the ability of data or tools from non-cooperating
+resources to integrate or work together with minimal effort.
+\item Reuse: digital assets are released with a clear and accessible data usage
+license
 \end{itemize}
 
-For software, FAIR also implies citability \cite{soito_citations_2016}. This requires action by authors \cite{smith_software_2016}, by those citing software \cite{katz_recognizing_2021}, and by journals that must cross-reference software artefacts \cite{stall_journal_2023}. Open software is ideally ``living,'' yet research demands that specific versions be discoverable and stable. Version control (e.g., \texttt{git}) allows releases to be tagged, while public repositories (e.g., GitHub) aid discoverability. For long-term reference, archival deposition (e.g., Zenodo) provides persistent identifiers (DOIs) \cite{smith_software_2016,stall_journal_2023}.
+For software to be FAIR, it must also be citable \cite{soito_citations_2016}, a
+process which has historically lacked standardisation. Making software citable
+involves compliance to guidelines not only by research software authors
+\cite{smith_software_2016} but also by those citing that software
+\cite{katz_recognizing_2021} and the journals cross-referencing those citations
+\cite{stall_journal_2023}.
 
-Persistence is one side of sustainability; reproducibility is the other \cite{perkel_challenge_2020}. Software should run now and in the future, despite evolving languages, libraries, and hardware, and despite more mundane obstacles such as incomplete documentation \cite{robert_reproducibility_2020}.
+Open software should ideally be `living' with the potential for constant change,
+but when used in research, this quality can be a problem for cite-ability and
+reusability. Version control systems such as git provide a straightforward way
+to track and tag versions of software. public, online, version-controlled
+repositories like GitHub help software comply with FAIR principles, but there is
+still a question of longevity \cite{smith_software_2016}. In addition to version
+control platforms source should be uploaded to archive repositories, like the
+Zenodo platform, which enable persistent referencing through a digital object
+identifier (DOI) \cite{smith_software_2016,stall_journal_2023}.
+
+Persistent referencing addresses on aspect longevity but another critical aspect
+is the reproducibility of software \cite{perkel_challenge_2020}. Software is
+should be executable no and in the future, a process which is hindered by
+constantly developing programming languages in addition to all manner of
+unforeseen obstacles, from hardware obsolescence to missing doc umentation
+\cite{robert_reproducibility_2020}.
 
 \subsection{Reproducibility}\label{hardware-reproducibility}
 
-Digitally designed \emph{hardware} introduces additional challenges. In digital musical instrument (DMI) design, long-term reuse remains difficult \cite{fiordelmondo_towards_2025}. Hardware projects typically combine electronics schematics, CAD/CAM assets, bills of materials, and assembly/operation documentation; these components must be archived together in a well-structured repository \cite{calegario_documentation_2021}. CAD formats and toolchains themselves are preservation risks. During this thesis, Autodesk announced the discontinuation of the EAGLE EDA tool \cite{autodesk_eagle_2024} for July 2026. A deliberate decision was made to continue using EAGLE’s XML format: much as Python~2’s end-of-life ``calcified'' that environment for archival purposes \cite{rougier_loupe_2020}, EAGLE’s stable format remains processable by other tools such as KiCad \cite{kicad_eagle_2024}.
+While this discussion has focused on digital software, digitally designed
+physical hardware presents additional challenges. Within the field of digital
+musical instrument (DMI) design, long-term reusability remains an on-going
+challenge \cite{fiordelmondo_towards_2025}. Designing and fabricating hardware
+requires more than just source code. Design of electronics hardware typically
+incorporates Computer Aided Design (CAD) and Computer Aided Manufacture (CAM)
+steps, necessitating the inclusion of not just schematics but also the bill of
+materials, and documentation on assembly and operation all within a  well
+structure archived repository \cite{calegario_documentation_2021}. CAD files and
+surrounding support files also provide another point of failure with respect to
+preservation. For example, in the course of this thesis the popular Electronic
+Design Automation (EDA) software tool EAGLE was announced to be discontinued
+\cite{autodesk_eagle_2024} for the July 2026. A conscious decision was made to
+continue using the EAGLE format for the PCB design. Much in the same way as the
+discontinuation of Python 2 may be beneficial for archival purposes as
+``advanced programming language that is guaranteed not to evolve anymore''
+\cite{rougier_loupe_2020}, so to does the discontinuation of the EAGLE means
+that its XML file standard is now calcified and is unable changes. Instead, the
+EAGLE files can be used in conjunction with other EDA software such as the open
+source KiCAD \cite{kicad_eagle_2024}.
 
-\textcite{perkel_challenge_2020} aggregates guidance from the ReScience~C ten-year challenge on reviving decade-old research software. Key recommendations---version control, archival deposits, and explicit documentation---align with wider best practice \cite{smith_software_2016, stall_journal_2023}.
+\textcite{perkel_challenge_2020} provides a checklist aggregated from the
+ReScience C jounral's ten-year challenge initiative which challenges researchers
+to replicate results from their software that is older than ten years. Key
+recommendations in the list include version control and archiving which is in
+keeping with this guidance for best practice \cite{smith_software_2016,
+stall_journal_2023}.
 
-All digital assets in this thesis are released under the GPLv3 licence, following recommendations to provide permissions as openly as possible \cite{stall_journal_2023}. GPLv3 permits copying, distribution, and modification, with the requirement that derivatives remain under the same licence \cite{gplv3}. Repositories were structured in line with Software Sustainability Institute guidance and underwent assessment by the Institute at the University of Edinburgh \cite{ssi_online_2025}.
+Finally, all digital assets are available under the GLPv3 licence under
+recommendation to provide as open permission as possible
+\cite{stall_journal_2023}. The GPLv3 licence allows for the copy, distribution
+and modify the source files and that any modifications to that digital source
+must also be made available under the same licence \cite{gplv3}. Source code
+repositories for this thesis were designed to conform to the current software
+sustainability institute guidelines and underwent assessment from the Software
+Sustainability Institute at the University of Edinburgh \cite{ssi_online_2025}.
+
 
 \subsection{Case Study: Aurora}\label{sec:aurora}
 
-During the course of this PhD, Professor Angelo Farina---a prolific acoustics researcher and author of several free analysis tools---passed away. Among his contributions, the Aurora suite provides a pertinent case study in software sustainability: it has enduring value and has supported digital cultural heritage projects for decades \cite{fausti_acoustic_2000,frey_acoustical_2013,almagropastor_assessing_2021}.
+During the course of this PhD was the passing of professor Angelo Farina who, as
+well being prolific academic within the field of acoustics, was also the author
+of a number of free software packages for acoustics analysis. One example of
+Farina's software is Aurora, a free software suite for acoustical analysis.
+Auroa provides an apposite case for the importance of software sustainability
+and preservation, not only for its enduring value but also because of its
+long-standing role in digital cultural heritage projects spanning decades
+\cite{fausti_acoustic_2000,frey_acoustical_2013,almagropastor_assessing_2021}.
 
-Aurora originated in 1995 \cite{farina_auralization_1995} as an extension to Cool Edit \cite{tronchin_acoustics_1997} (later Adobe Audition \cite{farina_listening_2004}) and was initially distributed with Farina’s Ramsete room-acoustics simulator \cite{farina_aurora_1995} via shareware sites. Its broad adoption followed the addition of sine-sweep impulse response measurement \cite{farina_aurora_2000}. In 2009, Simone Campanini ported Aurora to the open-source editor Audacity \cite{farina_new_2009}, ending the ``Russian roulette'' shareware model \cite{farina_registration_2007} and making Aurora freely usable.
+Aurora was created in 1995 \cite{farina_auralization_1995} as an extension to
+the then Cool Edit software \cite{tronchin_acoustics_1997} -- which would
+eventually become Adobe Audition \cite{farina_listening_2004} -- and was
+initially distributed alongside Farina's Ramsete software for 3D simulation of
+building acoustics \cite{farina_aurora_1995} from
+\url{http://aurora.ramsete.com/Aurora} and \url{http://aurora-plugins.com/} as
+shareware \cite{farina_registration_2007}. 
 
-Aurora remains widely cited \cite{fontana_highly_2024,popp_speech_2024,denti_pan_2024}, and development continued as late as 2023 \cite{bevilacqua_new_2023}. However, the absence of consistent software citation complicates provenance: inferring versions from publication dates is imprecise, and substantial code changes may affect comparability of results. In response, a small conservation effort---in collaboration with Campanini and Farina---uploaded the Audacity variant’s source to a public version-controlled repository, under GPLv3 with an assigned DOI \cite{farina_aurora_2025}, in line with best practice \cite{stall_journal_2023, hong_how_2019}.
+Aurora became prominently used in research after functionality was added that
+simplified the process of sine sweep room impulse response measurement
+\cite{farina_aurora_2000}. In 2009 the source code for Aurora would later be
+ported by Simone Campanini to the free open source audio editor Audacity
+\cite{farina_new_2009}. This port marked the first time Aurora was fully free to
+use and ended the ``russian roulette'' approach to shareware that had been taken
+with the Adobe Audition version \cite{farina_registration_2007}.
 
-Technically, Audacity supports extension through an experimental module system.\footnote{\url{https://manual.audacityteam.org/man/modules.html}} Modules must be co-compiled with the host source and version-checked at load time. This strategy enabled distribution of a single working editor with Aurora integrated, but it also intertwined module and host code, making Aurora vulnerable to breaking changes as Audacity evolved, particularly after its 2021 partnership with Muse Group \cite{prokoudine_ultimate_2021}. Consequently, Aurora’s long-term availability depends on maintaining build compatibility.
+Aurora has been widely cited in research papers since its remains a part of
+toolkit for the acoustics research community
+\cite{fontana_highly_2024,popp_speech_2024,denti_pan_2024}. Although Aurora is
+free software, its source code has not historically been open; however it was
+still in active development by Farina as late as 2023
+\cite{bevilacqua_new_2023}. Tracking Aurora’s use in historical research is
+complicated by the lack of a software citation standard. Inferring the version
+of Aurora used from publication dates is imprecise, and given the significant
+development it has undergone, it is difficult to assess how changes may have
+influenced previous research results. These factors motivated a small software
+conservation project, undertaken in collaboration with Campanini and Farina,
+which involved uploading the Audacity variant of Aurora’s source code to a
+public version control repository, released under a GPLv3 license with an
+assigned DOI \cite{farina_aurora_2025} in accordance with current best practice
+guidlines \cite{stall_journal_2023, hong_how_2019}
 
-Farina’s websites hosted Aurora binaries,\footnote{\url{https://www.angelofarina.it/Aurora/download}} but such hosting is fragile.\footnote{At the time of writing, Farina’s University of Parma site (\url{http://pcfarina.eng.unipr.it}) is down, though it has been mirrored at \url{https://www.angelofarina.it}.} The Audition-era source is not public; the current repository is therefore a partial historical snapshot. This is not unique. The YIN pitch-detection code by de~Cheveign\'e \cite{cheveigne_yin_2002} faces similar issues: widely used, historically hosted at unstable URLs,\footnote{\url{http://www.ircam.fr/pcm/cheveign/sw/yin.zip} (defunct); see also \url{http://audition.ens.fr/adc/sw/yin.zip}.} and often cited via papers rather than software artefacts. When the \emph{software}---not merely the algorithm---is integral to research, the record should include an accessible, citable source package.
+Since Audacity is an open source project, additional software can be embedded
+directly into it utilising Audacity's experimental `module' system, a
+little-used and under-documented feature.%
+\footnote{\url{https://manual.audacityteam.org/man/modules.html}} One
+requirement for modules are that they be co-compiled with the Audacity source
+code in order to function.%
+\footnote{``Modules should be built on the same date
+as Audacity, otherwise the version string check will prevent the module
+loading'' \url{https://manual.audacityteam.org/man/modules.html}}
 
-These examples point to an institutional role: research organisations could host software repositories, assign DOIs, and provide light-touch stewardship for outputs arising from funded work. Documentation is also central to sustainability \cite{perkel_challenge_2020}; even basic steps such as adding a licence can improve community engagement \cite{colazo_licence_2009}. Lessons from Aurora and YIN inform the project structure, documentation, and digital outputs presented in this thesis.
+The module approach was the one taken for Aurora port to Audacity
+\cite{farina_new_2009}. A key advantage is the ability to distribute a single
+working audio editor package that intergrates the Aurora suite. However, this
+also risks the module’s source code becoming entangled with Audacity’s own
+codebase — a situation that unfortunately occurred with Aurora.
 
-\section{Free Open Source Acoustics Research Software}
+Where this all has implications for software sustainability is when the host
+software, Audacity, undergoes major development which -- after its announced
+partnership in with Muse Group in 2021 \cite{prokoudine_ultimate_2021} -- is
+likely to take place. In this scenario breaking changes -- updates to source
+code that cause other dependant code or software to fail -- are inevitable.
+Consequently, Aurora’s availability and functionality has cbecome precarious.
 
-% Before introducing the \textsc{magpie} framework, this section surveys free and open-source software (FOSS) in acoustics with demonstrable relevance to heritage work, whether through measurement of historical spaces \cite{tronchin_acoustics_1997,fagerlande_adequaccao_2020} or digital reconstruction \cite{katz_exploring_2020}. The aim is not exhaustiveness but to indicate current practice and where the community might develop further.
+The repository for the Aurora binaries, hosted from Farina's personal site,
+\footnote{\url{https://www.angelofarina.it/Aurora/download}}
+will inevitably become
+obsolete.%
+\footnote{At time of writing Farina's University of Parma site,
+\url{http://pcfarina.eng.unipr.it}, is down, though it has been mirrored at
+\url{https://www.angelofarina.it}}
+Thus, source code remains one of the few
+reliable records to Aurora’s functionality. Although the source code for
+Aurora's Audacity port is available, the original Adobe Audition version source
+is not public. The current repository represents only a snapshot of the source
+code's complete history.
 
-The preceding discussion highlighted the fragility of digital heritage and the responsibilities that follow from creating new digital tools. Having shown how issues of access, licensing, documentation, and long-term stewardship affect the preservation of software itself, it is necessary to consider the broader ecosystem into which such tools are released. This section, therefore, surveys free and open-source software (FOSS) relevant to acoustics research, with particular attention to projects that intersect with heritage practice—whether through analysis, simulation, reconstruction, or measurement of instruments and spaces. The aim is not to catalogue the field exhaustively but to understand the current landscape into which new work is introduced, identify patterns of good practice and recurring shortcomings, and clarify where further development is needed.
+Aurora is not unique in this predicament, the YIN source code by Alain de
+Cheveigne \cite{cheveigne_yin_2002} and it faces strikingly similar challenges
+to Aurora. YIN is also a widely used and cited software in acoustics. YIN's
+source code was originally available from a commonly cited link at IRCAM website,
+\footnote{\url{http://www.ircam.fr/pcm/cheveign/sw/yin.zip}}
+but this is no longer a
+valid. YIN has recently been cited as available from de Cheveigne's ``informal''
+page at Laboratoire des Systèmes Perceptifs
+(LSR) \cite{alain_cancellation_2023}.%
+\footnote{\url{http://audition.ens.fr/adc/sw/yin.zip}, although the LSR page \textit{still} references the IRCAM url as the repository} 
+Though the original article describes the algorithm, citation to these zip
+archives are not uncommon in research
+\cite{banhalmi_fundamental_2005,staudacher_fast_2016} and when the software, not
+the algorithm in the paper, is a constituent part of that research then it is
+important that a record of it is kept.
+
+Aurora and YIN illustrate broader issues in the sustainability and preservation
+of research software. Regardless of being free, open source, or widely used,
+software remains vulnerable to decay. Research institutions could play a more
+proactive role by hosting repositories and assigning DOIs to software produced
+from their research outputs.
+
+Documentation is vital for understanding source code structure and functionality
+\cite{perkel_challenge_2020}.  Even basic steps such as adding a software
+licence can improve the developer community engagement with software
+\cite{colazo_licence_2009}.
+
+The work presented in this thesis builds on lessons learned from software like
+Aurora and YIN. These experiences have informed the methodology for project
+structure, documentation and the broader digital output of this research. 
 
 
-\subsection{Software Documentation}
 
-By ``documentation'' we mean both user-facing materials (tutorials, how-tos) and developer-facing structure (module/class/function references). Ideally, documentation is generated from source annotations to avoid duplication and to support automation. Across MATLAB, Python, and C\textsc{++} there are multiple conventions \cite{vanrossum_pep8_2001,goodger_pep257_2001}, and several tooling ecosystems coexist (e.g., Doxygen, Sphinx, HeaderDoc).\footnote{See the Stack Overflow data explorer for indicative tag counts: \url{https://data.stackexchange.com/stackoverflow/query/1069131/get-all-tags}.} Best practice emphasises the importance of documentation \cite{smith_software_2016}, though it is less prescriptive about form and depth. \textcite{writethedocs_sowftware_2025} offers comprehensive guidance. Following \textcite{procida_diataxis_2025}, we can distinguish four complementary forms: \emph{Tutorials}, \emph{How-to guides}, \emph{Explanation}, and \emph{Reference}. Generated API references should not be mistaken for user manuals \cite[Section~6.2]{stallman_gnu_1992}; conversely, many research tools lack adequate developer references. A pragmatic rule is that documentation should enable you to ``understand your code in six months'' \cite{writethedocs_sowftware_2025}, a theme underscored by reproducibility studies \cite{perkel_challenge_2020}. Using the \citep{ssi_checklist_2018} checklist, the core requirements for an open research software project are: publicly available source, a version control system (VCS), user and developer documentation, an OSI-compliant licence, and persistent identifiers (typically DOIs). A public VCS implies source availability; the reverse is not guaranteed. Likewise, a DOI implies some level of archival deposit, but not necessarily active maintenance. DOIs should be assigned both to the software as a whole and to individual releases \cite{smith_software_2016}; the licence should be clearly stated and OSI-compliant \cite{hong_choosing_2025}. Recommendations beyond these basics (contribution policies, issue tracking, codes of conduct) presuppose an active repository. The following subsections consider seven projects in this light.
-
-\subsubsection{Aurora}
-
-As discussed in Section~\ref{sec:aurora}, Aurora began in 1995 and became fully open only with the 2009 Audacity port \cite{farina_new_2009}. The project now has an OSI-compliant licence and a citable release with DOI \cite{farina_aurora_2025}. Developer documentation remains sparse; a user manual exists but is not currently set up for community contribution.\footnote{\url{https://www.aurora-plugins.com/Package.htm}}
-
-\subsubsection{ITA Toolbox}
-
-The ITA Toolbox emerged around 2010 \cite{dietrich_matlab_2010}, moved to RWTH Aachen’s GitLab in 2016, and adopted an explicit open-source model in 2017 \cite{berzborn_ita_2017}. It can be viewed as a successor to Aurora for measurement and analysis \cite{dietrich_influence_2013}. Developer documentation within MATLAB is extensive, but---as warned by \textcite{stallman_gnu_1992}---``doc strings'' are not a full user manual. Public-facing materials correspond mostly to \emph{Tutorials} in \citetitle{procida_diataxis_2025} \cite{procida_diataxis_2025}; other forms are more limited. Recommended citations are tied to publications; releases are available via the institutional GitLab. The toolbox depends on proprietary MATLAB toolboxes, narrowing its audience. Its BSD-4-Clause variant is not currently OSI-approved.\footnote{\url{https://spdx.org/licenses/BSD-4-Clause.html}} Despite these caveats, it remains a well-maintained institutional open-source effort and has been used in heritage case studies \cite{fagerlande_adequaccao_2020}. A Zenodo DOI has been suggested \cite{berzborn_ita_2017} but not, at the time of writing, implemented.
-
-\subsubsection{ITEMM OpenLab}
-
-The ITEMM OpenLab platform\footnote{\url{https://www.openlab-itemm.com}} provides resources for makers, including datasets, CAD models, and workshop-oriented calculators. Of particular relevance, the \textit{Rigidité de plaques} tool implements \textcite{mcintyre_measuring_1988} for plate elastic constants.\footnote{\url{https://www.openlab-itemm.com/calculateur-mecanique/rigidite-de-plaques-1/}} While accessible after registration, the model is distribution-free rather than open-source; code delivered to the browser can be inspected but is not clearly licensed for reuse.\footnote{See \texttt{js/p\_w\_script.js} and \texttt{js/olt\_class.js}.} Legal terms cover 3D models under CC-BY-SA,\footnote{\url{https://www.openlab-itemm.com/mentions-legals/}} but do not explicitly extend to calculators \cite{cc_can_2025}. By contrast, \textsc{magpie} follows an ``open first'' approach aligned with FAIR \cite{wilkinson_fair_2016,go_fair_2016}, aiming for sustainability, interoperability, and citability (\emph{sensu} \cite{soito_citations_2016}). The intent is FLOSS rather than merely ``open source'' \cite{stallman_floss_2021}.
-
-\subsubsection{NeSS}
-
-The Next Generation Sound Synthesis (NeSS) project at the University of Edinburgh employed GPU acceleration for physically based synthesis of instruments and acoustics, running from 2012--2017. During this thesis, the source was released under MIT on GitHub, with documentation covering build steps and partial structure,\footnote{\url{https://github.com/Edinburgh-Acoustics-and-Audio-Group/ness/tree/main/doc}} and an associated website of explanations and examples \cite{ness_welcome_2016}. Given the recent opening, citations outside the original project are currently limited.
-
-\subsubsection{PFFDTD}
-
-PFFDTD \cite{hamilton_pffdtd_2021} provides open-source room-acoustics simulation driven from SketchUp models,\footnote{\url{https://sketchup.trimble.com}} using CUDA for GPU acceleration and open languages (Ruby, Python, C) elsewhere. Documentation includes references and installation guidance; a concise how-to is provided. The project suggests a standard citation---a positive step for traceability---though a DOI would further improve citability. Tools of this kind support virtual exploration of cultural heritage spaces \cite{katz_exploring_2020, tronchin_acoustics_1997, cook_hearing_2023}.
-
-\subsubsection{VK-Gong}
-
-VK-Gong (ENSTA Paris) simulates nonlinear plates and shells relevant to gongs, cymbals, and bells. MATLAB and C\textsc{++} sources are hosted via an institutional site, with an unusually comprehensive MATLAB user manual \cite{vkgong_manual_2017}. The site lists CC-BY-NC-SA-4.0,\footnote{\url{https://creativecommons.org/licenses/by-nc-sa/4.0/}} though the licence text is absent from source files; CC licences are discouraged for software by both Creative Commons and OSI \cite{cc_can_2025}. No public VCS is used, limiting collaboration and issue tracking. Platform-specific optimisations (Intel SSE intrinsics) hinder portability, particularly to Arm processors; without a VCS, workarounds must be rediscovered by each user. Despite these hurdles, VK-Gong has been used in research \cite{nguyen_nonlinear_2019}.
-
-\subsubsection{YIN}
-
-The YIN pitch detector \cite{cheveigne_yin_2002} is widely adopted, with MATLAB code commonly used in studies (e.g., \cite{bowen_assessing_2019}). The software lacks a stable URI or DOI and carries a ``FOR RESEARCH PURPOSES'' restriction,\footnote{\url{https://github.com/mhamilt/yin/blob/main/LICENCE}} which is not OSI-compliant. Documentation is primarily the original paper (\emph{Explanation} in \cite{procida_diataxis_2025}); developer reference is absent. Technical friction arises from MATLAB MEX changes post-R2016a \cite{matlab_mex_2025}, requiring users to rebuild binaries individually.
-
-\subsection{Summary of Acoustics Software Practice}
-
-Across these seven projects there is a clear movement towards openness, but uneven adherence to best practice. Table~\ref{tab:foss-compliance} summarises the status with respect to source availability, version control, documentation, licensing, and persistent identifiers. Two trends stand out. First, persistent identifiers are largely absent; where present, suggested citations help but do not replace DOIs \cite{hornikx_exploring_2024}. Second, developer documentation is thin; most projects assume technically experienced users, which narrows adoption outside core acoustics communities. Licensing is generally present, though some projects apply non-OSI licences (or CC variants) in ways that limit reuse \cite{cc_can_2025,hong_choosing_2025}. Finally, software evolves: dual DOIs (project and release) clarify which version underpinned a result, and make bugs or behavioural changes tractable in retrospect.
-
-As with the open-hardware methodology applied to the keyboard interfaces, \textsc{magpie} aims to model FLOSS-aligned research practice: public VCS, explicit licensing, structured documentation for users and developers, and archival deposition with DOIs.
-
-\begin{table}[]
-	\centering
-	\begin{tabular}{rlccccl}
-		\toprule
-		\textbf{Project}       & \textbf{Source}        & \textbf{VCS} & \textbf{Reference}         & \textbf{Manual}            & \textbf{Licence}                             & \textbf{DOI}          \\\hline
-		\textit{Aurora}        & Yes\textsuperscript{*} & Yes          & No                         & Yes\textsuperscript{*}     & GPL-3.0-or-later                             & Yes                   \\
-		\textit{ITA Toolbox}   & Yes                    & Yes          & Yes                        & Partial\textsuperscript{*} & BSD-4-Clause\textsuperscript{\textdagger}    & No\textsuperscript{*} \\
-		\textit{ITEMM OpenLab} & No\textsuperscript{*}  & No           & No                         & No                         & CC-BY-SA-4.0\textsuperscript{*\textdagger}   & No                    \\
-		\textit{NeSS}          & Yes                    & Yes          & Partial\textsuperscript{*} & Yes                        & MIT                                          & No                    \\
-		\textit{PFFDTD}        & Yes                    & Yes          & No                         & Yes                        & MIT                                          & No                    \\
-		\textit{VK-Gong}       & Yes                    & No           & No                         & Yes                        & CC-BY-NC-SA-4.0\textsuperscript{\textdagger} & No                    \\
-		\textit{YIN}           & Yes                    & No           & No                         & Partial\textsuperscript{*} & Bespoke\textsuperscript{*\textdagger}        & No                    \\
-		\bottomrule
-	\end{tabular}
-	\caption{Acoustics FOSS compliance overview. \textdagger Not Open Source Initiative--approved. \\ * See relevant project section for discussion.}
-	\label{tab:foss-compliance}
-\end{table}
 
 
 

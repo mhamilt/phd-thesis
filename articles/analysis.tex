@@ -3,16 +3,16 @@
 This chapter introduces \textsc{magpie}, a free/libre, open, and citable toolkit for the analysis, visualisation, and pedagogical use of plate vibration models in musical acoustics. Whereas the previous chapter centred on \emph{user interaction} with digital reconstructions of cultural heritage—through the San Colombano keyboard project—our focus here shifts to \emph{analysis}, in particular the determination of wood properties that underpin conservation practice. The ability to extract elastic constants from non-intrusive vibration measurements addresses a persistent challenge in both the conservation of antique instruments and the making of new ones. Within the broader framework of \textsc{NEMUS}, \textsc{magpie} aims to extend the project’s goals by providing curators, conservators, and instrument makers with an accessible, open-source environment in which plate models can be simulated, visualised, and compared to experimental data.
 
 
-For both the conservation of historical instruments and the making of new ones or faithful copies, reliable material parameters are indispensable. In wooden soundboards and plates, the elastic behaviour is orthotropic, with distinct properties along and across the grain. Conventional destructive or quasi-destructive tests (bending, tensile, compression) are impractical for whole instruments and generally incompatible with curatorial practice. Conversely, vibration-based measurements—e.g., eigenfrequency/eigenshape identification and Chladni visualisation—offer a minimally invasive alternative. Recent work in \textsc{NEMUS} has produced a practical inverse-modelling method to estimate the rectangular orthotropic plate elastic constants from measured modes and Chladni patterns via a linear least-squares formulation \cite{ducceschi_method_2024,ducceschi_open_2024}. This approach is robust to boundary condition choices, yields a transparent matrix inversion for the constants, and is well-suited to workflows where repeatable, low-risk procedures are required, such as in a luthier workshop. In this chapter, we package, document, and expose this capability to non-specialists through \textsc{magpie}, with particular attention to reproducibility and ease of use in a web browser.
+For both the conservation of historical instruments and the making of new ones or faithful copies, reliable material parameters are indispensable. In wooden soundboards and plates, the elastic behaviour is orthotropic, with distinct properties along and across the grain. Conventional destructive or quasi-destructive tests (bending, tensile, compression) are impractical for whole instruments and generally incompatible with curatorial practice. Conversely, vibration-based measurements—e.g., eigenfrequency/eigenshape identification and Chladni visualisation—offer a minimally invasive alternative. Recent work in \textsc{NEMUS} has produced a practical inverse-modelling method to estimate the rectangular orthotropic plate elastic constants from measured modes and Chladni patterns via a linear least-squares formulation \cite{ducceschi_method_2024,ducceschi_open_2024}. This approach is robust to boundary condition choices, yields a transparent matrix inversion for the constants, and is well-suited to workflows requiring repeatable, low-risk procedures, such as in a luthier workshop. In this chapter, we package, document, and expose this capability to non-specialists through \textsc{magpie}, with particular attention to reproducibility and ease of use in a web browser.
 
 
 Plate simulations, eigenshape rendering (including Chladni plots), modal parameter estimation, and impulse-response synthesis are often available only in proprietary software stacks or bespoke research scripts, which usually have steep learning curves. The immediate need is for an open, well-documented toolchain that implements standard thin-plate models (e.g., Kirchhoff–Love and variants), supports inverse estimation of orthotropic constants from measurements, and lowers the barrier to entry via an interactive browser interface. \textsc{magpie} addresses this gap by consolidating numerics (sparse finite-difference biharmonics, eigenanalysis), analysis utilities (mode sorting, Chladni rendering), and inversion routines into a coherent, cross-language codebase released under a permissive licence and distributed on GitHub\footnote{ \href{https://github.com/orgs/Nemus-Project/teams/magpie/repositories}{MAGPIE repositories}} through the \textsc{NEMUS} project.
 
 To ensure that \textsc{magpie} is not just \emph{available} but \emph{reusable} in the long term, we align the project with the FAIR Guiding Principles (Findable, Accessible, Interoperable, Reusable) \cite{wilkinson_fair_2016,go_fair_2016}. In practical terms, this means: 
 \begin{enumerate}
-\item Assigning persistent identifiers (e.g., DOIs via archival services) to code, releases, and datasets; 
-\item Providing machine- and human-readable metadata, explicit licences, and provenance; 
-\item Maintaining stable, versioned APIs and minimal, well-specified dependencies; and \item Supplying rich documentation, examples, and curated notebooks that demonstrate museum-focused workflows (from data capture to inversion to reporting). 
+\item Assigning persistent identifiers (e.g., DOIs via archival services) to code, releases, and datasets. 
+\item Providing machine- and human-readable metadata, explicit licences, and provenance.
+\item Maintaining stable, versioned APIs and minimal, well-specified dependencies. \item Supplying rich documentation, examples, and curated notebooks that demonstrate museum-focused workflows (from data capture to inversion to reporting). 
 \end{enumerate}
 Complementarily, we adopt the FORCE11 Software Citation Principles so that \textsc{magpie} and its companion assets can be cited like any other research output, enabling credit and traceability for developers and curators alike \cite{smith_software_2016}.
 
@@ -21,57 +21,18 @@ Complementarily, we adopt the FORCE11 Software Citation Principles so that \text
 \paragraph{Scope of the chapter.}
 The remainder of the chapter develops the design choices behind \textsc{magpie} and their implications for conservation, lutherie, and education. We: 
 \begin{enumerate}
-\item Situate the model choices and numerical methods, with an emphasis on transparent sparse operators suitable for inverse workflows; 
-\item Describe the cross-language architecture and the web-facing interface, designed for user deployment;  
+\item Situate the model choices and numerical methods, with an emphasis on transparent sparse operators suitable for inverse workflows.
+\item Describe the cross-language architecture and the web-facing interface, designed for user deployment.
 \item Demonstrate a representative case study: estimation of elastic constants from measured modes and Chladni patterns on a rectangular plate. 
 \end{enumerate}
 
 
-Throughout, we prioritise replicability (scripts and notebooks), citeable artefacts (software, datasets, configurations), and alignment with museum constraints on access, handling, and documentation, consistent with the mission of \textsc{NEMUS}.
-
-\section{Existing Tools: ITEMM OpenLab [Under Construction]}
-% \section{Free Open Source Acoustics Research Software [Under Construction]}
+Throughout, we prioritise replicability (scripts and notebooks), citeable artefacts (software, datasets, configurations).
+% \section{Existing Tools: ITEMM OpenLab [Under Construction]}
 
 
 
-\begin{table}[]
-	\centering
-	\begin{tabular}{|r|l|c|c|c|c|l|}
-		\hline
-		\textbf{Project}       & \textbf{Source}        & \textbf{VCS} & \textbf{Reference}         & \textbf{Manual}            & \textbf{Licence}                             & \textbf{DOI}          \\\hline
-		\textit{Aurora}        & Yes\textsuperscript{*} & Yes          & No                         & Yes\textsuperscript{*}     & GPL-3.0-or-later                             & Yes                   \\
-		\textit{ITA Toolbox}   & Yes                    & Yes          & Yes                        & Partial\textsuperscript{*} & BSD-4-Clause\textsuperscript{\textdagger}    & No\textsuperscript{*} \\
-		\textit{ITEMM OpenLab} & No\textsuperscript{*}  & No           & No                         & No                         & CC-BY-SA-4.0\textsuperscript{*\textdagger}       & No                    \\
-		\textit{NeSS}          & Yes                    & Yes          & Partial\textsuperscript{*} & No                         & MIT                                          & No                    \\
-		\textit{PFFDTD}        & Yes                    & Yes          & No                         & Yes                        & MIT                                          & No                    \\
-		\textit{VK-Gong}       & Yes                    & No           & No                         & Yes                        & CC-BY-NC-SA 4.0\textsuperscript{\textdagger} & No                    \\
-		\textit{YIN}           & Yes                    & No           & No                         & Partial\textsuperscript{*} & Bespoke\textsuperscript{*\textdagger}        & No                    \\
-		\hline
-	\end{tabular}
-	\caption{Acoustics FOSS compliance Overview. \textdagger Not Open Source Initiative approved.\\ * See relevant project section for further discussion.}
-	\label{tab:foss-compliance}
-\end{table}
 
-
-\textsc{magpie} is not the first attempt to make plate analysis accessible, nor is it the only tool marketed as ``free.'' The Institut Technologique Européen des Métiers de la Musique (ITEMM) maintains an online platform, ITEMM Open Lab,%
-\footnote{\url{https://www.openlab-itemm.com}} which provides luthiers and makers with resources ranging from datasets of materials to CAD models of instrument parts. Most relevant for present purposes, OpenLab also includes a suite of calculators for acoustical and mechanical properties of wood, offering workshop access to methods otherwise restricted to laboratory environments. 
-
-Among the available tools are calculators for string behaviour under tension, resonance frequencies of soundboards and bridges, and a plate-stiffness tool, \textit{Rigidité de plaques},%
-\footnote{\url{https://www.openlab-itemm.com/calculateur-mecanique/rigidite-de-plaques-1/}} which implements the methodology of \textcite{mcintyre_measuring_1988} to estimate elastic constants. The initiative is admirable: ITEMM has made genuinely useful processes accessible to practitioners who might otherwise lack the means. But the openness has limits.
-
-Although freely accessible once registered, OpenLab tools follow a distribution model that differs from the approach taken here. In Stallman’s terms, they are closer to ``free as in beer'' than ``free as in freedom'' \cite{stallman_why_2007}. 
-The code that underpins calculators such as \textit{Rigidité de plaques} is delivered through the browser and can, in principle, be examined,%
-\footnote{Calculations are carried out in \href{https://www.openlab-itemm.com/wp-content/plugins/ITEMM-OpenLab-tools-main/js/p_w_script.js}{\texttt{js/p\_w\_script.js}} with support from an \texttt{olt} utility class at \href{https://www.openlab-itemm.com/wp-content/plugins/ITEMM-OpenLab-tools-main/js/olt_class.js}{\texttt{js/olt\_class.js}}, both accessible without authentication.} 
-but documentation, licensing, and citation pathways are not yet foregrounded. 
-ITEMM’s legal framework, for example, explicitly covers 3D models%
-\footnote{\url{https://www.openlab-itemm.com/mentions-legals/}}
-but does not naturally extend to the software calculators themselves \cite{cc_can_2025}. 
-
-By contrast, the development of \textsc{magpie} follows an ``open first'' methodology guided by the FAIR principles \cite{wilkinson_fair_2016,go_fair_2016}. This means that source code, metadata, and licensing are made explicit from the outset, persistent identifiers are assigned, and scholarly attribution is supported through standard citation practices \cite{soito_citations_2016}. In this way, \textsc{magpie} seeks not only to provide functionality comparable to existing online tools, but also to embed sustainability, interoperability, and citability as core design objectives.
-
-\textcite{stallman_floss_2021} stresses the importance of distinguishing between open-source software (FOSS) and free/libre open-source software (FLOSS). The intent behind \textsc{magpie} is to occupy this latter category: a toolkit for plate analysis that is genuinely free and open in both senses of the word, and designed from the ground up as shared research infrastructure.
-
-% Compare and contrast with \cite{hamilton_pffdtd_2021} which is source controlled, explicitly open-source licenced, detailed installation instructions, listed dependencies.
 
 \section{Methodology}\label{sec:methodology}
 
