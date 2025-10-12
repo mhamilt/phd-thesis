@@ -440,14 +440,16 @@ Despite the elegance of the block construction in Python, benchmarking revealed 
 \begin{figure}
     \centering
     \includegraphics[width=0.49\linewidth]{img/plot_matlab_vs_python.pdf}
-    \includegraphics[width=0.49\linewidth]{img/plot-python-sym-gen-clamped-error.pdf}
+    \includegraphics[width=0.49\linewidth]{img/plot-matlab-python-error.pdf}
     \caption{Computational performance of the biharmonic assembled in a block format in M\textsc{atlab} and Python and a diagonal format in M\textsc{atlab}. Each size of biharmonic was computed 10 times and the shortest time was recorded.}
     \label{fig:matlab_vs_python}
 \end{figure}
 
-It was projected that a diagonal composition in Python would likely outperform the block composition method once implemented. A second limitation emerged from the eigensolver interface, motivating a deeper examination of ARPACK's behaviour in both environments.
+It was projected that a diagonal composition in Python would likely outperform the block composition method once implemented. Comparison of between results from MATLAB and SciPy eigensolvers revealed a percentage error in the order of $10^{-9}$ (Figure~\ref{fig:matlab_vs_python}) and the highest error between solvers is concentrated within the first few modes. This error is not unexpected and likely arises from a mixture of floating-point error and differences in the BLAS and LAPACK versions and the LU Decomposition
+\footnote{UMPACK for MATLAB \cite{davis_umfpack_2007} and SuperLU for SciPy \cite{scipy_superlu_2025}} 
+methods used by MATLAB and SciPy respectively.
 
-\subsubsection{Eigensolver accuracy}
+\subsubsection{Eigensolver Process}
 
 Both M\textsc{atlab} and Python provide eigensolver functionality through an interface with the ARPACK library \cite{scipy_arpack_2025}. For the standard eigen problem $A\vec{x} = \lambda \vec{x}$ the ARPACK solver routines find eigenvalues iteratively, ranked by magnitude, with the largest magnitude eigenvalues requiring the least computation \cite{lehoucq_arpack_1998}. The biharmonic is multi-diagonal, sparse, real, and can be symmetric positive definite \cite{hamilton_magpie_2024}. The eigenvalues of the biharmonic are the modes of the system and, for musical acoustics, the lower and fundamental modes are those of greatest interest. For small magnitude eigenvalues, the eigensolvers will either converge slowly or fail entirely, leading to much longer compute times \cite{scipy_arpack_2025}.
 
@@ -485,15 +487,15 @@ x = U^{-1} L^{-1} \lambda x,\quad \frac{1}{\lambda} x = U^{-1}L^{-1} x,\quad \fr
 
 For a shift-invert using $\sigma = 0$ with LU decomposition, $A$ and $\lambda$ will be re-inverted. Both M\textsc{atlab} and SciPy interfaces with ARPACK can be passed a $\sigma$ value of 0 to find the smallest magnitude eigenvalues. ARPACK requires that the option to find largest magnitude is kept, but when a $\sigma$ value is provided the values will be implicitly passed through a second shift-invert process.
 
-Though SciPy and M\textsc{atlab} both interface with ARPACK and the default options for fine tuning of the eigensolver appear similar, the error between both is relatively large. Figure~\ref{fig:python-matlab-error} shows the percentage error for the first 500 eigenvalues calculated by the ARPACK interfaces in SciPy and M\textsc{atlab}. Table~\ref{tab:parameters} shows the parameters used in Python and M\textsc{atlab}.
+SciPy and M\textsc{atlab} both interface with ARPACK and the results between solvers appear similar. Figure~\ref{fig:python-matlab-error} shows the percentage error for the first 500 eigenvalues calculated by the ARPACK interfaces in SciPy and M\textsc{atlab}. Table~\ref{tab:parameters} shows the parameters used in Python and M\textsc{atlab}.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.49\linewidth]{img/plot_matlab_vs_python.pdf}
-    \includegraphics[width=0.49\linewidth]{img/plot-python-sym-gen-clamped-error.pdf}
-    \caption{Percentage error between M\textsc{atlab} and SciPy for the first 500 eigenvalues.}
-    \label{fig:python-matlab-error}
-\end{figure}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.49\linewidth]{img/plot_matlab_vs_python.pdf}
+%     \includegraphics[width=0.49\linewidth]{img/plot-python-sym-gen-clamped-error.pdf}
+%     \caption{Percentage error between M\textsc{atlab} and SciPy for the first 500 eigenvalues.}
+%     \label{fig:python-matlab-error}
+% \end{figure}
 
 \begin{table}
 	\centering
@@ -514,7 +516,9 @@ Though SciPy and M\textsc{atlab} both interface with ARPACK and the default opti
 	\label{tab:parameters}
 \end{table}
 
-With percentage error as high as 2.4\% and the eigenvalue compute time noticeably longer in Python compared to M\textsc{atlab}, the utility of the Python toolbox was limited to rough approximation. A further implementation was required to determine whether the discrepancy arose from M\textsc{atlab}, from SciPy, or both. A third implementation in C\textsc{++} was therefore developed to serve as a reference.
+Although the percentage error is relatively small, the eigenvalue compute time noticeably longer in Python 
+compared to M\textsc{atlab}.
+A further implementation was required to determine whether the compute time could be improved upon and to achieve this we looked toward a compiled language.
 
 \subsection{C++}
 
