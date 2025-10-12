@@ -35,7 +35,7 @@ Throughout, we prioritise replicability (scripts and notebooks), citeable artefa
 
 \section{Methodology}\label{sec:methodology}
 
-The modelling strategy underpinning \textsc{magpie} rests on classical thin-plate theory, discretised through finite differences and extended to cover generalised boundary conditions. This section aims to summarise the governing equations, the energy framework, and the semi-discrete formulation that lead naturally to modal analysis and time-domain simulation. It is anticipated that the fully isotropic case will be considered here. For this specific case, cross-language implementations are available in MATLAB, Python, and C++, along with a graphical user interface developed as a Jupyter notebook. The fully orthotropic model, more closely connected to instrument making, will be illustrated as a case study at the end of the chapter. 
+The modelling strategy underpinning \textsc{magpie} rests on classical thin-plate theory, discretised through finite differences and extended to cover generalised boundary conditions. This section aims to summarise the governing equations, the energy framework, and the semi-discrete formulation that lead naturally to modal analysis and time-domain simulation. It is anticipated that the fully isotropic case will be considered here. For this specific case, cross-language implementations are available in M\textsc{atlab}, Python, and C++, along with a graphical user interface developed as a Jupyter notebook. The fully orthotropic model, more closely connected to instrument making, will be illustrated as a case study at the end of the chapter. 
 
 \subsection{Kirchhoff--Love framework}
 
@@ -275,8 +275,6 @@ In practice, setting up the biharmonic matrix $\bf B$ allows one to:
 The following section describes implementation details, with a specific focus on computational aspects and cross-language deployment.
 
 
-
-
 \section{Development}\label{sec:development}
 
 
@@ -379,24 +377,24 @@ The result is a compact core that is easy to audit and extend (additional bounda
 
 \subsection{M\textsc{atlab}}
 
-The first implementation of \textsc{magpie} originated from a single 600-line MATLAB script used internally within the NEMUS project. This script produced eigenmodes, impulse responses, and stiffness estimates for rectangular Kirchhoff–Love plates under elastic boundary conditions. To make the tool reusable and extensible, the script was refactored into a modular library under version control on GitHub \cite{magpie_matlab_2025}. The refactor replaced monolithic procedural code with named functions, separated concerns, and removed repeated logic.
+The first implementation of \textsc{magpie} originated from a single 600-line M\textsc{atlab} script used internally within the NEMUS project. This script produced eigenmodes, impulse responses, and stiffness estimates for rectangular Kirchhoff–Love plates under elastic boundary conditions. To make the tool reusable and extensible, the script was refactored into a modular library under version control on GitHub \cite{magpie_matlab_2025}. The refactor replaced monolithic procedural code with named functions, separated concerns, and removed repeated logic.
 
-Adopting the MVC structure described in Section~\ref{design}, the MATLAB code was split into three functional layers. The \emph{model} is defined by plate geometry, material data, Poisson ratio, grid resolution, and the eight boundary stiffness constants. The \emph{controller} exposes a small API: the main \texttt{magpie} function validates six required arguments (geometry, $\rho$, $E$, $\nu$, grid, and boundary constants), and delegates to internal routines for eigenanalysis, modal synthesis (\texttt{ModalTimeInt}), and elastic constant inversion (\texttt{youngcalc}). The \emph{view} layer is minimal in MATLAB and limited to plotting eigenshapes and Chladni fields.
+Adopting the MVC structure described in Section~\ref{design}, the M\textsc{atlab} code was split into three functional layers. The \emph{model} is defined by plate geometry, material data, Poisson ratio, grid resolution, and the eight boundary stiffness constants. The \emph{controller} exposes a small API: the main \texttt{magpie} function validates six required arguments (geometry, $\rho$, $E$, $\nu$, grid, and boundary constants), and delegates to internal routines for eigenanalysis, modal synthesis (\texttt{ModalTimeInt}), and elastic constant inversion (\texttt{youngcalc}). The \emph{view} layer is minimal in M\textsc{atlab} and limited to plotting eigenshapes and Chladni fields.
 
-Figure~\ref{fig:directory-structure-matlab} show the directory structure for the MATLAB version preset in \citetitle{magpie_matlab_2025} \cite{magpie_matlab_2025}.
+Figure~\ref{fig:directory-structure-matlab} show the directory structure for the M\textsc{atlab} version preset in \citetitle{magpie_matlab_2025} \cite{magpie_matlab_2025}.
 Central to all functionality is the construction of the biharmonic matrix by the function \texttt{bhmat}. In the simplest interior case the discrete operator corresponds to the 13-point stencil in Figure~\ref{fig:biharmonic-stencil} and involves only four distinct coefficients. Under generalised elastic boundary conditions, however, up to 229 coefficients may arise; symmetry and repetition break down near edges and corners (Figure~\ref{fig:biharmonic-stencil}). This rules out assembling the matrix by naïvely repeating a uniform stencil. Instead, \texttt{bhmat} computes the coefficients explicitly and places them into a sparse matrix.
 
-The grid function \(u_{l,m}\) on an \((N_x+1)\times(N_y+1)\) grid is vectorised as shown in Figure~\ref{fig:fdtd-linear}, giving a square matrix of dimension \(N=(N_x+1)(N_y+1)\). For performance, all assembling is carried out in sparse format. MATLAB stores sparse matrices in compressed–sparse–column format (CSC), with values, row indices, and column pointers packed contiguously \cite{gilbert_sparse_1992}. This makes repeated block concatenation expensive, as it forces reallocation and reindexing of memory.
+The grid function \(u_{l,m}\) on an \((N_x+1)\times(N_y+1)\) grid is vectorised as shown in Figure~\ref{fig:fdtd-linear}, giving a square matrix of dimension \(N=(N_x+1)(N_y+1)\). For performance, all assembling is carried out in sparse format. M\textsc{atlab} stores sparse matrices in compressed–sparse–column format (CSC), with values, row indices, and column pointers packed contiguously \cite{gilbert_sparse_1992}. This makes repeated block concatenation expensive, as it forces reallocation and reindexing of memory.
 
 The original code used a block-structured approach (Figure~\ref{fig:biharmonic-matrix}), which was easy to read but slow to assemble at increasing grid sizes. The refactor isolates coefficient generation from matrix assembly within \texttt{bhmat}, ensuring that the expensive computations are not repeated unnecessarily and that any optimisation applies across all downstream calls (e.g.\ eigenvalue problems or modal time-stepping). This also makes the operator usable as a standalone object in other finite-difference schemes.
 
-Two assembly strategies were trialled. A block-based strategy constructs submatrices and concatenates them, mirroring the stencil structure. While this keeps the code compact, performance degrades once the blocks are copied into CSC format. The alternative is to write coefficients directly into diagonals or into preallocated triplet-style structures before conversion to CSC. Loop-based application of the stencil was rejected because it does not produce a matrix object, which is required for the ARPACK-based eigensolver \cite{lehoucq_arpack_1998} used by MATLAB's \texttt{eigs}. By consolidating everything in \texttt{bhmat}, later ports (e.g.\ Python, C\textsc{++}) could replicate the algorithm while shifting only the sparse backend.
+Two assembly strategies were trialled. A block-based strategy constructs submatrices and concatenates them, mirroring the stencil structure. While this keeps the code compact, performance degrades once the blocks are copied into CSC format. The alternative is to write coefficients directly into diagonals or into preallocated triplet-style structures before conversion to CSC. Loop-based application of the stencil was rejected because it does not produce a matrix object, which is required for the ARPACK-based eigensolver \cite{lehoucq_arpack_1998} used by M\textsc{atlab}'s \texttt{eigs}. By consolidating everything in \texttt{bhmat}, later ports (e.g.\ Python, C\textsc{++}) could replicate the algorithm while shifting only the sparse backend.
 
-In summary, the MATLAB refactor established the structure of \textsc{magpie}: a small controller API, explicit operator assembly, and an isolated data model. This provided a reference implementation against which subsequent translations and optimisations could be tested.
+In summary, the M\textsc{atlab} refactor established the structure of \textsc{magpie}: a small controller API, explicit operator assembly, and an isolated data model. This provided a reference implementation against which subsequent translations and optimisations could be tested.
 
 \subsection{Python}
 
-Python was the natural second target for \textsc{magpie}. Unlike M\textsc{atlab}, the language, ecosystem, and packaging infrastructure are fully open source, and its use in scientific computing continues to grow \cite{guo_python_2014}. Porting the toolkit to Python aligned with the project’s emphasis on transparency, accessibility, and reuse. The implementation is distributed via the Python Package Index (PyPI)\footnote{\url{https://pypi.org/project/nemus-magpie}} with the code hosted on GitHub and archived through Zenodo \cite{magpie_python_2025}. Structure of the Python package (Figure~\ref{fig:directory-structure-python}) adhered as closely as possible to that of the MATLAB variant (Figure~\ref{fig:directory-structure-matlab}).
+Python was the natural second target for \textsc{magpie}. Unlike M\textsc{atlab}, the language, ecosystem, and packaging infrastructure are fully open source, and its use in scientific computing continues to grow \cite{guo_python_2014}. Porting the toolkit to Python aligned with the project’s emphasis on transparency, accessibility, and reuse. The implementation is distributed via the Python Package Index (PyPI)\footnote{\url{https://pypi.org/project/nemus-magpie}} with the code hosted on GitHub and archived through Zenodo \cite{magpie_python_2025}. Structure of the Python package (Figure~\ref{fig:directory-structure-python}) adhered as closely as possible to that of the M\textsc{atlab} variant (Figure~\ref{fig:directory-structure-matlab}).
 
 A key change in the Python version concerns the construction of the discrete biharmonic operator. Rather than assembling sparse sub-blocks and concatenating them, the operator was reformulated explicitly by its 13 diagonals. Each diagonal is further split into non-repeating sectors, typically containing three to five unique coefficients each. This restructuring reflects the fact that elastic boundary conditions introduce up to eight distinct stiffness parameters, which disrupt the repeatable stencil pattern present in the interior. Figure~\ref{fig:biharm_zoom} shows how the number of unique coefficients increases near edges and corners, undermining diagonal-level repetition across the whole matrix.
 
@@ -445,9 +443,9 @@ Despite the elegance of the block construction in Python, benchmarking revealed 
     \label{fig:matlab_vs_python}
 \end{figure}
 
-It was projected that a diagonal composition in Python would likely outperform the block composition method once implemented. Comparison of between results from MATLAB and SciPy eigensolvers revealed a percentage error in the order of $10^{-9}$ (Figure~\ref{fig:matlab_vs_python}) and the highest error between solvers is concentrated within the first few modes. This error is not unexpected and likely arises from a mixture of floating-point error and differences in the BLAS and LAPACK versions and the LU Decomposition
-\footnote{UMPACK for MATLAB \cite{davis_umfpack_2007} and SuperLU for SciPy \cite{scipy_superlu_2025}} 
-methods used by MATLAB and SciPy respectively.
+It was projected that a diagonal composition in Python would likely outperform the block composition method once implemented. Comparison of between results from M\textsc{atlab} and SciPy eigensolvers revealed a percentage error in the order of $10^{-9}$ (Figure~\ref{fig:matlab_vs_python}) and the highest error between solvers is concentrated within the first few modes. This error is not unexpected and likely arises from a mixture of floating-point error and differences in the BLAS and LAPACK versions and the LU Decomposition
+\footnote{UMPACK for M\textsc{atlab} \cite{davis_umfpack_2007} and SuperLU for SciPy \cite{scipy_superlu_2025}} 
+methods used by M\textsc{atlab} and SciPy respectively.
 
 \subsubsection{Eigensolver Process}
 
@@ -516,15 +514,15 @@ SciPy and M\textsc{atlab} both interface with ARPACK and the results between sol
 	\label{tab:parameters}
 \end{table}
 
-Although the percentage error is relatively small, the eigenvalue compute time noticeably longer in Python 
-compared to M\textsc{atlab}.
-A further implementation was required to determine whether the compute time could be improved upon and to achieve this we looked toward a compiled language.
+Although the percentage error is relatively small, the eigenvalue compute time is noticeably longer in Python 
+compared to M\textsc{atlab}, which is compounded further by the compute time biharmonic using SciPy (Figure~\ref{fig:matlab_vs_python}).
+A further implementation was required to determine whether the compute time could be improved upon, and to achieve this, we looked toward a compiled language.
 
 \subsection{C++}
 
 Like Python, C\textsc{++} is entirely open source and therefore compatible with the FAIR principles underpinning the project’s methodology. Its status as a compiled, strongly typed language introduces additional development overhead, but it also enables direct control over memory, performance, and solver backends.
 
-The primary bottleneck in all versions of \textsc{magpie} is the eigensolver stage. Both M\textsc{atlab} and SciPy rely on ARPACK \cite{lehoucq_arpack_1998} as the backend. In MATLAB, the user has no visibility into the analysis or pre-processing applied to the matrix. Additionally, MATLAB employs its own internal sparse representation \cite{gilbert_sparse_1992}, which further obscures the process. The \texttt{eigs} function cannot be code-generated and requires the MATLAB runtime environment, limiting portability and access to anyone without a licence.
+The primary bottleneck in all versions of \textsc{magpie} is the eigensolver stage. Both M\textsc{atlab} and SciPy rely on ARPACK \cite{lehoucq_arpack_1998} as the backend. In M\textsc{atlab}, the user has no visibility into the analysis or pre-processing applied to the matrix. Additionally, M\textsc{atlab} employs its own internal sparse representation \cite{gilbert_sparse_1992}, which further obscures the process. The \texttt{eigs} function cannot be code-generated and requires the M\textsc{atlab} runtime environment, limiting portability and access to anyone without a licence.
 
 ARPACK itself is open source\footnote{The actively maintained fork \texttt{arpack-ng} is available via GitHub: \url{https://github.com/opencollab/arpack-ng}} and depends on BLAS\footnote{\url{http://www.netlib.org/blas/}} and LAPACK\footnote{\url{http://www.netlib.org/lapack/}} . While callable from C\textsc{++}, it is written in Fortran, which requires a working Fortran toolchain during compilation. This introduces cross-platform complications that are undesirable for lightweight deployment.
 
@@ -535,27 +533,30 @@ ARPACK itself is open source\footnote{The actively maintained fork \texttt{arpac
     \label{fig:biharm-diag-comp}
 \end{figure}
 
-To avoid reliance on Fortran binaries, the C\textsc{++} implementation of \textsc{magpie} uses the Spectra library \cite{spectra_git_2025}. Spectra is a header-only C\textsc{++} reimplementation of ARPACK that compiles natively without external linking. It builds on the Eigen library \cite{eigen_git_2025}, which provides sparse matrix types, iterative solvers, and BLAS/LAPACK interoperability when needed. Both libraries are heavily templated, making the learning curve steeper but providing type safety and performance advantages. The C\textsc{++} development followed the same structure and methodology as the MATLAB and Python implementations \cite{magpie_cpp_2025}.
+To avoid reliance on Fortran binaries, the C\textsc{++} implementation of \textsc{magpie} uses the Spectra library \cite{spectra_git_2025}. Spectra is a header-only C\textsc{++} reimplementation of ARPACK that compiles natively without external linking. It builds on the Eigen library \cite{eigen_git_2025}, which provides sparse matrix types, iterative solvers, and BLAS/LAPACK interoperability when needed. Although, there is no required dependency from Eigen on BLAS / LAPACK which makes its combination with Spectra much more portable.
+\footnote{And for this reason development was pursued with Spectra and Eigen as opposed to the SLEPc library (\url{https://github.com/slepc/slepc}, which does have BLAS / LAPACK dependency}
 
-Although the C\textsc{++} version remains under active development, early benchmarks indicate strong performance and numerical agreement with MATLAB. Figure~\ref{fig:biharm-diag-comp} compares construction times for the diagonal biharmonic operator across Python, MATLAB, and C\textsc{++}. The C\textsc{++} implementation is comparable to MATLAB and is likely to improve further with targeted optimisation. Eigen stores sparse matrices in CSC format, as MATLAB does, but it exposes explicit control over memory during assembly. Using triplet insertion\footnote{In the format \texttt{(value, x-coordinate, y-coordinate)}} followed by a finalisation step avoids repeated memory reallocation.
+Both libraries are heavily templated, which makes the learning curve steeper but provides type safety and performance advantages. The C\textsc{++} development followed the same structure and methodology as the M\textsc{atlab} and Python implementations \cite{magpie_cpp_2025}.
+
+
+Although the C\textsc{++} version remains under active development, early benchmarks indicate strong performance and numerical agreement with M\textsc{atlab}. Figure~\ref{fig:biharm-diag-comp} compares construction times for the diagonal biharmonic operator across Python, M\textsc{atlab}, and C\textsc{++}. The C\textsc{++} implementation is comparable to M\textsc{atlab} and is likely to improve further with targeted optimisation. Eigen stores sparse matrices in CSC format, as M\textsc{atlab} does, but it exposes explicit control over memory during assembly. Using triplet insertion\footnote{In the format \texttt{(value, x-coordinate, y-coordinate)}} followed by a finalisation step avoids repeated memory reallocation.
 
 \begin{figure}
     \centering
     \includegraphics[width=0.49\linewidth]{img/plot-eigensolver-comparison.pdf}
     \includegraphics[width=0.49\linewidth]{img/plot-sym-gen-clamped-error.pdf}
-    \caption{Comparison of eigensolver compute time in M\textsc{atlab}, Python and C\textsc{++} (generic and symmetric Spectra solvers). C\textsc{++} times shown with \texttt{-O3} compiler optimisation.}
+    \caption{Comparison of eigensolver compute time in M\textsc{atlab}, Python and C\textsc{++} (generic and symmetric Spectra solvers). C\textsc{++} times shown are with \texttt{-O3} compiler optimisation.}
     \label{fig:eigensolver-comp}
     \label{fig:spectra-error}
 \end{figure}
 
-Figure~\ref{fig:eigensolver-comp} shows the eigensolver performance using the parameters listed in Table~\ref{tab:parameters}. As in SciPy, Spectra allows the choice between generic and symmetric solvers. Unlike SciPy, the difference in performance between the two modes is substantial, with the symmetric solver matching or surpassing MATLAB in some cases. Figure~\ref{fig:spectra-error} shows the percentage error between Spectra (both solver types) and MATLAB’s \texttt{eigs}. Errors are several orders of magnitude smaller than those observed in Python (Figure~\ref{fig:python-matlab-error}), indicating that the discrepancy in SciPy arises from solver configuration rather than fundamental limitations of ARPACK.
+Figure~\ref{fig:eigensolver-comp} shows the eigensolver performance using the parameters listed in Table~\ref{tab:parameters}. As in SciPy, Spectra allows the choice between generic and symmetric solvers. Unlike SciPy, the difference in performance between the two modes is substantial, with the symmetric solver matching or surpassing M\textsc{atlab} in some cases. Figure~\ref{fig:spectra-error} shows the percentage error between Spectra (both solver types) and M\textsc{atlab}’s \texttt{eigs}. Errors are a few orders of magnitude higher than those observed in Python (Figure~\ref{fig:python-matlab-error}), resulting in a trade-off between performance and accuracy when using Spectra.
 
-Relaxing the tolerance slightly (to approximately $10^{-6}$) offers a further performance gain for large matrices, with only negligible impact on accuracy. Taken together, Figures~\ref{fig:biharm-diag-comp} and~\ref{fig:eigensolver-comp} indicate that C\textsc{++} provides both high performance and high fidelity, and supports the conclusion that the elevated Python error arises from how SciPy configures and drives ARPACK (solver mode, shift-invert settings, convergence parameters), not from fundamental differences in the libraries themselves.
+Relaxing the tolerance slightly (to approximately $10^{-6}$) offers a further performance gain for large matrices, with only a negligible impact on accuracy. Taken together, Figures~\ref{fig:biharm-diag-comp} and~\ref{fig:eigensolver-comp} indicate that C\textsc{++} provides both high performance and high fidelity, and supports the conclusion that the elevated Spectra error arises from the implementation of the eigensolver. Since SciPy and M\textsc{atlab} share a common element in ARPACK, errors are much lower. 
 
 \section{Applications}
 
 In this section, two practical applications of the \textsc{magpie} framework are illustrated. The first explores the graphical user interface (GUI), allowing non-expert users to run the \textsc{magpie} framework in a user-friendly environment. The second illustrates the inverse estimation of the elastic constants in wood and metal specimens. 
-
 
 \subsection{Interfacing with \textsc{magpie}}\label{sec:jupyter}
 
@@ -714,7 +715,7 @@ This chapter introduced \textsc{magpie}, a free/libre, citable toolkit that make
 \paragraph{Key outcomes.}
 \begin{enumerate}
   \item \textbf{Modelling and numerics.} We derived and discretised the Kirchhoff–Love plate with energy-consistent, elastically restrained boundaries. A sparse finite-difference biharmonic operator was implemented with explicit near-boundary specialisations, enabling stable eigenanalysis and time-domain synthesis from the same core.
-  \item \textbf{Cross-language implementation.} The model and APIs were reproduced in M\textsc{atlab}, Python, and C\textsc{++}. Diagonal (banded) assembly was shown to be markedly more scalable than block concatenation. On the eigensolver side, a symmetric shift–invert configuration (Spectra/Eigen in C\textsc{++}) matched or exceeded M\textsc{atlab}’s \texttt{eigs} while clarifying the causes of the larger errors seen with default SciPy settings.
+  \item \textbf{Cross-language implementation.} The model and APIs were reproduced in M\textsc{atlab}, Python, and C\textsc{++}. Diagonal (banded) assembly was shown to be markedly more scalable than block concatenation. On the eigensolver side, a symmetric shift–invert configuration (Spectra/Eigen in C\textsc{++}) matched or exceeded M\textsc{atlab}’s \texttt{eigs}, but at a cost of elevated error compared to SciPy.
   \item \textbf{FAIR and citation.} Code, examples, and datasets were aligned with FAIR and FORCE11 principles: versioned releases with persistent identifiers, minimal dependencies, and stable, documented interfaces. This supports long-term reuse in conservation workflows.
   \item \textbf{Applications and validation.} Two case studies demonstrated end-to-end use. For a cantilever copper plate, inverse estimation recovered a plausible Young’s modulus and reproduced higher modes within small error. For an orthotropic spruce plate, the linear least-squares inversion produced $E_x$, $E_y$, and $G_{xy}$ consistent with literature ranges, using a handful of modes and Chladni patterns. The same kernels power an instructional Jupyter UI for visualising eigenshapes, nodal (Chladni) patterns, and FRFs.
 \end{enumerate}
