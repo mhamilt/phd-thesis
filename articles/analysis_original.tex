@@ -313,7 +313,7 @@ For example, taking matrix:
         \end{bmatrix}; v_{A} =\begin{bmatrix}1\\4\\2\\5\end{bmatrix} ; r_{A} = \begin{bmatrix}1\\3\\2\\3\end{bmatrix}; c_{A} = \begin{bmatrix}1\\3\\4\end{bmatrix}
 \end{equation}
 
-where $v$ is the concatenated array of sparse matrix values, $r_{A}$ is the array of row indices and $c_{A}$ is the array of first element column indices.\footnote{For a coloumn compressed spasrse format, column indices may also end with a value one greater than the total number of values stored. For eq~\ref{eq:csc-sparse} this would result in a column index array of $c_{A} = [1 3 4 5]$ \cite{nvidia_sparse_2025}}
+where $v$ is the concatenated array of sparse matrix values, $r_{A}$ is the array of row indices and $c_{A}$ is the array of first element column indices.\footnote{For a column compressed sparse format, column indices may also end with a value one greater than the total number of values stored. For eq~\ref{eq:csc-sparse} this would result in a column index array of $c_{A} = [1 3 4 5]$ \cite{nvidia_sparse_2025}}
 % A sparse vector for a single value would consist of a value from $v_A$ and $r_A$, for instance for an index i = 2, sparse vector $v_1 = [v_{A2},r_{A2}] = [4,1]$.
 
 This would mean that concatenation of blocks would necessitate the reordering and concatenation of the new columns. Such an operation would require the copying and recopying of memory blocks which has a severe impact on computing performance. Before the biharmonic construction was optimised, the function were ported to Python to confirm that the same methodology could be used and confirm the portability of the existing source code.

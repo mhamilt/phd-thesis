@@ -411,12 +411,12 @@ A key change in the Python version concerns the construction of the discrete bih
     \label{fig:biharm_zoom}
 \end{figure}
 
-Because SciPy allows developers to specify sparse matrices in multiple formats, the diagonal (DIA) representation was adopted as the target. In contrast to the compressed-sparse-column (CSC) format used internally by M\textsc{atlab}, the DIA format stores diagonals directly. Zero-padding of shorter diagonals is required but incurs minimal overhead due to the low proportion of non-zero bands.
+Because SciPy allows developers to specify sparse matrices in multiple formats, the diagonal (DIA) representation (Figure~\ref{fig:sparse-dia} was adopted as the target. In contrast to the compressed-sparse-column (CSC) format used internally by M\textsc{atlab}, the DIA format stores diagonals directly. Zero-padding of shorter diagonals is required but incurs minimal overhead due to the low proportion of non-zero bands.
 
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{img/sparse-format-placeholder.png}
-    \caption{Compressed Sparse Column and Diagonal format sparse matrix storage structure.}
+    \includegraphics[width=1\linewidth]{img/sparse-formats.pdf}    
+    \caption{Compressed Diagonal (\subref{fig:sparse-dia}) and Sparse Column (\subref{fig:sparse-csc}) format sparse matrix storage structure.}
     \label{fig:sparse-dia}
 \end{figure}
 
