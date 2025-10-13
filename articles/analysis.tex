@@ -30,9 +30,6 @@ The remainder of the chapter develops the design choices behind \textsc{magpie} 
 Throughout, we prioritise replicability (scripts and notebooks), citeable artefacts (software, datasets, configurations).
 
 
-
-
-
 \section{Methodology}\label{sec:methodology}
 
 The modelling strategy underpinning \textsc{magpie} rests on classical thin-plate theory, discretised through finite differences and extended to cover generalised boundary conditions. This section aims to summarise the governing equations, the energy framework, and the semi-discrete formulation that lead naturally to modal analysis and time-domain simulation. It is anticipated that the fully isotropic case will be considered here. For this specific case, cross-language implementations are available in M\textsc{atlab}, Python, and C++, along with a graphical user interface developed as a Jupyter notebook. The fully orthotropic model, more closely connected to instrument making, will be illustrated as a case study at the end of the chapter. 
@@ -163,13 +160,23 @@ B := (\delta_{xx} + \delta_{yy})^{2} = \delta_{xxxx} + 2\delta_{xx}\delta_{yy} +
 \Delta\Delta.
 \end{equation}
 The 13-point, two-dimensional stencil is reported in Figure \ref{fig:biharmonic-stencil}. 
+
 \begin{figure}
     \centering
-	\includegraphics[width=0.45\linewidth]{img/biharm-stencil.pdf}\quad 
-    \includegraphics[width=0.45\linewidth]{img/plateBCs1.pdf}
-	\caption{Left: discrete biharmonic stencil. Right: ghost points resulting from application of the biharmonic stencil to the top-left corner of the plate.}
-	\label{fig:biharmonic-stencil}
+    \begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=1\linewidth]{img/biharm-stencil.pdf}\quad 
+    \caption{}
+    \label{fig:biharmonic-stencil}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=1\linewidth]{img/plateBCs1.pdf}
+    \caption{}
+    \label{fig:ghostpoints}
+    \end{subfigure}
+	\caption[Biharmonic stencil]{\subref{fig:biharmonic-stencil} discrete biharmonic stencil. (\subref{fig:ghostpoints}) ghost points resulting from application of the biharmonic stencil to the top-left corner of the plate.}
+	% \label{fig:biharmonic-stencil}
 \end{figure}
+
 Computationally, the two-dimensional problem is never really encoded as such. It is convenient to recast the two-dimensional grid function $u_{l,m}$ into a column vector \({\bf u}(t)\) of length \(N\). As illustrated in Figure~\ref{fig:fdtd-linear}, this vectorisation is obtained by stacking successive strips of grid points with the same index \(l\).
 \begin{figure}
     \centering
@@ -177,7 +184,7 @@ Computationally, the two-dimensional problem is never really encoded as such. It
     \caption{Arrangement of the finite difference plate as a linear vector.}
     \label{fig:fdtd-linear}
 \end{figure}
-The biharmonic, then, becomes the matrix ${\bf B}\in {\mathbb R}^{N\times N}$. The central block of the biharmonic matrix is composed of sub-blocks, as per Figure \ref{fig:biharmonic-matrix}. Near the boundary, however, the form of the biharmonic operator coefficients must be specialised. As an example, consider Figure \ref{fig:biharmonic-stencil}: application of the biharmonic stencil to the upper-left corner results in seven ``ghost'' points whose value must be pre-determined by applying the numerical boundary conditions \eqref{eq:ElasticBCsFD}. 
+The biharmonic, then, becomes the matrix ${\bf B}\in {\mathbb R}^{N\times N}$. The central block of the biharmonic matrix is composed of sub-blocks, as per Figure \ref{fig:biharmonic-matrix}. Near the boundary, however, the form of the biharmonic operator coefficients must be specialised. As an example, consider Figure \ref{fig:ghostpoints}: application of the biharmonic stencil to the upper-left corner results in seven ``ghost'' points whose value must be pre-determined by applying the numerical boundary conditions \eqref{eq:ElasticBCsFD}. 
 \begin{figure}[t]
   \centering
   \begingroup
@@ -239,7 +246,7 @@ The biharmonic, then, becomes the matrix ${\bf B}\in {\mathbb R}^{N\times N}$. T
   $}
 
   \endgroup
-  \caption{Block–Toeplitz form of the discrete 2-D biharmonic operator. The blocks
+  \caption[Block–Toeplitz form of the discrete 2-D biharmonic operator]{Block–Toeplitz form of the discrete 2-D biharmonic operator. The blocks
   \( {\mathbf B}_{0},{\mathbf B}_{1}, {\mathbf B}_{2} \) encode the centre, first off-line, and second off-line couplings of the stencil. Only the central blocks are displayed here. The blocks involving near-boundary points have specialised forms involving following to the elastically restrained boundary conditions \eqref{eq:ElasticBCsFD}. }
   \label{fig:biharmonic-matrix}
 \end{figure}
@@ -278,11 +285,11 @@ The following section describes implementation details, with a specific focus on
 \section{Development}\label{sec:development}
 
 
-The project is language-agnostic by construction. A minimal, shared specification of inputs/outputs (plate geometry, material set, boundary constants, grid, solver options) governs equivalent libraries in \textsc{matlab}, Python, and C\textsc{++}. Backends differ only where platform conventions demand it (e.g., sparse formats and eigensolver interfaces); numerical results and reference examples are kept congruent by tests and cross-checks.
+The project is language-agnostic by construction. A minimal, shared specification of inputs/outputs (plate geometry, material set, boundary constants, grid, solver options) governs equivalent libraries in \textsc{matlab}, Python, and C\textsc{++}. Back ends differ only where platform conventions demand it (e.g., sparse formats and eigensolver interfaces); numerical results and reference examples are kept congruent by tests and cross-checks.
 
 Distribution follows an ``open first'' approach: version-controlled source, machine- and human-readable metadata, explicit licences, and archival releases with persistent identifiers. Example notebooks and scripts ship alongside the libraries to promote repeatable workflows (from data import to inversion and reporting). The browser-facing interface (Section~\ref{sec:jupyter}) is a thin layer over the same core routines.
 
-Performance-sensitive stages are localised. Operator assembly is implemented explicitly (diagonals or structured blocks as appropriate to each backend), and eigenproblems are solved in shift–invert mode with symmetrical routines where applicable. These choices keep the numerics transparent while supporting large grids and routine parameter sweeps.
+Performance-sensitive stages are localised. Operator assembly is implemented explicitly (diagonals or structured blocks as appropriate to each back end), and eigenproblems are solved in shift–invert mode with symmetrical routines where applicable. These choices keep the numerics transparent while supporting large grids and routine parameter sweeps.
 
 \subsection{Design}\label{design}
 
@@ -356,7 +363,7 @@ magpie-python/
         \caption{}
         \label{fig:directory-structure-python}
     \end{subfigure}
-    \caption{Directory structure of \texttt{magpie-matlab} (a) and \texttt{magpie-python} (b)}
+    \caption[\textsc{magpie} directory structure]{Directory structure of \texttt{magpie-matlab} (\subref{fig:directory-structure-matlab}) and \texttt{magpie-python} (\subref{fig:directory-structure-python})}
     \label{fig:directory-structure}
 \end{figure}
 
@@ -388,7 +395,7 @@ The grid function \(u_{l,m}\) on an \((N_x+1)\times(N_y+1)\) grid is vectorised 
 
 The original code used a block-structured approach (Figure~\ref{fig:biharmonic-matrix}), which was easy to read but slow to assemble at increasing grid sizes. The refactor isolates coefficient generation from matrix assembly within \texttt{bhmat}, ensuring that the expensive computations are not repeated unnecessarily and that any optimisation applies across all downstream calls (e.g.\ eigenvalue problems or modal time-stepping). This also makes the operator usable as a standalone object in other finite-difference schemes.
 
-Two assembly strategies were trialled. A block-based strategy constructs submatrices and concatenates them, mirroring the stencil structure. While this keeps the code compact, performance degrades once the blocks are copied into CSC format. The alternative is to write coefficients directly into diagonals or into preallocated triplet-style structures before conversion to CSC. Loop-based application of the stencil was rejected because it does not produce a matrix object, which is required for the ARPACK-based eigensolver \cite{lehoucq_arpack_1998} used by M\textsc{atlab}'s \texttt{eigs}. By consolidating everything in \texttt{bhmat}, later ports (e.g.\ Python, C\textsc{++}) could replicate the algorithm while shifting only the sparse backend.
+Two assembly strategies were trialled. A block-based strategy constructs submatrices and concatenates them, mirroring the stencil structure. While this keeps the code compact, performance degrades once the blocks are copied into CSC format. The alternative is to write coefficients directly into diagonals or into preallocated triplet-style structures before conversion to CSC. Loop-based application of the stencil was rejected because it does not produce a matrix object, which is required for the ARPACK-based eigensolver \cite{lehoucq_arpack_1998} used by M\textsc{atlab}'s \texttt{eigs}. By consolidating everything in \texttt{bhmat}, later ports (e.g.\ Python, C\textsc{++}) could replicate the algorithm while shifting only the sparse back end.
 
 In summary, the M\textsc{atlab} refactor established the structure of \textsc{magpie}: a small controller API, explicit operator assembly, and an isolated data model. This provided a reference implementation against which subsequent translations and optimisations could be tested.
 
@@ -401,7 +408,7 @@ A key change in the Python version concerns the construction of the discrete bih
 \begin{figure}
     \centering
     \includegraphics[width=0.75\linewidth]{img/biharm_zoom.pdf}
-    \caption{Cross-section of the biharmonic illustrating the coefficient content for a single grid line.}
+    \caption[Cross-section of the biharmonic]{Cross-section of the biharmonic illustrating the coefficient content for a single grid line.}
     \label{fig:biharm_zoom}
 \end{figure}
 
@@ -429,21 +436,29 @@ SciPy also exposes intermediate construction formats such as coordinate and list
       ]
 \end{verbatim}
 }
-\caption{Python syntax for the biharmonic structured from a list-of-lists of sub-blocks. The \texttt{Ma} multiplier variables are defined as $N_y - a$.}
+\caption[Python syntax for the biharmonic]{Python syntax for the biharmonic structured from a list-of-lists of sub-blocks. The \texttt{Ma} multiplier variables are defined as $N_y - a$.}
 \label{fig:python-bmat}
 \end{figure}
 
-Despite the elegance of the block construction in Python, benchmarking revealed similar limitations to those in M\textsc{atlab}. Figure~\ref{fig:matlab_vs_python} compares the performance of three cases: block assembly in M\textsc{atlab}, block assembly in Python, and diagonal assembly in M\textsc{atlab}. Each operator size was generated ten times and the shortest runtime was recorded. At larger grid sizes ($\sim 3\times 10^{5}$ unknowns), M\textsc{atlab}'s diagonal method was roughly forty times faster than its own block formulation (0.2\,s vs.\ 8\,s). Python’s block performance tracked M\textsc{atlab}'s block performance: slower and less scalable than the diagonal approach.
+Despite the elegance of the block construction in Python, benchmarking revealed similar limitations to those in M\textsc{atlab}. Figure~\ref{fig:matlab-vs-python} compares the performance of three cases: block assembly in M\textsc{atlab}, block assembly in Python, and diagonal assembly in M\textsc{atlab}. Each operator size was generated ten times and the shortest runtime was recorded. At larger grid sizes ($\sim 3\times 10^{5}$ unknowns), M\textsc{atlab}'s diagonal method was roughly forty times faster than its own block formulation (0.2\,s vs.\ 8\,s). Python’s block performance tracked M\textsc{atlab}'s block performance: slower and less scalable than the diagonal approach.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.49\linewidth]{img/plot_matlab_vs_python.pdf}
-    \includegraphics[width=0.49\linewidth]{img/plot-matlab-python-error.pdf}
-    \caption{Computational performance of the biharmonic assembled in a block format in M\textsc{atlab} and Python and a diagonal format in M\textsc{atlab}. Each size of biharmonic was computed 10 times and the shortest time was recorded.}
-    \label{fig:matlab_vs_python}
+    \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=1\linewidth]{img/plot_matlab_vs_python.pdf}
+    \caption{}
+    \label{fig:matlab-vs-python}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=1\linewidth]{img/plot-matlab-python-error.pdf}
+    \caption{}
+    \label{fig:python-matlab-error}
+    \end{subfigure}
+    \caption[M\textsc{atlab} vs. SciPy computational performance]{(\subref{fig:matlab-vs-python}) Computational performance of the biharmonic assembled in a block format in M\textsc{atlab} and Python and a diagonal format in M\textsc{atlab}. Each size of biharmonic was computed 10 times and the shortest time was recorded. (\subref{fig:python-matlab-error}) Percentage error between M\textsc{atlab} and SciPy for the first 500 eigenvalues.}
 \end{figure}
 
-It was projected that a diagonal composition in Python would likely outperform the block composition method once implemented. Comparison of between results from M\textsc{atlab} and SciPy eigensolvers revealed a percentage error in the order of $10^{-9}$ (Figure~\ref{fig:matlab_vs_python}) and the highest error between solvers is concentrated within the first few modes. This error is not unexpected and likely arises from a mixture of floating-point error and differences in the BLAS and LAPACK versions and the LU Decomposition
+It was projected that a diagonal composition in Python would likely outperform the block composition method once implemented. Comparison of between results from M\textsc{atlab} and SciPy eigensolvers revealed a percentage error in the order of $10^{-9}$ (Figure~\ref{fig:python-matlab-error}) and the highest error between solvers is concentrated within the first few modes. This error is not unexpected and likely arises from a mixture of floating-point error and differences in the BLAS and LAPACK versions and the LU Decomposition
 \footnote{UMPACK for M\textsc{atlab} \cite{davis_umfpack_2007} and SuperLU for SciPy \cite{scipy_superlu_2025}} 
 methods used by M\textsc{atlab} and SciPy respectively.
 
@@ -510,31 +525,31 @@ SciPy and M\textsc{atlab} both interface with ARPACK and the results between sol
 		$R$                & $10^{15}$ N$\cdot$m$^{-1}$ & Rotational elastic restraint (All boundaries) \\ 
 		$K$                & $10^{15}$ N$\cdot$m$^{-2}$ & Flexural elastic restraint (All boundaries)   \\ \hline	
 	\end{tabular}
-    \caption{\textsc{magpie} parameters used throughout benchmarking tests in this chapter.}
+    \caption[\textsc{magpie} parameters]{\textsc{magpie} parameters used throughout benchmarking tests in this chapter.}
 	\label{tab:parameters}
 \end{table}
 
 Although the percentage error is relatively small, the eigenvalue compute time is noticeably longer in Python 
-compared to M\textsc{atlab}, which is compounded further by the compute time biharmonic using SciPy (Figure~\ref{fig:matlab_vs_python}).
+compared to M\textsc{atlab}, which is compounded further by the compute time biharmonic using SciPy (Figure~\ref{fig:matlab-vs-python}).
 A further implementation was required to determine whether the compute time could be improved upon, and to achieve this, we looked toward a compiled language.
 
 \subsection{C++}
 
-Like Python, C\textsc{++} is entirely open source and therefore compatible with the FAIR principles underpinning the project’s methodology. Its status as a compiled, strongly typed language introduces additional development overhead, but it also enables direct control over memory, performance, and solver backends.
+Like Python, C\textsc{++} is entirely open source and therefore compatible with the FAIR principles underpinning the project’s methodology. Its status as a compiled, strongly typed language introduces additional development overhead, but it also enables direct control over memory, performance, and solver back ends.
 
-The primary bottleneck in all versions of \textsc{magpie} is the eigensolver stage. Both M\textsc{atlab} and SciPy rely on ARPACK \cite{lehoucq_arpack_1998} as the backend. In M\textsc{atlab}, the user has no visibility into the analysis or pre-processing applied to the matrix. Additionally, M\textsc{atlab} employs its own internal sparse representation \cite{gilbert_sparse_1992}, which further obscures the process. The \texttt{eigs} function cannot be code-generated and requires the M\textsc{atlab} runtime environment, limiting portability and access to anyone without a licence.
+The primary bottleneck in all versions of \textsc{magpie} is the eigensolver stage. Both M\textsc{atlab} and SciPy rely on ARPACK \cite{lehoucq_arpack_1998} as the back end. In M\textsc{atlab}, the user has no visibility into the analysis or pre-processing applied to the matrix. Additionally, M\textsc{atlab} employs its own internal sparse representation \cite{gilbert_sparse_1992}, which further obscures the process. The \texttt{eigs} function cannot be code-generated and requires the M\textsc{atlab} runtime environment, limiting portability and access to anyone without a licence.
 
 ARPACK itself is open source\footnote{The actively maintained fork \texttt{arpack-ng} is available via GitHub: \url{https://github.com/opencollab/arpack-ng}} and depends on BLAS\footnote{\url{http://www.netlib.org/blas/}} and LAPACK\footnote{\url{http://www.netlib.org/lapack/}} . While callable from C\textsc{++}, it is written in Fortran, which requires a working Fortran toolchain during compilation. This introduces cross-platform complications that are undesirable for lightweight deployment.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\linewidth]{img/plot-biharmonic-comparison-alt.pdf}
-    \caption{Construction time for the diagonalised biharmonic in M\textsc{atlab}, Python and C\textsc{++}.}
+    \caption[Construction time for the diagonalised biharmonic]{Construction time for the diagonalised biharmonic in M\textsc{atlab}, Python and C\textsc{++}.}
     \label{fig:biharm-diag-comp}
 \end{figure}
 
 To avoid reliance on Fortran binaries, the C\textsc{++} implementation of \textsc{magpie} uses the Spectra library \cite{spectra_git_2025}. Spectra is a header-only C\textsc{++} reimplementation of ARPACK that compiles natively without external linking. It builds on the Eigen library \cite{eigen_git_2025}, which provides sparse matrix types, iterative solvers, and BLAS/LAPACK interoperability when needed. Although, there is no required dependency from Eigen on BLAS / LAPACK which makes its combination with Spectra much more portable.
-\footnote{And for this reason development was pursued with Spectra and Eigen as opposed to the SLEPc library (\url{https://github.com/slepc/slepc}, which does have BLAS / LAPACK dependency}
+\footnote{And for this reason development was pursued with Spectra and Eigen as opposed to the SLEPc library (\url{https://github.com/slepc/slepc}, which does have BLAS / LAPACK dependency. The benefits of more portable C / C\textsc{++} code are discussed further in Section~\ref{sec:wasm}.}
 
 Both libraries are heavily templated, which makes the learning curve steeper but provides type safety and performance advantages. The C\textsc{++} development followed the same structure and methodology as the M\textsc{atlab} and Python implementations \cite{magpie_cpp_2025}.
 
@@ -545,12 +560,12 @@ Although the C\textsc{++} version remains under active development, early benchm
     \centering
     \includegraphics[width=0.49\linewidth]{img/plot-eigensolver-comparison.pdf}
     \includegraphics[width=0.49\linewidth]{img/plot-sym-gen-clamped-error.pdf}
-    \caption{Comparison of eigensolver compute time in M\textsc{atlab}, Python and C\textsc{++} (generic and symmetric Spectra solvers). C\textsc{++} times shown are with \texttt{-O3} compiler optimisation.}
+    \caption[Comparison of eigensolvers]{Comparison of eigensolver compute time in M\textsc{atlab}, Python and C\textsc{++} (generic and symmetric Spectra solvers). C\textsc{++} times shown are with \texttt{-O3} compiler optimisation.}
     \label{fig:eigensolver-comp}
     \label{fig:spectra-error}
 \end{figure}
 
-Figure~\ref{fig:eigensolver-comp} shows the eigensolver performance using the parameters listed in Table~\ref{tab:parameters}. As in SciPy, Spectra allows the choice between generic and symmetric solvers. Unlike SciPy, the difference in performance between the two modes is substantial, with the symmetric solver matching or surpassing M\textsc{atlab} in some cases. Figure~\ref{fig:spectra-error} shows the percentage error between Spectra (both solver types) and M\textsc{atlab}’s \texttt{eigs}. Errors are a few orders of magnitude higher than those observed in Python (Figure~\ref{fig:python-matlab-error}), resulting in a trade-off between performance and accuracy when using Spectra.
+Figure~\ref{fig:eigensolver-comp} shows the eigensolver performance using the parameters listed in Table~\ref{tab:parameters}. As in SciPy, Spectra allows the choice between generic and symmetric solvers. Unlike SciPy, the difference in performance between the two modes is substantial, with the symmetric solver matching or surpassing M\textsc{atlab} in some cases. Figure~\ref{fig:spectra-error} shows the percentage error between Spectra (both solver types) and M\textsc{atlab}’s \texttt{eigs}. Errors are a few orders of magnitude higher than those observed in Python (Figure~\ref{fig:spectra-error}), resulting in a trade-off between performance and accuracy when using Spectra.
 
 Relaxing the tolerance slightly (to approximately $10^{-6}$) offers a further performance gain for large matrices, with only a negligible impact on accuracy. Taken together, Figures~\ref{fig:biharm-diag-comp} and~\ref{fig:eigensolver-comp} indicate that C\textsc{++} provides both high performance and high fidelity, and supports the conclusion that the elevated Spectra error arises from the implementation of the eigensolver. Since SciPy and M\textsc{atlab} share a common element in ARPACK, errors are much lower. 
 
@@ -576,7 +591,7 @@ The user wishes to compare with Chladni patterns recorded during the course of e
 \begin{figure}
     \centering
     \includegraphics[width=0.75\linewidth]{img/bc-transition.pdf}
-    \caption{Simulated Chladni patterns of modes 10, 11, 12, 13, and 16, for a plate with free boundary conditions along all edges except the leftmost one. The last condition moves from simply-supported (\textbf{S}) to a fully clamped cantilever case (\textbf{C}), with an intermediary step corresponding to a high rotation stiffness (\textbf{T}). The choice of specific modes is the result of an exploration using the Jupyter Notebook graphical interface depicted in Figure \ref{fig:magpie-ui} }
+    \caption[Simulated Chladni patterns]{Simulated Chladni patterns of modes 10, 11, 12, 13, and 16, for a plate with free boundary conditions along all edges except the leftmost one. The last condition moves from simply-supported (\textbf{S}) to a fully clamped cantilever case (\textbf{C}), with an intermediary step corresponding to a high rotation stiffness (\textbf{T}). The choice of specific modes is the result of an exploration using the Jupyter Notebook graphical interface depicted in Figure \ref{fig:magpie-ui} }
     \label{fig:bc_transitions}
 \end{figure}
 
@@ -605,7 +620,7 @@ A case study taking the experimental measurements from \textcite{duran_experimen
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.9\linewidth, clip, trim=0.0cm 0.0cm 0.0cm 0.0cm]{img/unorganised/copper.pdf}
-\caption{Pictorial representation of the cantilever copper plate investigated in \textcite{duran_experimentally_2023}. The impact hammer (Hx) and accelerometer measurement positions are also represented. Measurement locations are reported as $(x,y)$ coordinates on the plate surface, in cm.} \label{fig:ExpPlateIsoMagpie}
+\caption[Pictorial representation of the cantilever copper plate]{Pictorial representation of the cantilever copper plate investigated in \textcite{duran_experimentally_2023}. The impact hammer (Hx) and accelerometer measurement positions are also represented. Measurement locations are reported as $(x,y)$ coordinates on the plate surface, in cm.} \label{fig:ExpPlateIsoMagpie}
 \end{figure}
 
 
@@ -623,7 +638,7 @@ A case study taking the experimental measurements from \textcite{duran_experimen
 		6 \chladniSix & 910                 & 890              & 888               \\ 
         \bottomrule
 	\end{tabular}
-	\caption{Eigenfrequencies in Hz for experiment data in \textcite{duran_experimentally_2023} against numerical simulations in \textsc{magpie} and COMSOL, using the estimated Young's modulus again from \textsc{magpie}. The first two eigenmodes were used as input modes for the inverse estimation problem.}
+	\caption[Eigenfrequencies for experiment data]{Eigenfrequencies in Hz for experiment data in \textcite{duran_experimentally_2023} against numerical simulations in \textsc{magpie} and COMSOL, using the estimated Young's modulus again from \textsc{magpie}. The first two eigenmodes were used as input modes for the inverse estimation problem.}
 	\label{tab:case-study}
 \end{table}
 
@@ -640,7 +655,7 @@ As a more involved example, a spruce specimen is considered here. Spruce is a co
 \begin{figure}
 \centering
 \includegraphics[width=0.75\linewidth]{img/Picture 1.png}
-\caption{Reference experimental and numerical eigenshapes for the wooden plate. The plate is clamped along one edge and free along the others. Chladni patterns are generated with an electromechanical shaker exciting the board. The listed experimental frequencies are derived from accelerometric spectra. Figure reprduced from reproduced from \cite{ducceschi_method_2024}.}\label{fig:ExperOrtho}
+\caption[Reference experimental and numerical eigenshapes for the wooden plate]{Reference experimental and numerical eigenshapes for the wooden plate. The plate is clamped along one edge and free along the others. Chladni patterns are generated with an electromechanical shaker exciting the board. The listed experimental frequencies are derived from accelerometric spectra. Figure reprduced from reproduced from \cite{ducceschi_method_2024}.}\label{fig:ExperOrtho}
 \end{figure}
 
 The elastic constants $E_x$, $E_y$, and $G_{xy}$ for a rectangular sample can be obtained using the \texttt{InverseModelling} script within the M\textsc{atlab} implementation of \textsc{magpie}. The script is initialised by setting the plate's parameters:
@@ -681,7 +696,7 @@ These guesses serve only to generate numerical eigenmodes that resemble the meas
 \begin{figure}
 \centering
 \includegraphics[width=\linewidth]{img/LeastSq.png}
-\caption{Least-squares results for the Finnish spruce plate shown in Fig.~\ref{fig:ExperOrtho}, reproduced from \cite{ducceschi_method_2024}.}\label{fig:LeastSq}
+\caption[Least-squares results for the Finnish spruce plate]{Least-squares results for the Finnish spruce plate shown in Fig.~\ref{fig:ExperOrtho}, reproduced from \cite{ducceschi_method_2024}.}\label{fig:LeastSq}
 \end{figure}
 
 Finally, a least-squares procedure is used to extract the elastic constants, returning both mean values and standard deviations. Results for the experimental plate in Figure~\ref{fig:ExperOrtho} are reported in Figure~\ref{fig:LeastSq} and summarised in Table~\ref{tab:results}.
@@ -694,7 +709,7 @@ Finally, a least-squares procedure is used to extract the elastic constants, ret
 \multirow{2}{*}{\footnotesize{Finnish spruce}} & mean & 12.8 & 693 & 621 \\
 & rel. std & 4.0\% & 1.1\% & 6.4\% \\
 \end{tabular}
-\caption{Mean values and relative standard deviations of the elastic constants for the experimental plate. These values are consistent with previously reported data for spruce.}\label{tab:results}
+\caption[Mean values and relative standard deviations of the elastic constants]{Mean values and relative standard deviations of the elastic constants for the experimental plate. These values are consistent with previously reported data for spruce.}\label{tab:results}
 \end{table}
 
 
