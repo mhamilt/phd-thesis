@@ -415,8 +415,8 @@ Because SciPy allows developers to specify sparse matrices in multiple formats, 
 
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{img/sparse-formats.pdf}    
-    \caption{Compressed Diagonal (\subref{fig:sparse-dia}) and Sparse Column (\subref{fig:sparse-csc}) format sparse matrix storage structure.}
+    \includegraphics[width=1\linewidth]{img/sparse_formats.pdf}    
+    \caption[Compressed Sparse Column and Diagonal format sparse matrix storage structure]{Compressed Sparse Column and Diagonal format sparse matrix storage structure. CSC format stores the data, a column pointer and a data address pointer, while the DIA format stores arrays of data and the corresponding diagonal index from which length can be calculated.  For a banded matrix, less data is needed however any zero values in the diagonal band must be stored explicitly. [Adapted from \textcite{eding_sparse_2019}]}
     \label{fig:sparse-dia}
 \end{figure}
 
@@ -536,16 +536,18 @@ A further implementation was required to determine whether the compute time coul
 
 Like Python, C\textsc{++} is entirely open source and therefore compatible with the FAIR principles underpinning the project’s methodology. Its status as a compiled, strongly typed language introduces additional development overhead, but it also enables direct control over memory, performance, and solver back ends.
 
-The primary bottleneck in all versions of \textsc{magpie} is the eigensolver stage. Both M\textsc{atlab} and SciPy rely on ARPACK \cite{lehoucq_arpack_1998} as the back end. In M\textsc{atlab}, the user has no visibility into the analysis or pre-processing applied to the matrix. Additionally, M\textsc{atlab} employs its own internal sparse representation \cite{gilbert_sparse_1992}, which further obscures the process. The \texttt{eigs} function cannot be code-generated and requires the M\textsc{atlab} runtime environment, limiting portability and access to anyone without a licence.
-
-ARPACK itself is open source\footnote{The actively maintained fork \texttt{arpack-ng} is available via GitHub: \url{https://github.com/opencollab/arpack-ng}} and depends on BLAS\footnote{\url{http://www.netlib.org/blas/}} and LAPACK\footnote{\url{http://www.netlib.org/lapack/}} . While callable from C\textsc{++}, it is written in Fortran, which requires a working Fortran toolchain during compilation. This introduces cross-platform complications that are undesirable for lightweight deployment.
-
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\linewidth]{img/plot-biharmonic-comparison-alt.pdf}
     \caption[Construction time for the diagonalised biharmonic]{Construction time for the diagonalised biharmonic in M\textsc{atlab}, Python and C\textsc{++}.}
     \label{fig:biharm-diag-comp}
 \end{figure}
+
+The primary bottleneck in all versions of \textsc{magpie} is the eigensolver stage. Both M\textsc{atlab} and SciPy rely on ARPACK \cite{lehoucq_arpack_1998} as the back end. In M\textsc{atlab}, the user has no visibility into the analysis or pre-processing applied to the matrix. Additionally, M\textsc{atlab} employs its own internal sparse representation \cite{gilbert_sparse_1992}, which further obscures the process. The \texttt{eigs} function cannot be code-generated and requires the M\textsc{atlab} runtime environment, limiting portability and access to anyone without a licence.
+
+ARPACK itself is open source\footnote{The actively maintained fork \texttt{arpack-ng} is available via GitHub: \url{https://github.com/opencollab/arpack-ng}} and depends on BLAS\footnote{\url{http://www.netlib.org/blas/}} and LAPACK\footnote{\url{http://www.netlib.org/lapack/}} . While callable from C\textsc{++}, it is written in Fortran, which requires a working Fortran toolchain during compilation. This introduces cross-platform complications that are undesirable for lightweight deployment.
+
+
 
 To avoid reliance on Fortran binaries, the C\textsc{++} implementation of \textsc{magpie} uses the Spectra library \cite{spectra_git_2025}. Spectra is a header-only C\textsc{++} reimplementation of ARPACK that compiles natively without external linking. It builds on the Eigen library \cite{eigen_git_2025}, which provides sparse matrix types, iterative solvers, and BLAS / LAPACK interoperability when needed. Although, there is no required dependency from Eigen on BLAS / LAPACK which makes its combination with Spectra much more portable.
 \footnote{And for this reason development was pursued with Spectra and Eigen as opposed to the SLEPc library (\url{https://github.com/slepc/slepc}, which does have BLAS / LAPACK dependency. The benefits of more portable C / C\textsc{++} code are discussed further in Section~\ref{sec:wasm}.}
