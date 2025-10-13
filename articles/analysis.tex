@@ -3,14 +3,14 @@
 This chapter introduces \textsc{magpie}, a free/libre, open, and citable toolkit for the analysis, visualisation, and pedagogical use of plate vibration models in musical acoustics. Whereas the previous chapter centred on \emph{user interaction} with digital reconstructions of cultural heritage—through the San Colombano keyboard project—our focus here shifts to \emph{analysis}, in particular the determination of wood properties that underpin conservation practice. The ability to extract elastic constants from non-intrusive vibration measurements addresses a persistent challenge in instrument making, whether for preservation practices or otherwise. Within the broader framework of \textsc{NEMUS}, \textsc{magpie} aims to extend the project’s goals by providing curators, conservators, and instrument makers with an accessible, open-source environment in which plate models can be simulated, visualised, and compared to experimental data.
 
 
-For both the conservation of historical instruments and the making of new ones or faithful copies, reliable material parameters are indispensable. In wooden soundboards and plates, the elastic behaviour is orthotropic, with distinct properties along and across the grain. Conventional destructive or quasi-destructive tests (bending, tensile, compression) are impractical for whole instruments and generally incompatible with curatorial practice. Conversely, vibration-based measurements—e.g., eigenfrequency/eigenshape identification and Chladni visualisation—offer a less invasive alternative. Recent work in \textsc{NEMUS} has produced a practical inverse-modelling method to estimate the rectangular orthotropic plate elastic constants from measured modes and Chladni patterns via a linear least-squares formulation \cite{ducceschi_method_2024,ducceschi_open_2024}. This approach is robust to boundary condition choices, yields a transparent matrix inversion for the constants, and is well-suited to workflows requiring repeatable, low-risk procedures, such as in a luthier workshop. In this chapter, we package, document, and expose this capability to non-specialists through \textsc{magpie}, with particular attention to reproducibility and ease of use in a web browser.
+For both the conservation of historical instruments and the making of new ones or faithful copies, reliable material parameters are indispensable. In wooden soundboards and plates, the elastic behaviour is orthotropic, with distinct properties along and across the grain. Conventional destructive or quasi-destructive tests (bending, tensile, compression) are impractical for whole instruments and generally incompatible with curatorial practice. Conversely, vibration-based measurements—e.g. eigenfrequency / eigenshape identification and Chladni visualisation—offer a less invasive alternative. Recent work in \textsc{NEMUS} has produced a practical inverse-modelling method to estimate the rectangular orthotropic plate elastic constants from measured modes and Chladni patterns via a linear least-squares formulation \cite{ducceschi_method_2024,ducceschi_open_2024}. This approach is robust to boundary condition choices, yields a transparent matrix inversion for the constants, and is well-suited to workflows requiring repeatable, low-risk procedures, such as in a luthier workshop. In this chapter, we package, document, and expose this capability to non-specialists through \textsc{magpie}, with particular attention to reproducibility and ease of use in a web browser.
 
 
-Plate simulations, eigenshape rendering (including Chladni plots), modal parameter estimation, and impulse-response synthesis are often available only in proprietary software stacks or bespoke research scripts, which usually have steep learning curves. The immediate need is for an open, well-documented toolchain that implements standard thin-plate models (e.g., Kirchhoff–Love and variants), supports inverse estimation of orthotropic constants from measurements, and lowers the barrier to entry via an interactive browser interface. \textsc{magpie} addresses this gap by consolidating numerics (sparse finite-difference biharmonics, eigenanalysis), analysis utilities (mode sorting, Chladni rendering), and inversion routines into a coherent, cross-language codebase released under a permissive licence and distributed on GitHub\footnote{ \href{https://github.com/orgs/Nemus-Project/teams/magpie/repositories}{MAGPIE repositories}} through the \textsc{NEMUS} project.
+Plate simulations, eigenshape rendering (including Chladni plots), modal parameter estimation, and impulse-response synthesis are often available only in proprietary software stacks or bespoke research scripts, which usually have steep learning curves. The immediate need is for an open, well-documented toolchain that implements standard thin-plate models (e.g. Kirchhoff–Love and variants), supports inverse estimation of orthotropic constants from measurements, and lowers the barrier to entry via an interactive browser interface. \textsc{magpie} addresses this gap by consolidating numerics (sparse finite-difference biharmonics, eigenanalysis), analysis utilities (mode sorting, Chladni rendering), and inversion routines into a coherent, cross-language codebase released under a permissive licence and distributed on GitHub\footnote{ \href{https://github.com/orgs/Nemus-Project/teams/magpie/repositories}{MAGPIE repositories}} through the \textsc{NEMUS} project.
 
 To ensure that \textsc{magpie} is not just \emph{available} but \emph{reusable} in the long term, we align the project with the FAIR Guiding Principles (Findable, Accessible, Interoperable, Reusable) \cite{wilkinson_fair_2016,go_fair_2016}. In practical terms, this means: 
 \begin{enumerate}
-\item Assigning persistent identifiers (e.g., DOIs via archival services) to code, releases, and datasets. 
+\item Assigning persistent identifiers (e.g. DOIs via archival services) to code, releases, and datasets. 
 \item Providing machine- and human-readable metadata, explicit licences, and provenance.
 \item Maintaining stable, versioned APIs and minimal, well-specified dependencies. \item Supplying rich documentation, examples, and curated notebooks that demonstrate museum-focused workflows (from data capture to inversion to reporting). 
 \end{enumerate}
@@ -27,7 +27,7 @@ The remainder of the chapter develops the design choices behind \textsc{magpie} 
 \end{enumerate}
 
 
-Throughout, we prioritise replicability (scripts and notebooks), citeable artefacts (software, datasets, configurations).
+Throughout, we prioritise reproducibility (scripts and notebooks), citable artefacts (software, datasets, configurations).
 
 
 \section{Methodology}\label{sec:methodology}
@@ -285,7 +285,7 @@ The following section describes implementation details, with a specific focus on
 \section{Development}\label{sec:development}
 
 
-The project is language-agnostic by construction. A minimal, shared specification of inputs/outputs (plate geometry, material set, boundary constants, grid, solver options) governs equivalent libraries in \textsc{matlab}, Python, and C\textsc{++}. Back ends differ only where platform conventions demand it (e.g., sparse formats and eigensolver interfaces); numerical results and reference examples are kept congruent by tests and cross-checks.
+The project is language-agnostic by construction. A minimal, shared specification of inputs/outputs (plate geometry, material set, boundary constants, grid, solver options) governs equivalent libraries in M\textsc{atlab}, Python, and C\textsc{++}. Back ends differ only where platform conventions demand it (e.g. sparse formats and eigensolver interfaces); numerical results and reference examples are kept congruent by tests and cross-checks.
 
 Distribution follows an ``open first'' approach: version-controlled source, machine- and human-readable metadata, explicit licences, and archival releases with persistent identifiers. Example notebooks and scripts ship alongside the libraries to promote repeatable workflows (from data import to inversion and reporting). The browser-facing interface (Section~\ref{sec:jupyter}) is a thin layer over the same core routines.
 
@@ -363,10 +363,9 @@ magpie-python/
         \caption{}
         \label{fig:directory-structure-python}
     \end{subfigure}
-    \caption[\textsc{magpie} directory structure]{Directory structure of \texttt{magpie-matlab} (\subref{fig:directory-structure-matlab}) and \texttt{magpie-python} (\subref{fig:directory-structure-python})}
+    \caption[\textsc{magpie} directory structure]{Directory structure of \citetitle{magpie_matlab_2025} \cite{magpie_matlab_2025} (\subref{fig:directory-structure-matlab}) and \citetitle{magpie_python_2025} \cite{magpie_python_2025} (\subref{fig:directory-structure-python})}
     \label{fig:directory-structure}
 \end{figure}
-
 
 The source code was structured using the model-view-controller (MVC) paradigm \cite{krasner_description_1988}, splitting the software into three major components: data (Model), interface (View), and core logic (Controller).
 
@@ -375,8 +374,8 @@ The source code was structured using the model-view-controller (MVC) paradigm \c
   \item[Controller] Numerical kernels: sparse operator assembly, eigenanalysis, modal integrators, and linear inversion utilities. These are packaged as a stable library API replicated across languages.
   \item[View] Lightweight interfaces (Jupyter widgets and plotting helpers) for inspection, Chladni rendering, and report-ready figures. The UI is kept repository-separate and imports the library as a dependency. This layout has practical consequences: \begin{itemize}
   \item Interfaces are replaceable. The same kernels drive notebooks, command-line tools, or future web front ends without code duplication.
-  \item Only affected quantities are recomputed when parameters change (e.g., grid refinement or boundary constants), enabling fast exploratory sweeps with coarse grids and high-fidelity reruns at higher resolution.
-  \item Platform specifics are isolated. For example, CSC/DIA sparse storage and solver hooks (ARPACK/SciPy, \textsc{matlab} \texttt{eigs}, or Spectra/Eigen) live behind a consistent API, so examples and tests remain identical across languages.
+  \item Only affected quantities are recomputed when parameters change (e.g. grid refinement or boundary constants), enabling fast exploratory sweeps with coarse grids and high-fidelity reruns at higher resolution.
+  \item Platform specifics are isolated. For example, CSC/DIA sparse storage and solver hooks (ARPACK/SciPy, M\textsc{atlab} \texttt{eigs}, or Spectra / Eigen) live behind a consistent API, so examples and tests remain identical across languages.
 \end{itemize}
 \end{description}
 The result is a compact core that is easy to audit and extend (additional boundary models, orthotropic variants, damping laws), and a view layer that can evolve independently to suit conservation and teaching use cases.
@@ -391,11 +390,11 @@ Adopting the MVC structure described in Section~\ref{design}, the M\textsc{atlab
 Figure~\ref{fig:directory-structure-matlab} show the directory structure for the M\textsc{atlab} version preset in \citetitle{magpie_matlab_2025} \cite{magpie_matlab_2025}.
 Central to all functionality is the construction of the biharmonic matrix by the function \texttt{bhmat}. In the simplest interior case the discrete operator corresponds to the 13-point stencil in Figure~\ref{fig:biharmonic-stencil} and involves only four distinct coefficients. Under generalised elastic boundary conditions, however, up to 229 coefficients may arise; symmetry and repetition break down near edges and corners (Figure~\ref{fig:biharmonic-stencil}). This rules out assembling the matrix by naïvely repeating a uniform stencil. Instead, \texttt{bhmat} computes the coefficients explicitly and places them into a sparse matrix.
 
-The grid function \(u_{l,m}\) on an \((N_x+1)\times(N_y+1)\) grid is vectorised as shown in Figure~\ref{fig:fdtd-linear}, giving a square matrix of dimension \(N=(N_x+1)(N_y+1)\). For performance, all assembling is carried out in sparse format. M\textsc{atlab} stores sparse matrices in compressed–sparse–column format (CSC), with values, row indices, and column pointers packed contiguously \cite{gilbert_sparse_1992}. This makes repeated block concatenation expensive, as it forces reallocation and reindexing of memory.
+The grid function \(u_{l,m}\) on an \((N_x+1)\times(N_y+1)\) grid is vectorised as shown in Figure~\ref{fig:fdtd-linear}, giving a square matrix of dimension \(N=(N_x+1)(N_y+1)\). For performance, all assembling is carried out in sparse format. M\textsc{atlab} stores sparse matrices in compressed–sparse–column format (CSC), with values, row indices, and column pointers packed contiguously \cite{gilbert_sparse_1992}. This makes repeated block concatenation expensive, as it forces reallocation and re-indexing of memory.
 
-The original code used a block-structured approach (Figure~\ref{fig:biharmonic-matrix}), which was easy to read but slow to assemble at increasing grid sizes. The refactor isolates coefficient generation from matrix assembly within \texttt{bhmat}, ensuring that the expensive computations are not repeated unnecessarily and that any optimisation applies across all downstream calls (e.g.\ eigenvalue problems or modal time-stepping). This also makes the operator usable as a standalone object in other finite-difference schemes.
+The original code used a block-structured approach (Figure~\ref{fig:biharmonic-matrix}), which was easy to read but slow to assemble at increasing grid sizes. The refactor isolates coefficient generation from matrix assembly within \texttt{bhmat}, ensuring that the expensive computations are not repeated unnecessarily and that any optimisation applies across all downstream calls (e.g.\ eigenvalue problems or modal time-stepping). This also makes the operator usable as a stand-alone object in other finite-difference schemes.
 
-Two assembly strategies were trialled. A block-based strategy constructs submatrices and concatenates them, mirroring the stencil structure. While this keeps the code compact, performance degrades once the blocks are copied into CSC format. The alternative is to write coefficients directly into diagonals or into preallocated triplet-style structures before conversion to CSC. Loop-based application of the stencil was rejected because it does not produce a matrix object, which is required for the ARPACK-based eigensolver \cite{lehoucq_arpack_1998} used by M\textsc{atlab}'s \texttt{eigs}. By consolidating everything in \texttt{bhmat}, later ports (e.g.\ Python, C\textsc{++}) could replicate the algorithm while shifting only the sparse back end.
+Two assembly strategies were trialled. A block-based strategy constructs sub-matrices and concatenates them, mirroring the stencil structure. While this keeps the code compact, performance degrades once the blocks are copied into CSC format. The alternative is to write coefficients directly into diagonals or into preallocated triplet-style structures before conversion to CSC. Loop-based application of the stencil was rejected because it does not produce a matrix object, which is required for the ARPACK-based eigensolver \cite{lehoucq_arpack_1998} used by M\textsc{atlab}'s \texttt{eigs}. By consolidating everything in \texttt{bhmat}, later ports (e.g.\ Python, C\textsc{++}) could replicate the algorithm while shifting only the sparse back end.
 
 In summary, the M\textsc{atlab} refactor established the structure of \textsc{magpie}: a small controller API, explicit operator assembly, and an isolated data model. This provided a reference implementation against which subsequent translations and optimisations could be tested.
 
@@ -548,7 +547,7 @@ ARPACK itself is open source\footnote{The actively maintained fork \texttt{arpac
     \label{fig:biharm-diag-comp}
 \end{figure}
 
-To avoid reliance on Fortran binaries, the C\textsc{++} implementation of \textsc{magpie} uses the Spectra library \cite{spectra_git_2025}. Spectra is a header-only C\textsc{++} reimplementation of ARPACK that compiles natively without external linking. It builds on the Eigen library \cite{eigen_git_2025}, which provides sparse matrix types, iterative solvers, and BLAS/LAPACK interoperability when needed. Although, there is no required dependency from Eigen on BLAS / LAPACK which makes its combination with Spectra much more portable.
+To avoid reliance on Fortran binaries, the C\textsc{++} implementation of \textsc{magpie} uses the Spectra library \cite{spectra_git_2025}. Spectra is a header-only C\textsc{++} reimplementation of ARPACK that compiles natively without external linking. It builds on the Eigen library \cite{eigen_git_2025}, which provides sparse matrix types, iterative solvers, and BLAS / LAPACK interoperability when needed. Although, there is no required dependency from Eigen on BLAS / LAPACK which makes its combination with Spectra much more portable.
 \footnote{And for this reason development was pursued with Spectra and Eigen as opposed to the SLEPc library (\url{https://github.com/slepc/slepc}, which does have BLAS / LAPACK dependency. The benefits of more portable C / C\textsc{++} code are discussed further in Section~\ref{sec:wasm}.}
 
 Both libraries are heavily templated, which makes the learning curve steeper but provides type safety and performance advantages. The C\textsc{++} development followed the same structure and methodology as the M\textsc{atlab} and Python implementations \cite{magpie_cpp_2025}.
@@ -558,11 +557,17 @@ Although the C\textsc{++} version remains under active development, early benchm
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.49\linewidth]{img/plot-eigensolver-comparison.pdf}
-    \includegraphics[width=0.49\linewidth]{img/plot-sym-gen-clamped-error.pdf}
-    \caption[Comparison of eigensolvers]{Comparison of eigensolver compute time in M\textsc{atlab}, Python and C\textsc{++} (generic and symmetric Spectra solvers). C\textsc{++} times shown are with \texttt{-O3} compiler optimisation.}
+    \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=1\linewidth]{img/plot-eigensolver-comparison.pdf}
+    \caption{}
     \label{fig:eigensolver-comp}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=1\linewidth]{img/plot-sym-gen-clamped-error.pdf}
+    \caption{}
     \label{fig:spectra-error}
+    \end{subfigure}
+    \caption[Comparison of eigensolvers]{(\subref{fig:eigensolver-comp}) Comparison of eigensolver compute time in M\textsc{atlab}, Python and C\textsc{++} (generic and symmetric Spectra solvers). (\subref{fig:spectra-error}) C\textsc{++} times shown are with \texttt{-O3} compiler optimisation.}
 \end{figure}
 
 Figure~\ref{fig:eigensolver-comp} shows the eigensolver performance using the parameters listed in Table~\ref{tab:parameters}. As in SciPy, Spectra allows the choice between generic and symmetric solvers. Unlike SciPy, the difference in performance between the two modes is substantial, with the symmetric solver matching or surpassing M\textsc{atlab} in some cases. Figure~\ref{fig:spectra-error} shows the percentage error between Spectra (both solver types) and M\textsc{atlab}’s \texttt{eigs}. Errors are a few orders of magnitude higher than those observed in Python (Figure~\ref{fig:spectra-error}), resulting in a trade-off between performance and accuracy when using Spectra.
@@ -619,7 +624,7 @@ One of \textsc{magpie}'s functionalities is the estimation of a specimen's elast
 A case study taking the experimental measurements from \textcite{duran_experimentally_2023} to calculate Young's modulus using Magpie. The experimental plate is represented in Figure \ref{fig:ExpPlateIsoMagpie}, along with the plate's physical dimensions and density.
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.9\linewidth, clip, trim=0.0cm 0.0cm 0.0cm 0.0cm]{img/unorganised/copper.pdf}
+\includegraphics[width=0.9\linewidth]{img/unorganised/copper.pdf}
 \caption[Pictorial representation of the cantilever copper plate]{Pictorial representation of the cantilever copper plate investigated in \textcite{duran_experimentally_2023}. The impact hammer (Hx) and accelerometer measurement positions are also represented. Measurement locations are reported as $(x,y)$ coordinates on the plate surface, in cm.} \label{fig:ExpPlateIsoMagpie}
 \end{figure}
 
@@ -655,7 +660,7 @@ As a more involved example, a spruce specimen is considered here. Spruce is a co
 \begin{figure}
 \centering
 \includegraphics[width=0.75\linewidth]{img/Picture 1.png}
-\caption[Reference experimental and numerical eigenshapes for the wooden plate]{Reference experimental and numerical eigenshapes for the wooden plate. The plate is clamped along one edge and free along the others. Chladni patterns are generated with an electromechanical shaker exciting the board. The listed experimental frequencies are derived from accelerometric spectra. Figure reprduced from reproduced from \cite{ducceschi_method_2024}.}\label{fig:ExperOrtho}
+\caption[Reference experimental and numerical eigenshapes for the wooden plate]{Reference experimental and numerical eigenshapes for the wooden plate. The plate is clamped along one edge and free along the others. Chladni patterns are generated with an electromechanical shaker exciting the board. The listed experimental frequencies are derived from accelerometric spectra. Reproduced from \cite{ducceschi_method_2024}.}\label{fig:ExperOrtho}
 \end{figure}
 
 The elastic constants $E_x$, $E_y$, and $G_{xy}$ for a rectangular sample can be obtained using the \texttt{InverseModelling} script within the M\textsc{atlab} implementation of \textsc{magpie}. The script is initialised by setting the plate's parameters:
