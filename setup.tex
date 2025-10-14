@@ -19,6 +19,11 @@
 % \documentclass[11pt,a4paper]{report}
 % \usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
 %----------------------------------------------------------------------------------------
+
+\PassOptionsToPackage{T1}{fontenc}
+\PassOptionsToPackage{hidelinks}{hyperref}
+\PassOptionsToPackage{utf8}{inputenc}   % if you're on pdfLaTeX
+
 \usepackage{
     adjustbox,
      amsfonts,
@@ -36,10 +41,17 @@
      fancyhdr,
      fancyvrb,
         float,
+      fontenc,
+     geometry,
      graphicx,
+     hyperref,
   indentfirst,
+     inputenc,
      listings,
      multicol,
+     multirow,
+    newtxtext,
+    newtxmath,
     pmboxdraw,
      setspace,
    subcaption,
@@ -47,16 +59,9 @@
    tabularray,
         xcolor
 }
-
-\usepackage[T1]{fontenc}      % better font encoding
-\usepackage[utf8]{inputenc}   % if you're on pdfLaTeX
-\usepackage{newtxtext}
-\usepackage{newtxmath}
-
 %----------------------------------------------------------------------------------------
-\usepackage{multirow} % used for the table
+% Table and Matrix Vertical Space
 \renewcommand{\arraystretch}{1.4}
-\usepackage[hidelinks]{hyperref}
 %----------------------------------------------------------------------------------------
 \usepackage{newunicodechar}
 \newunicodechar{└}{\textSFii}
@@ -94,10 +99,10 @@
   \ifnum\value{listcount}=1%
     \ifnum\value{liststop}=1%
       % single author: add 's%
-      \usebibmacro{name:last}{\namepartfamily}{\namepartgiven}{\namepartprefix}{\namepartsuffix}'s%%
+      \usebibmacro{name:family}{\namepartfamily}{\namepartgiven}{\namepartprefix}{\namepartsuffix}'s%%
     \else%
       % multiple authors: no 's yet%
-      \usebibmacro{name:last}{\namepartfamily}{\namepartgiven}{\namepartprefix}{\namepartsuffix}%%
+      \usebibmacro{name:family}{\namepartfamily}{\namepartgiven}{\namepartprefix}{\namepartsuffix}%%
     \fi%
   \else%
     \ifnum\value{listcount}<\value{liststop}%
