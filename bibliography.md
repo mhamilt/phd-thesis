@@ -3,9 +3,27 @@
 Adlam, Derek, and Richard Burnett. 1972. “Proposal for Restoration.”
 Adlam Burnett, Fenton House records, The National Trust.
 
+Aghajani, Emad, Csaba Nagy, Mario Linares-Vásquez, Laura Moreno,
+Gabriele Bavota, Michele Lanza, and David C Shepherd. 2020. “Software
+Documentation: The Practitioners’ Perspective.” In *Proceedings of the
+Acm/Ieee 42nd International Conference on Software Engineering*,
+590–601.
+
+Al Khalifa, Haifa Ebrahim, and Anamika Vishal Jiwane. 2025. “Visitors’
+Interactions with the Exhibits and Behaviors in Museum Spaces: Insights
+from the National Museum of Bahrain.” *Buildings* 15 (8): 1324.
+
 Alain de, Cheveigné. 2023. “In-Channel Cancellation: A Model of Early
 Auditory Processing.” *bioRxiv*.
 <https://doi.org/10.1101/2022.11.27.518095>.
+
+AlexisMousseau, Matthew Hamilton, and Michele. 2025.
+“Nemus-Project/VKPlate: Zenoto Release.” Zenodo.
+<https://doi.org/10.5281/zenodo.16880838>.
+
+Ali, Randall, and Bryan Khan. 2024. “Steelpan Synthesis and Intangible
+Cultural Heritage.” In *2024 32nd European Signal Processing Conference
+(EUSIPCO)*, 1002–6. IEEE.
 
 Allard, Travis, Myra Sitchon, Roland Sawatzky, and Robert Hoppa. 2005.
 “Use of Hand-Held Laser Scanning and 3d Printing for Creation of a
@@ -37,12 +55,28 @@ Altinsoy, M Ercan, and Sebastian Merchel. 2011. “Electrotactile Feedback
 for Handheld Devices with Touch Screen and Simulation of Roughness.”
 *IEEE Transactions on Haptics* 5 (1): 6–13.
 
+Antalis UK. 2025. “Coala 1D 100 Gloss p Monomeric Self Adhesive Vinyl
+White Gloss Permanent 1370mm x 50 Metres 100 Micron.” 2025.
+<https://www.antalis.co.uk/eshop/visual-communication/self-adhesive-printing/solvent-latex-uv-inkjet-printable/monomeric/coala-1d/SKU-607755>.
+
+Aragonès, Àngels, Cédric Camier, Michele Ducceschi, Olivier Thomas, and
+Cyril Touzé. 2017. *VKgong 1.0 Reference Manual*.
+<https://vkgong.ensta-paris.fr/files/VKgong1.0_documentation.pdf>.
+
 Arcery, John, and Deborah Briggs. 2025. “Cites i-‑ii-‑iii Timber Species
 Manual.” U.S. Department of Agriculture.
 <https://www.aphis.usda.gov/sites/default/files/cites.pdf>.
 
 Arduino S.r.l. 2025. “Arduino Nano 33 Iot User Manual.” Arduino S.r.l.
 <https://docs.arduino.cc/resources/datasheets/ABX00027-datasheet.pdf>.
+
+Ausiello, Ludovico, Michele Ducceschi, Sebastian Duran, and Benjamin Kai
+Morrison. 2024. “Affordable Wide-Band Measurement Ecosystem for Musical
+Acoustics Based on Electro-Dynamic Transducers.” *Acta Acustica United
+with Acustica* 8 (October). <https://doi.org/10.1051/aacus/2024045>.
+
+Austin, Naomi. 2010. “Horizon: Is Seeing Believing?” BBC Two England.
+<https://learningonscreen.ac.uk/ondemand/index.php/prog/0175990B?bcast=54283586>.
 
 Autodesk. 2024. “Autodesk Eagle Announcement - Next Steps and Faq.”
 Autodesk. 2024.
@@ -63,6 +97,10 @@ Conference on New Interfaces for Musical Expression*, 14–19. Brisbane,
 Australia: Queensland Conservatorium Griffith University.
 <https://doi.org/10.5281/zenodo.3964592>.
 
+Bangerth, Wolfgang, and Timo Heister. 2013. “What Makes Computational
+Open Source Software Libraries Successful?” *Computational Science &
+Discovery* 6 (1): 015010.
+
 Bánhalmi, András, Kornél Kovács, András Kocsor, and László Tóth. 2005.
 “Fundamental Frequency Estimation by Least-Squares Harmonic Model
 Fitting.” In *INTERSPEECH*, 305–8.
@@ -75,7 +113,7 @@ Institute ; CIMCIM.
 ———. 1999. “A Critical Analysis of Actions Taken Upon Historic Musical
 Instruments Through the Period of the Early Music Revival from the
 Beginning of the 20th Century to the 1990s.” PhD thesis, Open University
-(United Kingdom).
+(United Kingdom). <https://oro.open.ac.uk/18804/1/pdf03.pdf>.
 
 ———. 2005. *The Preservation and Use of Historic Musical Instruments :
 Display Case and Concert Hall*. London: Earthscan.
@@ -101,14 +139,33 @@ Corporation.
 Berthoz, Alain. 2000. *The Brain’s Sense of Movement*. Perspectives in
 Cognitive Neuroscience. Cambridge, Mass. ; Harvard University Press.
 
+Berzborn, Marco, Ramona Bomhardt, Johannes Klein, Jan-Gerrit Richter,
+and Michael Vorländer. 2017. “The ITA-Toolbox: An Open Source MATLAB
+Toolbox for Acoustic Measurements and Signal Processing.” In
+*Proceedings of the 43th Annual German Congress on Acoustics, Kiel,
+Germany*. Vol. 6.
+<https://pub.dega-akustik.de/DAGA_2017/data/articles/000257.pdf>.
+
 Bevilacqua, Antonella, Adriano Farina, Leonardo Saccenti, et al. 2023.
 “New Method for the Computation of Acoustic Parameters According to the
 Updated Italian Legislation.” In *AES Europe 2023: 154th Audio
 Engineering Society Convention*. Audio Engineering Society.
 
+Bevilacqua, Antonella, Gino Iannace, Ilaria Lombardi, and Rosaria
+Parente. 2023. “A Sound from the Arena: Acoustic Reconstruction of a
+Roman Amphitheater Located in Avella, South of Italy.” In *INTER-NOISE
+and NOISE-CON Congress and Conference Proceedings*, 265:894–99. 7.
+Institute of Noise Control Engineering.
+
 Bilbao, S. 2009. *Numerical Sound Synthesis: Finite Difference Schemes
 and Simulation in Musical Acoustics*. Wiley.
 <https://doi.org/10.1002/9780470749012>.
+
+Bilbao, Stefan, Charlotte Desvages, Michele Ducceschi, Brian Hamilton,
+Reginald Harrison-Harsley, Alberto Torin, and Craig Webb. 2019.
+“Physical Modeling, Algorithms, and Sound Synthesis: The NESS Project.”
+*Computer Music Journal* 43 (2-3): 15–30.
+<http://www.ness.music.ed.ac.uk/wp-content/uploads/2019/11/cmj_ness_aam.pdf>.
 
 Bilbao, Stefan, Michele Ducceschi, and Fabiana Zama. 2023. “Explicit
 Exactly Energy-Conserving Methods for Hamiltonian Systems.” *Journal of
@@ -140,6 +197,10 @@ Bongers, A. J. 1998. “Tactual Display of Sound Properties in Electronic
 Musical Instruments.” *Displays* 18 (3): 129–33.
 https://doi.org/<https://doi.org/10.1016/S0141-9382(98)00013-4>.
 
+Bonvoisin, Jérémy, Robert Mies, Jean-François Boujut, and Rainer Stark.
+2017. “What Is the ‘Source’ of Open Source Hardware?” *Journal of Open
+Hardware* 1 (1).
+
 Borchers, Jan O. 1997. “Worldbeat: Designing a Baton-Based Interface for
 an Interactive Music Exhibit.” In *CHI 97: Conference on Human Factors
 in Computing*, 131–38. New York, NY, USA: ACM.
@@ -148,6 +209,10 @@ Boutillon, Xavier, Vincent Greef De, and Jérémie Chichignoud. 2024.
 Dispositif de simulation haptique d’un instrument de musique.
 FR3125162B1, issued November 8, 2024.
 <https://patents.google.com/patent/FR3125162B1/fr>.
+
+Bowen, D Keith, Kurijn Buys, Mathew Dart, and David Sharp. 2019.
+“Assessing the Sound of a Woodwind Instrument That Cannot Be Played.”
+*Applied Acoustics* 143: 84–99.
 
 Brauchler, Alexander, Pascal Ziegler, and Peter Eberhard. 2020.
 “Numerical Models for Classical Guitars with Updated Parameters from
@@ -181,6 +246,10 @@ Musicale Par Simulation Des mÉcanismes Instrumentaux, Transducteurs
 Gestuels rÉtroactifs Pour l’Étude Du Jeu Instrumental.” *Revue
 d’acoustique* 4 (59): 279–92.
 
+Calano, David, Michael Nelson, and Michele Weigle. 2025. “GitHub
+Repository Complexity Leads to Diminished Web Archive Availability.” In
+*Proceedings of the 17th ACM Web Science Conference 2025*, 449–59.
+
 Calegario, Filipe. 2019. “Challenges in Designing Dmis.” In *Designing
 Digital Musical Instruments Using Probatio: A Physical Prototyping
 Toolkit*, 5–17. Cham: Springer International Publishing.
@@ -200,6 +269,10 @@ of the Linux Audio Conference*. Parma, Italy.
 
 Campbell, Murray, and Clive Greated. 1987. *The Musician’s Guide to
 Acoustics*. Oxford Scholarship Online. Oxford: Oxford University Press.
+
+Candlin, Fiona. 2017. “Rehabilitating Unauthorised Touch or Why Museum
+Visitors Touch the Exhibits.” *The Senses and Society* 12 (3): 251–66.
+<https://doi.org/10.1080/17458927.2017.1367485>.
 
 Carcagno, Samuele, Roger Bucknall, Jim Woodhouse, Claudia Fritz, and
 Christopher J. Plack. 2018. “Effect of Back Wood Choice on the Perceived
@@ -225,6 +298,11 @@ Charras, Jean-Pierre, Fabrizio Tappero, Jon Evans, and Graham Keeth.
 2024. “Kicad 9.0 Reference Manual.” KiCad. 2024.
 <https://docs.kicad.org/9.0/en/kicad/kicad.html#importing_a_project_from_another_eda_tool>.
 
+Charrier, Cedric. 2023. “lOpen Lab de l’ITEMM — Un Lieu Pour Mutualiser
+Les Activités Du Pôle Recherche Et Innovation Et Les Rendre Accessibles
+En Ligne.” 2023.
+<https://itemm.fr/itemm/lopen-lab-de-litemm-un-lieu-pour-mutualiser-les-activites-du-pole-recherche-et-innovation-et-les-rendre-accessibles-en-ligne/>.
+
 Chen, Xiaoli, Sünje Dallmeier-Tiessen, Robin Dasler, Sebastian Feger,
 Pamfilos Fokianos, Jose Benito Gonzalez, Harri Hirvonsalo, et al. 2019.
 “Open Is Not Enough.” *Nature Physics* 15 (2): 113–19.
@@ -233,6 +311,11 @@ Cheveigne, Alain de, and Hideki Kawahara. 2002. “Yin, a Fundamental
 Frequency Estimator for Speech and Music.” *The Journal of the
 Acoustical Society of America* 111 (4): 1917–30.
 
+Chickerur, Satyadhyan, Sankalp Balannavar, Pranali Hongekar, Aditi
+Prerna, and Soumya Jituri. 2024. “WebGL Vs. WebGPU: A Performance
+Analysis for Web 3.0.” *Procedia Computer Science* 233: 919–28.
+https://doi.org/<https://doi.org/10.1016/j.procs.2024.03.281>.
+
 Chladni, E. F. F. 2015. *Treatise on Acoustics: The First Comprehensive
 English Translation of Eff Chladni’s Traité d’acoustique*. Springer.
 
@@ -240,12 +323,12 @@ Cieply, Michael. 2007. “The Afterlife Is Expensive for Digital Movies.”
 *The New York Times*.
 <https://www.nytimes.com/2007/12/23/business/media/23steal.html>.
 
-Cieśliński, J. L. 2011b. “On the Exact Discretization of the Classical
+Cieśliński, J. L. 2011a. “On the Exact Discretization of the Classical
 Harmonic Oscillator Equation.” *Journal of Difference Equations and
 Applications* 17 (11): 1673–94.
 <https://doi.org/10.1080/10236198.2010.502512>.
 
-———. 2011a. “On the Exact Discretization of the Classical Harmonic
+———. 2011b. “On the Exact Discretization of the Classical Harmonic
 Oscillator Equation.” *Journal of Difference Equations and Applications*
 17 (11): 1673–94. <https://doi.org/10.1080/10236198.2010.502512>.
 
@@ -256,12 +339,24 @@ Interfaces for Musical Expression*, edited by Doga Cavdir and Florent
 Berthaut, 224–30. Canberra, Australia.
 <https://doi.org/10.5281/zenodo.15735662>.
 
+Classen, Constance, and Constance Classen. 2005. “Touch in the Museum.”
+In *The Book of Touch*, 1st ed., 275–88. Routledge.
+
 Colazo, Jorge, and Yulin Fang. 2009. “Impact of License Choice on Open
 Source Software Development Activity.” *Journal of the American Society
 for Information Science and Technology* 60 (5): 997–1011.
 
 “Collections Management Policy 2020-2030.” 2020.
 <https://library.ed.ac.uk/sites/default/files/2024-08/Collections%20Management%20Policy%202020-2030.docx>.
+
+Commons, Creative. 2025. “Can i Apply a Creative Commons License to
+Software?” Frequently Asked Questions.
+<https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software>.
+
+Cook, James, Andrew Kirkman, Kenneth B McAlpine, and Rod Selfridge.
+2023. “Hearing Historic Scotland: Reflections on Recording in Virtually
+Reconstructed Acoustics.” *Journal of the Alamire Foundation* 15 (1):
+109–26.
 
 Cook, Perry R. 2004. “Remutualizing the Musical Instrument: Co-Design of
 Synthesis Algorithms and Controllers.” *Journal of New Music Research*
@@ -280,6 +375,10 @@ Council, European Research. 2024b. “ERC Synergy Grants 2024.” 2024.
 
 ———. n.d. “Nemus Project Description.” <https://doi.org/10.3030/950084>.
 
+Creative Commons. 2016. “May i Apply CC0 to Computer Software? If so, Is
+There a Recommended Implementation?” 2016.
+<https://wiki.creativecommons.org/wiki/CC0_FAQ#May_I_apply_CC0_to_computer_software.3F_If_so.2C_is_there_a_recommended_implementation.3F>.
+
 Crouch, Steve. n.d. “Online Sustainability Evaluation.” Software
 Sustainability Institute.
 <https://www.software.ac.uk/resources/online-sustainability-evaluation>.
@@ -293,9 +392,17 @@ and Image-Guided Surgery*, edited by Mohammad H. Abedin-Nasab, 239–63.
 Elsevier.
 https://doi.org/<https://doi.org/10.1016/B978-0-12-814245-5.00015-3>.
 
+Darcy, David P, Sherae L Daniel, and Katherine J Stewart. 2010.
+“Exploring Complexity in Open Source Software: Evolutionary Patterns,
+Antecedents, and Outcomes.” In *2010 43rd Hawaii International
+Conference on System Sciences*, 1–11. IEEE.
+
 Davies, Stephen. 2001. “Authenticity in Western Classical Music.” In
 *Musical Works and Performances: A Philosophical Exploration*. Oxford
 University Press. <https://doi.org/10.1093/0199241589.003.0005>.
+
+Davis, Timothy A. 2007. “UMFPACK Version 5.2. 0 User Guide.” *University
+of Florida* 25.
 
 Denti, Filippo, Davide Fantini, Federico Avanzini, and Giorgio Presti.
 2024. “Pan-Ar: A Multimodal Dataset of Higher-Order Ambisonics Room
@@ -309,8 +416,34 @@ Minneapolis: University of Minnesota Press.
 Dewhirst, Edward Matthew. 2016. “Stringed Keyboard Instruments at
 Nominal Octave Pitch.” PhD thesis, University of Edinburgh.
 
+Diaz Fernandez, R, M Sandler, et al. 2025. “Fast Differentiable Modal
+Simulation of Non-Linear Strings, Membranes, and Plates.” In
+*International Conference on Digital Audio Effects (DAFx25)*.
+
+Dietrich, Pascal, Martin Guski, and Michael VorlÃ¤nder. 2013. “Influence
+of Loudspeaker Distortion on Room Acoustic Parameters.” In *40th Italian
+(AIA) Annual Conference on Acoustics and the 39th German Annual
+Conference on Acoustics (DAGA)*.
+
+Dietrich, P., B. Masiero, M. Müller-Trapet, M. Pollow, and R. Scharrer.
+2010. “MATLAB Toolbox for the Comprehension of Acoustic Measurement and
+Signal Processing.” In *Fortschritte Der Akustik – DAGA*.
+
 Dolan, Emily I. 2017. “Mimo: Musical Instrument Museums Online.”
 *Journal of the American Musicological Society* 70 (2): 555–65.
+
+Dongarra, Jack J, Cleve Barry Moler, James R Bunch, and Gilbert W
+Stewart. 1979. *LINPACK Users’ Guide*. SIAM.
+
+Dorph, R., M. A. Cannady, and C. D. Schunn. 2019. “What Drives Visitor
+Engagement in Exhibits? The Interaction Between Visitor Activation
+Profiles and Exhibit Features.” *Curator: The Museum Journal*.
+<https://www.lrdc.pitt.edu/schunn/papers/dorph-etal2019-curator.pdf>.
+
+Druskat, Stephan, Jurriaan H. Spaaks, Neil Chue Hong, Robert Haines,
+James Baker, Spencer Bliven, Egon Willighagen, David Pérez-Suárez, and
+Alexander Konovalov. 2021. “Citation File Format.” Zenodo.
+<https://doi.org/10.5281/zenodo.5171937>.
 
 Ducceschi, M., S. Duran, H. Tahvanainen, and L. Ausiello. 2024. “A
 Method to Estimate the Rectangular Orthotropic Plate Elastic Constants
@@ -327,22 +460,59 @@ Scalar Auxiliary Variable (Sav) Method.” In *Proceedings of 10th
 Convention of the European Acoustics Association (Forum Acusticum
 2023)*. <https://doi.org/10.61782/fa.2023.0995>.
 
+Ducceschi, Michele, and Cyril Touzé. 2015a. “Modal Approach for
+Nonlinear Vibrations of Damped Impacted Plates: Application to Sound
+Synthesis of Gongs and Cymbals.” *Journal of Sound and Vibration* 344:
+313–31.
+
+———. 2015b. “Simulations of Nonlinear Plate Dynamics: An Accurate and
+Efficient Modal Algorithm.” In *18th International Conference on Digital
+Audio Effects (DAFx-15)*.
+
 Duerinck, Tim, Joost Segers, Ewa Skrodzka, Geerten Verberkmoes, Marc
 Leman, Wim Van Paepegem, and Mathias Kersemans. 2021. “Experimental
 Comparison of Various Excitation and Acquisition Techniques for Modal
 Analysis of Violins.” *Applied Acoustics* 177: 107942.
 https://doi.org/<https://doi.org/10.1016/j.apacoust.2021.107942>.
 
+DuPont. 2017. “Delrin® 100P BK602 Material Data Sheet.” DuPont.
+<https://www.picoplast.nl/uploads/b076b6cfae94ad109b542ae8797264b0Delrin%20100P%20BK602%20-%20MDS%20-%20EN.pdf>.
+
+Duran, Sebastian, Michele Ducceschi, Henna Tahvanainen, and Ludovico
+Ausiello. 2023. “Experimentally-Tuned Synthesis of a Thin Plate.” In
+*Proceedings of the Institute of Acoustics*, 45:1–8. 3. Institute of
+Acoustics.
+
+Duran, Sebastian, Henna Tahvanainen, Ludovico Ausiello, and Michele
+Ducceschi. 2025. “On the Use of Tonewood Leftovers for Elastic Parameter
+Estimation of Soundboards.” *The Journal of the Acoustical Society of
+America* 157 (4\_Supplement): A311–12.
+
 Dutot, Vincent, Anastasia Bouton, Maxime Méaux, and Elaine Mosconi.
 2021. “Changing the Way We See the Museum: An in-Depth Look at Immersive
 Technologies for Enhancing Visitor Experiences.” *International Journal
 of Art, Culture and Design Technologies* 10 (2): 1–18.
+
+Eding, Matt. 2019. “Sparse Matrices.” April 25, 2019.
+<https://matteding.github.io/2019/04/25/sparse-matrices/>.
 
 Elejabarrieta, María, A. Ezcurra, and Carlos Santamaria. 2000.
 “Evolution of the Vibrational Behavior of a Guitar Soundboard Along
 Successive Construction Phases by Means of the Modal Analysis
 Technique.” *The Journal of the Acoustical Society of America* 108
 (August): 369–78. <https://doi.org/10.1121/1.429470>.
+
+EPCC, University of Edinburgh. 2021. “Research Software Now Easy to Cite
+on GitHub.” 2021.
+<https://www.epcc.ed.ac.uk/whats-happening/articles/research-software-now-easy-cite-github>.
+
+Fagerlande, Guilherme, Maria Lygia Niemeyer, and Julio Cesar Boscher
+Torres. 2020. “Adequação Acústica Do Teatro Armando Gonzaga Por Meio de
+Simulação Computacional.” *Acústica e Vibrações* 35 (52): 73–88.
+
+Falco, Eleazar. 2023. “Understanding Phototransistor Optocouplers.”
+Würth Elektronik.
+<https://www.we-online.com/components/media/o760909v410%20ANO007a_EN.pdf>.
 
 Farina, Angelo et al. 1995. “Aurora Listens to the Traces of Pyramid
 Power.” *Noise & Vibration Worldwide* 26: 6–9.
@@ -428,6 +598,11 @@ Museums for the 21st Century.” *RSA Journal* 146 (5487): 68–77.
 Foundation, Python. 2024. “Timeit — Measure Execution Time of Small Code
 Snippets¶.” April 2024. <https://docs.python.org/3/library/timeit.html>.
 
+Franček, Petar, Kristian Jambrošić, Marko Horvat, and Vedran Planinec.
+2023. “The Performance of Inertial Measurement Unit Sensors on Various
+Hardware Platforms for Binaural Head-Tracking Applications.” *Sensors*
+23 (2): 872.
+
 Free Software Foundation. 2007. *Gnu General Public License, Version 3*.
 <https://www.gnu.org/licenses/gpl-3.0.en.html>.
 
@@ -474,6 +649,9 @@ Musical Instruments-Effects of Multimodality.” In *Proceedings of the
 Sciences of Music (ESCOM5), Hannover, Germany*, 8–13.
 <https://www.epos.uni-osnabrueck.de/books/k/klww003/pdfs/004_Galembo_Proc.pdf>.
 
+Gammon, Nick. 2012. “Interrupts.” 2012.
+<http://www.gammon.com.au/interrupts>.
+
 Garrett, John, and Donald Waters. 1996. “Preserving Digital Information:
 Final Report and Recommendations.” Vol. 27. The Commission on
 Preservation and Access; The Research Libraries Group.
@@ -514,9 +692,20 @@ the International Conference on New Interfaces for Musical Expression*.
 Ann Arbor, Michigan: University of Michigan.
 <https://doi.org/10.5281/zenodo.1178265>.
 
+GitHub, Inc. 2021. “About CITATION Files.” 2021.
+<https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files>.
+
 Goebl, Werner, Roberto Bresin, and Ichiro Fujinaga. 2014. “Perception of
 Touch Quality in Piano Tones.” *The Journal of the Acoustical Society of
 America* 136 (5): 2839–50.
+
+Goodger, David, and Guido van Rossum. 2001. “PEP 257: Docstring
+Conventions.” Informational Python Enhancement Proposal. May 29, 2001.
+<https://peps.python.org/pep-0257/>.
+
+Google, Inc. n.d. “Documentation Best Practices.” Accessed October 7,
+2025.
+<https://google.github.io/styleguide/docguide/best_practices.html>.
 
 Graff, K. F. 1991. *Wave Motion in Elastic Solids*. Dover Publications.
 
@@ -530,19 +719,38 @@ of the International Conference on New Interfaces for Musical
 Expression*, 73–79. Dublin, Ireland.
 <https://doi.org/10.5281/zenodo.1176418>.
 
-Hamilton, Brian. 2021. “Pffdtd Software.”
+Guo, Philip. 2014. “Blog@CACM.” Communications of the ACM. July 7, 2014.
+<https://cacm.acm.org/blogcacm/python-is-now-the-most-popular-introductory-teaching-language-at-top-u-s-universities/>.
 
-Hamilton, Matthew. 2025a. “Nemus-Project/Harpsichord-Interface: 0.1.0.”
-Zenodo. <https://doi.org/10.5281/zenodo.16847981>.
+Hamilton, Brian. 2021. “PFFDTD Software.”
 
-———. 2025b. “Nemus-Project/Harpsichord-Interface-Cad: 0.1.0.” Zenodo.
-<https://doi.org/10.5281/zenodo.16848277>.
+Hamilton, Matthew. 2025a. “Harpsichord Interface Firmware
+Documentation.” 2025.
+<https://nemus-project.github.io/harpsichord-interface-firmware/html/>.
 
-———. 2025c. “Nemus-Project/Harpsichord-Interface-Firmware: 0.1.0.”
-Zenodo. <https://doi.org/10.5281/zenodo.16848271>.
+———. 2025b. “Magpie MATLAB Reference Documentation.” 2025.
+<https://nemus-project.github.io/magpie-matlab/html/>.
 
-———. 2025d. “Nemus-Project/Harpsichord-Interface-Models: 0.1.0.” Zenodo.
+———. 2025c. “Magpie Python Interface Documentation.” 2025.
+<https://nemus-project.github.io/magpie-python/html/index.html>.
+
+———. 2025d. “Nemus-Project/Harpsichord-Interface: 0.1.1.” Zenodo.
+<https://doi.org/10.5281/zenodo.17333563>.
+
+———. 2025e. “Nemus-Project/Harpsichord-Interface-Cad: 0.1.1.” Zenodo.
+<https://doi.org/10.5281/zenodo.17333493>.
+
+———. 2025f. “Nemus-Project/Harpsichord-Interface-Firmware: 0.1.1.”
+Zenodo. <https://doi.org/10.5281/zenodo.17333529>.
+
+———. 2025g. “Nemus-Project/Harpsichord-Interface-Models: 0.1.0.” Zenodo.
 <https://doi.org/10.5281/zenodo.16848275>.
+
+———. 2025h. “Nemus-Project/Magpie-Cpp: 0.0.1-Alpha Proof of Concept.”
+Zenodo. <https://doi.org/10.5281/zenodo.17092437>.
+
+———. 2025i. “Nemus-Project/Magpie-Jupyter: Zenodo Integration Release.”
+Zenodo. <https://doi.org/10.5281/zenodo.17226938>.
 
 Hamilton, Matthew, Michele Ducceschi, Riccardo Livi, Cristina Vicens,
 and Andrew McPherson. 2025. “Augmentation of a Historical Harpsichord
@@ -554,10 +762,16 @@ Hamilton, Matthew, Michele Ducceschi, Alexis Mousseau, and Sebastian
 Duran. 2024. “Magpie: A Web-Based, Open-Source Framework for Plate
 Vibration Analysis.” *INTER-NOISE and NOISE-CON Congress and Conference
 Proceedings* 270 (October): 5918–29.
+<https://doi.org/10.3397/IN_2024_3662>.
+
+Hamilton, Matthew, Michele, AlexisMousseau, and Sebastian Duran. 2025.
+“Nemus-Project/Magpie-Python: 0.0.5.” Zenodo.
+<https://doi.org/10.5281/zenodo.17131912>.
 
 Hamilton, Matthew, Riccardo Russo, Craig Webb, and Michele Ducceschi.
 2025. “A Two-Register Haptic Interface for Articulated Control of
 Harpsichord Physical Models.” In *Proceedings of Forum Acusticum 2025*.
+Malaga, Spain.
 
 Hayes, Lauren. 2011. “Vibrotactile Feedback-Assisted Performance.” In
 *Proceedings of the International Conference on New Interfaces for
@@ -585,14 +799,37 @@ Berthaut, 319–27. Canberra, Australia.
 Hong, Neil Chue. 2019. “How To Cite Software: Current Best Practice,”
 May. <https://doi.org/10.6084/m9.figshare.8124284.v1>.
 
-*Horizon: Is Seeing Believing? Is Seeing Believing?* 2010. BBC Two
-England.
-<https://learningonscreen.ac.uk/ondemand/index.php/prog/0175990B?bcast=54283586>.
+Hong, Neil Chue, and Tim Parkinson. 2025. “Choosing an Open-Source
+License.” Software Sustainability Institute. 2025.
+<https://www.software.ac.uk/guide/choosing-open-source-license>.
+
+Hornikx, Maarten, Huiqing Wang, Ilaria Fichera, Lavı́nia Paganini,
+Alexander Nolte, and Alexander Serebrenik. 2024. “Exploring the Current
+Landscape of Open Research Software in Room Acoustics.” In *INTER-NOISE
+and NOISE-CON Congress and Conference Proceedings*, 270:5875–84. 6.
+Institute of Noise Control Engineering.
+
+Horowitz, Paul, and Winfield Hill. 2015. *The Art of Electronics*. Third
+edition. New York, NY, USA: Cambridge University Press.
+
+Howard, Keith. 2022. “Musical Instruments as Tangible Cultural Heritage
+and as/for Intangible Cultural Heritage.” *International Journal of
+Cultural Property* 29 (1): 23–44.
+
+Howes, David. 2014. “Introduction to Sensory Museology.” *The Senses and
+Society* 9 (3): 259–67.
+<https://doi.org/10.2752/174589314X14023847039917>.
 
 Hung, Shao-Kang, Yu-Hsin Chung, Cheng-Lung Chen, and Kai-Hung Chang.
 2022. “Optoelectronic Angular Displacement Measurement Technology for
 2-Dimensional Mirror Galvanometer.” *Sensors* 22 (3).
 <https://doi.org/10.3390/s22030872>.
+
+Hunt, Andy D., Marcelo M. Wanderley, and Matthew Paradis. 2002. “The
+Importance of Parameter Mapping in Electronic Instrument Design.” In
+*Proceedings of the International Conference on New Interfaces for
+Musical Expression*, 88–93. Dublin, Ireland.
+<https://doi.org/10.5281/zenodo.1176424>.
 
 Hwang, Inwook, Hyungki Son, and Jin Ryong Kim. 2017. “Airpiano:
 Enhancing Music Playing Experience in Virtual Reality with Mid-Air
@@ -603,6 +840,14 @@ IBM Corporation and Microsoft Corporation. 1991. “Multimedia Programming
 Interface and Data Specifications 1.0.” 1.0. IBM Corporation; Microsoft
 Corporation.
 <https://www.mmsp.ece.mcgill.ca/Documents/AudioFormats/WAVE/Docs/riffmci.pdf>.
+
+Initiative, Open Source. n.d. “Open Source Licenses.” Accessed October
+8, 2025. <https://opensource.org/licenses>.
+
+Innocente, Chiara, Luca Ulrich, Sandro Moos, and Enrico Vezzetti. 2023.
+“A Framework Study on the Use of Immersive XR Technologies in the
+Cultural Heritage Domain.” *Journal of Cultural Heritage* 62: 268–83.
+https://doi.org/<https://doi.org/10.1016/j.culher.2023.06.001>.
 
 Jack, Robert H., Adib Mehrabi, Tony Stockman, and Andrew McPherson.
 2018. “Action-Sound Latency and the Perceived Quality of Digital Musical
@@ -628,6 +873,9 @@ Francois Ollivier, and Christophe Josserand. 2017. “Modal Active Control
 of Chinese Gongs.” *The Journal of the Acoustical Society of America*
 141 (June): 4567–78. <https://doi.org/10.1121/1.4985108>.
 
+Jungleib, S. 1983. “The Complete SCI MIDI, Sequential Circuits.” Inc.
+<https://www.digitpress.com/library/techdocs/The_Complete_SCI_Midi-first_edition.pdf>.
+
 Kaczmarek, K A, J G Webster, P Bach-y-Rita, and W J Tompkins. 1991.
 “Electrotactile and Vibrotactile Displays for Sensory Substitution
 Systems.” *IEEE Trans Biomed Eng* 38 (1): 1–16.
@@ -641,6 +889,10 @@ Some Considerations on the Care of Musical Instruments.” *Early Music* 7
 
 ———. 1985. “Musical Instruments in Museums.” *The International Journal
 of Museum Management and Curatorship* 4 (2): 179–82.
+
+Katz, Brian FG, Damian Murphy, and Angelo Farina. 2020. “Exploring
+Cultural Heritage Through Acoustic Digital Reconstructions.” *Physics
+Today* 73 (12): 32–37.
 
 Katz, DS, NP Chue Hong, T Clark, A Muench, S Stall, D Bouquin, M Cannon,
 et al. 2021. “Recognizing the Value of Software: A Software Citation
@@ -660,6 +912,11 @@ Musical Expression*, edited by Romain Michon and Franziska Schroeder,
 273–78. Birmingham, UK: Birmingham City University.
 <https://doi.org/10.5281/zenodo.4813359>.
 
+Klingensmith, Neil, and Suman Banerjee. 2019. “Using Virtualized Task
+Isolation to Improve Responsiveness in Mobile and IoT Software.” In
+*Proceedings of the International Conference on Internet of Things
+Design and Implementation*, 160–71. ACM.
+
 Koster, John. 1994. “The ‘Exact Copy’ as a Legitimate Goal.” *CIMCIM
 Publications*, no. 3: 7–12.
 <https://cimcim.mini.icom.museum/wp-content/uploads/sites/7/2019/01/Publication_No._1__1993__Recommendations_for_the_conservation_of_musical_instruments_in_collections.pdf>.
@@ -674,6 +931,10 @@ of Fine Arts, Boston. Museum of Fine Arts.
 Kottick, Edward L., Kenneth D. Marshall, and Thomas J. Hendrickson.
 1991. “The Acoustics of the Harpsichord.” *Scientific American* 264 (2):
 110–15.
+
+Krasner, Glenn E, Stephen T Pope, et al. 1988. “A Description of the
+Model-View-Controller User Interface Paradigm in the Smalltalk-80
+System.” *Journal of Object Oriented Programming* 1 (3): 26–49.
 
 Krueger, David, Kent Gee, Jeremy Grimshaw, Dorothy Manuel, and Molly
 Jones. 2009. “Acoustic and Vibrometry Analysis of Beating in a Large
@@ -702,6 +963,14 @@ Battault Jean-Claude, and Stéphane Vaiedelich. 2012. “Restoration of a
 Experimental Study.” *The Journal of the Acoustical Society of America*
 131 (January): 888–96. <https://doi.org/10.1121/1.3651092>.
 
+Lehoucq, R. B., D. C. Sorensen, C. Yang, Society for Industrial, and
+Applied Mathematics. 1998. *ARPACK Users’ Guide Solution of Large-Scale
+Eigenvalue Problems with Implicitly Restarted Arnoldi Methods*.
+Software, Environments, Tools ; 6. Philadelphia, Pa: Society for
+Industrial; Applied Mathematics SIAM, 3600 Market Street, Floor 6,
+Philadelphia, PA 19104.
+<https://login.eux.idm.oclc.org/login?url=http://epubs.siam.org/ebooks/siam/software_environments_and_tools/se06>.
+
 Levinson, Jerrold. 2011. *Music, Art, and Metaphysics : Essays in
 Philosophical Aesthetics*. \[New ed.\]. Oxford: Oxford University Press.
 
@@ -716,19 +985,37 @@ Li, Jingjing, Xiaoyang Zheng, Ikumu Watanabe, and Yoichi Ochiai. 2024.
 Exhibition.” *Computers in Human Behavior* 161: 108407.
 https://doi.org/<https://doi.org/10.1016/j.chb.2024.108407>.
 
+Li, K. M., and Z. Yu. 2009. “A Simple Formula for Predicting Resonant
+Frequencies of a Rectangular Plate with Uniformly Restrained Edges.”
+*Journal of Sound and Vibration* 327 (1): 254–68.
+https://doi.org/<https://doi.org/10.1016/j.jsv.2009.06.011>.
+
 Li, Q. S. 2000. “Free Vibration of Elastically Restrained Flexural-Shear
 Plates with Varying Cross-Section.” *Journal of Sound and Vibration* 235
 (1): 63–85.
 
-Li, W. L., X. Zhang, J. Du, and Z. Liu. 2009. “An Exact Series Solution
+Li, W. L., X. Zhang, J. Du, and Z. Liu. 2009a. “An Exact Series Solution
 for the Transverse Vibration of Rectangular Plates with General Elastic
 Boundary Supports.” *Journal of Sound and Vibration* 321 (1-2): 254–69.
+
+Li, W. L., Xuefeng Zhang, Jingtao Du, and Zhigang Liu. 2009b. “An Exact
+Series Solution for the Transverse Vibration of Rectangular Plates with
+General Elastic Boundary Supports.” *Journal of Sound and Vibration* 321
+(1): 254–69.
+https://doi.org/<https://doi.org/10.1016/j.jsv.2008.09.035>.
 
 Liang, Beici, György Fazekas, Andrew Mcpherson, and Mark B. Sandler.
 2017. “Piano Pedaller: A Measurement System for Classification and
 Visualisation of Piano Pedalling Techniques.” In *New Interfaces for
 Musical Expression*.
 <https://api.semanticscholar.org/CorpusID:34690795>.
+
+Lion, David, Adrian Chiu, Michael Stumm, and Ding Yuan. 2022.
+“Investigating Managed Language Runtime Performance: Why JavaScript and
+Python Are 8x and 29x Slower Than c++, yet Java and Go Can Be Faster?”
+In *2022 USENIX Annual Technical Conference (USENIX ATC 22)*, 835–52.
+Carlsbad, CA: USENIX Association.
+<https://www.usenix.org/conference/atc22/presentation/lion>.
 
 Loughridge, Deirdre. 2023. *Sounding Human : Music and Machines,
 1740/2020*. Chicago Scholarship Online. Chicago: The University of
@@ -747,6 +1034,11 @@ Lozada, Jose, Moustapha Hafez, and Xavier Boutillon. 2007. “A Novel
 Haptic Interface for Musical Keyboards.” In *2007 IEEE/ASME
 International Conference on Advanced Intelligent Mechatronics*, 1–6.
 <https://doi.org/10.1109/AIM.2007.4412605>.
+
+MacRitchie, Jennifer, and Giulia Nuti. 2015. “Using Historical Accounts
+of Harpsichord Touch to Empirically Investigate the Production and
+Perception of Dynamics on the 1788 Taskin.” *Frontiers in Psychology* 6:
+183.
 
 Magnani, Matthew, Jelena Porsanger, Sami Laiti, Natalia Magnani, Anne
 May Olli, Paula Rauhala, Samuel Valkeapää, and Eric Hollinger. 2023.
@@ -783,6 +1075,13 @@ MIT Press.
 MATHWORKS. 2024. “Measure the Performance of Your Code.” April 2024.
 <https://uk.mathworks.com/help/matlab/matlab_prog/measure-performance-of-your-program.html>.
 
+“MathWorks MATLAB Documentation.” n.d. MathWorks, Inc. Accessed
+September 30, 2025.
+<https://uk.mathworks.com/help/matlab/ref/guide.html#mw_10928f5b-5143-48ed-a134-6cecf2b1bb6c>.
+
+Mbed, Arm. 2023. “Ticker API Documentation.” 2023.
+<https://os.mbed.com/docs/mbed-os/v6.16/apis/ticker.html>.
+
 McAlpine, Kenneth B. 2014. “Sampling the Past: A Tactile Approach to
 Interactive Musical Instrument Exhibits in the Heritage Sector.” In
 *Innovation in Music 2013*, edited by Russ Hepworth-Sawyer, J. Hodgson,
@@ -793,6 +1092,11 @@ in Music. Future Technology Press.
 McGurk, Harry, and John Macdonald. 1976. “Hearing Lips and Seeing
 Voices.” *Nature* 264 (5588): 746–48.
 <https://doi.org/10.1038/264746a0>.
+
+McIntyre, M. E., and J. Woodhouse. 1988. “On Measuring the Elastic and
+Damping Constants of Orthotropic Sheet Materials.” *Acta Metallurgica*
+36 (6): 1397–1416.
+https://doi.org/<https://doi.org/10.1016/0001-6160(88)90209-X>.
 
 McLuhan, Marshall, and W. Terrence Gordon. 2003. *Understanding Media
 the Extensions of Man*. Critical edition. Corte Madera, CA: Gingko
@@ -828,6 +1132,10 @@ Sensing.” In *Proceedings of the International Conference on New
 Interfaces for Musical Expression*, 217–22. Sydney, Australia.
 <https://doi.org/10.5281/zenodo.1177849>.
 
+McVittie, Geoff. 2021. “GenerateJavaScriptUsingMATLABCoder: Version
+3.1.1.” MathWorks.
+<https://uk.mathworks.com/matlabcentral/fileexchange/69973-generatejavascriptusingmatlabcoder>.
+
 Mead, Rebecca. 2014. “Musical Gold.” *The New Yorker* 90 (24): 34–41.
 <https://www.newyorker.com/magazine/2014/07/28/musical-gold>.
 
@@ -842,11 +1150,19 @@ International Conference on New Interfaces for Musical Expression*,
 edited by S M Astrid Bin and Courtney N. Reed, 133–37. Utrecht,
 Netherlands. <https://doi.org/10.5281/zenodo.13904806>.
 
-Merchel, Sebastian, and M. Ercan Altinsoy. 2018. “A Functional Analysis
-of Haptic Feedback in Digital Musical Instrument Interactions.” In
-*Musical Haptics*, edited by Stefano Papetti, Stefano. Papetti, and
-Charalampos. Saitis, 1st. ed. Springer Nature.
-<https://doi.org/10.1007/978-3-319-58316-7>.
+Merchel, Sebastian, and M. Ercan Altinsoy. 2009. “Vibratory and
+Acoustical Factors in Multimodal Reproduction of Concert DVDs.” In
+*Haptic and Audio Interaction Design*, edited by M. Ercan Altinsoy, Ute
+Jekosch, and Stephen Brewster, 119–27. Berlin, Heidelberg: Springer
+Berlin Heidelberg.
+
+———. 2018. “Auditory-Tactile Experience of Music.” In *Musical Haptics*,
+edited by Stefano Papetti, Stefano. Papetti, and Charalampos. Saitis,
+1st. ed. Springer Nature. <https://doi.org/10.1007/978-3-319-58316-7>.
+
+Michele, Matthew Hamilton, AlexisMousseau, and Sebastian Duran. 2025.
+“Nemus-Project/Magpie-Matlab: 0.0.2.” Zenodo.
+<https://doi.org/10.5281/zenodo.17328977>.
 
 Michon, Romain Pierre Denis. 2018. “The Hybrid Mobile Instrument:
 Recoupling the Haptic, the Physical, and the Virtual.” PhD thesis,
@@ -873,15 +1189,17 @@ Morgan, Jennie, and Sharon Macdonald. 2020. “De-Growing Museum
 Collections for New Heritage Futures.” *International Journal of
 Heritage Studies : IJHS* 26 (1): 56–70.
 
+Moritz, Manuel, Tobias Redlich, and Jens Wulfsberg. 2018. “Best
+Practices and Pitfalls in Open Source Hardware.” In *Proceedings of the
+International Conference on Information Technology & Systems (ICITS
+2018)*, edited by Álvaro Rocha and Teresa Guarda, 200–210. Cham:
+Springer International Publishing.
+
 Moro, Giulio, and Andrew McPherson. 2020. “A Platform for Low-Latency
 Continuous Keyboard Sensing and Sound Generation.” In *Proceedings of
 the International Conference on New Interfaces for Musical Expression*,
 edited by Romain Michon and Franziska Schroeder, 97–102. Birmingham, UK:
 Birmingham City University. <https://doi.org/10.5281/zenodo.4813253>.
-
-Mousseau, Alexis, Matthew Hamilton, and Michele Ducceschi. 2025.
-“Nemus-Project/Vkplate: Zenoto Release.” Zenodo.
-<https://doi.org/10.5281/zenodo.16880838>.
 
 Mudd, Tom. 2013. “Feeling for Sound: Mapping Sonic Data to Haptic
 Perceptions.” In *Proceedings of the International Conference on New
@@ -904,12 +1222,18 @@ National Library of Australia and UNESCO Information Society Division.
 Paris: National Library of Australia; UNESCO Information Society
 Division. <https://unesdoc.unesco.org/ark:/48223/pf0000130071>.
 
-“Nemus-Project/Harpsichord-Interface: 0.1.0.” 2025.
-<https://doi.org/xxxxx>.
+NEMUS Project. 2025. “NEMUS: Numerical Restoration of Historical Musical
+Instruments GitHub Organization.” University of Bologna, Italy.
+<https://github.com/Nemus-Project>.
 
-“Nemus-Project/Magpie-Jupyter: 0.0.5.” 2025. <https://doi.org/xxxxx>.
+NESS Project, University of Edinburgh. 2016. *NESS User Interface Guide
+(Welcome Pack)*.
+<https://www.ness.music.ed.ac.uk/wp-content/uploads/2016/12/nessWelcomePack.pdf>.
 
-“Nemus-Project/Magpie-Matlab: 0.0.3.” 2025. <https://doi.org/xxxxx>.
+Nguyen, Quoc Bao, and Cyril Touzé. 2019. “Nonlinear Vibrations of Thin
+Plates with Variable Thickness: Application to Sound Synthesis of
+Cymbals.” *The Journal of the Acoustical Society of America* 145 (2):
+977–88.
 
 Nichols, Charles. 2002. “The Vbow: Development of a Virtual Violin Bow
 Haptic Human-Computer Interface.” In *Proceedings of the International
@@ -923,6 +1247,9 @@ Johannesburg (South Africa): CITES.
 Nordic Semiconductor ASA. 2025. “Nrf52840 Product Specification – Saadc
 (Successive Approximation Adc).” Nordic Semiconductor ASA.
 <https://docs.nordicsemi.com/bundle/ps_nrf52840/page/saadc.html>.
+
+NVIDIA Corporation. 2025. “Sparse Matrix Formats.”
+<https://docs.nvidia.com/nvpl/latest/sparse/storage_format/sparse_matrix.html>.
 
 O’Modhrain, M Sile, and Chris Chafe. 2000. “The Performer-Instrument
 Interaction: A Sensory Motor Perspective.” In *Proceedings of the
@@ -946,6 +1273,20 @@ Oboe, Roberto. 2006. “A Multi-Instrument, Force-Feedback Keyboard.”
 *Computer Music Journal* 30 (3): 38–52.
 <http://www.jstor.org/stable/4617942>.
 
+Oellermann, Michael, Jolle W Jolles, Diego Ortiz, Rui Seabra, Tobias
+Wenzel, Hannah Wilson, and Richelle L Tanner. 2022. “Open Hardware in
+Science: The Benefits of Open Electronics.” *Integrative and Comparative
+Biology* 62 (4): 1061–75.
+
+Olson, Zach. 2023. “Optimizing CMRR in Differential Amplifier Circuits
+with Precision Matched Resistor Divider Pairs.” Application Note
+SBOA582. Texas Instruments.
+<https://www.ti.com/lit/an/sboa582/sboa582.pdf>.
+
+(OSHWA), Open Source Hardware Association. 2013. “Best Practices for
+Open Source Hardware 1.0.” April 18, 2013.
+<https://oshwa.org/resources/sharing-best-practices/>.
+
 Palacio-Quintin, Cléo. 2008. “Eight Years of Practice on the Hyper-Flute
 : Technological and Musical Perspectives.” In *Proceedings of the
 International Conference on New Interfaces for Musical Expression*,
@@ -968,6 +1309,12 @@ Baton Rouge, Louisiana, USA: Louisiana State University.
 Paradiso, Max. 2019. “To Save the Sound of a Stradivarius, a Whole City
 Must Keep Quiet.” 2019.
 <https://www.nytimes.com/2019/01/17/arts/music/stradivarius-sound-bank-recording-cremona.html>.
+
+Pardue, Laurel, and Andrew McPherson. 2013. “Near-Field Optical
+Reflective Sensing for Bow Tracking.” In *Proceedings of the
+International Conference on New Interfaces for Musical Expression*,
+363–68. Daejeon, Republic of Korea: Graduate School of Culture
+Technology, KAIST. <https://doi.org/10.5281/zenodo.1178628>.
 
 Pardue, Laurel, and William Sebastian. 2013. “Hand-Controller for
 Combined Tactile Control and Motion Tracking.” In *Proceedings of the
@@ -1017,11 +1364,17 @@ Prasad, Ray P. 1997. *Surface Mount Technology: Principles and
 Practice*. 2nd ed. Springer.
 <https://doi.org/10.1007/978-1-4615-4084-7>.
 
+Procida, Daniele. 2025. “Diátaxis Documentation Framework.” 2025.
+<https://diataxis.fr/>.
+
 “Products of Interest.” 2005. *Computer Music Journal* 29 (1): 104–13.
 <http://www.jstor.org/stable/3681889>.
 
 Project, GNU. 2025. “Philosophy of the Gnu Project.” 2025.
 <https://www.gnu.org/philosophy/philosophy.en.html>.
+
+Project, SPDX. n.d. “SPDX License List.” Accessed October 8, 2025.
+<https://spdx.org/licenses/>.
 
 Prokoudine, Alexandre. 2021. “Ultimate Guitar Launches Muse Group and
 Acquires Audacity.” *Libre Arts*, May.
@@ -1035,6 +1388,10 @@ Agrees to Resolve Investigation into Lacey Act Violations.” *U.S.
 Justice Department Archives*.
 <https://www.justice.gov/archives/opa/pr/gibson-guitar-corp-agrees-resolve-investigation-lacey-act-violations>.
 
+Python Software Foundation. 2025. “Expression Lists — Python 3.13.7
+Documentation.” 2025.
+[https://docs.python.org/3/reference/expressions.html\\expression-lists](https://docs.python.org/3/reference/expressions.html\#expression-lists).
+
 Ramesh, Rohit, Richard Lin, Antonio Iannopollo, Alberto
 Sangiovanni-Vincentelli, Björn Hartmann, and Prabal Dutta. 2017.
 “Turning Coders into Makers: The Promise of Embedded Design Generation.”
@@ -1042,7 +1399,8 @@ In *Proceedings of the 1st Annual ACM Symposium on Computational
 Fabrication*, 1–10.
 
 Rau, Mark. 2023. “Vibration and Acoustic Measurements of Guitars with
-Applications to Luthiery, Synthesis, and Audio Effects.” In.
+Applications to Luthiery, Synthesis, and Audio Effects.” PhD thesis,
+Stanford University.
 <https://stacks.stanford.edu/file/druid:kx813bh3027/Mark_Rau_PhD_Thesis-augmented.pdf>.
 
 Rau, Mark, Julius Smith, and Jonathan Abel. 2023. “A Comparison of Modal
@@ -1051,6 +1409,11 @@ Instruments.” In. <https://doi.org/10.61782/fa.2023.0418>.
 
 “Registration Policy.” n.d. Accessed August 10, 2025.
 <https://www.aurora-plugins.com/Registration.htm>.
+
+Reiser, Micha, and Luc Bläser. 2017. “Accelerate JavaScript Applications
+by Cross-Compiling to WebAssembly.” In *Proceedings of the 9th ACM
+SIGPLAN International Workshop on Virtual Machines and Intermediate
+Languages*, 10–17.
 
 Rivero Moreno, Luis D. 2019. “Museums and Digital Era: Preserving Art
 Through Databases.” *Collection Building* 38 (4): 89–93.
@@ -1067,6 +1430,10 @@ Playing on Early and Modern Musical Instruments Cost Fp1302 Woodmusick
 2nd Annual Conference*. Vol. 1. COST FP1302 WoodMusICK 1. London:
 International Committee for Museums; Collections of Musical Instruments;
 Royal College of Music.
+
+Rossum, Guido van, Barry Warsaw, and Alyssa Coghlan. 2001. “PEP 8: Style
+Guide for Python Code.” Process Python Enhancement Proposal. July 5,
+2001. <https://peps.python.org/pep-0008/>.
 
 Rougier, Nicolas P. 2020. “\[Rp\] Loupe.” *ReScience C* 6 (1).
 <https://doi.org/10.5281/zenodo.3886628>.
@@ -1108,6 +1475,16 @@ Charalampos. Saitis, 1st. ed. Springer Nature.
 Saldaña, H M, and L D Rosenblum. 1993. “Visual Influences on Auditory
 Pluck and Bow Judgments.” *Percept Psychophys* 54 (3): 406–16.
 
+“San Colombano: Il Museo Della Musica Che Suona, Si Rinnova e Guarda Al
+Futuro.” 2025. 2025.
+<https://genusbononiae.it/news/san-colombano-un-museo-che-si-rinnova-tra-musica-accessibilita-e-innovazione/>.
+
+Sánchez, Antonio, Charles Schlosser, Chip Kerchner, Christoph Hertzberg,
+Eigen Professor, Everton Constantino, Gael Guennebaud, Rasmus Munk
+Larsen, Sameer Agarwal, and William Kong. n.d. “Eigen: C++ Template
+Library for Linear Algebra.” Accessed September 16, 2025.
+<https://gitlab.com/libeigen/eigen>.
+
 Schaich, Martin. 2007. “From 3d Scanning to Analytical Heritage
 Documentation.” In *Lasers in the Conservation of Artworks*, edited by
 J. Nimmrichter, W. Kautek, and M. Schreiner, 463–71. Berlin, Heidelberg:
@@ -1126,6 +1503,26 @@ Catherine Van Ingen, Kobus Joste, Mark Manasse, and Mehul Shah. 2006.
 “Disk Failure Investigations at the Internet Archive.” In *IEEE
 Symposium on Mass Storage Systems and Technologies*.
 
+SciPy Community. 2025. “SuperLU — SciPy Sparse.linalg Reference.” SciPy.
+2025.
+<https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.SuperLU.html>.
+
+“SciPy Reference.” n.d. SciPy Community. Accessed September 30, 2025.
+<https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.bmat.html>.
+
+Semiconductor, Nordic. 2023. “nRFx Timer API Documentation.” 2023.
+<https://docs.nordicsemi.com/bundle/nrfx_3.10.0/page/group_nrf_timer.html>.
+
+———. 2025. “Timer — Technical Documentation.” 2025.
+<https://docs.nordicsemi.com/bundle/ps_nrf5340/page/timer.html>.
+
+Semiconductor, ON. 2024a. “QRD1114 Reflective Object Sensor.” ON
+Semiconductor. <https://www.onsemi.com/pdf/datasheet/qrd1114-d.pdf>.
+
+———. 2024b. “QRE1113 Miniature Reflective Object Sensor.” ON
+Semiconductor.
+<https://www.onsemi.com/download/data-sheet/pdf/qre1113-d.pdf>.
+
 Serafin, Stefania, Matthew Burtner, Charles Nichols, and Sile
 O’Modhrain. 2001. “Expressive Controllers for Bowed String Physical
 Models.” In *Proc. DAFX 2001, Limerick, Ireland*.
@@ -1141,6 +1538,12 @@ Mathematical Statistics* 21: 124–27.
 Sherrick, Carl E. 1985. “A Scale for Rate of Tactual Vibration.” *The
 Journal of the Acoustical Society of America* 78 (1): 78–83.
 <https://doi.org/10.1121/1.392457>.
+
+Shillito, Ann Marie, Karin Paynter, Steven Wall, and Mark Wright. 2001.
+“’Tacitus’ Project: Identifying Multi-Sensory Perceptions in Creative 3D
+Practice for the Development of a Haptic Computing System for Applied
+Artists.” *Digital Creativity* 12 (4): 195–204.
+<https://doi.org/10.1076/digc.12.4.195.3219>.
 
 Skrodzka, Ewa, Andrzej Łapa, Bogumił Linde, and Eike Rosenfeld. 2011.
 “Modal Parameters of Two Incomplete and Complete Guitars Differing in
@@ -1163,6 +1566,19 @@ Providing Identification, Access and Recognition for Research Software.”
 *International Journal of Digital Curation* 11 (December).
 <https://doi.org/10.2218/ijdc.v11i2.390>.
 
+Sokolovskis, Janis, and Andrew McPherson. 2014. “Optical Measurement of
+Acoustic Drum Strike Locations.” In *Proceedings of the International
+Conference on New Interfaces for Musical Expression*, 70–73. London,
+United Kingdom: Goldsmiths, University of London.
+<https://doi.org/10.5281/zenodo.1178943>.
+
+Spaaks, Jurriaan H., Tom Klaver, Stefan Verhoeven, Stephan Druskat, and
+Waldir Leoncio Netto. 2021. “Cffconvert.” Zenodo.
+<https://doi.org/10.5281/zenodo.5521767>.
+
+“Sparse Eigenvalue Problems with ARPACK.” 2025. 2025.
+<https://docs.scipy.org/doc/scipy/tutorial/arpack.html>.
+
 Srinivasan, Mandayam A., and Robert H. LaMotte. 1996. “Tactual
 Discrimination of Softness: Abilities and Mechanisms.” In *Somesthesis
 and the Neurobiology of the Somatosensory Cortex*, edited by O. Franzén,
@@ -1178,6 +1594,19 @@ Edmunds, Christopher C Erdmann, Michael Evans, et al. 2023. “Journal
 Production Guidance for Software and Data Citations.” *Sci Data* 10 (1):
 656.
 
+Stallman, Richard et al. 1992. “GNU Coding Standards.”
+<https://www.gnu.org/prep/standards/standards.pdf>.
+
+Stallman, Richard. 1996. “What Is Free Software?” GNU Project / Free
+Software Foundation. <https://www.gnu.org/philosophy/free-sw.en.html>.
+
+———. 2007. “Why Open Source Misses the Point of Free Software.” GNU
+Project / Free Software Foundation.
+<https://www.gnu.org/philosophy/open-source-misses-the-point.html>.
+
+———. 2021. “FLOSS and FOSS.” GNU Project / Free Software Foundation.
+<https://www.gnu.org/philosophy/floss-and-foss.html>.
+
 STANBRIDGE, A. B., and D. J. EWINS. 1999. “Modal Testing Using a
 Scanning Laser Doppler Vibrometer.” *Mechanical Systems and Signal
 Processing* 13 (2): 255–70.
@@ -1187,6 +1616,19 @@ Staudacher, Michael, Viktor Steixner, Andreas Griessner, and Clemens
 Zierhofer. 2016. “Fast Fundamental Frequency Determination via Adaptive
 Autocorrelation.” *EURASIP Journal on Audio, Speech, and Music
 Processing* 2016 (1): 1–1.
+
+Stewart, G. W. 2002. “A Krylov–Schur Algorithm for Large Eigenproblems.”
+*SIAM Journal on Matrix Analysis and Applications* 23 (3): 601–14.
+<https://doi.org/10.1137/S0895479800371529>.
+
+Summers, Ian R. 2000. “Single Channel Information Transfer Through the
+Skin: Limitations and Possibilities.” In *Proceedings of ISAC*.
+
+Sun, Zezhou, Antonio Rodà, Emily Whiting, Emanuela Faresin, and Giuseppe
+Salemi. 2020. “3D Virtual Reconstruction and Sound Simulation of an
+Ancient Roman Brass Musical Instrument.” In *Culture and Computing*,
+edited by Matthias Rauterberg, 267–80. Cham: Springer International
+Publishing.
 
 Szilard, R. 2004. *Theories and Applications of Plate Analysis*.
 Hoboken, New Jersey: John Wiley & Sons, Inc.
@@ -1220,6 +1662,10 @@ Humanities Research Community: A Study for the Ahrc.” Zenodo.
 Team, Zenodo Development. 2020. “Add Meaningful Test for Linear\_map.”
 2020. <https://github.com/zenodo/zenodo/issues/1036>.
 
+Technologies, BCN3D. 2019. “Technical Data Sheet: PLA.” BCN3D
+Technologies.
+<https://www.bcn3d.com/wp-content/uploads/2019/09/BCN3D_FILAMENTS_TechnicalDataSheet_PLA_EN.pdf>.
+
 Tee, G. J. 1963. “A Novel Finite-Difference Approximation to the
 Biharmonic Operator.” *Comput. J.* 6 (2): 177–92.
 <https://doi.org/10.1093/COMJNL/6.2.177>.
@@ -1229,9 +1675,30 @@ Rich and Interactive Experiences.” PhD thesis, Carnegie Mellon
 University.
 <https://kilthub.cmu.edu/articles/thesis/Museum_Visitor_Engagement_Through_Resonant_Rich_and_Interactive_Experiences/6723569>.
 
+Texas Instruments. 2011. *OPA377 / OPA2377 / OPA4377 — 5 MHz, Low-Noise,
+Single, Dual, Quad CMOS Operational Amplifiers Datasheet*. Rev. B.
+Dallas, TX, USA: Texas Instruments.
+<https://www.ti.com/lit/ds/symlink/opa4377.pdf>.
+
+The MathWorks, Inc. n.d.a. “Add Help for Your Program.” Accessed October
+7, 2025.
+<https://www.mathworks.com/help/matlab/matlab_prog/add-help-for-your-program.html>.
+
+———. n.d.b. “Mex — Build MEX Functions and Engine or MAT File
+Applications.” Accessed October 8, 2025.
+<https://www.mathworks.com/help/matlab/ref/mex.html>.
+
+The Software Sustainability Institute. 2018. “Checklist for a Software
+Management Plan.” Zenodo. <https://doi.org/10.5281/zenodo.2159713>.
+
 Thomas, O., and S. Bilbao. 2008. “Geometrically Nonlinear Flexural
 Vibrations of Plates: In-Plane Boundary Conditions and Some Symmetry
 Properties.” *Journal of Sound and Vibration* 315 (3): 569–90.
+
+Thompson, Kelly J. 2012. “Free as in Freedom, Not as in Beer: Free and
+Open Source Software ILS and the Library Community.” *B Sides:
+Fieldwork* 2012 (1).
+<https://pubs.lib.uiowa.edu/bsides/article/id/27904/>.
 
 Timmermans, Sébastien, Bruno Dehez, and Paul Fisette. 2020.
 “Multibody-Based Piano Action: Validation of a Haptic Key.” *Machines* 8
@@ -1291,6 +1758,15 @@ Control Engineering (Euronoise 2015)*, 913–18.
 Veroli, Claudio Di. 2012. “Optimising Harpsichord Staggering.”
 *Harpsichord and Fortepiano* 16: 8–13.
 
+Viala, Romain, Yakov Ben-Haim, Stéphane Vaiedelich, and Scott Cogan.
+2025. “Value of Information in the Conservation of a Heritage Cello: An
+Info-Gap Decision Theory Approach.” *Journal of Cultural Heritage* 71:
+165–74. https://doi.org/<https://doi.org/10.1016/j.culher.2024.11.014>.
+
+Viala, Romain, and Jérémy Cabaret. 2021. “Guide Pratique d’essais En
+Facture Instrumentale.” September 2021.
+<https://itemm.fr/itemm/le-pole-recherche-et-innovation-a-ecrit-un-guide-pratique-dessais-en-facture-instrumentale/>.
+
 Viala, Romain, Jérémy Cabaret, Marjan Sedighi-Gilani, Vincent Placet,
 and Scott Cogan. 2024. “Effect of Indented Growth Rings on Spruce Wood
 Mechanical Properties and Subsequent Violin Dynamics.” *Holzforschung*
@@ -1325,6 +1801,13 @@ Design over Material and Climatic Variability for Dynamic Behaviors.”
 *Applied Acoustics* 182 (July).
 <https://doi.org/10.1016/j.apacoust.2021.108275>.
 
+Viala, Romain, Vincent Placet, Sandie Le Conte, Stéphane Vaiedelich, and
+Scott Cogan. 2019. “Model-Based Decision Support Methods Applied to the
+Conservation of Musical Instruments: Application to an Antique Cello.”
+In *Model Validation and Uncertainty Quantification, Volume 3:
+Proceedings of the 37th IMAC, a Conference and Exposition on Structural
+Dynamics 2019*, 223–27. Springer.
+
 Villena-Taranilla, Rafael, and Pascual D. Diago. 2025. “Challenges and
 Implications of Virtual Reality in History Education: A Systematic
 Review.” *Applied Sciences* 15 (10).
@@ -1350,16 +1833,43 @@ and Explicit Schemes for Energy-Stable Simulation of String Vibrations
 with Collisions: Refinement, Analysis, and Comparison.” *Journal of
 Sound and Vibration* 569: 117968.
 
+Wang, Ge. 2018. *Artful Design : Technology in Search of the Sublime*.
+Stanford, CA: Stanford University Press.
+
 Wang, Hanbing, Junyan Du, Yue Li, Lie Zhang, and Xiang Li. 2025. “Grand
 Challenges in Immersive Technologies for Cultural Heritage.”
 *International Journal of Human–Computer Interaction* 0 (0): 1–22.
 <https://doi.org/10.1080/10447318.2025.2475996>.
 
+Wiffen, Paul. 1983. “Prophet T8 (EMM Dec 1983).” *Electronics & Music
+Maker*, no. Dec 1983: 28–34.
+
+Wilkinson, J. H. 1965. *The Algebraic Eigenvalue Problem*. Monographs on
+Numerical Analysis. Oxford: Clarendon Press.
+
+Wilkinson, J. H., and C. Reinsch. 1971. *Handbook for Automatic
+Computation: Volume II: Linear Algebra*. Edited by F. L. Bauer, A. S.
+Householder, F. W. J. Olver, H. Rutishauser, K. Samelson, and E.
+Stiefel. Vol. 186. Grundlehren Der Mathematischen Wissenschaften.
+Berlin, Heidelberg: Springer.
+<https://doi.org/10.1007/978-3-642-86940-2>.
+
 Wilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg,
 Gabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al.
-2016. “The Fair Guiding Principles for Scientific Data Management and
+2016a. “The Fair Guiding Principles for Scientific Data Management and
 Stewardship.” *Scientific Data* 3 (1): 160018.
 <https://doi.org/10.1038/sdata.2016.18>.
+
+Wilkinson, Mark D., Michel Dumontier, Ivan Juergen Aalbersberg, Myles
+Appleton, Matthew Axton, Arie Baak, Niklas Blomberg, et al. 2016b.
+“Go-FAIR.” October 1, 2016. <https://www.go-fair.org/fair-principles/>.
+
+Wolff, Jared. 2019. “How to Real Time Processing on Particle Mesh Using
+PPI.” October 2019.
+<https://www.jaredwolff.com/how-to-real-time-processing-on-particle-mesh/>.
+
+Woolley, Alan, and Donald Murray Campbell. 2017. “A Musical and
+Mechanical Study of Tracker Actions.” *ISO Journal*, no. 56: 7–40.
 
 Wraight, Denzil. 2017. “The Tuning of Trasuntino’s" Clavemusicum
 Omnitonum" and Zarlino’s Enharmonic System.”
@@ -1373,10 +1883,21 @@ Colombano.
 Wraight, Ralph Denzil. 1997. “The Stringing of Italian Keyboard
 Instruments c.1500-c.1650.” PhD thesis, Belfast: Queen’s University.
 
-Young, Gareth W., David Murphy, and Jeffrey Weeter. 2018.
-“Auditory-Tactile Experience of Music.” In *Musical Haptics*, edited by
-Stefano Papetti, Stefano. Papetti, and Charalampos. Saitis, 1st. ed.
-Springer Nature. <https://doi.org/10.1007/978-3-319-58316-7>.
+Write the Docs Community. n.d. “Software Documentation Guide.” Write the
+Docs. Accessed October 7, 2025. <https://www.writethedocs.org/guide/>.
+
+yixuan, JensWehner, felipeZ, v1kko, NicoRenaud, guacke, jschueller, et
+al. 2025. “Spectra: Large Scale Eigenvalue Library.”
+<https://github.com/yixuan/spectra>.
+
+Young, Gareth W., David Murphy, and Jeffrey Weeter. 2018. “A Functional
+Analysis of Haptic Feedback in Digital Musical Instrument Interactions.”
+In *Musical Haptics*, edited by Stefano Papetti, Stefano. Papetti, and
+Charalampos. Saitis, 1st. ed. Springer Nature.
+<https://doi.org/10.1007/978-3-319-58316-7>.
+
+Zenodo. 2025. “Metadata Checks.” 2025.
+<https://help.zenodo.org/guides/eu/submit/metadata-checks/>.
 
 Zhang, X., and W. L. Li. 2009. “Vibrations of Rectangular Plates with
 Arbitrary Non-Uniform Elastic Edge Restraints.” *Journal of Sound and
