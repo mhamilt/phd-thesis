@@ -1,25 +1,20 @@
-%%%%%%%%%% DO NOT EDIT %%%%%%%%%%
 %----------------------------------------------------------------------------------------
-% UoE
+% Document Setup and Geometry
 \documentclass[11pt,a4paper,openright,twoside]{book}
-% \usepackage[text={14.5cm,23cm}]{geometry}
-\setlength{\oddsidemargin}{1.5cm}
-\setlength{\evensidemargin}{0cm}
-\setlength{\textwidth}{14.5cm}
-\setlength{\topmargin}{-0.5cm}
-\setlength{\textheight}{23cm}
-% \renewcommand{\hoffset}{0cm}
-% \renewcommand{\voffset}{0cm}
+\usepackage[
+     paper = a4paper, % 21 x 29.7 cm
+       top = 2.10cm,  
+    bottom = 2.60cm,  
+      left = 3.25cm,  
+     right = 3.25cm,  
+     % inner = 4.00cm,  % Two sided options for binding
+     % outer = 2.50cm,  % Two sided options for binding
+     %  twoside,        % Two sided options for binding
+includehead,        
+includefoot         
+]{geometry}
 %----------------------------------------------------------------------------------------
-% Unibo
-% \documentclass[12pt,a4paper,twoside]{book}
-% \usepackage[a4paper,inner=3.5cm,outer=2.5cm]{geometry}
-%----------------------------------------------------------------------------------------
-% Le Mans
-% \documentclass[11pt,a4paper]{report}
-% \usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
-%----------------------------------------------------------------------------------------
-
+% Packag options
 \PassOptionsToPackage{T1}{fontenc}
 \PassOptionsToPackage{hidelinks}{hyperref}
 \PassOptionsToPackage{utf8}{inputenc}   % if you're on pdfLaTeX
@@ -42,7 +37,6 @@
      fancyvrb,
         float,
       fontenc,
-     geometry,
      graphicx,
      hyperref,
   indentfirst,

@@ -113,18 +113,18 @@ Within the DMI literature, \textcite{omodhrain_playing_2000} describes haptics a
 
 \paragraph{Force Feedback:} A subset of kinaesthetic feedback derived from physical impedance \cite{giordano_force_2012} or forces perceived by muscles and joints. It allows users to feel weight, resistance, or motion. Examples in DMIs include the FireFader \cite{berdahl_firefader_2013} and the TorqueTuner \cite{kirkegaard_torquetuner_2020}.  
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{img/drawing-3-key-mechanism.pdf}
+    \caption[Single–manual, two–register action]{Single–manual, two–register action as used on the 1547 Alessandro Trasuntino and on the model interfaces.}
+    \label{fig:mechanism}
+\end{figure}
+
 Beyond these subsets, \textcite{cook_remutualizing_2004} distinguishes between \emph{passive} and \emph{active} haptics. Passive haptic feedback is achieved by purely mechanical means, without actuators or motors—for example, weighted piano keys or the mechanical jacks of a harpsichord. Using the taxonomy of Figure~\ref{fig:taxonomy} and Cook’s distinction, the interface described herein can be categorised as a passive haptic, force-feedback, tactile interface. For brevity, the term ``haptic'' will be used.  
 
 Finally, it is worth reflecting that all musical instruments involve physical interaction and could therefore be described as inherently haptic. Even the theremin, often cited as an exception, requires specific bodily movement, which may be interpreted as a form of kinaesthetic feedback. While this thesis avoids the ontological implications of such claims, the term 'haptic feedback' is used here to describe design intent.  
 
 \section{Harpsichord Mechanics}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=1\linewidth]{img/drawing-3-key-mechanism.pdf}
-    \caption[Single–manual, two–register action]{Single–manual, two–register action as used on the 1547 Alessandro Trasuntino and on the model interfaces.}
-    \label{fig:mechanism}
-\end{figure}
 
 The harpsichord emerged in the latter half of the fourteenth century, its design partly derived from what contemporary sources termed the ``eschaquier'' or ``eschequier'' \cite{koster_keyboard_1994,dewhirst_stringed_2016}, and from the plucking action of the psaltery \cite{campbell_musician_1987}.  
 
@@ -132,7 +132,7 @@ At the core of the instrument lies a simple plucking mechanism (Figure~\ref{fig:
 
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{img/jack-anatomy.pdf}    
+    \includegraphics[width=0.9\linewidth]{img/jack-anatomy.pdf}    
     \caption[Anatomy of a harpsichord jack]{Forces acting on the jack during plucking and release (adapted from \textcite[Figure~1.7]{perng_physical_2012}) alongside a high–speed photo series (1000~fps) of jack displacement.}
     \label{fig:jack-forces}
 \end{figure}
@@ -281,7 +281,7 @@ This requirement introduced an additional layer of restriction: every sensing or
 
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{img/horizons-mcgurk-1x2.png}
+    \includegraphics[width=0.9\linewidth]{img/horizons-mcgurk-1x2.png}
     % \includegraphics[width=0.8\linewidth]{img/horizons-mcgurk-2x2.png}
     \caption[McGurk effect \citetitle{horizon_seeing_2010} Copyright BBC (2010)]{McGurk Effect as demonstrated on \citetitle{horizon_seeing_2010}. The left-hand side of the video shows the mouth movements for ``fa'' and the right-hand shows ``ba''. Copyright BBC (2010).}
     \label{fig:mcgurk}
@@ -468,7 +468,7 @@ Light-dependent resistors placed at the rail (above the jacks) produced a usable
 \begin{figure}
   \centering
   % \includegraphics[width=0.3\linewidth]{img/qre1113-schematic.pdf}
-  \includegraphics[width=1\linewidth]{img/simple-schematic-joined.pdf}
+  \includegraphics[width=0.9\linewidth]{img/simple-schematic-joined.pdf}
   \caption[Optical sensor voltage-divider]{Optical sensor in a simple voltage-divider circuit (Left) and its application in the prototype sensor board schematic (Right).}
   \label{fig:simple-schematic}
   \label{fig:prototype-pcb}
@@ -489,7 +489,7 @@ Early optical trials also revealed cross-talk: infrared light reflected from adj
 
 % \begin{figure}
 %     \centering
-%     \includesvg[inkscapelatex=false,width=1\linewidth]{img/pcb-miniboard-schematic.svg} 
+%     \includesvg[inkscapelatex=false,width=0.9\linewidth]{img/pcb-miniboard-schematic.svg} 
             
 %     \bigskip
     
@@ -612,7 +612,7 @@ Per board:
         
     % \bigskip
         
-    \includesvg[inkscapelatex=false, width=1\linewidth]{img/pcb_sensor_schematic_v1.svg}\\        
+    \includesvg[inkscapelatex=false, width=0.9\linewidth]{img/pcb_sensor_schematic_v1.svg}\\        
     \caption[Mark~I schematics]{Mark~I controller board (Top) sensor board (Centre) schematics and the sensor boards in situ (Bottom). `\texttt{D}' = RGB LED; `\texttt{Q}' = optical sensor; `\texttt{C}' = MUX channel. Labels indicate current direction. Daisy-chain ribbon cables connect \texttt{Input}/\texttt{Output} headers (Figure~\ref{fig:sensor-schematic-1}). The multicolour loom carries each board’s \texttt{SIG}; the green loom is the unused \texttt{INT} later tied to \texttt{GND}.}
     \label{fig:sensor-schematic-1}    
     \label{fig:controller-schematic-1}
@@ -684,7 +684,7 @@ Fitting the keyframe required temporarily removing the keys. Brackets were secur
 \begin{figure}  
   \centering
   % \includegraphics[width=0.65\linewidth]{img/keys-milled.jpeg}
-  \includegraphics[width=1\linewidth]{img/milled-keys.jpg} 
+  \includegraphics[width=0.9\linewidth]{img/milled-keys.jpg} 
   % \caption{Keys after rough milling (Top Right) and after squaring/finishing the recess (Bottom Right). Components and cabling concealed in the lower compartment (Left).}   
   \caption{Mark~I keys after milling and re-finishing.}
   \label{fig:milling}
@@ -747,7 +747,7 @@ During normal play, sensors were read in groups of seven; a 3-bit address (\text
 
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{img/plot-jack-states-wide.pdf}
+    \includegraphics[width=0.9\linewidth]{img/plot-jack-states-wide.pdf}
     \caption[Two-threshold hysteresis]{Two-threshold hysteresis: full press–release on an Arduino Nano~33~BLE (12-bit ADC). \texttt{PLUCKED} begins at \texttt{pluck\_threshold}; \texttt{RELEASED} returns at the lower \texttt{release\_threshold}.}
     \label{fig:jack-states}
 \end{figure}
@@ -776,7 +776,7 @@ followed by fine adjustments in situ with guidance from the curator-performer.
 
 \begin{figure}
   \centering
-  \includegraphics[width=1\linewidth]{img/serial_monitor.png}
+  \includegraphics[width=0.9\linewidth]{img/serial_monitor.png}
   \caption[Calibration using the Arduino IDE Serial Plotter]{Calibration using the Arduino IDE Serial Plotter (10-bit mode). The live sensor (\texttt{K32}) is plotted against its threshold (\texttt{T32}); \texttt{M}/\texttt{m} commands normalise the plot range.}
   \label{fig:serial_monitor}
 \end{figure}
@@ -831,7 +831,7 @@ Boards at the ends of a register can simply leave unused sensors unpopulated rat
             
     \bigskip
     
-    \includesvg[inkscapelatex=false,width=1\linewidth]{img/pcb_sensor_schematic_v2.svg}
+    \includesvg[inkscapelatex=false,width=0.9\linewidth]{img/pcb_sensor_schematic_v2.svg}
     \caption[Mark~II schematics]{Updated controller board (Top) and sensor board (Bottom) schematics for \emph{Mark~II}. RGB LEDs (\texttt{D}); optical sensors (\texttt{Q}); signal routing (\texttt{S}). The solder-pad junction on the sensor board assigns the muxed \texttt{SIG} to an \texttt{S} channel on the FFC.}
     \label{fig:sensor-schematic-2}
     \label{fig:controller-schematic-2}
@@ -872,7 +872,7 @@ Open hardware, like open software, is the provision of making electronics design
 
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{img/bonvoisin_source_2017-open-hardware.png}
+    \includegraphics[width=0.9\linewidth]{img/bonvoisin_source_2017-open-hardware.png}
     \caption[Taxonomy of openness]{Taxonomy of openness from \textcite[Figure~1]{bonvoisin_source_2017}.}
     \label{fig:osh-taxonomy}
 \end{figure}
