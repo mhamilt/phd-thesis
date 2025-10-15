@@ -2,7 +2,7 @@
 % From the Music Technology Project Latex Template 
 % Authored by Dr Michael Newton (University of Edinburgh)
 % December 2014
-% Adapted by a 'slightly' more sane mind of Matthew Hamilton
+% Adapted by the 'slightly' more sane mind of Matthew Hamilton
 % October 2025
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{setup} % all usepackages and bibliogrpahy setup are in setup.tex
@@ -16,8 +16,9 @@
 %----------------------------------------------------------------------------------------
 % Front Matter
 % \input{declaration}
-\input{abstract}
-\input{acknowledgements}
+\input{front_matter/abstract}
+\input{front_matter/acknowledgements}
+\input{front_matter/activities}
 %----------------------------------------------------------------------------------------
 % TOC Setup
 \singlespacing
@@ -49,11 +50,11 @@
 \renewcommand{\headrulewidth}{0pt}                    % Width of head rule
 %----------------------------------------------------------------------------------------
 % Main Matter
-% \include{articles/context}
+\include{articles/context}
 \include{articles/interaction}
-% \include{articles/analysis}
-% \include{articles/future}
-%----------------------------------------------------------------------------------------
+\include{articles/analysis}
+\include{articles/future}
+% ----------------------------------------------------------------------------------------
 % Bibliography
 \small{\singlespacing
 \addcontentsline{toc}{chapter}{Bibliography}

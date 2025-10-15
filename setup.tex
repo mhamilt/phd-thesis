@@ -16,7 +16,7 @@ includefoot
 %----------------------------------------------------------------------------------------
 % Packag options
 \PassOptionsToPackage{T1}{fontenc}
-\PassOptionsToPackage{hidelinks}{hyperref}
+% \PassOptionsToPackage{hidelinks}{hyperref}
 \PassOptionsToPackage{utf8}{inputenc}   % if you're on pdfLaTeX
 
 \usepackage{
@@ -38,7 +38,6 @@ includefoot
         float,
       fontenc,
      graphicx,
-     hyperref,
   indentfirst,
      inputenc,
      listings,
@@ -53,6 +52,8 @@ includefoot
    tabularray,
         xcolor
 }
+\usepackage[hyphens]{url}
+\usepackage[hidelinks]{hyperref}
 %----------------------------------------------------------------------------------------
 % Table and Matrix Vertical Space
 \renewcommand{\arraystretch}{1.4}
@@ -84,6 +85,7 @@ includefoot
    uniquelist = false,
           doi = false,
           url = false,
+    sortcites = true,
 ]{biblatex} 
 \addbibresource{main.bib}
 

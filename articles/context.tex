@@ -497,7 +497,7 @@ Dividing \textcite{procida_diataxis_2025}, developer-facing documentation lies i
 These are not of course not hard boundaries as the definition of a binary audience does not hold true in practice. 
 Instead the audience could more precisely be described as on a user-developer spectrum. 
 Reference documentation can be generated from source annotations to avoid duplication and to support automation.
-Across MATLAB, Python, and C\textsc{++} there are multiple conventions \cite{vanrossum_pep8_2001,goodger_pep257_2001}, and several tooling ecosystems coexist (e.g. Doxygen, Sphinx, HeaderDoc).
+Across M\textsc{ATLAB}, Python, and C\textsc{++} there are multiple conventions \cite{vanrossum_pep8_2001,goodger_pep257_2001}, and several tooling ecosystems coexist (e.g. Doxygen, Sphinx, HeaderDoc).
 \footnote{See the Stack Overflow data explorer for indicative tag counts: \url{https://data.stackexchange.com/stackoverflow/query/1069131/get-all-tags}.}
 Even so, generated API references should not be a substitute for user manuals \cite[Section~6.2]{stallman_gnu_1992}, but this is often the case \cite{procida_diataxis_2025}.
 \footnote{\url{https://diataxis.fr/reference/}}
@@ -517,7 +517,7 @@ As discussed in Section~\ref{sec:aurora}, Aurora began in 1995 and became fully 
 
 \subsubsection{ITA Toolbox}
 
-The ITA Toolbox emerged around 2010 \cite{dietrich_matlab_2010}, moved to RWTH Aachen’s GitLab in 2016, and adopted an explicit open-source model in 2017 \cite{berzborn_ita_2017}. The toolbox can be viewed as a successor to Aurora for measurement and analysis \cite{dietrich_influence_2013}. Developer documentation within MATLAB is extensive, but---as warned by \textcite{stallman_gnu_1992}---``doc strings'' are not a full user manual. Public-facing materials correspond mostly to \emph{Tutorials} in \citetitle{procida_diataxis_2025} \cite{procida_diataxis_2025}; other forms are more limited. Recommended citations are tied to publications; releases are available via the institutional GitLab. The toolbox depends on proprietary MATLAB toolboxes, narrowing its audience. Its BSD-4-Clause variant is not currently OSI-approved.\footnote{\url{https://spdx.org/licenses/BSD-4-Clause.html}} Despite these caveats, it remains a well-maintained institutional open-source effort and has been used in heritage case studies \cite{fagerlande_adequaccao_2020}. A Zenodo DOI has been suggested \cite{berzborn_ita_2017} but not, at the time of writing, implemented which is possibly as a result of the BSD-4-Clause's non-compliance with Zenodo's license requirements \cite{zenodo_metadata_2025}.
+The ITA Toolbox emerged around 2010 \cite{dietrich_matlab_2010}, moved to RWTH Aachen’s GitLab in 2016, and adopted an explicit open-source model in 2017 \cite{berzborn_ita_2017}. The toolbox can be viewed as a successor to Aurora for measurement and analysis \cite{dietrich_influence_2013}. Developer documentation within M\textsc{ATLAB} is extensive, but---as warned by \textcite{stallman_gnu_1992}---``doc strings'' are not a full user manual. Public-facing materials correspond mostly to \emph{Tutorials} in \citetitle{procida_diataxis_2025} \cite{procida_diataxis_2025}; other forms are more limited. Recommended citations are tied to publications; releases are available via the institutional GitLab. The toolbox depends on proprietary M\textsc{ATLAB} toolboxes, narrowing its audience. Its BSD-4-Clause variant is not currently OSI-approved.\footnote{\url{https://spdx.org/licenses/BSD-4-Clause.html}} Despite these caveats, it remains a well-maintained institutional open-source effort and has been used in heritage case studies \cite{fagerlande_adequaccao_2020}. A Zenodo DOI has been suggested \cite{berzborn_ita_2017} but not, at the time of writing, implemented which is possibly as a result of the BSD-4-Clause's non-compliance with Zenodo's license requirements \cite{zenodo_metadata_2025}.
 
 \subsubsection{ITEMM OpenLab}
 
@@ -533,11 +533,11 @@ PFFDTD \cite{hamilton_pffdtd_2021} provides open-source room-acoustics simulatio
 
 \subsubsection{VK-Gong}
 
-VK-Gong (ENSTA Paris) simulates nonlinear plates and shells relevant to gongs, cymbals, and bells. MATLAB and C\textsc{++} sources are hosted via an institutional site, with an unusually comprehensive MATLAB user manual \cite{vkgong_manual_2017}. The site lists CC-BY-NC-SA-4.0,\footnote{\url{https://creativecommons.org/licenses/by-nc-sa/4.0/}} though the licence text is absent from source files; CC licences are discouraged for software by both Creative Commons and OSI \cite{cc_can_2025}. No public VCS is used, limiting collaboration and issue tracking. Platform-specific optimisations (Intel SSE intrinsics) hinder portability, particularly to Arm processors; without a VCS, workarounds must be rediscovered by each user. Despite these hurdles, VK-Gong has been used in research \cite{nguyen_nonlinear_2019}, though it is more difficult to track in comparison to the other examples.
+VK-Gong (ENSTA Paris) simulates nonlinear plates and shells relevant to gongs, cymbals, and bells. M\textsc{ATLAB} and C\textsc{++} sources are hosted via an institutional site, with an unusually comprehensive M\textsc{ATLAB} user manual \cite{vkgong_manual_2017}. The site lists CC-BY-NC-SA-4.0,\footnote{\url{https://creativecommons.org/licenses/by-nc-sa/4.0/}} though the licence text is absent from source files; CC licences are discouraged for software by both Creative Commons and OSI \cite{cc_can_2025}. No public VCS is used, limiting collaboration and issue tracking. Platform-specific optimisations (Intel SSE intrinsics) hinder portability, particularly to Arm processors; without a VCS, workarounds must be rediscovered by each user. Despite these hurdles, VK-Gong has been used in research \cite{nguyen_nonlinear_2019}, though it is more difficult to track in comparison to the other examples.
 
 \subsubsection{YIN}
 
-The YIN pitch detector \cite{cheveigne_yin_2002} is widely adopted, with MATLAB code commonly used in studies (e.g. \cite{bowen_assessing_2019}). The software lacks a stable URI or DOI and carries a ``FOR RESEARCH PURPOSES'' restriction,\footnote{\url{https://github.com/mhamilt/yin/blob/main/LICENCE}} which is not OSI-compliant. Documentation is primarily the original paper (\emph{Explanation} in \cite{procida_diataxis_2025}); developer reference is absent. Technical friction arises from MATLAB MEX changes post-R2016a \cite{matlab_mex_2025}, requiring users to rebuild binaries individually.
+The YIN pitch detector \cite{cheveigne_yin_2002} is widely adopted, with M\textsc{ATLAB} code commonly used in studies (e.g. \cite{bowen_assessing_2019}). The software lacks a stable URI or DOI and carries a ``FOR RESEARCH PURPOSES'' restriction,\footnote{\url{https://github.com/mhamilt/yin/blob/main/LICENCE}} which is not OSI-compliant. Documentation is primarily the original paper (\emph{Explanation} in \cite{procida_diataxis_2025}); developer reference is absent. Technical friction arises from M\textsc{ATLAB} MEX changes post-R2016a \cite{matlab_mex_2025}, requiring users to rebuild binaries individually.
 
 \subsection{Summary of Acoustics Software Practice}
 
@@ -614,10 +614,11 @@ transition from one release to the next.
 \subsection{Chapter 2: Interaction}
 
 Chapter~\ref{ch:interaction} discusses the creation of a model harpsichord
-interface that was augmented with an optical electronic sensor system to allow
-for interaction with digital software instruments. Incorporates the design,
-prototyping and fabrication stages as well as the final deployment as part of an
-exhibition at Museo San Colombano, Bologna \cite{san_colombano_2025}.
+interface that was augmented with an electronic optical sensor system to allow
+for interaction with digital software instruments. Discussed within the chapter
+are the design, prototyping and fabrication stages as well as the final
+deployment as part of an exhibition at Museo San Colombano, Bologna
+\cite{san_colombano_2025}.
 
 Technological advances have reshaped the ways museums document, present, and
 interpret their collections. Immersive experiences are now made possible through
@@ -662,10 +663,10 @@ public engagement and supporting the long-term preservation of musical heritage.
 
 Chapter~\ref{ch:interaction} begins by looking at related work over the last 40
 years in the field of haptic keyboard musical interfaces and musical heritage
-interaction in museums. These specific context are then related to the wider
+interaction in museums. This specific context is then related to the wider
 discussion of digital cultural heritage and musical instrument conservation (as
 discussed above), its influence on the interface design process, and the
-constraints that imposed arising from this wider context. The projects is
+constraints that arise from this wider context. The project is
 separated into its discrete stages from design process, through the prototyping
 process and finally the fabrication of two final interfaces: one interface for
 exhibition at Museo San Colombano and the second for further research as part of
@@ -676,17 +677,17 @@ the NEMUS project.
 Chapter~\ref{ch:analysis} looks at the  the creation of an open source software
 tool for plate vibration analysis, material property estimation and musical
 acoustics education. Although applications of plate simulation continue to
-expand, access remains largely limited to specialized, proprietary
+expand, access remains largely limited to specialised, proprietary
 software—often prohibitively expensive for students or even smaller research
 groups. This work presents the theoretical background and initial implementation
 of \textsc{magpie}, an open-source platform for simulating plate physics.
-\textsc{magpie} provides intuitive visualization tools and a range of analysis
+\textsc{magpie} provides intuitive visualisation tools and a range of analysis
 methods, making it useful both as a teaching aid for instructors and as a
 research tool for academics and industry professionals. Its features include
-defining elastic boundary conditions along plate edges, visualizing and
+defining elastic boundary conditions along plate edges, visualising and
 exporting eigenshapes and corresponding frequencies, running time-domain
 simulations of the plate equation for sound synthesis, and estimating the
-elastic constants of experimental plates. This final function or elastic
+elastic constants of experimental plates. This final function of the elastic
 constants forms the basis of a tool for soundboard analysis to aid luthiers and
 conservators of historical string and keyboard instruments. 
 
@@ -709,7 +710,7 @@ application of the open methodology.
 
 The final chapter asks the question ``where do we go from here?'' with the
 projects in Chapters~\ref{ch:interaction} and \ref{ch:analysis}. Neither project
-is at an end point and their are multitude of developments for expansion,
+is at an end point and there are a multitude of developments for expansion,
 optimisation and refinement. A selection of possible developments are discussed
 for the interface and \textsc{magpie} in turn, outlining the technical
 challenges of development and the impact they would have on the open methodology
@@ -717,16 +718,16 @@ and the adherence to the FAIR principles.
 
 Developments for the interface are split between the fabrication process in the
 mechanical interface, in particular the jacks that are used and incorporation of
-a sensor surface within them. This is followed by discussion development in the
-electronics system , the refinement of the sensor circuitry as well as the
+a sensor surface within them. This is followed by discussion in the
+electronics system, the refinement of the sensor circuitry as well as the
 expansion in its functionality and the consideration that would have on the
-accessibility of the project. This concludes with a discussion and a look
-towards the future for interface as a tool for research and musical expression
-and the capabilities of the interface that have not yet been explored.
+accessibility of the project. This concludes with a discussion that looks
+towards the future for digital musical interfaces as a tool for research and musical expression,
+and the possibilities of the interface that have not yet been explored.
 
 The future of \textsc{magpie} is then discussed in terms of expanded
 functionality and the changes that have already taken place at time of writing,
 but have yet to be consolidated into a release format. Finally, the  development
 of \textsc{magpie}'s graphical interfaces are outlined, with description of the
-emerging technologies (in particular web technologies) which would make the
+emerging technologies (in particular, web technologies) which would make the
 software even more accessible.
