@@ -16,8 +16,7 @@ includefoot
 %----------------------------------------------------------------------------------------
 % Packag options
 \PassOptionsToPackage{T1}{fontenc}
-% \PassOptionsToPackage{hidelinks}{hyperref}
-\PassOptionsToPackage{utf8}{inputenc}   % if you're on pdfLaTeX
+\PassOptionsToPackage{utf8}{inputenc}
 
 \usepackage{
     adjustbox,
@@ -52,6 +51,7 @@ includefoot
    tabularray,
         xcolor
 }
+
 \usepackage[hyphens]{url}
 \usepackage[hidelinks]{hyperref}
 %----------------------------------------------------------------------------------------
@@ -85,8 +85,8 @@ includefoot
    uniquelist = false,
           doi = false,
           url = false,
-    sortcites = true,
-       dashed = true,
+      sorting = nyt,
+    sortcites = true,    
 ]{biblatex} 
 \addbibresource{main.bib}
 
