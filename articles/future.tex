@@ -39,28 +39,35 @@ For modification, a laser cutting approach was tested. The hypothesis was for a 
 It is possible that the optical sensor could be wired to an amplifier circuit and tuned to a smaller, more sensitive range, but pursuing this approach would require a major redesign of the electronics system.
 
 % \begin{subfigure}{0.45\textwidth}
-\begin{figure}
-    \centering
-    \includegraphics[width=0.7\linewidth]{example-image}
-    \caption{PLACEHOLDER 3D model of the jack body used for the CNC router and 3D printer.}
-    \label{fig:jack-model}
-\end{figure}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.7\linewidth]{example-image}
+%     \caption{PLACEHOLDER 3D model of the jack body used for the CNC router and 3D printer.}    
+% \end{figure}
 
 For CAD/CAM fabrication two methods were tested, a computer numerical control (CNC) router and 3D printing both of which could share the same 3D model (Figure~\ref{fig:jack-model}). The CNC router approach was the first taken as the intention was to pair it with the laser cutter to etch a pattern, which would hopefully offset defect rate of either process by being able to manufacture at a greater volume with far less manual labour. Once it was found the laser cutter approach was not viable, a second design was needed. Rather than reflectance from a speckle pattern, the concept returned to the distance application of the optical sensors. 
 
 \begin{figure}
     \centering
     \begin{subfigure}{1\textwidth}
-    \includegraphics[width=0.7\linewidth]{img/cad-jack-cutout-white.png}
+    \centering
+    \includegraphics[width=0.7\linewidth]{img/jack-dimensions-w-slots.png}
+    \caption{}
+    \label{fig:jack-model}
+    \end{subfigure}
+    \begin{subfigure}{0.49\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{img/cad-jack-cutout-white.png}
     \caption{}
     \label{fig:jack-cut-out}
     \end{subfigure}
-    \begin{subfigure}{1\textwidth}
-    \includegraphics[width=0.7\linewidth]{img/cad-jack-cutout-white.png}
+    \begin{subfigure}{0.49\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{img/cad-jack-printed.JPG}
     \caption{}
     \label{fig:jack-cut-out-3d-print}
     \end{subfigure}
-    \caption{(\subref{fig:jack-cut-out-3d-print}) CAD jack body with a sloped recess to create a `shutter' for the optical sensor. (\subref{fig:jack-model}) 3D printed variation of the jack body with inverted slope. The height of the slope is longer than the jacks travel to provide some leeway for misalignment and variation in the sensor heights across the entire keyboard.}
+    \caption{(\subref{fig:jack-model}) CAD drawing of the jack body used for CNC routing and 3D printing. (\subref{fig:jack-cut-out-3d-print}) CAD jack body with a sloped recess to create a `shutter' for the optical sensor. (\subref{fig:jack-model}) 3D printed variation of the jack body with inverted slope. The height of the slope is longer than the jacks travel to provide some leeway for misalignment and variation in the sensor heights across the entire keyboard.}
 \end{figure}
 % \begin{figure}
 %     \centering
