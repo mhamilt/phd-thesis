@@ -50,10 +50,24 @@ For CAD/CAM fabrication two methods were tested, a computer numerical control (C
 
 \begin{figure}
     \centering
+    \begin{subfigure}{1\textwidth}
     \includegraphics[width=0.7\linewidth]{img/cad-jack-cutout-white.png}
-    \caption{CAD jack body with cut out to create a `shutter' for the optical sensor.}
+    \caption{}
     \label{fig:jack-cut-out}
+    \end{subfigure}
+    \begin{subfigure}{1\textwidth}
+    \includegraphics[width=0.7\linewidth]{img/cad-jack-cutout-white.png}
+    \caption{}
+    \label{fig:jack-cut-out-3d-print}
+    \end{subfigure}
+    \caption{(\subref{fig:jack-cut-out-3d-print}) CAD jack body with a sloped recess to create a `shutter' for the optical sensor. (\subref{fig:jack-model}) 3D printed variation of the jack body with inverted slope. The height of the slope is longer than the jacks travel to provide some leeway for misalignment and variation in the sensor heights across the entire keyboard.}
 \end{figure}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.7\linewidth]{img/cad-jack-cutout-white.png}
+%     \caption{CAD jack body with cut out to create a `shutter' for the optical sensor.}
+%     \label{fig:jack-cut-out}
+% \end{figure}
 
 Taking inspiration from the shutter of a camera,
 section of the jack would be cut out (Figure~\ref{fig:jack-cut-out}. As the cut out section passed the optical sensor, a larger amount of light would be reflected. The baffles of the sensor would help restrict the field of view limit the light bleed between sensors. CNC routing of the jack bodies turned out to be time consuming for only a small number. The available router model and CNC bits were also prone to breaking , particularly around the damper slots, where there as commonly tear out. Finally, the materials for the jacks are typically hardwood such as pear, service or beech tree. Available MDF and plywood materials were far less dense than what would ideally be used in the final version and defect rate was unlikely to improve without extensive testing experimentation with router bits. The wood for the jack bodies would need to be planed first then likely adjusted by hand for width after the CNC process. The additional equipment requirement of a CNC router also reduced the accessibility of the project, which stood in contradiction to the open methodology. 3D Printers are now relatively common in institutional maker spaces. Given these limitations the CNC, pursuing that option did not seem viable. The design pivoted instead to a 3D printing approach using PLA as had been used for the brackets and baffles of the sensor board. PLA could be reworked for width if necessary and allowed for experimentation with affect of colour in the design. The 3D print of single jack body was also only 12 minutes, meaning it could be scaled. 
