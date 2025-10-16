@@ -414,7 +414,7 @@ Features such as independent grid spacing, which is implemented as part of an or
 
 \begin{figure}
     \centering
-    \includegraphics[width=075\linewidth]{img/koster_keyboard_1994_p49.png}
+    \includegraphics[width=0.75\linewidth]{img/koster_keyboard_1994_p49.png}
     \caption{Soundboard bracing of a seventeenth-century Couchet harpsichord from \textcite[p. 49]{koster_keyboard_1994}.}    
     \label{fig:bracing}
 \end{figure}
@@ -442,12 +442,12 @@ When the user is constrained, however, to the interesting areas of the parameter
 
 An example of the functionality that emerges from a GUI would be in the presentation of computational results versus those of a real experiment. One could iterate over a range of values, but there is no intuitive way to start exploring subranges within the larger parameter space; interrupting exploration in one space to tangentially explore another.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.7\linewidth]{example-image}
-    \caption{PLACEHOLDER \textsc{magpie} error view showing percentage error between the first 6 modal frequencies from an experiment and the computed modes.}
-    \label{fig:error-bars}
-\end{figure}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.7\linewidth]{example-image}
+%     \caption{PLACEHOLDER \textsc{magpie} error view showing percentage error between the first 6 modal frequencies from an experiment and the computed modes.}
+
+% \end{figure}
 
 Alternatively as a view that would provide feedback on the percentage error of each mode like as shown in Figure~\ref{fig:error-bars}. Serving the dual function of fine tuning results but also as practical understanding and exploring how each parameter impacts the simulation.
 
@@ -455,8 +455,9 @@ Alternatively as a view that would provide feedback on the percentage error of e
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{example-image}
-    \caption{PLACEHOLDER Example of editing a slider sub-range for finer parameter exploration.}
+    \caption{Prototype user interface for \textsc{magpie} created using M\textsc{atlab}'s App Designer environment. The UI demonstrates a potential `Error View' for fine tuning elastic constants to more closely match experimental results. The $R_{0y}$ and $K_{0y}$ parameters provide an example of an editable a slider sub-range for finer parameter control. Both parameters control the order of magnitude exponent in order to contain the range from 0 to $10^{15}$.}
     \label{fig:slider-subrange}
+    \label{fig:error-bars}
 \end{figure}
 
 
@@ -513,7 +514,6 @@ Each plate in comprised of approximately 1.5k grid points, for a total 12k grid 
     \caption{Prototype interface using WebGL via \texttt{p5.js} to render plate modes.}
     \label{fig:magpie-p5js}
 \end{figure}
-
 
 M\textsc{atlab} has functionality to compile its code to WASM \cite{mcvittie_generatejavascriptusingmatlabcoder_2021}, however some functionality such as that in M\textsc{atlab}'s sparse libraries is not currently open to code generation and compilation to a binary outside of the M\textsc{atlab} runtime%
 \footnote{(list of functions supported: \url{https://uk.mathworks.com/help/referencelist.html?type=function&capability=codegen&listtype=alpha}} 
