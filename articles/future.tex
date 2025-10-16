@@ -38,6 +38,7 @@ Research into both modification of the jacks or their CAD/CAM manufacture were u
 For modification, a laser cutting approach was tested. The hypothesis was for a speckle pattern to be etched into the side of the jack to alter reflectance. A number of materials were tested including MDF, plywood and hardwood. It was found that the available laser cutters were not able to etch a pattern with enough  differentiation between light and dark points. Both a rasterised and vector approach were attempted and it was found that the marks left by the laser cutter were too faint (Figure~\ref{fig:laser-speckle}. When power was increased, scorching of the material bled into the surrounding area, ruining the gradient from high to low reflectance. 
 It is possible that the optical sensor could be wired to an amplifier circuit and tuned to a smaller, more sensitive range, but pursuing this approach would require a major redesign of the electronics system.
 
+% \begin{subfigure}{0.45\textwidth}
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{example-image}
@@ -49,20 +50,20 @@ For CAD/CAM fabrication two methods were tested, a computer numerical control (C
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\linewidth]{example-image}
-    \caption{PLACEHOLDER Design of the jack body with cut out to create a rolling shutter.}
+    \includegraphics[width=0.7\linewidth]{img/cad-jack-cutout-white.png}
+    \caption{CAD jack body with cut out to create a `shutter' for the optical sensor.}
     \label{fig:jack-cut-out}
 \end{figure}
 
-Taking inspiration from the rolling shutter of a camera,
+Taking inspiration from the shutter of a camera,
 section of the jack would be cut out (Figure~\ref{fig:jack-cut-out}. As the cut out section passed the optical sensor, a larger amount of light would be reflected. The baffles of the sensor would help restrict the field of view limit the light bleed between sensors. CNC routing of the jack bodies turned out to be time consuming for only a small number. The available router model and CNC bits were also prone to breaking , particularly around the damper slots, where there as commonly tear out. Finally, the materials for the jacks are typically hardwood such as pear, service or beech tree. Available MDF and plywood materials were far less dense than what would ideally be used in the final version and defect rate was unlikely to improve without extensive testing experimentation with router bits. The wood for the jack bodies would need to be planed first then likely adjusted by hand for width after the CNC process. The additional equipment requirement of a CNC router also reduced the accessibility of the project, which stood in contradiction to the open methodology. 3D Printers are now relatively common in institutional maker spaces. Given these limitations the CNC, pursuing that option did not seem viable. The design pivoted instead to a 3D printing approach using PLA as had been used for the brackets and baffles of the sensor board. PLA could be reworked for width if necessary and allowed for experimentation with affect of colour in the design. The 3D print of single jack body was also only 12 minutes, meaning it could be scaled. 
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.7\linewidth]{example-image}
-    \caption{PLACEHOLDER Design of the jack body with cut out to create a rolling shutter.}
-    \label{fig:jack-cut-out-3d-print}
-\end{figure}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.7\linewidth]{example-image}
+%     \caption{PLACEHOLDER 3D printed jacks.}
+%     \label{fig:jack-cut-out-3d-print}
+% \end{figure}
 
 Figure~\ref{fig:jack-cut-out-3d-print} shows an example of a 3D printed jack of which six were created for use with the prototype (Section~\ref{sec:prototype}). Test using this system were promising but there were a number of limitations. The tongues and plectra still needed fitted to all jacks, which would either need to be done after the printing or as part of the print. 
 Comparing PLA \cite{bcn3d_pla_2019} to Delrin \cite{dupont_delrin_2017}, a common modern substitute for quill plectra \cite{barclay_preservation_2005}, suggested that the PLA would be too brittle and difficult to rework for adjusting the voicing of the jack. Therefore, at the very leats the 3D printed jacks would still need to be quilled by hand, with likely both quilling and tongue fitting being required. Given time constraints for the Mark 1, the option to pursue 3D printed jacks was abandoned in favour of the gradient stickers, which at the point was low cost, relatively reliable and reproducible.
@@ -82,7 +83,7 @@ For greater flexibility in the refinement of each stage in the circuitry, it wou
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{img/koster_keyboard_1994_p53.png}
-    \caption[Cross section of a multi-register harpsichord mechanism from \textcite[p. 53]{koster_keyboard_1994}]{Cross section of a multi-register harpsichord mechanism from \textcite[p. 53]{koster_keyboard_1994}. Image is of a two-manual instrument, with the lower manual in control of three registers.}
+    \caption[Cross section of a multi-register harpsichord mechanism]{Cross section of a multi-register harpsichord mechanism from \textcite[p. 53]{koster_keyboard_1994}. Image is of a two-manual instrument, with the lower manual in control of three registers.}
     \label{fig:3-registers}
 \end{figure}
 
@@ -455,7 +456,7 @@ Alternatively as a view that would provide feedback on the percentage error of e
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{example-image}
-    \caption{Prototype user interface for \textsc{magpie} created using M\textsc{atlab}'s App Designer environment. The UI demonstrates a potential `Error View' for fine tuning elastic constants to more closely match experimental results. The $R_{0y}$ and $K_{0y}$ parameters provide an example of an editable a slider sub-range for finer parameter control. Both parameters control the order of magnitude exponent in order to contain the range from 0 to $10^{15}$.}
+    \caption{Prototype user interface for \textsc{magpie} created using M\textsc{atlab}'s App Designer environment. The UI demonstrates a potential `Error View' for fine tuning elastic constants to more closely match experimental results. The $R_{0y}$ and $K_{0y}$ parameters provide an example of an editable a slider sub-range for finer parameter control. Both parameters control the order of magnitude in order to provide a logarithmic range from 0 to $10^{15}$.}
     \label{fig:slider-subrange}
     \label{fig:error-bars}
 \end{figure}
