@@ -78,8 +78,8 @@ ultimately too unrefined to be applied to the Mark 1.
 
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\linewidth]{img/laser-gradients.jpg}
-    \caption[Test gradients using a laser cutter]{Test gradients using a laser cutter. The range of the gradient was to compressed to be differentiated by the optical sensor. On high power settings, scorching tend to bleed around the raster, thus affecting the surrounding material and area of the gradient.}
+    \includegraphics[width=1.0\linewidth]{img/laser-gradients-1-row.jpg}
+    \caption[Test gradients using a laser cutter on MDF]{Test gradients of variaious heights using a laser cutter on MDF with decreasing laser power form left to right. The range of the gradient was to compressed to be differentiated by the optical sensor. On high power settings, scorching tend to bleed around the raster, thus affecting the surrounding material and area of the gradient.}
     \label{fig:laser-speckle}
 \end{figure}
 
@@ -347,7 +347,7 @@ output signal resulting in a slower response time.
         \label{fig:general-tia}
     \end{subfigure}
     \centering
-    \caption{Evolution of phototransistor ($Q$) voltage measurement from a
+    \caption[Circuit evolution for phototransistor voltage measurement]{Circuit evolution for phototransistor ($Q$) voltage measurement from a
         simple voltage divider circuit to a biased transimpedance amplifier as used
         in \citep{mcpherson_portable_2013} interface. The pull-up resistor $R_{in}$
         has been greyed to illustrate that it can be absent as well as to make clear
@@ -409,28 +409,27 @@ input, which is the configuration in Figure~\ref{fig:tia-diff}
 Voltage output $V_{\text{out}}$ in this circuit becomes:
 
 \begin{equation}
-    V_{out} = V_{ref} + I_{C}R_{5} + \frac{R_5}{R_4}(3.3 - V_{\text{ref}})
+    V_{out} = V_{b} + I_{C}R_{f} + \frac{R_f}{R_{in}}(V_{CC} - V_{b}); V_{b} = \frac{R_1}{R_1+R_2}V_{CC}
 \end{equation}
 
-With the addition of $R_4$ to bias the output voltage, the op-amp is now in a
+With the addition of $R_{in}$ to bias the output voltage, the op-amp is now in a
 differential amplifier configuration. Typically for a difference amplifier the
 ratio of resistor for each channel should be equal for optimal common-mode
 rejection ratio (CMRR) \cite{olson_optimizing_2023}. Using the convention of
-Figure~\ref{fig:tia-diff}, the rule for would be $\frac{R_5}{R_4} =
-    \frac{R_2}{R_3}$. With the addition of a current source in the form of the
-phototransistor, optimum CMRR is less definite, with $\frac{R_5}{R_4} \approx
-    \frac{R_2}{R_3}$. Given variation in all components, this becomes more of an
-engineer exercise,  with best noise reduction found through trial and error.
+Figure~\ref{fig:tia-diff}, the rule for would be $\frac{R_f}{R_{in}} =
+    \frac{R_2}{R_1}$. With the addition of a current source in the form of the
+phototransistor, optimum CMRR is less definite and $\frac{R_f}{R_{in}} \approx
+    \frac{R_2}{R_1}$ provides more a starting point. 
+Since there is variation in all components, this becomes more of an
+engineer exercise, with best noise reduction found through the usage of trim potentiometers.
 Typically a difference amplifier could employ a quad network of resistors
 \cite[p. 227]{horowitz_art_2015}. The asymmetric biasing of
 Figure~\ref{fig:tia-diff} values means that the four unique, high-tolerance
 resistor, values are needed.
 
-Variation across the optical sensors means that the feedback (or load) resistor%
-\footnote{$R_5$ in Figure~\ref{fig:tia-diff}, $R_1$ in
-    Figure~\ref{fig:tia-bias}} may need adjustment across all sensors as was the
-case in \textcite{pardue_near_2013}.%
-\footnote{``Early on it was noticed that different sensors of the same make yielded significantly different current response even when in the same configurations. With the QRE1113 sensors, we have used load resistors ranging between 12k$\Omega$ to 47k$\Omega$ to achieve similar range.''}
+Variation across the optical sensors means that the feedback (or load) resistor.%
+\footnote{$R_f$ in Figure~\ref{fig:tia-evolution} may need adjustment across all sensors due to variations in electrical characteristics, as was the
+case in \textcite{pardue_near_2013}, where ``[e]arly on it was noticed that different sensors of the same make yielded significantly different current response even when in the same configurations. With the QRE1113 sensors, we have used load resistors ranging between 12k$\Omega$ to 47k$\Omega$ to achieve similar range.''}
 If multiple optical sensors are to share the same TIA, such as in
 \textcite{mcpherson_portable_2013}, then the values will always be a best
 average. A bespoke circuit for each sensor is feasible, but highly impractical.
@@ -450,15 +449,15 @@ interface using economic electronics, a low technical knowledge barrier without
 a dependence on specialist facilities. Components for electronic system could be
 sourced and assembled using a modestly outfitted university maker space and
 small scale PCB manufacturing services such as JLCPCB or PCBWay.%
-\footnote{Although the current design is \textit{just} about practical with
-    prototyping board, the assembly of it would not be enviable.} Components such as
+\footnote{Although, the current circuit design it is `almost' manageable to assemble using just
+prototyping board, the process would take considerable time an labour.} Components such as
 op-amps are not commonly found in THT packaging, but rather in surface-mount
 device (SMD) format (Figure~\ref{fig:tht-vs-smd}).
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\linewidth]{example-image}
-    \caption{Surface mound device form QRE1113 and current-limiting and pull-up
+    \includegraphics[width=0.7\linewidth]{img/sparkfun_qre1113_2025.jpg}
+    \caption[Surface mound device QRE1113]{Surface mound device QRE1113 and current-limiting and pull-up
         and resistors with a U.S. quarter (24.26 mm diameter) for scale. Source
         \cite{sparkfun_qre1113_2025} Copyright SparkFun Electronics (Usage
         Permission Pending).}
@@ -522,9 +521,9 @@ circuit:
           biased by $V_{CC}$ resulting in a $V_{out}$ of:
 \end{itemize}
 
-\begin{equation}
-    V_{out} = \frac{R_1}{R_1 + R_2} V_{cc} + I_{C}R_{f} + \frac{R_f}{R_{in}}V_{cc}(\frac{R_1}{R_1 + R_2} - 1)
-\end{equation}
+% \begin{equation}
+%     V_{out} = \frac{R_1}{R_1 + R_2} V_{cc} + I_{C}R_{f} + \frac{R_f}{R_{in}}V_{cc}(\frac{R_1}{R_1 + R_2} - 1)
+% \end{equation}
 
 Table~\ref{tab:qre-vs-qrd} shows the key electrical characteristics that differ
 between the QRE1113 and QRD1114. The QRD1114 has a faster rise time and greater
@@ -888,7 +887,7 @@ accuracy outside of these very tight constraints.
 \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{img/plot-grid-error.pdf}
-    \caption{Plot illustrating analytic fifth mode of a plate compared to an isotropic model with shared an independent grid spacing in the x and y dimensions. Shared spacing exhibits saw convergence while the independent spacing converges much more smoothly.}
+    \caption[Grid space error]{Plot illustrating analytic fifth mode of a plate compared to an isotropic model with shared an independent grid spacing in the x and y dimensions. Shared spacing exhibits saw convergence while the independent spacing converges much more smoothly.}
     \label{fig:grid-error}
 \end{figure}
 
@@ -924,7 +923,7 @@ plate, two elastic moduli $E_x$ and $E_y$ and  a shear modulus $G_{xy}$.
 \begin{figure}
     \centering
     \includegraphics[width=0.75\linewidth]{img/koster_keyboard_1994_p49.png}
-    \caption{Soundboard bracing of a seventeenth-century Couchet harpsichord
+    \caption[Soundboard bracing of a seventeenth-century Couchet harpsichord]{Soundboard bracing of a seventeenth-century Couchet harpsichord
         from \textcite[p. 49]{koster_keyboard_1994}.}
     \label{fig:bracing}
 \end{figure}
@@ -945,7 +944,7 @@ as the accelerometer in \textcite{duran_experimentally_2023}. Such a set of
 features are not best explored through a code interface, but instead can best be
 leveraged with graphical user interfaces.
 
-\subsection{GUIs}
+\subsection{Graphical User Interfaces}
 
 A graphical user interfaces provide a means to change multiple parameters
 quickly in a way that is more intuitive for the end user. In addition to
@@ -964,14 +963,6 @@ the small adjustments in parameters are isolated to a single mouse interaction
 which would be otherwise difficult or unwieldy to change and explore if it were
 attempted to be achieved through the command-line interface or re-compilation of
 software.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\linewidth]{img/magpie-tuning.pdf}
-    \caption{Example interface visual feedback for `tuning' boundary conditions and simulation parameters to match known experimental data.}
-    \label{fig:magpie-tuning}
-\end{figure}
-
 
 An example of the functionality that emerges from a GUI would be in the
 presentation of computational results versus those of a real experiment. One
@@ -1006,7 +997,7 @@ constrained to only those elements made available.
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{img/ui_prototype_matlab.png}
-    \caption{Prototype user interface for \textsc{magpie} created using
+    \caption[Example \textsc{magpie} graphical user interface using M\textsc{atlab}'s App Designer]{Prototype user interface for \textsc{magpie} created using
         M\textsc{atlab}'s App Designer environment. The UI demonstrates a potential
         `Error View' for fine tuning elastic constants to more closely match
         experimental results. The $R_{0y}$ and $K_{0y}$ parameters provide an
@@ -1015,6 +1006,7 @@ constrained to only those elements made available.
         range from 0 to $10^{15}$.}
     \label{fig:slider-subrange}
     \label{fig:error-bars}
+    \label{fig:magpie-tuning}
 \end{figure}
 
 
@@ -1121,7 +1113,7 @@ vertex and fragment shaders rather than direct drawing using \texttt{p5.js}.
 \begin{figure}
     \centering
     \includegraphics[width=0.84\linewidth]{img/magpie-p5js.png}
-    \caption{Prototype interface using WebGL via \texttt{p5.js} to render plate
+    \caption[Prototype interface using WebGL]{Prototype interface using WebGL via \texttt{p5.js} to render plate
         modes.}
     \label{fig:magpie-p5js}
 \end{figure}
