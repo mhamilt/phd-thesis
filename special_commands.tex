@@ -10,3 +10,86 @@
 
 % Possesive Citation 
 % \newcommand{\citep}[1]{\citeauthor{#1}'s \cite{#1}}
+
+%----------------------------------------------------------------------------------------
+% Circuits
+%% Voltage Divider
+\newcommand{\VDIV}[1][1]{%
+\begin{circuitikz}[american, scale=#1, transform shape]
+    \draw (0, 0)  node[left]{$V_{CC}$} to[short,o-] (0,0) to [R,l_=$R_{in}$] (0, -2);
+    \draw -- (0,-2) node[npn, photo, anchor=C](Q){Q};
+    \draw (Q.E) -- ++(0,0) node[ground] {};
+    \draw (0,-2) to[short,*-o]  (0.5,-2) node[right]{$V_{out}$};
+\end{circuitikz}
+}
+
+% Basic TIA (no VCE)
+\newcommand{\TIABASIC}[1][1]{%
+\begin{circuitikz}[american, scale=#1, transform shape]
+	\draw (0, 0) node[op amp] (opamp) {};    
+	
+    \draw (opamp.-) to[short,-*] ++(-0.5, 0) coordinate(A);
+	\draw (opamp.+) node[ground] {};
+	\draw (opamp.out) to[short,*-o] ++(0.5, 0) coordinate(C) node[right]{$V_{out}$};
+
+	\draw (A) |- ++(0.5,1) coordinate[yshift=1ex] (L1) to[R=$R_{f}$] ++(2,0) coordinate(Rl) -| (opamp.out);    
+    \draw (A) |- ++(-0.5,-0) coordinate(Vout) node[npn, photo, anchor=C](Q){Q};
+	\draw[lightgray] (Vout) to[short,*-] ++(0,0.2) to [R,l=$R_{in}$] ++(0, 1.5) to[short,-o] node[left]{$V_{CC}$} ++(0,0.5) coordinate(Vcc);
+	\draw (Q.E) -- ++(0,0) node[ground] {};
+\end{circuitikz}
+}
+% feedback capacitor
+\newcommand{\TIACF}[1][1]{%
+\begin{circuitikz}[american, scale=#1, transform shape]
+	\draw (0, 0) node[op amp] (opamp) {};
+    \draw (opamp.-) to[short,-*] ++(-0.5, 0) coordinate(A);
+    \draw (opamp.+) node[ground] {};
+	\draw (opamp.out) to[short,*-o] ++(0.5, 0) coordinate(C) node[right]{$V_{out}$};
+
+	\draw (A) |- ++(0.5,1) coordinate(Rl) to[R=$R_{f}$] ++(2,0)  -| (opamp.out) to[short,*-*] ++(0,1.5);        
+    \draw (A) |- ++(0.5,2.15) to[C=$C_{f}$] ++(2,0)  -| (opamp.out);        
+    \draw (A) to[short,*-*] ++(0,1);
+
+    \draw (A) |- ++(-1,-0) coordinate(Vout) node[npn, photo, anchor=C](Q){Q};
+	\draw (Q.E) -- ++(0,0) node[ground] {};
+    \draw[lightgray] (Vout) to[short,*-] ++(0,0.2) to [R,l=$R_{in}$] ++(0, 1.5) to[short,-o] node[left]{$V_{CC}$} ++(0,0.5) coordinate(Vcc);
+\end{circuitikz}
+}
+
+%% VCE and Vb
+\newcommand{\TIAVB}[1][1]{%
+\begin{circuitikz}[american, scale=#1, transform shape]
+	\draw (0, 0) node[op amp] (opamp) {};
+    \draw (opamp.-) to[short,-*] ++(-0.5, 0) coordinate(A);    
+    \draw (opamp.+) to[short,-o] ++(-0.25,0) node[left] {$V_b$};
+	\draw (opamp.out) to[short,*-o] ++(0.5, 0) coordinate(C) node[right]{$V_{out}$};
+
+	\draw (A) |- ++(0.5,1) coordinate(Rl) to[R=$R_{f}$] ++(2,0)  -| (opamp.out) to[short,*-*] ++(0,1.5);        
+    \draw (A) |- ++(0.5,2.15) to[C=$C_{f}$] ++(2,0)  -| (opamp.out);        
+    \draw (A) to[short,*-*] ++(0,1);
+
+    \draw (A) |- ++(-1,-0) coordinate(Vout) node[npn, photo, anchor=C](Q){Q};
+	\draw (Q.E) -- ++(0,0) node[ground] {};
+    \draw[lightgray] (Vout) to[short,*-] ++(0,0.2) to [R,l=$R_{in}$] ++(0, 1.5) to[short,-o] node[left]{$V_{CC}$} ++(0,0.5) coordinate(Vcc);
+\end{circuitikz}
+}
+
+%% Full Circuit
+\newcommand{\TIAFULL}[1][1]{%
+\begin{circuitikz}[american, scale=#1, transform shape]
+	\draw (0, 0) node[op amp] (opamp) {};
+    \draw (opamp.-) to[short,-*] ++(-0.75, 0) coordinate(A);    
+    \draw (opamp.+) to [R,l_=$R_{1}$] ++(-2.0,0) coordinate(Ro);
+    \draw (opamp.+) -- ++(-0.0,0) to [R,l_=$R_{2}$] ++(0,-1.75) node[ground] {};
+	\draw (opamp.out) to[short,*-o] ++(0.5, 0) coordinate(C) node[right]{$V_{out}$};
+    
+	\draw (A) |- ++(1,1) coordinate(Rl) to[R=$R_{f}$] ++(2,0)  -| (opamp.out) to[short,*-*] ++(0,1.5);        
+    \draw (A) |- ++(1,2.15) to[C=$C_{f}$] ++(2,0)  -| (opamp.out);        
+    \draw (A) to[short,*-*] ++(0,1);
+
+    \draw (A) |- ++(-2,-0) coordinate(Vout) node[npn, photo, anchor=C](Q){Q};
+	\draw (Q.E) -- ++(0,0) node[ground] {};
+    \draw (Vout) to[short,*-] ++(0,0.2) to [R,l=$R_{in}$] ++(0, 1.5) to[short,-o] node[left]{$V_{CC}$} ++(0,0.5) coordinate(Vcc);
+    \draw (Vcc) to[short,-*] ++(0,-0.35) -- ++(0.75,0) to [short,-](Ro);    
+\end{circuitikz}
+}

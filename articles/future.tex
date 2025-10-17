@@ -30,8 +30,8 @@ Research into both modification of the jacks or their CAD/CAM manufacture were u
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\linewidth]{example-image}
-    \caption{PLACEHOLDER for laser cut speckle pattern on wood. The dynamic range across the gradient was too shallow to be detected by the optical sensor.}
+    \includegraphics[width=1.0\linewidth]{img/laser-gradients.jpg}
+    \caption[Test gradients using a laser cutter]{Test gradients using a laser cutter. The range of the gradient was to compressed to be differentiated by the optical sensor. On high power settings, scorching tend to bleed around the raster, thus affecting the surrounding material and area of the gradient.}
     \label{fig:laser-speckle}
 \end{figure}
 
@@ -45,7 +45,7 @@ It is possible that the optical sensor could be wired to an amplifier circuit an
 %     \caption{PLACEHOLDER 3D model of the jack body used for the CNC router and 3D printer.}    
 % \end{figure}
 
-For CAD/CAM fabrication two methods were tested, a computer numerical control (CNC) router and 3D printing both of which could share the same 3D model (Figure~\ref{fig:jack-model}). The CNC router approach was the first taken as the intention was to pair it with the laser cutter to etch a pattern, which would hopefully offset defect rate of either process by being able to manufacture at a greater volume with far less manual labour. Once it was found the laser cutter approach was not viable, a second design was needed. Rather than reflectance from a speckle pattern, the concept returned to the distance application of the optical sensors. 
+For CAD/CAM fabrication two methods were tested, a computer numerical control (CNC) router and 3D printing both of which could share the same CAD model (Figure~\ref{fig:jack-model}). The CNC router approach was the first taken as the intention was to pair it with the laser cutter to etch a pattern, which would hopefully offset defect rate of either process by being able to manufacture at a greater volume with far less manual labour. Once it was found the laser cutter approach was not viable, a second design was needed. Rather than reflectance from a speckle pattern, the concept returned to the distance application of the optical sensors. 
 
 \begin{figure}
     \centering
@@ -67,7 +67,7 @@ For CAD/CAM fabrication two methods were tested, a computer numerical control (C
     \caption{}
     \label{fig:jack-cut-out-3d-print}
     \end{subfigure}
-    \caption{(\subref{fig:jack-model}) CAD drawing of the jack body used for CNC routing and 3D printing. (\subref{fig:jack-cut-out-3d-print}) CAD jack body with a sloped recess to create a `shutter' for the optical sensor. (\subref{fig:jack-model}) 3D printed variation of the jack body with inverted slope. The height of the slope is longer than the jacks travel to provide some leeway for misalignment and variation in the sensor heights across the entire keyboard.}
+    \caption{(\subref{fig:jack-model}) CAD drawing of the jack body used for CNC routing and 3D printing. (\subref{fig:jack-cut-out}) CAD jack body with a sloped recess to create a `shutter' for the optical sensor. (\subref{fig:jack-cut-out-3d-print}) 3D printed variation of the jack body with inverted slope. The height of the slope is longer than the jacks travel to provide some leeway for misalignment and variation in the sensor heights across the entire keyboard.}
 \end{figure}
 % \begin{figure}
 %     \centering
@@ -94,16 +94,16 @@ The 3D printed jacks were also relatively high risk for sensor placement. Should
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\linewidth]{img/schmidt_sparksichord_2025fig-13.png}
+    \includegraphics[width=1\linewidth]{img/schmidt_sparksichord_2025fig-13.png}
     \caption[Example sensor module]{Example sensor module, Figure 1.3 of \textcite{schmidt_sparksichord_2025}.}
     \label{fig:schmidt-sensor-board}
 \end{figure}
 
 For greater flexibility in the refinement of each stage in the circuitry, it would be beneficial to separate the sensors from the corresponding routing circuitry. The current vertical orientation of the sensor board makes installation difficult in a small space, with dangling PCBs easily knocked out of alignment. A suggested alternative would be the separation of the current sensor board into two parts, a sensor module and a signal board. 
 
-\begin{figure}
+\begin{figure}[!b]
     \centering
-    \includegraphics[width=0.7\linewidth]{img/koster_keyboard_1994_p53.png}
+    \includegraphics[width=1.0\linewidth]{img/koster_keyboard_1994_p53.png}
     \caption[Cross section of a multi-register harpsichord mechanism]{Cross section of a multi-register harpsichord mechanism from \textcite[p. 53]{koster_keyboard_1994}. Image is of a two-manual instrument, with the lower manual in control of three registers.}
     \label{fig:3-registers}
 \end{figure}
@@ -134,61 +134,84 @@ Limitation in the sensor signal measurement is affected the inherent parasitic c
 
 \subsubsection{Sensor Signal Measurement}\label{sec:tia}
 
-Currently the signal of the sensors are in voltage divider configuration using a pull-up resistor and a signal on the sensor board is selected through the use of a multiplexer. The voltage divider works as current is induced through the phototransistor, a voltage is then present across the pull-up resistor. This voltage can be measured against transistor current by creating a signal path between the pull-up resistor and the phototransitor collector that is then connected to an analogue-to-digital converter. 
-The motivations behind this configuration were manifold, but each other related back to the principles of accessibility and reproducibility within FAIR framework.
-A single resistor is a cheap and simplistic method for measuring the current through the transistor as voltage with a low technical barrier to implement it.
-It is also more reproducible as the resistor is a fundamental component of electronics.
-The specific model and manufacturer of the resistor may become obsolete, but the very idea of   a resistor at the value of 100 k$\Omega$s will not.
-The same cannot be said for the integrated circuits (ICs) as used to package operational amplifiers, resistor networks, programmable memory \&c. which may ``here yesterday, gone today'',  becoming obsolete or unavailable for all manner of reasons \cite[p. 273]{horowitz_art_2015}.
-There are problems to which only these more complex ICs can provide a solution.
-The phototransistor has an inherent parasitic capacitance, which manifests as a low pass filter \cite{falco_understanding_2023} on the output signal and thus slower response time.
+This sections covers the possible development of the voltage measurment from the phototransistor of the optical sensor. Figure~\ref{fig:tia-evolution} provides an overview of circuit evolution with each component added in turn and its function within the new circuit.
+For the circuit design used in the Mark~I and Mark~II interfaces (Chapter~\ref{ch:interaction}), the phototransistor is in a voltage divider configuration (Figure~\ref{fig:volt-div}). 
+This configuration involves using a pull-up resistor between the power $V_{CC}$ and collector of the phototransistor with a signal tap ($V_{out}$) taken in between with the signal on the sensor board being selected through the use of a multiplexer. 
+Since current is induced through the phototransistor, a voltage is therefore present across the pull-up resistor. This voltage can be measured against transistor current by creating a signal path between the pull-up resistor and the phototransistor collector that is then connected to an analogue-to-digital converter. 
+The motivations behind this configuration were manifold, with each reason relating back to the FAIR principles, primarily accessibility and reproducibility.
+A single resistor is a cheap and simplistic method for measuring the current through the transistor as voltage and a low technical barrier to implement it.
+Such a simple circuit is also  more reproducible as the resistor is a fundamental component of electronics.
+The specific model and manufacturer of the resistor may become obsolete, but an alternative resistor at the specified value should always be available.
+The same cannot be said when using integrated circuits (ICs) as are used to package operational amplifiers, resistor networks, programmable memory \&c. which may be ``here yesterday, gone today,'' \cite[p. 273]{horowitz_art_2015}  becoming obsolete or unavailable with no alternative but to redesign a circuit.
+By contrast, there are problems to which only these more complex ICs can provide a solution. For instance, the phototransistor (like all transistors) has an inherent parasitic capacitance, which manifests as a low pass filter \cite{falco_understanding_2023} on the output signal resulting in a slower response time.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\linewidth]{example-image}
-    \caption{PLACEHOLDER Basic TIA circuit using a photodiode \cite[Figure 4.22]{horowitz_art_2015}.}
+    \begin{subfigure}[t]{0.19\textwidth}
+    \VDIV[0.9]    
+    \caption{}
+    \label{fig:volt-div}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.39\textwidth}
+    \TIABASIC[0.9]
+    \caption{}
     \label{fig:tia-basic}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.39\textwidth}
+    \TIACF[0.9]
+    \caption{}
+    \label{fig:tia-cf}    
+    \end{subfigure}    
+    
+    \vspace{0.5cm}
+    \noindent\rule{\textwidth}{0.4pt}
+    \vspace{0.5cm}
+
+    \begin{subfigure}[t]{0.45\textwidth}
+    \TIAVB[0.9]
+    \caption{}
+    \label{fig:tia-vb}
+    \label{fig:tia-bias}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.45\textwidth} 
+    \TIAFULL[0.9]
+    \caption{}
+    \label{fig:tia-full}
+    \label{fig:tia-diff}
+    \label{fig:general-tia}
+    \end{subfigure}    
+    \centering
+    \caption{Evolution of phototransistor ($Q$) voltage measurement from a simple voltage divider circuit to a biased transimpedance amplifier as used in \citep{mcpherson_portable_2013} interface. The pull-up resistor $R_{in}$ has been greyed to illustrate that it can be absent as well as to make clear the extension of circuit around the collector of the phototransistor.\\\\
+    (\subref{fig:volt-div}) phototransistor with pull-up resistor.\\
+    (\subref{fig:tia-basic}) a basic transimpedance amplifier circuit using a phototransistor (Source \textcite[Figure 4.22]{horowitz_art_2015}).\\
+    (\subref{fig:tia-cf}) a feedback $C_f$ capacitor to reduce high frequency noise and prevent ringing in the circuit.)\\
+    (\subref{fig:tia-bias}) transimpedance amplifier with voltage bias $V_b$ as used in \textcite{pardue_near_2013}. A higher collector-emitter provides greater light-level sensitivity and response time.\\
+    (\subref{fig:tia-diff}) transimpedance amplifier difference amplifier from \textcite[Figure 3]{mcpherson_portable_2013}. Pull-up resistor $R_{in}$ counteracts the raised $V_{out}$ voltage bias. This configuration also means that the ration of $R_2$/$R_1$ should closely match the ratio of $R_{f}$ / $R_{in}$ for optimum common-mode rejection ratio \cite[p. 227]{horowitz_art_2015}.}
+    \label{fig:tia-evolution}
 \end{figure}
 
-
-Instead of the pull-up resistor formation a number of transimpedance amplifier (TIA) circuits can be implemented. 
+To combat the slower response time, a transimpedance amplifier (TIA) circuit (Figure~\ref{fig:tia-basic}) can be implemented in place of the pull-up resistor formation. 
 The most basic TIA for phototransistors can be seen in Figure~\ref{fig:tia-basic}, where the output voltage $V_{\text{out}}$ is the current flowing from the non-inverting input of the op-amp through the (in this case) photodiode $I_{C}$, scaled by the feedback resistor $R_{f}$.
 
-$$
-V{out} = I_{C}R_{div}
-$$
+\begin{equation}
+V_{out} = I_{C}R_{f}
+\end{equation}
 
+As noted in \textcite[p. 233]{horowitz_art_2015}, this circuit should be assumed to include a capacitor in parallel to the feedback resistor as shown by $C_f$ in Figure~\ref{fig:tia-cf}. The capacitor helps to ensure stability and help mitigate oscillation in the feedback circuit. If there is a bias voltage present across the collector and emitter ($V_{CE}$) of the phototransistor, current will flow at a lower light level. An example of such a circuit can be see in Figure~\ref{fig:tia-bias}, and was the configuration used for the optical sensors in \citep{pardue_near_2013} interface.
+\footnote{\textcite[Figure 3]{pardue_near_2013}.} As well as sensitivity, the bias voltage $V_{b}$ should also improve the response time of the phototransistor \cite{falco_understanding_2023}. 
 
-As noted in \textcite{horowitz_art_2015}, this circuit should be assumed to include a capacitor in parallel to the feedback resistor. The phototransistor will begin conducting with a lower light presence, if their is a bias voltage present across the collector and emitter ($V_{CE}$). An example of such a circuit can be see in \textcite{pardue_near_2013} (Figure~\ref{fig:tia-bias}(b)).
+\begin{equation}\label{eq:tia-bias}
+V_{out} = V_{b} + I_{C}R_{1}    
+\end{equation}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.7\linewidth]{example-image}
-    \caption{PLACEHOLDER (a) pull-up resistor configuration of the phototransistor (b) TIA circuit with voltage offset $V_b$. From \cite[Figure 3]{pardue_near_2013}.}
-    \label{fig:tia-bias}
-\end{figure}
-
-In Figure~\ref{fig:tia-bias} there is a bias voltage $V_{b}$ which increases the voltage between the phototransistor collector and emitter, which in turn should improve the response time of the phototransistor \cite{falco_understanding_2023}. 
-
-$$
-V_{out} = V_{b} + I_{C}R_{1}
-$$
-
-Rail-to-rail op-amps are those that permits the voltage output to be up to the limits of the supply voltage, where op-amps typically limit before this point. In the case of the biased TIA above, there is a risk that the op-amp will be saturated unless it is rail-to-rail. To bypass this limitation, the output voltage can be biased down by introducing a voltage at the inverting input, which is the configuration in Figure~\ref{fig:tia-diff} \cite{mcpherson_portable_2013}.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.7\linewidth]{example-image}
-    \caption{PLACEHOLDER TIA difference amplifier from \textcite[Figure 3]{mcpherson_portable_2013}.}
-    \label{fig:tia-diff}
-\end{figure}
-
+By introducing a bias voltage, the overall output voltage is also raised (Eq~\ref{eq:tia-bias}). 
+A rail-to-rail op-amp, which permits the voltage output to be up to the limits of the supply voltage, should accommodate the raised $V_{out}$, but standard op-amps typically limit voltage at a lower level. In the case of the biased TIA in figure~\ref{fig:tia-vb}, there is a risk that the op-amp will be saturated unless it is rail-to-rail. To address this limitation, the output voltage can be biased down by introducing a voltage at the inverting input, which is the configuration in Figure~\ref{fig:tia-diff} \cite{mcpherson_portable_2013}.
 
 Voltage output $V_{\text{out}}$ in this circuit becomes:
 
-$$
+\begin{equation}
 V_{out} = V_{ref} + I_{C}R_{5} + \frac{R_5}{R_4}(3.3 - V_{\text{ref}})
-$$
+\end{equation}
 
 With the addition of $R_4$ to bias the output voltage, the op-amp is now in a differential amplifier configuration. 
 Typically for a difference amplifier the ratio of resistor for each channel should be equal for optimal common-mode rejection ratio (CMRR) \cite{olson_optimizing_2023}. 
@@ -232,33 +255,25 @@ The sensor system would benefit from single piece mounting bracket which would a
 \subsubsection{Optical Sensor}
 
 Switching to another variety of optical sensor, such as the On Semiconductor QRD1114 \cite{onsemiconductor_qrd1114_2024} may yield better results. 
-The optical characteristics of the QRD1114 \cite{onsemiconductor_qrd1114_2024} and the QRE1113 \cite{onsemiconductor_qre1113_2024} differ enough that resistor values of the TIA circuit in \textcite{mcpherson_portable_2013} will need to change. For clarity, a more generalised phototransitor TIA circuit is given in Figure~\ref{fig:general-tia}:
+The optical characteristics of the QRD1114 \cite{onsemiconductor_qrd1114_2024} and the QRE1113 \cite{onsemiconductor_qre1113_2024} differ enough that resistor values of the TIA circuit in \textcite{mcpherson_portable_2013} will need to change. For clarity, a more generalised phototransistor TIA circuit is given in Figure~\ref{fig:general-tia}:
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.7\linewidth]{example-image}
-    \caption{PLACEHOLDER Generalised TIA circuit for a optoisolator such as the optical sensors QRE1113 and QRD1114.}
-    \label{fig:general-tia}
-\end{figure}
-
-To restate the parameters and constraints of the generalised phototransitor TIA circuit: 
+To restate the parameters and constraints of the generalised phototransistor TIA circuit: 
 
 \begin{itemize}
     \item $R_{in}$ will dictate the impedance seem by the phototransistor $Q$. 
     \item $R_{f}$ will dictate scaling of change in collector current $I_{C}$ to the change output voltage $V_{\text{out}}$ such that $\Delta V_{\text{out}} = \Delta I_C R_f$  \cite{mcpherson_portable_2013}.
-    \item CMRR is adjusted in the ratios of all four resistor, with an approximate rule of $\frac{R_f}{R_{in}} \approx \frac{R_1}{R_2}$
+    \item CMRR is adjusted in the ratios of all four resistor, with an approximate rule of $\frac{R_f}{R_{in}} \approx \frac{R_2}{R_1}$
     \item $V_{\text{ref}}$ the resulting reference voltage of the voltage divider from $R_1$ and $R_2$ will apply result in voltage bias across the collector and emitter $V_{CE} \approx V_{\text{ref}}$
     \item to avoid the need for a rail-to-rail op-amp, the inverting input is biased by $V_{CC}$ resulting in a $V_{out}$ of:
 \end{itemize}
 
-$$
+\begin{equation}
 V_{out} = \frac{R_1}{R_1 + R_2} V_{cc} + I_{C}R_{f} + \frac{R_f}{R_{in}}V_{cc}(\frac{R_1}{R_1 + R_2} - 1)
-$$
+\end{equation}
 
 Table~\ref{tab:qre-vs-qrd} shows the key electrical characteristics that differ between the QRE1113 and QRD1114.
-The QRD1114 has a faster rise time and greater sensitivity \cite{onsemiconductor_qrd1114_2024} when compared to the QRE1113 \cite{onsemiconductor_qre1113_2024} and could be used as a drop-in replacement, with the remainder of the design being unchanged. While the QRD1114 has a faster rise time its asymmetric rise and fall times and the higher fall time suggests a greater presence parasitic capacitance. The effect can be mitigated by the usage of a smaller pull-up resistor ($R_1$ in Figure~\ref{fig:simple-schematic}) or smaller value $R_{in}$ in Figure~\ref{fig:general-tia}, the substitution of which would necessitate new choice of values for the remaining three resistors.
+The QRD1114 has a faster rise time and greater sensitivity \cite{onsemiconductor_qrd1114_2024} when compared to the QRE1113 \cite{onsemiconductor_qre1113_2024} and could be used as a drop-in replacement, with the remainder of the design being unchanged. While the QRD1114 has a faster rise time its asymmetric rise and fall times and the higher fall time suggests a greater presence parasitic capacitance. The effect can be mitigated by the usage of a smaller pull-up resistor ($R_{in}$ in Figure~\ref{fig:tia-full}), the substitution of which would necessitate new choice of values for the remaining three resistors.
 With careful choice of TIA circuit, the QRD1114 may provide the sensitivity required to reintroduce the laser-cut speckle pattern as suggested in Section~\ref{sec:cad-cam-jacks}.
-
 
 \begin{table}
 	\centering
@@ -476,7 +491,7 @@ Alternatively as a view that would provide feedback on the percentage error of e
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\linewidth]{example-image}
+    \includegraphics[width=0.7\linewidth]{img/ui_prototype_matlab.png}
     \caption{Prototype user interface for \textsc{magpie} created using M\textsc{atlab}'s App Designer environment. The UI demonstrates a potential `Error View' for fine tuning elastic constants to more closely match experimental results. The $R_{0y}$ and $K_{0y}$ parameters provide an example of an editable a slider sub-range for finer parameter control. Both parameters control the order of magnitude in order to provide a logarithmic range from 0 to $10^{15}$.}
     \label{fig:slider-subrange}
     \label{fig:error-bars}
