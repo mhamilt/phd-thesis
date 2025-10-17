@@ -235,7 +235,7 @@ Components such as op-amps are not commonly found in THT packaging, but rather i
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{example-image}
-    \caption{PLACEHOLDER The QRE1113 optical sensor in both THT and SMD formats with a XX for scale.}
+    \caption{Surface mound device form QRE1113 and current-limiting and pull-up and resistors with a U.S. quarter (24.26 mm diameter) for scale. Source \cite{sparkfun_qre1113_2025} Copyright SparkFun Electronics (Usage Permission Pending).}
     \label{fig:tht-vs-smd}
 \end{figure}
 
@@ -263,7 +263,7 @@ To restate the parameters and constraints of the generalised phototransistor TIA
     \item $R_{in}$ will dictate the impedance seem by the phototransistor $Q$. 
     \item $R_{f}$ will dictate scaling of change in collector current $I_{C}$ to the change output voltage $V_{\text{out}}$ such that $\Delta V_{\text{out}} = \Delta I_C R_f$  \cite{mcpherson_portable_2013}.
     \item CMRR is adjusted in the ratios of all four resistor, with an approximate rule of $\frac{R_f}{R_{in}} \approx \frac{R_2}{R_1}$
-    \item $V_{\text{ref}}$ the resulting reference voltage of the voltage divider from $R_1$ and $R_2$ will apply result in voltage bias across the collector and emitter $V_{CE} \approx V_{\text{ref}}$
+    \item $V_{\text{ref}}$ the resulting reference voltage of the voltage divider formed from $R_1$ and $R_2$ will result in a voltage bias across the collector and emitter $V_{CE} \approx V_{\text{ref}}$
     \item to avoid the need for a rail-to-rail op-amp, the inverting input is biased by $V_{CC}$ resulting in a $V_{out}$ of:
 \end{itemize}
 
@@ -488,6 +488,12 @@ An example of the functionality that emerges from a GUI would be in the presenta
 
 Alternatively as a view that would provide feedback on the percentage error of each mode like as shown in Figure~\ref{fig:error-bars}. Serving the dual function of fine tuning results but also as practical understanding and exploring how each parameter impacts the simulation.
 
+The user should be given the flexibility to change slider limits based on the sub-parameter space they are trying to explore. Resolution, or step size, of a graphical slider is limited by the resolution of on which it is displayed. Minute movements are not a pleasant solution to the problem of sub-parameter space exploration. Instead, the user could be allowed to edit the limits directly giving a method to move from a macro level exploration of a parameter zoom into a sub-range of interest (Figure~\ref{fig:slider-subrange}) 
+
+As discussed in Section~\ref{sec:jupyter}, an interface for the python version of \textsc{magpie} \cite{magpie_python_2025} has already been created using the Jupyter notebooks development environment.
+The Jupyter interface \cite{magpie_jupyter_2025} is quite limited, and allows for only those designs which can easily implemented using the IPywidgets. Functionality such as adjustable range constraints, though technically possible, are more easily implemented.  Similarly, M\textsc{atlab}'s App Designer%
+\footnote{\url{https://uk.mathworks.com/products/matlab/app-designer.html}}
+would provide the same mode switching for end users. The App Designer is constrained to only those elements made available.
 
 \begin{figure}
     \centering
@@ -497,13 +503,6 @@ Alternatively as a view that would provide feedback on the percentage error of e
     \label{fig:error-bars}
 \end{figure}
 
-
-The user should be given the flexibility to change slider limits based on the sub-parameter space they are trying to explore. Resolution, or step size, of a graphical slider is limited by the resolution of on which it is displayed. Minute movements are not a pleasant solution to the problem of sub-parameter space exploration. Instead, the user could be allowed to edit the limits directly giving a method to move from a macro level exploration of a parameter zoom into a sub-range of interest (Figure~\ref{fig:slider-subrange}) 
-
-As discussed in Section~\ref{sec:jupyter}, an interface for the python version of \textsc{magpie} \cite{magpie_python_2025} has already been created using the Jupyter notebooks development environment.
-The Jupyter interface \cite{magpie_jupyter_2025} is quite limited, and allows for only those designs which can easily implemented using the IPywidgets. Functionality such as adjustable range constraints, though technically possible, are more easily implemented.  Similarly, M\textsc{atlab}'s App Designer%
-\footnote{\url{https://uk.mathworks.com/products/matlab/app-designer.html}}
-would provide the same mode switching for end users. The App Designer is constrained to only those elements made available.
 
 M\textsc{atlab} also has deployment constraints as \texttt{eigs} function is not one that is supported by the software's code generation systems and the function still requires the M\textsc{atlab} runtime if it is to be interfaced with externally. Such constraints have implications on the accessibility and maintainability, with practical development being constrained to only those who have paid for access to the M\textsc{atlab} environment.
 That is not to say that the M\textsc{atlab} and Jupyter GUIs are redundant, on the contrary, they facilitate quick parameter exploration that could subsequently be automated directly through the library. Neither Jupyter nor M\textsc{atlab}'s App Designer are permissive to all design approaches, but with the implementation of the library in C++ a number of possibilities become available. This section will discuss some potential deployments for a \textsc{magpie} GUI, the technical requirements, and what benefits there are to gained form such development.
