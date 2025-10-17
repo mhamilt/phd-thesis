@@ -53,9 +53,15 @@ Usage: `sh ./compile-thesis.sh [OPTIONS] main`
 
 ## Generate Files
 
+Reduce image file size
+
+```
+sips -Z 640 *.jpg *.png
+```
 
 ### Bibliography
 
 ```sh
 pandoc -t markdown_strict  -F pandoc-crossref --citeproc -s bib-template.md -o bibliography.md
 ```
+
