@@ -32,6 +32,13 @@ and minor improvements to the executions of the optical sensing system.
 
 \subsection{CAD/CAM processes}\label{sec:cad-cam-jacks}
 
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\linewidth]{img/laser-gradients-1-row.jpg}
+    \caption[Test gradients using a laser cutter on MDF]{Test gradients of variaious heights using a laser cutter on MDF with decreasing laser power form left to right. The range of the gradient was to compressed to be differentiated by the optical sensor. On high power settings, scorching tend to bleed around the raster, thus affecting the surrounding material and area of the gradient.}
+    \label{fig:laser-speckle}
+\end{figure}
+
 A major limitation across all interfaces discussed in
 Chapter~\ref{ch:interaction} is the gradient stickers used for the sensor.
 Although the stickers are printed and cut by machines, allowing for large
@@ -78,9 +85,31 @@ ultimately too unrefined to be applied to the Mark 1.
 
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\linewidth]{img/laser-gradients-1-row.jpg}
-    \caption[Test gradients using a laser cutter on MDF]{Test gradients of variaious heights using a laser cutter on MDF with decreasing laser power form left to right. The range of the gradient was to compressed to be differentiated by the optical sensor. On high power settings, scorching tend to bleed around the raster, thus affecting the surrounding material and area of the gradient.}
-    \label{fig:laser-speckle}
+    \begin{subfigure}{1\textwidth}
+        \centering
+        \includegraphics[width=1.0\linewidth]{img/jack-dimensions-w-slots-1.pdf}
+        \caption{}
+        \label{fig:jack-model}
+    \end{subfigure}
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.9\linewidth]{img/cad-jack-cutout-white.png}
+        \caption{}
+        \label{fig:jack-cut-out}
+    \end{subfigure}
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.9\linewidth]{img/cad-jack-printed.JPG}
+        \caption{}
+        \label{fig:jack-cut-out-3d-print}
+    \end{subfigure}
+    \caption[CAD Harpsichord Jacks]{(\subref{fig:jack-model}) CAD drawing of the jack body used for CNC
+        routing and 3D printing. Values in millimetres. (\subref{fig:jack-cut-out}) CAD jack body with a
+        sloped recess to create a `shutter' for the optical sensor.
+        (\subref{fig:jack-cut-out-3d-print}) 3D printed variation of the jack body
+        with inverted slope. The height of the slope is longer than the jacks travel
+        to provide some leeway for misalignment and variation in the sensor heights
+        across the entire keyboard.}
 \end{figure}
 
 For modification, a laser cutting approach was tested. The hypothesis was for a
@@ -112,31 +141,9 @@ application of the optical sensors.
 
 \begin{figure}
     \centering
-    \begin{subfigure}{1\textwidth}
-        \centering
-        \includegraphics[width=1.0\linewidth]{img/jack-dimensions-w-slots-1.pdf}
-        \caption{}
-        \label{fig:jack-model}
-    \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[width=0.9\linewidth]{img/cad-jack-cutout-white.png}
-        \caption{}
-        \label{fig:jack-cut-out}
-    \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[width=0.9\linewidth]{img/cad-jack-printed.JPG}
-        \caption{}
-        \label{fig:jack-cut-out-3d-print}
-    \end{subfigure}
-    \caption{(\subref{fig:jack-model}) CAD drawing of the jack body used for CNC
-        routing and 3D printing. (\subref{fig:jack-cut-out}) CAD jack body with a
-        sloped recess to create a `shutter' for the optical sensor.
-        (\subref{fig:jack-cut-out-3d-print}) 3D printed variation of the jack body
-        with inverted slope. The height of the slope is longer than the jacks travel
-        to provide some leeway for misalignment and variation in the sensor heights
-        across the entire keyboard.}
+    \includegraphics[width=0.8\linewidth]{img/cnc-jacks.jpeg}
+    \caption[CNC Harpsichord Jacks]{Jacks created plywood and a CNC router. Though the jacks could be milled to a precise thickness, the cutting process was prone to tear outs in the material. As such, the CNC approach was subsequently abandoned in favour of experiments in laser cutting.}
+    \label{fig:cnc-jacks}
 \end{figure}
 % \begin{figure} \centering
 %     \includegraphics[width=0.7\linewidth]{img/cad-jack-cutout-white.png}
@@ -147,7 +154,7 @@ Taking inspiration from the shutter of a camera, section of the jack would be
 cut out (Figure~\ref{fig:jack-cut-out}). As the cut out section passed the
 optical sensor, a larger amount of light would be reflected. The baffles of the
 sensor would help restrict the field of view limit the light bleed between
-sensors. CNC routing of the jack bodies turned out to be time consuming for only
+sensors. CNC routing of the jack bodies (Figure~\ref{fig:cnc-jacks}) turned out to be time consuming for only
 a small number. The available router model and CNC bits were also prone to
 breaking , particularly around the damper slots, where there as commonly tear
 out. Finally, the materials for the jacks are typically hardwood such as pear,
@@ -272,13 +279,6 @@ Irregular timing in the central firmware loop results in deviation in time. This
 section will cover the methods for reducing jitter, but the consequences that
 impact the rest of design as a result.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.7\linewidth]{example-image}
-    \caption{PLACEHOLDER Example diffusers for LEDs.}
-    \label{fig:led-diffuser}
-\end{figure}
-
 \subsubsection{Sensor Signal Measurement}\label{sec:tia}
 
 This sections covers the possible development of the voltage measurment from the
@@ -294,7 +294,16 @@ Since current is induced through the phototransistor, a voltage is therefore
 present across the pull-up resistor. This voltage can be measured against
 transistor current by creating a signal path between the pull-up resistor and
 the phototransistor collector that is then connected to an analogue-to-digital
-converter. The motivations behind this configuration were manifold, with each
+converter. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{example-image}
+    \caption{PLACEHOLDER Example diffusers for LEDs.}
+    \label{fig:led-diffuser}
+\end{figure}
+
+The motivations behind this configuration were manifold, with each
 reason relating back to the FAIR principles, primarily accessibility and
 reproducibility. A single resistor is a cheap and simplistic method for
 measuring the current through the transistor as voltage and a low technical
@@ -457,10 +466,8 @@ device (SMD) format (Figure~\ref{fig:tht-vs-smd}).
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{img/sparkfun_qre1113_2025.jpg}
-    \caption[Surface mound device QRE1113]{Surface mound device QRE1113 and current-limiting and pull-up
-        and resistors with a U.S. quarter (24.26 mm diameter) for scale. Source
-        \cite{sparkfun_qre1113_2025} Copyright SparkFun Electronics (Usage
-        Permission Pending).}
+    \caption[Surface mound device QRE1113]{Surface mound device QRE1113 and current-limiting and pull-up and resistors with a U.S. quarter (24.26 mm diameter) for scale. Source
+        \cite{sparkfun_qre1113_2025} Image Copyright SparkFun Electronics \href{https://creativecommons.org/licenses/by-nc-sa/3.0/deed.en}{(CC BY-NC-SA 3.0)}.}
     \label{fig:tht-vs-smd}
 \end{figure}
 
