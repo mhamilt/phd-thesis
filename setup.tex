@@ -1,6 +1,11 @@
 %----------------------------------------------------------------------------------------
 % Document Setup and Geometry
-\documentclass[11pt,a4paper,openright,twoside]{book}
+\documentclass[
+     11pt, 
+  a4paper, 
+openright, 
+  twoside,
+]{book}
 \usepackage[
      paper = a4paper, % 21 x 29.7 cm
        top = 2.10cm,  
@@ -14,10 +19,14 @@ includehead,
 includefoot         
 ]{geometry}
 %----------------------------------------------------------------------------------------
+\usepackage{emptypage} % no numbering on empty pages
+\hyphenpenalty=5000    % helps to discourage hyphenation 10000 for no hyphens
+\tolerance=1000
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
 % Packag options
 \PassOptionsToPackage{T1}{fontenc}
 \PassOptionsToPackage{utf8}{inputenc}
-
 \usepackage{
     adjustbox,
      amsfonts,
@@ -45,6 +54,7 @@ includefoot
      multirow,
     newtxtext,
     newtxmath,
+     pdfpages,
     pmboxdraw,
      setspace,
    subcaption,
@@ -124,24 +134,6 @@ includefoot
   {\multicitedelim}%
   {\usebibmacro{postnote}%
 }%
-
-%----------------------------------------------------------------------------------------
-
-\makeatletter
-\newcommand{\SAVED@cleardoublepage}{} 
-\let\SAVED@cleardoublepage\cleardoublepage
-\renewcommand*{\cleardoublepage}{
-  \clearpage 
-  \begingroup 
-    \pagestyle{empty}
-    \SAVED@cleardoublepage 
-  \endgroup 
-} 
-\makeatother
-\hyphenpenalty=5000 % helps to discourage hyphenation 10000 for no hyphens
-\tolerance=1000
-
-%%%%%%%%%% DO NOT EDIT %%%%%%%%%%
 
 %----------------------------------------------------------------------------------------
 % Footnote Formatting
