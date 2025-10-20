@@ -554,8 +554,9 @@ To avoid reliance on Fortran binaries, the C\textsc{++} implementation of \texts
 
 Both libraries are heavily templated, which makes the learning curve steeper but provides type safety and performance advantages. The C\textsc{++} development followed the same structure and methodology as the M\textsc{atlab} and Python implementations \cite{magpie_cpp_2025}.
 
-
-Although the C\textsc{++} version remains under active development, early benchmarks indicate strong performance and numerical agreement with M\textsc{atlab}. Figure~\ref{fig:biharm-diag-comp} compares construction times for the diagonal biharmonic operator across Python, M\textsc{atlab}, and C\textsc{++}. The C\textsc{++} implementation is comparable to M\textsc{atlab} and is likely to improve further with targeted optimisation. Eigen stores sparse matrices in CSC format, as M\textsc{atlab} does, but it exposes explicit control over memory during assembly. Using triplet insertion\footnote{In the format \texttt{(value, x-coordinate, y-coordinate)}} followed by a finalisation step avoids repeated memory reallocation.
+Although the C\textsc{++} version remains under active development, early benchmarks indicate strong performance and numerical agreement with M\textsc{atlab}. Figure~\ref{fig:biharm-diag-comp} compares construction times for the diagonal biharmonic operator across Python, M\textsc{atlab}, and C\textsc{++}. The C\textsc{++} implementation is comparable to M\textsc{atlab} and is likely to improve further with targeted optimisation. Eigen stores sparse matrices in CSC format, as M\textsc{atlab} does, but it exposes explicit control over memory during assembly. Using triplet insertion,
+\footnote{In the format \texttt{(value, row, column)}} 
+followed by a finalisation step, avoids repeated memory reallocation.
 
 \begin{figure}
     \centering
