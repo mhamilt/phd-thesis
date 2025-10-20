@@ -6,9 +6,78 @@ The two projects covered in the previous chapters have use cases and application
 
 \section{Interaction}\label{sec:future-interaction}
 
-Future work on the keyboard interface focuses on two complementary goals: (i) making the system easier to build, install, and maintain at museum scale, and (ii) enriching the visitor and performer experience while remaining faithful to the conservation motivations established in Chapter~\ref{ch:interaction}. The first goal concentrates on fabrication and electronics---reducing calibration effort, improving robustness, and keeping the design accessible and reproducible under the open methodology (Section~\ref{sec:open-methods}). The second goal targets deployment: integrating the interface more coherently into its acoustic context, adding tactility that aligns with known haptic factors, and encouraging engagement within the constraints of exhibition practice. The subsections below organise these developments around fabrication (\S\ref{sec:cad-cam-jacks}), electronics and layout (\S\ref{sec:future-pcb-layout}), temporal performance (\S\ref{sec:latency}), exhibition enhancements, and research/application extensions.
+Future work on the keyboard interface builds directly on the constraints, improvisations, and design compromises described in Chapter~\ref{ch:interaction}. Rather than approaching these retrospectively as isolated shortcomings, the developments in this chapter are framed as continuations of specific pressures: how to make the system maintainable at scale, how to reduce calibration friction, how to improve robustness without abandoning openness, and how to support richer embodied experience in exhibition contexts. Table~\ref{tab:ch4-roadmap} summarises the key limitations encountered and the strategies that now shape the direction forward.
 
-\subsection{CAD/CAM processes}\label{sec:cad-cam-jacks}
+
+The remainder of Section~\ref{sec:future-interaction} develops these strategies as a series of responses that extend, refine, or redirect earlier design decisions. The following subsections trace this progression through fabrication and sensing (\S\ref{sec:cad-cam-jacks}), electronics and layout (\S\ref{sec:future-pcb-layout}), temporal performance (\S\ref{sec:latency}), exhibition integration, and research/application trajectories.
+
+
+\begin{table*}[htb!]
+\centering
+\small
+\begin{tabular}{p{2.0cm} p{4.7cm} p{7.2cm}}
+\toprule
+\textbf{Area} & \textbf{Limitation / Problem (Ch. 2)} & \textbf{Going-Forward Strategy} \\
+\midrule
+Fabrication 
+&
+Gradient stickers require manual application and periodic rework; humidity changes alter jack fit; adhesive lifespan; re-calibration overhead when reapplying.
+&
+Make sensing surface \emph{integral} to the jack via CAD/CAM: (a) geometric “shutter” feature in jack body (CNC/3D print), (b) revisit laser-etched reflectance once electronics improve sensitivity. Retain stickers as low-risk baseline until jigs/workflow stabilise. \\
+\addlinespace
+Mechanical Integration
+&
+Vertical sensor boards are fragile in tight spaces; difficult to install and prone to misalignment; limited clearance in multi-register actions.
+&
+Split into \emph{sensor module} (fixed pitch, pluggable) + \emph{signal board} (horizontal, robust routing). For multi-register: use per-key mini-modules where needed or interpolate inner-register thresholds from outer sensors to reduce install burden. \\
+\addlinespace
+Visibility during Calibration
+&
+LED indicators may be hidden with horizontal mounting; calibration visibility suffers under exhibit lighting.
+&
+Fit small opaque diffusers over on-board LEDs to improve angular visibility during calibration; keep indicators minimal in exhibition mode. \\
+\addlinespace
+Sensing Electronics
+&
+Voltage-divider readout limited by phototransistor parasitic capacitance (low-pass effect); speed/noise trade-offs.
+&
+Adopt transimpedance amplifier (TIA) with feedback capacitor and biasing; place TIAs on the signal/controller board near power rails; trim values where necessary while keeping BOM accessible. Consider QRD1114 as a faster sensor with retuned TIA. \\
+\addlinespace
+Firmware
+&
+Low jitter is hard with a free-running main loop; portability constraints limit use of high-precision timers.
+&
+Use hardware timers on nRF52 (\texttt{NRF\_TIMERx}) or \texttt{mbed::Ticker} to schedule sensing/MIDI; keep ISRs minimal. Alternatively evaluate ESP32-S3 (ESP-IDF) for timed tasks, documenting trade-offs vs. portability. Prioritise predictable jitter over absolute minimum latency. \\
+\addlinespace
+Exhibition Acoustics
+&
+Perceptual disconnect between headphone playback and room acoustics.
+&
+Add convolution with venue impulse response at listening position; optionally add lightweight IMU head-tracked binaural for stabilised cues. \\
+\addlinespace
+Exhibition Haptics
+&
+Headphones reduce embodied cues; limited tactile immersion at the keyboard/bench.
+&
+Introduce subtle keybed/bench vibration using low-passed signal with conservative levels (per noise policies), following tactile-perception best practice. \\
+\addlinespace
+Visitor Engagement
+&
+Some visitors misread the interface as untouchable due to museum norms; signage alone can be ambiguous.
+&
+Repurpose existing RGB LEDs for a slow, warm “breathing” idle glow to signal interactivity (disabled during performance), visually differentiating the interface from historical instruments. \\
+\bottomrule
+\end{tabular}
+\caption{Haptic keyboard limitations and going-forward strategies}\label{tab:ch4-roadmap}
+\end{table*}
+
+The remainder of Section~\ref{sec:future-interaction} develops these strategies as a series of responses that expand or redirect earlier design decisions. The following subsections trace this progression through fabrication and sensing (\S\ref{sec:cad-cam-jacks}), electronics and layout (\S\ref{sec:future-pcb-layout}), temporal performance (\S\ref{sec:latency}), exhibition integration, and research/application trajectories.
+
+
+
+
+
+\subsection{Integrated Jack Fabrication}\label{sec:cad-cam-jacks}
 
 \begin{figure}
     \centering
@@ -17,12 +86,13 @@ Future work on the keyboard interface focuses on two complementary goals: (i) ma
     \label{fig:laser-speckle}
 \end{figure}
 
-The current gradient stickers are manufacturable at scale but create overhead in application, rework, and re-calibration. Variability in jack width (short edge around 4.35~mm), humidity-driven dimensional change, and adhesive lifespan~\cite{antalis_coala_2025} all contribute to drift and labour. To reduce this burden, the reflective surface should become integral to the jack rather than an applied layer, while keeping production accessible via CAD/CAM.
+Reflective gradient stickers were originally adopted as a fast, inexpensive, and reproducible way to enable optical sensing across multiple jacks. That choice made prototyping feasible, but it also introduced a maintenance loop that has grown rather than diminished with refinement. Dimensional variability in the jack bodies (typically 4.35\,mm across the short edge), humidity-driven expansion and contraction, and the finite lifespan of adhesive layers~\cite{antalis_coala_2025} all contribute to drift and repeated recalibration. What initially functioned as a practical shortcut has therefore become a persistent source of labour. The question is no longer how to improve the sticker, but how to remove it from the sensing chain altogether.
 
-Two routes remain promising: (1) \emph{modifying} wooden jacks with controlled surface treatments, and (2) \emph{fabricating} jacks via CNC or 3D printing with sensor-facing features embedded in the geometry. Both routes use readily available tools and file formats (e.g., Fusion 360\footnote{\url{https://www.autodesk.com/products/fusion-360/personal}} , Inkscape\footnote{\url{https://inkscape.org}} , Processing\footnote{\url{https://processing.org}} ) to preserve reproducibility and iteration speed.
+A more sustainable approach treats the reflective surface not as an applied layer but as a property of the jack itself. This shifts attention from the process of correction to the process of fabrication: if the relevant geometry and reflectance are built into the component, there is less to realign, replace, or reattach. At the same time, any change in fabrication method must remain compatible with the open, small-scale production ethos that underpins the interface as a conservation tool. Techniques must therefore rely on accessible materials, common CAM workflows, and file formats that can circulate outside specialist workshops.
 
+One early path was to adapt the existing wooden jacks through laser etching. This had the appeal of retaining the original material while introducing a textured surface that could modulate reflected light. However, tests such as those shown in Figure~\ref{fig:laser-speckle} exposed the limitations of that approach. Low-power passes produce insufficient contrast for the optical sensor, while higher-power settings burn and bleed into the surrounding area, flattening any gradient. Although the method is not ruled out entirely—improvements in sensor-side sensitivity (see Section~\ref{sec:tia}) could make it viable—the reliability and repeatability required at scale cannot be guaranteed with current hardware.
 
-Initial laser-etch trials aim to create a speckle pattern with sufficient reflectance contrast but, as shown in Figure~\ref{fig:laser-speckle}, available cutters either under-expose (low contrast) or overheat the substrate (bleed and loss of gradient). An electronics-side sensitivity increase could recover this option, but it implies circuit changes (\S\ref{sec:tia}).
+A more decisive shift came from reframing the problem as one of fabrication rather than surface treatment. Instead of modifying a finished jack to make it senseable, the geometry of sensing can be designed into the part from the outset. Figures~\ref{fig:jack-model}--\ref{fig:jack-cut-out-3d-print} show the progression of experiments that take this approach. In each case, the jack body incorporates a sloped or recessed ``shutter'' feature that passes through the sensor’s field of view. Reflectance then becomes a function of motion through space rather than the condition of an applied layer.
 
 \begin{figure}
     \centering
@@ -53,10 +123,7 @@ Initial laser-etch trials aim to create a speckle pattern with sufficient reflec
         across the entire keyboard.}
 \end{figure}
 
-For fabrication, a geometric ``shutter'' feature embeds the sensing function into the jack itself (Figures~\ref{fig:jack-model}--\ref{fig:jack-cut-out-3d-print}). As the recess passes the sensor, reflected flux increases within the baffled field of view. CNC in hardwood offers dimensional accuracy but risks tear-out at slots and requires planing and post-fit (Figure~\ref{fig:cnc-jacks}); it also raises the tooling barrier and conflicts with the accessibility goal. 3D printing in PLA keeps costs low, supports colour experimentation, and scales rapidly; however, tongues and quills still require fitting, and alignment errors relocate effort from stickers to jack height adjustment. In the near term, stickers remain the low-risk baseline; the printed shutter becomes a viable path once electronics allow tighter sensing margins (\S\ref{sec:tia}) and a repeatable jack assembly workflow is established.
-
-As with earlier prototypes, the use of PLA reflects the thesis' focus on functional replication for research and exhibition contexts rather than material-authentic restoration. These components are not intended as replacements within historic instruments, but as non-invasive surrogates that preserve and externalise action behaviour.
-
+Two fabrication routes were tested in parallel: CNC cutting in hardwood and additive manufacturing in PLA. CNC work promises material familiarity and structural rigidity, but introduces its own friction points. As shown in Figure~\ref{fig:cnc-jacks}, tear-out occurs along the narrow slots needed for tongues and quills, and post-planing is required to achieve consistent thickness across a set. More significantly, the equipment and skill requirements place it at odds with the accessibility and reproducibility that underpin the interface as a conservation-led system.
 
 \begin{figure}
     \centering
@@ -65,9 +132,16 @@ As with earlier prototypes, the use of PLA reflects the thesis' focus on functio
     \label{fig:cnc-jacks}
 \end{figure}
 
-Figure~\ref{fig:jack-cut-out-3d-print} shows a functional 3D-printed prototype (see also Section~\ref{sec:prototype}). Material and voicing constraints (e.g., PLA versus Delrin~\cite{bcn3d_pla_2019,dupont_delrin_2017}; \cite{barclay_preservation_2005}) mean quilling remains a manual step. As sensing improves, the design can prioritise printed shutters over stickers where assembly risk is acceptable.
+PLA-based printing, by contrast, tolerates complex geometry, supports colour and dimensional iteration, and scales quickly. It does not remove labour entirely: tongues and quills still require fitting, and small dimensional variances shift attention from sticker placement to jack-height alignment. Yet this is labour that serves a single fabrication stage rather than a recurring cycle of reapplication and recalibration. The material choice also reflects the function of these jacks within the broader conservation framework. They are not introduced into historic instruments, nor intended to replicate their material authenticity. Their purpose is to externalise and preserve action behaviour in a form that can be installed, tested, and iterated without risk to the original mechanism.
 
-\subsection{PCB Layout}\label{sec:future-pcb-layout}
+Figure~\ref{fig:jack-cut-out-3d-print} shows one such prototype (see also Section~\ref{sec:prototype}). Constraints around quilling remain—whether in PLA, Delrin, or other substitutes~\cite{bcn3d_pla_2019,dupont_delrin_2017,barclay_preservation_2005}—but these affect assembly technique rather than the sensing strategy itself. As the electronics evolve (Section~\ref{sec:tia}) and a stable workflow for jack fabrication emerges, the need for stickers should recede further, with the printed shutter serving as the primary surface for modulation.
+
+
+\subsection{Modular Sensor Architecture}\label{sec:future-pcb-layout}
+
+As the sensing system matured, the physical arrangement of the electronics emerged as a constraint in its own right. The original vertical sensor boards were designed to minimise footprint and sit close to the jack body, but their orientation made them mechanically fragile and difficult to install in the confined geometries of harpsichord actions. Narrow clearances between registers leave little room for board-edge components, and misalignment at installation has repeatedly resulted in damage or the need for ad hoc spacing interventions. These issues do not reflect a flaw in the sensing principle, but in how the circuitry is embedded within the mechanism.
+
+A more robust approach separates the assembly into two distinct elements: a \emph{sensor module} that maintains fixed pitch and optical alignment, and a \emph{signal board} that handles routing, power conditioning, and analogue front ends. This modular structure localises mechanical risk to the sensor element while allowing the rest of the electronics to be placed where space and airflow are more permissive. Figure~\ref{fig:schmidt-sensor-board} illustrates one such module from \textcite{schmidt_sparksichord_2025}, where the sensing surface and connector remain compact and serviceable.
 
 \begin{figure}
     \centering
@@ -77,7 +151,7 @@ Figure~\ref{fig:jack-cut-out-3d-print} shows a functional 3D-printed prototype (
     \label{fig:schmidt-sensor-board}
 \end{figure}
 
-Separating the \emph{sensor module} from a \emph{signal board} increases mechanical robustness, simplifies installation, and localises iteration. The current vertical boards are vulnerable in tight spaces; a modular unit at fixed pitch (cf.~\textcite{schmidt_sparksichord_2025}) plugs into headers, while a horizontal signal board handles routing, power conditioning, and analogue front ends.
+Spatial constraints become especially acute in multi-register instruments. Figure~\ref{fig:3-registers} shows how stacked or closely spaced registers leave insufficient clearance for a long vertical board, regardless of pitch. In these cases, smaller per-key mini-modules provide an alternative that respects the geometry of the mechanism while retaining the same sensing principle. Where even that proves impractical, a hybrid strategy can be applied: two outer sensor rows capture motion directly, and values for the inner registers are interpolated during calibration. This trades installation complexity for computational load, but in a way that isolates mechanical risks rather than multiplying them.
 
 \begin{figure}[!b]
     \centering
@@ -88,7 +162,7 @@ Separating the \emph{sensor module} from a \emph{signal board} increases mechani
     \label{fig:3-registers}
 \end{figure}
 
-Multi-register actions (Figure~\ref{fig:3-registers}) reduce available clearance. Where a single long module will not fit between registers, per-key mini-modules become an alternative, with an associated redistribution of signal paths. A pragmatic fallback retains two outer sensor rows and interpolates thresholds for inner registers during calibration, trading installation labour for calibration complexity.
+Figure~\ref{fig:new-pcb-block-diagram} summarises the updated topology. The signal board resides horizontally under the wrestplank, away from key travel and optical apertures. This not only improves mechanical resilience but also opens space for analogue refinement and power management, both of which have been limited by previous board geometries. Because LEDs mounted in this position are less visible during calibration, a small opaque diffuser can be added to preserve visual feedback without affecting exhibition conditions (see Figure~\ref{fig:led-diffuser}).
 
 \begin{figure}
     \centering
@@ -97,7 +171,6 @@ Multi-register actions (Figure~\ref{fig:3-registers}) reduce available clearance
     \label{fig:new-pcb-block-diagram}
 \end{figure}
 
-Figure~\ref{fig:new-pcb-block-diagram} outlines the updated topology. The signal board mounts horizontally under the wrestplank, reducing interference with keys and lowering damage risk. Because horizontal mounting may hide on-board LEDs, a small opaque diffuser improves visibility during calibration (Figure~\ref{fig:led-diffuser}).
 
 \subsection{Latency and Jitter}\label{sec:latency}
 
