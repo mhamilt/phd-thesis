@@ -449,7 +449,7 @@ The heritage sector’s use of digital technology is far from settled. Immersive
 % Alongside the digital storage comes the risks of bit rot and obsolescence.
 % Museum professionals need adequate training to have an understanding of digital data and its inherent problems of obsolescence and silent corruption \cite{rubio_work_2020,schwarz_disk_2006, parry_museums_2010}.
 
-One clear advantage of the digital is aggregation. Projects such as Musical Instrument Museums Online (MIMO) collate catalogue data from distributed collections, improving access and enabling comparison at scale. The usefulness of such systems hinges on data quality and stewardship \cite{dolan_mimo_2017}, which in turn demand multidisciplinary skills. Museum professionals require training in data management, obsolescence, and silent corruption \cite{rubio_work_2020,schwarz_disk_2006,parry_museums_2010}; across the humanities, gaps remain in sustainable data practices \cite{taylor_shaping_2022}.
+One clear advantage of the digital domain is the aggregation of data from separate sources. Projects such as Musical Instrument Museums Online (MIMO) collate catalogue data from distributed collections, improving access and enabling comparison at scale. The usefulness of such systems hinges on data quality and stewardship \cite{dolan_mimo_2017}, which in turn demand multidisciplinary skills. Museum professionals require training in data management, obsolescence, and silent corruption \cite{rubio_work_2020,schwarz_disk_2006,parry_museums_2010}; across the humanities, gaps remain in sustainable data practices \cite{taylor_shaping_2022}.
 
 A further consideration concerns the `digital heritage we create:' software, datasets, and workflows produced during conservation. If instruments are preserved digitally, the tools of preservation must themselves be preservable. Software reproducibility is a persistent problem \cite{perkel_challenge_2020}, with processes becoming irreproducible after surprisingly short periods \cite{robert_reproducibility_2020}.
 
@@ -506,7 +506,7 @@ The preceding discussion highlighted the fragility of digital heritage and the r
 Following \textcite{procida_diataxis_2025}, we can distinguish four complementary forms of documentation: Tutorials, How-to guides, Explanation, and Reference.
 These forms of documentation can be naturally split to address two audiences: user-facing and developer-facing.
 Dividing \textcite{procida_diataxis_2025}, developer-facing documentation lies in How-To and Reference forms and the user-facing in tutorials and explanation. 
-These are not of course not hard boundaries as the definition of a binary audience does not hold true in practice. 
+This division of documentation is not formed by hard boundaries, as the definition of a binary audience does not hold true in practice. 
 Instead the audience could more precisely be described as on a user-developer spectrum. 
 Reference documentation can be generated from source annotations to avoid duplication and to support automation.
 Across M\textsc{atlab}, Python, and C\textsc{++} there are multiple conventions \cite{vanrossum_pep8_2001,goodger_pep257_2001}, and several tooling ecosystems coexist (e.g. Doxygen, Sphinx, HeaderDoc).
@@ -561,16 +561,17 @@ The YIN pitch detector \cite{cheveigne_yin_2002} is widely adopted, with M\texts
 Across these seven projects there is a clear movement towards openness, but uneven adherence to best practice. Table~\ref{tab:foss-compliance} summarises the status with respect to source availability, version control, documentation, licensing, and persistent identifiers. Two trends stand out. First, persistent identifiers are largely absent; where present, suggested citations help but do not replace DOIs \cite{hornikx_exploring_2024}. Second, developer documentation is thin; most projects assume technically experienced users, which narrows adoption outside core acoustics communities. Licensing is generally present, though some projects apply non-OSI licences (or CC variants) in ways that limit reuse \cite{cc_can_2025,hong_choosing_2025}. Finally, software evolves: dual DOIs (project and release) clarify which version underpinned a result, and make bugs or behavioural changes tractable in retrospect.
 
 The GNU Software Freedoms \cite{stallman_free_1996} can be summarised as the
-freedom to run, copy, study, and modify FOSS. From Table\ref{tab:foss-compliance} we can see the freedoms to run, copy,
+freedom to run, copy, study, and modify FOSS. 
+From Table\ref{tab:foss-compliance} we can see that the freedoms to run, copy,
 and study are well represented in the research software discussed, but the last (to modify)
-is the most underserved. Any source code can be modified is it accessible, but to do so one needs to first
+is the most underserved. Any source code can be modified if it is publicly accessible, but to do so one needs to first
 understand it and bare code does not typically provide adequate information.
-From the lack of universal version control, reference documentation
-we can surmise that there no intention of external development for these software.
-This conclusion is also backed by the absence of DOIs as when the software is not `alive’, there is no reason to cite it directly. 
+From the lack of universal version control and reference documentation,
+we can surmise that there is little to no intention of external development for the software discussed above.
+This conclusion is also backed by the absence of DOIs as when the software is not `alive,' there is no reason to cite it directly. 
 Static software can be served by suggested paper citations.
 
-For the projects in this thesis, the keyboard interfaces and \textsc{magpie}, aims to model FLOSS-aligned research practice: public VCS, explicit licensing, structured documentation for users and developers, and archival deposition with DOIs. The thesis and associated papers \cite{hamilton_augmentation_2025,hamilton_magpie_2024} comprise the explanatory documentation and the remaining documentation as part of the repositories \cite{hamilton_nemus_2025,hamilton_cad_2025,hamilton_models_2025,hamilton_firmware_2025,magpie_matlab_2025,magpie_python_2025,magpie_cpp_2025} and online reference manuals \cite{hamilton_documentation_2025,hamilton_matlab_2025,hamilton_python_2025}.
+The projects in this thesis, the keyboard interfaces and \textsc{magpie}, aim to model FLOSS-aligned research practice: public VCS, explicit licensing, structured documentation for users and developers, and archival deposition with DOIs. The thesis and associated papers \cite{hamilton_augmentation_2025,hamilton_magpie_2024} comprise the explanatory documentation and the remaining documentation as part of the repositories \cite{hamilton_nemus_2025,hamilton_cad_2025,hamilton_models_2025,hamilton_firmware_2025,magpie_matlab_2025,magpie_python_2025,magpie_cpp_2025} and online reference manuals \cite{hamilton_documentation_2025,hamilton_matlab_2025,hamilton_python_2025}.
 
 \begin{table}
 	\centering
