@@ -91,13 +91,13 @@ includefoot
 \usepackage[
         style = numeric-comp,
       backend = biber,
-     maxnames = 1,
- maxcitenames = 1,
+     maxnames = 99,
+ maxcitenames = 99,
    uniquelist = false,
-          doi = false,
+          doi = true,
           url = true,
       sorting = nyt,
-    sortcites = true,    
+    sortcites = true,
 ]{biblatex} 
 \addbibresource{main.bib}
 
@@ -117,7 +117,7 @@ includefoot
       {, }%%
     \else%
       % last author in multiple list: add 's%
-      \usebibmacro{name:last}{\namepartfamily}{\namepartgiven}{\namepartprefix}{\namepartsuffix}'s%%
+      \usebibmacro{name:family}{\namepartfamily}{\namepartgiven}{\namepartprefix}{\namepartsuffix}'s%%
     \fi%
   \fi%
 }%
@@ -185,3 +185,20 @@ includefoot
 
 \ExplSyntaxOff
 %----------------------------------------------------------------------------------------
+% \AtEveryBibitem{%
+%   \iffieldundef{doi}
+%     {}
+%     {%
+%     \clearfield{url}
+%       % \iffboolexpr{
+%       %   test {\ifhyperref}
+%       %   and
+%       %   test {\ifentryhasfield{url}}
+%       % }
+%       % {%
+%         % \iffieldequalstr{url}{https://doi.org/\thefield{doi}}
+%         %   {\clearfield{url}} % Remove redundant DOI-URLs
+%         %   {\clearfield{url}}%
+%       % }%
+%     }%
+% }
