@@ -301,102 +301,37 @@ While the conservation use case motivates the design, the same sensing opens exp
 
 \section{MAGPIE}\label{sec:future-magpie}
 
-Improvements to \textsc{magpie} can be split between those of functionality and
-those of interface. The core functions of \textsc{magpie} would already provide
-support for number of research use cases, but further development is needed to
-enable it as a powerful open source tool for musical acoustics. Similarly, there
-is functionality that exists but a efficient interface is needed in order to
-full utilise it. \textsc{magpie} seeks to turn traditionally physics based
-problems into a problems of engineering and interface is key in order to
-facilitate that.
+The preceding section has treated interaction through a physical interface; this section turns to its computational counterpart. Whereas the keyboard interface reconstructs material and tactile behaviour, \textsc{magpie} models the soundboard acoustics through simulation. Together they form complementary approaches to the same conservation and research agenda: to make the behaviour of musical artefacts intelligible, reproducible, and openly available. The following discussion, therefore, situates \textsc{magpie} within that shared framework while outlining how its functionality and interface could evolve into a more flexible research platform.
 
-Development within \textsc{magpie} can be focussed within two directions. One in
-functionality and the other in portability. The current iteration is a capable
-illustrative tool for educational purposes and some specific material
-measurement scenarios. The application for tone wood still needs to be developed
-further. Similarly, the tool is available now in the open source language
-Python, but the current interface relies on the Jupyter notebook system, which
-comes with its own technical and portability challenges. One key area for
-expansion is to translate the source code to a compiled language such as
-\textsc{C}~/~\textsc{C++} and Rust. Such a transition provides more granular
-control of compiler optimisations, but more interestingly opens potential for
-deployment.
+At present, \textsc{magpie} is already a capable tool for analysing modal behaviour and material properties, supporting a range of educational and research use cases. Yet the software remains a starting point rather than a finished environment. Further development is needed to strengthen both its computational engine and its usability, particularly if it is to serve as an open-source alternative to proprietary acoustics packages. In practical terms, improvement paths fall into two categories: \emph{functionality}, which addresses the scope and efficiency of simulation, and \emph{portability}, which addresses how the software can be deployed and maintained across different systems.
 
-The primary bottleneck for development is the eigensolver stage. In
-M\textsc{atlab} this achieved with \texttt{eigs} and in python the SciPy linear
-algebra library's \texttt{scipy.sparse.linalg.eigs}. In both cases, these
-eigensolvers are an interface to the ARPACK library \cite{lehoucq_arpack_1998}.
-For M\textsc{atlab} there is analysis of the target matrix to which the user is
-not privvy. M\textsc{atlab} its own sparse library on top of ARPACK
-\cite{gilbert_sparse_1992} which obfuscates the process further.
-M\textsc{atlab}'s \texttt{eigs} function is not one supported by the software's
-code generation systems and the function still requires the M\textsc{atlab}
-runtime if it is to be interfaced with externally. This has implications for
-portability issues, with development being constrained to those with paid access
-to the M\textsc{atlab} environment.
+The current Python implementation, designed for clarity and accessibility, demonstrates the underlying algorithms but relies on the Jupyter notebook interface, which poses portability and maintenance challenges. Translating the computational core into a compiled language such as \textsc{C}~/~\textsc{C++} or Rust would provide greater control over optimisation, allow for direct native compilation, and open possibilities for integration into broader toolchains. In both cases, the aim is not to depart from the open ethos established in earlier chapters but to extend it into more efficient, sustainable code.
 
-In the case of \textsc{C++}, the relevant technologies available for interfacing
-with ARPACK library. First is the open source Eigen library for C++%
-\footnote{\url{https://gitlab.com/libeigen/eigen}} and the Spectra library%
-\footnote{\url{https://spectralib.org}} for eigenvalue problems. Spectra
-consists of a re-write of ARPACK solvers in C++ allowing for direct native
-compilation.
+The primary technical constraint remains the eigensolver stage that underpins modal analysis. In M\textsc{atlab}, this is handled via the \texttt{eigs} function; in Python, through the SciPy sparse linear algebra library (\texttt{scipy.sparse.linalg.eigs}). Both are interfaces to the ARPACK library~\cite{lehoucq_arpack_1998}. M\textsc{atlab}'s sparse infrastructure~\cite{gilbert_sparse_1992} further obscures the solver process and is not supported by the software’s code generation tools, meaning external integration still requires the M\textsc{atlab} runtime. This limits reproducibility to those with licensed access.
+
+Within \textsc{C++}, open-source solutions such as the Eigen%
+\footnote{\url{https://gitlab.com/libeigen/eigen}} and Spectra%
+\footnote{\url{https://spectralib.org}} libraries offer viable paths forward. The latter reimplements ARPACK solvers natively in C++, enabling full compilation without proprietary dependencies. Such developments would move \textsc{magpie} closer to the same ideals that underpin the hardware work of earlier chapters: transparent methods, accessible tooling, and a community-maintained code base that supports both research and pedagogy.
+
 
 \subsection{Functionality}
 
-What is covered here is development of the core functionality as it is apart of
-the \textsc{magpie} framework. Such development means the rewriting and current
-\textsc{magpie} function suite, as well as the addition of further functions. As
-an open source project, the state of the project is constantly fluid. At time of
-writing the latest release of \citetitle{magpie_matlab_2025}, which consists of
-the functionality as discussed in Chapter~\ref{ch:analysis}.
+Development in this area concerns the core numerical and modelling functions that underpin the \textsc{magpie} framework. As an open-source project, \textsc{magpie} remains intentionally fluid, and its functionality evolves with each release. At the time of writing, the most recent version of \citetitle{magpie_matlab_2025} includes the capabilities discussed in Chapter~\ref{ch:analysis}. Continuing work focuses on refining those routines, extending their applicability to orthotropic materials, and improving efficiency in the underlying numerical methods.
 
 \subsubsection{Orthotropic Case}
 
-The grid spacing ($h$) for \textcite{magpie_matlab_2025} is currently shared in
-both the x and y directions. This has the major implication of the model being
-most accurate for integer ratio plate dimensions. Currently the system is
-optimum  where the ratio  of plate dimensions $L_x$ and $L_y$ is equal to the
-ratio of the number of grid points in each dimension $N_x$ and $N_y$. The
-alternative approach is to choose a grid spacing and truncate $\frac{L_x}{h}$
-and $\frac{L_y}{h}$. Shared grid spacing has the effect of the system losing
-accuracy outside of these very tight constraints.
+Earlier implementations of \textsc{magpie} used a shared grid spacing ($h$) for both $x$ and $y$ directions. This constraint simplified the discrete biharmonic operator but limited accuracy to plates whose aspect ratio produced integer grid ratios. In practice, the model performs best when the ratio of plate dimensions $L_x/L_y$ matches the ratio of grid points $N_x/N_y$. The alternative---fixing $h$ and truncating $\frac{L_x}{h}$ and $\frac{L_y}{h}$ independently---avoids this restriction but requires separate spacings $h_x$ and $h_y$.  
 
 \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{img/plot-grid-error.pdf}
-    \caption[Grid space error]{Plot illustrating analytic fifth mode of a plate compared to an isotropic model with shared an independent grid spacing in the x and y dimensions. Shared spacing exhibits saw convergence while the independent spacing converges much more smoothly.}
+    \caption[Grid space error]{Comparison between analytic and modelled fifth mode of a plate for isotropic cases using shared and independent grid spacing in the $x$ and $y$ dimensions. Shared spacing shows saw-tooth convergence, while independent spacing converges smoothly.}
     \label{fig:grid-error}
 \end{figure}
 
-Figure~\ref{fig:grid-error} illustrates the error that arises from such an
-approach. The reason for the behaviour of the shared grid spacing plot is that
-effective plat dimensions are altered. This is only feasible for small $N_x$ and
-$N_y$, since the total grid size $N_{xy}$ increases with the $NxNy$ the system
-grows exponentially larger. For example, the plate in
-Figure~\ref{fig:grid-error} is of dimensions $L_x$ = 100.1 cm and $L_y$ = 81.1cm
-a grid size of  $N_x$ = 1001 points and $N_y$ = 811 points would be needed to
-cancel out the error. The number of bytes for the sparse biharmonic scales
-$N_{xy}$ by a factor of 104, with 13 diagonals and double precision. Additional
-overhead is also required for the eigensolver stage which, with benchmarking,
-adds a further factor of 50. A shared grid spacing would require approximately
-4.2 gigabytes of RAM before it would match the accuracy of the independent $h_x,
-    h_y$ grid spacing. By contrast, the final grid size to the rightmost of
-Figure~\ref{fig:grid-error} comes at a cost of \~118 megabytes of RAM for the
-sparse biharmonic and eigensolver. Where this is relevant is deployment in
-resource constrains settings such as part of an embedded system, where RAM and
-processing requirements come at a financial cost of implementation or in the
-context of a web browser where overall performance will be much slower compared
-to a native implementation.
+Figure~\ref{fig:grid-error} illustrates the error introduced by shared grid spacing. Because the effective plate dimensions are slightly altered, the simulation diverges as grid resolution increases unless the grid ratios are perfectly matched. This is manageable only for small $N_x$ and $N_y$, since total grid size $N_{xy}$ scales exponentially with $N_x N_y$. For instance, for a plate of $L_x = 100.1$\,cm and $L_y = 81.1$\,cm, matching accuracy would require roughly $N_x = 1001$ and $N_y = 811$ grid points---about 4.2\,GB of memory for the sparse biharmonic matrix and eigensolver. By contrast, independent grid spacing achieves equivalent accuracy at roughly 118\,MB, a crucial difference when deploying on resource-limited systems such as embedded devices or web-based applications, where computational overhead directly affects feasibility.
 
-Features such as independent grid spacing, which is implemented as part of an
-orthotropic plate model, have been merged into the the M\textsc{atlab} library
-repository of \textsc{magpie}, which  were based on the orthotropic and lumped
-mass model as described in \textcite{ducceschi_method_2024}. The source is not
-yet in a format which would be distributable. The same principles in exploring
-the isotropic case can be applied to the orthotropic case, magpie would be
-capable of applying the same process to the  elastic constants of a wooden
-plate, two elastic moduli $E_x$ and $E_y$ and  a shear modulus $G_{xy}$.
+Independent spacing has therefore been implemented as part of the new orthotropic plate model, as per the wooden plate case study presented in Section \ref{sec:magpie-case-study}. These extensions have been merged into the M\textsc{atlab} library of \textsc{magpie}, following the orthotropic and lumped-mass formulation described in \textcite{ducceschi_open_2024}. Although the source code is not yet in a distributable format, the underlying principles generalise easily from the isotropic to the orthotropic case, allowing \textsc{magpie} to model distinct elastic moduli $E_x$ and $E_y$ and shear modulus $G_{xy}$---all required for representing wooden soundboards.
 
 \begin{figure}
     \centering
@@ -406,212 +341,79 @@ plate, two elastic moduli $E_x$ and $E_y$ and  a shear modulus $G_{xy}$.
     \label{fig:bracing}
 \end{figure}
 
-% \caption{Soundboard bracing of an eighteenth-century Hemsch harpsichord from
-% \textcite[p.~93]{koster_keyboard_1994}.} \caption{Soundboard bracing of an
-% eighteenth-century Kirkman harpsichord from \textcite[p.~% 99]{koster_keyboard_1994}.}
+The latest development stage introduces a lumped-mass model, enabling simulation of structural features such as soundboard bracing (Figure~\ref{fig:bracing}). These braces stiffen specific regions of the plate and alter its modal distribution, providing a realistic representation of historic construction techniques. The same mechanism also accommodates localised attachments, such as accelerometers or exciters used in experimental setups~\cite{duran_experimentally_2023}. In this way, \textsc{magpie} bridges physical and virtual modelling: it can incorporate measurement artefacts directly into its simulations, making comparison between computational and empirical data more meaningful.
 
+Although these functions can be accessed through the code interface, they would be more intuitively explored through a graphical interface that allows direct manipulation of parameters, visualisation of mode shapes, and integration with measurement data. Interface development, therefore, remains a key avenue for expanding the research and educational reach of \textsc{magpie}.
 
-The latest developments to \textsc{magpie} have implemented a lumped mass model.
-The addition of lumped masses to the system allows for modelling of the wooden
-braces that provide strength to musical instrument soundboards
-(Figure~\ref{fig:bracing}). Furthermore, lumped masses should also provide a
-means to compensating for the effects of components such a as accelerometers or
-exciters which are attached to plate as part of experimental measurement, such
-as the accelerometer in \textcite{duran_experimentally_2023}. Such a set of
-features are not best explored through a code interface, but instead can best be
-leveraged with graphical user interfaces.
 
 \subsection{Graphical User Interfaces}
 
-A graphical user interfaces provide a means to change multiple parameters
-quickly in a way that is more intuitive for the end user. In addition to
-intuitive access to a libraries functions, there is also interactions that arise
-from constraints \cite{wang_artful_2018}.%
-\footnote{``Principle 1.11 Design is constraints which give rise to interactions.''}
-\textsc{magpie} as a software library naturally provides a programmatic
-interface in each of its implementations. Complex, algorithmic iteration over
-parameters that allow for simulations to be run over long periods without
-intervention. Providing the user with a huge parameter space is only as powerful
-as the ability to explore it. There are commonly subtle transition points where
-small changes in any one parameter will have a dramatic affect on mode shapes or
-frequencies. When the user is constrained, however, to the interesting areas of
-the parameter space then the system becomes much easier to explore. Likewise,
-the small adjustments in parameters are isolated to a single mouse interaction
-which would be otherwise difficult or unwieldy to change and explore if it were
-attempted to be achieved through the command-line interface or re-compilation of
-software.
+Graphical user interfaces (GUIs) provide an essential bridge between \textsc{magpie}'s computational framework and its users. They allow multiple parameters to be adjusted rapidly and intuitively, transforming what might otherwise be a command-line experiment into an exploratory, visual process. Beyond convenience, such interfaces embody a key design principle identified by \textcite{wang_artful_2018}: ``design is constraints which give rise to interactions.'' When a parameter space is too large, exploration becomes abstract and disconnected; when it is shaped by meaningful constraints, new patterns and insights emerge.
 
-An example of the functionality that emerges from a GUI would be in the
-presentation of computational results versus those of a real experiment. One
-could iterate over a range of values, but there is no intuitive way to start
-exploring subranges within the larger parameter space; interrupting exploration
-in one space to tangentially explore another.
+In its current form, \textsc{magpie} exposes a programmatic interface that is ideal for long automated runs and algorithmic parameter sweeps. Yet the same openness that enables large-scale computation can also hinder intuitive exploration. Small adjustments to a single variable may yield dramatic changes in modal frequencies or mode shapes, and such nonlinearities are best discovered through direct interaction. A graphical layer therefore serves both as a research tool and as a pedagogical one, helping users understand the sensitivity of acoustic behaviour to material or geometric parameters.
 
-Alternatively as a view that would provide feedback on the percentage error of
-each mode like as shown in Figure~\ref{fig:error-bars}. Serving the dual
-function of fine tuning results but also as practical understanding and
-exploring how each parameter impacts the simulation.
-
-The user should be given the flexibility to change slider limits based on the
-sub-parameter space they are trying to explore. Resolution, or step size, of a
-graphical slider is limited by the resolution of on which it is displayed.
-Minute movements are not a pleasant solution to the problem of sub-parameter
-space exploration. Instead, the user could be allowed to edit the limits
-directly giving a method to move from a macro level exploration of a parameter
-zoom into a sub-range of interest (Figure~\ref{fig:slider-subrange})
-
-As discussed in Section~\ref{sec:jupyter}, an interface for the python version
-of \textsc{magpie} \cite{magpie_python_2025} has already been created using the
-Jupyter notebooks development environment. The Jupyter interface
-\cite{magpie_jupyter_2025} is quite limited, and allows for only those designs
-which can easily implemented using the IPywidgets. Functionality such as
-adjustable range constraints, though technically possible, are more easily
-implemented.  Similarly, M\textsc{atlab}'s App Designer%
-\footnote{\url{https://uk.mathworks.com/products/matlab/app-designer.html}}
-would provide the same mode switching for end users. The App Designer is
-constrained to only those elements made available.
+A GUI also enables modes of feedback that are difficult to achieve in code alone. For example, comparing computational results to experimental data can be made interactive: percentage error for each mode could be visualised directly, allowing researchers to refine material constants in real time (Figure~\ref{fig:error-bars}). Similarly, flexible slider limits and editable ranges permit navigation between global and local scales of a parameter space. Coarse exploration identifies regions of interest; finer sub-ranges then allow detailed tuning (Figure~\ref{fig:slider-subrange}). This multi-scale control transforms simulation from a static task into a responsive dialogue between user and model.
 
 \begin{figure}
     \centering
     \includegraphics[width=0.8\linewidth]{img/ui_prototype_matlab.png}
     \caption[Example \textsc{magpie} graphical user interface using M\textsc{atlab}'s App Designer]{Prototype user interface for \textsc{magpie} created using
         M\textsc{atlab}'s App Designer environment. The UI demonstrates a potential
-        `Error View' for fine tuning elastic constants to more closely match
-        experimental results. The $R_{0y}$ and $K_{0y}$ parameters provide an
-        example of an editable a slider sub-range for finer parameter control. Both
-        parameters control the order of magnitude in order to provide a logarithmic
-        range from 0 to $10^{15}$.}
+        ``Error View'' for fine-tuning elastic constants to match experimental
+        results. The $R_{0y}$ and $K_{0y}$ parameters illustrate editable slider
+        sub-ranges for fine control. Both parameters operate on logarithmic scales
+        from 0 to $10^{15}$.}
     \label{fig:slider-subrange}
     \label{fig:error-bars}
     \label{fig:magpie-tuning}
 \end{figure}
 
+As discussed in Section~\ref{sec:jupyter}, an early interface for the Python version of \textsc{magpie}~\cite{magpie_python_2025} has been developed within the Jupyter Notebook environment~\cite{magpie_jupyter_2025}. While this approach demonstrates proof of concept, it is limited by the capabilities of \texttt{ipywidgets}, which restrict interactive elements and responsiveness. Similarly, M\textsc{atlab}'s App Designer%
+\footnote{\url{https://uk.mathworks.com/products/matlab/app-designer.html}}
+provides a straightforward environment for prototyping but remains constrained to built-in components and ultimately tied to a proprietary runtime.
 
-M\textsc{atlab} also has deployment constraints as \texttt{eigs} function is not
-one that is supported by the software's code generation systems and the function
-still requires the M\textsc{atlab} runtime if it is to be interfaced with
-externally. Such constraints have implications on the accessibility and
-maintainability, with practical development being constrained to only those who
-have paid for access to the M\textsc{atlab} environment. That is not to say that
-the M\textsc{atlab} and Jupyter GUIs are redundant, on the contrary, they
-facilitate quick parameter exploration that could subsequently be automated
-directly through the library. Neither Jupyter nor M\textsc{atlab}'s App Designer
-are permissive to all design approaches, but with the implementation of the
-library in C++ a number of possibilities become available. This section will
-discuss some potential deployments for a \textsc{magpie} GUI, the technical
-requirements, and what benefits there are to gained form such development.
+These platform dependencies raise broader questions about accessibility and sustainability. The \texttt{eigs} function, central to \textsc{magpie}'s modal analysis, cannot be compiled through M\textsc{atlab}'s code generation system and still requires the M\textsc{atlab} runtime for deployment. This limits reproducibility to users with licensed access, running counter to the open methodology outlined throughout this thesis. By contrast, translating the computational core into a compiled language such as \textsc{C++} would enable standalone executables and unlock a wider range of interface frameworks, from lightweight Qt or JUCE front-ends to web-based visualisations.
+
+A dedicated \textsc{magpie} GUI could therefore support both expert and non-expert users: providing immediate visual feedback for research, while also functioning as an educational platform that communicates complex acoustic relationships through interaction. In doing so, it would extend the project’s broader aim—to make the physical and computational behaviour of musical instruments transparent, reproducible, and accessible to the communities that study and preserve them.
+
 
 \subsubsection{C++ Interface}
 
-Graphical user interfaces are typically platform specific, Cocoa for macOS,
-win32 for windows and either GTK or QT for Linux operating systems, each of
-which require platform specific implementation. The JUCE framework therefore
-provides an appealing solution to target all 3 core operating systems
-simultaneously, with its cross-platform native wrappings for audio libraries and
-OpenGL for graphics card rendering. The more graphics orientated, but still open
-source, \texttt{bgfx}%
-\footnote{\url{https://github.com/bkaradzic/bgfx}} may also be more appropriate
-given its support of multiple 3D graphics rendering libraries. If the ultimate
-goal is provide a tool that is easily accessible and cross-platform,
-developments within web technology may provide the best solution.
+While the Python and M\textsc{atlab} implementations of \textsc{magpie} have been instrumental in validating algorithms, long-term accessibility depends on portability and efficient compilation. Graphical interfaces are typically platform-specific---Cocoa for macOS, Win32 for Windows, and GTK or Qt for Linux---each requiring distinct implementation layers. The JUCE framework provides a compelling cross-platform solution, offering unified native wrappers for audio libraries and OpenGL-based rendering. Its abstraction layer enables deployment across all major operating systems without sacrificing performance.  
+
+For applications where 3D rendering or real-time visualisation is central, the open-source \texttt{bgfx} framework%
+\footnote{\url{https://github.com/bkaradzic/bgfx}} offers an alternative. It supports multiple low-level graphics APIs, including Direct3D, Metal, and Vulkan, while maintaining a consistent interface. Choosing either JUCE or \texttt{bgfx} would depend on the intended balance between audio integration and visual complexity.  
+
+Beyond desktop deployment, translating \textsc{magpie} into a compiled language such as \textsc{C++} also establishes a foundation for other targets, including web delivery. A compiled core ensures numerical consistency across builds, tighter control over optimisation, and compatibility with open libraries such as Eigen and Spectra. In this way, \textsc{magpie} can retain the transparency and reproducibility central to its open methodology, while extending its reach beyond proprietary environments.
 
 \subsubsection{Web Technology}\label{sec:wasm}
 
-Porting \textsc{magpie} to a compiled language like \textsc{C++} open up a
-number of exciting possibilities. Similarity in results to that of
-M\textsc{atlab} give an indication of a viable plate analysis tool that is not
-constrained to only those system on which M\textsc{atlab} is supported. Of
-particular  note is the possibility of deploying \textsc{magpie} as an entirely
-web based application. Traditional software has typically required some form of
-installation process, where binaries are compiled for a specific machine
-architecture. Web technologies do away with part of that necessity by delivering
-software directly through a browser. One such technology is Web Assembly (WASM)
-\url{https://webassembly.org}, which allows for optimised binary code to be
-executed by a virtual machine in the browser. This is achieved through the
-emscripten,%
-\footnote{\url{https://emscripten.org}} an open source compiler that enables
-compilation of \textsc{C}~/~\textsc{C++} code into WASM. Assembly code capable
-of more performative execution than the equivalent JavaScript
-\cite{reiser_accelerate_2017}. When combined with the native \textsc{C++} source
-of Eigen and Spectra, the emscripten compiler can potentially be used to
-distribute and execute \textsc{magpie} entirely in the browser.%
-\footnote{Such an application using the Eigen library has already been
-    demonstrated as feasible\\ \url{https://observablehq.com/@rreusser/eigen}} To
-make a web tool like \textsc{magpie} would traditionally require server
-architecture in order to execute ARPACK or to host a M\textsc{atlab} runtime. In
-a server / client arrangement the bottlenecks on performance are then tied to
-the slowest of the network and the computation. Creating a \textsc{magpie}
-server would also not be without cost and would also be limited by concurrent
-usage.
+Porting \textsc{magpie} to a compiled language opens the possibility of distributing it directly through the web. Traditionally, scientific software has required installation and system-specific binaries, but developments in browser technology now make high-performance applications viable as client-side experiences. Chief among these is WebAssembly (WASM), an open standard that allows optimised binary code to execute within a browser-based virtual machine. Using the \texttt{emscripten} compiler%
+\footnote{\url{https://emscripten.org}} , \textsc{C}~/~\textsc{C++} code can be compiled into WASM for near-native execution speeds~\cite{reiser_accelerate_2017}. When combined with Eigen and Spectra, this approach could enable the entire \textsc{magpie} core to run directly in the browser, without reliance on external servers or proprietary runtimes.%
+\footnote{A demonstration of Eigen compiled to WebAssembly is available at \url{https://observablehq.com/@rreusser/eigen}.}
 
-The server and client can be on the same machine, which is exactly the
-architecture for the Jupyter interface (Section~\ref{sec:jupyter}). The extra
-technical requirements for installation of a local server reintroduces platform
-specific behaviour and limitations, which the browser client is meant to avoid.
-Computational performance in this scenario is also affected compared to an
-equivalent system using natively compiled binaries. The alternative for
-\textsc{magpie} to execute entirely on the client-side would be an
-implementation of a sparse matrix library and eigensolver entirely within
-JavaScript, the result of which would be severely limited in performance
-\cite{lion_investigating_2022}. \textsc{magpie} would likely see much more
-utility if development is pursued for an entirely native or entirely web client
-approach.
+This model contrasts sharply with traditional client--server arrangements, in which simulations execute remotely via ARPACK or M\textsc{atlab} runtimes. Such architectures impose both financial and technical overheads, introducing latency and limiting scalability. In contrast, WASM permits fully client-side computation, removing network dependency and aligning with \textsc{magpie}'s principle of open accessibility.  
 
-The usage of WASM would allow for compilation for both approaches from a single,
-shared codebase. It is worth noting that the above web technologies are not
-supported equally across all browsers and their versions.%
-\footnote{\url{https://developer.mozilla.org/en-US/docs/WebAssembly\#browser_compatibility}}
-Such limitation of highlight an importance of both open sourcing and version
-control as multiple systems and deployments can more easily be supported.
-
-WASM addresses the porting of the core \textsc{magpie} to the web browser, but
-there still remains a question o of interface. The Jupyter version of
-\textsc{magpie} (Section~\ref{sec:jupyter}) demonstrates one potential
-interface, but this is limited by the communication happening between IPython
-the renderer for the browser. Breaking away from the constraint of Jupyter
-allows for direct usage of further browser technology, notably the WebGL and
-WebGPU \cite{chickerur_webgl_2024} which allow fast 3D drawing within the
-browser. Figure~\ref{fig:magpie-p5js} shows a prototype example of the first
-four eigenshapes of a plate above their corresponding `chladni pattern'
-projected shadows.%
-\footnote{\url{https://mhamilt.github.io/eigenvis/}} The plates in
-Figure~\ref{fig:magpie-p5js} are drawn using the \texttt{p5.js} library which
-has an interface to WebGL.%
-\footnote{\url{https://p5js.org/reference/p5/WEBGL/}}
-
-Each plate in comprised of approximately 1.5k grid points, for a total 12k grid
-points across four displacement and four projected shadows. The interface render
-at approximately 11 frames per second (FPS). The interface is an early proof of
-concept, using eigenvectors from the \textsc{c++} version of \textsc{magpie}
-output as JavaScript arrays. Although the plates are rendered at a low FPS, this
-would likely be improved by implementing displacement and shading as part of
-vertex and fragment shaders rather than direct drawing using \texttt{p5.js}.
+That said, browser-based performance depends on local hardware and engine support. The \textsc{magpie} prototype shown in Figure~\ref{fig:magpie-p5js} demonstrates the feasibility of real-time interaction using WebGL. Here, eigenmodes generated by the \textsc{C++} backend are visualised with the \texttt{p5.js} library%
+\footnote{\url{https://p5js.org/reference/p5/WEBGL/}} , yielding around 11\,fps for approximately 12,000 grid points across four modes and their projected ``Chladni pattern'' shadows. Although this remains a proof of concept, implementing the shading and displacement directly in vertex and fragment shaders would likely raise performance to interactive frame rates.
 
 \begin{figure}
     \centering
     \includegraphics[width=0.84\linewidth]{img/magpie-p5js.png}
     \caption[Prototype interface using WebGL]{Prototype interface using WebGL via \texttt{p5.js} to render plate
-        modes.}
+        modes. Four eigenmodes and their projected ``Chladni pattern'' shadows are shown; the interface renders at approximately 11\,fps using JavaScript arrays derived from \textsc{magpie}'s \textsc{C++} output.}
     \label{fig:magpie-p5js}
 \end{figure}
 
-M\textsc{atlab} has functionality to compile its code to WASM
-\cite{mcvittie_generatejavascriptusingmatlabcoder_2021}, however some
-functionality such as that in M\textsc{atlab}'s sparse libraries is not
-currently open to code generation and compilation to a binary outside of the
-M\textsc{atlab} runtime%
-\footnote{(list of functions supported:
-    \url{https://uk.mathworks.com/help/referencelist.html?type=function&capability=codegen&listtype=alpha}}
-and it is unlikely to be in the near future.
+The use of WASM allows both native and web clients to be compiled from a single shared codebase, preserving numerical fidelity while maximising accessibility. Nevertheless, browser support for WASM and related technologies such as WebGL and WebGPU~\cite{chickerur_webgl_2024} remains uneven across versions and devices.%
+\footnote{See \url{https://developer.mozilla.org/en-US/docs/WebAssembly\#browser_compatibility}.}  
+This variability reinforces the importance of open sourcing and version control: by maintaining transparent repositories, multiple deployment targets can be supported in parallel without fragmenting the project.
 
-A key development for \textsc{magpie} is the addition of an orthotropic model so
-match more closely that of the quarter-sawn wood as is used for string
-instrument soundboards. Even further, the addition of braces and lumped masses
-to the internal system to mimic that of the structural bracing found on physical
-instruments \cite{ducceschi_open_2024}.
+Although M\textsc{atlab} now provides limited functionality for generating JavaScript and WASM binaries~\cite{mcvittie_generatejavascriptusingmatlabcoder_2021}, sparse-matrix operations and eigensolvers remain excluded from its code-generation tools.%
+\footnote{Supported functions listed at \url{https://uk.mathworks.com/help/referencelist.html?type=function&capability=codegen&listtype=alpha}.}  
+Consequently, reproducing \textsc{magpie}'s full capabilities in the browser is only feasible through native compilation and open-source toolchains.
 
-Presenting the tool kit in an open source well-structure manner should hopefully
-encourage usage, collaboration and development as the system matures.
+Looking forward, the addition of orthotropic models and lumped-mass systems described earlier~\cite{ducceschi_open_2024} would further align the computational behaviour of \textsc{magpie} with the physical characteristics of quarter-sawn wood used in string-instrument soundboards. Presenting this toolkit in an open, well-documented, and cross-platform form will encourage collaboration and extension as the system matures---ensuring that, like the haptic interface, \textsc{magpie} remains a living resource rather than a static artefact.
 
 % \subsubsection{Emebedded Systems}
 
@@ -622,114 +424,18 @@ encourage usage, collaboration and development as the system matures.
 
 \section{Closing Remarks}
 
-This thesis has intended to illustrate the importance of an open methodology as
-well as demonstrate two use cases for its importance within digital research
-When applies to digital conservation, the intention is to show that we must take
-the same approach to conservation of cultural heritage as we do to the
-methodologies applied to carry it out. Two projects were presented, an interface
-for conserving the instructional value of musical instrument heritage artefacts
-and a plate analysis software toolkit. Both projects look to tackle polar ends
-of the heritage conservation spectrum, the act conservation and the act of
-engagement with that which is conserved. There is an ``as above so below''
-symmetry to digital cultural heritage, where both the heritage and the digital
-tools require conservation. With musical instrument heritage there is the added
-value of interaction and instruction which are not simply conserved by creating
-a digital facsimile of that heritage. Instead we must look at alternatives for
-conserving experience alongside the raw data of dimensions, materials and
-construction.
+This thesis has argued for the importance of an open methodology in digital research and demonstrated two use cases that reveal why such an approach matters. When applied to digital conservation, the principle is simple but far-reaching: the means by which we preserve must themselves be preservable. Two projects have embodied this argument in practice. The first, a haptic keyboard interface, explored how the instructional and experiential value of musical instruments might be conserved through interaction. The second, the \textsc{magpie} analysis toolkit, addressed how the physical behaviour of those instruments can be modelled, shared, and developed through open code. Together they frame opposite ends of the conservation spectrum---the act of preserving and the act of engaging with what is preserved.
 
-% Both digital and analogue objects rely on physical storage
-% mediums\nocite{Rubio2020}, but the financial and energy cost of preserving
-% something digitally can often be orders of magnitude greater than an
-% `analogue' equivalent\nocite{Cieply2007}.
+There is, as it were, an ``as above, so below'' symmetry to digital cultural heritage: both the artefacts and the digital tools that represent them require conservation. In musical instrument heritage, this symmetry takes on an additional dimension. Instruments are not only objects but teachers; their value lies in the gestures and feedback loops they enable. Simply creating a digital facsimile of such objects does not conserve the experience of playing or learning from them. What must also be preserved is the \emph{exchange}---the embodied relationship between human and material, sound and motion.
 
-The open methodology described here has tried to demonstrate the need for
-careful separation of components into digital repositories in order that each
-component can be reusable and iterated upon without affecting others. The
-keyboard interface is separated into physical mechanical, digital software, and
-the boundary between both in the form of electronics hardware designed in
-software. Software itself has been separated into components of data, processing
-and interface. Each digital component is stored in a version control repository,
-whose functions are many. The version control repository is a tool that
-simultaneously allows for access to older versions of source code, ensuring the
-ability to access older versions of software, but it can also serve as a record
-of how ideas are developed.
+The open methodology developed in this work has sought to model that same balance in its structure. Each component---mechanical, electronic, and digital---is modular and version-controlled, ensuring that it can evolve independently without compromising the whole. Software has been separated into data, processing, and interface layers, each documented in repositories that also serve as historical records of development. Version control is therefore not merely a technical convenience but an epistemic one: a trace of how ideas, as well as code, come into being.
 
-Through online git services, the version control repository can also act as the
-means of software being open source. Git repositories are decentralised and a
-combination of local and cloud service storage provides some degree of parity
-and preservation, but one this is coincidental and not deliberate. Services such
-as GitHub are owned and operated by commercial entities ad should not be
-depended upon to provide an resolvable DOI and digital archive. Relying on web
-archive projects to keep a record of these repositories is neither deliberate
-nor reliable \cite{calano_github_2025}. That responsibility should instead lie
-with institutes. Academic institutes do not defer responsibility of storing and
-distributing academic research literature from the Microsoft library and the
-same should also be true for research software.
+Online Git services enable open-source distribution, but their persistence is not guaranteed. Commercial hosting platforms provide decentralised access yet cannot be assumed to provide permanent archiving or resolvable identifiers~\cite{calano_github_2025}. The responsibility for preservation should rest with academic institutions, just as they already safeguard research literature. Services such as Zenodo, operated by CERN, offer an interim solution by issuing persistent DOIs for software releases and integrating directly with GitHub, making archiving almost frictionless. The DOI, analogous to an ISBN for digital artefacts, formalises citation and version specificity~\cite{soito_citations_2016}. Even so, true sustainability demands that universities integrate their existing Git infrastructure with archival repositories---a simple but powerful step toward institutional stewardship of digital research outputs.
 
-The Zenodo archive operated from CERN provides integration with GitHub, reducing
-the impedance to archiving digital software and providing a DOI. The DOI
-functions is a similar manner to the ISBN and ISSN, identifying a digital
-artefact without ambiguity. Enabling software citation through a DOI stresses
-software's importance, permitting attribution, while facilitating access and
-version specificity \cite{soito_citations_2016}. Research to rely on an external
-service, like Zenodo, is perhaps still an abdication of responsibility.
-Institutes have support for digital archives such as the Edinburgh Research
-Archive%
-\footnote{\url{https://era.ed.ac.uk/}} at the University of Edinburgh and
-Sistema Biblioteca Atteneo%
-\footnote{\url{https://sba.unibo.it/en/almadl/almadl-services/assigning-a-doi}}
-at the Università di Bologna, but these services are still tailored toward
-traditional publications and datasets rather than software repositories. Both of
-these institutes already host their own online git services.%
-\footnote{UoE ECDF \url{git.ecdf.ed.ac.uk} and multiple departmental GitLab
-    services at Unibo.} The ideal scenario would be where these services are simply
-connected together allowing institutes to take responsibility of both version
-control and it's archiving.
+The examples of ARPACK~\cite{lehoucq_arpack_1998} and Aurora (Section~\ref{sec:aurora}) illustrate how software longevity is rarely proportional to its adoption. ARPACK, released in 1990, remains active through open maintenance, while Aurora, only a few years younger, risks disappearance without deliberate intervention. Software sustainability should not depend on chance or popularity; it should be built into the research lifecycle as intentionally as peer review or data citation.
 
-Academic research is capable of long term usage of software, ARPACK from 1990
-\cite{lehoucq_arpack_1998} (discussed in Chapter~\ref{ch:analysis}) serves as
-one example. Aurora (Section~\ref{sec:aurora}) from just five years later is now
-at risk of no longer being useable without intervention and development.
-Research software access and permanence should not be a coin toss weighted by
-the extent of its adoption. Aurora demonstrated this by being both widely
-adopted and at risk of obsolescence. Instead, a more deliberate methodology is
-needed for research software to be accessible and reproducible as is the
-expectation with other aspects of academic research.
+An open methodology does impose a cost. It requires time, discipline, and a willingness to acquire technical skills beyond one's disciplinary training. For many researchers, particularly in the humanities, version control, documentation, and archiving still represent additional labour rather than standard practice. Yet, as with any craft, fluency reduces effort over time, and shared infrastructures create communities of support. There are no shortcuts to doing research well, and the cost of openness is ultimately an investment in durability and trust.
 
-The praxis of such a open methodology does not come without cost labour and
-time. Researcher are likely already learning a new skill with respect to
-programming. With the addition of repository organisation, drafting
-documentation, learning a version control system and archiving development time
-can be inflated as a researcher orientates themself with these new tools.
+The issue extends beyond research software to the digital conservation of cultural heritage itself. Digital preservation is not neutral. As scholars such as \textcite{rubio_work_2020}, \textcite{schwarz_disk_2006}, and \textcite{parry_museums_2010} have warned, poorly considered digital methods can distort the very histories they aim to protect. Conservation, whether physical or digital, is always an act of interpretation. Following \textcite{barclay_preservation_2005} and \textcite{desilvey_curated_2017}, we should resist the temptation to ``pickle'' the past---to preserve without reflection---and instead act with awareness of consequence. If a tool is meant to be disposable, then let that ephemerality be intentional; if it is meant to endure, then endurance must be designed into its fabric.
 
-Adopting an open methodology as standard practice lessened these costs as
-support networks are formed. It is important to remember that here are no
-shortcuts in good research and anything worth doing is worth doing well, but
-acknowledgment of this cost raises an important issue. With respect to the
-humanities, there is still a gap in  digital skills and best practices in data
-sustainability that needs to be closed \cite{taylor_shaping_2022}. Academic
-institutes will also need to take a proactive approach with digital skills
-literacy if those in the humanities research are to follow best practice with
-the respect to digital research.
-
-We do not only have to think of the impact of software sustainability if digital
-research, but also what the implication is for digital cultural heritage. When
-applied to cultural heritage, it is paramount that we approach digital
-conservation through a critical lens, otherwise we risk active harm to the
-heritage at stake
-\cite{rubio_work_2020,schwarz_disk_2006,parry_museums_2010,cieply_afterlife_2007}.
-Whatever approach is taken to digital conservation, it should be carried out
-deliberately, with the consequences of conservation decisions being intentional,
-not accidental. \textcite{barclay_preservation_2005} and
-\textcite{desilvey_curated_2017} proclaim the same thing We should not
-``pickle''\cite{desilvey_curated_2017} the past as that is what we are inclined
-to do, neither should we idly transition musical instruments across states of
-currency, conservation, and restoration while neglecting the consequences of
-those decisions. Better yet, if there is neglect should consequences be damned
-let it be explicit \cite[p.~75-76]{barclay_preservation_2005}. Similarly for the
-digital tools we employ in the process of that conservation. If these digital
-tools are disposable, then there should be intentionality in the ephemerality.
-If these tools should be enduring, then steps need to be taken to make sure they
-endure.
-
+The two projects in this thesis exemplify those choices. Each balances immediacy and longevity, access and authenticity, openness and rigour. More broadly, they argue that digital conservation should not be a technical afterthought but a cultural responsibility. To conserve experience as well as artefact, we must also conserve the tools, languages, and methods through which that experience is studied. The future of digital heritage, like that of research itself, depends on our willingness to build systems that remember not only their subjects but their own making.
