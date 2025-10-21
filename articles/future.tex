@@ -1,8 +1,11 @@
-\chapter{Future Development}\label{ch:future}
+\chapter{Future Directions}\label{ch:future}
 
-% \section{Introduction}
+The two systems presented in the preceding chapters already function as viable tools in their current forms, yet neither represents an endpoint. The thesis as a whole should be read less as a finished artefact and more as a platform from which further iterations can evolve. Each prototype—whether the haptic keyboard interface or the \textsc{magpie} software—reveals new questions that extend beyond the practical scope of this work but remain central to its aims.
 
-The two projects covered in the previous chapters have use cases and applications in their current form; however, the work presented in this thesis does not represent a terminus, but rather a starting point with rich possibilities for expansion. By refining and developing the work covered herein, these should hopefully be worthwhile tools within research to come. Some developments could not be undertaken due to restraints in time, while others would compromise in some manner the core design principles or aspects of the open methodology. This chapter covers the areas for development within both projects and the impact that they may have on future research. Where relevant justification is given for why some developments were not pursued, as well as guidance and caution as to how some developments may impact other aspects of the project. The sections are split by project, with Section~\ref{sec:future-interaction} covering developments to the keyboard, in particular improvements to the method for measuring the optical sensor current and concessions that would need to be made. Section~\ref{sec:future-magpie} discusses the further developments to be made to \textsc{magpie}, which as an open source project will hopefully see much more expansion for years to come. This section serves as a roadmap for how \textsc{magpie} could be expanded and the core motivations.
+Some of these developments are already underway or have been tested in parallel with writing. In contrast, others remain prospective because of constraints in time, resources, or the need to preserve core methodological principles such as openness and reproducibility. This chapter, therefore, outlines a forward trajectory rather than a wish list: identifying where refinement is technically feasible, where further exploration is warranted, and where expansion may introduce trade-offs that require careful ethical or methodological justification.
+
+The discussion is organised by project. Section~\ref{sec:future-interaction} focuses on the keyboard interface, detailing improvements to fabrication, sensing, and visitor interaction while maintaining its role within a conservation framework. Section~\ref{sec:future-magpie} then turns to \textsc{magpie}, considering its continuing development as an open-source research environment and the broader community practices that will shape its evolution. Together, these sections frame Chapter~\ref{ch:future} as a roadmap for sustainable growth—technical, conceptual, and collaborative—beyond the immediate boundaries of this thesis.
+
 
 \section{Interaction}\label{sec:future-interaction}
 
@@ -15,19 +18,19 @@ The remainder of Section~\ref{sec:future-interaction} develops these strategies 
 \begin{table*}[htb!]
 \centering
 \small
-\begin{tabular}{p{2.0cm} p{4.7cm} p{7.2cm}}
+\begin{tabular}{p{2.0cm} p{4.7cm} p{6.8cm}}
 \toprule
-\textbf{Area} & \textbf{Limitation / Problem (Ch. 2)} & \textbf{Going-Forward Strategy} \\
+\textbf{Area} & \textbf{Limitation } & \textbf{Strategy} \\
 \midrule
 Fabrication 
 &
-Gradient stickers require manual application and periodic rework; humidity changes alter jack fit; adhesive lifespan; re-calibration overhead when reapplying.
+Gradient stickers require manual application and periodic rework; humidity changes affect the jack fit, adhesive lifespan, and the need for recalibration when reapplying.
 &
-Make sensing surface \emph{integral} to the jack via CAD/CAM: (a) geometric “shutter” feature in jack body (CNC/3D print), (b) revisit laser-etched reflectance once electronics improve sensitivity. Retain stickers as low-risk baseline until jigs/workflow stabilise. \\
+Make sensing surface \emph{integral} to the jack via CAD/CAM: (a) geometric “shutter” feature in jack body (CNC/3D print), (b) revisit laser-etched reflectance once electronics improve sensitivity. Retain stickers as a low-risk baseline until jigs/workflow stabilise. \\
 \addlinespace
 Mechanical Integration
 &
-Vertical sensor boards are fragile in tight spaces; difficult to install and prone to misalignment; limited clearance in multi-register actions.
+Vertical sensor boards are fragile in tight spaces, difficult to install, and prone to misalignment; limited clearance in multi-register actions.
 &
 Split into \emph{sensor module} (fixed pitch, pluggable) + \emph{signal board} (horizontal, robust routing). For multi-register: use per-key mini-modules where needed or interpolate inner-register thresholds from outer sensors to reduce install burden. \\
 \addlinespace
@@ -41,7 +44,7 @@ Sensing Electronics
 &
 Voltage-divider readout limited by phototransistor parasitic capacitance (low-pass effect); speed/noise trade-offs.
 &
-Adopt transimpedance amplifier (TIA) with feedback capacitor and biasing; place TIAs on the signal/controller board near power rails; trim values where necessary while keeping BOM accessible. Consider QRD1114 as a faster sensor with retuned TIA. \\
+Adopt a transimpedance amplifier (TIA) with feedback capacitor and biasing; place TIAs on the signal/controller board near power rails; trim values where necessary while keeping BOM accessible. Consider QRD1114 as a faster sensor with a retuned TIA. \\
 \addlinespace
 Firmware
 &
@@ -157,7 +160,7 @@ Spatial constraints become especially acute in multi-register instruments. Figur
     \centering
     \includegraphics[width=1.0\linewidth]{img/koster_keyboard_1994_p53.png}
     \caption[Cross section of a multi-register harpsichord mechanism]{Cross
-        section of a multi-register harpsichord mechanism from \textcite[p.~~53]{koster_keyboard_1994}. Image is of a two-manual instrument, with the
+        section of a multi-register harpsichord mechanism from \textcite[p.~53]{koster_keyboard_1994}. Image is of a two-manual instrument, with the
         lower manual in control of three registers.}
     \label{fig:3-registers}
 \end{figure}
@@ -174,21 +177,21 @@ Figure~\ref{fig:new-pcb-block-diagram} summarises the updated topology. The sign
 
 \subsection{Latency and Jitter}\label{sec:latency}
 
-The sensing chain already achieves short response, but exhibition and performance benefit most from \emph{predictable} timing. Here, latency denotes the time from pluck to MIDI transmission; jitter denotes timing variability. Measured figures are around 2~ms latency and 1~ms jitter (Section~\ref{sec:latency}). Two constraints dominate: analogue front-end speed and firmware scheduling. The roadmap is therefore: first optimise sensor signal measurement (\S\ref{sec:tia}); then constrain firmware timing sources and ISR scope; finally, evaluate microcontroller choices where appropriate.
+Responsiveness in the keyboard interface is already adequate for both performance and exhibition use, yet further refinement depends less on absolute speed than on timing consistency. In this context, \emph{latency} denotes the delay from pluck to MIDI transmission, while \emph{jitter} refers to its variability. Measurements of around 2\,ms latency and 1\,ms jitter (Section~\ref{sec:latency}) demonstrate that the system performs well in average conditions, but musical perception and haptic coupling benefit most from predictable timing behaviour rather than marginal speed improvements. Two factors dominate this predictability: the speed of the analogue front end and the determinism of the firmware scheduler. The development pathway therefore proceeds in three stages: first, improve the precision of sensor signal measurement (Section~\ref{sec:tia}); then constrain the timing sources and interrupt routines in firmware; finally, evaluate microcontroller platforms that can support these constraints while remaining open and reproducible.
 
 \subsubsection{Sensor Signal Measurement}\label{sec:tia}
 
-This subsection develops a faster, more controllable voltage measurement for the phototransistor output, while balancing FAIR-aligned accessibility and reproducibility. The current voltage-divider approach (Figure~\ref{fig:volt-div}) is simple, cheap, and robust to component obsolescence, but the phototransistor’s parasitic capacitance imposes a low-pass effect~\cite{falco_understanding_2023} that limits response.
+The current voltage-divider circuit (Figure~\ref{fig:volt-div}) is intentionally simple, inexpensive, and resilient to component changes, aligning with the thesis' open-methodology principle. However, the phototransistor’s parasitic capacitance imposes a low-pass effect~\cite{falco_understanding_2023}, slightly smoothing rapid transitions and introducing small, variable delays. When precision of onset is crucial—such as when synchronising gesture with sound playback—this behaviour becomes a measurable limit rather than a theoretical one.
 
 \begin{figure}
     \centering
     \includegraphics[width=0.14\linewidth]{img/led_diffuser-model.png} \hfill
     \includegraphics[width=0.75\linewidth]{img/led_diffuser-demo-1.jpeg}
-     \caption[Demonstration of light diffusion applied to the RGB LEDs]{Demonstration of light diffusion applied to the RGB LEDs. If mounted horizontally and flush to the rest plank, the source of the light would be more difficult to ascertain meaning its purpose as an indicator is diminished. (Right) an example of a bare LED and an LED with a diffuser attached. (Left) the CAD model for the light diffuser. }
+     \caption[Demonstration of light diffusion applied to the RGB LEDs]{Demonstration of light diffusion applied to the RGB LEDs. If mounted horizontally and flush to the wrestplank, the source of the light would be difficult to locate, reducing its value as a calibration indicator. Right: example of a bare LED and an LED with a diffuser attached. Left: CAD model of the light diffuser.}
     \label{fig:led-diffuser}
 \end{figure}
 
-A transimpedance amplifier (TIA) replaces the pull-up resistor, converting sensor current directly into voltage and improving bandwidth (Figure~\ref{fig:tia-basic}). Stability requires a feedback capacitor (Figure~\ref{fig:tia-cf})~\cite[p.~233]{horowitz_art_2015}. Biasing the collector--emitter junction increases sensitivity and response~\cite{falco_understanding_2023}, as in Figure~\ref{fig:tia-bias} (\cite{pardue_near_2013}). To avoid rail limitations, a differential stage biases the inverting input (Figure~\ref{fig:tia-diff}) following \textcite{mcpherson_portable_2013}, with resistor ratios chosen for good CMRR~\cite[p.~227]{horowitz_art_2015}.
+A transimpedance amplifier (TIA) addresses this limitation by converting sensor current directly into voltage, bypassing the slow pull-up resistor and improving bandwidth (Figure~\ref{fig:tia-basic}). Stability is maintained through a feedback capacitor (Figure~\ref{fig:tia-cf})~\cite[p.~233]{horowitz_art_2015}, while biasing the collector--emitter junction further increases sensitivity and speed~\cite{falco_understanding_2023,pardue_near_2013}. To prevent the output from approaching supply rails, a differential configuration biases the inverting input (Figure~\ref{fig:tia-diff}), following \textcite{mcpherson_portable_2013}, with resistor ratios tuned for optimal common-mode rejection~\cite[p.~227]{horowitz_art_2015}. The resulting circuit family, summarised in Figure~\ref{fig:tia-evolution}, trades a small increase in complexity for a substantial gain in temporal precision.
 
 \begin{figure}
     \centering
@@ -227,32 +230,20 @@ A transimpedance amplifier (TIA) replaces the pull-up resistor, converting senso
     \end{subfigure}
     \centering
     \caption[Circuit evolution for phototransistor voltage measurement]{Circuit evolution for phototransistor ($Q$) voltage measurement from a
-        simple voltage divider circuit to a biased transimpedance amplifier as used
-        in \citep{mcpherson_portable_2013} interface. The pull-up resistor $R_{in}$
-        has been greyed to illustrate that it can be absent as well as to make clear
-        the extension of circuit around the collector of the phototransistor.\\\\
-        (\subref{fig:volt-div}) phototransistor with pull-up resistor.\\
-        (\subref{fig:tia-basic}) a basic transimpedance amplifier circuit using
-        a phototransistor (Source \textcite[Figure 4.22]{horowitz_art_2015}).\\
-        (\subref{fig:tia-cf}) a feedback $C_f$ capacitor to reduce high
-        frequency noise and prevent ringing in the circuit.)\\
-        (\subref{fig:tia-bias}) transimpedance amplifier with voltage bias $V_b$
-        as used in \textcite{pardue_near_2013}. A higher collector-emitter
-        provides greater light-level sensitivity and response time.\\
-        (\subref{fig:tia-diff}) transimpedance amplifier difference amplifier
-        from \textcite[Figure 3]{mcpherson_portable_2013}. Pull-up resistor
-        $R_{in}$ counteracts the raised $V_{out}$ voltage bias. This
-        configuration also means that the ration of $R_2$/$R_1$ should closely
-        match the ratio of $R_{f}$ / $R_{in}$ for optimum common-mode rejection
-        ratio \cite[p.~227]{horowitz_art_2015}.}
+        simple voltage divider to a biased transimpedance amplifier following \textcite{mcpherson_portable_2013}. The pull-up resistor $R_{in}$ has been greyed to indicate its optional removal and to clarify the circuit extension around the phototransistor collector.\\
+        (\subref{fig:volt-div}) Phototransistor with pull-up resistor.\\
+        (\subref{fig:tia-basic}) Basic transimpedance amplifier using a phototransistor~\cite[Fig.~4.22]{horowitz_art_2015}.\\
+        (\subref{fig:tia-cf}) Feedback capacitor $C_f$ reduces high-frequency noise and ringing.\\
+        (\subref{fig:tia-bias}) TIA with voltage bias $V_b$~\cite{pardue_near_2013}, increasing sensitivity and speed.\\
+        (\subref{fig:tia-diff}) Differential TIA with improved common-mode rejection~\cite[p.~227]{horowitz_art_2015}.}
     \label{fig:tia-evolution}
 \end{figure}
 
-These improvements increase circuit complexity and nudge the design toward SMD op-amps. This shift trades prototyping convenience for performance and board density, but remains compatible with low-cost PCB services; to preserve accessibility, TIAs should live on the controller/signal board near power rails rather than on per-key modules. Resistor spreads and sensor variance imply either best-average networks~\cite{mcpherson_portable_2013} or limited trimming; the baseline divider remains valid where ultimate speed is unnecessary.
+Implementing the TIA stage nudges the design toward surface-mount components and denser layouts. This transition reduces prototyping convenience but remains compatible with low-cost PCB services. To maintain accessibility, TIAs should reside on the shared controller or signal board—close to power rails—rather than on each key module. Variations in resistor tolerance and sensor response may be managed through best-average networks~\cite{mcpherson_portable_2013} or limited trimming. Where speed is less critical, the simpler voltage-divider circuit remains a valid and maintainable fallback.
 
 \subsubsection{Optical Sensor}
 
-A sensor substitution may further improve speed and sensitivity. The QRD1114 differs from the QRE1113 in rise/fall times and on-current (Table~\ref{tab:qre-vs-qrd}), with corresponding TIA value changes (Figure~\ref{fig:general-tia}). Although the QRD1114’s asymmetry suggests greater parasitic effects, careful selection of $R_{in}$ and feedback components mitigates this and may re-enable laser-etched patterns (Section~\ref{sec:cad-cam-jacks}).
+Performance can be improved further through sensor substitution. The QRD1114, compared with the QRE1113, offers higher on-state current and faster rise times (Table~\ref{tab:qre-vs-qrd}), although it introduces greater asymmetry and cross-talk. When paired with a tuned TIA (Figure~\ref{fig:general-tia}), these parameters yield more consistent transitions and may restore the viability of laser-etched patterns discussed in Section~\ref{sec:cad-cam-jacks}. As always, any such substitution must balance enhanced speed with reproducibility and sourcing longevity.
 
 \begin{table}
     \centering
@@ -260,10 +251,10 @@ A sensor substitution may further improve speed and sensitivity. The QRD1114 dif
         \hline
         \textbf{Symbol} & \textbf{Parameter}                   & \textbf{QRD1114} & \textbf{QRE1113} & \textbf{Unit} \\ \hline
         $I_{C(ON)}$     & On-State Collector Current           & 1 (min)          & 0.3 (min)        & mA            \\
-        $V_{CE(SAT)}$   & Collector-Emitter Saturation Voltage & 0.4 (max)        & 0.3 (max)        & V             \\
-        $I_{CX}$        & Cross Talk                           & 10 (max)         & 1   (max)        & $\mu$A        \\
-        $t_r$           & Rise Time                            & 10  (typ)        & 20  (typ)        & $\mu$s        \\
-        $t_f$           & Fall Time                            & 50  (typ)        & 20  (typ)        & $\mu$s        \\ \hline
+        $V_{CE(SAT)}$   & Collector--Emitter Saturation Voltage & 0.4 (max)        & 0.3 (max)        & V             \\
+        $I_{CX}$        & Cross Talk                           & 10 (max)         & 1 (max)          & $\mu$A        \\
+        $t_r$           & Rise Time                            & 10 (typ)         & 20 (typ)         & $\mu$s        \\
+        $t_f$           & Fall Time                            & 50 (typ)         & 20 (typ)         & $\mu$s        \\ \hline
     \end{tabular}
     \caption[Electrical characteristics of the QRD1114 and the
         QRE1113]{Electrical characteristics of the QRD1114
@@ -275,7 +266,8 @@ A sensor substitution may further improve speed and sensitivity. The QRD1114 dif
 
 \subsubsection{Microcontroller}
 
-With a faster analogue front end, deterministic scheduling becomes the dominant factor. The current firmware~\cite{hamilton_firmware_2025} is intentionally portable across Arduino-supported boards, which avoids platform lock-in but limits access to high-precision timers. To reduce jitter, a hardware timer on the Nano 33 BLE (nRF52) can drive periodic sensing and MIDI dispatch via \texttt{NRF\_TIMERx}~\cite{nordic_timer_2023,nordic_timer_2025} or \texttt{mbed::Ticker}, following the guideline that ISRs remain minimal~\cite{klingensmith_using_2019}. This may slightly raise baseline latency but tightens variance, which matters most for perceived responsiveness~\cite{jack_effect_2016}. An alternative is an ESP32-S3 (e.g., Nano ESP32) using ESP-IDF to access audio-timed tasks; this improves scheduling flexibility at the cost of portability and additional porting (e.g., I\textsuperscript{2}C FRAM drivers). Any move toward platform-specific timers must be documented and archived to preserve long-term reproducibility.
+With the analogue stage stabilised, attention shifts to the temporal precision of firmware. The current implementation~\cite{hamilton_firmware_2025} prioritises portability across Arduino-supported boards, ensuring long-term reproducibility but limiting access to high-resolution hardware timers. Deterministic scheduling can be introduced by employing a dedicated timer on the Nano~33~BLE (nRF52), using either \texttt{NRF\_TIMERx}~\cite{nordic_timer_2023,nordic_timer_2025} or \texttt{mbed::Ticker} for periodic sensing and MIDI dispatch, provided interrupt routines remain minimal~\cite{klingensmith_using_2019}. This approach may increase baseline latency slightly but significantly reduces variance, which has greater perceptual impact~\cite{jack_effect_2016}. An alternative is to migrate to an ESP32-S3 (e.g., Nano~ESP32) using ESP-IDF for audio-synchronous tasks. Such a move enhances timing flexibility but introduces new dependencies and the need to port drivers (e.g., I\textsuperscript{2}C FRAM). Any platform-specific adaptation must therefore be fully documented and archived to preserve the project’s reproducibility and open-access integrity.
+
 
 \subsection{Exhibition Enhancements}
 

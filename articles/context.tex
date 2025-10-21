@@ -3,8 +3,8 @@
 The work presented in this thesis was carried out as part of the NEMUS project
 \cite{nemus_description_2023}, which seeks to address the challenges of
 historical musical instrument restoration through the application of digital
-technologies. Two aspects of the conservation process are considered here. When
-a historical musical instrument has fallen out of playing condition---and
+technologies. Two aspects of the conservation process are considered here. 
+The first aspect is when a historical musical instrument has fallen out of playing condition---and
 restoring it would compromise its structural or historical integrity---can
 interaction be reintroduced through digitisation? Digitisation may involve
 sampling an instrument
@@ -13,7 +13,11 @@ reconstructing it through numerical simulation
 \cite{bevilacqua_sound_2023,sun_3d_2020}. Despite the emergence of these
 techniques, the question of how to provide meaningful access to digitised
 instruments within museum contexts remains unresolved
-\cite{woodmusick_effects_2015,holzer_imperfect_2025}.
+\cite{woodmusick_effects_2015,holzer_imperfect_2025}. The second aspect of 
+conservation concerns the analysis of an instrument, in particular string 
+instruments with wooden sound boards. How can we provide access to modal 
+analysis and and an understanding of material properties in a manner that 
+is accessible and minimising risk of damaging the instrument?
 
 These challenges are exemplified by the renowned Tagliavini Collection in
 Bologna \cite{meer_collezione_2007}, housed at Museo San Colombano
@@ -21,9 +25,9 @@ Bologna \cite{meer_collezione_2007}, housed at Museo San Colombano
 plucked string keyboards. Fernando Tagliavini envisioned that the instruments in
 his collection would be maintained in their original playable condition. While
 the instruments are indeed playable, their use necessitates strict controls and
-is permitted only under special supervision. Moreover, certain instruments—such
-as the Museum’s 1547 Alessandro Trasuntino harpsichord—where restoration to
-playable condition poses significant risks due to their fragility.
+is permitted only under special supervision. For example, instruments such
+as the Museum’s 1547 Alessandro Trasuntino harpsichord that are in a state where 
+restoration to playable condition poses significant risks due to their fragility.
 
 \begin{figure}
     \centering
@@ -35,17 +39,23 @@ playable condition poses significant risks due to their fragility.
 This issue is not unique to the Tagliavini Collection but also pertains to other
 notable historical instrument collections, such as those of Richard Burnett,
 Benton Fletcher, and Bate \cite{barclay_preservation_2005}, which all house
-playable harpsichords dating from the seventeenth and eighteenth centuries. The work
-addresses two aspects of the conservation process relevant to these collections
-termed `Analysis' and `Interaction'.
+playable harpsichords dating from the seventeenth and eighteenth centuries. 
+The two aspects of the conservation process relevant to these collections are
+reflected in chapter titles of `Analysis' and `Interaction'.
 
 This thesis addresses these questions through two interconnected projects.
 Chapter~\ref{ch:interaction} examines what occurs after digitisation has taken
 place, asking: how can interaction with a digitised musical instrument be
 meaningfully facilitated? Chapter~\ref{ch:analysis} focuses on the development
-of an open-source software tool for plate simulation, designed to be used
+of an open-source software tool for `plate simulation,` designed to be used
 alongside measurements to support decision-making in conservation strategies
-\cite{barclay_care_1997}. Linking these two case studies is a broader
+\cite{barclay_care_1997}. 
+In this context, plate simulation is the digital simulation of thin plates, 
+based on physics-based models,
+from which information such as modal frequencies can be derived.
+The `plates` are a representation of the systems that can be found on the soundboards
+of string instruments.
+Linking these two case studies is a broader
 investigation into the sustainability and reproducibility of digital
 conservation and the tools that underpin it. Reproducibility poses a significant
 challenge for digital research \cite{perkel_challenge_2020}. Accordingly, this
@@ -81,7 +91,7 @@ more than one collection. Of note are the Benton Fletcher Collection in Fenton
 House \cite{barclay_preservation_2005, mcalpine_sampling_2014}, Musical
 Instruments Museums Edinburgh, and the Tagliavini Collection in San Colombano
 \cite{wraight_report_2022}. Instruments from the Tagliavini collection
-\cite{meer_collezione_2007} -- in particular sixteenth-century instruments -- were a
+\cite{meer_collezione_2007} --- in particular sixteenth-century instruments --- were a
 motivating factor and test case for part of thesis. When discussing musical
 instrument conservation, it is the case of the harpsichord that is being
 considered. Though some of the methodology can be translated to other
@@ -107,7 +117,7 @@ This perspective stands in contrast to earlier views, such as those of Benton
 Fletcher, who insisted that instruments should remain playable in order to avoid
 becoming relics in a ``dead museum of glass cases'' \cite[p.~154, quoted in a
 letter]{barclay_preservation_2005}. Fletcher’s sentiments are echoed in a later
-report on the restoration of instruments in the collection. As relayed by
+report on the restoration of instruments within his donated collection. As relayed by
 \textcite[]{barclay_critical_1999}, the report warns against instruments being
 relegated to ``a temple of silence where it may be conserved as a piece of
 furniture, its musical function forgotten'' \cite{adlam_proposal_1972}. The
@@ -151,7 +161,8 @@ organisations, summarised in Table \ref{tab:values_comparison}.
 		\textbf{Art History} & \textbf{ICOMOS Australia} & \textbf{Economics} &
 		\textbf{English Heritage}                                                                        \\
 		Alois Reigl          & Burra Charter             & Bruno Frey         &                          \\
-		1902                 & 1998                      & 1997               & 1999                     \\\hline
+		1902                 & 1998                      & 1997               & 1999                     \\
+        \hline
 		Age                  & Aesthetic                 & Monetary           & Cultural                 \\
 		Historical           & Historic                  & Option             & Educational and academic \\
 		Commemorative        & Scientific                & Existence          & Economic                 \\
@@ -193,7 +204,7 @@ audience's experience often dominates discussions of musical heritage. Yet,
 consider a scenario where a performer rehearses a piece 50 times before
 performing to an audience of 50 who hears it once. Which value was represented
 and by what magnitude in the course of the performance? This thesis argues for the
-performer’s experience -- informed by the instrument’s unique qualities --
+performer’s experience --- informed by the instrument’s unique qualities --
 and the significant instructional value derived from it, which is equal or greater 
 in magnitude to those values relevant to audience. 
 
@@ -210,7 +221,7 @@ yet another example of McLuhan’s maxim that ``the medium is the message''
 Conventional museum practice rarely permits visitors to handle or play
 historical instruments. Though instruments may be in `playing condition' they
 are not typically playable by the average museum visitor. Instead, instruments
-cordoned off behind a -- real or imagined -- ``red velvet cord,''
+cordoned off behind a --- real or imagined --- ``red velvet cord,''
 \cite{mcalpine_sampling_2014} displayed as objects to be seen but not touched.
 This approach robs visitors of the experience of vibrotactile and kinaesthetic
 cues encoded into the interface of the instrument. The challenge, then, is how
@@ -235,11 +246,9 @@ realities of ageing instruments while honouring their performative and
 instructional roles. This integration opens pathways to novel conservation
 strategies that extend beyond current paradigms.
 
-
 % Musical instruments have a duality of both tangible and intangible heritage.
 % Emphasis placed on the intagible 'sound' but they also embody not just musical
 % tradition but also traditional craft \cite{howard_musical_2022}.
-%
 
 \subsection{Reproduction or Restoration}\label{sec:reproduction-or-restoration}
 
@@ -360,7 +369,7 @@ making that are currently subject to CITES regulations.
 		Rosewood             & Dalbergia spp.           & II                & 2017 \cite{usda_species_2025}  & Fretboards   \\
 		\bottomrule
 	\end{tabular}
-	\caption[Species of wood and its use in musical instrument manufacture]{Species of wood used in musical instrument manufacture, their CITES Appendix and the year the were added.}
+	\caption[Species of wood and its use in musical instrument manufacture]{Species of wood used in musical instrument manufacture, their CITES Appendix and the year they were added. Convention on International Trade in Endangered Species of Wild Fauna and Flora Appendices denote the level of protection afforded to a species, with Appendix I providing the most severe protection and III the least. The abbreviation ``spp.'' denotes all species of a higher taxon.}
 	\label{tab:cites}
 \end{table}
 
@@ -385,17 +394,17 @@ or ethically viable. Moreover, the number of historical instruments that could
 realistically undergo such processes is limited, raising a further question: who
 decides which instruments are deemed worthy of replication or restoration?
 
-\subsection{A Third Path}
+\subsection{A Third Path}\label{sec:third-path}
 
 \textcite{desilvey_curated_2017} puts forward the question ``what could be
 gained if we were to care for the past without pickling it[?]'' If heritage can
-be in a state of living -- and a conservation approach is akin to `dead'
-\cite{poulios_moving_2010} -- then there must also be a transition phase where
+be in a state of living --- and a conservation approach is akin to `dead'
+\cite{poulios_moving_2010} --- then there must also be a transition phase where
 heritage dies and moves from one state to the other. Rather than resisting and
 fearing this transition, \textcite{desilvey_curated_2017} suggests that we might
 instead embrace this natural event. \textcite[p 75]{barclay_preservation_2005}
 touches on this same idea as he discusses `benign neglect' where the
-preservation of playing state -- or Currency -- is passive but the decision to do
+preservation of playing state --- or Currency --- is passive but the decision to do
 so is very deliberate. We might then turn to other approaches to maintaining the
 idea of an instrument. Rather than striving for the ``exact copy'' we can
 instead consciously and deliberately seek an `imperfect' that elicits the
@@ -508,7 +517,7 @@ Best practice emphasises the importance of documentation \cite{smith_software_20
 Using the \citep{ssi_checklist_2018} checklist, the core requirements for an open research software project are: publicly available source, a version control system (VCS), user and developer documentation, an OSI-compliant licence, and persistent identifiers (typically DOIs). 
 A public VCS implies source availability; the reverse is not guaranteed. 
 Likewise, a DOI implies some level of digital archiving, but a release archive does not necessitate a DOI. DOIs should be assigned both to the software as a whole and to individual releases \cite{smith_software_2016}; the licence should be clearly stated and OSI-compliant \cite{hong_choosing_2025}.
-To better serve the complexity of software citation, \textcite{druskat_citation_2021} created the citation file format (CFF), CFF files aims to standardise the meta-data structure for software citations and supported by both the GitHub and Zenodo platforms. Recommendation in \textcite{fiordelmondo_towards_2025} for hardware projects, with tools for citation \cite{spaaks_cffconvert_2021}. Recommendations beyond these basics (contribution policies, issue tracking, codes of conduct) presuppose an active repository. The following subsections consider seven projects in this light.
+To better serve the complexity of software citation, \textcite{druskat_citation_2021} created the citation file format (CFF). CFF files aim to standardise the meta-data structure for software citations and are supported by both the GitHub and Zenodo platforms. Recommendation in \textcite{fiordelmondo_towards_2025} for hardware projects, with tools for citation \cite{spaaks_cffconvert_2021}. Recommendations beyond these basics (contribution policies, issue tracking, codes of conduct) presuppose an active repository. The following subsections consider seven projects in this light.
 
 \subsubsection{Aurora}
 
@@ -712,13 +721,14 @@ application of the open methodology.
 
 \subsection{Chapter 4: Going Forward}
 
-The final chapter asks the question ``where do we go from here?'' with the
-projects in Chapters~\ref{ch:interaction} and \ref{ch:analysis}. Neither project
-is at an end point and there are a multitude of developments for expansion,
-optimisation and refinement. A selection of possible developments are discussed
-for the interface and \textsc{magpie} in turn, outlining the technical
-challenges of development and the impact they would have on the open methodology
-and the adherence to the FAIR principles.
+The final chapter look at the paths for development for the projects in
+Chapters~\ref{ch:interaction} and \ref{ch:analysis}. Developments are discussed
+alongside the repercussions to each project's design principles and the wider
+open methodology. Neither project is at an end point and there are a multitude
+of developments for expansion, optimisation and refinement. A selection of
+possible developments are discussed for the interface and \textsc{magpie} in
+turn, outlining the technical challenges of development and the impact they
+would have on the open methodology and the adherence to the FAIR principles.
 
 Developments for the interface are split between the fabrication process in the
 mechanical interface, in particular the jacks that are used and incorporation of
