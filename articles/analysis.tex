@@ -18,7 +18,7 @@ Complementarily, we adopt the FORCE11 Software Citation Principles so that \text
 
 \textsc{magpie} is also intended as a teaching aid. Plates are a canonical gateway into structural acoustics: their eigenshapes are visually compelling and highly informative, and Chladni patterns are a familiar, laboratory-friendly way to connect theory and measurement. By offering easy mode visualisation, the tool enables students to explore how boundary conditions, thickness, and rigidity influence spectra and modal topology. In this sense, \textsc{magpie} serves both as an analysis workbench and as a pedagogical tool.
 
-\paragraph{Scope of the chapter.}
+\paragraph{Scope of the chapter}
 The remainder of the chapter develops the design choices behind \textsc{magpie} and their implications for conservation, lutherie, and education. We: 
 \begin{enumerate}
 \item Situate the model choices and numerical methods, with an emphasis on transparent sparse operators suitable for inverse workflows.
@@ -735,7 +735,7 @@ Finally, a least-squares procedure is used to extract the elastic constants, ret
 
 This chapter introduced \textsc{magpie}, a free/libre, citable toolkit that makes standard thin-plate models and inverse workflows accessible to conservators, luthiers, and students. In contrast to the previous chapter’s emphasis on public interaction with digital reconstructions, the present work focused on \emph{analysis}: modelling rectangular plates with elastic edge restraints, estimating elastic constants from vibration data, and packaging the whole workflow so it is reproducible, inspectable, and usable in a browser.
 
-\paragraph{Key outcomes.}
+\paragraph{Key outcomes}
 \begin{enumerate}
   \item \textbf{Modelling and numerics.} We derived and discretised the Kirchhoff–Love plate with energy-consistent, elastically restrained boundaries. A sparse finite-difference biharmonic operator was implemented with explicit near-boundary specialisations, enabling stable eigenanalysis and time-domain synthesis from the same core.
   \item \textbf{Cross-language implementation.} The model and APIs were reproduced in M\textsc{atlab}, Python, and C\textsc{++}. Diagonal (banded) assembly was shown to be markedly more scalable than block concatenation. On the eigensolver side, a symmetric shift–invert configuration (Spectra/Eigen in C\textsc{++}) matched or exceeded M\textsc{atlab}’s \texttt{eigs}, but at a cost of elevated error compared to SciPy.
@@ -743,8 +743,8 @@ This chapter introduced \textsc{magpie}, a free/libre, citable toolkit that make
   \item \textbf{Applications and validation.} Two case studies demonstrated end-to-end use. For a cantilever copper plate, inverse estimation recovered a plausible Young’s modulus and reproduced higher modes within small error. For an orthotropic spruce plate, the linear least-squares inversion produced $E_x$, $E_y$, and $G_{xy}$ consistent with literature ranges, using a handful of modes and Chladni patterns. The same kernels power an instructional Jupyter UI for visualising eigenshapes, nodal (Chladni) patterns, and FRFs.
 \end{enumerate}
 
-\paragraph{Limitations.}
+\paragraph{Limitations}
 Current scope is restricted to rectangular plates, linear KL theory, and simple damping; mode-matching still requires curation; and performance depends on solver configuration (shift–invert, symmetry exploitation) and matrix assembly strategy.
 
-\paragraph{Outlook.}
+\paragraph{Outlook}
 Near-term work will (i) expose the orthotropic KL model as a first-class path (including lumped masses to emulate bracing), (ii) add automated mode tracking and uncertainty quantification for inverse estimates, and (iii) package releases as a M\textsc{atlab} toolbox, Python wheels, and a header-only C\textsc{++} library. Medium-term, we will extend to the Föppl–von Kármán regime and broaden boundary/geometry support, while exploring parallel assembly and solver pipelines for large grids. These steps keep \textsc{magpie} aligned with conservation practice—non-intrusive, repeatable, and auditable—while strengthening its role as a teaching aid and a reliable workbench for instrument makers.

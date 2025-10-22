@@ -229,8 +229,7 @@ This mapping clarifies the rationale behind the hardware architecture and highli
 \midrule
 \textbf{Faithfulness to historical action} & 
 Replicated jack and key geometry from sixteenth-century models;  
-avoided actuators or motorised force feedback (\cite{gillespie_haptic_1996,timmermans_multibody-based_2020});  
-optical sensing chosen for non-contact measurement of jack travel. \\[0.8ex]
+avoided actuators or motorised force feedback \cite{gillespie_haptic_1996,timmermans_multibody-based_2020};  optical sensing chosen for non-contact measurement of jack travel. \\[0.8ex]
 
 \textbf{Robustness and maintainability} &
 Mechanical frame built with traditional woods (walnut, cypress, boxwood) and brass springs;  
@@ -322,13 +321,13 @@ The initial question was whether sensor data could reliably trigger MIDI playbac
 
 A range of sensing strategies was explored against the project’s constraints of non-invasiveness, concealment, reliability, and scalability.
 
-\paragraph{IMU.}
+\paragraph{IMU}
 A six-DoF IMU (accelerometer + gyroscope) mounted on a single key yielded a recognisable “fingerprint” for each gesture, but the resulting features were not sufficiently separable across neighbouring keys, and the per-key cost remained high even at scale.
 
-\paragraph{Magnetic (reed / Hall).}
+\paragraph{Magnetic (reed / Hall)}
 Reed switches and Hall sensors were tested with small magnets embedded in the jacks. Both provided repeatable threshold detection, yet each introduced difficulties: reed switches placed calibration entirely in the mechanical domain and scaled poorly; Hall sensors demanded precise positioning and per-key software trimming. Limited internal space made such adjustment impractical, and embedding magnets in the jacks was neither non-invasive nor low-risk.
 
-\paragraph{LDR near the jack rail.}
+\paragraph{LDR near the jack rail}
 Light-dependent resistors placed at the rail (above the jacks) produced a usable signal—less light as the jack rose—but were highly sensitive to ambient illumination. Mitigating this would have required continual re-balancing or a dedicated light-balance circuit. Mounting the devices outside the cavity also conflicted with the requirement for concealment. Nevertheless, these trials suggested that a \emph{local} light source, if fully enclosed, could be viable.
 
 % \clearpage
@@ -475,7 +474,7 @@ Light-dependent resistors placed at the rail (above the jacks) produced a usable
   \label{fig:prototype-pcb}
 \end{figure}
 
-\paragraph{Optical reflectance (final choice).}
+\paragraph{Optical reflectance (final choice)}
 Building on \textcite{mcpherson_portable_2013, moro_platform_2020}, we adopted the Fairchild QRE1113
 \footnote{Fairchild, now ON Semiconductor, QRE1113 datasheet \url{https://www.onsemi.com/download/data-sheet/pdf/qre1113-d.pdf}} 
 infrared reflectance sensor in a simple voltage-divider circuit (Figure~\ref{fig:simple-schematic}). Unlike earlier key-displacement systems \cite{mcpherson_portable_2013, moro_platform_2020}, we needed to sense the motion of the \emph{jack} while keeping hardware invisible. The solution was to rotate the geometry: each sensor looked sideways onto a \emph{grey-scale reflectance gradient} applied to the jack body (Figure~\ref{fig:jack-tags}). This borrowed the controlled-contrast approach of line-following robots \cite{ramesh_turning_2017}, giving a smooth, monotonic response without exposing the emitters.
@@ -752,7 +751,7 @@ With \emph{Mark~I} delivered and installed for the San Colombano exhibition, dev
 In the first full instrument, key events were detected by a single threshold with no hysteresis: simple to implement, but prone to chatter near the decision point and awkward to calibrate across forty–nine keys.  
 The smaller rig offered a controlled setting in which to rethink the detection pipeline and firmware before committing changes to a second full build.
 
-\paragraph{Force sensing and firmware.}
+\paragraph{Force sensing and firmware}
 We added force sensors to the three–key action and redesigned the firmware around a clearer separation between \emph{Calibration} and \emph{Operation}.  
 On boot, the microcontroller configured its GPIO lines and verified the presence of SPI FRAM, then entered one of the two modes according to the state of the rotary encoder.  
 During normal play, sensors were read in groups of seven; a 3-bit address (\texttt{A}, \texttt{B}, \texttt{C}) advanced the multiplexer through its eight channels.%, as summarised in Table~\ref{tab:mux-encoding}.
@@ -764,14 +763,14 @@ During normal play, sensors were read in groups of seven; a 3-bit address (\text
     \label{fig:jack-states}
 \end{figure}
 
-\paragraph{Hysteresis and timing.}
+\paragraph{Hysteresis and timing}
 Central to the revision was a two-threshold finite-state machine (FSM) with states \texttt{RELEASED}, \texttt{PLUCKED}, and \texttt{PRESSED}.  
 A note was triggered only when the signal rose above the \texttt{pluck\_threshold} from \texttt{RELEASED}; it returned to \texttt{RELEASED} only when falling below a lower \texttt{release\_threshold} (Figure~\ref{fig:jack-states}).  
 This modest change eliminated chatter around a single boundary and allowed per-key pluck and release points to be tuned independently.  
 A four-sample moving average suppressed high-frequency noise.  
 Across 10\,000 iterations, the sampling loop (including multiplexing and filtering) averaged 1.7\,ms with $\pm$0.2\,ms jitter—comfortably inside the 10\,ms latency budget reported by \textcite{jack_effect_2016}.
 
-\paragraph{Threshold storage.}
+\paragraph{Threshold storage}
 Pluck and release thresholds were stored in non-volatile FRAM so that calibration survived power cycles.  
 The layout adopted a RIFF-style chunk structure \cite{ibm_riff_1991}, shown in Table~\ref{tab:fram-structure}.  
 On startup, the firmware checked the identifiers at \texttt{0x00} and \texttt{0x66} (``MAXI'' and ``MINI''); if absent, memory was initialised with default values.  
@@ -779,7 +778,7 @@ A lightweight wrapper around the Adafruit SPI-FRAM library%
 \footnote{Adafruit SPI FRAM Driver v2.6.2\\ \url{https://github.com/adafruit/Adafruit_FRAM_SPI/releases/tag/2.6.2}}
 simplified read/write operations.
 
-\paragraph{Calibration workflow.}
+\paragraph{Calibration workflow}
 During calibration, the selected key streamed raw values over the serial connection (Figure~\ref{fig:serial_monitor}) while the encoder adjusted thresholds in real time.  
 Addressable LEDs echoed the current state—green for \texttt{PLUCKED}, orange for \texttt{PRESSED}, blue for \texttt{RELEASED}, and red when approaching ADC limits.  
 An initial pass was performed at NEMUS using the Arduino serial plotter and MIDI Monitor,%
