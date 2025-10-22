@@ -424,22 +424,33 @@ SciPy also exposes intermediate construction formats such as coordinate and list
 
 \begin{figure}[h]
 {\footnotesize
+% \begin{verbatim}
+%       [
+%        [B11, B12, B13,                *[None] *  M3],
+%        [B21, B22, B23, B24,           *[None] *  M4],
+%        [B31, B32, B33, B34, B35,      *[None] *  M5],
+%  *[[*[None] * r, B31, B32, B33, B34, B35, *[None] * (M5 + r)] for r in range(1, M4)],
+%   [ *[None] * M4,   BM1M3, BM1M2, BM1M1, BM1M0],
+%   [ *[None] * M3,          BM0M2, BM0M1, BM0M0]
+%       ]
+% \end{verbatim}
 \begin{verbatim}
       [
-       [B11, B12, B13,                *[None] *  M3],
-       [B21, B22, B23, B24,           *[None] *  M4],
-       [B31, B32, B33, B34, B35,      *[None] *  M5]
- *[[*[None] * r, B31, B32, B33, B34, B35, *[None] * (M5 + r)] for r in range(1, M4)],
-  [ *[None] * M4,   BM1M3, BM1M2, BM1M1, BM1M0],
-  [ *[None] * M3,          BM0M2, BM0M1, BM0M0]
+      [B11,   B12,   B13,                       *Z * M3],
+      [B21,   B22,   B23,   B24,                *Z * M4],
+      [B31,   B32,   B33,   B34,   B35,         *Z * M5],
+ *[[*Z * r,   B31,   B32,   B33,   B34,   B35,  *Z * (M5 + r)] for r in range(1, M4)],
+   [*Z * M4,              BM1M3, BM1M2, BM1M1, BM1M0],
+   [*Z * M3,                     BM0M2, BM0M1, BM0M0]
       ]
 \end{verbatim}
 }
-\caption[Python syntax for the biharmonic]{Python syntax for the biharmonic structured from a list-of-lists of sub-blocks. The \texttt{Ma} multiplier variables are defined as $N_y - a$.}
+\caption[Python syntax for the biharmonic]{Python syntax for the biharmonic structured from a list-of-lists of sub-blocks. The \texttt{Ma} multiplier variables are defined as $N_y - a$ and \texttt{Z} is a \texttt{[None]} list.
+The Python formulation permits a relatively direct translation of the block-Toeplitz form shown in Figure~\ref{fig:biharmonic-matrix}}
 \label{fig:python-bmat}
 \end{figure}
 
-Despite the elegance of the block construction in Python, benchmarking revealed similar limitations to those in M\textsc{atlab}. Figure~\ref{fig:matlab-vs-python} compares the performance of three cases: block assembly in M\textsc{atlab}, block assembly in Python, and diagonal assembly in M\textsc{atlab}. Each operator size was generated ten times and the shortest runtime was recorded. At larger grid sizes ($\sim 3\times 10^{5}$ unknowns), M\textsc{atlab}'s diagonal method was roughly forty times faster than its own block formulation (0.2\,s vs.\ 8\,s). Python’s block performance tracked M\textsc{atlab}'s block performance: slower and less scalable than the diagonal approach.
+Despite the elegance of the block construction in Python (Figure~\ref{fig:python-bmat}), benchmarking revealed similar limitations to those in M\textsc{atlab}. Figure~\ref{fig:matlab-vs-python} compares the performance of three cases: block assembly in M\textsc{atlab}, block assembly in Python, and diagonal assembly in M\textsc{atlab}. Each operator size was generated ten times and the shortest runtime was recorded. At larger grid sizes ($\sim 3\times 10^{5}$ unknowns), M\textsc{atlab}'s diagonal method was roughly forty times faster than its own block formulation (0.2\,s vs.\ 8\,s). Python’s block performance tracked M\textsc{atlab}'s block performance: slower and less scalable than the diagonal approach.
 
 \begin{figure}
     \centering
