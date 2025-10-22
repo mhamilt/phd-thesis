@@ -162,12 +162,15 @@ By the sixteenth century, it was common for Italian harpsichords to employ more 
 	\centering
 	\caption[Design constraints]{Design constraints for the augmented harpsichord keyboard and their immediate implications.}
 	\label{tab:design-constraints}
-	\begin{tabular}{p{0.23\linewidth}p{0.4\linewidth}p{0.37\linewidth}}
+    {
+    \renewcommand{\arraystretch}{1.75}
+    \begin{tabular}{>{\raggedright\arraybackslash}p{0.14\linewidth}>{\raggedright\arraybackslash}p{0.4\linewidth}>{\raggedright\arraybackslash}p{0.4\linewidth}}
 		\hline
 		\textbf{Category} & \textbf{Constraint}                                                                                          & \textbf{Immediate Implications}                                                                                    \\
 		\hline
-		\multirow{4}{*}{Mechanical interface}
-		                  & \textbf{Faithfulness}:\newline Preserve the authentic feel and behaviour of a sixteenth-century harpsichord. & No mechanical `improvements' to the action; electronics must observe rather than alter jack behaviour.           \\
+		% \multirow{4}{*}{Mechanical interface}
+        Mechanical\newline interface
+		                  & \textbf{Faithfulness}:\newline Preserve the authentic feel and behaviour of a sixteenth-century harpsichord. & No mechanical `improvements' to the action; electronics must observe rather than alter jack behaviour.           \\[2.0ex]
 		\cline{2-3}
 		                  & \textbf{Robustness}:\newline Withstand frequent public use; allow maintenance by non-specialist staff.       & Preference for durable materials and serviceable assemblies; tolerance for minor misalignments.                    \\
 		\cline{2-3}
@@ -175,7 +178,8 @@ By the sixteenth century, it was common for Italian harpsichords to employ more 
 		\cline{2-3}
 		                  & \textbf{Compactness}:\newline Minimal footprint in the gallery.                                              & Rectilinear casework and tight internal packaging; no external modules or frames.                                  \\
 		\hline
-		\multirow{4}{*}{Electronics}
+		% \multirow{4}{*}{Electronics}
+        Electronics
 		                  & \textbf{Non-invasiveness}:\newline No modifications to visible historical parts.                             & Sensors mounted off key surfaces; use of add-on targets and internal fixtures instead of altering the action.      \\
 		\cline{2-3}
 		                  & \textbf{Low latency}:\newline End-to-end read/process budget $<10$\,ms for 49 keys \cite{jack_effect_2016}.  & Efficient multiplexing; lightweight filtering; avoidance of heavy interrupt schemes that conflict with monitoring. \\
@@ -185,6 +189,7 @@ By the sixteenth century, it was common for Italian harpsichords to employ more 
 		                  & \textbf{Scalability}:\newline Economically extend from a three-key rig to a 49-key keyboard (and beyond).        & Modular PCBs and looms; repeatable alignment features; component choices that tolerate mass assembly.              \\
 		\hline
 	\end{tabular}
+    }
 \end{table}
 \clearpage
 
@@ -913,9 +918,10 @@ Parallel to the physical design, attention was given to documentation and dissem
     \node[box, right=of box2] (box3) {Model Data\\sub-module};
     \node[box, below=2cm of box2] (bottom) {Interface\\meta-repository};
     
-    \draw[arrow] (bottom.north) |- (box1.south);
-    \draw[arrow] (bottom.north) |- (box2.south);
-    \draw[arrow] (bottom.north) |- (box3.south);
+    \draw[arrow] (bottom.north) -- ++(0,1) -| (box1.south);
+    \draw[arrow] (bottom.north) -- ++(0,1) -| (box2.south);
+    \draw[arrow] (bottom.north) -- ++(0,1) -| (box3.south);
+    
     
     \end{tikzpicture}
     \caption{Interface git repository and its submodules.}
