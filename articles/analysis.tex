@@ -293,7 +293,7 @@ Performance-sensitive stages are localised. Operator assembly is implemented exp
 
 \subsection{Design}\label{design}
 
-\begin{figure}[h]
+\begin{figure}
     \centering
     \begin{subfigure}[t]{0.45\textwidth}
     \vtop{
@@ -390,6 +390,13 @@ Adopting the MVC structure described in Section~\ref{design}, the M\textsc{atlab
 Figure~\ref{fig:directory-structure-matlab} show the directory structure for the M\textsc{atlab} version preset in \citetitle{magpie_matlab_2025} \cite{magpie_matlab_2025}.
 Central to all functionality is the construction of the biharmonic matrix by the function \texttt{bhmat}. In the simplest interior case the discrete operator corresponds to the 13-point stencil in Figure~\ref{fig:biharmonic-stencil} and involves only four distinct coefficients. Under generalised elastic boundary conditions, however, up to 229 coefficients may arise; symmetry and repetition break down near edges and corners (Figure~\ref{fig:biharmonic-stencil}). This rules out assembling the matrix by naïvely repeating a uniform stencil. Instead, \texttt{bhmat} computes the coefficients explicitly and places them into a sparse matrix.
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{img/biharm_zoom.pdf}
+    \caption[Cross-section of the biharmonic]{Cross-section of the biharmonic illustrating the coefficient content for a single grid line.}
+    \label{fig:biharm_zoom}
+\end{figure}
+
 The grid function \(u_{l,m}\) on an \((N_x+1)\times(N_y+1)\) grid is vectorised as shown in Figure~\ref{fig:fdtd-linear}, giving a square matrix of dimension \(N=(N_x+1)(N_y+1)\). For performance, all assembling is carried out in sparse format. M\textsc{atlab} stores sparse matrices in compressed–sparse–column format (CSC), with values, row indices, and column pointers packed contiguously \cite{gilbert_sparse_1992}. This makes repeated block concatenation expensive, as it forces reallocation and re-indexing of memory.
 
 The original code used a block-structured approach (Figure~\ref{fig:biharmonic-matrix}), which was easy to read but slow to assemble at increasing grid sizes. The refactor isolates coefficient generation from matrix assembly within \texttt{bhmat}, ensuring that the expensive computations are not repeated unnecessarily and that any optimisation applies across all downstream calls (e.g.\ eigenvalue problems or modal time-stepping). This also makes the operator usable as a stand-alone object in other finite-difference schemes.
@@ -398,27 +405,20 @@ Two assembly strategies were trialled. A block-based strategy constructs sub-mat
 
 In summary, the M\textsc{atlab} refactor established the structure of \textsc{magpie}: a small controller API, explicit operator assembly, and an isolated data model. This provided a reference implementation against which subsequent translations and optimisations could be tested.
 
-\subsection{Python}
-
-Python was the natural second target for \textsc{magpie}. Unlike M\textsc{atlab}, the language, ecosystem, and packaging infrastructure are fully open source, and its use in scientific computing continues to grow \cite{guo_python_2014}. Porting the toolkit to Python aligned with the project’s emphasis on transparency, accessibility, and reuse. The implementation is distributed via the Python Package Index (PyPI)\footnote{\url{https://pypi.org/project/nemus-magpie}} with the code hosted on GitHub and archived through Zenodo \cite{magpie_python_2025}. Structure of the Python package (Figure~\ref{fig:directory-structure-python}) adhered as closely as possible to that of the M\textsc{atlab} variant (Figure~\ref{fig:directory-structure-matlab}).
-
-A key change in the Python version concerns the construction of the discrete biharmonic operator. Rather than assembling sparse sub-blocks and concatenating them, the operator was reformulated explicitly by its 13 diagonals. Each diagonal is further split into non-repeating sectors, typically containing three to five unique coefficients each. This restructuring reflects the fact that elastic boundary conditions introduce up to eight distinct stiffness parameters, which disrupt the repeatable stencil pattern present in the interior. Figure~\ref{fig:biharm_zoom} shows how the number of unique coefficients increases near edges and corners, undermining diagonal-level repetition across the whole matrix.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\linewidth]{img/biharm_zoom.pdf}
-    \caption[Cross-section of the biharmonic]{Cross-section of the biharmonic illustrating the coefficient content for a single grid line.}
-    \label{fig:biharm_zoom}
-\end{figure}
-
-Because SciPy allows developers to specify sparse matrices in multiple formats, the diagonal (DIA) representation (Figure~\ref{fig:sparse-dia} was adopted as the target. In contrast to the compressed-sparse-column (CSC) format used internally by M\textsc{atlab}, the DIA format stores diagonals directly. Zero-padding of shorter diagonals is required but incurs minimal overhead due to the low proportion of non-zero bands.
-
 \begin{figure}
     \centering
     \includegraphics[width=1\linewidth]{img/sparse_formats.pdf}    
     \caption[Compressed Sparse Column and Diagonal format sparse matrix storage structure]{Compressed Sparse Column and Diagonal format sparse matrix storage structure. CSC format stores the data, a column pointer and a data address pointer, while the DIA format stores arrays of data and the corresponding diagonal index from which length can be calculated.  For a banded matrix, less data is needed however any zero values in the diagonal band must be stored explicitly. Adapted from \textcite{eding_sparse_2019}.}
     \label{fig:sparse-dia}
 \end{figure}
+
+\subsection{Python}
+
+Python was the natural second target for \textsc{magpie}. Unlike M\textsc{atlab}, the language, ecosystem, and packaging infrastructure are fully open source, and its use in scientific computing continues to grow \cite{guo_python_2014}. Porting the toolkit to Python aligned with the project’s emphasis on transparency, accessibility, and reuse. The implementation is distributed via the Python Package Index (PyPI)\footnote{\url{https://pypi.org/project/nemus-magpie}} with the code hosted on GitHub and archived through Zenodo \cite{magpie_python_2025}. Structure of the Python package (Figure~\ref{fig:directory-structure-python}) adhered as closely as possible to that of the M\textsc{atlab} variant (Figure~\ref{fig:directory-structure-matlab}).
+
+A key change in the Python version concerns the construction of the discrete biharmonic operator. Rather than assembling sparse sub-blocks and concatenating them, the operator was reformulated explicitly by its 13 diagonals. Each diagonal is further split into non-repeating sectors, typically containing three to five unique coefficients each. This restructuring reflects the fact that elastic boundary conditions introduce up to eight distinct stiffness parameters, which disrupt the repeatable stencil pattern present in the interior. Figure~\ref{fig:biharm_zoom} shows how the number of unique coefficients increases near edges and corners, undermining diagonal-level repetition across the whole matrix.
+
+Because SciPy allows developers to specify sparse matrices in multiple formats, the diagonal (DIA) representation (Figure~\ref{fig:sparse-dia} was adopted as the target. In contrast to the compressed-sparse-column (CSC) format used internally by M\textsc{atlab}, the DIA format stores diagonals directly. Zero-padding of shorter diagonals is required but incurs minimal overhead due to the low proportion of non-zero bands.
 
 SciPy also exposes intermediate construction formats such as coordinate and list-of-lists \cite{eding_sparse_2019}. While this adds flexibility, it requires more explicit handling by the user than M\textsc{atlab}, where sparse matrices are constructed using CSC exclusively \cite{gilbert_sparse_1992}. Before a diagonal-based version was completed, an initial Python port reproduced the original block-based assembly. SciPy’s \texttt{bmat} function \cite{scipy_bmat_2025} made this practical: blocks of size $N\times N$ could be arranged in lists-of-lists, with empty blocks represented by \texttt{None}. Python’s list replication and unpacking operators allow the structure to be encoded compactly, avoiding extensive index manipulation.
 
@@ -467,7 +467,7 @@ Both M\textsc{atlab} and Python provide eigensolver functionality through an int
 
 In order to find these smaller magnitude eigenvalues, the solver must be operated in a shift-invert mode. This consists of transforming the eigenvalue problem from $A x = \lambda x$ to $(A- \sigma I)^{-1} x = \frac{1}{\lambda - \sigma} x$ with shift value $\sigma$. For $\sigma = 0$, $A^{-1}x = \frac{1}{\lambda}x$, large $\lambda$ therefore becomes small to the solver and smaller magnitude eigenvalues will be found first. When the biharmonic is large, inverting it can be a computationally expensive operation. The biharmonic can be inverted algebraically as part of LU decomposition.
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     {\footnotesize
     \begin{verbatim}
@@ -536,7 +536,7 @@ A further implementation was required to determine whether the compute time coul
 
 Like Python, C\textsc{++} is entirely open source and therefore compatible with the FAIR principles underpinning the project’s methodology. Its status as a compiled, strongly typed language introduces additional development overhead, but it also enables direct control over memory, performance, and solver back ends.
 
-\begin{figure}[h]
+\begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{img/plot-biharmonic-comparison-alt.pdf}
     \caption[Construction time for the diagonalised biharmonic]{Construction time for the diagonalised biharmonic in M\textsc{atlab}, Python and C\textsc{++}.}
