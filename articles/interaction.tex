@@ -327,7 +327,7 @@ The initial question was whether sensor data could reliably trigger MIDI playbac
 A range of sensing strategies was explored against the project’s constraints of non-invasiveness, concealment, reliability, and scalability.
 
 \paragraph{IMU}
-A six-DoF IMU (accelerometer + gyroscope) mounted on a single key yielded a recognisable “fingerprint” for each gesture, but the resulting features were not sufficiently separable across neighbouring keys, and the per-key cost remained high even at scale.
+A six-DoF IMU (accelerometer + gyroscope) mounted on a single key yielded a recognisable `fingerprint' for each gesture, but the resulting features were not sufficiently separable across neighbouring keys, and the per-key cost remained high even at scale.
 
 \paragraph{Magnetic (reed / Hall)}
 Reed switches and Hall sensors were tested with small magnets embedded in the jacks. Both provided repeatable threshold detection, yet each introduced difficulties: reed switches placed calibration entirely in the mechanical domain and scaled poorly; Hall sensors demanded precise positioning and per-key software trimming. Limited internal space made such adjustment impractical, and embedding magnets in the jacks was neither non-invasive nor low-risk.

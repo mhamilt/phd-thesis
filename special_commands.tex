@@ -18,7 +18,7 @@
 % Circuits
 %% Voltage Divider
 \newcommand{\VDIV}[1][1]{%
-\begin{circuitikz}[american, scale=#1, transform shape]
+\begin{circuitikz}[european, scale=#1, transform shape]
     \draw (0, 0)  node[left]{$V_{CC}$} to[short,o-] (0,0) to [R,l_=$R_{in}$] (0, -2);
     \draw -- (0,-2) node[npn, photo, anchor=C](Q){Q};
     \draw (Q.E) -- ++(0,0) node[ground] {};
@@ -28,7 +28,7 @@
 
 % Basic TIA (no VCE)
 \newcommand{\TIABASIC}[1][1]{%
-\begin{circuitikz}[american, scale=#1, transform shape]
+\begin{circuitikz}[european, scale=#1, transform shape]
 	\draw (0, 0) node[op amp] (opamp) {};    
 	
     \draw (opamp.-) to[short,-*] ++(-0.5, 0) coordinate(A);
@@ -43,7 +43,7 @@
 }
 % feedback capacitor
 \newcommand{\TIACF}[1][1]{%
-\begin{circuitikz}[american, scale=#1, transform shape]
+\begin{circuitikz}[european, scale=#1, transform shape]
 	\draw (0, 0) node[op amp] (opamp) {};
     \draw (opamp.-) to[short,-*] ++(-0.5, 0) coordinate(A);
     \draw (opamp.+) node[ground] {};
@@ -61,7 +61,7 @@
 
 %% VCE and Vb
 \newcommand{\TIAVB}[1][1]{%
-\begin{circuitikz}[american, scale=#1, transform shape]
+\begin{circuitikz}[european, scale=#1, transform shape]
 	\draw (0, 0) node[op amp] (opamp) {};
     \draw (opamp.-) to[short,-*] ++(-0.5, 0) coordinate(A);    
     \draw (opamp.+) to[short,-o] ++(-0.25,0) node[left] {$V_b$};
@@ -79,7 +79,7 @@
 
 %% Full Circuit
 \newcommand{\TIAFULL}[1][1]{%
-\begin{circuitikz}[american, scale=#1, transform shape]
+\begin{circuitikz}[european, scale=#1, transform shape]
 	\draw (0, 0) node[op amp] (opamp) {};
     \draw (opamp.-) to[short,-*] ++(-0.75, 0) coordinate(A);    
     \draw (opamp.+) to [R,l_=$R_{1}$] ++(-2.0,0) coordinate(Ro);

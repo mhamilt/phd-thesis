@@ -15,7 +15,7 @@ Future work on the keyboard interface builds directly on the constraints, improv
 The remainder of Section~\ref{sec:future-interaction} develops these strategies as a series of responses that extend, refine, or redirect earlier design decisions. The following subsections trace this progression through fabrication and sensing (\S\ref{sec:cad-cam-jacks}), electronics and layout (\S\ref{sec:future-pcb-layout}), temporal performance (\S\ref{sec:latency}), exhibition integration, and research/application trajectories.
 
 
-\begin{table*}[htb!]
+\begin{table}[htb!]
 \centering
 \small
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.13\linewidth} >{\raggedright\arraybackslash}p{0.30\linewidth} >{\raggedright\arraybackslash}p{0.48\linewidth}}
@@ -72,7 +72,7 @@ Repurpose existing RGB LEDs for a slow, warm “breathing” idle glow to signal
 \bottomrule
 \end{tabular}
 \caption{Haptic keyboard limitations and going-forward strategies}\label{tab:ch4-roadmap}
-\end{table*}
+\end{table}
 
 The remainder of Section~\ref{sec:future-interaction} develops these strategies as a series of responses that expand or redirect earlier design decisions. The following subsections trace this progression through fabrication and sensing (\S\ref{sec:cad-cam-jacks}), electronics and layout (\S\ref{sec:future-pcb-layout}), temporal performance (\S\ref{sec:latency}), exhibition integration, and research/application trajectories.
 
@@ -280,7 +280,7 @@ A lightweight convolution stage matches the rendered instrument to the venue’s
 
 \subsubsection{Vibration}
 
-Low-frequency, low-level tactile feedback increases immersion and reported audio quality in seated contexts~\cite{merchel_vibratory_2009,merchel_functional_2018}. For headphone-based exhibits, vibration signals should follow the noise-reduction practices in~\cite{merchel_functional_2018} (lower cut-offs, octave shifting where needed), acknowledging the different acuity of touch~\cite{summers_single_2000}. For keyboard use, subtle keybed or bench actuation provides whole-body cues without compromising museum noise policies. Findings in~\cite{young_musical_2018} suggest kinaesthetic factors dominate, but vibrotactile additions remain beneficial.
+Low-frequency, low-level tactile feedback increases immersion and reported audio quality in seated contexts~\cite{merchel_vibratory_2009,merchel_functional_2018}. For headphone-based exhibits, vibration signals should follow the noise-reduction practices in~\textcite{merchel_functional_2018} (lower cut-offs, octave shifting where needed), acknowledging the different acuity of touch~\cite{summers_single_2000}. For keyboard use, subtle keybed or bench actuation provides whole-body cues without compromising museum noise policies. Findings in \textcite{young_musical_2018} suggest kinaesthetic factors dominate, but vibrotactile additions remain beneficial.
 
 % \textcite{fontana_perception_2018}
 % %\begin{quotation}
@@ -295,7 +295,7 @@ Low-frequency, low-level tactile feedback increases immersion and reported audio
 
 \subsubsection{Encouraging Engagement}
 
-Visitor behaviour in the oratory suggests that some passers-by do not recognise the interface as “meant to be touched,” a learned museum norm~\cite{howes_introduction_2014,classen_touch_2005}. Signage helps but may be insufficient or ambiguous~\cite{khalifa_visitors_2025}. A gentle visual affordance can disambiguate: repurpose the existing RGB LEDs (Figures~\ref{fig:mark1-leds} and \ref{fig:mark-2}) for a slow, warm “breathing” pattern during idle. This differentiates the interface from adjacent historical instruments without compromising the aesthetic integration; the calibration indicators then serve a secondary role as an engagement cue.
+Visitor behaviour in the oratory suggests that some passers-by do not recognise the interface as `meant to be touched,' a learned museum norm~\cite{howes_introduction_2014,classen_touch_2005}. Signage helps but may be insufficient or ambiguous~\cite{khalifa_visitors_2025}. A gentle visual affordance can disambiguate: repurpose the existing RGB LEDs (Figures~\ref{fig:mark1-leds} and \ref{fig:mark-2}) for a slow, warm “breathing” pattern during idle. This differentiates the interface from adjacent historical instruments without compromising the aesthetic integration; the calibration indicators then serve a secondary role as an engagement cue.
 
 \subsection{Application}
 
