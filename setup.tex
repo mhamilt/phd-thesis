@@ -62,7 +62,8 @@ includefoot
    tabularray,
         xcolor
 }
-
+\usepackage{xparse}
+\usepackage{expl3}
 \usepackage[hyphens]{url}
 \usepackage[hidelinks]{hyperref}
 %----------------------------------------------------------------------------------------
@@ -100,104 +101,3 @@ includefoot
 ]{biblatex} 
 \addbibresource{main.bib}
 
-%% Possessive Citation
-\DeclareNameFormat{poss}{%%
-  \nameparts{#1}%%
-  \ifnum\value{listcount}=1%
-    \ifnum\value{liststop}=1%
-      % single author: add 's%
-      \usebibmacro{name:family}{\namepartfamily}{\namepartgiven}{\namepartprefix}{\namepartsuffix}'s%%
-    \else%
-      % multiple authors: no 's yet%
-      \usebibmacro{name:family}{\namepartfamily}{\namepartgiven}{\namepartprefix}{\namepartsuffix}%%
-    \fi%
-  \else%
-    \ifnum\value{listcount}<\value{liststop}%
-      {, }%%
-    \else%
-      % last author in multiple list: add 's%
-      \usebibmacro{name:family}{\namepartfamily}{\namepartgiven}{\namepartprefix}{\namepartsuffix}'s%%
-    \fi%
-  \fi%
-}%
-
-\DeclareCiteCommand{\citep}[] % keep prenote/postnote machinery%
-  {\usebibmacro{prenote}}%
-  {%%
-    % Author name(s) in possessive form%
-    \printnames[poss]{author}%%
-    \setunit{\space}%%
-    % Now the numeric citation%
-    \printtext{[\printfield{labelnumber}]}%%
-  }%
-  {\multicitedelim}%
-  {\usebibmacro{postnote}%
-}%
-
-%----------------------------------------------------------------------------------------
-% Footnote Formatting
-\usepackage{xparse}
-\usepackage{expl3}
-
-\ExplSyntaxOn
-
-% Save original \footnote
-\cs_new_eq:NN \origfootnote \footnote
-
-% Define our safe version
-\RenewDocumentCommand \footnote { m }
-  {
-    % delete space but give a warning
-    \ifhmode
-      \ifdim\lastskip>0pt
-        \unskip % delete the preceding space    
-    \fi
-
-      %   \PackageWarning{footnote-check}
-      %     {Removed\space a\space space\space immediately\space before\space \string\footnote}
-      % \fi
-
-    % Insert the real footnote
-    \origfootnote{#1}\space
-
-    % --- check for punctuation immediately after ---
-    \peek_meaning:NTF . { \__fn_bad_punct: } {
-    \peek_meaning:NTF , { \__fn_bad_punct: } {
-    \peek_meaning:NTF ; { \__fn_bad_punct: } {
-    \peek_meaning:NTF : { \__fn_bad_punct: } {
-    \peek_meaning:NTF ? { \__fn_bad_punct: } {
-    \peek_meaning:NTF ! { \__fn_bad_punct: } {
-    \peek_meaning:NTF ) { \__fn_bad_punct: } {
-    \peek_meaning:NTF ] { \__fn_bad_punct: } {
-    \peek_meaning:NTF } { \__fn_bad_punct: } {
-      % no punctuation immediately after -> OK
-    }}}}}}}}    
-  }
-
-% Helper macro for bad punctuation
-\cs_new_protected:Npn \__fn_bad_punct:
-  {
-    \PackageError{footnote-check}
-    {Footnote\space immediately\space followed\space by\space punctuation}
-    {Remove\space the\space punctuation\space or\space place\space it\space differently.}
-  }
-
-\ExplSyntaxOff
-%----------------------------------------------------------------------------------------
-% \AtEveryBibitem{%
-%   \iffieldundef{doi}
-%     {}
-%     {%
-%     \clearfield{url}
-%       % \iffboolexpr{
-%       %   test {\ifhyperref}
-%       %   and
-%       %   test {\ifentryhasfield{url}}
-%       % }
-%       % {%
-%         % \iffieldequalstr{url}{https://doi.org/\thefield{doi}}
-%         %   {\clearfield{url}} % Remove redundant DOI-URLs
-%         %   {\clearfield{url}}%
-%       % }%
-%     }%
-% }
