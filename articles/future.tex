@@ -181,7 +181,7 @@ Responsiveness in the keyboard interface is already adequate for both performanc
 
 \subsubsection{Sensor Signal Measurement}\label{sec:tia}
 
-The current voltage-divider circuit (Figure~\ref{fig:volt-div}) is intentionally simple, inexpensive, and resilient to component changes, aligning with the thesis' open-methodology principle. However, the phototransistor’s parasitic capacitance imposes a low-pass effect~\cite{falco_understanding_2023}, slightly smoothing rapid transitions and introducing small, variable delays. When precision of onset is crucial—such as when synchronising gesture with sound playback—this behaviour becomes a measurable limit rather than a theoretical one.
+The current voltage-divider circuit (Figure~\ref{fig:volt-div}) is intentionally simple, inexpensive, and resilient to component changes, aligning with the thesis' open-methodology principle. However, the phototransistor’s parasitic capacitance imposes a low-pass effect~\cites[]{falco_understanding_2023}[p. 283]{horowitz_art_2020}, slightly smoothing rapid transitions and introducing small, variable delays. When precision of onset is crucial—such as when synchronising gesture with sound playback—this behaviour becomes a measurable limit rather than a theoretical one.
 
 \begin{figure}
     \centering
@@ -191,7 +191,7 @@ The current voltage-divider circuit (Figure~\ref{fig:volt-div}) is intentionally
     \label{fig:led-diffuser}
 \end{figure}
 
-A transimpedance amplifier (TIA) addresses this limitation by converting sensor current directly into voltage, bypassing the slow pull-up resistor and improving bandwidth (Figure~\ref{fig:tia-basic}). Stability is maintained through a feedback capacitor (Figure~\ref{fig:tia-cf})~\cite[p.~233]{horowitz_art_2015}, while biasing the collector--emitter junction further increases sensitivity and speed~\cite{falco_understanding_2023,pardue_near_2013}. To prevent the output from approaching supply rails, a differential configuration biases the inverting input (Figure~\ref{fig:tia-diff}), following \textcite{mcpherson_portable_2013}, with resistor ratios tuned for optimal common-mode rejection~\cite[p.~227]{horowitz_art_2015}. The resulting circuit family, summarised in Figure~\ref{fig:tia-evolution}, trades a small increase in complexity for a substantial gain in temporal precision.
+A transimpedance amplifier (TIA) addresses this limitation by converting sensor current directly into voltage, bypassing the slow pull-up resistor and improving bandwidth (Figure~\ref{fig:tia-basic}). Stability is maintained through a feedback capacitor (Figure~\ref{fig:tia-cf})~\cite[p.~233]{horowitz_art_2015}, while biasing the collector--emitter junction further increases sensitivity and speed~\cite{falco_understanding_2023, pardue_near_2013}. To prevent the output from approaching supply rails, a differential configuration biases the inverting input (Figure~\ref{fig:tia-diff}), following \textcite{mcpherson_portable_2013}, with resistor ratios tuned for optimal common-mode rejection~\cite[p.~227]{horowitz_art_2015}. The resulting circuit family, summarised in Figure~\ref{fig:tia-evolution}, trades a small increase in complexity for a substantial gain in temporal precision.
 
 \begin{figure}
     \centering
@@ -230,12 +230,12 @@ A transimpedance amplifier (TIA) addresses this limitation by converting sensor 
     \end{subfigure}
     \centering
     \caption[Circuit evolution for phototransistor voltage measurement]{Circuit evolution for phototransistor ($Q$) voltage measurement from a
-        simple voltage divider to a biased transimpedance amplifier following \textcite{mcpherson_portable_2013}. The pull-up resistor $R_{in}$ has been greyed to indicate its optional removal and to clarify the circuit extension around the phototransistor collector.\\
+        simple voltage divider to a biased transimpedance amplifier following \textcite{mcpherson_portable_2013}. The pull-up resistor $R_{in}$ has been greyed to indicate its optional removal and to clarify the circuit extension around the phototransistor collector.\\\\
         (\subref{fig:volt-div}) Phototransistor with pull-up resistor.\\
         (\subref{fig:tia-basic}) Basic transimpedance amplifier using a phototransistor~\cite[Fig.~4.22]{horowitz_art_2015}.\\
-        (\subref{fig:tia-cf}) Feedback capacitor $C_f$ reduces high-frequency noise and ringing.\\
-        (\subref{fig:tia-bias}) TIA with voltage bias $V_b$~\cite{pardue_near_2013}, increasing sensitivity and speed.\\
-        (\subref{fig:tia-diff}) Differential TIA with improved common-mode rejection~\cite[p.~227]{horowitz_art_2015}.}
+        (\subref{fig:tia-cf}) Feedback capacitor $C_f$ reduces high-frequency noise and ringing \cite[p. 283]{horowitz_art_2020}.\\
+        (\subref{fig:tia-bias}) TIA with voltage bias $V_b$~\cite{pardue_near_2013}, increasing sensitivity and response time.\\
+        (\subref{fig:tia-diff}) Differential TIA derived from \textcite[Fig. 3]{mcpherson_portable_2013} that necessitates a balance of resistor ratio for optimal common-mode rejection as per~\textcite[p.~227]{horowitz_art_2015}.}
     \label{fig:tia-evolution}
 \end{figure}
 

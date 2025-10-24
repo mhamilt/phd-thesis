@@ -27,7 +27,7 @@ The remainder of the chapter develops the design choices behind \textsc{magpie} 
 \end{enumerate}
 
 
-Throughout, we prioritise reproducibility (scripts and notebooks), citable artefacts (software, datasets, configurations).
+Throughout, we prioritise reproducibility (scripts and notebooks) and citable artefacts (software, datasets, configurations).
 
 
 \section{Methodology}\label{sec:methodology}
@@ -36,7 +36,7 @@ The modelling strategy underpinning \textsc{magpie} rests on classical thin-plat
 
 \subsection{Kirchhoff--Love framework}
 
-The Kirchhoff--Love describes thin plates undergoing bending deformation \cite{love_small_1888}. For a homogeneous isotropic plate of thickness $\zeta$ and uniform density $\rho$, the transverse displacement $u = u(x,y,t)$ over a rectangular domain ${\mathcal D} = [0,L_x]\times[0,L_y]$ satisfies the following partial differential equation \cite{graff_wave_1991,bilbao_numerical_2009}:
+The Kirchhoff--Love model describes thin plates undergoing bending deformation \cite{love_small_1888}. For a homogeneous isotropic plate of thickness $\zeta$ and uniform density $\rho$, the transverse displacement $u = u(x,y,t)$ over a rectangular domain ${\mathcal D} = [0,L_x]\times[0,L_y]$ satisfies the following partial differential equation \cite{graff_wave_1991,bilbao_numerical_2009}:
 %
 \begin{equation}
 \rho \zeta \frac{\partial^2 u}{\partial t^2}
@@ -418,7 +418,7 @@ Python was the natural second target for \textsc{magpie}. Unlike M\textsc{atlab}
 
 A key change in the Python version concerns the construction of the discrete biharmonic operator. Rather than assembling sparse sub-blocks and concatenating them, the operator was reformulated explicitly by its 13 diagonals. Each diagonal is further split into non-repeating sectors, typically containing three to five unique coefficients each. This restructuring reflects the fact that elastic boundary conditions introduce up to eight distinct stiffness parameters, which disrupt the repeatable stencil pattern present in the interior. Figure~\ref{fig:biharm_zoom} shows how the number of unique coefficients increases near edges and corners, undermining diagonal-level repetition across the whole matrix.
 
-Because SciPy allows developers to specify sparse matrices in multiple formats, the diagonal (DIA) representation (Figure~\ref{fig:sparse-dia} was adopted as the target. In contrast to the compressed-sparse-column (CSC) format used internally by M\textsc{atlab}, the DIA format stores diagonals directly. Zero-padding of shorter diagonals is required but incurs minimal overhead due to the low proportion of non-zero bands.
+Because SciPy allows developers to specify sparse matrices in multiple formats, the diagonal (DIA) representation (Figure~\ref{fig:sparse-dia}) was adopted as the target. In contrast to the compressed-sparse-column (CSC) format used internally by M\textsc{atlab}, the DIA format stores diagonals directly. Zero-padding of shorter diagonals is required but incurs minimal overhead due to the low proportion of non-zero bands.
 
 SciPy also exposes intermediate construction formats such as coordinate and list-of-lists \cite{eding_sparse_2019}. While this adds flexibility, it requires more explicit handling by the user than M\textsc{atlab}, where sparse matrices are constructed using CSC exclusively \cite{gilbert_sparse_1992}. Before a diagonal-based version was completed, an initial Python port reproduced the original block-based assembly. SciPy’s \texttt{bmat} function \cite{scipy_bmat_2025} made this practical: blocks of size $N\times N$ could be arranged in lists-of-lists, with empty blocks represented by \texttt{None}. Python’s list replication and unpacking operators allow the structure to be encoded compactly, avoiding extensive index manipulation.
 
@@ -539,8 +539,7 @@ SciPy and M\textsc{atlab} both interface with ARPACK and the results between sol
 	\label{tab:parameters}
 \end{table}
 
-Although the percentage error is relatively small, the eigenvalue compute time is noticeably longer in Python 
-compared to M\textsc{atlab}, which is compounded further by the compute time biharmonic using SciPy (Figure~\ref{fig:matlab-vs-python}).
+Although the percentage error is relatively small, the eigenvalue compute time is noticeably longer in Python compared to M\textsc{atlab}, which is compounded further by the compute time biharmonic using SciPy (Figure~\ref{fig:matlab-vs-python}).
 A further implementation was required to determine whether the compute time could be improved upon, and to achieve this, we looked toward a compiled language.
 
 \subsection{C++}
@@ -635,7 +634,7 @@ One of \textsc{magpie}'s functionalities is the estimation of a specimen's elast
 
 \subsubsection{A metal plate}
 
-A case study taking the experimental measurements from \textcite{duran_experimentally_2023} to calculate Young's modulus using Magpie. The experimental plate is represented in Figure \ref{fig:ExpPlateIsoMagpie}, along with the plate's physical dimensions and density.
+A case study taking the experimental measurements from \textcite{duran_experimentally_2023} to calculate Young's modulus using Magpie is illustrated. The experimental plate is represented in Figure \ref{fig:ExpPlateIsoMagpie}, along with the plate's physical dimensions and density.
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.9\linewidth]{img/copper.pdf}
