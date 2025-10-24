@@ -280,18 +280,31 @@ A lightweight convolution stage matches the rendered instrument to the venue’s
 
 \subsubsection{Vibration}
 
-Low-frequency, low-level tactile feedback increases immersion and reported audio quality in seated contexts~\cite{merchel_vibratory_2009,merchel_functional_2018}. For headphone-based exhibits, vibration signals should follow the noise-reduction practices in~\textcite{merchel_functional_2018} (lower cut-offs, octave shifting where needed), acknowledging the different acuity of touch~\cite{summers_single_2000}. For keyboard use, subtle keybed or bench actuation provides whole-body cues without compromising museum noise policies. Findings in \textcite{young_musical_2018} suggest kinaesthetic factors dominate, but vibrotactile additions remain beneficial.
-
-% \textcite{fontana_perception_2018}
-% %\begin{quotation}
-%     An example application that seems at immediate reach of current tactile interfaces is to create illusory effects of loudness change by varying the intensity of vibratory feedback [39, 42].
-% \end{quotation}
-% suggests the influence of vibrotactile feedback on dynamics perception and timbre.  
-% Cross referenced with \textcite{young_musical_2018} which conducted its study using the new DMI ``Haptic Bowl''
-% \textcite{young_musical_2018} showed that for a haptic interface, tactile and force feedback combined, force feedback is the most influential feedback type. A combination of force and tactile the interface was ranked higher interms of playability and learnability. Though the harpsichord may not provide the same dynamic information as the piano, when collected together \textcite{fontana_perception_2018, young_musical_2018, fluckiger_evaluation_2018}
-% studies of \textcite{galembo_quality_1982, galembo_problem_1983} that demonstrated the identification of piano from touch alone, when other senses had been damped 
-% \footnote{summarised in \textcite{galembo_quality_2003}, deemed kinesthetic tests, but given the nature of the experiments these would be hatic studies as the force and vibrotactile feedback are not decoupled.}
-% It is clear that information is held within vibrotactile perception \cite{galembo_quality_1982, galembo_problem_1983,fontana_perception_2018,young_musical_2018,fluckiger_influence_2018,fluckiger_influence_2018} and it is natural next step to begin to incorporate it.
+Low-frequency, low-level tactile feedback increases immersion and reported audio
+quality in seated
+contexts~\cite{merchel_vibratory_2009,merchel_functional_2018}. For
+headphone-based exhibits, vibration signals should follow the noise-reduction
+practices in~\textcite{merchel_functional_2018} (lower cut-offs, octave shifting
+where needed), acknowledging the different acuity of
+touch~\cite{summers_single_2000}. For keyboard use, subtle keybed or bench
+actuation provides whole-body cues without compromising museum noise policies.%
+% issue #59
+Research over several decades has shown that musicians can extract information
+about an instrument through haptic feedback. Early studies demonstrated that
+expert pianists could identify instruments purely by playing, where they
+otherwise could not by listening
+\cite{galembo_quality_1982,galembo_problem_1983}.
+\footnote{As well as being blindfolded the ``kinaesthetic test`` had experts
+wear headphones playing white noise to block ambient sound
+\cite{galembo_quality_2003}} Subsequent work has revealed that vibrotactile
+feedback in p[articular] shapes perceptions of both
+loundess\cite{fontana_perception_2018} and instrument quality
+\cite{fluckiger_influence_2018}. Although the harpsichord lacks the piano's
+dynamic control, \textcite{young_musical_2018} found that performers preferred
+interfaces combining vibrotactile and kinaesthetic feedback on a custom
+interface, reporting a higher score for both playability and ``learnability.''
+It is clear that vibrotactile feedback conveys information that is accessible to the
+player and represents a natural avenue for extending the augmented interface.
 
 \subsubsection{Encouraging Engagement}
 
@@ -331,7 +344,7 @@ Development in this area concerns the core numerical and modelling functions tha
 
 \subsubsection{Orthotropic Case}
 
-Earlier implementations of \textsc{magpie} used a shared grid spacing ($h$) for both $x$ and $y$ directions. This constraint simplified the discrete biharmonic operator but limited accuracy to plates whose aspect ratio produced integer grid ratios. In practice, the model performs best when the ratio of plate dimensions $L_x/L_y$ matches the ratio of grid points $N_x/N_y$. The alternative---fixing $h$ and truncating $\frac{L_x}{h}$ and $\frac{L_y}{h}$ independently---avoids this restriction but requires separate spacings $h_x$ and $h_y$.  
+Earlier implementations of \textsc{magpie} used a shared grid spacing ($h$) for both $x$ and $y$ directions. This constraint simplified the discrete biharmonic operator but limited accuracy to plates whose aspect ratio produced integer grid ratios. In practice, the model performs best when the ratio of plate dimensions $L_x/L_y$ matches the ratio of grid points $N_x/N_y$. The alternative--fixing $h$ and truncating $\frac{L_x}{h}$ and $\frac{L_y}{h}$ independently--avoids this restriction but requires separate spacings $h_x$ and $h_y$.  
 
 \begin{figure}
     \centering
@@ -340,9 +353,9 @@ Earlier implementations of \textsc{magpie} used a shared grid spacing ($h$) for 
     \label{fig:grid-error}
 \end{figure}
 
-Figure~\ref{fig:grid-error} illustrates the error introduced by shared grid spacing. Because the effective plate dimensions are slightly altered, the simulation diverges as grid resolution increases unless the grid ratios are perfectly matched. This is manageable only for small $N_x$ and $N_y$, since total grid size $N_{xy}$ scales exponentially with $N_x N_y$. For instance, for a plate of $L_x = 100.1$\,cm and $L_y = 81.1$\,cm, matching accuracy would require roughly $N_x = 1001$ and $N_y = 811$ grid points---about 4.2\,GB of memory for the sparse biharmonic matrix and eigensolver. By contrast, independent grid spacing achieves equivalent accuracy at roughly 118\,MB, a crucial difference when deploying on resource-limited systems such as embedded devices or web-based applications, where computational overhead directly affects feasibility.
+Figure~\ref{fig:grid-error} illustrates the error introduced by shared grid spacing. Because the effective plate dimensions are slightly altered, the simulation diverges as grid resolution increases unless the grid ratios are perfectly matched. This is manageable only for small $N_x$ and $N_y$, since total grid size $N_{xy}$ scales exponentially with $N_x N_y$. For instance, for a plate of $L_x = 100.1$\,cm and $L_y = 81.1$\,cm, matching accuracy would require roughly $N_x = 1001$ and $N_y = 811$ grid points--about 4.2\,GB of memory for the sparse biharmonic matrix and eigensolver. By contrast, independent grid spacing achieves equivalent accuracy at roughly 118\,MB, a crucial difference when deploying on resource-limited systems such as embedded devices or web-based applications, where computational overhead directly affects feasibility.
 
-Independent spacing has therefore been implemented as part of the new orthotropic plate model, as per the wooden plate case study presented in Section \ref{sec:magpie-case-study}. These extensions have been merged into the M\textsc{atlab} library of \textsc{magpie}, following the orthotropic and lumped-mass formulation described in \textcite{ducceschi_open_2024}. Although the source code is not yet in a distributable format, the underlying principles generalise easily from the isotropic to the orthotropic case, allowing \textsc{magpie} to model distinct elastic moduli $E_x$ and $E_y$ and shear modulus $G_{xy}$---all required for representing wooden soundboards.
+Independent spacing has therefore been implemented as part of the new orthotropic plate model, as per the wooden plate case study presented in Section \ref{sec:magpie-case-study}. These extensions have been merged into the M\textsc{atlab} library of \textsc{magpie}, following the orthotropic and lumped-mass formulation described in \textcite{ducceschi_open_2024}. Although the source code is not yet in a distributable format, the underlying principles generalise easily from the isotropic to the orthotropic case, allowing \textsc{magpie} to model distinct elastic moduli $E_x$ and $E_y$ and shear modulus $G_{xy}$--all required for representing wooden soundboards.
 
 \begin{figure}
     \centering
@@ -390,7 +403,7 @@ A dedicated \textsc{magpie} GUI could therefore support both expert and non-expe
 
 \subsubsection{C++ Interface}
 
-While the Python and M\textsc{atlab} implementations of \textsc{magpie} have been instrumental in validating algorithms, long-term accessibility depends on portability and efficient compilation. Graphical interfaces are typically platform-specific---Cocoa for macOS, Win32 for Windows, and GTK or Qt for Linux---each requiring distinct implementation layers. The JUCE framework provides a compelling cross-platform solution, offering unified native wrappers for audio libraries and OpenGL-based rendering. Its abstraction layer enables deployment across all major operating systems without sacrificing performance.  
+While the Python and M\textsc{atlab} implementations of \textsc{magpie} have been instrumental in validating algorithms, long-term accessibility depends on portability and efficient compilation. Graphical interfaces are typically platform-specific--Cocoa for macOS, Win32 for Windows, and GTK or Qt for Linux--each requiring distinct implementation layers. The JUCE framework provides a compelling cross-platform solution, offering unified native wrappers for audio libraries and OpenGL-based rendering. Its abstraction layer enables deployment across all major operating systems without sacrificing performance.  
 
 For applications where 3D rendering or real-time visualisation is central, the open-source \texttt{bgfx} framework%
 \footnote{\url{https://github.com/bkaradzic/bgfx}} offers an alternative. It supports multiple low-level graphics APIs, including Direct3D, Metal, and Vulkan, while maintaining a consistent interface. Choosing either JUCE or \texttt{bgfx} would depend on the intended balance between audio integration and visual complexity.  
@@ -424,7 +437,7 @@ Although M\textsc{atlab} now provides limited functionality for generating JavaS
 \footnote{Supported functions listed at \url{https://uk.mathworks.com/help/referencelist.html?type=function&capability=codegen&listtype=alpha}.}  
 Consequently, reproducing \textsc{magpie}'s full capabilities in the browser is only feasible through native compilation and open-source toolchains.
 
-Looking forward, the addition of orthotropic models and lumped-mass systems described earlier~\cite{ducceschi_open_2024} would further align the computational behaviour of \textsc{magpie} with the physical characteristics of quarter-sawn wood used in string-instrument soundboards. Presenting this toolkit in an open, well-documented, and cross-platform form will encourage collaboration and extension as the system matures---ensuring that, like the haptic interface, \textsc{magpie} remains a living resource rather than a static artefact.
+Looking forward, the addition of orthotropic models and lumped-mass systems described earlier~\cite{ducceschi_open_2024} would further align the computational behaviour of \textsc{magpie} with the physical characteristics of quarter-sawn wood used in string-instrument soundboards. Presenting this toolkit in an open, well-documented, and cross-platform form will encourage collaboration and extension as the system matures--ensuring that, like the haptic interface, \textsc{magpie} remains a living resource rather than a static artefact.
 
 % \subsubsection{Emebedded Systems}
 
@@ -435,18 +448,18 @@ Looking forward, the addition of orthotropic models and lumped-mass systems desc
 
 \section{Closing Remarks}
 
-This thesis has argued for the importance of an open methodology in digital research and demonstrated two use cases that reveal why such an approach matters. When applied to digital conservation, the principle is simple but far-reaching: the means by which we preserve must themselves be preservable. Two projects have embodied this argument in practice. The first, a haptic keyboard interface, explored how the instructional and experiential value of musical instruments might be conserved through interaction. The second, the \textsc{magpie} analysis toolkit, addressed how the physical behaviour of those instruments can be modelled, shared, and developed through open code. Together they frame opposite ends of the conservation spectrum---the act of preserving and the act of engaging with what is preserved.
+This thesis has argued for the importance of an open methodology in digital research and demonstrated two use cases that reveal why such an approach matters. When applied to digital conservation, the principle is simple but far-reaching: the means by which we preserve must themselves be preservable. Two projects have embodied this argument in practice. The first, a haptic keyboard interface, explored how the instructional and experiential value of musical instruments might be conserved through interaction. The second, the \textsc{magpie} analysis toolkit, addressed how the physical behaviour of those instruments can be modelled, shared, and developed through open code. Together they frame opposite ends of the conservation spectrum--the act of preserving and the act of engaging with what is preserved.
 
-There is, as it were, an ``as above, so below'' symmetry to digital cultural heritage: both the artefacts and the digital tools that represent them require conservation. In musical instrument heritage, this symmetry takes on an additional dimension. Instruments are not only objects but teachers; their value lies in the gestures and feedback loops they enable. Simply creating a digital facsimile of such objects does not conserve the experience of playing or learning from them. What must also be preserved is the \emph{exchange}---the embodied relationship between human and material, sound and motion.
+There is, as it were, an ``as above, so below'' symmetry to digital cultural heritage: both the artefacts and the digital tools that represent them require conservation. In musical instrument heritage, this symmetry takes on an additional dimension. Instruments are not only objects but teachers; their value lies in the gestures and feedback loops they enable. Simply creating a digital facsimile of such objects does not conserve the experience of playing or learning from them. What must also be preserved is the \emph{exchange}--the embodied relationship between human and material, sound and motion.
 
-The open methodology developed in this work has sought to model that same balance in its structure. Each component---mechanical, electronic, and digital---is modular and version-controlled, ensuring that it can evolve independently without compromising the whole. Software has been separated into data, processing, and interface layers, each documented in repositories that also serve as historical records of development. Version control is therefore not merely a technical convenience but an epistemic one: a trace of how ideas, as well as code, come into being.
+The open methodology developed in this work has sought to model that same balance in its structure. Each component--mechanical, electronic, and digital--is modular and version-controlled, ensuring that it can evolve independently without compromising the whole. Software has been separated into data, processing, and interface layers, each documented in repositories that also serve as historical records of development. Version control is therefore not merely a technical convenience but an epistemic one: a trace of how ideas, as well as code, come into being.
 
-Online Git services enable open-source distribution, but their persistence is not guaranteed. Commercial hosting platforms provide decentralised access yet cannot be assumed to provide permanent archiving or resolvable identifiers~\cite{calano_github_2025}. The responsibility for preservation should rest with academic institutions, just as they already safeguard research literature. Services such as Zenodo, operated by CERN, offer an interim solution by issuing persistent DOIs for software releases and integrating directly with GitHub, making archiving almost frictionless. The DOI, analogous to an ISBN for digital artefacts, formalises citation and version specificity~\cite{soito_citations_2016}. Even so, true sustainability demands that universities integrate their existing Git infrastructure with archival repositories---a simple but powerful step toward institutional stewardship of digital research outputs.
+Online Git services enable open-source distribution, but their persistence is not guaranteed. Commercial hosting platforms provide decentralised access yet cannot be assumed to provide permanent archiving or resolvable identifiers~\cite{calano_github_2025}. The responsibility for preservation should rest with academic institutions, just as they already safeguard research literature. Services such as Zenodo, operated by CERN, offer an interim solution by issuing persistent DOIs for software releases and integrating directly with GitHub, making archiving almost frictionless. The DOI, analogous to an ISBN for digital artefacts, formalises citation and version specificity~\cite{soito_citations_2016}. Even so, true sustainability demands that universities integrate their existing Git infrastructure with archival repositories--a simple but powerful step toward institutional stewardship of digital research outputs.
 
 The examples of ARPACK~\cite{lehoucq_arpack_1998} and Aurora (Section~\ref{sec:aurora}) illustrate how software longevity is rarely proportional to its adoption. ARPACK, released in 1990, remains active through open maintenance, while Aurora, only a few years younger, risks disappearance without deliberate intervention. Software sustainability should not depend on chance or popularity; it should be built into the research lifecycle as intentionally as peer review or data citation.
 
 An open methodology does impose a cost. It requires time, discipline, and a willingness to acquire technical skills beyond one's disciplinary training. For many researchers, particularly in the humanities, version control, documentation, and archiving still represent additional labour rather than standard practice. Yet, as with any craft, fluency reduces effort over time, and shared infrastructures create communities of support. There are no shortcuts to doing research well, and the cost of openness is ultimately an investment in durability and trust.
 
-The issue extends beyond research software to the digital conservation of cultural heritage itself. Digital preservation is not neutral. As scholars such as \textcite{rubio_work_2020}, \textcite{schwarz_disk_2006}, and \textcite{parry_museums_2010} have warned, poorly considered digital methods can distort the very histories they aim to protect. Conservation, whether physical or digital, is always an act of interpretation. Following \textcite{barclay_preservation_2005} and \textcite{desilvey_curated_2017}, we should resist the temptation to ``pickle'' the past---to preserve without reflection---and instead act with awareness of consequence. If a tool is meant to be disposable, then let that ephemerality be intentional; if it is meant to endure, then endurance must be designed into its fabric.
+The issue extends beyond research software to the digital conservation of cultural heritage itself. Digital preservation is not neutral. As scholars such as \textcite{rubio_work_2020}, \textcite{schwarz_disk_2006}, and \textcite{parry_museums_2010} have warned, poorly considered digital methods can distort the very histories they aim to protect. Conservation, whether physical or digital, is always an act of interpretation. Following \textcite{barclay_preservation_2005} and \textcite{desilvey_curated_2017}, we should resist the temptation to ``pickle'' the past--to preserve without reflection--and instead act with awareness of consequence. If a tool is meant to be disposable, then let that ephemerality be intentional; if it is meant to endure, then endurance must be designed into its fabric.
 
 The two projects in this thesis exemplify those choices. Each balances immediacy and longevity, access and authenticity, openness and rigour. More broadly, they argue that digital conservation should not be a technical afterthought but a cultural responsibility. To conserve experience as well as artefact, we must also conserve the tools, languages, and methods through which that experience is studied. The future of digital heritage, like that of research itself, depends on our willingness to build systems that remember not only their subjects but their own making.
