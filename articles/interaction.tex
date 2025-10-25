@@ -486,7 +486,7 @@ infrared reflectance sensor in a simple voltage-divider circuit (Figure~\ref{fig
 
 To prototype the target surface, gradients were initially printed on paper and taped to the jacks. For production, they were rendered as full-length vinyl stickers
 % \footnote{Coala, 1D 100 Gloss P, white gloss, 300 g/m\textsuperscript{2}, 100 µm, 1370 mm $\times$ 50 m}
-using an HP Latex 115 and cut on a Summa 150 from vector outlines. The print-and-cut process scaled cleanly from six prototype jacks to the ninety-eight required for Mark~I, satisfying the scalability criterion. Short “gradient-only” strips sometimes curled at their ink edges or caught against neighbouring parts; full-length stickers provided greater adhesion and kept heavy ink away from the edges, eliminating binding.
+using an HP Latex 115 and cut on a Summa 150 from vector outlines. The print-and-cut process scaled cleanly from six prototype jacks to the ninety-eight required for Mark~I, satisfying the scalability criterion. Short `gradient-only' strips sometimes curled at their ink edges or caught against neighbouring parts; full-length stickers provided greater adhesion and kept heavy ink away from the edges, eliminating binding.
 
 Early optical trials also revealed cross-talk: infrared light reflected from adjacent jacks contaminated nearby sensors. We designed matte, dark-pigmented PLA baffles to wrap each device and block stray light. Printed on a Bambu X1, these baffles (Figures~\ref{fig:sensor-physical-pcbs}) removed interference entirely and became part of the standard mounting.
 
@@ -561,9 +561,9 @@ This section summarises the components used in the final circuit design and the 
 \paragraph{Microcontroller}
 All signals terminate at a microcontroller that samples analogue inputs and controls peripherals. We chose the Arduino Nano 33 BLE. The Nano form factor allowed early substitution among models while requirements were still unclear. An initial Nano 33 IoT revealed ADC issues on channels~4–5 \cite{arduino_nano33iot_2025}, effectively limiting usable inputs to six; the BLE variant exposes eight ADC channels, so it replaced the IoT with minimal firmware/circuit changes. Nanos provide native USB-MIDI (with BLE-MIDI fallback). The BLE’s 12-bit ADC also provided headroom if 10-bit resolution proved marginal.
 
-\paragraph{Non-Volatile Memory} Per-key pluck and release thresholds must persist across power cycles. The Nano BLE lacks a convenient NVM for this; we therefore used a Fujitsu MB85RS64 SPI FRAM \cite{fujitsu_fram_2011}. I\textsuperscript{2}C pins were reserved for ADC expansion, so SPI was preferred. Alternatives (SD card or host-stored calibration) would complicate access, reliability, and portability, undermining the “plug-and-play” advantages of MIDI.
+\paragraph{Non-Volatile Memory} Per-key pluck and release thresholds must persist across power cycles. The Nano BLE lacks a convenient NVM for this; we therefore used a Fujitsu MB85RS64 SPI FRAM \cite{fujitsu_fram_2011}. I\textsuperscript{2}C pins were reserved for ADC expansion, so SPI was preferred. Alternatives (SD card or host-stored calibration) would complicate access, reliability, and portability, undermining the `plug-and-play' advantages of MIDI.
 
-\paragraph{RGB LEDs} Scaling from six to 98 jacks introduced “problems of scale”: tracking which key is being calibrated and spotting out-of-range sensors. Addressable WS2812 LEDs were aligned to keys and driven programmatically; colour states (Figure~\ref{fig:mark1-leds}) provided immediate feedback during calibration and debugging. We avoided separate drivers (e.g., \texttt{TLC5940} in \textcite{mcpherson_portable_2013}) to reduce assembly complexity. While chain failure can cascade past a dead LED, LEDs are hidden in regular operation and non-critical to playability; replacing the affected PCB remains the practical remedy.
+\paragraph{RGB LEDs} Scaling from six to 98 jacks introduced `problems of scale': tracking which key is being calibrated and spotting out-of-range sensors. Addressable WS2812 LEDs were aligned to keys and driven programmatically; colour states (Figure~\ref{fig:mark1-leds}) provided immediate feedback during calibration and debugging. We avoided separate drivers (e.g., \texttt{TLC5940} in \textcite{mcpherson_portable_2013}) to reduce assembly complexity. While chain failure can cascade past a dead LED, LEDs are hidden in regular operation and non-critical to playability; replacing the affected PCB remains the practical remedy.
 
 \begin{figure}[t]
     \centering
@@ -573,7 +573,7 @@ All signals terminate at a microcontroller that samples analogue inputs and cont
     \includegraphics[height=0.4\textheight]{img/drawing-all_comparison-90-3.pdf}
     \hspace*{0.2\textwidth}
     % \includegraphics[width=0.7\linewidth,angle=270]{img/drawing-all_comparison-90.pdf}
-    \caption[Scale comparison of 1547 Trasuntino and models]{Scale comparison: (left to right) the 1547 Trasuntino, 49-key \emph{Mark~I} model, and the three-key prototype. The Trasuntino shows the traditional “logarithmic” outline.}
+    \caption[Scale comparison of 1547 Trasuntino and models]{Scale comparison: (left to right) the 1547 Trasuntino, 49-key \emph{Mark~I} model, and the three-key prototype. The Trasuntino shows the traditional `logarithmic' outline.}
     \label{fig:compare}
 \end{figure}
 
@@ -865,7 +865,7 @@ The development of the interface culminated in its public installation, research
 
 When \emph{Mark~I} was installed in the Oratory at San Colombano, alongside the 1547 Trasuntino harpsichord and the 1540 spinet by the same maker,%
 \footnote{\href{https://digital.fondazionecarisbo.it/artwork/arpicordo-a-pianta-poligonale-anonimo-attr-ad-alessandro-trasuntino}{Trasuntino harpsichord – Fondazione Carisbo}} 
-the emphasis on historical appearance and tactile plausibility paid dividends. Visitors could approach the keyboard without encountering cables, displays, or other cues that might mark it as “technology.” Reports of the “disconnect” between action and sound noted by \textcite{mcalpine_sampling_2014} were absent among staff, surveillance personnel, and trained visitors (approximately twenty participants). The instrument’s restrained frame and hidden sensors (Figures~\ref{fig:oratory}, \ref{fig:mark-1-pcbs}) enabled an experience in which haptic response and sonic result felt coherent.
+the emphasis on historical appearance and tactile plausibility paid dividends. Visitors could approach the keyboard without encountering cables, displays, or other cues that might mark it as `technology.' Reports of the ``disconnect'' between action and sound noted by \textcite{mcalpine_sampling_2014} were absent among staff, surveillance personnel, and trained visitors (approximately twenty participants). The instrument’s restrained frame and hidden sensors (Figures~\ref{fig:oratory}, \ref{fig:mark-1-pcbs}) enabled an experience in which haptic response and sonic result felt coherent.
 
 \begin{figure}
     \centering
