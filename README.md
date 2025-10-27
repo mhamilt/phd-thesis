@@ -65,3 +65,19 @@ sips -Z 640 *.jpg *.png
 pandoc -t markdown_strict  -F pandoc-crossref --citeproc -s bib-template.md -o bibliography.md
 ```
 
+
+## Binding
+
+### Imposition
+
+#### A4 (A3 Signature)
+
+```
+pdfjam phd_thesis.pdf --nup 2x1 --signature 16 --otheredge --landscape --offset '0mm 0mm' --papersize '{297mm,420mm}' --outfile thesis-booklet.pdf
+```
+
+#### A5 (A4 Signature)
+
+```
+pdfjam phd_thesis.pdf --nup 2x1 --signature 16 --otheredge --landscape --offset '0mm 0mm' --papersize '{210mm,297mm}' --outfile thesis-booklet.pdf
+```
