@@ -8,8 +8,8 @@ these initiatives seek to leverage the collection’s rich holdings to create im
 encompassing tactile and auditory dimensions of performance \cite{fritz_listener_2017}. 
 
 In the museum context, they may be played under carefully controlled conditions, typically by experienced historical keyboard specialists or by students under the close supervision of the curator. Thus, the experiential access remains limited for the general public. As \citeauthor{mcalpine_sampling_2014} describes through the ``red velvet cord'' metaphor \cite{mcalpine_sampling_2014},
-\footnote{\textcite{mcalpine_sampling_2014} defines the ``the red velvet cord problem'' as the situation which arises from curatorial choices to preserve an object of function. For example, a museum exhibiting musical instruments behind a ``red velvet cord'' that visitors are forbidden to cross, stripping those instruments of their function and thus rendering them ``impractical [...] pieces of furniture.''}
 collections such as Tagliavini's prioritise protection of fragile mechanisms by limiting their usage.  
+\footnote{\textcite{mcalpine_sampling_2014} defines the ``the red velvet cord problem'' as the situation which arises from curatorial choices to preserve an object of function. For example, a museum exhibiting musical instruments behind a ``red velvet cord'' that visitors are forbidden to cross, stripping those instruments of their function and thus rendering them ``impractical [...] pieces of furniture.''}
 
 
 % \begin{figure}
@@ -650,14 +650,6 @@ Power enters via barrel jack \texttt{J1}. Headers separate \texttt{RESET}, \text
 
 Estimated power draw is $\sim$1.1~A at 5~V with inrush variation. Sensors stayed continuously powered in v1; future designs may modulate emitters dynamically \cite{mcpherson_portable_2013}.
 
-\subsection{Installation}
-
-Once fabricated, the electronics were fitted to the instrument as a bespoke installation, with brackets and enclosures added to ease future servicing without constraining the design. Some of the geometry inevitably evolved during fitting---most notably the shift from horizontal to vertical sensor boards---showing how fabrication and assembly remained in dialogue until the last moment.
-
-Pre-assembly took place in Edinburgh, while the final build was completed in the NEMUS Lab in Bologna during the last week of October 2024; delivery and exhibition followed in the first week of November. Power and data were carried through a daisy-chained loom, while the \texttt{SIG} lines ran separately to reduce noise. Ribbon cables were hand-cut to length so they could be repositioned later, a decision that improved flexibility but added time---an insight folded into \emph{Mark~II} through the adoption of flat-flex cabling. The controller’s location was revised when the rear-chamber dimensions proved tighter than those assumed for the Mac mini housing the sampler.
-
-Fitting the keyframe required temporarily removing the keys. Brackets were secured to the underside with round-head self-tappers and left slightly loose for coarse positioning; final alignment was completed in firmware. Each jack was prepared with a varnished short side for better sticker adhesion, the gradients were trimmed to length, and the free travel of every jack was checked. Preliminary calibration took place before the keys were replaced, with outliers traced and corrected. A single clearance error blocked key travel entirely, forcing a 10 mm × 15 mm recess to be milled into each key (Figure~\ref{fig:milling}) and the leather pads refitted---an extra day's work, but one that informed later geometry and cabling changes adopted in Mark~II.
-
 \begin{figure}  
   \centering
   % \includegraphics[width=0.65\linewidth]{img/keys-milled.jpeg}
@@ -667,16 +659,25 @@ Fitting the keyframe required temporarily removing the keys. Brackets were secur
   \label{fig:milling}
 \end{figure}
 
+\subsection{Installation}
+
+Once fabricated, the electronics were fitted to the instrument as a bespoke installation, with brackets and enclosures added to ease future servicing without constraining the design. Some of the geometry inevitably evolved during fitting---most notably the shift from horizontal to vertical sensor boards---showing how fabrication and assembly remained in dialogue until the last moment.
+
+Pre-assembly took place in Edinburgh, while the final build was completed in the NEMUS Lab in Bologna during the last week of October 2024; delivery and exhibition followed in the first week of November. Power and data were carried through a daisy-chained loom, while the \texttt{SIG} lines ran separately to reduce noise. Ribbon cables were hand-cut to length so they could be repositioned later, a decision that improved flexibility but added time---an insight folded into \emph{Mark~II} through the adoption of flat-flex cabling. The controller’s location was revised when the rear-chamber dimensions proved tighter than those assumed for the Mac mini housing the sampler.
+
+Fitting the keyframe required temporarily removing the keys. Brackets were secured to the underside with round-head self-tappers and left slightly loose for coarse positioning; final alignment was completed in firmware. Each jack was prepared with a varnished short side for better sticker adhesion, the gradients were trimmed to length, and the free travel of every jack was checked. Preliminary calibration took place before the keys were replaced, with outliers traced and corrected. A single clearance error blocked key travel entirely, forcing a 10 mm × 15 mm recess to be milled into each key (Figure~\ref{fig:milling}) and the leather pads refitted---an extra day's work, but one that informed later geometry and cabling changes adopted in Mark~II.
+
+
 For the first exhibition, a harpsichord sample library ran in Kontakt%
 \footnote{\href{https://www.native-instruments.com/en/products/komplete/samplers/kontakt-8/?srsltid=AfmBOorKUf43SoIxGBS2-GnXmKHHkgcfcfWRskpweDhLSG3FiF0qrf2w}{Kontakt webpage} (Accessed: 31 Jan 2025)}
 on a Mac mini housed in the lower compartment; cables were routed through hidden holes (Figure~\ref{fig:mac-mini}). An iPad exposed controls for tuning, voicing, and stop selection.
 
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=0.5\linewidth,trim={0 5cm 0 0},clip]{img/mac-mini.jpg}
-%     \caption{Components and cabling concealed in the lower compartment.}
-%     \label{fig:mac-mini}
-% \end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth,trim={0 5cm 0 0},clip]{img/mark-2-led-indicator.jpeg}
+    \caption[RGB LEDs behaviour in calibration mode.]{RGB LEDs behaviour in calibration mode. LEDs are aligned with the keys and colour-coded for quick identification or the jack being calibrated and its state.}
+    \label{fig:led-indicator}
+\end{figure}
 
 \subsection{Calibration}
 
