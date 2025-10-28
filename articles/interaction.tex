@@ -7,7 +7,9 @@ situated within Fondazione Carisbo's cultural itinerary in Bologna \cite{meer_co
 these initiatives seek to leverage the collection’s rich holdings to create immersive and interactive modes of encounter with the exhibited heritage. Central to this vision is the reinterpretation of historical musical objects through their tactile and auditory dimensions, making the exhibition more inclusive for blind and partially sighted visitors, as well as the general public. The Tagliavini Collection comprises over fifty historical keyboard instruments, with a particular focus on Italian plucked string instruments. The collection represents a unique resource of interest to musicologists, organologists, and performers. Tagliavini's guiding principle was one of authenticity: instruments were acquired with the explicit aim of restoring them to playing condition with as little intervention as possible. Clearly, the cultural value of such instruments extends beyond their visual presence, 
 encompassing tactile and auditory dimensions of performance \cite{fritz_listener_2017}. 
 
-In the museum context, they may be played under carefully controlled conditions, typically by experienced historical keyboard specialists or by students under the close supervision of the curator. Thus, the experiential access remains limited for the general public. As \citeauthor{mcalpine_sampling_2014} describes through the ``red velvet cord'' metaphor \cite{mcalpine_sampling_2014}, collections such as Tagliavini's prioritise protection of fragile mechanisms by limiting their usage.  
+In the museum context, they may be played under carefully controlled conditions, typically by experienced historical keyboard specialists or by students under the close supervision of the curator. Thus, the experiential access remains limited for the general public. As \citeauthor{mcalpine_sampling_2014} describes through the ``red velvet cord'' metaphor \cite{mcalpine_sampling_2014},
+\footnote{\textcite{mcalpine_sampling_2014} defines the ``the red velvet cord problem'' as the situation which arises from curatorial choices to preserve an object of function. For example, a museum exhibiting musical instruments behind a ``red velvet cord'' that visitors are forbidden to cross, stripping those instruments of their function and thus rendering them ``impractical [...] pieces of furniture.''}
+collections such as Tagliavini's prioritise protection of fragile mechanisms by limiting their usage.  
 
 
 % \begin{figure}
@@ -43,7 +45,7 @@ The expressive potential of commercial MIDI interfaces is further limited by the
 This chapter presents the development of two digital musical instruments (DMIs). It begins by outlining the motivations, constraints and methodological approach, 
 before following the design process from early prototypes through to the completed system. 
 The work builds on prior studies of musical heritage 
-\cite{mcalpine_sampling_2014,baldwin_tromba_2016} and draws on a long history of research into haptic keyboard design. While the immediate goal was to enhance the visitor experience within the museum, the project also responds to a broader challenge: the sustainability of digital research. 
+\cite{mcalpine_sampling_2014,baldwin_tromba_2016} and draws on a long history of research into haptic keyboard design. While the immediate goal was to enhance the visitor experience within the museum, the project also responds to a broader challenge: the sustainability of digital research (\S\S~\ref{sec:digital-conservation}, \ref{sec:foss-acoustics}). 
 The optical sensing approach adapts earlier techniques developed for the piano \cite{mcpherson_portable_2013}, here reinterpreted for the harpsichord.  Thus, the project situates itself within best practices for archiving and long-term reuse \cite{smith_software_2016}, engaging with ongoing discussions around the durability of DMIs and electronics hardware \cite{mcpherson_nimehub_2016,fiordelmondo_longevity_2024}. 
 
 \section{Related Work and Motivations}\label{sec:related-work}
@@ -65,7 +67,7 @@ have explored haptic keyboard design. The lineage begins with \citep{cadoz_modul
 Despite their variety, these systems share a common limitation: they are generally restricted to a single key or a small number of keys. For heritage applications such as the Tagliavini 
 collection, an interface must span 38--53 keys to match historical harpsichords \cite{tagliavini_clavicembali_1987}. 
 The present project, therefore, builds directly on both museum precedents and haptic keyboard research. 
-It diverges, however, in adopting an aesthetics-first approach: electronics are concealed, serving only as a transparent link between mechanical action and digital sound, so that the tactile and kinaesthetic qualities of the instrument remain central to the visitor’s experience.  
+It diverges, however, by adopting an aesthetics-forward approach: electronics are concealed, serving only as a transparent link between mechanical action and digital sound, so that the tactile and kinaesthetic qualities of the instrument remain central to the visitor’s experience.  
  
 \subsection{Haptics Terminology}
 
@@ -104,7 +106,9 @@ For this thesis, \emph{feedback} refers broadly to physical sensory feedback: th
 
 Within the DMI literature, \textcite{omodhrain_playing_2000} describes haptics as the combined feedback from tactile sensors in the skin and kinaesthetic sensors in muscles and joints. Similarly, \textcite{rovan_typology_2000} refers to ``sensory and motor modalities under one unified umbrella.'' Finally, \textcite{cook_remutualizing_2004} defines haptics as the ``combined senses of touch, including skin vibration and pressure, and the muscle senses of motion, position, and force.'' From these accounts, vibration or texture felt directly by the skin, as well as forces felt by the muscles, can all be understood as haptic feedback.  
 
-\paragraph{Mechanical Feedback:} Haptic feedback achieved through physical movement or structures that apply forces or constraints. \textcite{rovan_typology_2000} sometimes uses the terms \emph{haptic} and \emph{mechanical feedback} interchangeably. For example, \textcite{hayes_vibrotactile_2011} refers to ``an actuator or mechanical device.'' However, in the DMI context, the distinction is not particularly useful, since virtually all haptic feedback is mechanical. It becomes more meaningful only in contrast to thermal \cite{miyashita_thermoscore_2004}, ultrasonic \cite{hwang_airpiano_2017}, or electrical \cite{altinsoy_electrotactile_2011} forms of feedback.  
+\paragraph{Mechanical Feedback:} Haptic feedback achieved through physical movement or structures that apply forces or constraints. \textcite{rovan_typology_2000} sometimes uses the terms \emph{haptic} and \emph{mechanical feedback} interchangeably. For example, \textcite{hayes_vibrotactile_2011} refers to ``an actuator or mechanical device.'' However, in the DMI context, the distinction is not particularly useful, since virtually all haptic feedback is `mechanical.' The term can informally be summarised as force-feedback derived from a physical mechanism \cite{memis_hyper-ney_2024} or \textit{passive} feedback that is not reinforced by an \textit{active} system \cite{cook_remutualizing_2004} (e.g., as the term is used in  \textcite{montag_low-cost_2011}). `Mechanical feedback' becomes more meaningful a term in contrast to thermal \cite{miyashita_thermoscore_2004}, ultrasonic \cite{hwang_airpiano_2017}, or electrical \cite{altinsoy_electrotactile_2011} forms of feedback.
+
+% \cite{montag_low-cost_2011} ``haptic'' is narrrowed to vibrotactile, mechanical
 
 \paragraph{Tactile Feedback:} A subset of haptic feedback perceived through direct contact with the body, encompassing sensations such as pressure, texture, and vibration. \textcite{rovan_typology_2000} defines tactile as ``discriminative touch as in the perception of surfaces.'' The terms \emph{tactile}, \emph{tactual}, and \emph{haptic} are sometimes used interchangeably, though not always consistently. \textcite{bongers_tactual_1998} and \textcite{srinivasan_tactual_1996} define \emph{tactual} as cutaneous sensation, including kinaesthetic feedback, though in practice the term is rarely used in the DMI community. For example, in the NIME archive, `tactual' appears in only four papers \cite{gunther_multi_2002,pardue_hand_2013,spapetti_multi_2015,ferris_musical_2002}, whereas `haptic' appears in roughly 300 papers. As such, within this thesis, haptic and tactual can be considered largely interchangeable.  
 
@@ -112,7 +116,7 @@ Within the DMI literature, \textcite{omodhrain_playing_2000} describes haptics a
 
 \paragraph{Kinaesthetic Feedback:} Haptic feedback that relates to the awareness of body position and movement. Definitions include ``the awareness of the body state, including position, velocity and forces supplied by the muscles'' \cite{palacio_eight_2008}, ``position and motor control of muscles and joints'' \cite{hayes_vibrotactile_2011}, and ``the movement principles of the body'' \cite{bokowiec_ritual_2011}. \textcite{berthoz_brain_2000}[pp 26–32] further distinguishes kinaesthesia (``the sense of movement'') from proprioception, which they treat as a subset of kinaesthesia. In the NIME archive, kinaesthetics appear in approximately 30 papers, usually discussed alongside somatic practice and proprioception. For this thesis, kinaesthetic feedback is defined as the way an interface influences movement and encourages specific bodily gestures during use.  
 
-\paragraph{Force Feedback:} A subset of kinaesthetic feedback derived from physical impedance \cite{giordano_force_2012} or forces perceived by muscles and joints. It allows users to feel weight, resistance, or motion. Examples in DMIs include the FireFader \cite{berdahl_firefader_2013} and the TorqueTuner \cite{kirkegaard_torquetuner_2020}.  
+\paragraph{Force Feedback:} A subset of kinaesthetic feedback derived from physical impedance \cite{giordano_force_2012} or forces perceived by muscles and joints. It allows users to feel weight, resistance, or motion. Examples in DMIs include the FireFader \cite{berdahl_firefader_2013} and the TorqueTuner \cite{kirkegaard_torquetuner_2020}.\\  
 
 \begin{figure}
     \centering
@@ -121,7 +125,7 @@ Within the DMI literature, \textcite{omodhrain_playing_2000} describes haptics a
     \label{fig:mechanism}
 \end{figure}
 
-Beyond these subsets, \textcite{cook_remutualizing_2004} distinguishes between \emph{passive} and \emph{active} haptics. Passive haptic feedback is achieved by purely mechanical means, without actuators or motors—for example, weighted piano keys or the mechanical jacks of a harpsichord. Using the taxonomy of Figure~\ref{fig:taxonomy} and Cook’s distinction, the interface described herein can be categorised as a passive haptic, force-feedback, tactile interface. For brevity, the term `haptic' will be used.  
+Beyond these subsets, \textcite{cook_remutualizing_2004} distinguishes between \emph{passive} and \emph{active} haptics. Passive haptic feedback is achieved by purely mechanical means, without actuators or motors---for example, weighted piano keys or the mechanical jacks of a harpsichord. Using the taxonomy of Figure~\ref{fig:taxonomy} and Cook’s distinction, the interface described herein can be categorised as a passive haptic, force-feedback, tactile interface. For brevity, the term `haptic' will be used.  
 
 Finally, it is worth reflecting that all musical instruments involve physical interaction and could therefore be described as inherently haptic. Even the theremin, often cited as an exception, requires specific bodily movement, which may be interpreted as a form of kinaesthetic feedback. While this thesis avoids the ontological implications of such claims, the term `haptic feedback' is used here to describe design intent.  
 
@@ -129,7 +133,7 @@ Finally, it is worth reflecting that all musical instruments involve physical in
 
 The harpsichord emerged in the latter half of the fourteenth century, its design partly derived from what contemporary sources termed the ``eschaquier'' or ``eschequier'' \cite{koster_keyboard_1994,dewhirst_stringed_2016}, and from the plucking action of the psaltery \cite{campbell_musician_1987}.  
 
-At the core of the instrument lies a simple plucking mechanism (Figure~\ref{fig:mechanism}) based on a second–class lever: depression of the key lifts a \emph{jack}, which drives a plectrum upward to pluck a string. Historically, plectra were most often made of quill, though leather was also used.  Each jack is a two–part wooden element consisting of a \emph{body} and a pivoting \emph{tongue}. The plectrum is wedged into a slot on the tongue, which is attached to the body by a pin. A tapered tongue and a correspondingly tapered recess allow the tongue to return to an upright position against a spring—commonly a strip of brass, though quill or boar hair were sometimes employed \cite{tagliavini_clavicembali_1987}.  As the jack rises, the plectrum presses laterally against the string until it slips past and releases it. The resisting force of the quill is relatively constant, so the amplitude of the pluck—and therefore the volume of the note—is largely fixed, a defining characteristic of the harpsichord’s dynamics.
+At the core of the instrument lies a simple plucking mechanism (Figure~\ref{fig:mechanism}) based on a second–class lever: depression of the key lifts a \emph{jack}, which drives a plectrum upward to pluck a string. Historically, plectra were most often made of quill, though leather was also used.  Each jack is a two–part wooden element consisting of a \emph{body} and a pivoting \emph{tongue}. The plectrum is wedged into a slot on the tongue, which is attached to the body by a pin. A tapered tongue and a correspondingly tapered recess allow the tongue to return to an upright position against a spring---commonly a strip of brass, though quill or boar hair were sometimes employed \cite{tagliavini_clavicembali_1987}.  As the jack rises, the plectrum presses laterally against the string until it slips past and releases it. The resisting force of the plectrum is relatively constant, so the amplitude of the pluck---and therefore the volume of the note---is largely fixed, a defining characteristic of the harpsichord’s dynamics.
 
 \begin{figure}
     \centering
@@ -137,25 +141,6 @@ At the core of the instrument lies a simple plucking mechanism (Figure~\ref{fig:
     \caption[Anatomy of a harpsichord jack]{Forces acting on the jack during plucking and release (adapted from \textcite[Figure~1.7]{perng_physical_2012}) alongside a high–speed photo series (1000~fps) of jack displacement.}
     \label{fig:jack-forces}
 \end{figure}
-
-By the sixteenth century, it was common for Italian harpsichords to employ more than one string per key, each with its own jack. These jacks were arranged in rows and staggered in height so that, over the key’s travel, each register was plucked sequentially rather than simultaneously \cite{veroli_optimising_2012}. Accurate detection of the plucking event, therefore, requires measuring the displacement of each jack individually, rather than only the key motion, owing to subtle hand–crafted variations across the keyboard. Fig. \ref{fig:jack-forces} depicts snapshots of the plucking mechanism, highlighting the jack mechanics and the jack-string interaction.
-
-% \begin{figure}[!t]
-%   \centering
-%   \begin{minipage}[t]{0.47\linewidth}
-%     \centering 
-%     \frame{\includegraphics[width=\linewidth]{img/drawing-3-key-mechanism.pdf}}
-%     \caption{Single–manual, two–register action as used on the 1547 Alessandro Trasuntino and on the model interfaces.}
-%     \label{fig:mechanism}
-%   \end{minipage}\hfill 
-%   \begin{minipage}[t]{0.47\linewidth}
-%     \centering
-%     \includegraphics[width=0.9\linewidth]{img/drawing-jack_forces.pdf}\\[0.75ex]
-%     \includegraphics[width=0.9\linewidth]{img/film-strip.jpeg}
-%     \caption{Forces acting on the jack during plucking and release (adapted from \textcite[Figure~1.7]{perng_physical_2012}) alongside a high–speed photo series (1000~fps) of jack displacement.}
-%     \label{fig:jack-forces}
-%   \end{minipage}
-% \end{figure}
 
 \clearpage
 \begin{table}
@@ -193,13 +178,15 @@ By the sixteenth century, it was common for Italian harpsichords to employ more 
 \end{table}
 \clearpage
 
+By the sixteenth century, it was common for Italian harpsichords to employ more than one string per key, each with its own jack. These jacks were arranged in rows and staggered in height so that, over the key’s travel, each register was plucked sequentially rather than simultaneously \cite{veroli_optimising_2012}. Accurate detection of the plucking event, therefore, requires measuring the displacement of each jack individually, rather than only the key motion, owing to subtle hand–crafted variations across the keyboard. Fig. \ref{fig:jack-forces} depicts snapshots of the plucking mechanism, highlighting the jack mechanics and the jack-string interaction.
+
 \section{Design Constraints}\label{sec:design-constraints}
 
 The augmented replica keyboard for the Museo San Colombano was steered by two interlocking sets of constraints: one governing the \emph{mechanical interface} (how the instrument should look, feel, and behave), and one governing the \emph{electronic sensor system} (how motion is detected, processed, and conveyed to sound synthesis). These constraints simultaneously served as design principles and evaluative criteria throughout the prototyping and deployment phases. To orient the reader before the detailed discussion that follows, Table~\ref{tab:design-constraints} summarises the key requirements and their immediate implications for the rest of the chapter.
 
 \subsection{Mechanical Interface}
 
-At the mechanical level, the instrument needed to \emph{read as} a sixteenth-century Italian harpsichord in both appearance and feel. This implied, first of all, a commitment to \emph{faithfulness}: the replica had to reproduce the characteristic behaviour of a historical plucked action—the resistance of quill against string, the sequencing of registers, and the subtle asymmetries inherent to hand-built components. The electronic system was therefore conceived as an observer rather than an active agent; actuator-based haptic solutions that impose forces on the key were excluded, since they risked compromising authenticity and would have required substantial mechanical intervention \cite{gillespie_haptic_1996,timmermans_multibody-based_2020}. Equally important was \emph{robustness}. As a public exhibit, the interface had to withstand repeated handling, minor misalignments, and basic servicing by museum staff. Fasteners, brackets and wear surfaces were specified for durability, and tolerances were chosen so that minor adjustments could be made without specialist tools. A further concern was \emph{concealment}. All electronic elements—sensors, wiring, and controllers—were placed inside the case, leaving visible only a discreet headphone socket and a compact display for audio parameters. This preserved the visual integrity of the instrument and avoided the perceptual bias that overt technology can introduce in a heritage context. Finally, the instrument had to respect the spatial limits of the gallery. The overall envelope was therefore kept deliberately compact, with internal cavities planned from the outset so that electronics could be accommodated without external modules or frames.
+At the mechanical level, the instrument needed to \emph{read as} a sixteenth-century Italian harpsichord in both appearance and feel. This implied, first of all, a commitment to \emph{faithfulness}: the replica had to reproduce the characteristic behaviour of a historical plucked action---the resistance of plectrum against string, the sequencing of registers, and the subtle asymmetries inherent to hand-built components. The electronic system was therefore conceived as an observer rather than an active agent; actuator-based haptic solutions that impose forces on the key were excluded, since they risked compromising authenticity and would have required substantial mechanical intervention \cite{gillespie_haptic_1996,timmermans_multibody-based_2020}. Equally important was \emph{robustness}. As a public exhibit, the interface had to withstand repeated handling, minor misalignments, and basic servicing by museum staff. Fasteners, brackets and wear surfaces were specified for durability, and tolerances were chosen so that minor adjustments could be made without specialist tools. A further concern was \emph{concealment}. All electronic elements---sensors, wiring, and controllers---were placed inside the case, leaving visible only a discreet headphone socket and a compact display for audio parameters. This preserved the visual integrity of the instrument and avoided the perceptual bias that overt technology can introduce in a heritage context. Finally, the instrument had to respect the spatial limits of the gallery. The overall envelope was therefore kept deliberately compact, with internal cavities planned from the outset so that electronics could be accommodated without external modules or frames.
 
 Taken together, these considerations pointed towards an optical approach in which each jack carries a concealed, high-contrast target read by an adjacent sensor (Figure~\ref{fig:jack-tags}). This strategy preserves the original action geometry while allowing precise displacement measurements. Although the current implementation uses thresholding to trigger MIDI events, the continuous data remain available for analysing subtler aspects such as pluck staggering and resistance profiles across the keyboard compass \cite{veroli_optimising_2012,mcpherson_space_2013}.
 
@@ -217,12 +204,20 @@ Foremost among these was \emph{non-invasiveness}: the historical geometry of key
 
 Together, these considerations materialised as a chain of sensor boards mounted under the wrest plank (Figure~\ref{fig:mark-1-bottom}), each integrating illumination, sensing, and simple aggregation logic. Through-hole technology (THT) components were used wherever possible to facilitate easier soldering and rework, while socketed microcontrollers and detachable looms ensured serviceability. The resulting design balances accessibility and cost with the open-source ethos of the project, adapting established piano-tracking techniques \cite{mcpherson_portable_2013} to the idiosyncrasies of a plucked harpsichord action, where discrete pluck and release events dominate but continuous motion remains observable.
 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.85\linewidth]{img/hidden-electronics.png}
+  \caption[Underside of the keyboard]{Underside of the keyboard showing optical-sensor PCBs mounted beneath the wrest plank.}
+  \label{fig:mark-1-bottom}
+  \label{fig:mac-mini}
+\end{figure}
+
 \section{Summary of Informed Design Choices}\label{sec:constraints-to-choices}
 
 The preceding section outlined the mechanical and electronic constraints that guided the development of the augmented keyboard.  
 Before describing the prototypes in detail, it is helpful to summarise how these requirements informed specific design decisions.  
 Table~\ref{tab:constraints-choices} anticipates the results by linking each constraint to the principal strategies adopted in the final system.  
-This mapping clarifies the rationale behind the hardware architecture and highlights how apparently competing demands—historical fidelity, robustness, the invisibility of electronics, and scalability--were reconciled.
+This mapping clarifies the rationale behind the hardware architecture and highlights how apparently competing demands---historical fidelity, robustness, the invisibility of electronics, and scalability--were reconciled.
 
 \begin{table}
 \centering
@@ -268,15 +263,7 @@ prototypes validated on a three-key rig before full-scale build. \\
 \end{tabular}
 \end{table}
 
-The table highlights that the same design element often answered several constraints: for instance, the optical gradient not only met the non-invasiveness requirement but also enabled reliable and low-latency sensing, while the modular PCB architecture simultaneously supported maintenance and scalability. Presenting these links up front clarifies why apparently modest details—sensor orientation, baffle geometry, choice of soldering technology—were decisive for meeting the project’s broader aims.
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.85\linewidth]{img/hidden-electronics.png}
-  \caption[Underside of the keyboard]{Underside of the keyboard showing optical-sensor PCBs mounted beneath the wrest plank.}
-  \label{fig:mark-1-bottom}
-  \label{fig:mac-mini}
-\end{figure}
+The table highlights that the same design element often answered several constraints: for instance, the optical gradient not only met the non-invasiveness requirement but also enabled reliable and low-latency sensing, while the modular PCB architecture simultaneously supported maintenance and scalability. Presenting these links up front clarifies why apparently modest details---sensor orientation, baffle geometry, choice of soldering technology---were decisive for meeting the project’s broader aims.
 
 \subsection{Visual Aesthetics}
 
@@ -310,7 +297,7 @@ We first received a \emph{three-key prototype} and used it for several months to
 
 The prototyping was staged with ever-increasing complexity to solve jack-displacement sensing in the simplest controllable case before scaling up: single action $\rightarrow$ multi-register action $\rightarrow$ multi-key interface. The system evolved from simple threshold tests to a multi-sensor interface capable of triggering MIDI events. The four development stages are now reviewed in detail. For reference, Fig. \ref{fig:timeline-vertical} shows a timeline of all four stages. 
 
-\begin{figure}[!b]
+\begin{figure}
     \centering    
     \includegraphics[width=0.85\linewidth]{img/3-key-side.png}
     \caption{Three-key model harpsichord mechanism.}
@@ -327,13 +314,13 @@ The initial question was whether sensor data could reliably trigger MIDI playbac
 A range of sensing strategies was explored against the project’s constraints of non-invasiveness, concealment, reliability, and scalability.
 
 \paragraph{IMU}
-A six-DoF IMU (accelerometer + gyroscope) mounted on a single key yielded a recognisable `fingerprint' for each gesture, but the resulting features were not sufficiently separable across neighbouring keys, and the per-key cost remained high even at scale.
+A six-DoF Inertial Measurement Unit (IMU) (accelerometer + gyroscope) mounted on a single key yielded a recognisable `fingerprint' for each gesture, but the resulting features were not sufficiently separable across neighbouring keys, and the per-key cost remained high even at scale.
 
 \paragraph{Magnetic (reed / Hall)}
 Reed switches and Hall sensors were tested with small magnets embedded in the jacks. Both provided repeatable threshold detection, yet each introduced difficulties: reed switches placed calibration entirely in the mechanical domain and scaled poorly; Hall sensors demanded precise positioning and per-key software trimming. Limited internal space made such adjustment impractical, and embedding magnets in the jacks was neither non-invasive nor low-risk.
 
 \paragraph{LDR near the jack rail}
-Light-dependent resistors placed at the rail (above the jacks) produced a usable signal—less light as the jack rose—but were highly sensitive to ambient illumination. Mitigating this would have required continual re-balancing or a dedicated light-balance circuit. Mounting the devices outside the cavity also conflicted with the requirement for concealment. Nevertheless, these trials suggested that a \emph{local} light source, if fully enclosed, could be viable.
+Light-dependent resistors (LDR) placed at the rail (above the jacks) produced a usable signal---less light as the jack rose---but were highly sensitive to ambient illumination. Mitigating this would have required continual re-balancing or a dedicated light-balance circuit. Mounting the devices outside the cavity also conflicted with the requirement for concealment. Nevertheless, these trials suggested that a \emph{local} light source, if fully enclosed, could be viable.
 
 % \clearpage
 \begin{figure}
@@ -473,7 +460,7 @@ Light-dependent resistors placed at the rail (above the jacks) produced a usable
 \begin{figure}
   \centering
   % \includegraphics[width=0.3\linewidth]{img/qre1113-schematic.pdf}
-  \includegraphics[width=0.9\linewidth]{img/simple-schematic-joined.pdf}
+  \includegraphics[width=1\linewidth]{img/simple-schematic-joined.pdf}
   \caption[Optical sensor voltage-divider]{Optical sensor in a simple voltage-divider circuit (Left) and its application in the prototype sensor board schematic (Right).}
   \label{fig:simple-schematic}
   \label{fig:prototype-pcb}
@@ -546,7 +533,7 @@ Livi fabricated the instrument in his Pesaro workshop, adopting a restrained rec
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\linewidth]{img/drawing-mark-1-model-cross-section.pdf}
+    \includegraphics[width=0.9\linewidth]{img/drawing-mark-1-model-cross-section.pdf}
     \caption[Cross-section of keyboard mechanics]{Cross-section of keyboard mechanics by Roberto Livi. The original design reserved space for a horizontal circuit board of 50\,mm $\times$ 6\,mm.}
     \label{fig:mark-1-cs}
 \end{figure}
@@ -561,11 +548,11 @@ This section summarises the components used in the final circuit design and the 
 \paragraph{Microcontroller}
 All signals terminate at a microcontroller that samples analogue inputs and controls peripherals. We chose the Arduino Nano 33 BLE. The Nano form factor allowed early substitution among models while requirements were still unclear. An initial Nano 33 IoT revealed ADC issues on channels~4–5 \cite{arduino_nano33iot_2025}, effectively limiting usable inputs to six; the BLE variant exposes eight ADC channels, so it replaced the IoT with minimal firmware/circuit changes. Nanos provide native USB-MIDI (with BLE-MIDI fallback). The BLE’s 12-bit ADC also provided headroom if 10-bit resolution proved marginal.
 
-\paragraph{Non-Volatile Memory} Per-key pluck and release thresholds must persist across power cycles. The Nano BLE lacks a convenient NVM for this; we therefore used a Fujitsu MB85RS64 SPI FRAM \cite{fujitsu_fram_2011}. I\textsuperscript{2}C pins were reserved for ADC expansion, so SPI was preferred. Alternatives (SD card or host-stored calibration) would complicate access, reliability, and portability, undermining the `plug-and-play' advantages of MIDI.
+\paragraph{Non-Volatile Memory (NVM)} Per-key pluck and release thresholds must persist across power cycles. The Nano BLE lacks a convenient NVM for this; we therefore used a Fujitsu MB85RS64 SPI FRAM \cite{fujitsu_fram_2011}. I\textsuperscript{2}C pins were reserved for ADC expansion, so SPI was preferred. Alternatives (SD card or host-stored calibration) would complicate access, reliability, and portability, undermining the `plug-and-play' advantages of MIDI.
 
-\paragraph{RGB LEDs} Scaling from six to 98 jacks introduced `problems of scale': tracking which key is being calibrated and spotting out-of-range sensors. Addressable WS2812 LEDs were aligned to keys and driven programmatically; colour states (Figure~\ref{fig:mark1-leds}) provided immediate feedback during calibration and debugging. We avoided separate drivers (e.g., \texttt{TLC5940} in \textcite{mcpherson_portable_2013}) to reduce assembly complexity. While chain failure can cascade past a dead LED, LEDs are hidden in regular operation and non-critical to playability; replacing the affected PCB remains the practical remedy.
+\paragraph{RGB LEDs} Scaling from six to 98 jacks introduced `problems of scale': tracking which key is being calibrated and spotting out-of-range sensors. Addressable WS2812 LEDs were aligned to keys and driven programmatically; colour states (Figure~\ref{fig:mark1-leds}) provided immediate visual feedback to the user during calibration and debugging. We avoided separate drivers (e.g., \texttt{TLC5940} in \textcite{mcpherson_portable_2013}) to reduce assembly complexity. While chain failure can cascade past a dead LED, LEDs are hidden in regular operation and non-critical to playability. Replacing the affected PCB remains the practical remedy should an LED fail and disrupt the signal chain.
 
-\begin{figure}[t]
+\begin{figure}
     \centering
     \hspace*{0.2\textwidth}
     \includegraphics[height=0.4\textheight]{img/drawing-all_comparison-90-1.pdf}\hfill
@@ -577,9 +564,9 @@ All signals terminate at a microcontroller that samples analogue inputs and cont
     \label{fig:compare}
 \end{figure}
 
-\begin{figure}[b]
+\begin{figure}
     \centering
-     \includegraphics[width=0.75\linewidth]{img/mark-1-leds.png}
+     \includegraphics[width=1\linewidth]{img/mark-1-leds.png}
     \caption{Mark~I demonstrating the addressable RGB LED array.}
     \label{fig:mark1-leds}
 \end{figure}
@@ -596,26 +583,8 @@ All signals terminate at a microcontroller that samples analogue inputs and cont
 \end{figure}
 
 \paragraph{Sensor Board} Each board measures vertical jack displacement. Distributing sensors across multiple boards reduced cost, eased installation, and allowed coarse adjustment in both stand-off and lateral centring over seven jacks. We kept sensor–MUX traces short to minimise noise. 
-\bigskip
 Per board:
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\linewidth]{img/mark-1-pcbs.jpg}    
-    \caption[Sensor boards \textit{in situ}]{Sensor boards \textit{in situ}. Daisy-chain ribbon cables connect \texttt{Input}/\texttt{Output} headers (Figure~\ref{fig:sensor-schematic-1}). The multicoloured cable loom carries each board’s \texttt{SIG}; the green loom is the unused \texttt{INT} later tied to \texttt{GND}.}
-    \label{fig:mark-1-pcbs}    
-\end{figure}
-
-\begin{figure}[b]
-  \centering
-  \includegraphics[width=0.75\linewidth,trim={0 1.5cm 0 1.5cm},clip]{img/sensor-board-w-baffles.jpeg}
-  % \includegraphics[width=0.6\linewidth,trim={4.45cm 4.5cm 5.25cm 4cm},clip]{img/sensor-board-reverse-side.png} 
-  \caption{Sensor board front with baffles.}
-  \label{fig:sensor-physical-pcbs}
-  \label{fig:baffles}
-\end{figure}
-
-\begin{itemize}[itemsep=0pt, parsep=0pt, topsep=1em, partopsep=0pt]
+\begin{itemize}[itemsep=0pt, parsep=0pt, topsep=0.5em, partopsep=0pt]
     \item 7 QRE1113 optical sensors
     \item 7 100~$\Omega$ resistors and 7 10~k$\Omega$ resistors (later reduced to one shared resistor per board)
     \item 1 Texas Instruments \texttt{CD4051BE} multiplexer
@@ -624,11 +593,29 @@ Per board:
 
 \begin{figure}
     \centering
+    \includegraphics[width=1\linewidth]{img/mark-1-pcbs.jpg}    
+    \caption[Sensor boards \textit{in situ}]{Sensor boards \textit{in situ}. Daisy-chain ribbon cables connect \texttt{Input}/\texttt{Output} headers (Figure~\ref{fig:sensor-schematic-1}). The multicoloured cable loom carries each board’s \texttt{SIG}; the green loom is the unused \texttt{INT} later tied to \texttt{GND}.}
+    \label{fig:mark-1-pcbs}    
+\end{figure}
+
+\begin{figure}[b]
+  \centering
+  \includegraphics[width=1\linewidth,trim={0 1.5cm 0 1.5cm},clip]{img/sensor-board-w-baffles.jpeg}
+  % \includegraphics[width=0.6\linewidth,trim={4.45cm 4.5cm 5.25cm 4cm},clip]{img/sensor-board-reverse-side.png} 
+  \caption{Sensor board front with baffles.}
+  \label{fig:sensor-physical-pcbs}
+  \label{fig:baffles}
+\end{figure}
+
+
+
+\begin{figure}
+    \centering
     \includegraphics[width=0.85\linewidth,angle=270]{img/pcb_controller_schematic_v1.pdf}
         
     % \bigskip
         
-    \includesvg[inkscapelatex=false, width=0.9\linewidth]{img/pcb_sensor_schematic_v1.svg}\\        
+    \includesvg[inkscapelatex=false, width=0.99\linewidth]{img/pcb_sensor_schematic_v1.svg}\\        
     \caption[Mark~I schematics]{Mark~I controller board (Top) sensor board (Centre) schematics and the sensor boards \textit{in situ} (Bottom). `\texttt{D}' = RGB LED; `\texttt{Q}' = optical sensor; `\texttt{C}' = MUX channel. Labels indicate current direction. Daisy-chain ribbon cables connect \texttt{Input}/\texttt{Output} headers (Figure~\ref{fig:sensor-schematic-1}). The multicolour loom carries each board’s \texttt{SIG}; the green loom is the unused \texttt{INT} later tied to \texttt{GND}.}
     \label{fig:sensor-schematic-1}    
     \label{fig:controller-schematic-1}
@@ -637,35 +624,9 @@ Per board:
 \noindent
 Figure~\ref{fig:sensor-schematic-1} shows the sensor board schematic. The analogue \texttt{SIG} output is routed through the MUX but returns separately to the controller in v1 (to reserve board space for an unused MUX interrupt \texttt{INT}). MUX select lines \texttt{A}/\texttt{B}/\texttt{C} implement 3-bit encoded channel selection.
 
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=0.75\linewidth]{img/mark-1-pcbs.jpg}
-%     \caption{Mark~I sensor boards in situ. Daisy-chain ribbon cables connect \texttt{Input}/\texttt{Output} headers (Figure~\ref{fig:sensor-schematic-1}). The multicolour loom carries each board’s \texttt{SIG}; the green loom is the unused \texttt{INT} later tied to \texttt{GND}.}
-%     \label{fig:mark-1-pcbs}
-% \end{figure}
-
-Ribbon cables linked \texttt{Input}/\texttt{Output} between boards prior to installation; the assembly was fitted as a single chain. Each board’s \texttt{SIG} was brought separately to the controller (Figure~\ref{fig:controller-schematic-1}). The same 3D-printed baffles used on the prototype eliminated cross-talk (Figure~\ref{fig:baffles}). As shown in Figure~\ref{fig:sensor-physical-pcbs}, the baffles, an adjustment plate, and a vertical back plate form a three-part bracket. Push-fit dovetails allow off-site printing and on-site assembly; two 3~mm holes in the PCB allow it to be sandwiched between back plate and baffle.
-
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=0.6\linewidth,trim={0 2cm 0 2.5cm},clip]{img/baffles.png}
-%     \caption{3D-printed baffles to prevent IR cross-talk.}
-%     \label{fig:baffles}
-% \end{figure}
-
-% \begin{figure}
-%     \centering    
-%     \label{fig:sensor-bracket}
-% \end{figure}
+Ribbon cables linked \texttt{Input}/\texttt{Output} between boards prior to installation; the assembly was fitted as a single chain. Each board’s \texttt{SIG} was brought separately to the controller (Figure~\ref{fig:controller-schematic-1}). The same 3D-printed baffles used on the prototype eliminated cross-talk (Figure~\ref{fig:baffles}). As shown in Figure~\ref{fig:sensor-physical-pcbs}, the baffles, an adjustment plate, and a vertical back plate form a three-part bracket. Push-fit dovetails allow off-site printing and on-site assembly; two 3~mm holes in the PCB allow it to be sandwiched between back plate and baffle.\\\bigskip
 
 \paragraph{Controller Board}
-
-% \begin{figure}
-%     \centering
-    % \includegraphics[width=0.6\linewidth,angle=270]{img/pcb_controller_schematic_v1.pdf}
-    % \caption{Mark~I controller board schematic.}
-    % \label{fig:controller-schematic-1}
-% \end{figure}
 
 The controller board reliably connects all components to the Nano BLE (Figure~\ref{fig:controller-schematic-1}). 
 
@@ -691,11 +652,11 @@ Estimated power draw is $\sim$1.1~A at 5~V with inrush variation. Sensors stayed
 
 \subsection{Installation}
 
-Once fabricated, the electronics were fitted to the instrument as a bespoke installation, with brackets and enclosures added to ease future servicing without constraining the design. Some of the geometry inevitably evolved during fitting—most notably the shift from horizontal to vertical sensor boards—showing how fabrication and assembly remained in dialogue until the last moment.
+Once fabricated, the electronics were fitted to the instrument as a bespoke installation, with brackets and enclosures added to ease future servicing without constraining the design. Some of the geometry inevitably evolved during fitting---most notably the shift from horizontal to vertical sensor boards---showing how fabrication and assembly remained in dialogue until the last moment.
 
-Pre-assembly took place in Edinburgh, while the final build was completed in the NEMUS Lab in Bologna during the last week of October 2024; delivery and exhibition followed in the first week of November. Power and data were carried through a daisy-chained loom, while the \texttt{SIG} lines ran separately to reduce noise. Ribbon cables were hand-cut to length so they could be repositioned later, a decision that improved flexibility but added time—an insight folded into \emph{Mark~II} through the adoption of flat-flex cabling. The controller’s location was revised when the rear-chamber dimensions proved tighter than those assumed for the Mac mini housing the sampler.
+Pre-assembly took place in Edinburgh, while the final build was completed in the NEMUS Lab in Bologna during the last week of October 2024; delivery and exhibition followed in the first week of November. Power and data were carried through a daisy-chained loom, while the \texttt{SIG} lines ran separately to reduce noise. Ribbon cables were hand-cut to length so they could be repositioned later, a decision that improved flexibility but added time---an insight folded into \emph{Mark~II} through the adoption of flat-flex cabling. The controller’s location was revised when the rear-chamber dimensions proved tighter than those assumed for the Mac mini housing the sampler.
 
-Fitting the keyframe required temporarily removing the keys. Brackets were secured to the underside with round-head self-tappers and left slightly loose for coarse positioning; final alignment was completed in firmware. Each jack was prepared with a varnished short side for better sticker adhesion, the gradients were trimmed to length, and the free travel of every jack was checked. Preliminary calibration took place before the keys were replaced, with outliers traced and corrected. A single clearance error blocked key travel entirely, forcing a 10 mm × 15 mm recess to be milled into each key (Figure~\ref{fig:milling}) and the leather pads refitted—an extra day's work, but one that informed later geometry and cabling changes adopted in Mark~II.
+Fitting the keyframe required temporarily removing the keys. Brackets were secured to the underside with round-head self-tappers and left slightly loose for coarse positioning; final alignment was completed in firmware. Each jack was prepared with a varnished short side for better sticker adhesion, the gradients were trimmed to length, and the free travel of every jack was checked. Preliminary calibration took place before the keys were replaced, with outliers traced and corrected. A single clearance error blocked key travel entirely, forcing a 10 mm × 15 mm recess to be milled into each key (Figure~\ref{fig:milling}) and the leather pads refitted---an extra day's work, but one that informed later geometry and cabling changes adopted in Mark~II.
 
 \begin{figure}  
   \centering
@@ -719,7 +680,7 @@ on a Mac mini housed in the lower compartment; cables were routed through hidden
 
 \subsection{Calibration}
 
-The rotary encoder selects a key, edits thresholds, and saves to FRAM. Defaults are mid-range; each sensor is plotted against its threshold (Figure~\ref{fig:serial_monitor}) and adjusted until the threshold is crossed only at the pluck. LEDs identify the active key and report state; red indicates readings near ADC rails (misalignment/fault).
+The rotary encoder is used to select a key, edits thresholds, and save new threshold values to FRAM. Defaults are mid-range; each sensor is plotted against its threshold (Figure~\ref{fig:serial_monitor}) and adjusted until the threshold is crossed only at the pluck. LEDs identify the active key and report state; red indicates readings near ADC rails (misalignment/fault).
 
 % \begin{table}
 %     \centering
@@ -773,7 +734,7 @@ Central to the revision was a two-threshold finite-state machine (FSM) with stat
 A note was triggered only when the signal rose above the \texttt{pluck\_threshold} from \texttt{RELEASED}; it returned to \texttt{RELEASED} only when falling below a lower \texttt{release\_threshold} (Figure~\ref{fig:jack-states}).  
 This modest change eliminated chatter around a single boundary and allowed per-key pluck and release points to be tuned independently.  
 A four-sample moving average suppressed high-frequency noise.  
-Across 10\,000 iterations, the sampling loop (including multiplexing and filtering) averaged 1.7\,ms with $\pm$0.2\,ms jitter—comfortably inside the 10\,ms latency budget reported by \textcite{jack_effect_2016}.
+Across 10\,000 iterations, the sampling loop (including multiplexing and filtering) averaged 1.7\,ms with $\pm$0.2\,ms jitter---comfortably inside the 10\,ms latency budget reported by \textcite{jack_effect_2016}.
 
 \paragraph{Threshold storage}
 Pluck and release thresholds were stored in non-volatile FRAM so that calibration survived power cycles.  
@@ -785,7 +746,7 @@ simplified read/write operations.
 
 \paragraph{Calibration workflow}
 During calibration, the selected key streamed raw values over the serial connection (Figure~\ref{fig:serial_monitor}) while the encoder adjusted thresholds in real time.  
-Addressable LEDs echoed the current state—green for \texttt{PLUCKED}, orange for \texttt{PRESSED}, blue for \texttt{RELEASED}, and red when approaching ADC limits.  
+Addressable LEDs echoed the current state---green for \texttt{PLUCKED}, orange for \texttt{PRESSED}, blue for \texttt{RELEASED}, and red when approaching ADC limits.  
 An initial pass was performed at NEMUS using the Arduino serial plotter and MIDI Monitor,%
 \footnote{\url{https://github.com/krevis/MIDIApps}}
 followed by fine adjustments \textit{in situ} with guidance from the curator-performer.
@@ -800,13 +761,13 @@ followed by fine adjustments \textit{in situ} with guidance from the curator-per
 % \section{Stage 4}
 \section{Stage 4: Mark~II}\label{sec:mark-2}
 
-Building on the lessons of \emph{Mark~I}, a second interface—\emph{Mark~II}—was commissioned by NEMUS for laboratory research with numerically simulated physical models and whole multi-register operation. Where the first build prioritised public robustness and single-register clarity, the new instrument consolidated the sensing and firmware refinements developed in Stage~3 and set out to demonstrate a complete dual-register system.  
+Building on the lessons of \emph{Mark~I}, a second interface---\emph{Mark~II}---was commissioned by NEMUS for laboratory research with numerically simulated physical models and whole multi-register operation. Where the first build prioritised public robustness and single-register clarity, the new instrument consolidated the sensing and firmware refinements developed in Stage~3 and set out to demonstrate a complete dual-register system.  
 Parametric Python scripts generated EAGLE footprints from the measured jack pitch, speeding the layout of new circuit boards.
 
 Mechanically, \emph{Mark~II} adopted forty-five keys rather than forty-nine, following the short-octave layout found in Italian plucked keyboards of the sixteenth to eighteenth centuries \cite[p.~46]{tagliavini_clavicembali_1987}.  
 The mapping is handled in firmware, allowing the hardware to retain historical proportions without constraining later experiments with tuning or sample mapping.
 
-\begin{table}
+\begin{table}[b]
 	\centering
 	\begin{tabular}{|l|l|r|l|}
 		\hline
@@ -826,7 +787,7 @@ The mapping is handled in firmware, allowing the hardware to retain historical p
     % \caption{Controller board, version~2.}
     % \label{fig:controller-schematic-2}
 % \end{figure}
-\begin{figure}[!b]
+\begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{img/mark2.png}\\[1ex]
     \includegraphics[width=0.7\linewidth,trim={0 20cm 0 .5cm},clip]{img/mark-2-front-internal.jpeg}
@@ -847,14 +808,14 @@ Boards at the ends of a register can simply leave unused sensors unpopulated rat
             
     \bigskip
     
-    \includesvg[inkscapelatex=false,width=0.9\linewidth]{img/pcb_sensor_schematic_v2.svg}
+    \includesvg[inkscapelatex=false,width=0.99\linewidth]{img/pcb_sensor_schematic_v2.svg}
     \caption[Mark~II schematics]{Updated controller board (Top) and sensor board (Bottom) schematics for \emph{Mark~II}. RGB LEDs (\texttt{D}); optical sensors (\texttt{Q}); signal routing (\texttt{S}). The solder-pad junction on the sensor board assigns the muxed \texttt{SIG} to an \texttt{S} channel on the FFC.}
     \label{fig:sensor-schematic-2}
     \label{fig:controller-schematic-2}
 \end{figure}
 
 A small but significant refinement lies in the solder-pad junction on each board (Figure~\ref{fig:sensor-schematic-2}), which routes the multiplexed \texttt{SIG} to a defined ADC line via the FFC.  
-Coupled with keyed connectors, this allows any faulty board to be swapped \textit{in situ} without desoldering or disturbing its neighbours—an operation that in \emph{Mark~I} often meant dismantling an entire loom.  
+Coupled with keyed connectors, this allows any faulty board to be swapped \textit{in situ} without desoldering or disturbing its neighbours---an operation that in \emph{Mark~I} often meant dismantling an entire loom.  
 Together, these changes transformed the sensing assembly into a set of serviceable modules, suitable for research environments where components can be replaced or reconfigured between studies.
 
 \section{Discussion}\label{discussion-interaction}
@@ -898,13 +859,13 @@ To facilitate reproduction of hardware, it should be self-evident but, any form 
 
 This highlights a core problem with digital cultural heritage, which is if we rely on proprietary system for digital conservation, then they will be locked in an ecosystem which is designed to chase change. If heritage institutions are using proprietary digital systems \cite{innocente_framework_2023} they should be aware of their choice of digital infrastructure and the implications that will have on a project's longevity. As \textcite{bonvoisin_source_2017} coined ``openwashing'' likewise with digital conservation we run a risk of ``heritagewashing'' where digital projects claim to serve the conservation of cultural heritage, but are in fact ephemera. That is not to say that ephemeral heritage projects are forbidden, but this should be a conscious choice made at a project's inception and not one applied at a point in the future when the task of archiving a work becomes too great. An open methodology needs to be `baked-in' to the research process and it is not something trivially applied after the fact. It is of course better to do it afterwards than not at all, but the information at stake also constitutes the development process, not just the end product. The point at which a project is abandoned is not the key point of record--which, given their `living' status, is likely to have undergone some further modifications.
 
-Both \textcite{mcpherson_nimehub_2016} and \cite{fiordelmondo_towards_2025} approach hardware archiving in a repository format. \textcite{mcpherson_nimehub_2016} proposed a workshop with the intention to create a a central repository (or database) for DMI designs. Part of that workshop's primary eight goals were the FAIR adjacent aims of encouraging reproducibility, open access and encouraging a normalised practice of documentation. Both \textcite{mcpherson_nimehub_2016} and \cite{fiordelmondo_towards_2025} raise the issue of repository structure with the latter proposing a a prescriptive measure which can be applied to any DMI project. Research in the form of open hardware, open software, research product can and should take advantage of the platforms available for distribution of the work,
+Both \textcite{mcpherson_nimehub_2016} and \textcite{fiordelmondo_towards_2025} approach hardware archiving in a repository format. \textcite{mcpherson_nimehub_2016} proposed a workshop with the intention to create a a central repository (or database) for DMI designs. Part of that workshop's primary eight goals were the FAIR adjacent aims of encouraging reproducibility, open access and encouraging a normalised practice of documentation. Both \textcite{mcpherson_nimehub_2016} and \cite{fiordelmondo_towards_2025} raise the issue of repository structure with the latter proposing a a prescriptive measure which can be applied to any DMI project. Research output in the form of open hardware or open software can and should take advantage of the platforms available for distribution of the work,
 \footnote{such as GitHub, GitLab for source code or Thingiverse for 3D models \cite{oshwa_best_2013}.}
 but the work still needs to be citable \cite{smith_software_2016}, and cross-reference-able \cite{stall_journal_2023} if it is to be built upon.
 
 The limitation here is assuming that the constituent parts of a DMI are a collective to archive and version controlled. This is true to some degree, there is a complete artefact to be documented, but it is very much made of constituent parts that develop and are swapped out. There is the interface, the electronics, and the firmware, whose versions current and old can be used in all number of combinations of versions. Keeping these components contained to a single version control repository limits their modularity and potential for reuse.
 
-Parallel to the physical design, attention was given to documentation and dissemination. Following DMI documentation guidelines \cite{calegario_documentation_2021} and open-science practice \cite{stall_journal_2023}, the entire project was archived: source code, firmware, bill of materials, CAD schematics, STL models, photographs, and build instructions were placed in public repositories. The material is organised into three submodules—\emph{Firmware} \cite{hamilton_firmware_2025}, \emph{CAD} \cite{hamilton_cad_2025}, and \emph{Model Data} \cite{hamilton_models_2025}—combined via a meta-repository (Figure~\ref{fig:repo-relation}). This structure allows individual components (e.g., a PCB or an optical sensor) to be reused or substituted without restructuring the entire system.
+Parallel to the physical design, attention was given to documentation and dissemination. Following DMI documentation guidelines \cite{calegario_documentation_2021} and open-science practice \cite{stall_journal_2023}, the entire project was archived: source code, firmware, bill of materials, CAD schematics, STL models, photographs, and build instructions were placed in public repositories. The material is organised into three submodules---\emph{Firmware} \cite{hamilton_firmware_2025}, \emph{CAD} \cite{hamilton_cad_2025}, and \emph{Model Data} \cite{hamilton_models_2025}---combined via a meta-repository (Figure~\ref{fig:repo-relation}). This structure allows individual components (e.g., a PCB or an optical sensor) to be reused or substituted without restructuring the entire system.
 
 \begin{figure}
 \centering
@@ -930,7 +891,7 @@ Parallel to the physical design, attention was given to documentation and dissem
 
 Archiving exposed a few practical challenges. Zenodo’s GitHub integration does not yet handle meta-repositories, requiring separate DOIs for each submodule with cross-references \cite{zenodo_1036_2025}. Likewise, the future of CAD data is tied to software sustainability: the discontinuation of Autodesk EAGLE \cite{autodesk_eagle_2024} effectively freezes its XML format, though conversion to KiCad remains available \cite{kicad_eagle_2024}. These lessons emphasise that openness depends not only on licensing but also on the careful selection of formats and hosting infrastructure.
 
-\paragraph{Final remarks} From the first three–key prototype, through the 49–key gallery instrument, to the laboratory-oriented \emph{Mark~II}, the project followed a staged path in which each step resolved a specific set of constraints. The optical sensing system—hidden, inexpensive, and mechanically unobtrusive—met the museum brief without resorting to high-force actuation or unnecessary complexity \cite{gillespie_haptic_1996,cadoz_modular_1990,timmermans_multibody-based_2020}. Placing digital measurement behind historically derived mechanics and materials \cite{masu_o-in-nime_2023} allowed the interface to operate as a credible harpsichord in a public setting while still supporting data capture.
+\paragraph{Final remarks} From the first three–key prototype, through the 49–key gallery instrument, to the laboratory-oriented \emph{Mark~II}, the project followed a staged path in which each step resolved a specific set of constraints. The optical sensing system---hidden, inexpensive, and mechanically unobtrusive---met the museum brief without resorting to high-force actuation or unnecessary complexity \cite{gillespie_haptic_1996,cadoz_modular_1990,timmermans_multibody-based_2020}. Placing digital measurement behind historically derived mechanics and materials \cite{masu_o-in-nime_2023} allowed the interface to operate as a credible harpsichord in a public setting while still supporting data capture.
 
 Beyond its role as an exhibit, the hardware exposes a level of control that goes beyond a conventional MIDI keyboard. Continuous jack displacement, per-register sensing, and hysteretic event logic make it suitable for engines that aim either at historical reconstruction or at new modes of synthesis. \emph{Mark~II} integrates these features into a dual-register platform for research with physically informed models \cite{bologna_nemus_2024}, extending the original design without compromising its underlying assumptions.
 
