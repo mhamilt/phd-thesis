@@ -160,7 +160,7 @@ Spatial constraints become especially acute in multi-register instruments. Figur
     \centering
     \includegraphics[width=1.0\linewidth]{img/koster_keyboard_1994_p53.png}
     \caption[Cross section of a multi-register harpsichord mechanism]{Cross
-        section of a multi-register harpsichord mechanism from \textcite[p.~53]{koster_keyboard_1994}. Image is of a two-manual instrument, with the
+        section of a multi-register harpsichord mechanism from \textcite[p.\ 53]{koster_keyboard_1994}. Image is of a two-manual instrument, with the
         lower manual in control of three registers.}
     \label{fig:3-registers}
 \end{figure}
@@ -191,7 +191,7 @@ The current voltage-divider circuit (Figure~\ref{fig:volt-div}) is intentionally
     \label{fig:led-diffuser}
 \end{figure}
 
-A transimpedance amplifier (TIA) addresses this limitation by converting sensor current directly into voltage, bypassing the slow pull-up resistor and improving bandwidth (Figure~\ref{fig:tia-basic}). Stability is maintained through a feedback capacitor (Figure~\ref{fig:tia-cf})~\cite[p.~233]{horowitz_art_2015}, while biasing the collector--emitter junction further increases sensitivity and speed~\cite{falco_understanding_2023, pardue_near_2013}. To prevent the output from approaching supply rails, a differential configuration biases the inverting input (Figure~\ref{fig:tia-diff}), following \textcite{mcpherson_portable_2013}, with resistor ratios tuned for optimal common-mode rejection~\cite[p.~227]{horowitz_art_2015}. The resulting circuit family, summarised in Figure~\ref{fig:tia-evolution}, trades a small increase in complexity for a substantial gain in temporal precision.
+A transimpedance amplifier (TIA) addresses this limitation by converting sensor current directly into voltage, bypassing the slow pull-up resistor and improving bandwidth (Figure~\ref{fig:tia-basic}). Stability is maintained through a feedback capacitor (Figure~\ref{fig:tia-cf})~\cite[p.\ 233]{horowitz_art_2015}, while biasing the collector--emitter junction further increases sensitivity and speed~\cite{falco_understanding_2023, pardue_near_2013}. To prevent the output from approaching supply rails, a differential configuration biases the inverting input (Figure~\ref{fig:tia-diff}), following \textcite{mcpherson_portable_2013}, with resistor ratios tuned for optimal common-mode rejection~\cite[p.\ 227]{horowitz_art_2015}. The resulting circuit family, summarised in Figure~\ref{fig:tia-evolution}, trades a small increase in complexity for a substantial gain in temporal precision.
 
 \begin{figure}
     \centering
@@ -235,7 +235,7 @@ A transimpedance amplifier (TIA) addresses this limitation by converting sensor 
         (\subref{fig:tia-basic}) Basic transimpedance amplifier using a phototransistor~\cite[Fig.~4.22]{horowitz_art_2015}.\\
         (\subref{fig:tia-cf}) Feedback capacitor $C_f$ reduces high-frequency noise and ringing \cite[p. 283]{horowitz_art_2020}.\\
         (\subref{fig:tia-bias}) TIA with voltage bias $V_b$~\cite{pardue_near_2013}, moving the input voltage away from supply rails and avoiding saturation.\\
-        (\subref{fig:tia-diff}) Differential TIA from \textcite[Fig. 3]{mcpherson_portable_2013} that necessitates a balance of resistor ratio for optimal common-mode rejection as per~\textcite[p.~227]{horowitz_art_2015}.}.
+        (\subref{fig:tia-diff}) Differential TIA from \textcite[Fig. 3]{mcpherson_portable_2013} that necessitates a balance of resistor ratio for optimal common-mode rejection as per~\textcite[p.\ 227]{horowitz_art_2015}.}.
     \label{fig:tia-evolution}
 \end{figure}
 
@@ -368,7 +368,7 @@ Independent spacing has therefore been implemented as part of the new orthotropi
     \centering
     \includegraphics[width=0.75\linewidth]{img/koster_keyboard_1994_p49.png}
     \caption[Soundboard bracing of a seventeenth-century Couchet harpsichord]{Soundboard bracing of a seventeenth-century Couchet harpsichord
-        from \textcite[p.~49]{koster_keyboard_1994}.}
+        from \textcite[p.\ 49]{koster_keyboard_1994}.}
     \label{fig:bracing}
 \end{figure}
 
@@ -475,12 +475,16 @@ For many humanities researchers, version control, documentation, and archiving s
 
 The issue extends beyond research software to the digital conservation of cultural heritage itself. Digital preservation is not neutral. As scholars such as \textcite{rubio_work_2020}, \textcite{schwarz_disk_2006}, and \textcite{parry_museums_2010} have warned, poorly considered digital methods can distort the very histories they aim to protect. Conservation, whether physical or digital, is always an act of interpretation. Following \textcite{desilvey_curated_2017}, we should resist the temptation to ``pickle'' the past---to preserve without reflection---and instead act with awareness of consequence. If a tool is meant to be disposable, then let that ephemerality be intentional; if it is meant to endure, then endurance must be designed into its fabric.
 
-% The regimens of \textcite{barclay_preservation_2005} endorse deliberacy.
-% ``Benign neglect'' \cite[p. 75--76]{barclay_preservation_2005} is an equally valid conservation path so long as it is one taken deliberately.
+The sentiment of \citeauthor{desilvey_curated_2017} is echoed in the ``benign neglect''  of \textcite[p. 75--76]{barclay_preservation_2005}, a promotion of a passive approach to conservation which is far preferable to a ``failed restoration'' \cite[p.\ 244]{barclay_preservation_2005}.
+If we are to continue to interact with historical musical instruments---and those instruments are destined to reach a state where they are no longer playable---then the conservation and curatorial choices taken must be deliberate. Whatever the choice made, it should be informed by the wider context of musical acoustics as well as the feasibility of sustainable maintenance and restoration of historical musical instruments.
 
 The two projects in this thesis exemplify those choices. Each balances immediacy and longevity, access and authenticity, openness and rigour. More broadly, they argue that digital conservation should not be a technical afterthought but a cultural responsibility. To conserve experience as well as artefact, we must also conserve the tools, languages, and methods through which that experience is studied. The future of digital heritage, like that of research itself, depends on our willingness to build systems that remember not only their subjects but their own making.
 
 
-% When musical instrumnets reach a state where restoration to playable condition poses significant risks due to their fragility, the action we take must be informed and deliberate.
 
-% If we are to continue to try and interact with historical musical instrument and those instruments are destined to reach a state where they are no longer playable, then we have to take action in a way that will be that is informed. Whichever pathway is chosen, the choice must be deliberate, informed by the context and acknowledged the consequences that ripple from it.
+
+ % -- [p. 244]{barclay_preservation_2005}
+% \begin{quotation}
+% Any music lover will know the exquisite, sciatic pain of music badly played. Well, conservators suffer an equally sharp pain when encountering musical instruments badly restored. There is little so heartbreaking as to visit a storage area and to find a valuable musical instrument, ruined by a failed restoration, sitting silent with neither its historical nor its musical voice intact. The 'dead' instruments in display cases are nothing to this.
+% \end{quotation}
+% When musical instrumnets reach a state where restoration to playable condition poses significant risks due to their fragility, the action we take must be informed and deliberate.
