@@ -613,9 +613,9 @@ Per board:
     \centering
     \includegraphics[width=0.85\linewidth,angle=270]{img/pcb_controller_schematic_v1.pdf}
         
-    % \bigskip
-        
+    % \bigskip    
     \includesvg[inkscapelatex=false, width=0.99\linewidth]{img/pcb_sensor_schematic_v1.svg}\\        
+    % \includegraphics[width=0.99\linewidth]{img/pcb_sensor_schematic_v1.pdf}
     \caption[Mark~I schematics]{Mark~I controller board (Top) sensor board (Centre) schematics and the sensor boards \textit{in situ} (Bottom). `\texttt{D}' = RGB LED; `\texttt{Q}' = optical sensor; `\texttt{C}' = MUX channel. Labels indicate current direction. Daisy-chain ribbon cables connect \texttt{Input}/\texttt{Output} headers (Figure~\ref{fig:sensor-schematic-1}). The multicolour loom carries each board’s \texttt{SIG}; the green loom is the unused \texttt{INT} later tied to \texttt{GND}.}
     \label{fig:sensor-schematic-1}    
     \label{fig:controller-schematic-1}
@@ -809,6 +809,7 @@ Boards at the ends of a register can simply leave unused sensors unpopulated rat
     \bigskip
     
     \includesvg[inkscapelatex=false,width=0.99\linewidth]{img/pcb_sensor_schematic_v2.svg}
+    % \includegraphics[width=0.99\linewidth]{img/pcb_sensor_schematic_v2.pdf}
     \caption[Mark~II schematics]{Updated controller board (Top) and sensor board (Bottom) schematics for \emph{Mark~II}. RGB LEDs (\texttt{D}); optical sensors (\texttt{Q}); signal routing (\texttt{S}). The solder-pad junction on the sensor board assigns the muxed \texttt{SIG} to an \texttt{S} channel on the FFC.}
     \label{fig:sensor-schematic-2}
     \label{fig:controller-schematic-2}
