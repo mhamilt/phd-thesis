@@ -294,7 +294,7 @@ about an instrument through haptic feedback. Early studies demonstrated that
 expert pianists could identify instruments purely by playing, where they
 otherwise could not by listening
 \cite{galembo_quality_1982,galembo_problem_1983}.
-\footnote{As well as being blindfolded the ``kinaesthetic test`` had experts
+\footnote{As well as being blindfolded the ``kinaesthetic test" had experts
 wear headphones playing white noise to block sound from the piano
 \cite{galembo_quality_2003}.} Subsequent work has revealed that vibrotactile
 feedback in particular shapes perceptions of both
@@ -316,19 +316,18 @@ Beyond conservation and exhibition, the interface serves as a research probe and
 
 \subsubsection{As Research Probe}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\linewidth]{img/sliding_registers.pdf}
-    \caption[Detail of the registers on the three-key rig.]{Detail of the registers on the three-key rig. Arrows indicate the direction that each register can be moved in order to engage or disengage the jacks.}
-    \label{fig:sliding-registers}
-\end{figure}
-
 The system enables controlled studies on the role of kinaesthetic and vibrotactile feedback, and on the influence of visual aesthetics, analogous to studies using Yamaha AvantGrand and Disklavier pianos~\cite{fontana_perception_2018,charalampos_role_2018}. Because registers can be disengaged mechanically (Figure~\ref{fig:sliding-registers}) while still emitting MIDI, experiments can independently vary pluck occurrence and timing (e.g., staggering effects), with Mark~2 intended for this role. The modular PCB approach in Section~\ref{sec:future-pcb-layout} supports deployment on differing jack pitches and on multi-register instruments, enabling comparison across the augmented interface, an acoustic instrument, and traditional MIDI systems~\cite{mcalpine_sampling_2014}. Such work tests whether faithfully reproducing the mechanical action and kinaesthetic forces suffices for `tactile realism' before pursuing more elaborate electromechanical emulation~\cite{mcalpine_sampling_2014,gillespie_virtual_1994,lozada_novel_2007,timmermans_multibody-based_2020}.
 
 \subsubsection{Old Interfaces, New Expression}
 
 While the conservation use case motivates the design, the same sensing opens expressive controls unavailable to historical instruments. With continuous displacement streams before and after pluck, the firmware can map post-onset gestures to synthesis parameters, analogous to MIDI aftertouch~\cite{wiffen_prophet_1983,jungleib_complete_1983} but tailored to the harpsichord action. Additional pressure sensing at the keybed or jack rail~\cite{hamilton_two_2025} augments this space. In this way, the interface both preserves kinaesthetic information inherent in historical performance and enables contemporary expressions rooted in that tactile grammar, addressing long-standing debates about post-onset control in keyboard instruments~\cite{macritchie_using_2015,woolley_musical_2017}.
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{img/sliding_registers.pdf}
+    \caption[Detail of the registers on the three-key rig.]{Detail of the registers on the three-key rig. Arrows indicate the direction that each register can be moved in order to engage or disengage the jacks.}
+    \label{fig:sliding-registers}
+\end{figure}
 
 \section{MAGPIE}\label{sec:future-magpie}
 
@@ -344,6 +343,12 @@ Within \textsc{C++}, open-source solutions such as the Eigen%
 \footnote{\url{https://gitlab.com/libeigen/eigen}} and Spectra%
 \footnote{\url{https://spectralib.org}} libraries offer viable paths forward. The latter reimplements ARPACK solvers natively in C++, enabling full compilation without proprietary dependencies. Such developments would move \textsc{magpie} closer to the same ideals that underpin the hardware work of earlier chapters: transparent methods, accessible tooling, and a community-maintained code base that supports both research and pedagogy.
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{img/plot-grid-error.pdf}
+    \caption[Grid space error]{Comparison between analytic and modelled fifth mode of a plate for isotropic cases using shared and independent grid spacing in the $x$ and $y$ dimensions. Shared spacing shows saw-tooth convergence, while independent spacing converges smoothly.}
+    \label{fig:grid-error}
+\end{figure}
 
 \subsection{Functionality}
 
@@ -353,12 +358,6 @@ Development in this area concerns the core numerical and modelling functions tha
 
 Earlier implementations of \textsc{magpie} used a shared grid spacing ($h$) for both $x$ and $y$ directions. This constraint simplified the discrete biharmonic operator but limited accuracy to plates whose aspect ratio produced integer grid ratios. In practice, the model performs best when the ratio of plate dimensions $L_x/L_y$ matches the ratio of grid points $N_x/N_y$. The alternative--fixing $h$ and truncating $\frac{L_x}{h}$ and $\frac{L_y}{h}$ independently--avoids this restriction but requires separate spacings $h_x$ and $h_y$.  
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\linewidth]{img/plot-grid-error.pdf}
-    \caption[Grid space error]{Comparison between analytic and modelled fifth mode of a plate for isotropic cases using shared and independent grid spacing in the $x$ and $y$ dimensions. Shared spacing shows saw-tooth convergence, while independent spacing converges smoothly.}
-    \label{fig:grid-error}
-\end{figure}
 
 Figure~\ref{fig:grid-error} illustrates the error introduced by shared grid spacing. Because the effective plate dimensions are slightly altered, the simulation diverges as grid resolution increases unless the grid ratios are perfectly matched. This is manageable only for small $N_x$ and $N_y$, since total grid size $N_{xy}$ scales exponentially with $N_x N_y$. For instance, for a plate of $L_x = 100.1$\,cm and $L_y = 81.1$\,cm, matching accuracy would require roughly $N_x = 1001$ and $N_y = 811$ grid points--about 4.2\,GB of memory for the sparse biharmonic matrix and eigensolver. By contrast, independent grid spacing achieves equivalent accuracy at roughly 118\,MB, a crucial difference when deploying on resource-limited systems such as embedded devices or web-based applications, where computational overhead directly affects feasibility.
 
