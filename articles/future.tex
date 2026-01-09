@@ -4,7 +4,7 @@ The two systems presented in the preceding chapters already function as viable t
 
 Some of these developments are already underway or have been tested in parallel with writing. In contrast, others remain prospective because of constraints in time, resources, or the need to preserve core methodological principles such as openness and reproducibility. This chapter, therefore, outlines a forward trajectory rather than a wish list: identifying where refinement is technically feasible, where further exploration is warranted, and where expansion may introduce trade-offs that require careful ethical or methodological justification.
 
-The discussion is organised by project. Section~\ref{sec:future-interaction} focuses on the keyboard interface, detailing improvements to fabrication, sensing, and visitor interaction while maintaining its role within a conservation framework. Section~\ref{sec:future-magpie} then turns to \textsc{magpie}, considering its continuing development as an open-source research environment and the broader community practices that will shape its evolution. Together, these sections frame Chapter~\ref{ch:future} as a roadmap for sustainable growth—technical, conceptual, and collaborative—beyond the immediate boundaries of this thesis.
+The discussion is organised by project. Section~\ref{sec:future-interaction} focuses on the keyboard interface, detailing improvements to fabrication, sensing, and visitor interaction while maintaining its role within a conservation framework. Section~\ref{sec:future-magpie} then turns to \textsc{magpie}, considering its continuing development as an open source research environment and the broader community practices that will shape its evolution. Together, these sections frame Chapter~\ref{ch:future} as a roadmap for sustainable growth—technical, conceptual, and collaborative—beyond the immediate boundaries of this thesis.
 
 
 \section{Interface}\label{sec:future-interaction}
@@ -294,7 +294,7 @@ about an instrument through haptic feedback. Early studies demonstrated that
 expert pianists could identify instruments purely by playing, where they
 otherwise could not by listening
 \cite{galembo_quality_1982,galembo_problem_1983}.
-\footnote{As well as being blindfolded the ``kinaesthetic test`` had experts
+\footnote{As well as being blindfolded the ``kinaesthetic test" had experts
 wear headphones playing white noise to block sound from the piano
 \cite{galembo_quality_2003}.} Subsequent work has revealed that vibrotactile
 feedback in particular shapes perceptions of both
@@ -316,6 +316,12 @@ Beyond conservation and exhibition, the interface serves as a research probe and
 
 \subsubsection{As Research Probe}
 
+The system enables controlled studies on the role of kinaesthetic and vibrotactile feedback, and on the influence of visual aesthetics, analogous to studies using Yamaha AvantGrand and Disklavier pianos~\cite{fontana_perception_2018,charalampos_role_2018}. Because registers can be disengaged mechanically (Figure~\ref{fig:sliding-registers}) while still emitting MIDI, experiments can independently vary pluck occurrence and timing (e.g., staggering effects), with Mark~2 intended for this role. The modular PCB approach in Section~\ref{sec:future-pcb-layout} supports deployment on differing jack pitches and on multi-register instruments, enabling comparison across the augmented interface, an acoustic instrument, and traditional MIDI systems~\cite{mcalpine_sampling_2014}. Such work tests whether faithfully reproducing the mechanical action and kinaesthetic forces suffices for `tactile realism' before pursuing more elaborate electromechanical emulation~\cite{mcalpine_sampling_2014,gillespie_virtual_1994,lozada_novel_2007,timmermans_multibody-based_2020}.
+
+\subsubsection{Old Interfaces, New Expression}
+
+While the conservation use case motivates the design, the same sensing opens expressive controls unavailable to historical instruments. With continuous displacement streams before and after pluck, the firmware can map post-onset gestures to synthesis parameters, analogous to MIDI aftertouch~\cite{wiffen_prophet_1983,jungleib_complete_1983} but tailored to the harpsichord action. Additional pressure sensing at the keybed or jack rail~\cite{hamilton_two_2025} augments this space. In this way, the interface both preserves kinaesthetic information inherent in historical performance and enables contemporary expressions rooted in that tactile grammar, addressing long-standing debates about post-onset control in keyboard instruments~\cite{macritchie_using_2015,woolley_musical_2017}.
+
 \begin{figure}
     \centering
     \includegraphics[width=0.75\linewidth]{img/sliding_registers.pdf}
@@ -323,35 +329,19 @@ Beyond conservation and exhibition, the interface serves as a research probe and
     \label{fig:sliding-registers}
 \end{figure}
 
-The system enables controlled studies on the role of kinaesthetic and vibrotactile feedback, and on the influence of visual aesthetics, analogous to studies using Yamaha AvantGrand and Disklavier pianos~\cite{fontana_perception_2018,charalampos_role_2018}. Because registers can be disengaged mechanically (Figure~\ref{fig:sliding-registers}) while still emitting MIDI, experiments can independently vary pluck occurrence and timing (e.g., staggering effects), with Mark~2 intended for this role. The modular PCB approach in Section~\ref{sec:future-pcb-layout} supports deployment on differing jack pitches and on multi-register instruments, enabling comparison across the augmented interface, an acoustic instrument, and traditional MIDI systems~\cite{mcalpine_sampling_2014}. Such work tests whether faithfully reproducing the mechanical action and kinaesthetic forces suffices for `tactile realism' before pursuing more elaborate electromechanical emulation~\cite{mcalpine_sampling_2014,gillespie_virtual_1994,lozada_novel_2007,timmermans_multibody-based_2020}.
-
-\subsubsection{Old Interfaces, New Expression}
-
-While the conservation use case motivates the design, the same sensing opens expressive controls unavailable to historical instruments. With continuous displacement streams before and after pluck, the firmware can map post-onset gestures to synthesis parameters, analogous to MIDI aftertouch~\cite{wiffen_prophet_1983,jungleib_complete_1983} but tailored to the harpsichord action. Additional pressure sensing at the keybed or jack rail~\cite{hamilton_two_2025} augments this space. In this way, the interface both preserves kinaesthetic information inherent in historical performance and enables contemporary expressions rooted in that tactile grammar, addressing long-standing debates about post-onset control in keyboard instruments~\cite{macritchie_using_2015,woolley_musical_2017}.
-
-
 \section{MAGPIE}\label{sec:future-magpie}
 
 The preceding section has treated interaction through a physical interface; this section turns to its computational counterpart. Whereas the keyboard interface reconstructs material and tactile behaviour, \textsc{magpie} models the soundboard acoustics through simulation. Together they form complementary approaches to the same conservation and research agenda: to make the behaviour of musical artefacts intelligible, reproducible, and openly available. The following discussion, therefore, situates \textsc{magpie} within that shared framework while outlining how its functionality and interface could evolve into a more flexible research platform.
 
-At present, \textsc{magpie} is already a capable tool for analysing modal behaviour and material properties, supporting a range of educational and research use cases. Yet the software remains a starting point rather than a finished environment. Further development is needed to strengthen both its computational engine and its usability, particularly if it is to serve as an open-source alternative to proprietary acoustics packages. In practical terms, improvement paths fall into two categories: \emph{functionality}, which addresses the scope and efficiency of simulation, and \emph{portability}, which addresses how the software can be deployed and maintained across different systems.
+At present, \textsc{magpie} is already a capable tool for analysing modal behaviour and material properties, supporting a range of educational and research use cases. Yet the software remains a starting point rather than a finished environment. Further development is needed to strengthen both its computational engine and its usability, particularly if it is to serve as an open source alternative to proprietary acoustics packages. In practical terms, improvement paths fall into two categories: \emph{functionality}, which addresses the scope and efficiency of simulation, and \emph{portability}, which addresses how the software can be deployed and maintained across different systems.
 
 The current Python implementation, designed for clarity and accessibility, demonstrates the underlying algorithms but relies on the Jupyter notebook interface, which poses portability and maintenance challenges. Translating the computational core into a compiled language such as \textsc{C}~/~\textsc{C++} or Rust would provide greater control over optimisation, allow for direct native compilation, and open possibilities for integration into broader toolchains. In both cases, the aim is not to depart from the open ethos established in earlier chapters but to extend it into more efficient, sustainable code.
 
 The primary technical constraint remains the eigensolver stage that underpins modal analysis. In M\textsc{atlab}, this is handled via the \texttt{eigs} function; in Python, through the SciPy sparse linear algebra library (\texttt{scipy.sparse.linalg.eigs}). Both are interfaces to the ARPACK library~\cite{lehoucq_arpack_1998}. M\textsc{atlab}'s sparse infrastructure~\cite{gilbert_sparse_1992} further obscures the solver process and is not supported by the software’s code generation tools, meaning external integration still requires the M\textsc{atlab} runtime. This limits reproducibility to those with licensed access.
 
-Within \textsc{C++}, open-source solutions such as the Eigen%
+Within \textsc{C++}, open source solutions such as the Eigen%
 \footnote{\url{https://gitlab.com/libeigen/eigen}} and Spectra%
 \footnote{\url{https://spectralib.org}} libraries offer viable paths forward. The latter reimplements ARPACK solvers natively in C++, enabling full compilation without proprietary dependencies. Such developments would move \textsc{magpie} closer to the same ideals that underpin the hardware work of earlier chapters: transparent methods, accessible tooling, and a community-maintained code base that supports both research and pedagogy.
-
-
-\subsection{Functionality}
-
-Development in this area concerns the core numerical and modelling functions that underpin the \textsc{magpie} framework. As an open-source project, \textsc{magpie} remains intentionally fluid, and its functionality evolves with each release. At the time of writing, the most recent version of \citetitle{magpie_matlab_2025} includes the capabilities discussed in Chapter~\ref{ch:analysis}. Continuing work focuses on refining those routines, extending their applicability to orthotropic materials, and improving efficiency in the underlying numerical methods.
-
-\subsubsection{Orthotropic Case}
-
-Earlier implementations of \textsc{magpie} used a shared grid spacing ($h$) for both $x$ and $y$ directions. This constraint simplified the discrete biharmonic operator but limited accuracy to plates whose aspect ratio produced integer grid ratios. In practice, the model performs best when the ratio of plate dimensions $L_x/L_y$ matches the ratio of grid points $N_x/N_y$. The alternative--fixing $h$ and truncating $\frac{L_x}{h}$ and $\frac{L_y}{h}$ independently--avoids this restriction but requires separate spacings $h_x$ and $h_y$.  
 
 \begin{figure}
     \centering
@@ -359,6 +349,15 @@ Earlier implementations of \textsc{magpie} used a shared grid spacing ($h$) for 
     \caption[Grid space error]{Comparison between analytic and modelled fifth mode of a plate for isotropic cases using shared and independent grid spacing in the $x$ and $y$ dimensions. Shared spacing shows saw-tooth convergence, while independent spacing converges smoothly.}
     \label{fig:grid-error}
 \end{figure}
+
+\subsection{Functionality}
+
+Development in this area concerns the core numerical and modelling functions that underpin the \textsc{magpie} framework. As an open source project, \textsc{magpie} remains intentionally fluid, and its functionality evolves with each release. At the time of writing, the most recent version of \citetitle{magpie_matlab_2025} includes the capabilities discussed in Chapter~\ref{ch:analysis}. Continuing work focuses on refining those routines, extending their applicability to orthotropic materials, and improving efficiency in the underlying numerical methods.
+
+\subsubsection{Orthotropic Case}
+
+Earlier implementations of \textsc{magpie} used a shared grid spacing ($h$) for both $x$ and $y$ directions. This constraint simplified the discrete biharmonic operator but limited accuracy to plates whose aspect ratio produced integer grid ratios. In practice, the model performs best when the ratio of plate dimensions $L_x/L_y$ matches the ratio of grid points $N_x/N_y$. The alternative--fixing $h$ and truncating $\frac{L_x}{h}$ and $\frac{L_y}{h}$ independently--avoids this restriction but requires separate spacings $h_x$ and $h_y$.  
+
 
 Figure~\ref{fig:grid-error} illustrates the error introduced by shared grid spacing. Because the effective plate dimensions are slightly altered, the simulation diverges as grid resolution increases unless the grid ratios are perfectly matched. This is manageable only for small $N_x$ and $N_y$, since total grid size $N_{xy}$ scales exponentially with $N_x N_y$. For instance, for a plate of $L_x = 100.1$\,cm and $L_y = 81.1$\,cm, matching accuracy would require roughly $N_x = 1001$ and $N_y = 811$ grid points--about 4.2\,GB of memory for the sparse biharmonic matrix and eigensolver. By contrast, independent grid spacing achieves equivalent accuracy at roughly 118\,MB, a crucial difference when deploying on resource-limited systems such as embedded devices or web-based applications, where computational overhead directly affects feasibility.
 
@@ -412,7 +411,7 @@ A dedicated \textsc{magpie} GUI could therefore support both expert and non-expe
 
 While the Python and M\textsc{atlab} implementations of \textsc{magpie} have been instrumental in validating algorithms, long-term accessibility depends on portability and efficient compilation. Graphical interfaces are typically platform-specific--Cocoa for macOS, Win32 for Windows, and GTK or Qt for Linux--each requiring distinct implementation layers. The JUCE framework provides a compelling cross-platform solution, offering unified native wrappers for audio libraries and OpenGL-based rendering. Its abstraction layer enables deployment across all major operating systems without sacrificing performance.  
 
-For applications where 3D rendering or real-time visualisation is central, the open-source \texttt{bgfx} framework%
+For applications where 3D rendering or real-time visualisation is central, the open source \texttt{bgfx} framework%
 \footnote{\url{https://github.com/bkaradzic/bgfx}} offers an alternative. It supports multiple low-level graphics APIs, including Direct3D, Metal, and Vulkan, while maintaining a consistent interface. Choosing either JUCE or \texttt{bgfx} would depend on the intended balance between audio integration and visual complexity.  
 
 Beyond desktop deployment, translating \textsc{magpie} into a compiled language such as \textsc{C++} also establishes a foundation for other targets, including web delivery. A compiled core ensures numerical consistency across builds, tighter control over optimisation, and compatibility with open libraries such as Eigen and Spectra. In this way, \textsc{magpie} can retain the transparency and reproducibility central to its open methodology, while extending its reach beyond proprietary environments.
@@ -442,7 +441,7 @@ This variability reinforces the importance of open sourcing and version control:
 
 Although M\textsc{atlab} now provides limited functionality for generating JavaScript and WASM binaries~\cite{mcvittie_generatejavascriptusingmatlabcoder_2021}, sparse-matrix operations and eigensolvers remain excluded from its code-generation tools.%
 \footnote{Supported functions listed at \url{https://uk.mathworks.com/help/referencelist.html?type=function&capability=codegen&listtype=alpha}.}  
-Consequently, reproducing \textsc{magpie}'s full capabilities in the browser is only feasible through native compilation and open-source toolchains.
+Consequently, reproducing \textsc{magpie}'s full capabilities in the browser is only feasible through native compilation and open source toolchains.
 
 Looking forward, the addition of orthotropic models and lumped-mass systems described earlier~\cite{ducceschi_open_2024} would further align the computational behaviour of \textsc{magpie} with the physical characteristics of quarter-sawn wood used in string-instrument soundboards. Presenting this toolkit in an open, well-documented, and cross-platform form will encourage collaboration and extension as the system matures--ensuring that, like the haptic interface, \textsc{magpie} remains a living resource rather than a static artefact.
 
@@ -461,7 +460,7 @@ There is, as it were, an ``as above, so below'' symmetry to digital cultural her
 
 The open methodology developed in this work has sought to model that same balance in its structure. Each component---mechanical, electronic, and digital---is modular and version-controlled, ensuring that it can evolve independently without compromising the whole. Software has been separated into data, processing, and interface layers, each documented in repositories that also serve as historical records of development. Version control is therefore not merely a technical convenience but an epistemic one: a trace of how ideas, as well as code, come into being.
 
-Online Git services enable open-source distribution, but their persistence is not guaranteed. Commercial hosting platforms provide decentralised access yet cannot be assumed to provide permanent archiving or resolvable identifiers~\cite{calano_github_2025}. The responsibility for preservation should rest with academic institutions, just as they already safeguard research literature. Services such as Zenodo, operated by CERN, offer an interim solution by issuing persistent DOIs for software releases and integrating directly with GitHub, making archiving almost frictionless. The DOI, analogous to an ISBN for digital artefacts, formalises citation and version specificity~\cite{soito_citations_2016}. Even so, true sustainability demands that universities integrate their existing Git infrastructure with archival repositories---a simple but powerful step toward institutional stewardship of digital research outputs.
+Online Git services enable open source distribution, but their persistence is not guaranteed. Commercial hosting platforms provide decentralised access yet cannot be assumed to provide permanent archiving or resolvable identifiers~\cite{calano_github_2025}. The responsibility for preservation should rest with academic institutions, just as they already safeguard research literature. Services such as Zenodo, operated by CERN, offer an interim solution by issuing persistent DOIs for software releases and integrating directly with GitHub, making archiving almost frictionless. The DOI, analogous to an ISBN for digital artefacts, formalises citation and version specificity~\cite{soito_citations_2016}. Even so, true sustainability demands that universities integrate their existing Git infrastructure with archival repositories---a simple but powerful step toward institutional stewardship of digital research outputs.
 
 The examples of ARPACK~\cite{lehoucq_arpack_1998} and Aurora (Section~\ref{sec:aurora}) illustrate how software longevity is rarely proportional to its adoption. ARPACK, released in 1990, remains active through open maintenance, while Aurora, only a few years younger, risks disappearance without deliberate intervention. Software sustainability should not depend on chance or popularity; it should be built into the research lifecycle as intentionally as peer review or data citation.
 
