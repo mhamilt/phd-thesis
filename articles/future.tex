@@ -344,8 +344,43 @@ Within \textsc{C++}, open source solutions such as the Eigen%
 \footnote{\url{https://spectralib.org}} libraries offer viable paths forward. The latter reimplements ARPACK solvers natively in C++, enabling full compilation without proprietary dependencies. Such developments would move \textsc{magpie} closer to the same ideals that underpin the hardware work of earlier chapters: transparent methods, accessible tooling, and a community-maintained code base that supports both research and pedagogy.
 
 \begin{figure}
-    \centering
-    \includegraphics[width=0.5\linewidth]{img/plot-grid-error.pdf}
+    % \centering
+    % \includegraphics[width=0.5\linewidth]{img/plot-grid-error.pdf}
+        \begin{tikzpicture}
+            \begin{axis}[
+                    width=\textwidth,
+                    height=7cm,
+                    xlabel={Inverse $h$},
+                    ylabel={Hz},
+                    ymin=1359, ymax=1369,
+                    xmin=500, xmax=1500,
+                    grid=major,
+                    grid style={dashed,gray!30},
+                    legend pos=north east,
+                    title={Mode 5: $h$ vs $h_x$,$h_y$ vs analytical},
+                    thick,
+                    every axis plot/.append style={
+                            no markers
+                        },
+                ]
+                \addplot
+                coordinates {
+                        (509.49,1362.42) (1498.50,1362.42)
+                    };
+                \addplot
+                coordinates {
+                        (509.49,1359.01) (519.48,1359.14) (529.47,1359.26) (539.46,1359.38) (549.45,1359.49) (559.44,1359.59) (569.43,1359.69) (579.42,1359.79) (589.41,1359.88) (599.40,1359.96) (609.39,1360.04) (619.38,1360.12) (629.37,1360.19) (639.36,1360.26) (649.35,1360.33) (659.34,1360.39) (669.33,1360.45) (679.32,1360.51) (689.31,1360.56) (699.30,1360.62) (709.29,1360.67) (719.28,1360.71) (729.27,1360.76) (739.26,1360.81) (749.25,1360.85) (759.24,1360.89) (769.23,1360.93) (779.22,1360.97) (789.21,1361.00) (799.20,1361.04) (809.19,1361.07) (819.18,1361.11) (829.17,1361.14) (839.16,1361.17) (849.15,1361.20) (859.14,1361.23) (869.13,1361.25) (879.12,1361.28) (889.11,1361.30) (899.10,1361.33) (909.09,1361.35) (919.08,1361.38) (929.07,1361.40) (939.06,1361.42) (949.05,1361.44) (959.04,1361.46) (969.03,1361.48) (979.02,1361.50) (989.01,1361.52) (999.00,1361.54) (1008.99,1361.55) (1018.98,1361.57) (1028.97,1361.59) (1038.96,1361.60) (1048.95,1361.62) (1058.94,1361.63) (1068.93,1361.65) (1078.92,1361.66) (1088.91,1361.68) (1098.90,1361.69) (1108.89,1361.70) (1118.88,1361.72) (1128.87,1361.73) (1138.86,1361.74) (1148.85,1361.75) (1158.84,1361.76) (1168.83,1361.78) (1178.82,1361.79) (1188.81,1361.80) (1198.80,1361.81) (1208.79,1361.82) (1218.78,1361.83) (1228.77,1361.84) (1238.76,1361.85) (1248.75,1361.86) (1258.74,1361.86) (1268.73,1361.87) (1278.72,1361.88) (1288.71,1361.89) (1298.70,1361.90) (1308.69,1361.91) (1318.68,1361.91) (1328.67,1361.92) (1338.66,1361.93) (1348.65,1361.94) (1358.64,1361.94) (1368.63,1361.95) (1378.62,1361.96) (1388.61,1361.96) (1398.60,1361.97) (1408.59,1361.98) (1418.58,1361.98) (1428.57,1361.99) (1438.56,1361.99) (1448.55,1362.00) (1458.54,1362.01) (1468.53,1362.01) (1478.52,1362.02) (1488.51,1362.02) (1498.50,1362.03)
+                    };
+        
+                \addplot
+                coordinates {
+                        (509.49,1362.10) (519.48,1360.36) (529.47,1368.18) (539.46,1366.32) (549.45,1364.54) (559.44,1362.85) (569.43,1361.24) (579.42,1368.37) (589.41,1366.65) (599.40,1365.01) (609.39,1363.44) (619.38,1361.94) (629.37,1360.51) (639.36,1366.90) (649.35,1365.37) (659.34,1363.91) (669.33,1362.51) (679.32,1361.17) (689.31,1367.08) (699.30,1365.66) (709.29,1364.30) (719.28,1362.98) (729.27,1361.72) (739.26,1367.23) (749.25,1365.90) (759.24,1364.61) (769.23,1363.38) (779.22,1362.18) (789.21,1361.03) (799.20,1366.09) (809.19,1364.88) (819.18,1363.71) (829.17,1362.58) (839.16,1361.49) (849.15,1366.25) (859.14,1365.10) (869.13,1364.00) (879.12,1362.93) (889.11,1361.89) (899.10,1366.38) (909.09,1365.30) (919.08,1364.25) (929.07,1363.23) (939.06,1362.24) (949.05,1366.49) (959.04,1365.46) (969.03,1364.46) (979.02,1363.49) (989.01,1362.55) (999.00,1361.62) (1008.99,1365.61) (1018.98,1364.65) (1028.97,1363.73) (1038.96,1362.82) (1048.95,1361.94) (1058.94,1365.73) (1068.93,1364.82) (1078.92,1363.93) (1088.91,1363.07) (1098.90,1362.22) (1108.89,1365.85) (1118.88,1364.97) (1128.87,1364.12) (1138.86,1363.29) (1148.85,1362.48) (1158.84,1365.95) (1168.83,1365.11) (1178.82,1364.29) (1188.81,1363.49) (1198.80,1362.71) (1208.79,1361.95) (1218.78,1365.23) (1228.77,1364.44) (1238.76,1363.67) (1248.75,1362.92) (1258.74,1362.19) (1268.73,1365.34) (1278.72,1364.58) (1288.71,1363.84) (1298.70,1363.12) (1308.69,1362.40) (1318.68,1365.44) (1328.67,1364.71) (1338.66,1364.00) (1348.65,1363.29) (1358.64,1362.61) (1368.63,1365.53) (1378.62,1364.83) (1388.61,1364.14) (1398.60,1363.46) (1408.59,1362.79) (1418.58,1362.14) (1428.57,1364.94) (1438.56,1364.27) (1448.55,1363.61) (1458.54,1362.97) (1468.53,1362.33) (1478.52,1365.04) (1488.51,1364.39) (1498.50,1363.75)
+                    };
+                \addlegendentry{analytical}
+                \addlegendentry{$h_x,h_y$}
+                \addlegendentry{$h$}
+            \end{axis}
+        \end{tikzpicture}
     \caption[Grid space error]{Comparison between analytic and modelled fifth mode of a plate for isotropic cases using shared and independent grid spacing in the $x$ and $y$ dimensions. Shared spacing shows saw-tooth convergence, while independent spacing converges smoothly.}
     \label{fig:grid-error}
 \end{figure}
@@ -477,10 +512,8 @@ The issue extends beyond research software to the digital conservation of cultur
 The sentiment of \citeauthor{desilvey_curated_2017} is echoed in the ``benign neglect''  of \textcite[p. 75--76]{barclay_preservation_2005}, a promotion of a passive approach to conservation which is far preferable to a ``failed restoration'' \cite[p.\ 244]{barclay_preservation_2005}.
 If we are to continue to interact with historical musical instruments---and those instruments are destined to reach a state where they are no longer playable---then the conservation and curatorial choices taken must be deliberate. Whatever the choice made, it should be informed by the wider context of musical acoustics as well as the feasibility of sustainable maintenance and restoration of historical musical instruments.
 
-The two projects in this thesis exemplify those choices. Each balances immediacy and longevity, access and authenticity, openness and rigour. More broadly, they argue that digital conservation should not be a technical afterthought but a cultural responsibility. To conserve experience as well as artefact, we must also conserve the tools, languages, and methods through which that experience is studied. The future of digital heritage, like that of research itself, depends on our willingness to build systems that remember not only their subjects but their own making.
-
-
-
+The two projects in this thesis exemplify those choices. Each balances immediacy and longevity, access and authenticity, openness and rigour. More broadly, they argue that digital conservation should not be a technical afterthought but a cultural responsibility. To conserve experience as well as artefact, we must also conserve the tools, languages, and methods through which that experience is studied. The future of digital heritage, like that of research itself, depends on our willingness to build systems that remember not only their subjects but their own making.\\\\
+\staveXVII 
 
  % -- [p. 244]{barclay_preservation_2005}
 % \begin{quotation}

@@ -112,23 +112,39 @@ R_{x=0} \frac{\partial u}{\partial x}(0,y,t) &=& -M_x(0,y,t).
 %
 Analogous expressions hold along the $y$-edges. In the limits $K_\circ\to 0$ or $R_\circ\to 0$, one recovers free boundaries, whereas $K_\circ\to\infty$ or $R_\circ\to\infty$ enforces zero displacement or zero slope, respectively. Note that eight such constants, two per edge, must be specified, as per Figure \ref{fig:elasticCnts}.
 \begin{figure}
-\begin{verbatim}
+% \begin{verbatim}    
+%                    [K_{xL_y},R_{xL_y}]
+%                  ┌─────────────────────┐                      ^
+%                  │                     │                      │
+%                  │                     │                      │ 
+%  [K_{0y},R_{0y}] │                     │ [K_{L_xy},R_{L_xy}]  │
+%                  │                     │                      │ L_y
+%                  │                     │                      │ 
+%                  │                     │                      │
+%                  │                     │                      │
+%                  └─────────────────────┘                      ˇ
+%                      [K_{x0},R_{x0}]
+
+%                  <─────────────────────>
+%                           L_x
+% \end{verbatim}
+    \centering
+    \begin{tikzpicture}[
+            node distance=0.25cm and 0.25cm,
+            box/.style = {draw, minimum width=0.1\linewidth, minimum height=0.5cm, align=center},
+            % arrow/.style = {-latex,thick},
+        ]
     
-                          [K_{xL_y},R_{xL_y}]
-                  ---------------------                       ^
-                 |                     |                      |
-                 |                     |                      | 
- [K_{0y},R_{0y}] |                     |                      |
-                 |                     |                       L_y
-                 |                     |[K_{L_xy},R_{L_xy}]   |
-                 |                     |                      |
-                 |                     |                      |
-                  ---------------------                       ˇ
-               [K_{x0},R_{x0}]
-
-                 <-------- L_x -------->
-
-\end{verbatim}
+        \draw (0,0) rectangle (5,5); % square from (0,0) to (2,2)
+        \node[rotate=90] at (-0.25,2.5) {$K_{0y},R_{0y}$};
+        \node[rotate=270] at (5.25,2.5) {$K_{L_xy},R_{L_xy}$};
+        \node[] at (2.5,-0.25) {$K_{x0},R_{x0}$};
+        \node[] at (2.5,5.25) {$K_{xL_y},R_{xL_y}$};
+        \draw[thick,latex-latex](6.5,-1)--(6.5,6);
+        \draw[thick,latex-latex](-1,-1)--(6,-1);
+        \node[] at (2.5,-1.25) {$L_x$};
+        \node[rotate=90] at (6.75,2.5) {$L_y$};
+    \end{tikzpicture}
 \caption{Representation of the eight edge elastic constants.}\label{fig:elasticCnts}
 \end{figure}
 
@@ -408,7 +424,7 @@ In summary, the M\textsc{atlab} refactor established the structure of \textsc{ma
 \begin{figure}
     \centering
     \includegraphics[width=1\linewidth]{img/sparse_formats.pdf}    
-    \caption[Compressed Sparse Column and Diagonal format sparse matrix storage structure]{Compressed Sparse Column and Diagonal format sparse matrix storage structure. CSC format stores the data, a column pointer and a data address pointer, while the DIA format stores arrays of data and the corresponding diagonal index from which length can be calculated.  For a banded matrix, less data is needed however any zero values in the diagonal band must be stored explicitly. Adapted from \textcite{eding_sparse_2019}.}
+    \caption[Sparse Matrix Storage Structures]{Compressed Sparse Column and Diagonal format sparse matrix storage structure. CSC format stores the data, a column pointer and a data address pointer, while the DIA format stores arrays of data and the corresponding diagonal index from which length can be calculated.  For a banded matrix, less data is needed however any zero values in the diagonal band must be stored explicitly. Adapted from \textcite{eding_sparse_2019}.}
     \label{fig:sparse-dia}
 \end{figure}
 
@@ -458,6 +474,41 @@ Despite the elegance of the block construction in Python (Figure~\ref{fig:python
     \centering
     \begin{subfigure}{0.45\textwidth}
     \includegraphics[width=1\linewidth]{img/plot_matlab_vs_python.pdf}
+    % \begin{tikzpicture}
+    %     \begin{axis}[
+    %             width=\textwidth,
+    %             height=6cm,
+    %             xlabel={Grid Points $\times 10^5$},
+    %             ylabel={Compute Time (seconds)},
+    %             ymin=0, ymax=4.5,
+    %             xmin=0, xmax=3,
+    %             grid=major,
+    %             grid style={dashed,gray!30},
+    %             legend pos=north east,
+    %             title={},
+    %             thick,
+    %             every axis plot/.append style={
+    %                     no markers
+    %                 },
+    %         ]
+    %         \addplot
+    %         coordinates {
+    %                 (0,0) (1.55,0.6) (1.75,3.5) (1.95,4.6)
+    %             };
+    %         \addplot
+    %         coordinates {
+    %                 (0,0) (3,0.12)
+    %             };
+    %         \addplot
+    %         coordinates {
+    %                 (0,0) (3,1.48)
+    %             };
+    
+    %         \addlegendentry{M\textsc{atlab} blk}
+    %         \addlegendentry{M\textsc{atlab} diag}
+    %         \addlegendentry{Python}
+    %     \end{axis}
+    % \end{tikzpicture}
     \caption{}
     \label{fig:matlab-vs-python}
     \end{subfigure}
@@ -550,7 +601,42 @@ Like Python, C\textsc{++} is entirely open source and therefore compatible with 
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\linewidth]{img/plot-biharmonic-comparison-alt.pdf}
+    % \includegraphics[width=0.5\linewidth]{img/plot-biharmonic-comparison-alt.pdf}
+    \begin{tikzpicture}
+        \begin{axis}[
+                width=0.66\textwidth,
+                height=7cm,
+                xlabel={Grid Points $\times 10^5$},
+                ylabel={Compute Time (seconds)},
+                ymin=0, ymax=1,
+                xmin=0, xmax=10,
+                grid=major,
+                grid style={dashed,gray!30},
+                legend pos=north east,
+                title={},
+                thick,
+                every axis plot/.append style={
+                        no markers
+                    },
+            ]
+            \addplot
+            coordinates {
+                    (0,0) (5.2,1)
+                };
+            \addplot
+            coordinates {
+                    (0,0) (10,0.21)
+                };
+    
+            \addplot
+            coordinates {
+                    (0,0) (10,0.12)
+                };
+            \addlegendentry{Python}
+            \addlegendentry{C\textsc{++}}
+            \addlegendentry{M\textsc{atlab}}
+        \end{axis}
+    \end{tikzpicture}
     \caption[Construction time for the diagonalised biharmonic]{Construction time for the diagonalised biharmonic in M\textsc{atlab}, Python and C\textsc{++}.}
     \label{fig:biharm-diag-comp}
 \end{figure}
@@ -747,7 +833,7 @@ Finally, a least-squares procedure is used to extract the elastic constants, ret
 
 \section{Conclusions}\label{sec:Conclusions}
 
-This chapter introduced \textsc{magpie}, a free/libre, citable toolkit that makes standard thin-plate models and inverse workflows accessible to conservators, luthiers, and students. In contrast to the previous chapter’s emphasis on public interaction with digital reconstructions, the present work focused on \emph{analysis}: modelling rectangular plates with elastic edge restraints, estimating elastic constants from vibration data, and packaging the whole workflow so it is reproducible, inspectable, and usable in a browser.
+This chapter introduced \textsc{magpie}, a free/libre, citable toolkit that makes standard thin-plate models and inverse workflows accessible to conservators, luthiers \nocite{ed_pasqua_2006}, and students. In contrast to the previous chapter’s emphasis on public interaction with digital reconstructions, the present work focused on \emph{analysis}: modelling rectangular plates with elastic edge restraints, estimating elastic constants from vibration data, and packaging the whole workflow so it is reproducible, inspectable, and usable in a browser.
 
 \paragraph{Key outcomes}
 \begin{enumerate}
