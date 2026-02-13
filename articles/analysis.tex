@@ -604,36 +604,27 @@ Like Python, C\textsc{++} is entirely open source and therefore compatible with 
     % \includegraphics[width=0.5\linewidth]{img/plot-biharmonic-comparison-alt.pdf}
     \begin{tikzpicture}
         \begin{axis}[
-                width=0.66\textwidth,
+                width=0.75\textwidth,
                 height=7cm,
-                xlabel={Grid Points $\times 10^5$},
+                xlabel={Grid Points},
                 ylabel={Compute Time (seconds)},
                 ymin=0, ymax=1,
-                xmin=0, xmax=10,
+                xmin=0, xmax=998544,
                 grid=major,
                 grid style={dashed,gray!30},
                 legend pos=north east,
                 title={},
                 thick,
                 every axis plot/.append style={
-                        no markers
+                        no markers,
+                        smooth
                     },
             ]
-            \addplot
-            coordinates {
-                    (0,0) (5.2,1)
-                };
-            \addplot
-            coordinates {
-                    (0,0) (10,0.21)
-                };
-    
-            \addplot
-            coordinates {
-                    (0,0) (10,0.12)
-                };
-            \addlegendentry{Python}
+            \addplot table [col sep=comma] {data/benchmark_biharm_cpp.csv};
+            \addplot table [col sep=comma] {data/benchmark_biharm_python_dia.csv};
+            \addplot table [col sep=comma] {data/benchmark_biharm_matlab.csv};
             \addlegendentry{C\textsc{++}}
+            \addlegendentry{Python}
             \addlegendentry{M\textsc{atlab}}
         \end{axis}
     \end{tikzpicture}
