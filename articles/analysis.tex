@@ -196,7 +196,72 @@ The 13-point, two-dimensional stencil is reported in Figure \ref{fig:biharmonic-
 Computationally, the two-dimensional problem is never really encoded as such. It is convenient to recast the two-dimensional grid function $u_{l,m}$ into a column vector \({\bf u}(t)\) of length \(N\). As illustrated in Figure~\ref{fig:fdtd-linear}, this vectorisation is obtained by stacking successive strips of grid points with the same index \(l\).
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\linewidth]{img/biharm-grid.pdf}
+    % \includegraphics[width=0.5\linewidth]{img/biharm-grid.pdf}
+
+    \begin{tikzpicture}[
+            % scale=0.8,
+            node distance=0.25cm and 0.25cm,
+            box/.style = {draw, minimum width=0.1\linewidth, minimum height=0.5cm, align=center},
+            % arrow/.style = {-latex,thick},
+        ]
+    
+        \def\bsize{0.554}
+        \def\bxsize{0.7}
+        \def\bgsize{0.95}
+        \def\mx{0.25}
+        \def\my{0.0}
+        
+        \pgfmathsetmacro{\cx}{\bgsize+\mx}
+        \pgfmathsetmacro{\colx}{{6*(\bgsize+\mx)}}
+        \pgfmathsetmacro{\oy}{{8*\bsize) - 2*\bgsize}}
+    
+    
+        % Colours   
+        \definecolor{c0}{RGB}{249,133,46}
+        \definecolor{c1}{RGB}{93,183,69}
+        \definecolor{c2}{RGB}{78,151,208}
+        \definecolor{c3}{RGB}{110,58,139}
+    
+        \foreach \j in {0,...,3} {
+                \foreach \i in {0,...,3} {
+                        \begin{scope}[shift={({\j*(\bgsize+\mx)},\i*\bgsize)}]
+                            \draw[c\j] (0,0) rectangle (\bgsize,\bgsize);
+                        \end{scope}
+                    }
+            }
+    
+    
+        \begin{scope}[shift={(\colx, 0)}]
+            \foreach \j in {0,...,3} {
+                    \foreach \i in {0,...,3} {
+                            \pgfmathtruncatemacro{\mj}{3-\j}
+                            \begin{scope}[shift={(0 , {\i*\bsize + ((\j*(4*\bsize + \my))) - \oy }) }]
+                                \draw[c\mj] (0,0) rectangle (\bxsize,\bsize);
+                            \end{scope}
+                        }
+                }
+        \end{scope}
+    
+        \foreach \i in {0,...,3}{
+                \coordinate (A) at ({(\i*(\bgsize + \mx)) + 0.5*\bgsize}, {4*\bgsize});
+                \coordinate (B) at (\colx, {4 * \bsize + ((3-\i) * (4 * \bsize + \my)) - \oy});
+                \draw[-,dotted,thick,c\i] (A) to[out=60,in=120,distance=2cm] (B);
+            }
+            
+        \node[] at (-0.5,4*\bgsize + 0.5) {(y,x)};
+        \draw[-latex,thick](-0.25, 4*\bgsize + 0.25) -- ++(1.5, 0);
+        \draw[-latex,thick](-0.25, 4*\bgsize + 0.25) -- ++(0,-1.5);
+        \node[] at     ( 0.5*\bgsize, 4*\bgsize + 0.5) {x};
+        \node[] at     (-0.5 , 4*\bgsize - 0.5*\bgsize) {y};
+    
+        \foreach \i in {0,...,3}{
+                \node[] at ({\cx*\i + 0.5*\bgsize}, 3.5*\bgsize) {(0,\i)};
+    
+                \node[font=\small] at (\colx + 0.5*\bxsize, {4 * \bsize + ((3-\i) * (4 * \bsize + \my)) - \oy - 0.5*\bsize} ) {\i$N_y$};
+    
+            }
+    \end{tikzpicture}
+    
     \caption{Arrangement of the finite difference plate as a linear vector.}
     \label{fig:fdtd-linear}
 \end{figure}
