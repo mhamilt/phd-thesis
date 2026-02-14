@@ -1,83 +1,16 @@
 # Open Methods for Digital Conservation of Musical Instruments
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18642357.svg)](https://doi.org/10.5281/zenodo.18642357)
 
-| ![ ](./img/example/title_page.png) |
-| :--------------------------------: |
-|           Title Page               |
+## Citation
 
-## Getting started
-
-### Overleaf
-
-
-### macOS
-
-To get started there are a few package requirements if you `brew install basictex`
-
-```
-brew install basictex
-eval "$(/usr/libexec/path_helper)"
-sudo tlmgr update --self
-sudo tlmgr install texliveonfly
-sudo tlmgr install xelatex
-sudo tlmgr install adjustbox
-sudo tlmgr install tcolorbox
-sudo tlmgr install collectbox
-sudo tlmgr install ucs
-sudo tlmgr install environ
-sudo tlmgr install trimspaces
-sudo tlmgr install titling
-sudo tlmgr install enumitem
-sudo tlmgr install rsfs
-sudo tlmgr install tocbibind
-sudo tlmgr install appendix
-sudo tlmgr install datetime
-sudo tlmgr install fmtcount
-sudo tlmgr install nomencl
-sudo tlmgr install multirow
-sudo tlmgr install siunitx
-```
-
-## Compiling
-
-###   Shell script for PDFLaTeX (Unix/Linux)
-
-Usage: `sh ./compile-thesis.sh [OPTIONS] main`
-
-- [option]  `compile`: Compiles the PhD Thesis
-- [option]  `clean`: removes temporary files - no filename required
-
-
-## Submission guidelines
-
-[Link to 37th cycle guidelines](https://phd.unibo.it/agricultural-environmental-food-sci-technology/en/final-exam/uploading-of-the-phd-thesis-in-the-unibo-repository)
-
-## Generate Files
-
-Reduce image file size
-
-```
-sips -Z 640 *.jpg *.png
-```
-
-### Bibliography
-
-```sh
-pandoc -t markdown_strict  -F pandoc-crossref --citeproc -s bib-template.md -o bibliography.md
-```
-
-
-## Binding
-
-### Imposition
-
-#### A4 (A3 Signature)
-
-```
-pdfjam phd_thesis.pdf --nup 2x1 --signature 16 --otheredge --landscape --offset '0mm 0mm' --papersize '{297mm,420mm}' --outfile thesis-booklet.pdf
-```
-
-#### A5 (A4 Signature)
-
-```
-pdfjam phd_thesis.pdf --nup 2x1 --signature 16 --otheredge --landscape --offset '0mm 0mm' --papersize '{210mm,297mm}' --outfile thesis-booklet.pdf
+```bibtex
+@phdthesis{matthew_hamilton_2026_18642357,
+  author       = {Matthew Hamilton},
+  title        = {Open Methods for Digital Conservation of Musical Instruments},
+  month        = feb,
+  year         = 2026,
+  school       = {Universit\`a di Bologna}  
+  doi          = {10.5281/zenodo.18642357},
+  url          = {https://doi.org/10.5281/zenodo.18642357},
+}
 ```
