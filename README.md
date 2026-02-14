@@ -4,7 +4,7 @@
 ## Citation
 
 ```bibtex
-@phdthesis{matthew_hamilton_2026_18642357,
+@phdthesis{hamilton_open_2026,
   author       = {Matthew Hamilton},
   title        = {Open Methods for Digital Conservation of Musical Instruments},
   month        = feb,
