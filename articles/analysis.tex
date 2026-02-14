@@ -249,10 +249,10 @@ Computationally, the two-dimensional problem is never really encoded as such. It
             }
             
         \node[] at (-0.5,4*\bgsize + 0.5) {(y,x)};
-        \draw[-latex,thick](-0.25, 4*\bgsize + 0.25) -- ++(1.5, 0);
-        \draw[-latex,thick](-0.25, 4*\bgsize + 0.25) -- ++(0,-1.5);
-        \node[] at     ( 0.5*\bgsize, 4*\bgsize + 0.5) {x};
-        \node[] at     (-0.5 , 4*\bgsize - 0.5*\bgsize) {y};
+        \draw[-latex,thick](-0.25, 4*\bgsize + 0.25) -- ++({4*\cx}, 0);
+        \draw[-latex,thick](-0.25, 4*\bgsize + 0.25) -- ++(0,-{4.25*\bgsize});
+        \node[] at     ( 2*\cx, 4*\bgsize + 0.5)  {$N_x$};
+        \node[] at     (-0.65 , 2*\bgsize) {$N_y$};
     
         \foreach \i in {0,...,3}{
                 \node[] at ({\cx*\i + 0.5*\bgsize}, 3.5*\bgsize) {(0,\i)};
