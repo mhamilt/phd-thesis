@@ -54,7 +54,8 @@ includefoot
      multicol,
      multirow,
     newtxtext,
-    newtxmath,
+    newtxmath,    
+    pagecolor,
      pdfpages,
      pgfplots,
     pmboxdraw,
@@ -69,6 +70,8 @@ includefoot
 \usepackage{expl3}
 \usepackage[hyphens]{url}
 \usepackage[hidelinks]{hyperref}
+% \pagecolor{black}
+% \color{white}
 %----------------------------------------------------------------------------------------
 % Table and Matrix Vertical Space
 \renewcommand{\arraystretch}{1.4}
@@ -97,9 +100,9 @@ includefoot
 %----------------------------------------------------------------------------------------
 % Bibliography
 \usepackage[
-        style = numeric-comp,
+        style = authoryear,
       backend = biber,
-     maxnames = 99,
+     maxnames = 1,
  maxcitenames = 1,
           doi = true,
           url = true,

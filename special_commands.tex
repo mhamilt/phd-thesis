@@ -37,7 +37,7 @@
 
 	\draw (A) |- ++(0.5,1) coordinate[yshift=1ex] (L1) to[R=$R_{f}$] ++(2,0) coordinate(Rl) -| (opamp.out);    
     \draw (A) |- ++(-0.5,-0) coordinate(Vout) node[npn, photo, anchor=C](Q){Q};
-	\draw[lightgray] (Vout) to[short,-] ++(0,0.2) to [R,l=$R_{in}$] ++(0, 1.5) to[short,-o] node[left]{$V_{CC}$} ++(0,0.5) coordinate(Vcc);
+	\draw[draw opacity=0.3, fill opacity=0.3] (Vout) to[short,-] ++(0,0.2) to [R,l=$R_{in}$] ++(0, 1.5) to[short,-o] node[left]{$V_{CC}$} ++(0,0.5) coordinate(Vcc);
 	\draw (Q.E) -- ++(0,0) node[ground] {};
 \end{circuitikz}
 }
@@ -55,7 +55,7 @@
 
     \draw (A) |- ++(-1,-0) coordinate(Vout) node[npn, photo, anchor=C](Q){Q};
 	\draw (Q.E) -- ++(0,0) node[ground] {};
-    \draw[lightgray] (Vout) to[short,-] ++(0,0.2) to [R,l=$R_{in}$] ++(0, 1.5) to[short,-o] node[left]{$V_{CC}$} ++(0,0.5) coordinate(Vcc);
+    \draw[draw opacity=0.3, fill opacity=0.3] (Vout) to[short,-] ++(0,0.2) to [R,l=$R_{in}$] ++(0, 1.5) to[short,-o] node[left]{$V_{CC}$} ++(0,0.5) coordinate(Vcc);
 \end{circuitikz}
 }
 
@@ -73,7 +73,7 @@
 
     \draw (A) |- ++(-1,-0) coordinate(Vout) node[npn, photo, anchor=C](Q){Q};
 	\draw (Q.E) -- ++(0,0) node[ground] {};
-    \draw[lightgray] (Vout) to[short,-] ++(0,0.2) to [R,l=$R_{in}$] ++(0, 1.5) to[short,-o] node[left]{$V_{CC}$} ++(0,0.5) coordinate(Vcc);
+    \draw[draw opacity=0.3, fill opacity=0.3] (Vout) to[short,-] ++(0,0.2) to [R,l=$R_{in}$] ++(0, 1.5) to[short,-o] node[left]{$V_{CC}$} ++(0,0.5) coordinate(Vcc);
 \end{circuitikz}
 }
 
