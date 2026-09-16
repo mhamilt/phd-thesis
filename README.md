@@ -10,7 +10,7 @@
   month        = feb,
   year         = 2026,
   school       = {Universit\`a di Bologna},  
-  doi          = {10.5281/zenodo.18642357},
-  url          = {https://doi.org/10.5281/zenodo.18642357},
+  doi          = {10.48676/unibo/amsdottorato/12890},
+  url          = {https://amsdottorato.unibo.it/id/eprint/12890/1/phd_thesis.pdf},
 }
 ```
