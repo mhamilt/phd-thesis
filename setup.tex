@@ -1,7 +1,7 @@
 %----------------------------------------------------------------------------------------
 % Document Setup and Geometry
 \documentclass[
-     11pt, 
+     12pt, 
   a4paper, 
 openright, 
   twoside,
@@ -20,13 +20,8 @@ includefoot
 ]{geometry}
 %----------------------------------------------------------------------------------------
 \usepackage{emptypage} % no numbering on empty pages
-\hyphenpenalty=5000    % helps to discourage hyphenation 10000 for no hyphens
-\tolerance=1000
-%----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
 % Packag options
-\PassOptionsToPackage{T1}{fontenc}
-\PassOptionsToPackage{utf8}{inputenc}
 \usepackage{
     adjustbox,
      amsfonts,
@@ -45,16 +40,12 @@ includefoot
      fancyhdr,
      fancyvrb,
         float,
-      fontenc,
      graphicx,
   indentfirst,
-     inputenc,
      listings,
        minted,
      multicol,
-     multirow,
-    newtxtext,
-    newtxmath,    
+     multirow,  
     pagecolor,
      pdfpages,
      pgfplots,
@@ -112,3 +103,20 @@ includefoot
 \addbibresource{main.bib}
 \renewcommand*{\bibfont}{\normalfont\footnotesize}
 
+%----------------------------------------------------------------------------------------
+% Accessibility / Typography
+%----------------------------------------------------------------------------------------
+\usepackage{ragged2e}
+\usepackage{microtype}
+\usepackage{setspace}
+
+\hyphenpenalty=5000    % helps to discourage hyphenation 10000 for no hyphens
+
+% Paragraph separation
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.75em}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}

@@ -18,7 +18,7 @@ The remainder of Section~\ref{sec:future-interaction} develops these strategies 
 \begin{table}
 \centering
 \small
-\begin{tabular}{>{\raggedright\arraybackslash}p{0.13\linewidth} >{\raggedright\arraybackslash}p{0.30\linewidth} >{\raggedright\arraybackslash}p{0.48\linewidth}}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.14\linewidth} >{\raggedright\arraybackslash}p{0.30\linewidth} >{\raggedright\arraybackslash}p{0.48\linewidth}}
 \toprule
 \textbf{Area} & \textbf{Limitation } & \textbf{Strategy} \\
 \midrule
@@ -34,7 +34,7 @@ Vertical sensor boards are fragile in tight spaces, difficult to install, and pr
 &
 Split into \emph{sensor module} (fixed pitch, pluggable) + \emph{signal board} (horizontal, robust routing). For multi-register: use per-key mini-modules where needed or interpolate inner-register thresholds from outer sensors to reduce install burden. \\
 \addlinespace
-Visibility during Calibration
+Calibration
 &
 LED indicators may be hidden with horizontal mounting; calibration visibility suffers under exhibit lighting.
 &
@@ -51,7 +51,17 @@ Firmware
 Low jitter is hard with a free-running main loop; portability constraints limit use of high-precision timers.
 &
 Use hardware timers on nRF52 (\texttt{NRF\_TIMERx}) or \texttt{mbed::Ticker} to schedule sensing/MIDI; keep ISRs minimal. Alternatively evaluate ESP32-S3 (ESP-IDF) for timed tasks, documenting trade-offs vs. portability. Prioritise predictable jitter over absolute minimum latency. \\
-\addlinespace
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}
+\centering
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.14\linewidth} >{\raggedright\arraybackslash}p{0.30\linewidth} >{\raggedright\arraybackslash}p{0.48\linewidth}}
+\toprule
+\textbf{Area} & \textbf{Limitation } & \textbf{Strategy} \\
+\midrule
 Exhibition Acoustics
 &
 Perceptual disconnect between headphone playback and room acoustics.
@@ -64,7 +74,7 @@ Headphones reduce embodied cues; limited tactile immersion at the keyboard/bench
 &
 Introduce subtle keybed/bench vibration using low-passed signal with conservative levels (per noise policies), following tactile-perception best practice. \\
 \addlinespace
-Visitor Engagement
+Visitor\newline Engagement
 &
 Some visitors misread the interface as untouchable due to museum norms; signage alone can be ambiguous.
 &
