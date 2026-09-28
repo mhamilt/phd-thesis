@@ -12,10 +12,11 @@
 \input{special_commands}
 %----------------------------------------------------------------------------------------
 % Front Matter
-\input{front_matter/title-unibo}
-
+% \input{front_matter/title-unibo}
+\input{front_matter/title_uoe}
 \frontmatter
 \onehalfspacing
+% \RaggedRight
 % \input{front_matter/activities}
 \input{front_matter/abstract}
 \input{front_matter/acknowledgements}
@@ -23,7 +24,8 @@
 %----------------------------------------------------------------------------------------
 % Main Matter Setup
 \mainmatter
-\onehalfspacing
+\doublespacing
+
 \pagestyle{fancy}
 \fancyhead{} 
 \cfoot{}
@@ -33,6 +35,8 @@
 % \fancyhead[LE]{\bf \footnotesize \slshape \leftmark}  % Chapter in the right on even pages
 % \fancyhead[RO]{\bf \footnotesize \slshape \rightmark} % Section in the left on odd pages
 \renewcommand{\headrulewidth}{0pt}                    % Width of head rule
+\raggedright
+% \RaggedRight
 %----------------------------------------------------------------------------------------
 % Main Matter
 \include{articles/context}
